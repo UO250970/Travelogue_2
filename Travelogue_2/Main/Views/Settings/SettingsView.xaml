@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Travelogue_2.Main.Views.Settings.SettingsView">
+    <ContentPage.Content>
+
+        <Grid Padding="15,15,15,5" x:Name="MainGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Text="{Binding Resources[Language]}" Grid.Column="0" Grid.Row="0"
+                    Command="{Binding SettingsLanguageViewCommand}"
+                    ImageSource="{Binding FlagRoute}">
+            </Button>
+            <Button Text="{Binding Resources[CardHolder]}" Grid.Column="1" Grid.Row="0"></Button>
+
+            <Button Text="{Binding Resources[Style]}" Grid.Column="0" Grid.Row="1"></Button>
+            <Button Text="{Binding Resources[Destinations]}" Grid.Column="1" Grid.Row="1"></Button>
+
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,97 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Icons\icon_about.png" />
+    <None Remove="Resources\Icons\icon_feed.png" />
+    <None Remove="Resources\Icons\icon_library.png" />
+    <None Remove="Resources\Icons\icon_modelation.png" />
+    <None Remove="Resources\Icons\icon_play.png" />
+    <None Remove="Resources\Imgs\default_image.png" />
+    <None Remove="Resources\Imgs\Flags\AD_Flag.png" />
+    <None Remove="Resources\Imgs\Flags\AF_Flag.png" />
+    <None Remove="Resources\Imgs\Flags\AT_Flag.png" />
+    <None Remove="Resources\Imgs\Flags\AU_Flag.png" />
+    <None Remove="Resources\Imgs\Flags\CU_Flag.png" />
+    <None Remove="Resources\Imgs\Flags\DE_Flag.png" />
+    <None Remove="Resources\Imgs\Flags\ES_Flag.png" />
+    <None Remove="Resources\Imgs\Flags\FR_Flag.png" />
+    <None Remove="Resources\Imgs\untitled.png" />
+    <None Remove="Resources\xamarin_logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\icon_about.png" />
+    <EmbeddedResource Include="Resources\Icons\icon_feed.png" />
+    <EmbeddedResource Include="Resources\Icons\icon_library.png" />
+    <EmbeddedResource Include="Resources\Icons\icon_modelation.png" />
+    <EmbeddedResource Include="Resources\Icons\icon_play.png" />
+    <EmbeddedResource Include="Resources\Imgs\default_image.png" />
+    <EmbeddedResource Include="Resources\Imgs\Flags\AD_Flag.png" />
+    <EmbeddedResource Include="Resources\Imgs\Flags\AF_Flag.png" />
+    <EmbeddedResource Include="Resources\Imgs\Flags\AT_Flag.png" />
+    <EmbeddedResource Include="Resources\Imgs\Flags\AU_Flag.png" />
+    <EmbeddedResource Include="Resources\Imgs\Flags\CU_Flag.png" />
+    <EmbeddedResource Include="Resources\Imgs\Flags\DE_Flag.png" />
+    <EmbeddedResource Include="Resources\Imgs\Flags\ES_Flag.png" />
+    <EmbeddedResource Include="Resources\Imgs\Flags\FR_Flag.png" />
+    <EmbeddedResource Include="Resources\Imgs\untitled.png" />
+    <EmbeddedResource Include="Resources\xamarin_logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Syncfusion.Licensing" Version="18.4.0.32" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.4.0.32" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCarousel" Version="18.4.0.32" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.4.0.32" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1821" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />  
+    <PackageReference Include="Xamarin.Forms.Maps" Version="4.8.0.1821" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Localization\AppResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Main\Views\Library\ClosedJourneysView.xaml.cs">
+      <DependentUpon>ClosedJourneysView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Main\Views\Library\CreatedJourneysView.xaml.cs">
+      <DependentUpon>CreatedJourneysView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Main\Views\Journey\JourneyDetailView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Media\MediaView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Library\ClosedJourneysView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Library\CreatedJourneysView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Library\LibraryView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Settings\SettingsLanguageView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Settings\SettingsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

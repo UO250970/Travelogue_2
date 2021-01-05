@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Travelogue_2.Main.Views.Library.ClosedJourneysView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid Padding="10,10,10,5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackLayout BackgroundColor="{StaticResource Accent}">
+                    <Label
+                        FontSize="Large"
+                        HorizontalOptions="Center"
+                        Text="{Binding Resources[ClosedJourneys]}"
+                        VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+
+                <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Default">
+                    <StackLayout Orientation="Vertical" >
+                        <ListView x:Name="Closed" HasUnevenRows="True">
+                            <ListView.ItemTemplate RowHeight="100">
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Frame Margin="5" HasShadow="true">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="15*" />
+                                                    <ColumnDefinition Width="2*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Text="Nombre" />
+                                                <Button
+                                                    Grid.Column="1"
+                                                    Text="{Binding Resources[Minus]}" />
+                                            </Grid>
+                                        </Frame>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <Label
+                                x:Name="ClosedEmpty"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Resources[ClosedEmpty]}" />
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+
+</ContentPage>
