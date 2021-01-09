@@ -14,7 +14,7 @@ namespace Travelogue_2
 
         public App()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzI4NTQ5QDMxMzgyZTMzMmUzMGlTMHlEeHdwSGkyU3ZKb2dCcjArT0dtUXlUcmJkYzJnR2VPQzBsZm1kL0U9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzgwNTEzQDMxMzgyZTM0MmUzMGd5ZzdMS2RINmM2NkNVQ0s0Y0szNElMS1Q0cmxoWW1nUmJIUlBiNDNBcE09");
             InitializeComponent();
 
             AppResources.Culture = new CultureInfo(string.Empty);
