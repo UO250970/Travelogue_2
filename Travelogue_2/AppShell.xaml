@@ -35,7 +35,13 @@
     </Shell.Resources>
 
     <TabBar>
-        <ShellContent Title="{Binding Source={x:Static app:App.LocResources}, Path=Library}" Icon="icon_library.png" Route="AboutPage" ContentTemplate="{DataTemplate library:LibraryView}" />
+        <ShellContent Title="{Binding Source={x:Static app:App.LocResources}, Path=Library}" Route="AboutPage" ContentTemplate="{DataTemplate library:LibraryView}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="FA"
+                    Glyph="" />
+            </ShellContent.Icon>
+        </ShellContent>
         <ShellContent Title="{Binding LocResources[Media]}" Icon="icon_feed.png" ContentTemplate="{DataTemplate media:MediaView}" />
         <ShellContent Icon="icon_play.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
         <ShellContent Icon="icon_modelation.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
