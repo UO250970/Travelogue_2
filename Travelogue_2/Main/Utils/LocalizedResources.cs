@@ -11,7 +11,7 @@ namespace Travelogue_2.Main.Utils
         const string DEFAULT_LANGUAGE = "";
 
         readonly ResourceManager ResourceManager;
-        CultureInfo CurrentCultureInfo;
+        public CultureInfo CurrentCultureInfo;
 
         public string this[string key]
         {

@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Icons\icomoon.ttf" />
     <EmbeddedResource Include="Resources\Icons\icon_about.png" />
     <EmbeddedResource Include="Resources\Icons\icon_feed.png" />
     <EmbeddedResource Include="Resources\Icons\icon_library.png" />

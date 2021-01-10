@@ -8,6 +8,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="Primary">#2196F3</Color>
+            
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="VisualStateManager.VisualStateGroups">
@@ -27,6 +28,11 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
+
+            <OnPlatform x:Key="Icon" x:TypeArguments="x:String">
+                <On Platform="Android" Value="icon_fonts.ttf#icomoon" />
+            </OnPlatform>
+
         </ResourceDictionary>        
     </Application.Resources>
 </Application>
