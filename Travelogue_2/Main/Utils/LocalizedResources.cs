@@ -11,7 +11,7 @@ namespace Travelogue_2.Main.Utils
         const string DEFAULT_LANGUAGE = "";
 
         readonly ResourceManager ResourceManager;
-        public CultureInfo CurrentCultureInfo;
+        CultureInfo CurrentCultureInfo;
 
         public string this[string key]
         {
@@ -31,14 +31,17 @@ namespace Travelogue_2.Main.Utils
                 String.Empty, OnCultureChanged);
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private void OnCultureChanged(object s, CultureChangedMessage ccm)
         {
             CurrentCultureInfo = ccm.NewCultureInfo;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        public string CurrentCulture() { return CurrentCultureInfo.Name; }
+        public string CurrentCulture() => CurrentCultureInfo.Name;
+
+        public CultureInfo CurrentCultureI() => CurrentCultureInfo;
     }
 }

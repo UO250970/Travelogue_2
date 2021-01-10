@@ -1,4 +1,5 @@
-﻿using Travelogue_2.Main.ViewModels.Settings;
+﻿using System;
+using Travelogue_2.Main.ViewModels.Settings;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Views.Settings
@@ -26,6 +27,11 @@ namespace Travelogue_2.Main.Views.Settings
             }
 
             base.OnSizeAllocated(width, height);
+        }
+
+        public void SettingsLanguageView(object sender, EventArgs e)
+        {
+            model.SettingsLanguageViewC();
         }
 
     }

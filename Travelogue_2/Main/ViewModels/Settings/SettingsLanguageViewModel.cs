@@ -32,9 +32,10 @@ namespace Travelogue_2.Main.ViewModels.Settings
             try
             {
                 Languages.Clear();
-                Languages.Add("ES");
-                Languages.Add("FR");
-                Languages.Add("EN");
+                foreach (string language in CommonVariables.AvailableLocations)
+				{
+                    Languages.Add(language);
+                }
             }
             catch (Exception ex)
             {

@@ -13,12 +13,11 @@ namespace Travelogue_2.Main.ViewModels.Settings
         {
             SettingsLanguageViewCommand = new Command(() => SettingsLanguageViewC());
 
-            FlagRoute = ImageSource.FromResource(CommonVariables.FlagImagesPath + "" + App.LocResources.CurrentCulture() + CommonVariables.FlagImagesExtension);
+            FlagRoute = ImageSource.FromResource(CommonVariables.FlagImagesPath + App.LocResources.CurrentCulture().ToUpper() + CommonVariables.FlagImagesExtension);
         }
 
         async internal void SettingsLanguageViewC()
-        {
-            await Shell.Current.GoToAsync($"{ nameof(SettingsLanguageView)}");
-        }
+            => await Shell.Current.GoToAsync($"{ nameof(SettingsLanguageView)}");
+
     }
 }

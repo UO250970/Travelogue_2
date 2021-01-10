@@ -5,8 +5,6 @@
        xmlns:library="clr-namespace:Travelogue_2.Main.Views.Library"
        xmlns:media="clr-namespace:Travelogue_2.Main.Views.Media"
        xmlns:settings="clr-namespace:Travelogue_2.Main.Views.Settings" 
-       xmlns:loc="clr-namespace:Travelogue_2.Main.Utils"
-       xmlns:app="clr-namespace:Travelogue_2"
        Title="Travelogue_2"
        x:Class="Travelogue_2.AppShell">
 

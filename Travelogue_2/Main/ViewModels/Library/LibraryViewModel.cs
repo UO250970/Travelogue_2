@@ -55,30 +55,27 @@ namespace Travelogue_2.Main.ViewModels.Library
 		}
 
 		public void OnAppearing()
-		{
-			IsBusy = true;
-		}
+			=> IsBusy = true;
+
 
 		public ObservableCollection<Item> CreatedJourneys
 		{
-			get{ return new ObservableCollection<Item>(); }
+			get => new ObservableCollection<Item>();
 		}
 
 		public ObservableCollection<Item> ClosedJourneys
 		{
-			get{ return new ObservableCollection<Item>(); }
+			get => new ObservableCollection<Item>();
 		}
 
 
 		async internal void CreatedJourneysViewC()
-		{
-			await Shell.Current.GoToAsync(nameof(CreatedJourneysView));
-		}
+			=> await Shell.Current.GoToAsync(nameof(CreatedJourneysView));
+		
 
 		async internal void ClosedJourneysViewC()
-		{
-			await Shell.Current.GoToAsync(nameof(ClosedJourneysView));
-		}
+			=> await Shell.Current.GoToAsync(nameof(ClosedJourneysView));
+		
 
 		async void OnJourneySelected(Item journey)
 		{

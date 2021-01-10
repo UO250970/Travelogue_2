@@ -9,14 +9,11 @@ namespace Travelogue_2.Main.Utils
 		private static Page Page;
 
 		public static void SetPage(Page page)
-		{
-			Page = page;
-		}
+			=> Page = page;
 
 		public static async Task NoImplementedYet()
-		{
-			await Page?.DisplayAlert("Error", "Funcionalidad en desarrollo", App.LocResources["Ok"]);
-		}
+			=> await Page?.DisplayAlert("Error", "Funcionalidad en desarrollo", App.LocResources["Ok"]);
+
 		/*
 		public static async Task AlertDayOccupied()
 		{
@@ -140,9 +137,7 @@ namespace Travelogue_2.Main.Utils
 		/** Already exists */
 
 		internal static async Task<bool> AlertCountryAlreadySelected()
-		{
-			return await Page?.DisplayAlert(App.LocResources["Empty"], "El destino ya está incluido", App.LocResources["Ok"], App.LocResources["Cancel"]);
-		}
+			=> await Page?.DisplayAlert(App.LocResources["Empty"], "El destino ya está incluido", App.LocResources["Ok"], App.LocResources["Cancel"]);
 
 		/** Photo */
 		/*
@@ -155,15 +150,12 @@ namespace Travelogue_2.Main.Utils
 		/** Servicios */
 
 		internal static async Task<bool> AlertEnableLocation()
-		{
-			return await Page?.DisplayAlert(App.LocResources["Empty"], "Habilite la geolocalización para poder usarla en la aplicación", App.LocResources["Ok"], App.LocResources["Cancel"]);
-		}
+			=> await Page?.DisplayAlert(App.LocResources["Empty"], "Habilite la geolocalización para poder usarla en la aplicación", App.LocResources["Ok"], App.LocResources["Cancel"]);
 
 		/** Ajustes */
 
 		internal static async Task<bool> AlertLanguageChanged()
-		{
-			return await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessLanguageChanged"], App.LocResources["Ok"], App.LocResources["Cancel"]);
-		}
+			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessLanguageChanged"], App.LocResources["Ok"], App.LocResources["Cancel"]);
+
 	}
 }
