@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Icons\icomoon.ttf" />
     <None Remove="Resources\Icons\icon_about.png" />
     <None Remove="Resources\Icons\icon_feed.png" />
     <None Remove="Resources\Icons\icon_library.png" />

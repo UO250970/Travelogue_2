@@ -8,7 +8,7 @@ namespace Travelogue_2
 {
     public partial class App : Application
     {
-        public static string CurrentLanguage = "";
+        public static string CurrentLanguage = "ES";
         public static LocalizedResources LocResources { get; private set; }
 
 
@@ -17,7 +17,7 @@ namespace Travelogue_2
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzgwNTEzQDMxMzgyZTM0MmUzMGd5ZzdMS2RINmM2NkNVQ0s0Y0szNElMS1Q0cmxoWW1nUmJIUlBiNDNBcE09");
             InitializeComponent();
 
-            AppResources.Culture = new CultureInfo(string.Empty);
+            AppResources.Culture = new CultureInfo(CurrentLanguage);
             LocResources = new LocalizedResources(typeof(AppResources), CurrentLanguage);
 
             DependencyService.Register<MockDataStore>();

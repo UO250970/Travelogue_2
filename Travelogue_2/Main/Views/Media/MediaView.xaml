@@ -7,31 +7,34 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" >
     <ContentPage.Content>
 
-        <tabView:SfTabView EnableSwiping="False" VisibleHeaderCount="3"  VerticalOptions="FillAndExpand">
+        <tabView:SfTabView EnableSwiping="False" VisibleHeaderCount="3"  VerticalOptions="FillAndExpand" DisplayMode="Image">
 
             <tabView:SfTabView.SelectionIndicatorSettings>
                 <tabView:SelectionIndicatorSettings />
             </tabView:SfTabView.SelectionIndicatorSettings>
 
-            <tabView:SfTabItem Title="{Binding Resources[Calendar]}">
+            <tabView:SfTabItem Title="{Binding Resources[Calendar]}"
+                               IconFont="&#xe953;"
+                               FontIconFontColor="#FF00AFF0"
+                               FontIconFontFamily="{StaticResource Icon}">
                 <tabView:SfTabItem.Content>
 
                     <StackLayout Padding="5, 10, 5, 10">
                         <calendar:SfCalendar x:Name="calendar" 
-                                                 ViewMode="MonthView" 
-                                                 YearViewMode="Month" 
-                                                 Margin="20, 5, 20, 5"
-                                                 NavigationDirection="Vertical"
-                                                 ShowInlineEvents="True"
-                                                 InlineViewMode="Agenda"
-                                                 VerticalOptions="FillAndExpand">
+                                             ViewMode="MonthView" 
+                                             YearViewMode="Month" 
+                                             Margin="10, 5, 10, 5"
+                                             NavigationDirection="Vertical"
+                                             ShowInlineEvents="True"
+                                             InlineViewMode="Agenda"
+                                             VerticalOptions="FillAndExpand"
+                                             Locale="{Binding localization}">
                             <calendar:SfCalendar.MonthViewSettings>
                                 <calendar:MonthViewSettings>
                                     <calendar:MonthViewSettings.InlineItemTemplate>
                                         <DataTemplate>
                                             <Button AutomationId="{Binding AutomationId}" 
-                                                    Text="Texto" TextColor="#bbd5ed" 
-                                                        />
+                                                    Text="Texto" TextColor="#bbd5ed"/>
                                         </DataTemplate>
                                     </calendar:MonthViewSettings.InlineItemTemplate>
                                 </calendar:MonthViewSettings>
@@ -42,11 +45,27 @@
                 </tabView:SfTabItem.Content>
             </tabView:SfTabItem>
 
-            <tabView:SfTabItem Title="{Binding Resources[Map]}">
+            <tabView:SfTabItem Title="{Binding Resources[Map]}"
+                               IconFont="&#xe94b;"
+                               FontIconFontColor="#FF00AFF0"
+                               FontIconFontFamily="{StaticResource Icon}">
                 <tabView:SfTabItem.Content>
 
                     <maps:Map x:Name="map" />
 
+                </tabView:SfTabItem.Content>
+            </tabView:SfTabItem>
+
+            <tabView:SfTabItem Title="{Binding Resources[Gallery]}"
+                               IconFont="&#xe90e;"
+                               FontIconFontColor="#FF00AFF0"
+                               FontIconFontFamily="{StaticResource Icon}">
+                <tabView:SfTabItem.Content>
+                    
+                    <StackLayout Padding="5, 10, 5, 10">
+
+                    </StackLayout>
+                    
                 </tabView:SfTabItem.Content>
             </tabView:SfTabItem>
 

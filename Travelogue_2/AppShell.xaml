@@ -35,11 +35,31 @@
     </Shell.Resources>
 
     <TabBar>
-        <ShellContent Title="{Binding Source={x:Static app:App.LocResources}, Path=Library}" Icon="icon_library.png" Route="AboutPage" ContentTemplate="{DataTemplate library:LibraryView}" />
-        <ShellContent Title="{Binding LocResources[Media]}" Icon="icon_feed.png" ContentTemplate="{DataTemplate media:MediaView}" />
-        <ShellContent Icon="icon_play.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
-        <ShellContent Icon="icon_modelation.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
-        <ShellContent Title="{Binding Resources[Settings]}" Icon="icon_feed.png" ContentTemplate="{DataTemplate settings:SettingsView}" />
+        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate library:LibraryView}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#xe920;" FontFamily="{StaticResource Icon}" Size="Small"/>
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent ContentTemplate="{DataTemplate media:MediaView}" >
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#xe90e;" FontFamily="{StaticResource Icon}" Size="Small"/>
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" >
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#xea1c;" FontFamily="{StaticResource Icon}" Size="Small"/>
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" >
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#xe905;" FontFamily="{StaticResource Icon}" Size="Small"/>
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent ContentTemplate="{DataTemplate settings:SettingsView}" >
+            <ShellContent.Icon>
+                <FontImageSource Glyph="&#xe994;" FontFamily="{StaticResource Icon}" Size="Small"/>
+            </ShellContent.Icon>
+        </ShellContent>
     </TabBar>
 
     <!--
