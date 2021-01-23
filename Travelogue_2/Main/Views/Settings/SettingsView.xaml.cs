@@ -34,5 +34,10 @@ namespace Travelogue_2.Main.Views.Settings
             model.SettingsLanguageViewC();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
     }
 }

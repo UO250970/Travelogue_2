@@ -15,24 +15,22 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackLayout Grid.Column="0" Grid.Row="0">
-                <Label Text="{Binding Resources[Language]}"/>
+            <!--StackLayout Grid.Column="0" Grid.Row="0" Style="{StaticResource buttonStyle}" >
+                <Label Text="{Binding Resources[Language]}" Style="{StaticResource buttonTextStyle}"/>
                 <Image x:Name="NewImage"
-                            VerticalOptions="FillAndExpand"
-                            Source="{Binding FlagRoute, UpdateSourceEventName=SourceChanged}"/>
+                       VerticalOptions="FillAndExpand"
+                       Source="{Binding FlagRoute}"/>
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer
                                 Tapped="SettingsLanguageView" />
                 </StackLayout.GestureRecognizers>
-            </StackLayout>
-            
+            </-->
+
+            <Button Text="{Binding Resources[Language]}" Grid.Column="0" Grid.Row="0" Command="{Binding LanguagesSettingsCommand}"></Button>
             <Button Text="{Binding Resources[CardHolder]}" Grid.Column="1" Grid.Row="0"></Button>
 
             <Button Text="{Binding Resources[Style]}" Grid.Column="0" Grid.Row="1"></Button>
             <Button Text="{Binding Resources[Destinations]}" Grid.Column="1" Grid.Row="1"></Button>
-
-            <Label Grid.Column="0" Grid.Row="2" Text="Prueba"/>
-            <Image Margin="10" BackgroundColor="Aqua" Grid.Column="1" Grid.Row="2" Source="{Binding FlagRoute}"/>
         </Grid>
         
         

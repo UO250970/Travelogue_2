@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Utils
 {
@@ -18,17 +19,33 @@ namespace Travelogue_2.Main.Utils
 
 		public static string CountryWebSite { get => "http://country.io/"; }
 
-		public static string FlagImagesPath { get => "Travelogue_2.Resources.Imgs.Flags."; }
+		public static string ImagesPath { get => AppName + ".Resources.Imgs"; }
 
-		public static string FlagImagesExtension { get => "_Flag.png"; } 
+		public static string FlagImagesPath { get => ImagesPath + ".Flags."; }
+
+		public static string FlagImagesExtension { get => "_Flag" + ImagesExtension; } 
 
 		public static string ImagesExtension { get => ".png"; } 
 
-		public static string GenericImage { get => "Travelogue_2.Resources.Imgs.default_image.png"; }
+		public static string GenericImage { get => ImagesPath + ".default_image" + ImagesExtension; }
 
-		public static string GenericFlag { get => "Travelogue_2.Resources.Imgs.Flags.DEFAULT_Flag.png"; }  
+		public static string GenericFlag { get => FlagImagesPath + "DEFAULT" + FlagImagesExtension; }  
 
-		public static List<String> AvailableLocations { get => new List<string>() { "ES", "EN", "FR" }; }
+		public static List<String> AvailableLocations { get => new List<string>() { "AD", "AF", "AT", "AU", "CU", "DE", "ES", "FR", "EN" }; }
+
+		public static List<String> AvailableFlags { get => new List<string>() { "AD", "AF", "AT", "AU", "CU", "DE", "ES", "FR" }; }
+
+		public static ImageSource GetFlag(string name)
+		{
+			if ( AvailableFlags.Contains(name) )
+			{
+				string tempString = (FlagImagesPath + name.ToUpper() + FlagImagesExtension);
+				return ImageSource.FromResource(tempString);
+			} else
+			{
+				return ImageSource.FromResource(GenericFlag);
+			}
+		}
 
 	}
 }

@@ -19,10 +19,10 @@ namespace Travelogue_2.Main.Views.Media
         }
 
         protected override void OnAppearing()
-		{
+        {
             base.OnAppearing();
-            model.Refresh(calendar, map);
-            
+            //model.Refresh();
         }
+
     }
 }

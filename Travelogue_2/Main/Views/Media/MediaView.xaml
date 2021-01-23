@@ -15,7 +15,7 @@
 
             <tabView:SfTabItem Title="{Binding Resources[Calendar]}"
                                IconFont="&#xe953;"
-                               FontIconFontColor="#FF00AFF0"
+                               FontIconFontColor="{StaticResource Primary}"
                                FontIconFontFamily="{StaticResource Icon}">
                 <tabView:SfTabItem.Content>
 
@@ -28,8 +28,8 @@
                                              ShowInlineEvents="True"
                                              InlineViewMode="Agenda"
                                              VerticalOptions="FillAndExpand"
-                                             Locale="{Binding Path=localization}"
-                                             FirstDayofWeek="{Binding Path=localizationFirstDay}">
+                                             Locale="{Binding localization}"
+                                             FirstDayofWeek="{Binding Resources[LocalizationFirstDay]}">
                             <calendar:SfCalendar.MonthViewSettings>
                                 <calendar:MonthViewSettings>
                                     <calendar:MonthViewSettings.InlineItemTemplate>
@@ -48,7 +48,7 @@
 
             <tabView:SfTabItem Title="{Binding Resources[Map]}"
                                IconFont="&#xe94b;"
-                               FontIconFontColor="#FF00AFF0"
+                               FontIconFontColor="{StaticResource Primary}"
                                FontIconFontFamily="{StaticResource Icon}">
                 <tabView:SfTabItem.Content>
 
@@ -59,7 +59,7 @@
 
             <tabView:SfTabItem Title="{Binding Resources[Gallery]}"
                                IconFont="&#xe90e;"
-                               FontIconFontColor="#FF00AFF0"
+                               FontIconFontColor="{StaticResource Primary}"
                                FontIconFontFamily="{StaticResource Icon}">
                 <tabView:SfTabItem.Content>
                     

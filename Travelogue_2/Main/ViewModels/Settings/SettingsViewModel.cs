@@ -6,15 +6,18 @@ namespace Travelogue_2.Main.ViewModels.Settings
 {
     public class SettingsViewModel : BaseViewModel
     {
-        public Command SettingsLanguageViewCommand { get; }
-        public ImageSource FlagRoute { get; }
+        public ImageSource FlagRoute;
 
-        public SettingsViewModel()
+        public Command LanguagesSettingsCommand { get; }
+
+        public SettingsViewModel() 
         {
-            SettingsLanguageViewCommand = new Command(() => SettingsLanguageViewC());
-
-            FlagRoute = ImageSource.FromResource(CommonVariables.FlagImagesPath + App.LocResources.CurrentCulture().ToUpper() + CommonVariables.FlagImagesExtension);
+            LanguagesSettingsCommand = new Command(() => LanguagesSettingsC());
         }
+
+        async internal void LanguagesSettingsC()
+            => await Shell.Current.GoToAsync(nameof(SettingsLanguageView));
+
 
         async internal void SettingsLanguageViewC()
             => await Shell.Current.GoToAsync($"{ nameof(SettingsLanguageView)}");

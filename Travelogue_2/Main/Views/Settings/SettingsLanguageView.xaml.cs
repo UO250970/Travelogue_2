@@ -16,11 +16,5 @@ namespace Travelogue_2.Main.Views.Settings
             Shell.SetNavBarIsVisible(this, false);
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            model.OnAppearing();
-        }
-
     }
 }

@@ -36,9 +36,8 @@ namespace Travelogue_2.Main.Utils
         private void OnCultureChanged(object s, CultureChangedMessage ccm)
         {
             CurrentCultureInfo = ccm.NewCultureInfo;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Item"));
         }
-
 
         public string CurrentCulture() => CurrentCultureInfo.Name;
 

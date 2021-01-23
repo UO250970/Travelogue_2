@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
-using Travelogue_2.Resources.Localization;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels
@@ -55,13 +54,15 @@ namespace Travelogue_2.Main.ViewModels
 
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            var changed = PropertyChanged;
-            if (changed == null)
-                return;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        protected void OnPropertyChanged(object s, PropertyChangedEventArgs e)
+        {
+            PropertyChanged?.Invoke(this, e);
         }
         #endregion
     }

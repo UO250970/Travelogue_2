@@ -169,6 +169,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1.
+        /// </summary>
+        internal static string LocalizationFirstDay {
+            get {
+                return ResourceManager.GetString("LocalizationFirstDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mapa.
         /// </summary>
         internal static string Map {

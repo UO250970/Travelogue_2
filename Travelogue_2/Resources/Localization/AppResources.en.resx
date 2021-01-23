@@ -153,6 +153,9 @@
   <data name="Library" xml:space="preserve">
     <value>Library</value>
   </data>
+  <data name="LocalizationFirstDay" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="Map" xml:space="preserve">
     <value>Map</value>
   </data>
