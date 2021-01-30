@@ -126,11 +126,17 @@
   <data name="CardHolder" xml:space="preserve">
     <value>Tarjetera</value>
   </data>
+  <data name="ClosedEditing" xml:space="preserve">
+    <value>Ver Journals completados</value>
+  </data>
   <data name="ClosedEmpty" xml:space="preserve">
     <value>Ningún viaje cerrado</value>
   </data>
   <data name="ClosedJourneys" xml:space="preserve">
     <value>Viajes cerrados</value>
+  </data>
+  <data name="ContinueEditing" xml:space="preserve">
+    <value>Continuar editando...</value>
   </data>
   <data name="CreatedEmpty" xml:space="preserve">
     <value>Ningún viaje creado</value>
@@ -177,8 +183,14 @@
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="Plus" xml:space="preserve">
+    <value>+</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Ajustes</value>
+  </data>
+  <data name="StartEditing" xml:space="preserve">
+    <value>Comenzar a editar...</value>
   </data>
   <data name="Style" xml:space="preserve">
     <value>Estilo</value>

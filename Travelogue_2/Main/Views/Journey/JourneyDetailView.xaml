@@ -3,10 +3,121 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Travelogue_2.Main.Views.Journey.JourneyDetailView">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <AbsoluteLayout>
+
+            <ScrollView x:Name="MainScroll" AbsoluteLayout.LayoutFlags="All"
+                        AbsoluteLayout.LayoutBounds="0,0,1,1" >
+                <StackLayout>
+                    <AbsoluteLayout HeightRequest="180" >
+                        <Image x:Name="Image" 
+                               Source="{Binding CoverImage}"
+                               Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
+
+                        
+                    </AbsoluteLayout>
+                    <StackLayout>
+
+                        <ScrollView x:Name="DaysScroll" Orientation="Horizontal" 
+                                    BackgroundColor="{StaticResource Secondary}"
+                                    HeightRequest="40" HorizontalOptions="FillAndExpand"
+                                    Margin="10, 10, 10, 0">
+
+                            <!--ListView x:Name="MyClassList"
+                                      ItemsSource="{Binding MyClassList}"
+                                      RowHeight="210">  
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"></StackPanel>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid Padding="5">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="20"></RowDefinition>
+                                                    <RowDefinition Height="20"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Grid.Row="0" Grid.Column="0" Text="Name:" LineBreakMode="TailTruncation"></Label>
+                                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Name}" LineBreakMode="TailTruncation"></Label>
+                                                <Label Grid.Row="1" Grid.Column="0" Text="Type:" LineBreakMode="TailTruncation"></Label>
+                                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Type}" LineBreakMode="TailTruncation"></Label>
+
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </-->
+
+                        </ScrollView>
+
+                        <Frame x:Name="EntriesScroll"
+                                    BackgroundColor="{StaticResource Secondary}"
+                                    HeightRequest="500" HorizontalOptions="FillAndExpand"
+                                    Margin="10, 0, 10, 0">
+
+                        </Frame>
+                        
+                        <ScrollView x:Name="PhotosScroll" Orientation="Horizontal" 
+                                    BackgroundColor="{StaticResource Secondary}"
+                                    HeightRequest="100" HorizontalOptions="FillAndExpand"
+                                    Margin="10, 0, 10, 10">
+
+                        </ScrollView>
+
+                    </StackLayout>
+                    <!--tabView:SfTabView EnableSwiping="False" VisibleHeaderCount="3"  VerticalOptions="FillAndExpand" DisplayMode="Image">
+                        
+                        <tabView:SfTabView.SelectionIndicatorSettings>
+                            <tabView:SelectionIndicatorSettings />
+                        </tabView:SfTabView.SelectionIndicatorSettings>
+
+                        <tabView:SfTabItem Title="Diario"
+                               IconFont="&#xe953;"
+                               FontIconFontColor="{StaticResource Primary}"
+                               FontIconFontFamily="{StaticResource Icon}">
+                        </tabView:SfTabItem>
+
+                        <tabView:SfTabItem Title="Itinerario"
+                               IconFont="&#xe953;"
+                               FontIconFontColor="{StaticResource Primary}"
+                               FontIconFontFamily="{StaticResource Icon}">
+                        </tabView:SfTabItem>
+
+                        <tabView:SfTabItem Title="Fotos"
+                               IconFont="&#xe953;"
+                               FontIconFontColor="{StaticResource Primary}"
+                               FontIconFontFamily="{StaticResource Icon}">
+                        </tabView:SfTabItem>
+
+                    </-->
+                    <!--StackLayout x:Name="Body" Padding="5, 10, 5, 10"  VerticalOptions="FillAndExpand"/-->
+                </StackLayout>
+            </ScrollView>
+
+            <BoxView x:Name="JourneyNameBoxView" HeightRequest="30"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds="0,0.15,1,0.06" 
+                    Opacity="0"
+                    BackgroundColor="{StaticResource Primary}"   
+                    ></BoxView>
+
+            <Label x:Name="JourneyName"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    AbsoluteLayout.LayoutBounds="0.1,0.15"
+                    FontSize="24" Text="Prueba"
+                    TextColor="{StaticResource White}"/>
+
+            <Button x:Name="ModifyJourneyButton" 
+                    Style="{StaticResource circleButtonStyle}"
+                    HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}" />
+
+        </AbsoluteLayout>
+
     </ContentPage.Content>
 </ContentPage>

@@ -88,6 +88,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ver Journals completados.
+        /// </summary>
+        internal static string ClosedEditing {
+            get {
+                return ResourceManager.GetString("ClosedEditing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ningún viaje cerrado.
         /// </summary>
         internal static string ClosedEmpty {
@@ -102,6 +111,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string ClosedJourneys {
             get {
                 return ResourceManager.GetString("ClosedJourneys", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Continuar editando....
+        /// </summary>
+        internal static string ContinueEditing {
+            get {
+                return ResourceManager.GetString("ContinueEditing", resourceCulture);
             }
         }
         
@@ -241,11 +259,29 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to +.
+        /// </summary>
+        internal static string Plus {
+            get {
+                return ResourceManager.GetString("Plus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ajustes.
         /// </summary>
         internal static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comenzar a editar....
+        /// </summary>
+        internal static string StartEditing {
+            get {
+                return ResourceManager.GetString("StartEditing", resourceCulture);
             }
         }
         

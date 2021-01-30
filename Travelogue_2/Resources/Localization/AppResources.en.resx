@@ -126,11 +126,17 @@
   <data name="CardHolder" xml:space="preserve">
     <value>Card holder</value>
   </data>
+  <data name="ClosedEditing" xml:space="preserve">
+    <value>Closed Trips</value>
+  </data>
   <data name="ClosedEmpty" xml:space="preserve">
     <value>No closed journeys</value>
   </data>
   <data name="ClosedJourneys" xml:space="preserve">
     <value>Closed Journeys</value>
+  </data>
+  <data name="ContinueEditing" xml:space="preserve">
+    <value>Continue editing...</value>
   </data>
   <data name="CreatedEmpty" xml:space="preserve">
     <value>No created journeys</value>
@@ -179,6 +185,9 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="StartEditing" xml:space="preserve">
+    <value>Start editing...</value>
   </data>
   <data name="Style" xml:space="preserve">
     <value>Style</value>

@@ -52,7 +52,7 @@
                                FontIconFontFamily="{StaticResource Icon}">
                 <tabView:SfTabItem.Content>
 
-                    <maps:Map x:Name="map" />
+                    <maps:Map x:Name="map" MapType="Street"/>
 
                 </tabView:SfTabItem.Content>
             </tabView:SfTabItem>

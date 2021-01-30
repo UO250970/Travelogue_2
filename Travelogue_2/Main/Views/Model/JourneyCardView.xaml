@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Travelogue_2.Main.Views.Model.JourneyCardView"></ContentPage>
+<!--Frame xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Travelogue_2.Main.Views.Model.JourneyCardView">
+
+    <AbsoluteLayout>
+
+        <Image  x:Name="JourneyImage" 
+                Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
+
+        <Label  x:Name="JourneyName"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                AbsoluteLayout.LayoutBounds="0.1,0.15"
+                FontSize="24"
+                TextColor="{StaticResource White}"/> 
+
+    </AbsoluteLayout>
+    
+</-->

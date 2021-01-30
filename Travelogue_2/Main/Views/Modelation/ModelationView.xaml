@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Travelogue_2.Main.Views.Modelation.ModelationView"
+             xmlns:carousel="clr-namespace:Syncfusion.SfCarousel.XForms;assembly=Syncfusion.SfCarousel.XForms">
+
+    <RefreshView Command="{Binding LoadJourneysCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+
+        <Grid Padding="10,10,10,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Button Text="{Binding Resources[StartEditing]}"
+                    Command="{Binding StarJournalViewCommand}"/>
+            </Grid>
+            <Frame Grid.Row="1" Padding="5, 5, 5, 5">
+                <carousel:SfCarousel
+                        x:Name="StartJournal"
+                        ViewMode="Linear"
+                        ItemSpacing="10">
+                </carousel:SfCarousel>
+            </Frame>
+
+            <Grid Grid.Row="2">
+                <Button Text="{Binding Resources[ContinueEditing]}"
+                    Command="{Binding ContinueJournalViewCommand}"/>
+            </Grid>
+            <Frame Grid.Row="3" Padding="5, 5, 5, 5">
+                <carousel:SfCarousel
+                        x:Name="ContinueJournal"
+                        ViewMode="Linear"
+                        ItemSpacing="10">
+                </carousel:SfCarousel>
+            </Frame>
+
+            <Grid Grid.Row="4">
+                <Button Text="{Binding Resources[ClosedEditing]}"
+                    Command="{Binding ClosedJournalViewCommand}"/>
+            </Grid>
+            <Frame Grid.Row="5" Padding="5, 5, 5, 5">
+                <carousel:SfCarousel
+                        x:Name="ClosedJournal"
+                        ViewMode="Linear"
+                        ItemSpacing="10">
+                </carousel:SfCarousel>
+            </Frame>
+
+        </Grid>
+
+    </RefreshView>
+    
+</ContentPage>

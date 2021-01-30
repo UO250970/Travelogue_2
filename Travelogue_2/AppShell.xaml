@@ -2,8 +2,10 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:Travelogue_2.Main.Views"
+       xmlns:journey="clr-namespace:Travelogue_2.Main.Views.Journey" 
        xmlns:library="clr-namespace:Travelogue_2.Main.Views.Library"
        xmlns:media="clr-namespace:Travelogue_2.Main.Views.Media"
+       xmlns:modelation="clr-namespace:Travelogue_2.Main.Views.Modelation"
        xmlns:settings="clr-namespace:Travelogue_2.Main.Views.Settings" 
        Title="Travelogue_2"
        x:Class="Travelogue_2.AppShell">
@@ -43,12 +45,12 @@
                 <FontImageSource Glyph="&#xe90e;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>
         </ShellContent>
-        <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" >
+        <ShellContent ContentTemplate="{DataTemplate journey:JourneyDetailView}" >
             <ShellContent.Icon>
                 <FontImageSource Glyph="&#xea1c;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>
         </ShellContent>
-        <ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" >
+        <ShellContent ContentTemplate="{DataTemplate modelation:ModelationView}" >
             <ShellContent.Icon>
                 <FontImageSource Glyph="&#xe905;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>

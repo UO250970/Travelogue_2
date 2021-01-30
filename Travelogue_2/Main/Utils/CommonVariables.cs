@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Utils
@@ -31,7 +32,15 @@ namespace Travelogue_2.Main.Utils
 
 		public static string GenericFlag { get => FlagImagesPath + "DEFAULT" + FlagImagesExtension; }  
 
-		public static List<String> AvailableLocations { get => new List<string>() { "AD", "AF", "AT", "AU", "CU", "DE", "ES", "FR", "EN" }; }
+		public static List<String> AvailableLanguages { get => new List<string>() { "ES", "FR", "EN" }; }
+
+		public static Dictionary<string, Location> AvailableLanguagesLocations 
+		{
+			get => new Dictionary<string, Location>() 
+			{ 
+				{ "ES", new Location(40.41966158373195, -3.690064616210935) }
+			}; 
+		}
 
 		public static List<String> AvailableFlags { get => new List<string>() { "AD", "AF", "AT", "AU", "CU", "DE", "ES", "FR" }; }
 

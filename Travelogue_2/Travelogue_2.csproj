@@ -47,10 +47,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Syncfusion.Licensing" Version="18.4.0.34" />
-    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.4.0.34" />
-    <PackageReference Include="Syncfusion.Xamarin.SfCarousel" Version="18.4.0.34" />
-    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.4.0.34" />
+    <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
+    <PackageReference Include="Syncfusion.Licensing" Version="18.4.0.35" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.4.0.35" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCarousel" Version="18.4.0.35" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.4.0.35" />
+    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />  
     <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.1874" />
@@ -75,6 +77,15 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Media\MediaView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Modelation\ModelationView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Model\JourneyBookView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Model\JourneyCardView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Localization\AppResources.resx">

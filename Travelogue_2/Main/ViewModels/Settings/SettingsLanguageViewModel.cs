@@ -12,7 +12,8 @@ namespace Travelogue_2.Main.ViewModels.Settings
         private String selectedLanguage;
         //public Command ChangeLanguageCommand { get; }
 
-        ObservableCollection<LanguageLabel> Languages { get; }
+
+        public ObservableCollection<LanguageLabel> Languages { get; }
         public Command LoadLanguagesCommand { get; }
         public Command<String> LanguageTapped { get; }
 
@@ -32,7 +33,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
             try
             {
                 Languages.Clear();
-                foreach (string lang in CommonVariables.AvailableLocations)
+                foreach (string lang in CommonVariables.AvailableLanguages)
 				{
                     LanguageLabel temp = new LanguageLabel();
                     temp.language = lang;

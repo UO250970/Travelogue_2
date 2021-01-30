@@ -3,6 +3,8 @@ using Travelogue_2.Resources.Localization;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
 using Xamarin.Forms;
+using System;
+using System.Diagnostics;
 
 namespace Travelogue_2
 {
@@ -14,17 +16,25 @@ namespace Travelogue_2
 
         public App()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzgwNTEzQDMxMzgyZTM0MmUzMGd5ZzdMS2RINmM2NkNVQ0s0Y0szNElMS1Q0cmxoWW1nUmJIUlBiNDNBcE09");
-            InitializeComponent();
+			try
+			{
+                Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzgwNTEzQDMxMzgyZTM0MmUzMGd5ZzdMS2RINmM2NkNVQ0s0Y0szNElMS1Q0cmxoWW1nUmJIUlBiNDNBcE09");
+                InitializeComponent();
 
-            AppResources.Culture = new CultureInfo(CurrentLanguage);
-            LocResources = new LocalizedResources(typeof(AppResources), CurrentLanguage);
+                AppResources.Culture = new CultureInfo(CurrentLanguage);
+                LocResources = new LocalizedResources(typeof(AppResources), CurrentLanguage);
 
-            DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
+                DependencyService.Register<MockDataStore>();
+                MainPage = new AppShell();
 
-            // Alerter de la aplicación
-            Alerter.SetPage(MainPage);
+                // Alerter de la aplicación
+                Alerter.SetPage(MainPage);
+
+                Geolocalization.CheckPermissions();
+            } catch (Exception e)
+			{
+                Debug.WriteLine(e);
+            }
         }
 
         protected override void OnStart()

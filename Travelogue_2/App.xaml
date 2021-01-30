@@ -7,10 +7,14 @@
     -->
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#247c7c</Color>
+            <Color x:Key="Secondary">#247c7c</Color>
+            <Color x:Key="Primary">#3D6D9B</Color>
+            <Color x:Key="White">White</Color>
+            
 
             <Style x:Key="buttonStyle" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="TextColor" Value="{StaticResource White}"/>
                 <Setter Property="Padding" Value="10" />
             </Style>
 
@@ -20,6 +24,16 @@
                 <Setter Property="Margin" Value="15, 25, 15, 15"/>
                 <Setter Property="FontSize" Value="Large"/>
             </Style>
+
+            <Style x:Key="circleButtonStyle" TargetType="Button">
+                <Setter Property="WidthRequest" Value="60"/>
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="BorderRadius" Value="30"/>
+                <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
+                <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.98,0.98,60,60"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                <Setter Property="TextColor" Value="{StaticResource White}"/>
+            </Style> T
 
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
@@ -42,7 +56,7 @@
             </Style>
 
             <OnPlatform x:Key="Icon" x:TypeArguments="x:String">
-                <On Platform="Android" Value="icon_fonts.ttf#icomoon" />
+                <On Platform="Android" Value="icomoon.ttf#icomoon" />
             </OnPlatform>
 
         </ResourceDictionary>        

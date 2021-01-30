@@ -9,13 +9,16 @@
                 ItemsLayout="VerticalList">
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Grid Padding="15,15,15,5" x:Name="MainGrid">
+                <Grid HeightRequest="65">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="8*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0"/>
-                    <Label Grid.Column="1" Text="holi"/>
+                    <Image HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="0" Source="{Binding image}"/>
+                    <Label Padding="5, 22, 0, 0" Grid.Column="1" Text="{Binding language}"
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" />
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"

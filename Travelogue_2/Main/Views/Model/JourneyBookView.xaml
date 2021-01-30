@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Travelogue_2.Main.Views.Model.JourneyBookView"></ContentPage>
+<!--Frame xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Travelogue_2.Main.Views.Model.JourneyBookView">
+
+    <StackLayout>
+
+        <Image  x:Name="JourneyImage" 
+                Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+
+        <Label  x:Name="JourneyName"
+                FontSize="24"
+                TextColor="{StaticResource White}"
+                BackgroundColor="{StaticResource Primary}"/>
+
+    </StackLayout>
+    
+</-->

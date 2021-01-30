@@ -2,81 +2,54 @@
 <ContentPage x:Class="Travelogue_2.Main.Views.Library.LibraryView"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Travelogue_2.Main.ViewModels.Library"
+             xmlns:local="clr-namespace:Travelogue_2.Main.Views.Model"
              xmlns:carousel="clr-namespace:Syncfusion.SfCarousel.XForms;assembly=Syncfusion.SfCarousel.XForms">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <DataTemplate
-                x:Key="journeyTemplate">
-                <ViewCell>
-                    <Frame
-                        Padding="0,20,0,20"
-                        Margin="10"
-                        BorderColor="Aqua"
-                        HasShadow="true">
-                        <Label
-                            Text="Nombre" />
-                    </Frame>
-                </ViewCell>
-            </DataTemplate>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <ContentPage.Content>
-        <Grid
-            Padding="10,10,10,5">
-            <Grid.RowDefinitions>
-                <RowDefinition
-                    Height="Auto" />
-                <RowDefinition
-                    Height="*" />
-                <RowDefinition
-                    Height="Auto" />
-                <RowDefinition
-                    Height="*" />
-            </Grid.RowDefinitions>
+        <RefreshView >
+        <!--Command="{Binding LoadJourneysCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}"-->
             <Grid
-                Grid.Row="0">
-                <Button
-                    Text="{Binding Resources[CreatedJourneys]}"
-                    Command="{Binding CreatedJourneysViewCommand}"/>
-            </Grid>
-            <Frame
-                Grid.Row="1" Padding="5, 5, 5, 5">
-                <RefreshView x:DataType="local:LibraryViewModel" Command="{Binding LoadJourneysCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-                    <carousel:SfCarousel
-                        x:Name="Created"
-                        ItemTemplate="{StaticResource journeyTemplate}"
-                        ItemsSource="{Binding CreatedJourneys}"
-                        ViewMode="Linear"
-                        ItemSpacing="10">
-                    </carousel:SfCarousel>
-                </RefreshView>
-            </Frame>
-            <Grid
-                Grid.Row="2">
-                <Button
-                    Text="{Binding Resources[ClosedJourneys]}"
-                    Command="{Binding ClosedJourneysViewCommand}"/>
-            </Grid>
-            <Frame
-                Grid.Row="3" Padding="5, 5, 5, 5">
-                <Grid>
-                    <carousel:SfCarousel
-                        x:Name="Closed"
-                        ItemTemplate="{StaticResource journeyTemplate}"
-                        ItemsSource="{Binding ClosedJourneys}"
-                        ViewMode="Linear"
-                        ItemSpacing="10">
-                    </carousel:SfCarousel>
-                    <Label
-                        x:Name="ClosedEmpty"
-                        HorizontalTextAlignment="Center"
-                        VerticalTextAlignment="Center"
-                        Text="{Binding Resources[ClosedEmpty]}"/>
+                Padding="10,10,10,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Button Text="{Binding Resources[CreatedJourneys]}"
+                        Command="{Binding CreatedJourneysViewCommand}"/>
                 </Grid>
-            </Frame>
-        </Grid>
+                <Frame Grid.Row="1" Padding="5, 5, 5, 5">
+                    <!--carousel:SfCarousel
+                            x:Name="Created"
+                            ItemTemplate="{Binding local:JourneyCardView}"
+                            ItemsSource="{Binding Journeys}"
+                            ViewMode="Linear"
+                            ItemSpacing="10">
+                    </-->
+                </Frame>
+                
+                <Grid Grid.Row="2">
+                    <Button Text="{Binding Resources[ClosedJourneys]}"
+                        Command="{Binding ClosedJourneysViewCommand}"/>
+                </Grid>
+                <Frame Grid.Row="3" Padding="5, 5, 5, 5">
+                    <Grid>
+                        <!--carousel:SfCarousel
+                            x:Name="Closed"
+                            ItemTemplate="{StaticResource journeyTemplate}"
+                            ItemsSource="{Binding ClosedJourneys}"
+                            ViewMode="Linear"
+                            ItemSpacing="10">
+                        </-->
+                        <Label x:Name="ClosedEmpty"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center"
+                            Text="{Binding Resources[ClosedEmpty]}"/>
+                    </Grid>
+                </Frame>
+            </Grid>
+        </RefreshView>
     </ContentPage.Content>
 </ContentPage>

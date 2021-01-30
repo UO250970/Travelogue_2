@@ -1,5 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Globalization;
+using Travelogue_2.Main.Utils;
+using Xamarin.Forms.Maps;
 
 namespace Travelogue_2.Main.ViewModels.Media
 {
@@ -20,6 +23,19 @@ namespace Travelogue_2.Main.ViewModels.Media
 		{
 			localization = Resources.CurrentCultureI();
 			localizationFirstDay = (int)Resources.CurrentCultureI().DateTimeFormat.FirstDayOfWeek;
+		}
+
+		internal Position GetPosition()
+		{
+			string loca = Resources.CurrentCulture();
+			if (CommonVariables.AvailableLanguagesLocations.ContainsKey(loca.ToUpper()))
+			{
+				var temp = CommonVariables.AvailableLanguagesLocations[loca.ToUpper()];
+				return new Position(temp.Latitude, temp.Longitude);
+			} else
+			{
+				return new Position();
+			}
 		}
 
 		protected void OnResourcesChanged(object s, PropertyChangedEventArgs e)

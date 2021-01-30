@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.Library;
 using Xamarin.Forms;
@@ -10,23 +11,23 @@ using Xamarin.Forms;
 namespace Travelogue_2.Main.ViewModels.Library
 {
     public class LibraryViewModel : BaseViewModel
-    {
-        public Command CreatedJourneysViewCommand { get; }
+	{
+		public Command LoadJourneysCommand { get; }
+		public Command<Item> JourneyTapped { get; }
+		public Command CreatedJourneysViewCommand { get; }
         public Command ClosedJourneysViewCommand { get; }
 
 
-		public ObservableCollection<Item> Journeys { get; }
-		public Command LoadJourneysCommand { get; }
-		public Command<Item> JourneyTapped { get; }
+		public ObservableCollection<JourneyCard> Journeys { get; }
 
 		public LibraryViewModel()
-        {
+		{
+			LoadJourneysCommand = new Command(async () => await ExecuteLoadJourneysCommand());
+			
 			CreatedJourneysViewCommand = new Command(() => CreatedJourneysViewC());
 			ClosedJourneysViewCommand = new Command(() => ClosedJourneysViewC());
 
-			LoadJourneysCommand = new Command(async () => await ExecuteLoadJourneysCommand());
-
-			Journeys = new ObservableCollection<Item>();
+			Journeys = new ObservableCollection<JourneyCard>();
 
 			JourneyTapped = new Command<Item>(OnJourneySelected);
 		}
@@ -38,11 +39,22 @@ namespace Travelogue_2.Main.ViewModels.Library
 			try
 			{
 				Journeys.Clear();
-				var items = await DataStore.GetItemsAsync(true);
-				foreach (var item in items)
-				{
-					Journeys.Add(item);
-				}
+				JourneyCard temp1 = new JourneyCard();
+				temp1.Name = "Prueba";
+				temp1.Image = ImageSource.FromResource(CommonVariables.GenericImage);
+
+
+				JourneyCard temp2 = new JourneyCard();
+				temp2.Name = "Prueba2";
+				temp2.Image = ImageSource.FromResource(CommonVariables.GenericImage);
+
+				Journeys.Add(temp1);
+				Journeys.Add(temp2);
+				//var items = await DataStore.GetItemsAsync(true);
+				//foreach (var item in items)
+				//{
+				//Journeys.Add(item);
+				//}
 			}
 			catch (Exception ex)
 			{
