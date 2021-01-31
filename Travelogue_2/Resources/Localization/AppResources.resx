@@ -129,6 +129,9 @@
   <data name="ClosedEditing" xml:space="preserve">
     <value>Ver Journals completados</value>
   </data>
+  <data name="ClosedEditingEmpty" xml:space="preserve">
+    <value>Sin viajes terminados de editar</value>
+  </data>
   <data name="ClosedEmpty" xml:space="preserve">
     <value>Ningún viaje cerrado</value>
   </data>
@@ -138,11 +141,17 @@
   <data name="ContinueEditing" xml:space="preserve">
     <value>Continuar editando...</value>
   </data>
+  <data name="ContinueEditingEmpty" xml:space="preserve">
+    <value>Sin viajes para continuar editando</value>
+  </data>
   <data name="CreatedEmpty" xml:space="preserve">
     <value>Ningún viaje creado</value>
   </data>
   <data name="CreatedJourneys" xml:space="preserve">
     <value>Viajes creados</value>
+  </data>
+  <data name="DateFormat" xml:space="preserve">
+    <value>dd-MM-yyyy</value>
   </data>
   <data name="Destinations" xml:space="preserve">
     <value>Destinos</value>
@@ -186,11 +195,17 @@
   <data name="Plus" xml:space="preserve">
     <value>+</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Ajustes</value>
   </data>
   <data name="StartEditing" xml:space="preserve">
     <value>Comenzar a editar...</value>
+  </data>
+  <data name="StartEditingEmpty" xml:space="preserve">
+    <value>Sin viajes para editar</value>
   </data>
   <data name="Style" xml:space="preserve">
     <value>Estilo</value>

@@ -97,6 +97,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sin viajes terminados de editar.
+        /// </summary>
+        internal static string ClosedEditingEmpty {
+            get {
+                return ResourceManager.GetString("ClosedEditingEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ningún viaje cerrado.
         /// </summary>
         internal static string ClosedEmpty {
@@ -124,6 +133,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sin viajes para continuar editando.
+        /// </summary>
+        internal static string ContinueEditingEmpty {
+            get {
+                return ResourceManager.GetString("ContinueEditingEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ningún viaje creado.
         /// </summary>
         internal static string CreatedEmpty {
@@ -138,6 +156,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string CreatedJourneys {
             get {
                 return ResourceManager.GetString("CreatedJourneys", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dd-MM-yyyy.
+        /// </summary>
+        internal static string DateFormat {
+            get {
+                return ResourceManager.GetString("DateFormat", resourceCulture);
             }
         }
         
@@ -268,6 +295,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Guardar.
+        /// </summary>
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ajustes.
         /// </summary>
         internal static string Settings {
@@ -282,6 +318,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string StartEditing {
             get {
                 return ResourceManager.GetString("StartEditing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sin viajes para editar.
+        /// </summary>
+        internal static string StartEditingEmpty {
+            get {
+                return ResourceManager.GetString("StartEditingEmpty", resourceCulture);
             }
         }
         

@@ -7,10 +7,21 @@
     -->
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Secondary">#247c7c</Color>
             <Color x:Key="Primary">#3D6D9B</Color>
-            <Color x:Key="White">White</Color>
+            <Color x:Key="Secondary">#247c7c</Color>
             
+            <Color x:Key="White">White</Color>
+            <Color x:Key="Grey">#999999</Color>
+            <Color x:Key="None">Transparent</Color>
+
+            <Rectangle x:Key="LinearOpacityBrush">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Color="{StaticResource White}" Offset="0.0" />
+                        <GradientStop Color="{StaticResource Secondary}" Offset="0.6" />
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
 
             <Style x:Key="buttonStyle" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
@@ -25,7 +36,13 @@
                 <Setter Property="FontSize" Value="Large"/>
             </Style>
 
-            <Style x:Key="circleButtonStyle" TargetType="Button">
+            <Style x:Key="addImageStyle" TargetType="Button">
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="BorderColor" Value="{StaticResource Grey}"/>
+                <Setter Property="FontSize" Value="Large"/>
+            </Style>
+
+            <Style x:Key="circleButtonAddStyle" TargetType="Button">
                 <Setter Property="WidthRequest" Value="60"/>
                 <Setter Property="HeightRequest" Value="60"/>
                 <Setter Property="BorderRadius" Value="30"/>
@@ -33,7 +50,17 @@
                 <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.98,0.98,60,60"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
                 <Setter Property="TextColor" Value="{StaticResource White}"/>
-            </Style> T
+            </Style>
+
+            <Style x:Key="circleButtonDeleteStyle" TargetType="Button">
+                <Setter Property="WidthRequest" Value="40"/>
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="BorderRadius" Value="20"/>
+                <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
+                <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.03,0.03,40,40"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+                <Setter Property="TextColor" Value="{StaticResource Grey}"/>
+            </Style>
 
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
@@ -47,13 +74,14 @@
                             </VisualState>
                             <VisualState x:Name="Disabled">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#332196F3" />
+                                    <!--Setter Property="BackgroundColor" Value="#332196F3" /-->
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
                     </VisualStateGroupList>
                 </Setter>
             </Style>
+
 
             <OnPlatform x:Key="Icon" x:TypeArguments="x:String">
                 <On Platform="Android" Value="icomoon.ttf#icomoon" />

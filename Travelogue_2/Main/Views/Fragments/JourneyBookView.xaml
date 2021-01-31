@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Frame xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Travelogue_2.Main.Views.Fragments.JourneyBookView">
+
+    <StackLayout BackgroundColor="{StaticResource Secondary}" HeightRequest="180">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
+                <Image Grid.Row="0" x:Name="JourneyImage" 
+                    Source="{Binding Image}"
+                    Aspect="AspectFill"/>
+
+                <Label Grid.Row="1" x:Name="JourneyName"
+                    FontSize="24"
+                    Text="{Binding Name}"
+                    TextColor="{StaticResource White}"
+                    BackgroundColor="{StaticResource Primary}"/>
+            </Grid>
+
+
+    </StackLayout>
+    
+</Frame>

@@ -114,7 +114,7 @@
                     TextColor="{StaticResource White}"/>
 
             <Button x:Name="ModifyJourneyButton" 
-                    Style="{StaticResource circleButtonStyle}"
+                    Style="{StaticResource circleButtonAddStyle}"
                     HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}" />
 
         </AbsoluteLayout>

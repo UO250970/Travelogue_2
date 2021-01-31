@@ -24,6 +24,16 @@ namespace Travelogue_2.Main.Views.Journey
 			MainScroll.PropertyChanged += OnScrollViewPropertyChanged;
         }
 
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+
+			JourneyName.TranslationY = _journeyNameFrameTop * 0.1;
+			JourneyNameBoxView.TranslationY = _journeyNameFrameTop * 0.1;
+
+			JourneyNameBoxView.FadeTo(0, 0);
+		}
+
 		private void OnJourneyNameSizeChanged(object sender, System.EventArgs e)
 		{
 			if (JourneyName.Height > 0)

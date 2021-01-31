@@ -129,6 +129,9 @@
   <data name="ClosedEditing" xml:space="preserve">
     <value>Closed Trips</value>
   </data>
+  <data name="ClosedEditingEmpty" xml:space="preserve">
+    <value>No Journeys finished editing</value>
+  </data>
   <data name="ClosedEmpty" xml:space="preserve">
     <value>No closed journeys</value>
   </data>
@@ -138,11 +141,17 @@
   <data name="ContinueEditing" xml:space="preserve">
     <value>Continue editing...</value>
   </data>
+  <data name="ContinueEditingEmpty" xml:space="preserve">
+    <value>No Journeys to continue editing</value>
+  </data>
   <data name="CreatedEmpty" xml:space="preserve">
     <value>No created journeys</value>
   </data>
   <data name="CreatedJourneys" xml:space="preserve">
     <value>Created Journeys</value>
+  </data>
+  <data name="DateFormat" xml:space="preserve">
+    <value>MM-dd-yyyy</value>
   </data>
   <data name="Destinations" xml:space="preserve">
     <value>Destinations</value>
@@ -183,11 +192,17 @@
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="StartEditing" xml:space="preserve">
     <value>Start editing...</value>
+  </data>
+  <data name="StartEditingEmpty" xml:space="preserve">
+    <value>No Journeys to edit</value>
   </data>
   <data name="Style" xml:space="preserve">
     <value>Style</value>

@@ -5,22 +5,17 @@ using Xamarin.Forms.Xaml;
 namespace Travelogue_2.Main.Views.Modelation
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ModelationView : ContentPage
+	public partial class EndedModelationView : ContentPage
 	{
-		readonly ModelationViewModel model;
+		readonly EndedModelationViewModel model;
 
-		public ModelationView()
+		public EndedModelationView()
 		{
 			InitializeComponent();
 
-			BindingContext = model = new ModelationViewModel();
+			BindingContext = model = new EndedModelationViewModel();
 
 			Shell.SetNavBarIsVisible(this, false);
-		}
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
-			model.OnAppearing();
 		}
 	}
 }

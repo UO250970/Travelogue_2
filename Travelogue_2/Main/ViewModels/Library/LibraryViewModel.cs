@@ -18,7 +18,8 @@ namespace Travelogue_2.Main.ViewModels.Library
         public Command ClosedJourneysViewCommand { get; }
 
 
-		public ObservableCollection<JourneyCard> Journeys { get; }
+		public ObservableCollection<JourneyCard> JourneysCreated { get; }
+		public ObservableCollection<JourneyCard> JourneysClosed { get; }
 
 		public LibraryViewModel()
 		{
@@ -27,7 +28,9 @@ namespace Travelogue_2.Main.ViewModels.Library
 			CreatedJourneysViewCommand = new Command(() => CreatedJourneysViewC());
 			ClosedJourneysViewCommand = new Command(() => ClosedJourneysViewC());
 
-			Journeys = new ObservableCollection<JourneyCard>();
+			JourneysCreated = new ObservableCollection<JourneyCard>();
+			JourneysClosed = new ObservableCollection<JourneyCard>();
+			ExecuteLoadJourneysCommand();
 
 			JourneyTapped = new Command<Item>(OnJourneySelected);
 		}
@@ -38,7 +41,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 			try
 			{
-				Journeys.Clear();
+				JourneysCreated.Clear();
 				JourneyCard temp1 = new JourneyCard();
 				temp1.Name = "Prueba";
 				temp1.Image = ImageSource.FromResource(CommonVariables.GenericImage);
@@ -48,8 +51,8 @@ namespace Travelogue_2.Main.ViewModels.Library
 				temp2.Name = "Prueba2";
 				temp2.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
-				Journeys.Add(temp1);
-				Journeys.Add(temp2);
+				JourneysCreated.Add(temp1);
+				JourneysCreated.Add(temp2);
 				//var items = await DataStore.GetItemsAsync(true);
 				//foreach (var item in items)
 				//{
@@ -68,17 +71,6 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		public void OnAppearing()
 			=> IsBusy = true;
-
-
-		public ObservableCollection<Item> CreatedJourneys
-		{
-			get => new ObservableCollection<Item>();
-		}
-
-		public ObservableCollection<Item> ClosedJourneys
-		{
-			get => new ObservableCollection<Item>();
-		}
 
 
 		async internal void CreatedJourneysViewC()

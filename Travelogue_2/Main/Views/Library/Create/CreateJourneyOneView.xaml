@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             x:Class="Travelogue_2.Main.Views.Library.Create.CreateJourneyOneView"
+             Shell.PresentationMode="ModalAnimated">
+
+    <ContentPage.Content>
+        <ScrollView Margin="10,10,10,5">
+
+            <StackLayout>
+
+                <border:SfBorder BorderColor="{StaticResource Grey}" BorderWidth="2" CornerRadius="10">
+                    <border:SfBorder.DashArray>
+                        <x:Array Type="{x:Type x:Double}">
+                            <x:Double>3</x:Double>
+                            <x:Double>4</x:Double>
+                        </x:Array>
+                    </border:SfBorder.DashArray>
+                    <Button Margin="2" Padding="5" HeightRequest="180" BackgroundColor="{StaticResource None}"></Button>
+
+                </border:SfBorder>
+
+                <Frame HasShadow="True" Padding="5">
+                    <StackLayout>
+                        <Label Text="Titulo" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                        <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame HasShadow="True" Padding="5">
+                    <StackLayout>
+                        <Label Text="Fechas" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                        <StackLayout Orientation="Horizontal">
+
+                            <DatePicker Format="{Binding Resources[DateFormat]}"
+                                x:Name="IniDatePicker"
+                                DateSelected="CheckNewIniDate" HorizontalOptions="FillAndExpand"/>
+                            <DatePicker Format="{Binding Resources[DateFormat]}"
+                                x:Name="EndDatePicker"
+                                DateSelected="CheckNewEndDate" HorizontalOptions="FillAndExpand"/>
+
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="{Binding Resources[Cancel]}" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    <Button Text="{Binding Resources[Save]}" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                </StackLayout>
+
+            </StackLayout>
+
+        </ScrollView>
+    </ContentPage.Content>
+    
+</ContentPage>

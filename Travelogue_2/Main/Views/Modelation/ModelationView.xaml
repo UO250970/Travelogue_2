@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Travelogue_2.Main.Views.Modelation.ModelationView"
-             xmlns:carousel="clr-namespace:Syncfusion.SfCarousel.XForms;assembly=Syncfusion.SfCarousel.XForms">
+             xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments">
 
     <RefreshView Command="{Binding LoadJourneysCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
 
@@ -21,11 +21,20 @@
                     Command="{Binding StarJournalViewCommand}"/>
             </Grid>
             <Frame Grid.Row="1" Padding="5, 5, 5, 5">
-                <carousel:SfCarousel
-                        x:Name="StartJournal"
-                        ViewMode="Linear"
-                        ItemSpacing="10">
-                </carousel:SfCarousel>
+                
+                <CarouselView ItemsSource="{Binding JourneysStartEditing}" EmptyView="{Binding Resources[StartEditingEmpty]}" 
+                              PeekAreaInsets="50" Loop="False">
+                    <CarouselView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
+                    </CarouselView.ItemsLayout>
+
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <local:JourneyCardView BindingContext="{Binding .}"/>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                
             </Frame>
 
             <Grid Grid.Row="2">
@@ -33,11 +42,20 @@
                     Command="{Binding ContinueJournalViewCommand}"/>
             </Grid>
             <Frame Grid.Row="3" Padding="5, 5, 5, 5">
-                <carousel:SfCarousel
-                        x:Name="ContinueJournal"
-                        ViewMode="Linear"
-                        ItemSpacing="10">
-                </carousel:SfCarousel>
+                
+                <CarouselView ItemsSource="{Binding JourneysContinueEditing}" EmptyView="{Binding Resources[ContinueEditingEmpty]}" 
+                              PeekAreaInsets="50" Loop="False">
+                    <CarouselView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
+                    </CarouselView.ItemsLayout>
+
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <local:JourneyCardView BindingContext="{Binding .}"/>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                
             </Frame>
 
             <Grid Grid.Row="4">
@@ -45,11 +63,20 @@
                     Command="{Binding ClosedJournalViewCommand}"/>
             </Grid>
             <Frame Grid.Row="5" Padding="5, 5, 5, 5">
-                <carousel:SfCarousel
-                        x:Name="ClosedJournal"
-                        ViewMode="Linear"
-                        ItemSpacing="10">
-                </carousel:SfCarousel>
+
+                <CarouselView ItemsSource="{Binding JourneysClosedEditing}" EmptyView="{Binding Resources[ClosedEditingEmpty]}" 
+                              PeekAreaInsets="50" Loop="False">
+                    <CarouselView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
+                    </CarouselView.ItemsLayout>
+
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <local:JourneyCardView BindingContext="{Binding .}"/>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+
             </Frame>
 
         </Grid>
