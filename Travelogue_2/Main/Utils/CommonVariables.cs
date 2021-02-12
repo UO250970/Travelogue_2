@@ -17,6 +17,7 @@ namespace Travelogue_2.Main.Utils
 
 		/** Common string */
 		public static string AppName { get => "Travelogue_2"; }
+		public static string ResourcesMonth { get => "Month_"; }
 
 		public static string CountryWebSite { get => "http://country.io/"; }
 
@@ -54,6 +55,11 @@ namespace Travelogue_2.Main.Utils
 			{
 				return ImageSource.FromResource(GenericFlag);
 			}
+		}
+
+		public static ImageSource GetImage()
+		{
+			return ImageSource.FromResource(GenericImage);
 		}
 
 	}

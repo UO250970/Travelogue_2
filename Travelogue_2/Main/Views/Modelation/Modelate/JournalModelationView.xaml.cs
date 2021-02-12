@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Travelogue_2.Main.Views.Fragments
+namespace Travelogue_2.Main.Views.Modelation.Modelate
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class DestinyCardView : Frame
+	public partial class JournalModelationView : ContentView
 	{
-		public DestinyCardView()
+		public JournalModelationView()
 		{
 			InitializeComponent();
 		}

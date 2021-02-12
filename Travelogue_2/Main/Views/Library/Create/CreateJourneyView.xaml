@@ -4,7 +4,7 @@
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
              xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
              xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments"
-             x:Class="Travelogue_2.Main.Views.Library.Create.CreateJourneyOneView"
+             x:Class="Travelogue_2.Main.Views.Library.Create.CreateJourneyView"
              Shell.PresentationMode="ModalAnimated">
 
     <ContentPage.Content>
@@ -49,28 +49,33 @@
                                         DateSelected="CheckNewEndDate" HorizontalOptions="FillAndExpand"/>
 
                         </StackLayout>
-                        <CarouselView ItemsSource="{Binding DaysSelected}"
-                                  PeekAreaInsets="50" Loop="False" HorizontalOptions="StartAndExpand" Position="0">
-                            <CarouselView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Horizontal" />
-                            </CarouselView.ItemsLayout>
 
-                            <CarouselView.ItemTemplate>
+                        <CollectionView ItemsSource="{Binding DaysSelected}"  HeightRequest="100">
+
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <local:DayCardView BindingContext="{Binding .}"/>
+                                    <StackLayout>
+                                        <local:DayCardView BindingContext="{Binding .}"/>
+                                    </StackLayout>
                                 </DataTemplate>
-                            </CarouselView.ItemTemplate>
-                        </CarouselView>
+                            </CollectionView.ItemTemplate>
+
+                        </CollectionView>
+
                     </StackLayout>
                 </Frame>
 
-                <Frame HasShadow="True" Margin="5" Padding="5">
+                <Frame HasShadow="True" Margin="5" Padding="8">
                     <StackLayout>
                         <Label Text="Destinos" FontSize="Large" TextColor="{StaticResource Primary}"/>
                         <StackLayout Orientation="Horizontal">
-                            
+
                             <autocomplete:SfAutoComplete x:Name="AutocompleteDestiny"
-                                                         AutoCompleteSource="{Binding DestiniesList}"
+                                                         DataSource="{Binding DestiniesList}"
                                                          NoResultsFoundText="{Binding Resources[NoResultsFound]}"
                                                          Text="{Binding DestinyText, Mode=TwoWay}"
                                                          Watermark="{Binding Resources[EnterADestiny]}"
@@ -80,6 +85,21 @@
                                     IsEnabled="{Binding CorrectDestinyText}"
                                     Text="&#xea0a;" FontFamily="{StaticResource Icon}"  FontSize="Medium"/>
                         </StackLayout>
+                        <CollectionView ItemsSource="{Binding DestiniesSelected}">
+
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <local:DestinyCardView BindingContext="{Binding .}"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+
+                        </CollectionView>
                     </StackLayout>
                 </Frame>
 

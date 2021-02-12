@@ -1,12 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<Frame xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Travelogue_2.Main.Views.Fragments.DestinyCardView">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+    
+    <StackLayout>
+        <Label x:Name="DestinyName" FontSize="Medium" 
+                            Text="{Binding Destiny}"/>
+        <Grid x:Name="DestinyInfo">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="7*" />
+            </Grid.ColumnDefinitions>
+            
+            <Image x:Name="FlagImage"  
+                   Source="{Binding Flag}"
+                   Aspect="AspectFill" Grid.Column="0" HeightRequest="50" />
+
+            <StackLayout Grid.Column="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0"
+                            FontSize="Medium"
+                            Text="{Binding Destiny}" />
+                    <Label Grid.Column="1"
+                            x:Name="CountryName"
+                            FontSize="Medium" 
+                            Text="{Binding Destiny}"/>
+
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0"
+                            FontSize="Medium"
+                            Text="{Binding Currency}" />
+                    <Label Grid.Column="1"
+                            x:Name="Currency"
+                            FontSize="Medium"
+                            Text="{Binding Currency}" />
+
+                </Grid>
+
+                <Label Grid.Column="0"
+                        FontSize="Medium"
+                        TextColor="#3D6D9B"
+                        x:Name="DestinyURL"
+                        Text="{Binding MoreInfoCountry}">
+                    <!--Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="" CommandParameter=""/>
+                    </-->
+                </Label>
+            </StackLayout>
+
+        </Grid>
+    </StackLayout>
+
+</Frame>

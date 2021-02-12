@@ -162,6 +162,12 @@
   <data name="EnterADestiny" xml:space="preserve">
     <value>Introduce un destino</value>
   </data>
+  <data name="Entries" xml:space="preserve">
+    <value>Entradas</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Eventos</value>
+  </data>
   <data name="Gallery" xml:space="preserve">
     <value>Galería</value>
   </data>
@@ -188,6 +194,9 @@
   </data>
   <data name="Modelation" xml:space="preserve">
     <value>Modelado</value>
+  </data>
+  <data name="MonthShort_2" xml:space="preserve">
+    <value>FEB.</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>

@@ -5,29 +5,33 @@
              xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments">
 
     <ContentPage.Content>
-        <StackLayout Padding="10,10,10,5">
+        <Grid Padding="10,10,10,5">
+            
+            <ScrollView VerticalScrollBarVisibility="Default">
 
-            <Button Grid.Row="0" Text="{Binding Resources[ClosedJourneys]}"
+                <StackLayout>
+
+                    <Button Text="{Binding Resources[ClosedJourneys]}"
                     IsEnabled="False"/>
 
-            <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Default">
-
-                <CollectionView ItemsSource="{Binding JourneysCreated}">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical"
+                    <CollectionView ItemsSource="{Binding JourneysCreated}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
                                             Span="2" />
-                    </CollectionView.ItemsLayout>
+                        </CollectionView.ItemsLayout>
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <local:JourneyBookView BindingContext="{Binding .}"/>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <local:JourneyBookView BindingContext="{Binding .}"/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    
+                </StackLayout>
+                
             </ScrollView>
             
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 
 </ContentPage>

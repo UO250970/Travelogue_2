@@ -7,39 +7,42 @@
     <ContentPage.Content>
         <AbsoluteLayout>
 
-            <StackLayout Padding="10,10,10,5">
+            <Grid Padding="10,10,10,5">
+                
+                <ScrollView Orientation="Vertical">
 
-                <Button Text="{Binding Resources[CreatedJourneys]}"
+                    <StackLayout>
+
+                        <Button Text="{Binding Resources[CreatedJourneys]}"
                             IsEnabled="False"/>
 
-                <ScrollView VerticalScrollBarVisibility="Default">
-
-                    <CollectionView ItemsSource="{Binding JourneysCreated}">
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical"
+                        <CollectionView ItemsSource="{Binding JourneysCreated}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical"
                                             Span="2"/>
-                        </CollectionView.ItemsLayout>
+                            </CollectionView.ItemsLayout>
 
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
 
-                                <AbsoluteLayout>
+                                    <AbsoluteLayout>
 
-                                    <local:JourneyBookView BindingContext="{Binding .}"/>
+                                        <local:JourneyBookView BindingContext="{Binding .}"/>
 
-                                    <Button x:Name="DeleteJourneyButton" 
+                                        <Button x:Name="DeleteJourneyButton" 
                                         Style="{StaticResource circleButtonDeleteStyle}"
                                         HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" />
 
-                                </AbsoluteLayout>
+                                    </AbsoluteLayout>
 
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
 
+                    </StackLayout>
                 </ScrollView>
 
-            </StackLayout>
+            </Grid>
 
             <Button x:Name="CreateJourneyButton" 
                     Style="{StaticResource circleButtonAddStyle}"

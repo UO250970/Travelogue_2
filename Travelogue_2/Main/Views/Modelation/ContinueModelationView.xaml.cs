@@ -16,7 +16,12 @@ namespace Travelogue_2.Main.Views.Modelation
 			BindingContext = model = new ContinueModelationViewModel();
 
 			Shell.SetNavBarIsVisible(this, false);
+		}
 
+		protected override void OnAppearing()
+		{
+			model.OnAppearing();
+			base.OnAppearing();
 		}
 	}
 }

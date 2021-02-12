@@ -12,12 +12,5 @@ namespace Travelogue_2.Main.Views.Fragments
 			InitializeComponent();
 		}
 
-		public JourneyCardView(JourneyCard card)
-		{
-			InitializeComponent();
-
-			JourneyImage.Source = card.Image;
-			JourneyName.Text = card.Name;
-		}
 	}
 }

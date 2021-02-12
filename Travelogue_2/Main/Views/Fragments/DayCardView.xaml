@@ -1,35 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<Frame xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Travelogue_2.Main.Views.Fragments.DayCardView">
-    <ContentPage.Content>
+             x:Class="Travelogue_2.Main.Views.Fragments.DayCardView"
+             HasShadow="True" 
+             HeightRequest="40" WidthRequest="100"
+             Margin="5">
+    
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="70"/>
+        </Grid.ColumnDefinitions>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+        <StackLayout Grid.Column="0">
 
-            <StackLayout Grid.Column="0">
-
-                <Label x:Name="Day"
+            <Label x:Name="Day"
                         Text="{Binding Day}"
                         FontSize="24"
                         TextColor="{StaticResource Primary}"/>
-                
-                <Label x:Name="Month"
+
+            <Label x:Name="Month"
                         Text="{Binding Month}"
                         FontSize="11"
                         TextColor="{StaticResource Grey}"/>
 
-            </StackLayout>
+        </StackLayout>
 
-            <StackLayout Grid.Column="1">
+        <StackLayout Grid.Column="1">
 
+            <Label x:Name="Entries"
+                   Text="{Binding EntriesText}"
+                   FontSize="15" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
+            <Label x:Name="Events"
+                   Text="{Binding EventsText}"
+                   FontSize="15" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"/>
 
-            </StackLayout>
+        </StackLayout>
 
-        </Grid>
-        
-    </ContentPage.Content>
-</ContentPage>
+    </Grid>
+    
+</Frame>

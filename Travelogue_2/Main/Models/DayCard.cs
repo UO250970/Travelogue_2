@@ -4,6 +4,33 @@
 	{
 		public string Day { get; set; }
 
-		public string Month { get; set; }
+		private string month;
+		public string Month
+		{
+			get { return month; }
+			set => month = App.LocResources["MonthShort_" + value];
+		}
+
+		public int Entries { get; set; }
+
+		public string EntriesText 
+		{
+			get
+			{
+				return Entries + " " + App.LocResources["Entries"];
+			} 
+		}
+
+		public int Events { get; set; }
+
+		public string EventsText
+		{
+			get
+			{
+				return Events + " " + App.LocResources["Events"];
+			}
+		}
+
 	}
+
 }

@@ -196,6 +196,24 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Entradas.
+        /// </summary>
+        internal static string Entries {
+            get {
+                return ResourceManager.GetString("Entries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eventos.
+        /// </summary>
+        internal static string Events {
+            get {
+                return ResourceManager.GetString("Events", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Galería.
         /// </summary>
         internal static string Gallery {
@@ -273,6 +291,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string Modelation {
             get {
                 return ResourceManager.GetString("Modelation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FEB..
+        /// </summary>
+        internal static string MonthShort_2 {
+            get {
+                return ResourceManager.GetString("MonthShort_2", resourceCulture);
             }
         }
         

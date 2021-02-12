@@ -162,6 +162,12 @@
   <data name="EnterADestiny" xml:space="preserve">
     <value>Enter a destiny</value>
   </data>
+  <data name="Entries" xml:space="preserve">
+    <value>Entries</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Events</value>
+  </data>
   <data name="Galery" xml:space="preserve">
     <value>Galery</value>
   </data>
@@ -188,6 +194,9 @@
   </data>
   <data name="Modelation" xml:space="preserve">
     <value>Modelation</value>
+  </data>
+  <data name="MonthShort_2" xml:space="preserve">
+    <value>FEB.</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>

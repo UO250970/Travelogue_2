@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -61,6 +61,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Main\Views\Library\Create\CreateJourneyView.xaml.cs">
+      <DependentUpon>CreateJourneyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Main\Views\Modelation\Modelate\JournalModelationView.xaml.cs">
+      <DependentUpon>JournalModelationView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Localization\AppResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -84,7 +90,7 @@
     <EmbeddedResource Update="Main\Views\Journey\JourneyDetailView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Main\Views\Library\Create\CreateJourneyOneView.xaml">
+    <EmbeddedResource Update="Main\Views\Library\Create\CreateJourneyView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Media\MediaView.xaml">
@@ -94,6 +100,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Modelation\EndedModelationView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Modelation\Modelate\JournalModelationView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Modelation\ModelationView.xaml">

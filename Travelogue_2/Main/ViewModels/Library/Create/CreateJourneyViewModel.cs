@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -9,26 +8,32 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Library.Create
 {
-	public class CreateJourneyOneViewModel : BaseViewModel
+	public class CreateJourneyViewModel : BaseViewModel
 	{
 		public Command AddDestinyCommand { get; }
 		public Command CancelCommand { get; }
 		public Command SaveCommand { get; }
 
 		public ObservableCollection<DayCard> DaysSelected { get; }
-
+		public ObservableCollection<DestinyCard> DestiniesSelected { get; }
 		public ObservableCollection<string> DestiniesList { get; }
 
-		public CreateJourneyOneViewModel()
+		public Command<DayCard> DayTapped { get; }
+		
+
+		public CreateJourneyViewModel()
 		{
 			AddDestinyCommand = new Command(() => AddDestinyC());
 
 			CancelCommand = new Command(() => CancelC());
 			SaveCommand = new Command(() => SaveC());
 
-			//DestiniesList = CommonVariables.AvailableLanguages;
-
 			DaysSelected = new ObservableCollection<DayCard>();
+			DestiniesSelected = new ObservableCollection<DestinyCard>();
+			DestiniesList = new ObservableCollection<string>();
+
+			DayTapped = new Command<DayCard>(OnDayTapped);
+
 			ExecuteLoadDataCommand();
 		}
 
@@ -105,6 +110,8 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 					DayCard temp = new DayCard();
 					temp.Day = dateTemp.Day.ToString();
 					temp.Month = dateTemp.Month.ToString();
+					temp.Entries = 0;
+					temp.Events = 0;
 					DaysSelected.Add(temp);
 
 					dateTemp = dateTemp.AddDays(1);
@@ -122,11 +129,17 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 		}
 
 		async internal void AddDestinyC()
-		{ }
+		{
+			DestinyCard temp = new DestinyCard();
+			temp.Destiny = destinyText;
+			temp.Code = destinyText;
+			temp.Currency = "Euros";
+			DestiniesSelected.Add(temp);
+			destinyText = "";
+		}
 
 		async internal void CancelC()
-		{ }
-		//=> await Shell.Current.GoToAsync(nameof(CreatedJourneysView));
+			=> await Shell.Current.GoToAsync("..");
 
 
 		async internal void SaveC()
@@ -135,12 +148,21 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
 		internal void CheckNewIniDate(DatePicker iniDatePicker, DatePicker endDatePicker)
 		{
-			throw new NotImplementedException();
+			ExecuteLoadDataCommand();
 		}
 
 		internal void CheckNewEndDate(DatePicker iniDatePicker, DatePicker endDatePicker)
 		{
-			throw new NotImplementedException();
+			ExecuteLoadDataCommand();
+		}
+
+		void OnDayTapped(DayCard day)
+		{
+			if (day == null)
+				return;
+
+			// This will push the ItemDetailPage onto the navigation stack
+			//await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
 		}
 
 	}

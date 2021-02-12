@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Frame xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Travelogue_2.Main.Views.Fragments.JourneyCardView">
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       x:Class="Travelogue_2.Main.Views.Fragments.JourneyCardView">
 
     <AbsoluteLayout BackgroundColor="{StaticResource Secondary}">
 
@@ -15,6 +15,8 @@
                 AbsoluteLayout.LayoutBounds="0.1,0.5"
                 FontSize="24"
                 TextColor="{StaticResource White}"/> 
+        
+        
 
     </AbsoluteLayout>
     

@@ -4,8 +4,7 @@
              x:Class="Travelogue_2.Main.Views.Modelation.ModelationView"
              xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments">
 
-    <RefreshView Command="{Binding LoadJourneysCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-
+    <ContentPage.Content>
         <Grid Padding="10,10,10,5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -21,7 +20,7 @@
                     Command="{Binding StarJournalViewCommand}"/>
             </Grid>
             <Frame Grid.Row="1" Padding="5, 5, 5, 5">
-                
+
                 <CarouselView ItemsSource="{Binding JourneysStartEditing}" EmptyView="{Binding Resources[StartEditingEmpty]}" 
                               PeekAreaInsets="50" Loop="False">
                     <CarouselView.ItemsLayout>
@@ -34,7 +33,7 @@
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
-                
+
             </Frame>
 
             <Grid Grid.Row="2">
@@ -42,7 +41,7 @@
                     Command="{Binding ContinueJournalViewCommand}"/>
             </Grid>
             <Frame Grid.Row="3" Padding="5, 5, 5, 5">
-                
+
                 <CarouselView ItemsSource="{Binding JourneysContinueEditing}" EmptyView="{Binding Resources[ContinueEditingEmpty]}" 
                               PeekAreaInsets="50" Loop="False">
                     <CarouselView.ItemsLayout>
@@ -55,7 +54,7 @@
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
                 </CarouselView>
-                
+
             </Frame>
 
             <Grid Grid.Row="4">
@@ -80,7 +79,6 @@
             </Frame>
 
         </Grid>
-
-    </RefreshView>
+    </ContentPage.Content>
     
 </ContentPage>

@@ -76,8 +76,10 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 
 		async internal void StarJournalViewC() 
 			=> await Shell.Current.GoToAsync(nameof(StartModelationView));
+
 		async internal void ContinueJournalViewC()
 			=> await Shell.Current.GoToAsync(nameof(ContinueModelationView));
+
 		async internal void ClosedJournalViewC() 
 			=> await Shell.Current.GoToAsync(nameof(EndedModelationView));
 

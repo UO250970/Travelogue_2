@@ -6,16 +6,16 @@ using Xamarin.Forms.Xaml;
 namespace Travelogue_2.Main.Views.Library.Create
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CreateJourneyOneView : ContentPage
+	public partial class CreateJourneyView : ContentPage
 	{
 
-		readonly CreateJourneyOneViewModel model;
+		readonly CreateJourneyViewModel model;
 
-		public CreateJourneyOneView()
+		public CreateJourneyView()
 		{
 			InitializeComponent();
 
-			BindingContext = model = new CreateJourneyOneViewModel();
+			BindingContext = model = new CreateJourneyViewModel();
 
 			Shell.SetNavBarIsVisible(this, false);
 		}

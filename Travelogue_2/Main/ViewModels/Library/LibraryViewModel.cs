@@ -30,9 +30,10 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 			JourneysCreated = new ObservableCollection<JourneyCard>();
 			JourneysClosed = new ObservableCollection<JourneyCard>();
-			ExecuteLoadJourneysCommand();
 
 			JourneyTapped = new Command<Item>(OnJourneySelected);
+
+			ExecuteLoadJourneysCommand();
 		}
 
 		async Task ExecuteLoadJourneysCommand()
