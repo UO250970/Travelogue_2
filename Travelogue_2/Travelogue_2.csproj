@@ -50,6 +50,7 @@
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
     <PackageReference Include="Syncfusion.Licensing" Version="18.4.0.39" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.4.0.39" />
+    <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="18.4.0.39" />
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.4.0.39" />
     <PackageReference Include="Syncfusion.Xamarin.SfCarousel" Version="18.4.0.39" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.4.0.39" />
@@ -74,6 +75,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Main\Views\Fragments\DayCardView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Fragments\DestinyCardView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Journey\JourneyDetailView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

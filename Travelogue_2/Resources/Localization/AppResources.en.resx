@@ -159,6 +159,9 @@
   <data name="Empty" xml:space="preserve">
     <value />
   </data>
+  <data name="EnterADestiny" xml:space="preserve">
+    <value>Enter a destiny</value>
+  </data>
   <data name="Galery" xml:space="preserve">
     <value>Galery</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="NoResultsFound" xml:space="preserve">
+    <value>No results</value>
   </data>
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>

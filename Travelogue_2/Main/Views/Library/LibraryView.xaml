@@ -68,28 +68,8 @@
     </ContentPage.Content>
 </ContentPage>
     
-    <!--
-    <carousel:SfCarousel
-                            x:Name="Created"
-                            ItemsSource="{Binding Journeys}"
-                            ItemTemplate="{StaticResource JourneyCardTemplate}" 
-                            ItemHeight=""
-                            ViewMode="Linear"
-                            ItemSpacing="10"
-                            BackgroundColor="{StaticResource Primary}">
-                    <!carousel:SfCarousel.ItemTemplate>
-                            <local:JourneyCardView/>    ItemTemplate="{StaticResource journeyTemplate}" BindableLayout.EmptyView="{Binding Resources[ClosedEmpty]}" BindableLayout.EmptyView="{Binding Resources[CreatedEmpty]}"
-                        </>
+<!--
     
-                    <carousel:SfCarousel
-                            x:Name="Closed"
-                            
-                            ItemsSource="{Binding ClosedJourneys}"
-                            
-                            ViewMode="Linear"
-                            ItemSpacing="10">
-                    </carousel:SfCarousel>
-</carousel:SfCarousel>
 
 
 -->

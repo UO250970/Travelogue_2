@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Travelogue_2.Main.Views.Fragments.DayCardView">
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Column="0">
+
+                <Label x:Name="Day"
+                        Text="{Binding Day}"
+                        FontSize="24"
+                        TextColor="{StaticResource Primary}"/>
+                
+                <Label x:Name="Month"
+                        Text="{Binding Month}"
+                        FontSize="11"
+                        TextColor="{StaticResource Grey}"/>
+
+            </StackLayout>
+
+            <StackLayout Grid.Column="1">
+
+
+            </StackLayout>
+
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

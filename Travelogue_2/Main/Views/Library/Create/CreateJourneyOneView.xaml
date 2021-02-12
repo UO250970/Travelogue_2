@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
+             xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
+             xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments"
              x:Class="Travelogue_2.Main.Views.Library.Create.CreateJourneyOneView"
              Shell.PresentationMode="ModalAnimated">
 
@@ -21,25 +23,62 @@
 
                 </border:SfBorder>
 
-                <Frame HasShadow="True" Padding="5">
+                <Frame HasShadow="True" Margin="5" Padding="5">
                     <StackLayout>
                         <Label Text="Titulo" FontSize="Large" TextColor="{StaticResource Primary}"/>
                         <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
                     </StackLayout>
                 </Frame>
 
-                <Frame HasShadow="True" Padding="5">
+                <Frame HasShadow="True" Margin="5" Padding="5">
                     <StackLayout>
                         <Label Text="Fechas" FontSize="Large" TextColor="{StaticResource Primary}"/>
                         <StackLayout Orientation="Horizontal">
 
+                            <Label Text="&#xea0a;" FontFamily="{StaticResource Icon}"  FontSize="Medium" TextColor="{StaticResource Primary}" VerticalTextAlignment="Center"/>
                             <DatePicker Format="{Binding Resources[DateFormat]}"
-                                x:Name="IniDatePicker"
-                                DateSelected="CheckNewIniDate" HorizontalOptions="FillAndExpand"/>
+                                        x:Name="IniDatePicker"
+                                        Date="{Binding IniDate, Mode=TwoWay}"
+                                        MinimumDate="{Binding MinimumDate}"
+                                        DateSelected="CheckNewIniDate" HorizontalOptions="FillAndExpand"/>  
+                            <Label Text="&#xea0a;" FontFamily="{StaticResource Icon}"  FontSize="Medium" TextColor="{StaticResource Primary}" VerticalTextAlignment="Center"/>
                             <DatePicker Format="{Binding Resources[DateFormat]}"
-                                x:Name="EndDatePicker"
-                                DateSelected="CheckNewEndDate" HorizontalOptions="FillAndExpand"/>
+                                        x:Name="EndDatePicker"
+                                        Date="{Binding EndDate, Mode=TwoWay}"
+                                        MinimumDate="{Binding MinimumDate}"
+                                        DateSelected="CheckNewEndDate" HorizontalOptions="FillAndExpand"/>
 
+                        </StackLayout>
+                        <CarouselView ItemsSource="{Binding DaysSelected}"
+                                  PeekAreaInsets="50" Loop="False" HorizontalOptions="StartAndExpand" Position="0">
+                            <CarouselView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" />
+                            </CarouselView.ItemsLayout>
+
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <local:DayCardView BindingContext="{Binding .}"/>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                    </StackLayout>
+                </Frame>
+
+                <Frame HasShadow="True" Margin="5" Padding="5">
+                    <StackLayout>
+                        <Label Text="Destinos" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                        <StackLayout Orientation="Horizontal">
+                            
+                            <autocomplete:SfAutoComplete x:Name="AutocompleteDestiny"
+                                                         AutoCompleteSource="{Binding DestiniesList}"
+                                                         NoResultsFoundText="{Binding Resources[NoResultsFound]}"
+                                                         Text="{Binding DestinyText, Mode=TwoWay}"
+                                                         Watermark="{Binding Resources[EnterADestiny]}"
+                                                         HorizontalOptions="FillAndExpand"/>
+                            <Button x:Name="AddDestinyButton"
+                                    Command="{Binding AddDestinyCommand}"
+                                    IsEnabled="{Binding CorrectDestinyText}"
+                                    Text="&#xea0a;" FontFamily="{StaticResource Icon}"  FontSize="Medium"/>
                         </StackLayout>
                     </StackLayout>
                 </Frame>

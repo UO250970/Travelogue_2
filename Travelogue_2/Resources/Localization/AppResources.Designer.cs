@@ -187,6 +187,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Introduce un destino.
+        /// </summary>
+        internal static string EnterADestiny {
+            get {
+                return ResourceManager.GetString("EnterADestiny", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Galería.
         /// </summary>
         internal static string Gallery {
@@ -273,6 +282,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sin resultados.
+        /// </summary>
+        internal static string NoResultsFound {
+            get {
+                return ResourceManager.GetString("NoResultsFound", resourceCulture);
             }
         }
         

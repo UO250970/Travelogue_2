@@ -13,6 +13,8 @@
             <Color x:Key="White">White</Color>
             <Color x:Key="Grey">#999999</Color>
             <Color x:Key="None">Transparent</Color>
+            <Color x:Key="Disabled">#332196F3</Color>
+            
 
             <Rectangle x:Key="LinearOpacityBrush">
                 <Rectangle.Fill>
@@ -74,7 +76,7 @@
                             </VisualState>
                             <VisualState x:Name="Disabled">
                                 <VisualState.Setters>
-                                    <!--Setter Property="BackgroundColor" Value="#332196F3" /-->
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Disabled}" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>

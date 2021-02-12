@@ -53,6 +53,9 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 				JourneysCreated.Add(temp1);
 				JourneysCreated.Add(temp2);
+
+				JourneysClosed.Clear();
+				JourneysClosed.Add(temp1);
 				//var items = await DataStore.GetItemsAsync(true);
 				//foreach (var item in items)
 				//{
