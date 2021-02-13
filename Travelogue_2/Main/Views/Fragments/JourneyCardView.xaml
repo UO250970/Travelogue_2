@@ -16,8 +16,6 @@
                 FontSize="24"
                 TextColor="{StaticResource White}"/> 
         
-        
-
     </AbsoluteLayout>
     
 </Frame>

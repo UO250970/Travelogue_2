@@ -16,7 +16,12 @@
                         <Button Text="{Binding Resources[CreatedJourneys]}"
                             IsEnabled="False"/>
 
-                        <CollectionView ItemsSource="{Binding JourneysCreated}">
+                        <CollectionView x:Name="CreatedJourneysCollection"
+                                        ItemsSource="{Binding JourneysCreated}"
+                                        SelectionMode="Single"
+                                        SelectionChangedCommand="{Binding JourneyTapped}"
+                                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference StartJournalsCollection}}">
+                                
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Vertical"
                                             Span="2"/>
@@ -30,8 +35,10 @@
                                         <local:JourneyBookView BindingContext="{Binding .}"/>
 
                                         <Button x:Name="DeleteJourneyButton" 
-                                        Style="{StaticResource circleButtonDeleteStyle}"
-                                        HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" />
+                                                Style="{StaticResource circleButtonDeleteStyle}"
+                                                HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
+                                                Command="{Binding JourneyTappedDelete}"
+                                                CommandParameter="{Binding .}"/>
 
                                     </AbsoluteLayout>
 

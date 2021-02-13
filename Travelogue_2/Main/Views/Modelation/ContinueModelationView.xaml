@@ -16,7 +16,11 @@
 
             <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Default">
 
-                <CollectionView ItemsSource="{Binding ContinueJourneys}">
+                <CollectionView x:Name="ContinueJournalsCollection" 
+                                ItemsSource="{Binding ContinueJournals}"
+                                SelectionMode="Single"
+                                SelectionChangedCommand="{Binding JourneyTapped}"
+                                SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ContinueJournalsCollection}}">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical"
                                             Span="2"/>
@@ -26,9 +30,7 @@
                         <DataTemplate>
 
                             <AbsoluteLayout>
-
                                 <local:JourneyBookView BindingContext="{Binding .}"/>
-
                             </AbsoluteLayout>
 
                         </DataTemplate>

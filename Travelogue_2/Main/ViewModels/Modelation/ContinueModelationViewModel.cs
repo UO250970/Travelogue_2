@@ -12,11 +12,11 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 	{
 
 		public Command<Item> JourneyTapped { get; }
-		public ObservableCollection<JourneyCard> ContinueJourneys { get; set; }
+		public ObservableCollection<JourneyCard> ContinueJournals { get; set; }
 
 		public ContinueModelationViewModel()
 		{
-			ContinueJourneys = new ObservableCollection<JourneyCard>();
+			ContinueJournals = new ObservableCollection<JourneyCard>();
 
 			JourneyTapped = new Command<Item>(OnJourneySelected);
 

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Travelogue_2.Main.Views.Modelation.Modelate.JournalModelationView"
-             
+             xmlns:imageeditor="clr-namespace:Syncfusion.SfImageEditor.XForms;assembly=Syncfusion.SfImageEditor.XForms"
              Shell.PresentationMode="ModalAnimated">
-  <ContentView.Content>
-        <!--imageeditor:SfImageEditor  Source="{Binding Image}" /-->
-    </ContentView.Content>
-</ContentView>
+    <ContentPage.Content>
+        <imageeditor:SfImageEditor Source="{Binding Image}" />
+    </ContentPage.Content>
+</ContentPage>

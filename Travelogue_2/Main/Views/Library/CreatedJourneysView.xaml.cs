@@ -20,6 +20,7 @@ namespace Travelogue_2.Main.Views.Library
         protected override void OnAppearing()
         {
             model.OnAppearing();
+            CreatedJourneysCollection.SelectedItem = null;
             base.OnAppearing();
         }
     }

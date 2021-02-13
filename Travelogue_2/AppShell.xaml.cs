@@ -23,7 +23,7 @@ namespace Travelogue_2
             Routing.RegisterRoute(nameof(StartModelationView), typeof(StartModelationView));
             Routing.RegisterRoute(nameof(ContinueModelationView), typeof(ContinueModelationView));
             Routing.RegisterRoute(nameof(EndedModelationView), typeof(EndedModelationView));
-            Routing.RegisterRoute(nameof(EndedModelationView), typeof(JournalModelationView));
+            Routing.RegisterRoute(nameof(JournalModelationView), typeof(JournalModelationView));
 
             Routing.RegisterRoute(nameof(SettingsLanguageView), typeof(SettingsLanguageView));
         }

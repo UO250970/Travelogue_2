@@ -12,11 +12,11 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 	{
 
 		public Command<Item> JourneyTapped { get; }
-		public ObservableCollection<JourneyCard> ClosedJourneys { get; set; }
+		public ObservableCollection<JourneyCard> ClosedJourals { get; set; }
 
 		public EndedModelationViewModel()
 		{
-			ClosedJourneys = new ObservableCollection<JourneyCard>();
+			ClosedJourals = new ObservableCollection<JourneyCard>();
 
 			JourneyTapped = new Command<Item>(OnJourneySelected);
 
@@ -66,7 +66,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 				return;
 
 			// This will push the ItemDetailPage onto the navigation stack
-			await Shell.Current.GoToAsync($"{nameof(JourneyDetailView)}?{nameof(ItemDetailViewModel.ItemId)}={journey.Id}");
+			//await Shell.Current.GoToAsync($"{nameof(JourneyDetailView)}?{nameof(ItemDetailViewModel.ItemId)}={journey.Id}");
 		}
 	}
 }

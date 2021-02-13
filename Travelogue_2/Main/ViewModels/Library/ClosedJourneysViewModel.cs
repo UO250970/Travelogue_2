@@ -12,6 +12,7 @@ namespace Travelogue_2.Main.ViewModels.Library
     {
 
 		public Command<Item> JourneyTapped { get; }
+		public Command<JourneyCard> JourneyTappedDelete { get; }
 		public ObservableCollection<JourneyCard> JourneysClosed { get; set; }
 
 
@@ -21,6 +22,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 			JourneysClosed = new ObservableCollection<JourneyCard>();
 
 			JourneyTapped = new Command<Item>(OnJourneySelected);
+			JourneyTappedDelete = new Command<JourneyCard>(OnJourneySelectedDelete);
 
 			ExecuteLoadJourneysCommand();
 		}
@@ -69,6 +71,14 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 			// This will push the ItemDetailPage onto the navigation stack
 			await Shell.Current.GoToAsync($"{nameof(JourneyDetailView)}?{nameof(ItemDetailViewModel.ItemId)}={journey.Id}");
+		}
+
+		async void OnJourneySelectedDelete(JourneyCard journey)
+		{
+			if (journey == null)
+				return;
+
+			// TO-DO implementar
 		}
 
 	}

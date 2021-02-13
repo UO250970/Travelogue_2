@@ -21,6 +21,7 @@ namespace Travelogue_2.Main.Views.Modelation
 		protected override void OnAppearing()
 		{
 			model.OnAppearing();
+			ContinueJournalsCollection.SelectedItem = null;
 			base.OnAppearing();
 		}
 	}
