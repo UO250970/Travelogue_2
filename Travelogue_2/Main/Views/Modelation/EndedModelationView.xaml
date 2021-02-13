@@ -26,6 +26,10 @@
                                             Span="2"/>
                     </CollectionView.ItemsLayout>
 
+                    <CollectionView.EmptyView>
+                        <Label Text="{Binding Resources[ClosedEditingEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                    </CollectionView.EmptyView>
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
 

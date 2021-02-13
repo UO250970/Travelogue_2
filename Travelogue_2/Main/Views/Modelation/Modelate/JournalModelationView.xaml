@@ -5,6 +5,27 @@
              xmlns:imageeditor="clr-namespace:Syncfusion.SfImageEditor.XForms;assembly=Syncfusion.SfImageEditor.XForms"
              Shell.PresentationMode="ModalAnimated">
     <ContentPage.Content>
-        <imageeditor:SfImageEditor Source="{Binding Image}" />
+        <StackLayout>
+
+            <StackLayout Orientation="Horizontal" HeightRequest="40">
+
+                <Button x:Name="DeletePageJournalButton" 
+                        Style="{StaticResource circleButtonDeleteStyle}"
+                        HorizontalOptions="StartAndExpand"  Text="&#xea0b;" FontFamily="{StaticResource Icon}"/>
+
+
+                <CollectionView>
+
+                </CollectionView>
+
+                <Button x:Name="AddPageJournalButton" 
+                        Style="{StaticResource circleButtonDeleteStyle}"
+                        HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}"/>
+
+            </StackLayout>
+
+            <imageeditor:SfImageEditor Source="{Binding Image}" />
+            
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

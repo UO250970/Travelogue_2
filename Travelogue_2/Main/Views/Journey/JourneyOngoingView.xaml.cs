@@ -6,17 +6,17 @@ using Xamarin.Forms.Xaml;
 namespace Travelogue_2.Main.Views.Journey
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class JourneyDetailView : ContentPage
+    public partial class JourneyOngoingView : ContentPage
     {
-        readonly JourneyDetailViewModel model;
+        readonly JourneyOngoingViewModel model;
 
 		private double _journeyNameFrameTop;
 
-		public JourneyDetailView()
+		public JourneyOngoingView()
         {
             InitializeComponent();
 
-            BindingContext = model = new JourneyDetailViewModel();
+            BindingContext = model = new JourneyOngoingViewModel();
 
             Shell.SetNavBarIsVisible(this, false);
 

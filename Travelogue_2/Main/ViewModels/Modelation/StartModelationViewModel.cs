@@ -14,11 +14,11 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 	{
 
 		public Command<JourneyCard> JourneyTapped { get; }
-		public ObservableCollection<JourneyCard> StartJourneys { get; set; }
+		public ObservableCollection<JourneyCard> StartJournals { get; set; }
 
 		public StartModelationViewModel()
 		{
-			StartJourneys = new ObservableCollection<JourneyCard>();
+			StartJournals = new ObservableCollection<JourneyCard>();
 
 			JourneyTapped = new Command<JourneyCard>(OnJourneySelected);
 
@@ -31,7 +31,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 
 			try
 			{
-				StartJourneys.Clear();
+				StartJournals.Clear();
 				JourneyCard temp1 = new JourneyCard();
 				temp1.Name = "Prueba";
 				temp1.Image = ImageSource.FromResource(CommonVariables.GenericImage);
@@ -41,8 +41,8 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 				temp2.Name = "Prueba3";
 				temp2.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
-				StartJourneys.Add(temp1);
-				StartJourneys.Add(temp2);
+				StartJournals.Add(temp1);
+				StartJournals.Add(temp2);
 				//var items = await DataStore.GetItemsAsync(true);
 				//foreach (var item in items)
 				//{

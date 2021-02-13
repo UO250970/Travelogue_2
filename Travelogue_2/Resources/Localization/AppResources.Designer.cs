@@ -268,6 +268,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿Quieres eliminar el viaje? (Las entradas y eventos se eliminarán).
+        /// </summary>
+        internal static string MessDeleteJourney {
+            get {
+                return ResourceManager.GetString("MessDeleteJourney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Se ha cambiado el idioma de la aplicación..
         /// </summary>
         internal static string MessLanguageChanged {

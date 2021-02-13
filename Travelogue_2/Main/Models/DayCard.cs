@@ -2,6 +2,8 @@
 {
 	public class DayCard
 	{
+		public int Id { get; set; }
+
 		public string Day { get; set; }
 
 		private string month;

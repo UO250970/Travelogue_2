@@ -186,6 +186,9 @@
   <data name="Media" xml:space="preserve">
     <value>Media</value>
   </data>
+  <data name="MessDeleteJourney" xml:space="preserve">
+    <value>¿Quieres eliminar el viaje? (Las entradas y eventos se eliminarán)</value>
+  </data>
   <data name="MessLanguageChanged" xml:space="preserve">
     <value>Se ha cambiado el idioma de la aplicación.</value>
   </data>

@@ -139,6 +139,11 @@ namespace Travelogue_2.Main.Utils
 		internal static async Task<bool> AlertCountryAlreadySelected()
 			=> await Page?.DisplayAlert(App.LocResources["Empty"], "El destino ya está incluido", App.LocResources["Ok"], App.LocResources["Cancel"]);
 
+
+		/** Delete */
+		internal static async Task<bool> AlertDeleteJourney()
+			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessDeleteJourney"], App.LocResources["Ok"], App.LocResources["Cancel"]);
+
 		/** Photo */
 		/*
 		// Gochada -> True es take, false es pick

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.ViewModels.Journal;
 using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.Library.Create;
 using Xamarin.Forms;
@@ -42,35 +43,43 @@ namespace Travelogue_2.Main.ViewModels.Library
 			{
 				JourneysCreated.Clear();
 				JourneyCard temp1 = new JourneyCard();
+				temp1.Id = 0;
 				temp1.Name = "Prueba";
 				temp1.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
 
 				JourneyCard temp2 = new JourneyCard();
+				temp1.Id = 1;
 				temp2.Name = "Prueba3";
 				temp2.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
 				JourneyCard temp3 = new JourneyCard();
+				temp1.Id = 2;
 				temp3.Name = "Prueba3";
 				temp3.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
 				JourneyCard temp4 = new JourneyCard();
+				temp1.Id = 3;
 				temp4.Name = "Prueba3";
 				temp4.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
 				JourneyCard temp5 = new JourneyCard();
+				temp1.Id = 4;
 				temp5.Name = "Prueba3";
 				temp5.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
 				JourneyCard temp6 = new JourneyCard();
+				temp1.Id = 5;
 				temp6.Name = "Prueba3";
 				temp6.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
 				JourneyCard temp7 = new JourneyCard();
+				temp1.Id = 6;
 				temp7.Name = "Prueba3";
 				temp7.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
 				JourneyCard temp8 = new JourneyCard();
+				temp1.Id = 7;
 				temp8.Name = "Prueba3";
 				temp8.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
@@ -111,7 +120,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 				return;
 
 			// This will push the ItemDetailPage onto the navigation stack
-			await Shell.Current.GoToAsync($"{nameof(JourneyDetailView)}?{nameof(ItemDetailViewModel.ItemId)}={journey.Id}");
+			await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyViewModel.JourneyId)}={journey.Id}");
 		}
 
 		async void OnJourneySelectedDelete(JourneyCard journey)
@@ -120,6 +129,8 @@ namespace Travelogue_2.Main.ViewModels.Library
 				return;
 
 			// TO-DO implementar
+			bool result = await Alerter.AlertDeleteJourney();
+			if (result) JourneysCreated.Remove(journey);
 		}
 
 	}

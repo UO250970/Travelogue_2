@@ -12,13 +12,17 @@
                 <StackLayout>
 
                     <Button Text="{Binding Resources[ClosedJourneys]}"
-                    IsEnabled="False"/>
+                            IsEnabled="False"/>
 
                     <CollectionView ItemsSource="{Binding JourneysCreated}">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical"
                                             Span="2" />
                         </CollectionView.ItemsLayout>
+                        
+                        <CollectionView.EmptyView>
+                            <Label Text="{Binding Resources[ClosedEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                        </CollectionView.EmptyView>
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate>

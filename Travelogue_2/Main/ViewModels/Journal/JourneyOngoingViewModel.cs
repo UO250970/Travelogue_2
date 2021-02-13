@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Journal
 {
-	public class JourneyDetailViewModel : BaseViewModel
+	public class JourneyOngoingViewModel : BaseViewModel
 	{
 
 		public ImageSource CoverImage 

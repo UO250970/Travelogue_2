@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Travelogue_2.Main.Views.Library.CreatedJourneysView"
-             xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments">
+             xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments"
+             x:Name="CreatedJourneysViewName">
 
     <ContentPage.Content>
         <AbsoluteLayout>
@@ -20,12 +21,16 @@
                                         ItemsSource="{Binding JourneysCreated}"
                                         SelectionMode="Single"
                                         SelectionChangedCommand="{Binding JourneyTapped}"
-                                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference StartJournalsCollection}}">
+                                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CreatedJourneysCollection}}">
                                 
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Vertical"
                                             Span="2"/>
                             </CollectionView.ItemsLayout>
+
+                            <CollectionView.EmptyView>
+                                <Label Text="{Binding Resources[CreatedEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            </CollectionView.EmptyView>
 
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
@@ -37,7 +42,7 @@
                                         <Button x:Name="DeleteJourneyButton" 
                                                 Style="{StaticResource circleButtonDeleteStyle}"
                                                 HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
-                                                Command="{Binding JourneyTappedDelete}"
+                                                Command="{Binding BindingContext.JourneyTappedDelete, Source={x:Reference CreatedJourneysViewName}}"
                                                 CommandParameter="{Binding .}"/>
 
                                     </AbsoluteLayout>

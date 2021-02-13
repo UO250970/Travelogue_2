@@ -19,7 +19,8 @@
                             <x:Double>4</x:Double>
                         </x:Array>
                     </border:SfBorder.DashArray>
-                    <Button Margin="2" Padding="5" HeightRequest="180" BackgroundColor="{StaticResource None}"></Button>
+                    <Button Margin="2" Padding="5" HeightRequest="180" BackgroundColor="{StaticResource None}" 
+                            FontFamily="{StaticResource Icon}" Style="{StaticResource addImageStyle}"/>
 
                 </border:SfBorder>
 
@@ -50,7 +51,7 @@
 
                         </StackLayout>
 
-                        <CollectionView ItemsSource="{Binding DaysSelected}"  HeightRequest="100">
+                        <!--CollectionView ItemsSource="{Binding DaysSelected}"  HeightRequest="100">
 
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
@@ -64,7 +65,7 @@
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
 
-                        </CollectionView>
+                        </-->
 
                     </StackLayout>
                 </Frame>

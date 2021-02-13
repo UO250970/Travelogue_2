@@ -15,7 +15,7 @@ namespace Travelogue_2.Main.Views.Modelation.Modelate
 
 			BindingContext = model = new JournalModelationViewModel();
 
-			Shell.SetNavBarIsVisible(this, false);
+			//Shell.SetNavBarIsVisible(this, false);
 		}
 	}
 }

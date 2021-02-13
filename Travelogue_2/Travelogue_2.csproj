@@ -62,6 +62,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Main\Views\Journey\JourneyOngoingView.xaml.cs">
+      <DependentUpon>JourneyOngoingView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Main\Views\Library\Create\CreateJourneyView.xaml.cs">
       <DependentUpon>CreateJourneyView.xaml</DependentUpon>
     </Compile>
@@ -88,7 +91,10 @@
     <EmbeddedResource Update="Main\Views\Fragments\DestinyCardView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Main\Views\Journey\JourneyDetailView.xaml">
+    <EmbeddedResource Update="Main\Views\Journey\JourneyOngoingView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Journey\JourneyView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Library\Create\CreateJourneyView.xaml">

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Travelogue_2.Main.Views.Journey.JourneyView"
+             Shell.PresentationMode="ModalAnimated">
+    <ContentPage.Content>
+
+        <AbsoluteLayout>
+
+            <ScrollView x:Name="MainScroll" AbsoluteLayout.LayoutFlags="All"
+                        AbsoluteLayout.LayoutBounds="0,0,1,1" >
+                <StackLayout>
+                    <AbsoluteLayout HeightRequest="180" >
+                        <Image x:Name="Image" 
+                               Source="{Binding CoverImage}"
+                               Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
+
+
+                    </AbsoluteLayout>
+                    <StackLayout>
+
+                        <ScrollView x:Name="DaysScroll" Orientation="Horizontal" 
+                                    BackgroundColor="{StaticResource Secondary}"
+                                    HeightRequest="40" HorizontalOptions="FillAndExpand"
+                                    Margin="10, 10, 10, 0">
+                            <CollectionView>
+
+                            </CollectionView>
+
+                        </ScrollView>
+
+                        <Frame x:Name="EntriesScroll"
+                                    BackgroundColor="{StaticResource Secondary}"
+                                    HeightRequest="500" HorizontalOptions="FillAndExpand"
+                                    Margin="10, 0, 10, 0">
+                            <CollectionView>
+                                
+                            </CollectionView>
+
+                        </Frame>
+
+                        <ScrollView x:Name="PhotosScroll" Orientation="Horizontal" 
+                                    BackgroundColor="{StaticResource Secondary}"
+                                    HeightRequest="100" HorizontalOptions="FillAndExpand"
+                                    Margin="10, 0, 10, 10">
+                            <CollectionView>
+
+                            </CollectionView>
+
+                        </ScrollView>
+
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+
+            <BoxView x:Name="JourneyNameBoxView" HeightRequest="30"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds="0,0.15,1,0.06" 
+                    Opacity="0"
+                    BackgroundColor="{StaticResource Primary}"   
+                    ></BoxView>
+
+            <Label x:Name="JourneyName"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    AbsoluteLayout.LayoutBounds="0.1,0.15"
+                    FontSize="24" Text="Prueba"
+                    TextColor="{StaticResource White}"/>
+
+            <Button x:Name="ModifyJourneyButton" 
+                    Style="{StaticResource circleButtonAddStyle}"
+                    HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}" />
+
+        </AbsoluteLayout>
+
+    </ContentPage.Content>
+</ContentPage>

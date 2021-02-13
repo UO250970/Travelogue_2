@@ -35,7 +35,7 @@
     </Shell.Resources>
 
     <TabBar>
-        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate library:LibraryView}">
+        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate library:LibraryView}" >
             <ShellContent.Icon>
                 <FontImageSource Glyph="&#xe920;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>
@@ -45,7 +45,7 @@
                 <FontImageSource Glyph="&#xe90e;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>
         </ShellContent>
-        <ShellContent ContentTemplate="{DataTemplate journey:JourneyDetailView}" >
+        <ShellContent ContentTemplate="{DataTemplate journey:JourneyOngoingView}" >
             <ShellContent.Icon>
                 <FontImageSource Glyph="&#xea1c;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>
