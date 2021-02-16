@@ -1,4 +1,6 @@
 ﻿using System;
+using Travelogue_2.Main.Utils;
+using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Journal
 {
@@ -8,6 +10,12 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		private string journeyId;
 
 		public string Id { get; set; }
+
+        public ImageSource CoverImage
+        {
+            get { return ImageSource.FromResource(CommonVariables.GenericImage); }
+        }
+
 
         public string JourneyId
         {

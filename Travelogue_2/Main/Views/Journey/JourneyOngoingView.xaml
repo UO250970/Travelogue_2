@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments"
              x:Class="Travelogue_2.Main.Views.Journey.JourneyOngoingView">
     <ContentPage.Content>
         <AbsoluteLayout>
@@ -67,7 +67,40 @@
                                     BackgroundColor="{StaticResource Secondary}"
                                     HeightRequest="100" HorizontalOptions="FillAndExpand"
                                     Margin="10, 0, 10, 10">
+                            
+                            <CollectionView x:Name="ImagesCollection"
+                                        ItemsSource="{Binding JourneyImages}"
+                                        SelectionMode="Single"
+                                        SelectionChangedCommand="{Binding JourneyTapped}"
+                                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CreatedJourneysCollection}}">
 
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal"/>
+                                </CollectionView.ItemsLayout>
+
+                                <CollectionView.EmptyView>
+                                    <Label Text="{Binding Resources[CreatedEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                </CollectionView.EmptyView>
+
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+
+                                        <AbsoluteLayout>
+
+                                            <local:JourneyBookView BindingContext="{Binding .}"/>
+
+                                            <Button x:Name="DeleteJourneyButton" 
+                                                Style="{StaticResource circleButtonDeleteStyle}"
+                                                HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
+                                                Command="{Binding BindingContext.JourneyTappedDelete, Source={x:Reference CreatedJourneysViewName}}"
+                                                CommandParameter="{Binding .}"/>
+
+                                        </AbsoluteLayout>
+
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            
                         </ScrollView>
 
                     </StackLayout>

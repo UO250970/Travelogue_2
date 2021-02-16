@@ -1,6 +1,5 @@
 ﻿using Plugin.Permissions;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms.Maps;
@@ -8,7 +7,7 @@ using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 
 namespace Travelogue_2.Main.Utils
 {
-	public static class Geolocalization
+	public static class GeolocalizationUtil
 	{
 
         public static async void CheckPermissions()

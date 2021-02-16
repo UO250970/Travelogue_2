@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Travelogue_2.Main.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -7,6 +8,7 @@ namespace Travelogue_2.Main.Utils
 {
     class CommonVariables
     {
+		/** Common values */
 		public static int EntriesInDay { get => 50; }
 
 		public static int CountriesInJourney { get => 50; } 
@@ -14,6 +16,10 @@ namespace Travelogue_2.Main.Utils
 		public static int DataInEntry { get => 50; }
 
 		public static int EventsInDay { get => 20; }
+
+		public static int ImageMaxHeight { get => 180; }
+
+		public static int ImageCardMaxHeight { get => 85; }
 
 		/** Common string */
 		public static string AppName { get => "Travelogue_2"; }
@@ -31,9 +37,12 @@ namespace Travelogue_2.Main.Utils
 
 		public static string GenericImage { get => ImagesPath + ".default_image" + ImagesExtension; }
 
+		public static string GenericImageImage { get => ImagesPath + ".default_image_image" + ImagesExtension; }
+
 		public static string GenericFlag { get => FlagImagesPath + "DEFAULT" + FlagImagesExtension; }  
 
 		public static List<String> AvailableLanguages { get => new List<string>() { "ES", "FR", "EN" }; }
+		public static List<Destiny> AvailableDestinies { get; set; } = new List<Destiny>();
 
 		public static Dictionary<string, Location> AvailableLanguagesLocations 
 		{

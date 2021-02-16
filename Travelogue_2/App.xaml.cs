@@ -2,6 +2,7 @@
 using Travelogue_2.Resources.Localization;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
+using Travelogue_2.Automatization;
 using Xamarin.Forms;
 using System;
 using System.Diagnostics;
@@ -30,7 +31,10 @@ namespace Travelogue_2
                 // Alerter de la aplicación
                 Alerter.SetPage(MainPage);
 
-                Geolocalization.CheckPermissions();
+                GeolocalizationUtil.CheckPermissions();
+                CameraUtil.CheckPermissions();
+                Automatization.Automatization.PrepareCountries();
+
             } catch (Exception e)
 			{
                 Debug.WriteLine(e);

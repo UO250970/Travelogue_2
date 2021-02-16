@@ -14,6 +14,8 @@ namespace Travelogue_2.Main.Utils
 		public static async Task NoImplementedYet()
 			=> await Page?.DisplayAlert("Error", "Funcionalidad en desarrollo", App.LocResources["Ok"]);
 
+		/** Dates */
+
 		/*
 		public static async Task AlertDayOccupied()
 		{
@@ -47,12 +49,13 @@ namespace Travelogue_2.Main.Utils
 
 
 		/** Created */
-		/*
+
 		public static async Task AlertJourneyCreated()
 		{
-			await Page?.DisplayAlert(AppResources.Empty, AppResources.MessJourCreated, AppResources.Ok);
+			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessJourCreated"], AppResources.Ok);
 		}
 
+		/*
 		public static async Task AlertJourneyAlreadyCreated()
 		{
 			await Page?.DisplayAlert(AppResources.Empty, AppResources.MessJourAlreadyCreated, AppResources.Ok);
@@ -89,12 +92,12 @@ namespace Travelogue_2.Main.Utils
 		{
 			await Page?.DisplayAlert(AppResources.AlertNoNameInNewCountry, AppResources.MessNoNameInNewCountry, AppResources.Ok);
 		}
-
+		*/
 		public static async Task AlertNoNameInJourney()
 		{
-			await Page?.DisplayAlert(AppResources.AlertNoNameInJourney, AppResources.MessNoNameInJourney, AppResources.Ok);
+			await Page?.DisplayAlert(App.LocResources["AlertNoNameInJourney"], App.LocResources["MessNoNameInJourney"], App.LocResources["Ok"]);
 		}
-
+		/*
 		public static async Task AlertNoNameInEntry()
 		{
 			await Page?.DisplayAlert(AppResources.AlertNoNameInEntry, AppResources.MessNoNameInEntry, AppResources.Ok);
@@ -136,8 +139,8 @@ namespace Travelogue_2.Main.Utils
 
 		/** Already exists */
 
-		internal static async Task<bool> AlertCountryAlreadySelected()
-			=> await Page?.DisplayAlert(App.LocResources["Empty"], "El destino ya está incluido", App.LocResources["Ok"], App.LocResources["Cancel"]);
+		internal static async Task<bool> AlertDestinyAlreadySelected()
+			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessDestinyAlreadySelected"], App.LocResources["Ok"], App.LocResources["Cancel"]);
 
 
 		/** Delete */
@@ -145,11 +148,11 @@ namespace Travelogue_2.Main.Utils
 			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessDeleteJourney"], App.LocResources["Ok"], App.LocResources["Cancel"]);
 
 		/** Photo */
-		/*
+		
 		// Gochada -> True es take, false es pick
 		internal static async Task<string> AlertPhoto()
 		{
-			return await Page?.DisplayActionSheet(AppResources.Empty, AppResources.Empty, AppResources.Empty, AppResources.TakePhoto, AppResources.PickPhoto);
+			return await Page?.DisplayActionSheet(App.LocResources["Empty"], App.LocResources["Empty"], App.LocResources["Empty"], App.LocResources["TakePhoto"], App.LocResources["PickPhoto"]);
 		}
 
 		/** Servicios */

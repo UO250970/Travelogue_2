@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Utils;
@@ -8,8 +10,9 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Library.Create
 {
-	public class CreateJourneyViewModel : BaseViewModel
+	public class CreateJourneyViewModel : PhotoRendererModel
 	{
+		public Command AddCoverCommand { get; }
 		public Command AddDestinyCommand { get; }
 		public Command CancelCommand { get; }
 		public Command SaveCommand { get; }
@@ -17,12 +20,15 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 		public ObservableCollection<DayCard> DaysSelected { get; }
 		public ObservableCollection<DestinyCard> DestiniesSelected { get; }
 		public ObservableCollection<string> DestiniesList { get; }
+		public Command<DestinyCard> DestinyTappedDelete { get; }
 
 		public Command<DayCard> DayTapped { get; }
 		
 
 		public CreateJourneyViewModel()
 		{
+			AddCoverCommand = new Command(() => AddCoverC());
+
 			AddDestinyCommand = new Command(() => AddDestinyC());
 
 			CancelCommand = new Command(() => CancelC());
@@ -33,13 +39,22 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			DestiniesList = new ObservableCollection<string>();
 
 			DayTapped = new Command<DayCard>(OnDayTapped);
+			DestinyTappedDelete = new Command<DestinyCard>(OnDestinySelectedDelete);
 
 			ExecuteLoadDataCommand();
 		}
 
+		public ImageCard CoverImage = new ImageCard();
 
-		private string title;
-		public string Title
+		/**private ImageSource coverImageSource = new ImageCard().ImageSour;
+		public ImageSource CoverImageSource
+		{
+			get => coverImageSource;
+			set => SetProperty(ref coverImageSource, value);
+		}*/
+
+		private string title = "";
+		public new string Title
 		{
 			get => title;
 			set => SetProperty(ref title, value);
@@ -90,6 +105,30 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			}
 		}
 
+		private int destiniesSelectedHeight = 100;
+		public int DestiniesSelectedHeight
+		{
+			get => destiniesSelectedHeight;
+			set => SetProperty(ref destiniesSelectedHeight, value);
+		}
+
+		public int ImageHeight { get => CommonVariables.ImageMaxHeight; }
+
+
+		private bool imageVisible = false;
+		public bool ImageVisible
+		{
+			get => imageVisible;
+			set => SetProperty(ref imageVisible, value);
+		}
+
+		private bool labelVisible = true;
+		public bool LabelVisible
+		{
+			get => labelVisible;
+			set => SetProperty(ref labelVisible, value);
+		}
+
 		async Task ExecuteLoadDataCommand()
 		{
 			IsBusy = true;
@@ -97,9 +136,10 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			try
 			{
 				DestiniesList.Clear();
-				foreach(string data in CommonVariables.AvailableLanguages)
+				IEnumerable<string> temp1 = CommonVariables.AvailableDestinies?.Select(x => x.Name);
+				foreach (string destiny in temp1)
 				{
-					DestiniesList.Add(data);
+					DestiniesList.Add(destiny);
 				}
 
 				DaysSelected.Clear();
@@ -128,14 +168,30 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			}
 		}
 
+		async internal void AddCoverC()
+		{
+			ImageCard success = await CameraUtil.Photo(this);
+			if (success != null)
+			{
+				CoverImage = success;
+			}
+		}
+
 		async internal void AddDestinyC()
 		{
 			DestinyCard temp = new DestinyCard();
-			temp.Destiny = destinyText;
-			temp.Code = destinyText;
+			temp.Destiny = DestinyText;
+			temp.Code = DestinyText;
 			temp.Currency = "Euros";
-			DestiniesSelected.Add(temp);
-			destinyText = "";
+			if (!DestiniesSelected.Contains(temp))
+			{
+				DestiniesSelected.Add(temp);
+				DestiniesSelectedHeight = DestiniesSelected.Count * 125;
+			} else
+			{
+				await Alerter.AlertDestinyAlreadySelected();
+			}
+			DestinyText = "";
 		}
 
 		async internal void CancelC()
@@ -143,17 +199,30 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
 
 		async internal void SaveC()
-		{ }
+		{ 
+			if (title.Equals(""))
+			{
+				await Alerter.AlertNoNameInJourney();
+			} else
+			{
+				//TO-DO create and store journey
+				await Alerter.AlertJourneyCreated();
+				//TO-DO checkear cuando empieza  eso y cambiar redirección
+				await Shell.Current.GoToAsync("..");
+			}
+		}
 		//=> await Shell.Current.GoToAsync(nameof(ClosedJourneysView));
 
 		internal void CheckNewIniDate(DatePicker iniDatePicker, DatePicker endDatePicker)
 		{
-			ExecuteLoadDataCommand();
+			if (iniDatePicker.Date.CompareTo(EndDate.Date) > 0) endDatePicker.Date = iniDatePicker.Date;
+			//ExecuteLoadDataCommand();
 		}
 
 		internal void CheckNewEndDate(DatePicker iniDatePicker, DatePicker endDatePicker)
 		{
-			ExecuteLoadDataCommand();
+			if (iniDatePicker.Date.CompareTo(EndDate.Date) > 0) iniDatePicker.Date = endDatePicker.Date;
+			//ExecuteLoadDataCommand();
 		}
 
 		void OnDayTapped(DayCard day)
@@ -163,6 +232,22 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
 			// This will push the ItemDetailPage onto the navigation stack
 			//await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+		}
+
+		async void OnDestinySelectedDelete(DestinyCard destiny)
+		{
+			if (destiny == null)
+				return;
+
+			DestiniesSelected.Remove(destiny);
+			if (DestiniesSelected.Count == 0)
+			{
+				DestiniesSelectedHeight = 1;
+			} else
+			{
+				DestiniesSelectedHeight = DestiniesSelected.Count * 125 + 1;
+			}
+
 		}
 
 	}

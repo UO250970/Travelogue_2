@@ -5,7 +5,8 @@
              xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
              xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments"
              x:Class="Travelogue_2.Main.Views.Library.Create.CreateJourneyView"
-             Shell.PresentationMode="ModalAnimated">
+             Shell.PresentationMode="ModalAnimated"
+             x:Name="CreateJourneyViewName">
 
     <ContentPage.Content>
         <ScrollView Margin="10,10,10,5">
@@ -19,9 +20,18 @@
                             <x:Double>4</x:Double>
                         </x:Array>
                     </border:SfBorder.DashArray>
-                    <Button Margin="2" Padding="5" HeightRequest="180" BackgroundColor="{StaticResource None}" 
-                            FontFamily="{StaticResource Icon}" Style="{StaticResource addImageStyle}"/>
 
+                    <border:SfBorder.Content>
+
+                        <Image Source="{Binding Path=CoverImage.ImageSour}" HeightRequest="{Binding ImageHeight}"
+                               BackgroundColor="Red"/>
+
+                    </border:SfBorder.Content>
+
+                    <border:SfBorder.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddCoverCommand}"/>
+                    </border:SfBorder.GestureRecognizers>
+                    
                 </border:SfBorder>
 
                 <Frame HasShadow="True" Margin="5" Padding="5">
@@ -86,7 +96,8 @@
                                     IsEnabled="{Binding CorrectDestinyText}"
                                     Text="&#xea0a;" FontFamily="{StaticResource Icon}"  FontSize="Medium"/>
                         </StackLayout>
-                        <CollectionView ItemsSource="{Binding DestiniesSelected}">
+                        <CollectionView x:Name="DestiniesCollection" ItemsSource="{Binding DestiniesSelected}" ItemSizingStrategy="MeasureAllItems"
+                                        HeightRequest="{Binding DestiniesSelectedHeight, Mode=TwoWay}">
 
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
@@ -95,12 +106,26 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout>
-                                        <local:DestinyCardView BindingContext="{Binding .}"/>
+                                        <AbsoluteLayout>
+
+                                            <local:DestinyCardView BindingContext="{Binding .}"/>
+
+                                            <Button x:Name="DeleteJourneyButton" 
+                                                Style="{StaticResource circleButtonDeleteStyle}"
+                                                HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
+                                                Command="{Binding BindingContext.DestinyTappedDelete, Source={x:Reference CreateJourneyViewName}}"
+                                                CommandParameter="{Binding .}"/>
+                                            
+                                        </AbsoluteLayout>
                                     </StackLayout>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
 
                         </CollectionView>
+                        <!--ScrollView>
+                            <StackLayout
+                                        x:Name="Destinies"></StackLayout>
+                        </-->
                     </StackLayout>
                 </Frame>
 

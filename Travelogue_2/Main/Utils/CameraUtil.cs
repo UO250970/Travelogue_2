@@ -1,0 +1,83 @@
+﻿using Plugin.Media;
+using Plugin.Media.Abstractions;
+using Plugin.Permissions;
+using System;
+using System.Threading.Tasks;
+using Travelogue_2.Main.Models;
+using Travelogue_2.Resources.Localization;
+using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
+
+namespace Travelogue_2.Main.Utils
+{
+	public static class CameraUtil
+	{
+
+		public static async void CheckPermissions()
+		{
+			PermissionStatus statusCamera = CrossPermissions.Current.CheckPermissionStatusAsync<CameraPermission>().Result;
+			if (statusCamera != PermissionStatus.Granted)
+			{
+				statusCamera = await CrossPermissions.Current.RequestPermissionAsync<CameraPermission>();
+			}
+
+			System.Diagnostics.Debug.WriteLine("Permision camera : " + statusCamera);
+
+			Start();
+		}
+
+		private static async void Start()
+		{
+			if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsPickPhotoSupported || !CrossMedia.Current.IsTakePhotoSupported)
+			{
+				await CrossMedia.Current.Initialize();
+			}
+		}
+
+		internal static async Task<ImageCard> Photo(PhotoRendererModel model)
+		{
+			CheckPermissions();
+			string photo = await Alerter.AlertPhoto();
+			if (photo != null)
+			{
+				if (photo.Equals(AppResources.TakePhoto))
+				{
+					return model.AddImage(await TakePhoto());
+				}
+				else if (photo.Equals(AppResources.PickPhoto))
+				{
+					return model.AddImage(await PickPhoto());
+				}
+			}
+			return null;
+		}
+
+		private static async Task<MediaFile> TakePhoto()
+		{
+			try
+			{
+				return await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions());
+			}
+			catch (Exception ex)
+			{
+				//Xamarin.Insights.Report(ex);
+				//await DisplayAlert("Uh oh", "Something went wrong, but don't worry we captured it in Xamarin Insights! Thanks.", "OK");
+				return null;
+			}
+		}
+
+		private static async Task<MediaFile> PickPhoto()
+		{
+			try
+			{
+				return await CrossMedia.Current.PickPhotoAsync();
+			}
+			catch (Exception ex)
+			{
+				//Xamarin.Insights.Report(ex);
+				//await DisplayAlert("Uh oh", "Something went wrong, but don't worry we captured it in Xamarin Insights! Thanks.", "OK");
+				return null;
+			}
+		}
+
+	}
+}
