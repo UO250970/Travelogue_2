@@ -10,11 +10,21 @@ namespace Travelogue_2.Main.ViewModels.Journal
 {
 	public class JourneyOngoingViewModel : PhotoRendererModel
 	{
+		public Command AddImageCommand { get; }
+		public Command<ImageCard> ImageTapped { get; }
+		public Command<DayCard> DayTapped { get; }
 		public ObservableCollection<ImageCard> JourneyImages { get; }
+		public ObservableCollection<DayCard> JourneyDays { get; }
 
 		public JourneyOngoingViewModel()
 		{
+			AddImageCommand = new Command(() => AddImageC());
+
 			JourneyImages = new ObservableCollection<ImageCard>();
+			JourneyDays = new ObservableCollection<DayCard>();
+
+			ImageTapped = new Command<ImageCard>(OnImageSelected);
+			DayTapped = new Command<DayCard>(OnDaySelected);
 
 			ExecuteLoadDataCommand();
 		}
@@ -25,7 +35,21 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 			try
 			{
-				JourneyImages.Add(new ImageCard());
+				var temp = new DayCard();
+				temp.Day = "2";
+				temp.Month = "2";
+				JourneyDays.Add(temp);
+
+				var temp2 = new DayCard();
+				temp2.Day = "3";
+				temp2.Month = "2";
+				JourneyDays.Add(temp2);
+
+				var temp3 = new DayCard();
+				temp3.Day = "4";
+				temp3.Month = "2";
+				JourneyDays.Add(temp3);
+				//JourneyImages.Add(new ImageCard());
 			}
 			catch (Exception ex)
 			{
@@ -40,12 +64,87 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		public void OnAppearing()
 			=> IsBusy = true;
 
+		#region Photos
 
-		public ImageSource CoverImage 
+		public ImageCard blanckImage = new ImageCard();
+		public ImageCard BlanckImage
 		{
-			get { return ImageSource.FromResource(CommonVariables.GenericImage); } 
+			get => blanckImage;
+			set
+			{
+				SetProperty(ref blanckImage, value);
+			}
+		}
+		public int CardImagesHeight { get => CommonVariables.ImageCardMaxHeight; }
+
+		#endregion
+
+		#region Cover
+
+		private ImageCard coverImage = new ImageCard()
+		{
+			ImageSour = CommonVariables.GetImage()
+		};
+
+		public ImageCard CoverImage
+		{
+			get => coverImage;
+			set
+			{
+				SetProperty(ref coverImage, value);
+			}
 		}
 
+		public int CoverImageHeight { get => CommonVariables.ImageMaxHeight; }
+
+		#endregion
+
+		#region DaySelected
+
+		private DayCard daySelected = new DayCard();
+
+		public DayCard DaySelected
+		{
+			get => daySelected;
+			set
+			{
+				SetProperty(ref daySelected, value);
+			}
+		}
+
+		#endregion
+
+		async internal void AddImageC()
+		{
+			ImageCard success = await CameraUtil.Photo(this);
+			if (success != null)
+			{
+				JourneyImages.Add(success);
+			}
+		}
+
+		#region OnAction
+
+		async void OnImageSelected(ImageCard image)
+		{
+			if (image == null)
+				return;
+
+			// This will push the ItemDetailPage onto the navigation stack
+			//await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyViewModel.JourneyId)}={journey.Id}");
+		}
+
+		async void OnDaySelected(DayCard day)
+		{
+			if (day == null)
+				return;
+
+			DaySelected = day;
+			// This will push the ItemDetailPage onto the navigation stack
+			//await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyViewModel.JourneyId)}={journey.Id}");
+		}
+
+		#endregion
 
 	}
 }

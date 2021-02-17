@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments" xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
              x:Class="Travelogue_2.Main.Views.Journey.JourneyOngoingView">
     <ContentPage.Content>
         <AbsoluteLayout>
@@ -9,99 +9,101 @@
                         AbsoluteLayout.LayoutBounds="0,0,1,1" >
                 <StackLayout>
                     <AbsoluteLayout HeightRequest="180" >
+                        
                         <Image x:Name="Image" 
-                               Source="{Binding CoverImage}"
+                               HeightRequest="{Binding CoverImageHeight}" Source="{Binding CoverImage.ImageSour}"
                                Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
 
-                        
                     </AbsoluteLayout>
                     <StackLayout>
 
-                        <ScrollView x:Name="DaysScroll" Orientation="Horizontal" 
-                                    BackgroundColor="{StaticResource Secondary}"
-                                    HeightRequest="40" HorizontalOptions="FillAndExpand"
-                                    Margin="10, 10, 10, 0">
+                        <CollectionView x:Name="DaysCollection"
+                                            HeightRequest="60"
+                                            ItemsSource="{Binding JourneyDays}"
+                                            SelectionMode="Single"
+                                            SelectionChangedCommand="{Binding DayTapped}"
+                                            SelectionChangedCommandParameter="{Binding SelectedDay, Source={x:Reference DaysCollection}}">
 
-                            <!--ListView x:Name="MyClassList"
-                                      ItemsSource="{Binding MyClassList}"
-                                      RowHeight="210">  
-                                <ListView.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal"></StackPanel>
-                                    </ItemsPanelTemplate>
-                                </ListView.ItemsPanel>
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <ViewCell>
-                                            <Grid Padding="5">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="20"></RowDefinition>
-                                                    <RowDefinition Height="20"></RowDefinition>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                                                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                                                </Grid.ColumnDefinitions>
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
 
-                                                <Label Grid.Row="0" Grid.Column="0" Text="Name:" LineBreakMode="TailTruncation"></Label>
-                                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Name}" LineBreakMode="TailTruncation"></Label>
-                                                <Label Grid.Row="1" Grid.Column="0" Text="Type:" LineBreakMode="TailTruncation"></Label>
-                                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Type}" LineBreakMode="TailTruncation"></Label>
-
-                                            </Grid>
-                                        </ViewCell>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </-->
-
-                        </ScrollView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <Button HeightRequest="50" WidthRequest="50" BorderRadius="25" Text="{Binding .Day}"
+                                                BackgroundColor="{StaticResource Grey}"  Margin="10, 5"
+                                                Command="{Binding DayTapped}"
+                                                CommandParameter="{Binding .}"></Button>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
 
                         <Frame x:Name="EntriesScroll"
-                                    BackgroundColor="{StaticResource Secondary}"
                                     HeightRequest="500" HorizontalOptions="FillAndExpand"
                                     Margin="10, 0, 10, 0">
+                            <StackLayout>
+                                <Label Text="{Binding DaySelected.Day}" FontSize="Title" TextColor="{StaticResource Primary}"/>
+                                <Label Text="{Binding DaySelected.Month}" FontSize="Header" TextColor="{StaticResource Primary}"/>
+
+                                <Line />
+
+                            </StackLayout>
 
                         </Frame>
-                        
-                        <ScrollView x:Name="PhotosScroll" Orientation="Horizontal" 
-                                    BackgroundColor="{StaticResource Secondary}"
-                                    HeightRequest="100" HorizontalOptions="FillAndExpand"
-                                    Margin="10, 0, 10, 10">
-                            
-                            <CollectionView x:Name="ImagesCollection"
-                                        ItemsSource="{Binding JourneyImages}"
-                                        SelectionMode="Single"
-                                        SelectionChangedCommand="{Binding JourneyTapped}"
-                                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CreatedJourneysCollection}}">
 
-                                <CollectionView.ItemsLayout>
-                                    <GridItemsLayout Orientation="Horizontal"/>
-                                </CollectionView.ItemsLayout>
+                        <Frame HasShadow="True" Margin="5" Padding="5">
+                            <StackLayout>
+                                <Label Text="Fotos" FontSize="Large" TextColor="{StaticResource Primary}"/>
 
-                                <CollectionView.EmptyView>
-                                    <Label Text="{Binding Resources[CreatedEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                                </CollectionView.EmptyView>
+                                <CollectionView x:Name="ImagesCollection"
+                                            HeightRequest="100"
+                                            Margin="10, 0, 10, 10"
+                                            ItemsSource="{Binding JourneyImages}"
+                                            SelectionMode="Single"
+                                            SelectionChangedCommand="{Binding ImageTapped}"
+                                            SelectionChangedCommandParameter="{Binding SelectedImage, Source={x:Reference ImagesCollection}}">
 
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal"/>
+                                    </CollectionView.ItemsLayout>
 
-                                        <AbsoluteLayout>
+                                    <CollectionView.Header>
 
-                                            <local:JourneyBookView BindingContext="{Binding .}"/>
+                                        <border:SfBorder BorderColor="{StaticResource Grey}" BorderWidth="2" CornerRadius="10">
+                                            <border:SfBorder.DashArray>
+                                                <x:Array Type="{x:Type x:Double}">
+                                                    <x:Double>3</x:Double>
+                                                    <x:Double>4</x:Double>
+                                                </x:Array>
+                                            </border:SfBorder.DashArray>
 
-                                            <Button x:Name="DeleteJourneyButton" 
-                                                Style="{StaticResource circleButtonDeleteStyle}"
-                                                HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
-                                                Command="{Binding BindingContext.JourneyTappedDelete, Source={x:Reference CreatedJourneysViewName}}"
-                                                CommandParameter="{Binding .}"/>
+                                            <border:SfBorder.Content >
 
-                                        </AbsoluteLayout>
+                                                <Image HeightRequest="{Binding CardImagesHeight}" WidthRequest="{Binding CardImagesHeight}" Source="{Binding BlanckImage.ImageSour}"
+                                                       />
 
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                            
-                        </ScrollView>
+                                            </border:SfBorder.Content>
+
+                                            <border:SfBorder.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding AddImageCommand}"/>
+                                            </border:SfBorder.GestureRecognizers>
+
+                                        </border:SfBorder>
+
+                                    </CollectionView.Header>
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Padding="5">
+                                                <Image HeightRequest="{Binding CardImagesHeight}" Source="{Binding .ImageSour}"/>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </StackLayout>
+                        </Frame>
 
                     </StackLayout>
                     <!--tabView:SfTabView EnableSwiping="False" VisibleHeaderCount="3"  VerticalOptions="FillAndExpand" DisplayMode="Image">

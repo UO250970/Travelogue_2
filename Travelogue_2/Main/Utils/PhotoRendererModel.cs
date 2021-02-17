@@ -1,6 +1,5 @@
 ﻿using Plugin.Media.Abstractions;
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using Travelogue_2.Main.Models;
@@ -11,8 +10,6 @@ namespace Travelogue_2.Main.Utils
 {
 	public abstract class PhotoRendererModel : BaseViewModel
 	{
-
-		private ImageSource DefaultImageSour = ImageSource.FromResource(CommonVariables.GenericImageImage);
 
 		public ImageCard AddImage(MediaFile file)
 		{

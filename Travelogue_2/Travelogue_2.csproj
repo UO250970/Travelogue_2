@@ -13,6 +13,7 @@
     <None Remove="Resources\Icons\icon_modelation.png" />
     <None Remove="Resources\Icons\icon_play.png" />
     <None Remove="Resources\Imgs\default_image.png" />
+    <None Remove="Resources\Imgs\default_image_image.png" />
     <None Remove="Resources\Imgs\Flags\AD_Flag.png" />
     <None Remove="Resources\Imgs\Flags\AF_Flag.png" />
     <None Remove="Resources\Imgs\Flags\AT_Flag.png" />
@@ -35,6 +36,7 @@
     <EmbeddedResource Include="Resources\Icons\icon_modelation.png" />
     <EmbeddedResource Include="Resources\Icons\icon_play.png" />
     <EmbeddedResource Include="Resources\Imgs\default_image.png" />
+    <EmbeddedResource Include="Resources\Imgs\default_image_image.png" />
     <EmbeddedResource Include="Resources\Imgs\Flags\AD_Flag.png" />
     <EmbeddedResource Include="Resources\Imgs\Flags\AF_Flag.png" />
     <EmbeddedResource Include="Resources\Imgs\Flags\AT_Flag.png" />
@@ -91,10 +93,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Main\Views\Fragments\DayBubbleView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Fragments\DayCardView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Fragments\DestinyCardView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Fragments\ImageCardView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Journey\JourneyOngoingView.xaml">

@@ -2,6 +2,7 @@
 using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Resources.Localization;
@@ -55,12 +56,11 @@ namespace Travelogue_2.Main.Utils
 		{
 			try
 			{
-				return await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions());
+				return await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions());
 			}
 			catch (Exception ex)
 			{
-				//Xamarin.Insights.Report(ex);
-				//await DisplayAlert("Uh oh", "Something went wrong, but don't worry we captured it in Xamarin Insights! Thanks.", "OK");
+				Debug.WriteLine("Take photo : " + ex);
 				return null;
 			}
 		}

@@ -21,10 +21,9 @@
                         </x:Array>
                     </border:SfBorder.DashArray>
 
-                    <border:SfBorder.Content>
-
-                        <Image Source="{Binding Path=CoverImage.ImageSour}" HeightRequest="{Binding ImageHeight}"
-                               BackgroundColor="Red"/>
+                    <border:SfBorder.Content >
+                        
+                        <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding CoverImage.ImageSour}"/>
 
                     </border:SfBorder.Content>
 

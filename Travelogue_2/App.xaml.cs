@@ -31,8 +31,7 @@ namespace Travelogue_2
                 // Alerter de la aplicación
                 Alerter.SetPage(MainPage);
 
-                GeolocalizationUtil.CheckPermissions();
-                CameraUtil.CheckPermissions();
+                Automatization.Automatization.CheckPermissionsAsync();
                 Automatization.Automatization.PrepareCountries();
 
             } catch (Exception e)

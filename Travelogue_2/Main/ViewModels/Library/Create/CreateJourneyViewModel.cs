@@ -44,7 +44,17 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			ExecuteLoadDataCommand();
 		}
 
-		public ImageCard CoverImage = new ImageCard();
+		public ImageCard coverImage = new ImageCard();
+		public ImageCard CoverImage
+		{
+			get => coverImage;
+			set
+			{
+				SetProperty(ref coverImage, value);
+			}
+		}
+
+		public int CoverImageHeight { get => CommonVariables.ImageMaxHeight; }
 
 		/**private ImageSource coverImageSource = new ImageCard().ImageSour;
 		public ImageSource CoverImageSource
@@ -112,7 +122,6 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			set => SetProperty(ref destiniesSelectedHeight, value);
 		}
 
-		public int ImageHeight { get => CommonVariables.ImageMaxHeight; }
 
 
 		private bool imageVisible = false;
@@ -173,7 +182,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			ImageCard success = await CameraUtil.Photo(this);
 			if (success != null)
 			{
-				CoverImage = success;
+				coverImage = success;
 			}
 		}
 

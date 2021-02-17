@@ -5,6 +5,8 @@ namespace Travelogue_2.Main.Models
 {
 	public class ImageCard
 	{
+		public int Id { get; set; }
+
 		public ImageSource ImageSour { get; set; } = ImageSource.FromResource(CommonVariables.GenericImageImage);
 
 		public string ImagePath { get; set; } = string.Empty;
