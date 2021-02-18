@@ -93,9 +93,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Main\Views\Fragments\DayBubbleView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Fragments\DayCardView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

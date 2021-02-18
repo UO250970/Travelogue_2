@@ -182,7 +182,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			ImageCard success = await CameraUtil.Photo(this);
 			if (success != null)
 			{
-				coverImage = success;
+				CoverImage = success;
 			}
 		}
 

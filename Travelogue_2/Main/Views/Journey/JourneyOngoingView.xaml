@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments" xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
-             x:Class="Travelogue_2.Main.Views.Journey.JourneyOngoingView">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             x:Class="Travelogue_2.Main.Views.Journey.JourneyOngoingView"
+             x:Name="JourneyOngoingViewName">
     <ContentPage.Content>
         <AbsoluteLayout>
 
@@ -20,9 +22,7 @@
                         <CollectionView x:Name="DaysCollection"
                                             HeightRequest="60"
                                             ItemsSource="{Binding JourneyDays}"
-                                            SelectionMode="Single"
-                                            SelectionChangedCommand="{Binding DayTapped}"
-                                            SelectionChangedCommandParameter="{Binding SelectedDay, Source={x:Reference DaysCollection}}">
+                                            SelectionMode="None">
 
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Horizontal"/>
@@ -31,29 +31,73 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout>
+                                        
                                         <Button HeightRequest="50" WidthRequest="50" BorderRadius="25" Text="{Binding .Day}"
-                                                BackgroundColor="{StaticResource Grey}"  Margin="10, 5"
-                                                Command="{Binding DayTapped}"
+                                                BackgroundColor="{Binding .Background}"  Margin="10, 5" 
+                                                Command="{Binding Path=BindingContext.DayTapped, Source={x:Reference JourneyOngoingViewName}}"
                                                 CommandParameter="{Binding .}"></Button>
+                                        
                                     </StackLayout>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
 
-                        <Frame x:Name="EntriesScroll"
-                                    HeightRequest="500" HorizontalOptions="FillAndExpand"
+                        <Frame x:Name="EntriesScroll" VerticalOptions="StartAndExpand" 
                                     Margin="10, 0, 10, 0">
                             <StackLayout>
-                                <Label Text="{Binding DaySelected.Day}" FontSize="Title" TextColor="{StaticResource Primary}"/>
-                                <Label Text="{Binding DaySelected.Month}" FontSize="Header" TextColor="{StaticResource Primary}"/>
+                                <Label Text="{Binding DaySelected.Day}" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                                <Label Text="{Binding DaySelected.Month}" FontSize="Title" TextColor="{StaticResource Primary}"/>
 
                                 <Line />
+
+                                <CollectionView x:Name="EventsCollection"
+                                            HeightRequest="60"
+                                            ItemsSource="{Binding JourneyEvents}"
+                                            SelectionMode="None">
+
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal"/>
+                                    </CollectionView.ItemsLayout>
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout>
+
+                                                <Button HeightRequest="50" WidthRequest="50" BorderRadius="25" Text="{Binding .Day}"
+                                                BackgroundColor="{Binding .Background}"  Margin="10, 5" 
+                                                Command="{Binding Path=BindingContext.DayTapped, Source={x:Reference JourneyOngoingViewName}}"
+                                                CommandParameter="{Binding .}"></Button>
+
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+                                <CollectionView x:Name="EntriesCollection"
+                                            HeightRequest="60"
+                                            ItemsSource="{Binding DaySelected.JourneyEntries}"
+                                            SelectionMode="None">
+
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Horizontal"/>
+                                    </CollectionView.ItemsLayout>
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout>
+
+                                                <Label Text="{Binding .Title}"></Label>
+
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
 
                             </StackLayout>
 
                         </Frame>
 
-                        <Frame HasShadow="True" Margin="5" Padding="5">
+                        <Frame HasShadow="True" Margin="10, 0, 10, 0" Padding="5">
                             <StackLayout>
                                 <Label Text="Fotos" FontSize="Large" TextColor="{StaticResource Primary}"/>
 

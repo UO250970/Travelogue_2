@@ -15,6 +15,8 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		public Command<DayCard> DayTapped { get; }
 		public ObservableCollection<ImageCard> JourneyImages { get; }
 		public ObservableCollection<DayCard> JourneyDays { get; }
+		public ObservableCollection<EventCard> JourneyEvents { get; }
+		public ObservableCollection<EntryCard> JourneyEntries { get; }
 
 		public JourneyOngoingViewModel()
 		{
@@ -22,6 +24,8 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 			JourneyImages = new ObservableCollection<ImageCard>();
 			JourneyDays = new ObservableCollection<DayCard>();
+			JourneyEvents = new ObservableCollection<EventCard>();
+			JourneyEntries = new ObservableCollection<EntryCard>();
 
 			ImageTapped = new Command<ImageCard>(OnImageSelected);
 			DayTapped = new Command<DayCard>(OnDaySelected);
@@ -43,6 +47,9 @@ namespace Travelogue_2.Main.ViewModels.Journal
 				var temp2 = new DayCard();
 				temp2.Day = "3";
 				temp2.Month = "2";
+				var etemp1 = new EntryCard();
+				etemp1.Title = "Prueba titulo";
+				temp2.JourneyEntries.Add(etemp1);
 				JourneyDays.Add(temp2);
 
 				var temp3 = new DayCard();
