@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.ViewModels.Journal;
+using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.Modelation;
 using Xamarin.Forms;
 
@@ -12,7 +14,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 	public class ModelationViewModel : BaseViewModel
 	{
 		public Command LoadJourneysCommand { get; }
-		public Command<Item> JourneyTapped { get; }
+		public Command<JourneyCard> JourneyTapped { get; }
 		public Command StarJournalViewCommand { get; }
 		public Command ContinueJournalViewCommand { get; }
 		public Command ClosedJournalViewCommand { get; }
@@ -32,6 +34,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 			JourneysContinueEditing = new ObservableCollection<JourneyCard>();
 			JourneysClosedEditing = new ObservableCollection<JourneyCard>();
 
+			JourneyTapped = new Command<JourneyCard>(OnJourneySelected);
 
 			ExecuteLoadJourneysCommand();
 		}
@@ -83,5 +86,13 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 		async internal void ClosedJournalViewC() 
 			=> await Shell.Current.GoToAsync(nameof(EndedModelationView));
 
+		async void OnJourneySelected(JourneyCard journey)
+		{
+			if (journey == null)
+				return;
+
+			// This will push the ItemDetailPage onto the navigation stack
+			await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyViewModel.JourneyId)}={journey.Id}");
+		}
 	}
 }

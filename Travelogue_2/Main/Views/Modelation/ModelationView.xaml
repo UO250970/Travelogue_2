@@ -2,83 +2,119 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Travelogue_2.Main.Views.Modelation.ModelationView"
-             xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments">
+             xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments"
+             x:Name="ModelationViewName">
 
     <ContentPage.Content>
-        <Grid Padding="10,10,10,5">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <StackLayout Padding="10,10,10,5" BackgroundColor="{StaticResource PrimaryFaded}">
 
-            <Grid Grid.Row="0">
-                <Button Text="{Binding Resources[StartEditing]}"
-                    Command="{Binding StarJournalViewCommand}"/>
-            </Grid>
-            <Frame Grid.Row="1" Padding="5, 5, 5, 5">
+            <Frame Padding="5">
+                
+                <StackLayout>
+                    <Grid HeightRequest="150">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="{Binding Resources[StartEditing]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                        <Label Grid.Column="1" Text="&#xea42;" FontFamily="{StaticResource Icon}" FontSize="Title"  VerticalTextAlignment="Center" HorizontalOptions="Center"
+                               TextColor="{StaticResource Primary}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding StarJournalViewCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                    
+                    <CarouselView ItemsSource="{Binding JourneysStartEditing}" EmptyView="{Binding Resources[StartEditingEmpty]}" 
+                                PeekAreaInsets="50" Loop="False" HorizontalOptions="StartAndExpand" Position="0">
+                        <CarouselView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
+                        </CarouselView.ItemsLayout>
 
-                <CarouselView ItemsSource="{Binding JourneysStartEditing}" EmptyView="{Binding Resources[StartEditingEmpty]}" 
-                              PeekAreaInsets="50" Loop="False">
-                    <CarouselView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
-                    </CarouselView.ItemsLayout>
-
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <local:JourneyCardView BindingContext="{Binding .}"/>
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
-
-            </Frame>
-
-            <Grid Grid.Row="2">
-                <Button Text="{Binding Resources[ContinueEditing]}"
-                    Command="{Binding ContinueJournalViewCommand}"/>
-            </Grid>
-            <Frame Grid.Row="3" Padding="5, 5, 5, 5">
-
-                <CarouselView ItemsSource="{Binding JourneysContinueEditing}" EmptyView="{Binding Resources[ContinueEditingEmpty]}" 
-                              PeekAreaInsets="50" Loop="False">
-                    <CarouselView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
-                    </CarouselView.ItemsLayout>
-
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <local:JourneyCardView BindingContext="{Binding .}"/>
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                
+                                <local:JourneyCardView BindingContext="{Binding .}">
+                                    <local:JourneyCardView.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                                Command="{Binding Path=BindingContext.JourneyTapped, Source={x:Reference ModelationViewName}}"		
+                                                CommandParameter="{Binding .}"/>
+                                    </local:JourneyCardView.GestureRecognizers>
+                                </local:JourneyCardView>
+                                
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                </StackLayout>
 
             </Frame>
 
-            <Grid Grid.Row="4">
-                <Button Text="{Binding Resources[ClosedEditing]}"
-                    Command="{Binding ClosedJournalViewCommand}"/>
-            </Grid>
-            <Frame Grid.Row="5" Padding="5, 5, 5, 5">
+            <Frame Padding="5">
 
-                <CarouselView ItemsSource="{Binding JourneysClosedEditing}" EmptyView="{Binding Resources[ClosedEditingEmpty]}" 
+                <StackLayout>
+                    <Grid HeightRequest="150">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="{Binding Resources[ContinueEditing]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                        <Label Grid.Column="1" Text="&#xea42;" FontFamily="{StaticResource Icon}" FontSize="Title"  VerticalTextAlignment="Center" HorizontalOptions="Center"
+                               TextColor="{StaticResource Primary}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ContinueJournalViewCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+
+                    <CarouselView ItemsSource="{Binding JourneysContinueEditing}" EmptyView="{Binding Resources[ContinueEditingEmpty]}" 
                               PeekAreaInsets="50" Loop="False">
-                    <CarouselView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
-                    </CarouselView.ItemsLayout>
+                        <CarouselView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
+                        </CarouselView.ItemsLayout>
 
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <local:JourneyCardView BindingContext="{Binding .}"/>
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <local:JourneyCardView BindingContext="{Binding .}"/>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                </StackLayout>
+                
+            </Frame>
+
+            <Frame Padding="5">
+                <StackLayout>
+                    <Grid HeightRequest="150">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="{Binding Resources[ClosedEditing]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                        <Label Grid.Column="1" Text="&#xea42;" FontFamily="{StaticResource Icon}" FontSize="Title"  VerticalTextAlignment="Center" HorizontalOptions="Center"
+                               TextColor="{StaticResource Primary}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ClosedJournalViewCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+                    
+                    <CarouselView ItemsSource="{Binding JourneysClosedEditing}" EmptyView="{Binding Resources[ClosedEditingEmpty]}" 
+                              PeekAreaInsets="50" Loop="False">
+                        <CarouselView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
+                        </CarouselView.ItemsLayout>
+
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <local:JourneyCardView BindingContext="{Binding .}"/>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                </StackLayout>
 
             </Frame>
 
-        </Grid>
+        </StackLayout>
     </ContentPage.Content>
     
 </ContentPage>

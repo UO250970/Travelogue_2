@@ -64,9 +64,10 @@
                 <Setter Property="HeightRequest" Value="40"/>
                 <Setter Property="BorderRadius" Value="20"/>
                 <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
-                <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.03,0.03,40,40"/>
-                <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+                <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.02,0.02,40,40"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource None}"/>
                 <Setter Property="TextColor" Value="{StaticResource Grey}"/>
+                <Setter Property="FontSize" Value="Large"/>
             </Style>
 
             <Style TargetType="Button">

@@ -61,6 +61,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Añadir al viaje.
+        /// </summary>
+        internal static string AddToJourney {
+            get {
+                return ResourceManager.GetString("AddToJourney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nombre de viaje vacio.
         /// </summary>
         internal static string AlertNoNameInJourney {

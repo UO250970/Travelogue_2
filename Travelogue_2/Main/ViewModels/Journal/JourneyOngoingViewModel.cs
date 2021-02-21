@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.Views.PopUps;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Journal
@@ -18,9 +19,14 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		public ObservableCollection<EventCard> JourneyEvents { get; }
 		public ObservableCollection<EntryCard> JourneyEntries { get; }
 
+		/** Pop Ups */
+		public Command AddToJourneyCommand { get; }
+		/** */
+
 		public JourneyOngoingViewModel()
 		{
 			AddImageCommand = new Command(() => AddImageC());
+			AddToJourneyCommand = new Command(() => AddToJourneyC());
 
 			JourneyImages = new ObservableCollection<ImageCard>();
 			JourneyDays = new ObservableCollection<DayCard>();
@@ -50,6 +56,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 				var etemp1 = new EntryCard();
 				etemp1.Title = "Prueba titulo";
 				temp2.JourneyEntries.Add(etemp1);
+				temp2.Entries = 1;
 				JourneyDays.Add(temp2);
 
 				var temp3 = new DayCard();
@@ -57,6 +64,8 @@ namespace Travelogue_2.Main.ViewModels.Journal
 				temp3.Month = "2";
 				JourneyDays.Add(temp3);
 				//JourneyImages.Add(new ImageCard());
+
+				daySelected = JourneyDays[0];
 			}
 			catch (Exception ex)
 			{
@@ -116,10 +125,29 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			set
 			{
 				SetProperty(ref daySelected, value);
+				EventsHeight = 40 * value.Events;
+				EntriesHeight = 40 * value.Entries;
 			}
 		}
 
 		#endregion
+
+		private double eventsHeight = 0;
+
+		public double EventsHeight
+		{
+			get => eventsHeight;
+			set => SetProperty(ref eventsHeight, value);
+		}
+
+
+		private double entriesHeight = 0;
+
+		public double EntriesHeight
+		{
+			get => entriesHeight;
+			set => SetProperty(ref entriesHeight, value);
+		}
 
 		async internal void AddImageC()
 		{
@@ -128,6 +156,12 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			{
 				JourneyImages.Add(success);
 			}
+		}
+
+		async internal void AddToJourneyC()
+		{
+			AddToJourneyPopUp popup = new AddToJourneyPopUp();
+			//popup.model.journey = JourneyCard;
 		}
 
 		#region OnAction

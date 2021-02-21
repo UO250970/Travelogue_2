@@ -13,5 +13,7 @@ namespace Travelogue_2.Main.Models
 		public string ImageName { get; set; } = string.Empty;
 		public string ImageFoot { get; set; } = string.Empty;
 
+		public string JourneyName { get; set; } = string.Empty;
+
 	}
 }

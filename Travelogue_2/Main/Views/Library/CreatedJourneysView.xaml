@@ -21,8 +21,12 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Text="{Binding Resources[CreatedJourneys]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
-                        <Button Grid.Column="1" Text="&#xe986;" FontFamily="{StaticResource Icon}"
-                                    Command="{Binding SearchJourneyCommand}" BackgroundColor="{StaticResource Primary}"/>
+                        <Label Grid.Column="1" Text="&#x1f50d;" FontFamily="{StaticResource Icon}" FontSize="Large"  VerticalTextAlignment="Center" HorizontalOptions="Center"
+                               TextColor="{StaticResource White}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SearchJourneyCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
                     </Grid>
 
                     <SearchBar IsVisible="{Binding SearchVisible}" Placeholder="{Binding Resources[SearchJourney]}" Text="{Binding SearchText, Mode=TwoWay}"/>
@@ -54,6 +58,7 @@
 
                                 <Button x:Name="DeleteJourneyButton" 
                                             Style="{StaticResource circleButtonDeleteStyle}"
+                                            BackgroundColor="{StaticResource None}"
                                             HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
                                             Command="{Binding BindingContext.JourneyTappedDelete, Source={x:Reference CreatedJourneysViewName}}"
                                             CommandParameter="{Binding .}"/>

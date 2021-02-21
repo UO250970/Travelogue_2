@@ -17,8 +17,12 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Text="{Binding Resources[CreatedJourneys]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
-                        <Button Grid.Column="1" Text="&#xea42;" FontFamily="{StaticResource Icon}"
-                            Command="{Binding CreatedJourneysViewCommand}" FontSize="Large" HeightRequest="40" WidthRequest="40" BorderRadius="20"/>
+                        <Label Grid.Column="1" Text="&#xea42;" FontFamily="{StaticResource Icon}" FontSize="Title"  VerticalTextAlignment="Center" HorizontalOptions="Center"
+                               TextColor="{StaticResource Primary}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CreatedJourneysViewCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
                     </Grid>
 
                     <CarouselView ItemsSource="{Binding JourneysCreated}" EmptyView="{Binding Resources[CreatedEmpty]}" 
@@ -54,8 +58,12 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Text="{Binding Resources[ClosedJourneys]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center" HeightRequest="40"/>
-                        <Button Grid.Column="1" Text="&#xea42;" FontFamily="{StaticResource Icon}"
-                        Command="{Binding ClosedJourneysViewCommand}" FontSize="Large" HeightRequest="40" WidthRequest="40" BorderRadius="20"/>
+                        <Label Grid.Column="1" Text="&#xea42;" FontFamily="{StaticResource Icon}" FontSize="Title"  VerticalTextAlignment="Center" HorizontalOptions="Center"
+                               TextColor="{StaticResource Primary}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ClosedJourneysViewCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
                     </Grid>
 
                     <CarouselView ItemsSource="{Binding JourneysClosed}" EmptyView="{Binding Resources[ClosedEmpty]}" 

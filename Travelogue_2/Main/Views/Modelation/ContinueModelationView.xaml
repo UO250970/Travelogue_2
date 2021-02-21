@@ -11,37 +11,45 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Text="{Binding Resources[ContinueEditing]}"
-                            IsEnabled="False"/>
+            <StackLayout Padding="10,10,10,5" Grid.Row="0">
 
-            <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Default">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="{Binding Resources[ContinueEditing]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                    <Label Grid.Column="1" Text="&#x1f50d;" FontFamily="{StaticResource Icon}" FontSize="Large"  VerticalTextAlignment="Center" HorizontalOptions="Center"
+                               TextColor="{StaticResource White}">
+                    </Label>
+                </Grid>
 
-                <CollectionView x:Name="ContinueJournalsCollection" 
-                                ItemsSource="{Binding ContinueJournals}"
-                                SelectionMode="Single"
-                                SelectionChangedCommand="{Binding JourneyTapped}"
-                                SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ContinueJournalsCollection}}">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical"
-                                            Span="2"/>
-                    </CollectionView.ItemsLayout>
+            </StackLayout>
 
-                    <CollectionView.EmptyView>
-                        <Label Text="{Binding Resources[ContinueEditingEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                    </CollectionView.EmptyView>
+            <CollectionView Grid.Row="1" x:Name="ContinueJournalsCollection" 
+                            ItemsSource="{Binding ContinueJournals}"
+                            SelectionMode="Single"
+                            SelectionChangedCommand="{Binding JourneyTapped}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ContinueJournalsCollection}}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                        Span="2"/>
+                </CollectionView.ItemsLayout>
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
+                <CollectionView.EmptyView>
+                    <Label Text="{Binding Resources[ContinueEditingEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                </CollectionView.EmptyView>
 
-                            <AbsoluteLayout>
-                                <local:JourneyBookView BindingContext="{Binding .}"/>
-                            </AbsoluteLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
 
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                        <AbsoluteLayout>
+                            <local:JourneyBookView BindingContext="{Binding .}"/>
+                        </AbsoluteLayout>
 
-            </ScrollView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
         </Grid>
 

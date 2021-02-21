@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popuplayout:SfPopupLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:popuplayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms" 
+             x:Class="Travelogue_2.Main.Views.PopUps.AddToJourneyEntryPopUp">
+
+    <popuplayout:SfPopupLayout.PopupView>
+        <popuplayout:PopupView ShowHeader="True" ShowFooter="False" VerticalOptions="Fill">
+
+            <popuplayout:PopupView.HeaderTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Resources[AddToJourney]}" FontSize="Large"/>
+                </DataTemplate>
+            </popuplayout:PopupView.HeaderTemplate>
+
+            <popuplayout:PopupView.PopupStyle>
+                <popuplayout:PopupStyle
+                                    BorderThickness="3"
+                                    CornerRadius="5"/>
+            </popuplayout:PopupView.PopupStyle>
+
+            <popuplayout:PopupView.ContentTemplate>
+                <DataTemplate>
+
+                    <Label Text="Titulo" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                    
+                </DataTemplate>
+            </popuplayout:PopupView.ContentTemplate>
+
+        </popuplayout:PopupView>
+    </popuplayout:SfPopupLayout.PopupView>
+
+</popuplayout:SfPopupLayout>
