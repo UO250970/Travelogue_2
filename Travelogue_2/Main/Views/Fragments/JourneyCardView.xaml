@@ -1,21 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Frame xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       x:Class="Travelogue_2.Main.Views.Fragments.JourneyCardView">
+       x:Class="Travelogue_2.Main.Views.Fragments.JourneyCardView" HeightRequest="80">
 
-    <AbsoluteLayout BackgroundColor="{StaticResource Secondary}">
+    <StackLayout  HeightRequest="80" WidthRequest="150">
+        <AbsoluteLayout BackgroundColor="{StaticResource Secondary}" >
 
-        <Image  x:Name="JourneyImage" 
-                Source="{Binding Image}"
-                Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
+            <Image  x:Name="JourneyImage" 
+                    Source="{Binding Image}"
+                    Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
 
-        <Label  x:Name="JourneyName"
-                Text="{Binding Name}"
-                AbsoluteLayout.LayoutFlags="PositionProportional"
-                AbsoluteLayout.LayoutBounds="0.1,0.5"
-                FontSize="24"
-                TextColor="{StaticResource White}"/> 
+            <Label  x:Name="JourneyName"
+                    Text="{Binding Name}"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    AbsoluteLayout.LayoutBounds="0.1,0.5"
+                    FontSize="24"
+                    TextColor="{StaticResource White}"/> 
         
-    </AbsoluteLayout>
-    
+        </AbsoluteLayout>
+    </StackLayout>
 </Frame>

@@ -6,53 +6,63 @@
              x:Name="CreatedJourneysViewName">
 
     <ContentPage.Content>
-        <AbsoluteLayout>
+        <AbsoluteLayout BackgroundColor="{StaticResource PrimaryFaded}">
 
-            <Grid Padding="10,10,10,5">
-                
-                <ScrollView Orientation="Vertical">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackLayout Padding="10,10,10,5" Grid.Row="0">
 
-                    <StackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="{Binding Resources[CreatedJourneys]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                        <Button Grid.Column="1" Text="&#xe986;" FontFamily="{StaticResource Icon}"
+                                    Command="{Binding SearchJourneyCommand}" BackgroundColor="{StaticResource Primary}"/>
+                    </Grid>
 
-                        <Button Text="{Binding Resources[CreatedJourneys]}"
-                            IsEnabled="False"/>
+                    <SearchBar IsVisible="{Binding SearchVisible}" Placeholder="{Binding Resources[SearchJourney]}" Text="{Binding SearchText, Mode=TwoWay}"/>
 
-                        <CollectionView x:Name="CreatedJourneysCollection"
-                                        ItemsSource="{Binding JourneysCreated}"
-                                        SelectionMode="Single"
-                                        SelectionChangedCommand="{Binding JourneyTapped}"
-                                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CreatedJourneysCollection}}">
-                                
-                            <CollectionView.ItemsLayout>
-                                <GridItemsLayout Orientation="Vertical"
-                                            Span="2"/>
-                            </CollectionView.ItemsLayout>
 
-                            <CollectionView.EmptyView>
-                                <Label Text="{Binding Resources[CreatedEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                            </CollectionView.EmptyView>
+                </StackLayout>
 
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
+                <CollectionView Grid.Row="1" x:Name="CreatedJourneysCollection"
+                                    ItemsSource="{Binding JourneysCreatedSearched}"
+                                    SelectionMode="Single"
+                                    SelectionChangedCommand="{Binding JourneyTapped}"
+                                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CreatedJourneysCollection}}">
 
-                                    <AbsoluteLayout>
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                        Span="2"/>
+                    </CollectionView.ItemsLayout>
 
-                                        <local:JourneyBookView BindingContext="{Binding .}"/>
+                    <CollectionView.EmptyView>
+                        <Label Text="{Binding Resources[CreatedEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                    </CollectionView.EmptyView>
 
-                                        <Button x:Name="DeleteJourneyButton" 
-                                                Style="{StaticResource circleButtonDeleteStyle}"
-                                                HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
-                                                Command="{Binding BindingContext.JourneyTappedDelete, Source={x:Reference CreatedJourneysViewName}}"
-                                                CommandParameter="{Binding .}"/>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
 
-                                    </AbsoluteLayout>
+                            <AbsoluteLayout>
 
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                                <local:JourneyBookView BindingContext="{Binding .}"/>
 
-                    </StackLayout>
-                </ScrollView>
+                                <Button x:Name="DeleteJourneyButton" 
+                                            Style="{StaticResource circleButtonDeleteStyle}"
+                                            HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
+                                            Command="{Binding BindingContext.JourneyTappedDelete, Source={x:Reference CreatedJourneysViewName}}"
+                                            CommandParameter="{Binding .}"/>
+
+                            </AbsoluteLayout>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
             </Grid>
 

@@ -403,6 +403,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Buscar un viaje....
+        /// </summary>
+        internal static string SearchJourney {
+            get {
+                return ResourceManager.GetString("SearchJourney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ajustes.
         /// </summary>
         internal static string Settings {

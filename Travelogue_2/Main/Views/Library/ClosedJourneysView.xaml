@@ -5,36 +5,51 @@
              xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments">
 
     <ContentPage.Content>
-        <Grid Padding="10,10,10,5">
-            
-            <ScrollView VerticalScrollBarVisibility="Default">
 
-                <StackLayout>
 
-                    <Button Text="{Binding Resources[ClosedJourneys]}"
-                            IsEnabled="False"/>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Padding="10,10,10,5" BackgroundColor="{StaticResource PrimaryFaded}" Grid.Row="0">
 
-                    <CollectionView ItemsSource="{Binding JourneysCreated}">
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical"
-                                            Span="2" />
-                        </CollectionView.ItemsLayout>
-                        
-                        <CollectionView.EmptyView>
-                            <Label Text="{Binding Resources[ClosedEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                        </CollectionView.EmptyView>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="{Binding Resources[ClosedJourneys]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                    <Button Grid.Column="1" Text="&#xe986;" FontFamily="{StaticResource Icon}"
+                                    Command="{Binding SearchJourneyCommand}" BackgroundColor="{StaticResource Primary}"/>
+                </Grid>
 
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <local:JourneyBookView BindingContext="{Binding .}"/>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                    
-                </StackLayout>
-                
-            </ScrollView>
-            
+                <SearchBar IsVisible="{Binding SearchVisible}" Placeholder="{Binding Resources[SearchJourney]}" Text="{Binding SearchText, Mode=TwoWay}"/>
+
+            </StackLayout>
+
+            <CollectionView Grid.Row="1" x:Name="ClosedJourneysCollection"
+                                ItemsSource="{Binding JourneysClosedSearched}"
+                                SelectionMode="Single"
+                                SelectionChangedCommand="{Binding JourneyTapped}"
+                                SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ClosedJourneysCollection}}">
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                        Span="2" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.EmptyView>
+                    <Label Text="{Binding Resources[ClosedEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <local:JourneyBookView BindingContext="{Binding .}"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
         </Grid>
     </ContentPage.Content>
 

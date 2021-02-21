@@ -42,7 +42,7 @@
         </ShellContent>
         <ShellContent ContentTemplate="{DataTemplate media:MediaView}" >
             <ShellContent.Icon>
-                <FontImageSource Glyph="&#xe90e;" FontFamily="{StaticResource Icon}" Size="Small"/>
+                <FontImageSource Glyph="&#xe9ca;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>
         </ShellContent>
         <ShellContent ContentTemplate="{DataTemplate journey:JourneyOngoingView}" >

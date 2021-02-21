@@ -3,44 +3,61 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments"
-             FlowDirection="RightToLeft">
+             x:Name="LibraryViewName">
     
     <ContentPage.Content>
-        <Grid Padding="10,10,10,5">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Button Text="{Binding Resources[CreatedJourneys]}"
-                        Command="{Binding CreatedJourneysViewCommand}"/>
-            </Grid>
-            <Frame Grid.Row="1" Padding="5, 5, 5, 5">
-                
-                <CarouselView ItemsSource="{Binding JourneysCreated}" EmptyView="{Binding Resources[CreatedEmpty]}" 
-                              PeekAreaInsets="50" Loop="False">
-                    <CarouselView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
-                    </CarouselView.ItemsLayout>
+        <StackLayout Padding="10,10,10,5" BackgroundColor="{StaticResource PrimaryFaded}">
+            
+            <Frame Padding="5">
 
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <local:JourneyCardView BindingContext="{Binding .}"/>
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
-                
+                <StackLayout>
+                    <Grid HeightRequest="120">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="{Binding Resources[CreatedJourneys]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                        <Button Grid.Column="1" Text="&#xea42;" FontFamily="{StaticResource Icon}"
+                            Command="{Binding CreatedJourneysViewCommand}" FontSize="Large" HeightRequest="40" WidthRequest="40" BorderRadius="20"/>
+                    </Grid>
+
+                    <CarouselView ItemsSource="{Binding JourneysCreated}" EmptyView="{Binding Resources[CreatedEmpty]}" 
+                                PeekAreaInsets="50" Loop="False" HorizontalOptions="StartAndExpand" Position="0">
+                        <CarouselView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" />
+                        </CarouselView.ItemsLayout>
+
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+
+                                <local:JourneyCardView BindingContext="{Binding .}">
+                                    <local:JourneyCardView.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding Path=BindingContext.JourneyTapped, Source={x:Reference LibraryViewName}}"		
+                                            CommandParameter="{Binding .}"/>
+                                    </local:JourneyCardView.GestureRecognizers>
+                                </local:JourneyCardView>
+
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                </StackLayout>
+
             </Frame>
 
-            <Grid Grid.Row="2">
-                <Button Text="{Binding Resources[ClosedJourneys]}"
-                        Command="{Binding ClosedJourneysViewCommand}"/>
-            </Grid>
-            <Frame Grid.Row="3" Padding="5, 5, 5, 5">
-                <Grid>
-                    
+            <Frame Padding="5">
+                
+                <StackLayout>
+                    <Grid HeightRequest="120">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="{Binding Resources[ClosedJourneys]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center" HeightRequest="40"/>
+                        <Button Grid.Column="1" Text="&#xea42;" FontFamily="{StaticResource Icon}"
+                        Command="{Binding ClosedJourneysViewCommand}" FontSize="Large" HeightRequest="40" WidthRequest="40" BorderRadius="20"/>
+                    </Grid>
+
                     <CarouselView ItemsSource="{Binding JourneysClosed}" EmptyView="{Binding Resources[ClosedEmpty]}" 
                                   PeekAreaInsets="50" Loop="False" HorizontalOptions="StartAndExpand" Position="0">
                         <CarouselView.ItemsLayout>
@@ -49,7 +66,7 @@
 
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
-                               
+
                                 <local:JourneyCardView BindingContext="{Binding .}">
                                     <local:JourneyCardView.GestureRecognizers>
                                         <TapGestureRecognizer 
@@ -57,14 +74,14 @@
                                             CommandParameter="{Binding .}"/>
                                     </local:JourneyCardView.GestureRecognizers>
                                 </local:JourneyCardView>
-                                
+
                             </DataTemplate>
                         </CarouselView.ItemTemplate>
                     </CarouselView>
-                    
-                </Grid>
+                </StackLayout>
+                
             </Frame>
-        </Grid>
+        </StackLayout>
     </ContentPage.Content>
     
 </ContentPage>

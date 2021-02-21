@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.ViewModels.Journal;
 using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.Library;
 using Xamarin.Forms;
@@ -13,7 +14,7 @@ namespace Travelogue_2.Main.ViewModels.Library
     public class LibraryViewModel : BaseViewModel
 	{
 		public Command LoadJourneysCommand { get; }
-		public Command<Item> JourneyTapped { get; }
+		public Command<JourneyCard> JourneyTapped { get; }
 		public Command CreatedJourneysViewCommand { get; }
         public Command ClosedJourneysViewCommand { get; }
 
@@ -31,7 +32,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 			JourneysCreated = new ObservableCollection<JourneyCard>();
 			JourneysClosed = new ObservableCollection<JourneyCard>();
 
-			JourneyTapped = new Command<Item>(OnJourneySelected);
+			JourneyTapped = new Command<JourneyCard>(OnJourneySelected);
 
 			ExecuteLoadJourneysCommand();
 		}
@@ -85,13 +86,13 @@ namespace Travelogue_2.Main.ViewModels.Library
 			=> await Shell.Current.GoToAsync(nameof(ClosedJourneysView));
 		
 
-		async void OnJourneySelected(Item journey)
+		async void OnJourneySelected(JourneyCard journey)
 		{
 			if (journey == null)
 				return;
 
 			// This will push the ItemDetailPage onto the navigation stack
-			await Shell.Current.GoToAsync($"{nameof(JourneyOngoingView)}?{nameof(ItemDetailViewModel.ItemId)}={journey.Id}");
+			await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyViewModel.JourneyId)}={journey.Id}");
 		}
 
 	}
