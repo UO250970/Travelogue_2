@@ -11,7 +11,7 @@ namespace Travelogue_2.Main.Models
 
 		public ImageSource Image { get; set; }
 
-		public DateTime StartDate { get; set; }
+		public DateTime IniDate { get; set; }
 
 		public DateTime EndDate { get; set; }
 

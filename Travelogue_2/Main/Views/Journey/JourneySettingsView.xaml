@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.NavBarIsVisible="True"
+             Shell.TabBarIsVisible="False"
+             xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments"
+             x:Class="Travelogue_2.Main.Views.Journey.JourneySettingsView">
+    <Shell.TitleView>
+        <Label Text="{Binding JourneyTitle}" />
+    </Shell.TitleView>
+    
+    <ContentPage.Content>
+
+        <StackLayout>
+            <Frame HasShadow="True" Margin="5" Padding="5">
+                <StackLayout>
+                    <Label Text="Nombre del viaje" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                    <Entry Text="{Binding JourneyTitle, Mode=TwoWay}" FontSize="Medium" />
+                </StackLayout>
+            </Frame>
+
+            <Frame HasShadow="True" Margin="5" Padding="5">
+                <StackLayout>
+                    <Label Text="Destinos" FontSize="Large" TextColor="{StaticResource Primary}"/>
+
+                    <CollectionView x:Name="DestiniesCollection"
+                                            HeightRequest="60"
+                                            ItemsSource="{Binding JourneyDestinies}"
+                                            SelectionMode="None">
+
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Horizontal"/>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+
+                                    <local:DestinyCardView BindingContext="{Binding .}"/>
+                                    
+                                    <Button HeightRequest="50" WidthRequest="50" BorderRadius="25" Text="{Binding .Day}"
+                                                BackgroundColor="{Binding .Background}"  Margin="10, 5" 
+                                                Command="{Binding Path=BindingContext.DayTapped, Source={x:Reference JourneyOngoingViewName}}"
+                                                CommandParameter="{Binding .}"></Button>
+
+                                    <CollectionView x:Name="EmbassiesCollection"
+                                            HeightRequest="60"
+                                            ItemsSource="{Binding .Embassies}"
+                                            SelectionMode="None">
+
+                                        <CollectionView.ItemsLayout>
+                                            <GridItemsLayout Orientation="Horizontal"/>
+                                        </CollectionView.ItemsLayout>
+
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout>
+
+                                                    <Label Text="{Binding Path=Key}"/>
+                                                    <Label Text="{Binding Path=Value}"/>
+
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

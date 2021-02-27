@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddEntry" xml:space="preserve">
+    <value>Add an entry</value>
+  </data>
+  <data name="AddEvent" xml:space="preserve">
+    <value>Add an event</value>
+  </data>
   <data name="AddToJourney" xml:space="preserve">
     <value>Add to the journey</value>
   </data>
@@ -156,11 +162,23 @@
   <data name="CreatedJourneys" xml:space="preserve">
     <value>Created Journeys</value>
   </data>
+  <data name="CreateEntry" xml:space="preserve">
+    <value>Create an entry</value>
+  </data>
+  <data name="CreateEvent" xml:space="preserve">
+    <value>Create an event</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
   <data name="DateFormat" xml:space="preserve">
     <value>MM-dd-yyyy</value>
   </data>
   <data name="Destinies" xml:space="preserve">
     <value>Destinations</value>
+  </data>
+  <data name="Destiny" xml:space="preserve">
+    <value>Destiny</value>
   </data>
   <data name="Empty" xml:space="preserve">
     <value />
@@ -215,6 +233,9 @@
   </data>
   <data name="MonthShort_2" xml:space="preserve">
     <value>FEB.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>

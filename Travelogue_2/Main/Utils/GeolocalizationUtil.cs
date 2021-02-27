@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms.Maps;
+using System.Diagnostics;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 
 namespace Travelogue_2.Main.Utils
@@ -17,8 +18,8 @@ namespace Travelogue_2.Main.Utils
             {
                 statusLocation = await CrossPermissions.Current.RequestPermissionAsync<LocationWhenInUsePermission>();
             } 
-            //await Alerter.AlertEnableLocation();
-            System.Diagnostics.Debug.WriteLine("Permision location : " + statusLocation);
+
+            Debug.WriteLine("Permision location : " + statusLocation);
         }
 
         private static async Task<Location> GetLocationAsync()
@@ -46,11 +47,13 @@ namespace Travelogue_2.Main.Utils
 
         public static Location GetLocation()
         {
+            CheckPermissions();
             return GetLocationAsync().Result;
         }
 
         public static Position GetPosition()
-		{
+        {
+            CheckPermissions();
             Location temp = GetLocationAsync().Result;
             if (temp is null) temp = new Location();
             return new Position(temp.Latitude, temp.Longitude);

@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Models
@@ -13,18 +16,25 @@ namespace Travelogue_2.Main.Models
 		private string month;
 		public string Month
 		{
-			get { return month; }
-			set => month = App.LocResources["MonthShort_" + value];
-		}
-
-		public Color Background
-		{
-			get
+			get => month;
+			set 
 			{
-				return (Color) Application.Current.Resources["Primary"];
-			}
+				month = App.LocResources["MonthShort_" + value];
+				MonthNum = value;
+			} 
 		}
 
+		public string MonthNum { get; set; }
+
+		private string year;
+		public string Year
+		{
+			get => year;
+			set => year = value;
+		}
+
+		public Color Background = (Color)Application.Current.Resources["PrimaryFaded"];
+		
 		public int Entries { get; set; }
 
 		public string EntriesText 
@@ -46,6 +56,8 @@ namespace Travelogue_2.Main.Models
 				return Events + " " + App.LocResources["Events"];
 			}
 		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
 
 	}
 

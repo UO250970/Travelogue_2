@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Utils;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Library.Create
@@ -14,6 +15,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 	{
 		public Command AddCoverCommand { get; }
 		public Command AddDestinyCommand { get; }
+		public Command MoreInfoCommand { get; }
 		public Command CancelCommand { get; }
 		public Command SaveCommand { get; }
 
@@ -30,6 +32,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			AddCoverCommand = new Command(() => AddCoverC());
 
 			AddDestinyCommand = new Command(() => AddDestinyC());
+			MoreInfoCommand = new Command<string>((x) => MoreInfoC(x));
 
 			CancelCommand = new Command(() => CancelC());
 			SaveCommand = new Command(() => SaveC());
@@ -44,6 +47,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			ExecuteLoadDataCommand();
 		}
 
+		#region CoverImage
 		public ImageCard coverImage = new ImageCard();
 		public ImageCard CoverImage
 		{
@@ -53,51 +57,56 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 				SetProperty(ref coverImage, value);
 			}
 		}
+		#endregion
 
 		public int CoverImageHeight { get => CommonVariables.ImageMaxHeight; }
 
-		/**private ImageSource coverImageSource = new ImageCard().ImageSour;
-		public ImageSource CoverImageSource
-		{
-			get => coverImageSource;
-			set => SetProperty(ref coverImageSource, value);
-		}*/
-
+		#region Title
 		private string title = "";
 		public new string Title
 		{
 			get => title;
 			set => SetProperty(ref title, value);
 		}
+		#endregion
 
+		#region MinimumDate
 		private DateTime minimumDate = DateTime.Today;
 		public DateTime MinimumDate
 		{
 			get => minimumDate;
 			set => SetProperty(ref minimumDate, value);
 		}
+		#endregion
 
+		#region IniDate
 		private DateTime iniDate = DateTime.Today;
 		public DateTime IniDate
 		{
 			get => iniDate;
 			set => SetProperty(ref iniDate, value);
 		}
+		#endregion
 
+		#region EndDate
 		private DateTime endDate = DateTime.Today;
 		public DateTime EndDate
 		{
 			get => endDate;
 			set => SetProperty(ref endDate, value);
 		}
+		#endregion
 
+		#region CorrectDestinyText
 		private bool correctDestinyText;
 		public bool CorrectDestinyText
 		{
 			get => correctDestinyText;
 			set => SetProperty(ref correctDestinyText, value);
 		}
+		#endregion
 
+		#region DestinyText
 		private string destinyText;
 		public string DestinyText
 		{
@@ -114,29 +123,34 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 				SetProperty(ref destinyText, value);
 			}
 		}
+		#endregion
 
+		#region DestiniesSelectedHeight
 		private int destiniesSelectedHeight = 100;
 		public int DestiniesSelectedHeight
 		{
 			get => destiniesSelectedHeight;
 			set => SetProperty(ref destiniesSelectedHeight, value);
 		}
+		#endregion
 
-
-
+		#region ImageVisible
 		private bool imageVisible = false;
 		public bool ImageVisible
 		{
 			get => imageVisible;
 			set => SetProperty(ref imageVisible, value);
 		}
+		#endregion
 
+		#region LabelVisible
 		private bool labelVisible = true;
 		public bool LabelVisible
 		{
 			get => labelVisible;
 			set => SetProperty(ref labelVisible, value);
 		}
+		#endregion
 
 		async Task ExecuteLoadDataCommand()
 		{
@@ -177,6 +191,9 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			}
 		}
 
+		public void OnAppearing()
+			=> IsBusy = true;
+
 		async internal void AddCoverC()
 		{
 			ImageCard success = await CameraUtil.Photo(this);
@@ -188,10 +205,11 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
 		async internal void AddDestinyC()
 		{
+			Destiny destiny = CommonVariables.AvailableDestinies.Find(x => x.Name == DestinyText);
 			DestinyCard temp = new DestinyCard();
-			temp.Destiny = DestinyText;
-			temp.Code = DestinyText;
-			temp.Currency = "Euros";
+			temp.Destiny = destiny.Name;
+			temp.Code = destiny.Code;
+			temp.Currency = destiny.Currency;
 			if (!DestiniesSelected.Contains(temp))
 			{
 				DestiniesSelected.Add(temp);
@@ -201,6 +219,11 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 				await Alerter.AlertDestinyAlreadySelected();
 			}
 			DestinyText = "";
+		}
+
+		async internal void MoreInfoC(string path)
+		{
+			await Browser.OpenAsync(path);
 		}
 
 		async internal void CancelC()
@@ -214,13 +237,17 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 				await Alerter.AlertNoNameInJourney();
 			} else
 			{
+				JourneyCard journey = new JourneyCard();
+				journey.Name = Title;
+				journey.IniDate = IniDate;
+				journey.EndDate = EndDate;
+				CalendarUtil.AddJourney(journey);
 				//TO-DO create and store journey
 				await Alerter.AlertJourneyCreated();
 				//TO-DO checkear cuando empieza  eso y cambiar redirección
 				await Shell.Current.GoToAsync("..");
 			}
 		}
-		//=> await Shell.Current.GoToAsync(nameof(ClosedJourneysView));
 
 		internal void CheckNewIniDate(DatePicker iniDatePicker, DatePicker endDatePicker)
 		{

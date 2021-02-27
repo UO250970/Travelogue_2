@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.PresentationMode="ModalAnimated"
+             x:Class="Travelogue_2.Main.Views.Journey.CreateEventView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding Resources[CreateEvent]}"
+                   FontSize="Title"
+                   VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center"/>
+
+            <Frame HasShadow="True" Margin="5" Padding="5">
+                <StackLayout>
+                    <Label Text="Titulo" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                    <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
+                </StackLayout>
+            </Frame>
+
+            <Frame HasShadow="True" Margin="5" Padding="5">
+                <StackLayout>
+                    <Label Text="Descripcion" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                    <Entry Text="{Binding Description, Mode=TwoWay}" FontSize="Medium" />
+                </StackLayout>
+            </Frame>
+
+            <Frame HasShadow="True" Margin="5" Padding="5">
+                <StackLayout>
+                    <Label Text="Fecha" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                    <DatePicker Date="{Binding Date}" FontSize="Medium" 
+                                MaximumDate="{Binding MaximumDate}" MinimumDate="{Binding MinimumDate}"/>
+                </StackLayout>
+            </Frame>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="End">
+                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Save" Command="{Binding CreateCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

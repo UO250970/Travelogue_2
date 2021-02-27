@@ -21,7 +21,6 @@ namespace Travelogue_2.Main.ViewModels.Library
 		public ObservableCollection<JourneyCard> JourneysClosedSearched { get; set; }
 
 
-
 		public ClosedJourneysViewModel()
 		{
 			SearchJourneyCommand = new Command(() => SearchJourneyC());

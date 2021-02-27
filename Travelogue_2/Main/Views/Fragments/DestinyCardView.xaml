@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Frame xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Travelogue_2.Main.Views.Fragments.DestinyCardView">
+             x:Class="Travelogue_2.Main.Views.Fragments.DestinyCardView"
+             xmlns:model="clr-namespace:Travelogue_2.Main.Views.Library.Create">
     
     <StackLayout>
         <Label x:Name="DestinyName" FontSize="Medium" 
@@ -24,7 +25,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0"
                             FontSize="Medium"
-                            Text="{Binding Destiny}" />
+                            Text="{Binding Resources[Nombre]}" />
                     <Label Grid.Column="1"
                             x:Name="CountryName"
                             FontSize="Medium" 
@@ -39,7 +40,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0"
                             FontSize="Medium"
-                            Text="{Binding Currency}" />
+                            Text="{Binding Resources[Currency]}" />
                     <Label Grid.Column="1"
                             x:Name="Currency"
                             FontSize="Medium"
@@ -52,9 +53,10 @@
                         TextColor="#3D6D9B"
                         x:Name="DestinyURL"
                         Text="{Binding MoreInfoCountry}">
-                    <!--Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="" CommandParameter=""/>
-                    </-->
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.MoreInfoCommand, Source=model:CreateJourneyViewModel}"
+                                CommandParameter="{Binding MoreInfoCountry}"/>
+                    </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
 

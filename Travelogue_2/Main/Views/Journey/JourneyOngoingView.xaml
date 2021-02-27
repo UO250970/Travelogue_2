@@ -190,6 +190,15 @@
                     TextColor="{StaticResource White}"/>
 
             <Button x:Name="ModifyJourneyButton" 
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    AbsoluteLayout.LayoutBounds="1,0"
+                    FontSize="Title"
+                    TextColor="{StaticResource White}"
+                    BackgroundColor="{StaticResource None}"
+                    Command="{Binding ModifyJourneyCommand}"
+                    HorizontalOptions="StartAndExpand"  Text="&#xe9bd;" FontFamily="{StaticResource Icon}" />
+
+            <Button x:Name="AddToJourneyButton" 
                     Style="{StaticResource circleButtonAddStyle}"
                     Command="{Binding AddToJourneyCommand}"
                     HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}" />

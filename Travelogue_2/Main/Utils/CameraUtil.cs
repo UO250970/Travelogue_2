@@ -21,7 +21,7 @@ namespace Travelogue_2.Main.Utils
 				statusCamera = await CrossPermissions.Current.RequestPermissionAsync<CameraPermission>();
 			}
 
-			System.Diagnostics.Debug.WriteLine("Permision camera : " + statusCamera);
+			Debug.WriteLine("Permision camera : " + statusCamera);
 
 			Start();
 		}

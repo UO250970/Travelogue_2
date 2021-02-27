@@ -41,7 +41,7 @@ namespace Travelogue_2.Main.Utils
 
 		public static string GenericFlag { get => FlagImagesPath + "DEFAULT" + FlagImagesExtension; }  
 
-		public static List<String> AvailableLanguages { get => new List<string>() { "ES", "FR", "EN" }; }
+		public static List<string> AvailableLanguages { get => new List<string>() { "ES", "FR", "EN" }; }
 		public static List<Destiny> AvailableDestinies { get; set; } = new List<Destiny>();
 
 		public static Dictionary<string, Location> AvailableLanguagesLocations 
@@ -52,7 +52,7 @@ namespace Travelogue_2.Main.Utils
 			}; 
 		}
 
-		public static List<String> AvailableFlags { get => new List<string>() { "AD", "AF", "AT", "AU", "CU", "DE", "ES", "FR" }; }
+		public static List<string> AvailableFlags { get => new List<string>() { "AD", "AF", "AT", "AU", "CU", "DE", "ES", "FR" }; }
 
 		public static ImageSource GetFlag(string name)
 		{

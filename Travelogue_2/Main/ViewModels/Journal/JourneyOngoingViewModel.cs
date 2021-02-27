@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.PopUps;
 using Xamarin.Forms;
 
@@ -11,6 +15,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 {
 	public class JourneyOngoingViewModel : PhotoRendererModel
 	{
+		private string JourneyId { get; set; }
 		public Command AddImageCommand { get; }
 		public Command<ImageCard> ImageTapped { get; }
 		public Command<DayCard> DayTapped { get; }
@@ -20,16 +25,23 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		public ObservableCollection<EntryCard> JourneyEntries { get; }
 
 		/** Pop Ups */
+		public Command ModifyJourneyCommand { get; }
 		public Command AddToJourneyCommand { get; }
+		public Command CreateEventCommand { get; }
+		public Command CreateEntryCommand { get; }
 		/** */
 
 		public JourneyOngoingViewModel()
 		{
 			AddImageCommand = new Command(() => AddImageC());
+			ModifyJourneyCommand = new Command(() => ModifyJourneyC());
 			AddToJourneyCommand = new Command(() => AddToJourneyC());
+			CreateEventCommand = new Command(() => CreateEventC());
+			CreateEntryCommand = new Command(() => CreateEntryC());
 
 			JourneyImages = new ObservableCollection<ImageCard>();
 			JourneyDays = new ObservableCollection<DayCard>();
+			JourneyDays.CollectionChanged += JourneyDaysChanged;
 			JourneyEvents = new ObservableCollection<EventCard>();
 			JourneyEntries = new ObservableCollection<EntryCard>();
 
@@ -45,6 +57,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 			try
 			{
+				JourneyId = "1";
 				var temp = new DayCard();
 				temp.Day = "2";
 				temp.Month = "2";
@@ -127,10 +140,24 @@ namespace Travelogue_2.Main.ViewModels.Journal
 				SetProperty(ref daySelected, value);
 				EventsHeight = 40 * value.Events;
 				EntriesHeight = 40 * value.Entries;
+				foreach(DayCard day in JourneyDays)
+				{
+					day.Background = (Color)Application.Current.Resources["PrimaryFaded"];
+				}
+				JourneyDays.First(x => x == daySelected).Background = (Color)Application.Current.Resources["Primary"];
+
+				DaySelectedNum = JourneyDays.IndexOf(daySelected);
+				//Color change = (Color) Application.Current.Resources["Primary"];
+				//Color temp1 = JourneyDays.First(x => x == daySelected).Background;
+				//SetProperty(ref temp1, change);
 			}
 		}
 
+		public int DaySelectedNum { get; set; }
+
 		#endregion
+
+		#region EventsHeight
 
 		private double eventsHeight = 0;
 
@@ -140,6 +167,9 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			set => SetProperty(ref eventsHeight, value);
 		}
 
+		#endregion
+
+		#region EntriesHeight
 
 		private double entriesHeight = 0;
 
@@ -147,6 +177,15 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		{
 			get => entriesHeight;
 			set => SetProperty(ref entriesHeight, value);
+		}
+
+		#endregion
+
+		#region Commands
+
+		async internal void ModifyJourneyC()
+		{
+			await Shell.Current.GoToAsync($"{nameof(JourneySettingsView)}?{nameof(JourneySettingsViewModel.JourneyId)}={JourneyId}");
 		}
 
 		async internal void AddImageC()
@@ -160,9 +199,24 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		async internal void AddToJourneyC()
 		{
-			AddToJourneyPopUp popup = new AddToJourneyPopUp();
+			AddToJourneyPopUp popup = new AddToJourneyPopUp(this);
 			//popup.model.journey = JourneyCard;
 		}
+
+		//TO-DO checkear
+		async internal void CreateEventC()
+		{
+			await Shell.Current.GoToAsync($"{nameof(CreateEventView)}?{nameof(CreateEventViewModel.DaySelectedNum)}={DaySelectedNum}" +
+																	$"&{nameof(CreateEventViewModel.JourneyId)}={JourneyId}");
+		}
+
+		async internal void CreateEntryC()
+		{
+			await Shell.Current.GoToAsync($"{nameof(CreateEntryView)}?{nameof(CreateEntryViewModel.DaySelectedNum)}={DaySelectedNum}" +
+																	$"&{nameof(CreateEntryViewModel.JourneyId)}={JourneyId}");
+		}
+
+		#endregion
 
 		#region OnAction
 
@@ -186,6 +240,19 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		}
 
 		#endregion
+
+		void JourneyDaysChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+
+			
+			if (e.NewItems != null)
+				foreach (DayCard day in e.NewItems)
+					day.PropertyChanged += OnPropertyChanged;
+
+			if (e.OldItems != null)
+				foreach (DayCard day in e.OldItems)
+					day.PropertyChanged -= OnPropertyChanged;
+		}
 
 	}
 }

@@ -24,6 +24,7 @@
     <None Remove="Resources\Imgs\Flags\ES_Flag.png" />
     <None Remove="Resources\Imgs\Flags\FR_Flag.png" />
     <None Remove="Resources\Imgs\untitled.png" />
+    <None Remove="Resources\JSON\ESEmbassyList.txt" />
     <None Remove="Resources\JSON\ISO2Country.txt" />
     <None Remove="Resources\JSON\ISO2Currency.txt" />
     <None Remove="Resources\xamarin_logo.png" />
@@ -47,22 +48,24 @@
     <EmbeddedResource Include="Resources\Imgs\Flags\ES_Flag.png" />
     <EmbeddedResource Include="Resources\Imgs\Flags\FR_Flag.png" />
     <EmbeddedResource Include="Resources\Imgs\untitled.png" />
+    <EmbeddedResource Include="Resources\JSON\ESEmbassyList.txt" />
     <EmbeddedResource Include="Resources\JSON\ISO2Country.txt" />
     <EmbeddedResource Include="Resources\JSON\ISO2Currency.txt" />
     <EmbeddedResource Include="Resources\xamarin_logo.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CClarke.Plugin.Calendars" Version="1.0.14" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
-    <PackageReference Include="Syncfusion.Licensing" Version="18.4.0.43" />
-    <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.4.0.43" />
-    <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="18.4.0.43" />
-    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.4.0.43" />
-    <PackageReference Include="Syncfusion.Xamarin.SfCarousel" Version="18.4.0.43" />
-    <PackageReference Include="Syncfusion.Xamarin.SfImageEditor" Version="18.4.0.43" />
-    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="18.4.0.43" />
-    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.4.0.43" />
+    <PackageReference Include="Syncfusion.Licensing" Version="18.4.0.44" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.4.0.44" />
+    <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="18.4.0.44" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.4.0.44" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCarousel" Version="18.4.0.44" />
+    <PackageReference Include="Syncfusion.Xamarin.SfImageEditor" Version="18.4.0.44" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="18.4.0.44" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.4.0.44" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
@@ -106,6 +109,9 @@
     <EmbeddedResource Update="Main\Views\Journey\JourneyOngoingView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Journey\JourneySettingsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Journey\JourneyView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -134,12 +140,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Modelation\StartModelationView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Main\Views\PopUps\AddToJourneyEntryPopUp.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Main\Views\PopUps\AddToJourneyEventPopUp.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Localization\AppResources.resx">

@@ -1,6 +1,5 @@
 ﻿using System;
 using Travelogue_2.Main.ViewModels.Library.Create;
-using Travelogue_2.Main.Views.Fragments;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,6 +19,11 @@ namespace Travelogue_2.Main.Views.Library.Create
 			DestiniesCollection.HeightRequest = 0;
 
 			Shell.SetNavBarIsVisible(this, false);
+		}
+		protected override void OnAppearing()
+		{
+			model.OnAppearing();
+			base.OnAppearing();
 		}
 
 		public void CheckNewIniDate(object sender, EventArgs e)

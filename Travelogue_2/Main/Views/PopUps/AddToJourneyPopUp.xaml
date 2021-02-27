@@ -9,7 +9,7 @@
 
             <popuplayout:PopupView.HeaderTemplate>
                 <DataTemplate>
-                    <Label Text="pene" FontSize="Large"/>
+                    <Label Text="pene" FontSize="Title" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                 </DataTemplate>
             </popuplayout:PopupView.HeaderTemplate>
             
@@ -21,7 +21,25 @@
 
             <popuplayout:PopupView.ContentTemplate>
                 <DataTemplate>
+                    <Grid Margin="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
+                        <StackLayout Grid.Column="0" Padding="15">
+                            <Button Style="{StaticResource circleButtonAddStyle}"
+                                    Command="{Binding CreateEventCommand}"/>
+                            <Label Text="{Binding Resources[AddEvent]}"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1" Padding="15">
+                            <Button Style="{StaticResource circleButtonAddStyle}"
+                                    Command="{Binding CreateEntryCommand}"/>
+                            <Label Text="{Binding Resources[AddEntry]}"/>
+                        </StackLayout>
+                        
+                    </Grid>
                 </DataTemplate>
             </popuplayout:PopupView.ContentTemplate>
 

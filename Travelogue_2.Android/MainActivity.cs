@@ -2,6 +2,9 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using global::Xamarin.Forms;
+using Xamarin.Essentials;
+using Syncfusion.XForms.Android.PopupLayout;
 
 namespace Travelogue_2.Droid
 {
@@ -15,8 +18,9 @@ namespace Travelogue_2.Droid
 
             base.OnCreate(savedInstanceState);
 
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Platform.Init(this, savedInstanceState);
+            Forms.Init(this, savedInstanceState);
+            SfPopupLayoutRenderer.Init();
 
             LoadApplication(new App());
         }

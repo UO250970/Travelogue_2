@@ -1,4 +1,5 @@
-﻿using Travelogue_2.Main.Utils;
+﻿using System.Collections.Generic;
+using Travelogue_2.Main.Utils;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Models
@@ -16,6 +17,10 @@ namespace Travelogue_2.Main.Models
 			get => CommonVariables.GetFlag(Destiny);
 		}
 
-		public string MoreInfoCountry { get; set; }
+		public string MoreInfoCountry { get => CommonVariables.CountryWebSite + Code.ToLower(); }
+
+		public Dictionary<string, string> Embassies { get; set; }
+
+		public List<string> EmbassiesCities { get; set; }
 	}
 }

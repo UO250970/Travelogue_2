@@ -1,5 +1,5 @@
 ﻿using Syncfusion.XForms.PopupLayout;
-using Travelogue_2.Main.ViewModels.PopUps;
+using Travelogue_2.Main.ViewModels.Journal;
 using Xamarin.Forms.Xaml;
 
 namespace Travelogue_2.Main.Views.PopUps
@@ -7,13 +7,13 @@ namespace Travelogue_2.Main.Views.PopUps
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AddToJourneyPopUp : SfPopupLayout
 	{
-		public AddToJourneyPopUpModel model;
+		public JourneyOngoingViewModel model;
 
-		public AddToJourneyPopUp()
+		public AddToJourneyPopUp(JourneyOngoingViewModel model)
 		{
 			InitializeComponent();
 
-			BindingContext = model = new AddToJourneyPopUpModel();
+			BindingContext = this.model = model;
 
 			Show();
 		}
