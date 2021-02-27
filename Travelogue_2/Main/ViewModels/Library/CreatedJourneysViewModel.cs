@@ -153,15 +153,14 @@ namespace Travelogue_2.Main.ViewModels.Library
 			}
 		}
 
-
-		async internal void CreateJourneyC()
-			=> await Shell.Current.GoToAsync(nameof(CreateJourneyView));
-
 		async internal void SearchJourneyC()
 		{
 			SearchText = "";
 			SearchVisible = !SearchVisible;
 		}
+
+		async internal void CreateJourneyC()
+			=> await Shell.Current.GoToAsync(nameof(CreateJourneyView));
 
 		async void OnJourneySelected(JourneyCard journey)
 		{

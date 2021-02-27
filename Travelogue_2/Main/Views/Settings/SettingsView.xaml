@@ -30,7 +30,7 @@
             <Button Text="{Binding Resources[CardHolder]}" Grid.Column="1" Grid.Row="0"></Button>
 
             <Button Text="{Binding Resources[Style]}" Grid.Column="0" Grid.Row="1"></Button>
-            <Button Text="{Binding Resources[Destinies]}" Grid.Column="1" Grid.Row="1"></Button>
+            <Button Text="{Binding Resources[Destinies]}" Grid.Column="1" Grid.Row="1" Command="{Binding DestiniesSettingsCommand}"></Button>
         </Grid>
         
         

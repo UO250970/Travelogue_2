@@ -59,6 +59,22 @@ namespace Travelogue_2.Main.Models
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
+
+		public bool Equals(DayCard obj)
+		{
+			//Check for null and compare run-time types.
+			if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+			{
+				return false;
+			}
+			else
+			{
+				DayCard p = (DayCard)obj;
+				return (Day == p.Day) && (Month == p.Month) && (Year == p.Year);
+			}
+		}
+
+
 	}
 
 }

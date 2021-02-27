@@ -255,8 +255,14 @@
   <data name="Save" xml:space="preserve">
     <value>Guardar</value>
   </data>
+  <data name="SearchDestiny" xml:space="preserve">
+    <value>Buscar un destino...</value>
+  </data>
   <data name="SearchJourney" xml:space="preserve">
     <value>Buscar un viaje...</value>
+  </data>
+  <data name="SearchLanguage" xml:space="preserve">
+    <value>Buscar un idioma...</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Ajustes</value>

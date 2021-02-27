@@ -475,11 +475,29 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Buscar un destino....
+        /// </summary>
+        internal static string SearchDestiny {
+            get {
+                return ResourceManager.GetString("SearchDestiny", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Buscar un viaje....
         /// </summary>
         internal static string SearchJourney {
             get {
                 return ResourceManager.GetString("SearchJourney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buscar un idioma....
+        /// </summary>
+        internal static string SearchLanguage {
+            get {
+                return ResourceManager.GetString("SearchLanguage", resourceCulture);
             }
         }
         

@@ -54,6 +54,9 @@ namespace Travelogue_2.Main.Utils
 
 		public static List<string> AvailableFlags { get => new List<string>() { "AD", "AF", "AT", "AU", "CU", "DE", "ES", "FR" }; }
 
+
+		public static List<string> Alphabet { get => new List<string>() { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }; }
+
 		public static ImageSource GetFlag(string name)
 		{
 			if ( AvailableFlags.Contains(name) )

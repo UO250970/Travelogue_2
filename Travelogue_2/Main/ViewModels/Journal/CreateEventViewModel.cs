@@ -8,9 +8,23 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Journal
 {
+	[QueryProperty("JourneyId", "JourneyId")]
+	[QueryProperty("DaySelected", "DaySelected")]
 	public class CreateEventViewModel : BaseViewModel
 	{
 		public string JourneyId { get; set; }
+
+		private int daySelected;
+		public int DaySelected
+		{
+			get => daySelected;
+			set
+			{
+				daySelected = value;
+				var currentDate = JourneyDays?[DaySelected];
+				Date = new DateTime(int.Parse(currentDate.Year), int.Parse(currentDate.MonthNum), int.Parse(currentDate.Day));
+			}
+		}
 
 		public ObservableCollection<DayCard> JourneyDays { get; }
 
@@ -74,17 +88,6 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		public void OnAppearing()
 			=> IsBusy = true;
 
-		private int daySelectedNum;
-		public int DaySelectedNum
-		{
-			get => daySelectedNum;
-			set
-			{
-				SetProperty(ref daySelectedNum, value);
-				var temp = JourneyDays?[daySelectedNum];
-				Date = new DateTime(int.Parse(temp.Year), int.Parse(temp.Month), int.Parse(temp.Day));
-			}
-		}
 
 		private DateTime date;
 

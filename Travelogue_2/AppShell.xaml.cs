@@ -32,6 +32,7 @@ namespace Travelogue_2
             Routing.RegisterRoute(nameof(JournalModelationView), typeof(JournalModelationView));
 
             Routing.RegisterRoute(nameof(SettingsLanguageView), typeof(SettingsLanguageView));
+            Routing.RegisterRoute(nameof(SettingsDestiniesView), typeof(SettingsDestiniesView));
         }
 
     }

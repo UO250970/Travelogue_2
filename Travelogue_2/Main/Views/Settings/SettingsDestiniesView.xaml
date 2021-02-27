@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Travelogue_2.Main.ViewModels.Settings"
-             x:Class="Travelogue_2.Main.Views.Settings.SettingsLanguageView">
-
+             x:Class="Travelogue_2.Main.Views.Settings.SettingsDestiniesView">
+    
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -16,21 +15,21 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Text="{Binding Resources[Language]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                <Label Grid.Column="0" Text="{Binding Resources[Destinies]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
                 <Label Grid.Column="1" Text="&#x1f50d;" FontFamily="{StaticResource Icon}" FontSize="Large"  VerticalTextAlignment="Center" HorizontalOptions="Center"
                                TextColor="{StaticResource Primary}">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding SearchLanguageCommand}"/>
+                        <TapGestureRecognizer Command="{Binding SearchDestinyCommand}"/>
                     </Label.GestureRecognizers>
                 </Label>
             </Grid>
 
-            <SearchBar IsVisible="{Binding SearchVisible}" Placeholder="{Binding Resources[Searchanguage]}" Text="{Binding SearchText, Mode=TwoWay}"/>
+            <SearchBar IsVisible="{Binding SearchVisible}" Placeholder="{Binding Resources[SearchDestiny]}" Text="{Binding SearchText, Mode=TwoWay}"/>
 
         </StackLayout>
 
         <CollectionView x:Name="LanguagesListView"
-                ItemsSource="{Binding LanguagesSearched}"
+                ItemsSource="{Binding DestiniesSearched}"
                 ItemsLayout="VerticalList" Grid.Row="1">
             <CollectionView.ItemTemplate>
                 <DataTemplate>

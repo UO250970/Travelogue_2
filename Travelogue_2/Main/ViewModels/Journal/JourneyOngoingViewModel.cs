@@ -145,8 +145,6 @@ namespace Travelogue_2.Main.ViewModels.Journal
 					day.Background = (Color)Application.Current.Resources["PrimaryFaded"];
 				}
 				JourneyDays.First(x => x == daySelected).Background = (Color)Application.Current.Resources["Primary"];
-
-				DaySelectedNum = JourneyDays.IndexOf(daySelected);
 				//Color change = (Color) Application.Current.Resources["Primary"];
 				//Color temp1 = JourneyDays.First(x => x == daySelected).Background;
 				//SetProperty(ref temp1, change);
@@ -205,9 +203,8 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		//TO-DO checkear
 		async internal void CreateEventC()
-		{
-			await Shell.Current.GoToAsync($"{nameof(CreateEventView)}?{nameof(CreateEventViewModel.DaySelectedNum)}={DaySelectedNum}" +
-																	$"&{nameof(CreateEventViewModel.JourneyId)}={JourneyId}");
+		{ // TO-DO Aqui mas alante podría pasarle el ID del Day y buscarlo en BBDD....
+			await Shell.Current.GoToAsync($"{nameof(CreateEventView)}?{nameof(CreateEventViewModel.DaySelected)}={JourneyDays.IndexOf(DaySelected)}&{nameof(CreateEventViewModel.JourneyId)}={JourneyId}");
 		}
 
 		async internal void CreateEntryC()
@@ -244,7 +241,6 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		void JourneyDaysChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 
-			
 			if (e.NewItems != null)
 				foreach (DayCard day in e.NewItems)
 					day.PropertyChanged += OnPropertyChanged;

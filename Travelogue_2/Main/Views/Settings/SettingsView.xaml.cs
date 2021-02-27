@@ -29,11 +29,6 @@ namespace Travelogue_2.Main.Views.Settings
             base.OnSizeAllocated(width, height);
         }
 
-        public void SettingsLanguageView(object sender, EventArgs e)
-        {
-            model.SettingsLanguageViewC();
-        }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();

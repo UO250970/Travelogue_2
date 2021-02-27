@@ -81,4 +81,93 @@
 	{country: "Dominica", city: "Kingston", phoneNumber: "(+1 876) 577 9719"}, 
 	{country: "Dominican Republic", city: "Santo Domingo", phoneNumber: "(+1 809) 697 30 35"},
 
+	
+	{country: "Ecuador", city: "Quito", phoneNumber: "(+593) 995 62 02 91"}, 
+	{country: "Ecuador", city: "Guayaquil", phoneNumber: "(+593) 984 97 53 94"}, 
+	{country: "Egypt", city: "El Cairo", phoneNumber: "(+20) 12 2318 3783"}, 
+	{country: "El Salvador", city: "El Salvador", phoneNumber: "(+503) 7719 7311"}, 
+	{country: "United Arab Emirates", city: "Abu Dhabi", phoneNumber: "(+971) (0) 50 612 0260"}, 
+	{country: "Eritrea", city: "Jartum", phoneNumber: "(+249) 912 36 33 77"}, 
+	{country: "Slovakia", city: "Bratislava", phoneNumber: "(+421) 903 773 707"}, 
+	{country: "Slovenia", city: "Liubliana", phoneNumber: "(+386) (0) 31 327 627"},  
+	{country: "United States", city: "Boston", phoneNumber: "(+1) (617) 283 95 39"},  
+	{country: "United States", city: "Chicago", phoneNumber: "(+1) (617) 283 95 39"},  
+	{country: "United States", city: "Houston", phoneNumber: "(+1) (713) 962 62 84"},  
+	{country: "United States", city: "Los Angeles", phoneNumber: "(+1) (323) 445 04 84"},  
+	{country: "United States", city: "Miami", phoneNumber: "(+1) (305) 790 18 51"},  
+	{country: "United States", city: "Nueva York", phoneNumber: "(+1) (917) 273 76 01"},  
+	{country: "United States", city: "San Francisco", phoneNumber: "(+1) (415) 846 81 24"},  
+	{country: "United States", city: "Washington", phoneNumber: "(+1) (202) 352 22 99"}, 
+	{country: "Estonia", city: "Tallin", phoneNumber: "(+372) 502 73 57"}, 
+	{country: "Esuitini", city: "Maputo", phoneNumber: "(+258) 84 32 82 900"}, 
+	
+	
+	{country: "Philippines", city: "Manila", phoneNumber: "(+63) 917 826 6046s"}, 
+	{country: "Finland", city: "Finlandia", phoneNumber: "(+358) 405511503"},
+	{country: "Fiji", city: "Wellington", phoneNumber: "(+64) 21 83 67 25"},  
+	{country: "France", city: "Bayona", phoneNumber: "(+33) 674 97 16 91"},   
+	{country: "France", city: "Burdeos", phoneNumber: "(+33) 667 09 02 45"},   
+	{country: "France", city: "Estrasburgo", phoneNumber: "(+33) 764 20 33 33"},   
+	{country: "France", city: "Lyon", phoneNumber: "(+33) 637 27 93 48"},   
+	{country: "France", city: "Marsella", phoneNumber: "(+33) 608 71 79 88"},   
+	{country: "France", city: "Montpellier", phoneNumber: "(+33) 670 16 80 43"},   
+	{country: "France", city: "Paris", phoneNumber: "(+33) 670 16 80 43"},   
+	{country: "France", city: "Pau", phoneNumber: "(+33) 688 58 07 06"},   
+	{country: "France", city: "Perpiñan", phoneNumber: "(+33) 607 21 63 15"},   
+	{country: "France", city: "Tolouse", phoneNumber: "(+33) 670 31 93 57"}, 
+
+
+	{country: "Gabon", city: "Libreville", phoneNumber: "(+241) 04 44 46 71"}, 
+	{country: "Gambia", city: "Dakars", phoneNumber: "(+221) 77 569 28 89"}, 
+	{country: "Georgia", city: "Ankara", phoneNumber: "(+90) 533 397 69 07"}, 
+	{country: "Ghana", city: "Ghana", phoneNumber: "(+233) (0) 540113582"}, 
+	{country: "Grenada", city: "Puerto España", phoneNumber: "(+1 868) 780 26 79"},
+	{country: "Greece", city: "Atenas", phoneNumber: "(+30) 6945704001"},  
+	{country: "Guatemala", city: "Guatemala", phoneNumber: "(+30) 6945704001"}, 
+	{country: "Guyana", city: "Puerto España", phoneNumber: "(+1 868) 780 26 79"}, 
+	{country: "Guinea-Bissau", city: "Bissau", phoneNumber: "(+1 868) 780 26 79"}, 
+	{country: "Guinea", city: "Conakry", phoneNumber: "(+224) 664 33 54 93"}, 
+
+
+
+	{country: "Haiti", city: "Puerto Principe", phoneNumber: "(+509) 3920 05 05"}, 
+	{country: "Honduras", city: "Honduras", phoneNumber: "(+504) 9982 0918"}, 
+	{country: "Hungary", city: "Budapest", phoneNumber: "(+36) (30) 924 80 92"}, 
+	
+	
+	{country: "India", city: "Nueva Delhi", phoneNumber: "(+91) 98 10 17 41 60"}, 
+	{country: "India", city: "Mumbai", phoneNumber: "(+91) 99870 43339"}, 
+	{country: "Indonesia", city: "Yakarta", phoneNumber: "(+62) 8138 0013 988"}, 
+	{country: "Iran, Islamic Republic Of", city: "Teheran", phoneNumber: "(+98) 912 139 37 03"}, 
+	{country: "Iraq", city: "Bagdag", phoneNumber: "(+964) 780 109 9364"}, 
+	{country: "Ireland", city: "Dublin", phoneNumber: "(+353) 86 174 1318"}, 
+	{country: "Iceland", city: "Oslo", phoneNumber: "(+47) 92247979"}, 
+	{country: "Solomon Islands", city: "Canberra", phoneNumber: "(+61) 418 628 275"}, 
+	{country: "Solomon Islands", city: "Sidney", phoneNumber: "(+61) 412 258 989"},
+	{country: "Israel", city: "Tel Aviv", phoneNumber: "(+972) (0) 50 5772641"}, 
+	{country: "Italy", city: "Milan", phoneNumber: "(+39) 335265959"}, 
+	{country: "Italy", city: "Napoles", phoneNumber: "(+39) 335201242"}, 
+	{country: "Italy", city: "Roma", phoneNumber: "(+39) 335 333438"}, 
+
+
+	{country: "Jamaica", city: "Jamaica", phoneNumber: "(+1 876) 577 9719"}, 
+	{country: "Japan", city: "Tokio", phoneNumber: "(+81) 80 4368 2817"}, 
+	{country: "Jordan", city: "Amman", phoneNumber: "(+962) 795550169s"},
+	
+	
+	{country: "Kazakhstan", city: "Kazajstan", phoneNumber: "(+7) 7017 115502"}, 
+	{country: "Kenya", city: "Nairobi", phoneNumber: "(+254) 733631144"}, 
+	{country: "Kiribati", city: "Wellington", phoneNumber: "(+686) (64) 21 83 67 25"}, 
+	{country: "Kuwait", city: "Kuwait", phoneNumber: "(+965) 97210578"},
+	
+	
+	{country: "Lao People\"S Democratic Republic", city: "Bangkok", phoneNumber: "(+66) 818 68 7507"}, 
+	{country: "Lesotho", city: "Pretoria", phoneNumber: "(+27) 76114615"}, 
+	{country: "Latvia", city: "Riga", phoneNumber: "(+371) 26 399 222"}, 
+	{country: "Lebanon", city: "Beirut", phoneNumber: "(+961) 3 11 00 74"}, 
+	{country: "Liberia", city: "Abidjan", phoneNumber: "(+225) 07 42 57 89"}, 
+	{country: "Libyan Arab Jamahiriya", city: "Libia", phoneNumber: "(+218) 91 320 3904"}, 
+	{country: "Liechtenstein", city: "Zurich", phoneNumber: "(+41) (0) 79 276 31 25"}, 
+	{country: "Lithuania", city: "Lituania", phoneNumber: "(+370) 620 21 232"}, 
+	{country: "Luxembourg", city: "Luxemburgo", phoneNumber: "(+352) 621401024"},
 ]
