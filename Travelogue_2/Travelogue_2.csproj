@@ -18,14 +18,14 @@
     <None Remove="Resources\Imgs\Flags\AF_Flag.png" />
     <None Remove="Resources\Imgs\Flags\AT_Flag.png" />
     <None Remove="Resources\Imgs\Flags\AU_Flag.png" />
+    <None Remove="Resources\Imgs\Flags\CA_Flag.png" />
     <None Remove="Resources\Imgs\Flags\CU_Flag.png" />
     <None Remove="Resources\Imgs\Flags\DEFAULT_Flag.png" />
     <None Remove="Resources\Imgs\Flags\DE_Flag.png" />
     <None Remove="Resources\Imgs\Flags\ES_Flag.png" />
     <None Remove="Resources\Imgs\Flags\FR_Flag.png" />
-    <None Remove="Resources\Imgs\untitled.png" />
     <None Remove="Resources\JSON\ESEmbassyList.txt" />
-    <None Remove="Resources\JSON\ISO2Country.txt" />
+    <None Remove="Resources\JSON\ISO2CountryChecked.txt" />
     <None Remove="Resources\JSON\ISO2Currency.txt" />
     <None Remove="Resources\xamarin_logo.png" />
   </ItemGroup>
@@ -42,14 +42,14 @@
     <EmbeddedResource Include="Resources\Imgs\Flags\AF_Flag.png" />
     <EmbeddedResource Include="Resources\Imgs\Flags\AT_Flag.png" />
     <EmbeddedResource Include="Resources\Imgs\Flags\AU_Flag.png" />
+    <EmbeddedResource Include="Resources\Imgs\Flags\CA_Flag.png" />
     <EmbeddedResource Include="Resources\Imgs\Flags\CU_Flag.png" />
     <EmbeddedResource Include="Resources\Imgs\Flags\DEFAULT_Flag.png" />
     <EmbeddedResource Include="Resources\Imgs\Flags\DE_Flag.png" />
     <EmbeddedResource Include="Resources\Imgs\Flags\ES_Flag.png" />
     <EmbeddedResource Include="Resources\Imgs\Flags\FR_Flag.png" />
-    <EmbeddedResource Include="Resources\Imgs\untitled.png" />
     <EmbeddedResource Include="Resources\JSON\ESEmbassyList.txt" />
-    <EmbeddedResource Include="Resources\JSON\ISO2Country.txt" />
+    <EmbeddedResource Include="Resources\JSON\ISO2CountryChecked.txt" />
     <EmbeddedResource Include="Resources\JSON\ISO2Currency.txt" />
     <EmbeddedResource Include="Resources\xamarin_logo.png" />
   </ItemGroup>
@@ -62,7 +62,6 @@
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.4.0.44" />
     <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="18.4.0.44" />
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="18.4.0.44" />
-    <PackageReference Include="Syncfusion.Xamarin.SfCarousel" Version="18.4.0.44" />
     <PackageReference Include="Syncfusion.Xamarin.SfImageEditor" Version="18.4.0.44" />
     <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="18.4.0.44" />
     <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="18.4.0.44" />

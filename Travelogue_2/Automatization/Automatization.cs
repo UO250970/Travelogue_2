@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using Travelogue_2.Main.Models;
-using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.Services;
 using Plugin.Permissions;
 using System.Threading.Tasks;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
@@ -45,7 +45,7 @@ namespace Travelogue_2.Automatization
 		public static void PrepareCountries()
 		{
 			var assembly = Assembly.GetExecutingAssembly();
-			var resourceNameDestiny = "Travelogue_2.Resources.JSON.ISO2Country.txt";
+			var resourceNameDestiny = "Travelogue_2.Resources.JSON.ISO2CountryChecked.txt";
 			var resourceNameEmbassy = "Travelogue_2.Resources.JSON.ESEmbassyList.txt";
 			string result = "";
 

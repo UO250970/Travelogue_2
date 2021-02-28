@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.Services;
 using Xamarin.Forms;
 
-namespace Travelogue_2.Main.Models
+namespace Travelogue_2.Main.Models.Cards
 {
 	public class DestinyCard
 	{

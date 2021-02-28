@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Globalization;
-using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.Services;
 using Xamarin.Forms.Maps;
 
 namespace Travelogue_2.Main.ViewModels.Media

@@ -5,7 +5,7 @@ using Plugin.Permissions.Abstractions;
 using System;
 using System.Diagnostics;
 using System.Linq;
-using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Models.Cards;
 
 namespace Travelogue_2.Main.Utils
 {

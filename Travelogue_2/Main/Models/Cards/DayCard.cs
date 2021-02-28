@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using Travelogue_2.Main.Models.Entries;
 using Xamarin.Forms;
 
-namespace Travelogue_2.Main.Models
+namespace Travelogue_2.Main.Models.Cards
 {
 	public class DayCard
 	{

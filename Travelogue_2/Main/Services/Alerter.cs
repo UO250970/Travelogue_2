@@ -2,7 +2,7 @@
 using Travelogue_2.Resources.Localization;
 using Xamarin.Forms;
 
-namespace Travelogue_2.Main.Utils
+namespace Travelogue_2.Main.Services
 {
     static class Alerter
 	{
@@ -119,12 +119,12 @@ namespace Travelogue_2.Main.Utils
 		}
 
 		/** Too Many */
-		/*
-		internal static async Task AlertTooanyCountriesInJourney()
+		
+		internal static async Task AlertTooManyDestiniesInJourney()
 		{
-			await Page?.DisplayAlert(AppResources.Empty, AppResources.MessTooManyCountries, AppResources.Ok);
+			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessTooManyDestinies"], App.LocResources["Ok"]);
 		}
-
+		/*
 		internal static async Task AlertTooManyEntriesInDay()
 		{
 			await Page?.DisplayAlert(AppResources.Empty, AppResources.MessTooManyEntries, AppResources.Ok);

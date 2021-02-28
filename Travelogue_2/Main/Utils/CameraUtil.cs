@@ -5,6 +5,8 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Services;
 using Travelogue_2.Resources.Localization;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 

@@ -2,7 +2,6 @@
 using Travelogue_2.Resources.Localization;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
-using Travelogue_2.Automatization;
 using Xamarin.Forms;
 using System;
 using System.Diagnostics;
@@ -13,7 +12,6 @@ namespace Travelogue_2
     {
         public static string CurrentLanguage = "ES";
         public static LocalizedResources LocResources { get; private set; }
-
 
         public App()
         {

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using Travelogue_2.Main.Utils;
-using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Services;
+using Travelogue_2.Main.Models.Cards;
 using Xamarin.Forms;
 using System.Linq;
 using System.Collections.Generic;
+using Travelogue_2.Main.Models;
 
 namespace Travelogue_2.Main.ViewModels.Settings
 {
@@ -13,6 +14,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
 	{
         public Command SearchDestinyCommand { get; }
         public Command AddDestinyCommand { get; }
+        public Dictionary<string,List<DestinyCard>> DestiniesOrdered { get; }
         public ObservableCollection<DestinyCard> Destinies { get; }
         public ObservableCollection<DestinyCard> DestiniesSearched { get; }
 
@@ -21,6 +23,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
             SearchDestinyCommand = new Command(() => SearchDestinyC());
             AddDestinyCommand = new Command(() => AddDestinyC());
 
+            DestiniesOrdered = new Dictionary<string, List<DestinyCard>>();
             Destinies = new ObservableCollection<DestinyCard>();
             DestiniesSearched = new ObservableCollection<DestinyCard>();
 
@@ -48,6 +51,13 @@ namespace Travelogue_2.Main.ViewModels.Settings
 
                     Destinies.Add(temp);
                 }
+
+                foreach(string s in CommonVariables.Alphabet)
+				{
+                    var tempList = Destinies.Where(x => x.Destiny.ToUpper().StartsWith(s.ToUpper())).ToList();
+                    DestiniesOrdered.Add(s, tempList);
+				}
+
             }
             catch (Exception ex)
             {
@@ -91,6 +101,13 @@ namespace Travelogue_2.Main.ViewModels.Settings
                     foreach (var card in temp)
                     {
                         DestiniesSearched.Add(card);
+                    }
+
+                    DestiniesOrdered.Clear();
+                    foreach (string s in CommonVariables.Alphabet)
+                    {
+                        var tempList = DestiniesSearched.Where(x => x.Destiny.ToUpper().StartsWith(s.ToUpper())).ToList();
+                        DestiniesOrdered.Add(s, tempList);
                     }
                 }
             }

@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -125,15 +127,6 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 		}
 		#endregion
 
-		#region DestiniesSelectedHeight
-		private int destiniesSelectedHeight = 100;
-		public int DestiniesSelectedHeight
-		{
-			get => destiniesSelectedHeight;
-			set => SetProperty(ref destiniesSelectedHeight, value);
-		}
-		#endregion
-
 		#region ImageVisible
 		private bool imageVisible = false;
 		public bool ImageVisible
@@ -205,18 +198,25 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
 		async internal void AddDestinyC()
 		{
-			Destiny destiny = CommonVariables.AvailableDestinies.Find(x => x.Name == DestinyText);
-			DestinyCard temp = new DestinyCard();
-			temp.Destiny = destiny.Name;
-			temp.Code = destiny.Code;
-			temp.Currency = destiny.Currency;
-			if (!DestiniesSelected.Contains(temp))
+			if ( DestiniesSelected.Count <= CommonVariables.DestiniesInJourney )
 			{
-				DestiniesSelected.Add(temp);
-				DestiniesSelectedHeight = DestiniesSelected.Count * 125;
-			} else
+				Destiny destiny = CommonVariables.AvailableDestinies.Find(x => x.Name == DestinyText);
+				DestinyCard temp = new DestinyCard();
+				temp.Destiny = destiny.Name;
+				temp.Code = destiny.Code;
+				temp.Currency = destiny.Currency;
+				if (!DestiniesSelected.Contains(temp))
+				{
+					DestiniesSelected.Add(temp);
+				}
+				else
+				{
+					await Alerter.AlertDestinyAlreadySelected();
+				}
+			}
+			else
 			{
-				await Alerter.AlertDestinyAlreadySelected();
+				await Alerter.AlertTooManyDestiniesInJourney();
 			}
 			DestinyText = "";
 		}
@@ -228,7 +228,6 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
 		async internal void CancelC()
 			=> await Shell.Current.GoToAsync("..");
-
 
 		async internal void SaveC()
 		{ 
@@ -276,13 +275,6 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 				return;
 
 			DestiniesSelected.Remove(destiny);
-			if (DestiniesSelected.Count == 0)
-			{
-				DestiniesSelectedHeight = 1;
-			} else
-			{
-				DestiniesSelectedHeight = DestiniesSelected.Count * 125 + 1;
-			}
 
 		}
 

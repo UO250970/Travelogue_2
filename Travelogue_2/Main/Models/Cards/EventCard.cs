@@ -1,4 +1,4 @@
-﻿namespace Travelogue_2.Main.Models
+﻿namespace Travelogue_2.Main.Models.Cards
 {
 	public class EventCard
 	{

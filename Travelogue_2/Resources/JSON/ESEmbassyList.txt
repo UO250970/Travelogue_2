@@ -21,8 +21,6 @@
 	{country: "Armenia", city: "Moscu", phoneNumber: "(+7) (499) 136 39 02"}, 
 	{country: "Australia", city: "Canberra", phoneNumber: "(+61) 418 628 275"}, 
 	{country: "Australia", city: "Melbourne", phoneNumber: "(+61) 400 234 613"},
-	{country: "Australia", city: "Melbourne", phoneNumber: "(+61) 3 9347 1966"},
-	{country: "Australia", city: "Melbourne", phoneNumber: "(+61) 3 9347 1997"}, 
 	{country: "Australia", city: "Sidney", phoneNumber: "(+61) 412 258 989"}, 
 	{country: "Austria", city: "Viena", phoneNumber: "(+43) (0) 664 120 32 96"}, 
 	{country: "Azerbaijan", city: "Baku", phoneNumber: "(+994) 51 910 73 78"}, 

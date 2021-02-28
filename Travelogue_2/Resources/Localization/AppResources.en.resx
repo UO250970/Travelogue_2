@@ -180,6 +180,9 @@
   <data name="Destiny" xml:space="preserve">
     <value>Destiny</value>
   </data>
+  <data name="Embassies" xml:space="preserve">
+    <value>Embassies</value>
+  </data>
   <data name="Empty" xml:space="preserve">
     <value />
   </data>
@@ -224,6 +227,9 @@
   </data>
   <data name="MessNoNameInJourney" xml:space="preserve">
     <value>Journeys must have a name</value>
+  </data>
+  <data name="MessTooManyDestinies" xml:space="preserve">
+    <value>There are already too many destinies in the journey.</value>
   </data>
   <data name="Minus" xml:space="preserve">
     <value>-</value>

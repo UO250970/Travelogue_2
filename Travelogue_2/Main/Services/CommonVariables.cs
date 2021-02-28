@@ -4,14 +4,14 @@ using Travelogue_2.Main.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace Travelogue_2.Main.Utils
+namespace Travelogue_2.Main.Services
 {
     class CommonVariables
     {
 		/** Common values */
 		public static int EntriesInDay { get => 50; }
 
-		public static int CountriesInJourney { get => 50; } 
+		public static int DestiniesInJourney { get => 50; } 
 
 		public static int DataInEntry { get => 50; }
 

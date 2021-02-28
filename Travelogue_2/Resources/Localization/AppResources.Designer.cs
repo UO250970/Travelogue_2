@@ -250,6 +250,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Embajadas españolas.
+        /// </summary>
+        internal static string Embassies {
+            get {
+                return ResourceManager.GetString("Embassies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         internal static string Empty {
@@ -381,6 +390,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string MessNoNameInJourney {
             get {
                 return ResourceManager.GetString("MessNoNameInJourney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El viaje ya contiene demasiados destinos..
+        /// </summary>
+        internal static string MessTooManyDestinies {
+            get {
+                return ResourceManager.GetString("MessTooManyDestinies", resourceCulture);
             }
         }
         

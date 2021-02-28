@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Shell.NavBarIsVisible="True"
              Shell.TabBarIsVisible="False"
-             xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments"
+             x:Name="JourneySettingsViewName"
              x:Class="Travelogue_2.Main.Views.Journey.JourneySettingsView">
     <Shell.TitleView>
         <Label Text="{Binding JourneyTitle}" />
@@ -23,51 +23,103 @@
                 <StackLayout>
                     <Label Text="Destinos" FontSize="Large" TextColor="{StaticResource Primary}"/>
 
-                    <CollectionView x:Name="DestiniesCollection"
-                                            HeightRequest="60"
-                                            ItemsSource="{Binding JourneyDestinies}"
-                                            SelectionMode="None">
+                    <StackLayout x:Name="DestiniesCollection"
+                                 BindableLayout.ItemsSource="{Binding JourneyDestinies}"
+                                 Margin="5, 5, 5, 5">
 
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Horizontal"/>
-                        </CollectionView.ItemsLayout>
-
-                        <CollectionView.ItemTemplate>
+                        <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout>
 
-                                    <local:DestinyCardView BindingContext="{Binding .}"/>
-                                    
-                                    <Button HeightRequest="50" WidthRequest="50" BorderRadius="25" Text="{Binding .Day}"
-                                                BackgroundColor="{Binding .Background}"  Margin="10, 5" 
-                                                Command="{Binding Path=BindingContext.DayTapped, Source={x:Reference JourneyOngoingViewName}}"
-                                                CommandParameter="{Binding .}"></Button>
+                                    <Label x:Name="DestinyName" FontSize="Title" 
+                                           Text="{Binding .Destiny}"/>
+                                    <Grid x:Name="DestinyInfo" Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="4*" />
+                                            <ColumnDefinition Width="7*" />
+                                        </Grid.ColumnDefinitions>
 
-                                    <CollectionView x:Name="EmbassiesCollection"
-                                            HeightRequest="60"
-                                            ItemsSource="{Binding .Embassies}"
-                                            SelectionMode="None">
+                                        <Image x:Name="FlagImage"  
+                                                Source="{Binding .Flag}"
+                                                Aspect="AspectFill" Grid.Column="0" 
+                                               HeightRequest="80"/>
 
-                                        <CollectionView.ItemsLayout>
-                                            <GridItemsLayout Orientation="Horizontal"/>
-                                        </CollectionView.ItemsLayout>
+                                        <StackLayout Grid.Column="1">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0"
+                                                                FontSize="Medium"
+                                                                Text="{Binding BindingContext.Resources[Name], Source={x:Reference JourneySettingsViewName}}" />
+                                                <Label Grid.Column="1"
+                                                                x:Name="CountryName"
+                                                                FontSize="Medium" 
+                                                                Text="{Binding .Destiny}"/>
 
-                                        <CollectionView.ItemTemplate>
+                                            </Grid>
+
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0"
+                                                                FontSize="Medium"
+                                                                Text="{Binding BindingContext.Resources[Currency], Source={x:Reference JourneySettingsViewName}}" />
+                                                <Label Grid.Column="1"
+                                                                x:Name="Currency"
+                                                                FontSize="Medium"
+                                                                Text="{Binding .Currency}" />
+
+                                            </Grid>
+
+                                            <Label Grid.Column="0"
+                                                            FontSize="Medium"
+                                                            TextColor="#3D6D9B"
+                                                            x:Name="DestinyURL"
+                                                            Text="{Binding .MoreInfoCountry}">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding BindingContext.MoreInfoCommand, Source={x:Reference JourneySettingsViewName}}"
+                                                                                CommandParameter="{Binding .MoreInfoCountry}"/>
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                        </StackLayout>
+
+                                    </Grid>
+
+                                    <Label FontSize="Large" 
+                                           Text="{Binding BindingContext.Resources[Embassies], Source={x:Reference JourneySettingsViewName}}"/>
+
+                                    <StackLayout x:Name="EmbassiesCollection"
+                                                        BindableLayout.ItemsSource="{Binding .Embassies}">
+
+                                        <BindableLayout.ItemTemplate>
                                             <DataTemplate>
-                                                <StackLayout>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
 
-                                                    <Label Text="{Binding Path=Key}"/>
-                                                    <Label Text="{Binding Path=Value}"/>
+                                                    <Label Grid.Column="0" Text="{Binding Key}"/>
+                                                    <Label Grid.Column="1" Text="{Binding Value}" TextColor="{StaticResource Primary}">
+                                                        <Label.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding BindingContext.PhoneNumberTappedCommand, Source={x:Reference JourneySettingsViewName}}" 
+                                                                                  CommandParameter="{Binding Value}"/>
+                                                        </Label.GestureRecognizers>
+                                                    </Label>
 
-                                                </StackLayout>
+                                                </Grid>
                                             </DataTemplate>
-                                        </CollectionView.ItemTemplate>
-                                    </CollectionView>
+                                        </BindableLayout.ItemTemplate>
+                                    </StackLayout>
 
                                 </StackLayout>
                             </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
 
                 </StackLayout>
             </Frame>

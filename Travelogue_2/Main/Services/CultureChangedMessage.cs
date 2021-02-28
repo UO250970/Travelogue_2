@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Travelogue_2.Main.Utils
+namespace Travelogue_2.Main.Services
 {
     public class CultureChangedMessage
     {

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Models.Entries;
+using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.PopUps;
@@ -138,8 +139,6 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			set
 			{
 				SetProperty(ref daySelected, value);
-				EventsHeight = 40 * value.Events;
-				EntriesHeight = 40 * value.Entries;
 				foreach(DayCard day in JourneyDays)
 				{
 					day.Background = (Color)Application.Current.Resources["PrimaryFaded"];
@@ -152,30 +151,6 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		}
 
 		public int DaySelectedNum { get; set; }
-
-		#endregion
-
-		#region EventsHeight
-
-		private double eventsHeight = 0;
-
-		public double EventsHeight
-		{
-			get => eventsHeight;
-			set => SetProperty(ref eventsHeight, value);
-		}
-
-		#endregion
-
-		#region EntriesHeight
-
-		private double entriesHeight = 0;
-
-		public double EntriesHeight
-		{
-			get => entriesHeight;
-			set => SetProperty(ref entriesHeight, value);
-		}
 
 		#endregion
 

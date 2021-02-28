@@ -2,8 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Travelogue_2.Main.Models;
-using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Services;
 using Travelogue_2.Main.ViewModels.Journal;
 using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.Modelation;

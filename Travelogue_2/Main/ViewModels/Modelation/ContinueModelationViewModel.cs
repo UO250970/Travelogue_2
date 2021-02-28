@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Views.Journey;
 using Xamarin.Forms;
 

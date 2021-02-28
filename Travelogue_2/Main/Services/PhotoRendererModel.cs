@@ -2,11 +2,11 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.ViewModels;
 using Xamarin.Forms;
 
-namespace Travelogue_2.Main.Utils
+namespace Travelogue_2.Main.Services
 {
 	public abstract class PhotoRendererModel : BaseViewModel
 	{

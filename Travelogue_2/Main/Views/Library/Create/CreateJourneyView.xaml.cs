@@ -16,7 +16,6 @@ namespace Travelogue_2.Main.Views.Library.Create
 			InitializeComponent();
 
 			BindingContext = model = new CreateJourneyViewModel();
-			DestiniesCollection.HeightRequest = 0;
 
 			Shell.SetNavBarIsVisible(this, false);
 		}

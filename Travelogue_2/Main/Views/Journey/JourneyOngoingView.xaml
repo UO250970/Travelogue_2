@@ -53,7 +53,7 @@
                                 <Rectangle HeightRequest="1" WidthRequest="200" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource Grey}"/>
 
                                 <CollectionView x:Name="EventsCollection"
-                                            HeightRequest="{Binding EventsHeight}"
+                                            HeightRequest="0"
                                             ItemsSource="{Binding JourneyEvents}"
                                             SelectionMode="None">
 
@@ -70,7 +70,17 @@
                                     </CollectionView.ItemTemplate>
                                 </CollectionView>
 
-                                <CollectionView x:Name="EntriesCollection"
+                                <StackLayout x:Name="EntriesCollection" BindableLayout.ItemsSource="{Binding DaySelected.JourneyEntries}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+
+                                            <Label HeightRequest="40" Text="{Binding .Title}"></Label>
+
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+
+                                <!--CollectionView x:Name="EntriesCollection"
                                             HeightRequest="{Binding EntriesHeight}"
                                             ItemsSource="{Binding DaySelected.JourneyEntries}"
                                             SelectionMode="None">
@@ -88,7 +98,7 @@
                                             </StackLayout>
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>
-                                </CollectionView>
+                                </-->
 
                             </StackLayout>
 

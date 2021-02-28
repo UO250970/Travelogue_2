@@ -180,6 +180,9 @@
   <data name="Destiny" xml:space="preserve">
     <value>Destino</value>
   </data>
+  <data name="Embassies" xml:space="preserve">
+    <value>Embajadas españolas</value>
+  </data>
   <data name="Empty" xml:space="preserve">
     <value />
   </data>
@@ -224,6 +227,9 @@
   </data>
   <data name="MessNoNameInJourney" xml:space="preserve">
     <value>Se debe introducir un nombre de viaje</value>
+  </data>
+  <data name="MessTooManyDestinies" xml:space="preserve">
+    <value>El viaje ya contiene demasiados destinos.</value>
   </data>
   <data name="Minus" xml:space="preserve">
     <value>-</value>

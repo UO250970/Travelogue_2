@@ -1,6 +1,5 @@
-﻿using Travelogue_2.Main.Models.Entries;
-
-namespace Travelogue_2.Main.Models
+﻿
+namespace Travelogue_2.Main.Models.Entries
 {
 	public class EntryCard : IEntry
 	{
