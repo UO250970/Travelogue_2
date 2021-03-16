@@ -198,6 +198,12 @@
   <data name="Gallery" xml:space="preserve">
     <value>Galería</value>
   </data>
+  <data name="JourneyCover" xml:space="preserve">
+    <value>Portada</value>
+  </data>
+  <data name="JourneyName" xml:space="preserve">
+    <value>Nombre del viaje</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Idioma</value>
   </data>

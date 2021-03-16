@@ -1,0 +1,107 @@
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Services;
+using Xamarin.Essentials;
+using Xamarin.Forms;
+using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Utils;
+
+namespace Travelogue_2.Main.ViewModels.Journal
+{
+	public class JourneySettingsViewModel : PhotoRendererModel
+	{
+		public string JourneyId;
+
+		public Command ModifyCoverCommand { get; }
+		public Command MoreInfoCommand { get; }
+		public Command PhoneNumberTappedCommand { get; }
+		public ObservableCollection<DestinyCard> JourneyDestinies { get; }
+
+		public JourneySettingsViewModel()
+		{
+			coverImage = new ImageCard();
+			JourneyDestinies = new ObservableCollection<DestinyCard>();
+
+			ModifyCoverCommand = new Command(x => ModifyCoverC());
+			MoreInfoCommand = new Command<string>((x) => MoreInfoC(x));
+			PhoneNumberTappedCommand = new Command<string>((x) => PhoneNumberTappedC(x));
+
+			ExecuteLoadDataCommand();
+		}
+
+		public override void LoadData()
+		{
+			JourneyId = "1";
+			JourneyName = "Prueba titulo";
+
+			DestinyCard temp = new DestinyCard();
+			Destiny tempDestiny = CommonVariables.AvailableDestinies.Find(x => x.Name == "Canada");
+			temp.Destiny = tempDestiny.Name;
+			temp.Code = tempDestiny.Code;
+			temp.Currency = tempDestiny.Currency;
+			Dictionary<string, string> tempEmbassies = new Dictionary<string, string>();
+			foreach (Embassy embassy in tempDestiny.Embassies)
+			{
+				tempEmbassies.Add(embassy.City, embassy.PhoneNumber);
+			}
+			temp.Embassies = tempEmbassies;
+
+			JourneyDestinies.Add(temp);
+
+			coverImage.ImageSour = CommonVariables.GetImage(); 
+		}
+
+		#region JourneyName
+		public string journeyName;
+
+		public string JourneyName
+		{
+			get => journeyName;
+			set => SetProperty(ref journeyName, value);
+		}
+		#endregion
+
+		#region CoverImage
+		public ImageCard coverImage;
+		public ImageCard CoverImage
+		{
+			get => coverImage;
+			set
+			{
+				SetProperty(ref coverImage, value);
+			}
+		}
+		public int CoverImageHeight { get => CommonVariables.ImageMaxHeight; }
+		#endregion
+
+		async internal void ModifyCoverC()
+		{
+			ImageCard success = await CameraUtil.Photo(this);
+			if (success != null)
+			{
+				CoverImage = success;
+			}
+		}
+
+		async internal void MoreInfoC(string path)
+		{
+			await Browser.OpenAsync(path);
+		}
+
+		internal void PhoneNumberTappedC(string number)
+		{
+			PhoneDialer.Open(number);
+
+			var temp = DependencyService.Get<ILocalNotifications>();
+
+
+			temp.SendLocalNotification(
+					"Notification title",
+					"Notification content / description",
+					0
+			);
+		}
+
+	}
+}

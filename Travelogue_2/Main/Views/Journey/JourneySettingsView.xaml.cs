@@ -14,6 +14,8 @@ namespace Travelogue_2.Main.Views.Journey
 			InitializeComponent();
 
 			BindingContext = model = new JourneySettingsViewModel();
+
+			Shell.SetNavBarIsVisible(this, true);
 		}
 	}
 }

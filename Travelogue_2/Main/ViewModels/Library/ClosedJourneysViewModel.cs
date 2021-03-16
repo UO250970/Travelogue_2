@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.ViewModels.Journal;
@@ -11,7 +9,7 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Library
 {
-    public class ClosedJourneysViewModel : BaseViewModel
+    public class ClosedJourneysViewModel : DataBaseViewModel
     {
 
 		public Command SearchJourneyCommand { get; }
@@ -31,45 +29,13 @@ namespace Travelogue_2.Main.ViewModels.Library
 			JourneyTapped = new Command<JourneyCard>(OnJourneySelected);
 			JourneyTappedDelete = new Command<JourneyCard>(OnJourneySelectedDelete);
 
-			ExecuteLoadJourneysCommand();
+			ExecuteLoadDataCommand();
 		}
 
-		async Task ExecuteLoadJourneysCommand()
+		public override void LoadData()
 		{
-			IsBusy = true;
-
-			try
-			{
-				/*JourneysClosed.Clear();
-				JourneyCard temp1 = new JourneyCard();
-				temp1.Name = "Prueba";
-				temp1.Image = ImageSource.FromResource(CommonVariables.GenericImage);
-
-
-				JourneyCard temp2 = new JourneyCard();
-				temp2.Name = "Prueba3";
-				temp2.Image = ImageSource.FromResource(CommonVariables.GenericImage);
-
-				JourneysClosed.Add(temp1);
-				JourneysClosed.Add(temp2);*/
-				//var items = await DataStore.GetItemsAsync(true);
-				//foreach (var item in items)
-				//{
-				//Journeys.Add(item);
-				//}
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
-			finally
-			{
-				IsBusy = false;
-			}
+			throw new NotImplementedException();
 		}
-
-		public void OnAppearing()
-			=> IsBusy = true;
 
 		private bool searchVisible = false;
 
@@ -110,7 +76,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 				return;
 
 			// This will push the ItemDetailPage onto the navigation stack
-			await Shell.Current.GoToAsync($"{nameof(JourneyOngoingView)}?{nameof(JourneyViewModel.JourneyId)}={journey.Id}");
+			await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyTemplateViewModel.JourneyId)}={journey.Id}");
 		}
 
 		async void OnJourneySelectedDelete(JourneyCard journey)

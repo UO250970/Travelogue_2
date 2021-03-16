@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.ViewModels.Journal;
@@ -11,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Library
 {
-    public class LibraryViewModel : BaseViewModel
+    public class LibraryViewModel : DataBaseViewModel
 	{
 		public Command LoadJourneysCommand { get; }
 		public Command<JourneyCard> JourneyTapped { get; }
@@ -24,7 +21,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		public LibraryViewModel()
 		{
-			LoadJourneysCommand = new Command(async () => await ExecuteLoadJourneysCommand());
+			LoadJourneysCommand = new Command(async () => await ExecuteLoadDataCommand());
 			
 			CreatedJourneysViewCommand = new Command(() => CreatedJourneysViewC());
 			ClosedJourneysViewCommand = new Command(() => ClosedJourneysViewC());
@@ -34,49 +31,32 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 			JourneyTapped = new Command<JourneyCard>(OnJourneySelected);
 
-			ExecuteLoadJourneysCommand();
+			ExecuteLoadDataCommand();
 		}
 
-		async Task ExecuteLoadJourneysCommand()
+		public override void LoadData()
 		{
-			IsBusy = true;
-
-			try
-			{
-				JourneysCreated.Clear();
-				JourneyCard temp1 = new JourneyCard();
-				temp1.Name = "Prueba";
-				temp1.Image = ImageSource.FromResource(CommonVariables.GenericImage);
+			JourneysCreated.Clear();
+			JourneyCard temp1 = new JourneyCard();
+			temp1.Name = "Prueba";
+			temp1.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
 
-				JourneyCard temp2 = new JourneyCard();
-				temp2.Name = "Prueba2";
-				temp2.Image = ImageSource.FromResource(CommonVariables.GenericImage);
+			JourneyCard temp2 = new JourneyCard();
+			temp2.Name = "Prueba2";
+			temp2.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
-				JourneysCreated.Add(temp1);
-				JourneysCreated.Add(temp2);
+			JourneysCreated.Add(temp1);
+			JourneysCreated.Add(temp2);
 
-				JourneysClosed.Clear();
-				JourneysClosed.Add(temp1);
-				//var items = await DataStore.GetItemsAsync(true);
-				//foreach (var item in items)
-				//{
-				//Journeys.Add(item);
-				//}
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
-			finally
-			{
-				IsBusy = false;
-			}
+			JourneysClosed.Clear();
+			JourneysClosed.Add(temp1);
+			//var items = await DataStore.GetItemsAsync(true);
+			//foreach (var item in items)
+			//{
+			//Journeys.Add(item);
+			//}
 		}
-
-		public void OnAppearing()
-			=> IsBusy = true;
-
 
 		async internal void CreatedJourneysViewC()
 			=> await Shell.Current.GoToAsync(nameof(CreatedJourneysView));
@@ -92,7 +72,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 				return;
 
 			// This will push the ItemDetailPage onto the navigation stack
-			await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyViewModel.JourneyId)}={journey.Id}");
+			await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyTemplateViewModel.JourneyId)}={journey.Id}");
 		}
 
 	}

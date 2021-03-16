@@ -7,9 +7,9 @@ namespace Travelogue_2.Main.Views.PopUps
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AddToJourneyPopUp : SfPopupLayout
 	{
-		public JourneyOngoingViewModel model;
+		public JourneyTemplateViewModel model;
 
-		public AddToJourneyPopUp(JourneyOngoingViewModel model)
+		public AddToJourneyPopUp(JourneyTemplateViewModel model)
 		{
 			InitializeComponent();
 

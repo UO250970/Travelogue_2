@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.ViewModels.Journal;
@@ -11,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Modelation
 {
-	public class ModelationViewModel : BaseViewModel
+	public class ModelationViewModel : DataBaseViewModel
 	{
 		public Command LoadJourneysCommand { get; }
 		public Command<JourneyCard> JourneyTapped { get; }
@@ -36,46 +33,24 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 
 			JourneyTapped = new Command<JourneyCard>(OnJourneySelected);
 
-			ExecuteLoadJourneysCommand();
+			ExecuteLoadDataCommand();
 		}
 
-		async Task ExecuteLoadJourneysCommand()
+		public override void LoadData()
 		{
-			IsBusy = true;
-
-			try
-			{
-				JourneysStartEditing.Clear();
-				JourneyCard temp1 = new JourneyCard();
-				temp1.Name = "Prueba";
-				temp1.Image = ImageSource.FromResource(CommonVariables.GenericImage);
+			JourneysStartEditing.Clear();
+			JourneyCard temp1 = new JourneyCard();
+			temp1.Name = "Prueba";
+			temp1.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
 
-				JourneyCard temp2 = new JourneyCard();
-				temp2.Name = "Prueba2";
-				temp2.Image = ImageSource.FromResource(CommonVariables.GenericImage);
+			JourneyCard temp2 = new JourneyCard();
+			temp2.Name = "Prueba2";
+			temp2.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
-				JourneysStartEditing.Add(temp1);
-				JourneysStartEditing.Add(temp2);
-				//var items = await DataStore.GetItemsAsync(true);
-				//foreach (var item in items)
-				//{
-				//Journeys.Add(item);
-				//}
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
-			finally
-			{
-				IsBusy = false;
-			}
+			JourneysStartEditing.Add(temp1);
+			JourneysStartEditing.Add(temp2);
 		}
-
-		public void OnAppearing()
-			=> IsBusy = true;
-
 
 		async internal void StarJournalViewC() 
 			=> await Shell.Current.GoToAsync(nameof(StartModelationView));

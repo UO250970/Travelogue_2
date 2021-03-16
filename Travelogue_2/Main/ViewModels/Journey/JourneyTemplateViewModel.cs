@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Models.Entries;
 using Travelogue_2.Main.Services;
@@ -14,9 +11,10 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Journal
 {
-	public class JourneyOngoingViewModel : PhotoRendererModel
+	[QueryProperty(nameof(JourneyId), nameof(JourneyId))]
+	public class JourneyTemplateViewModel : PhotoRendererModel
 	{
-		private string JourneyId { get; set; }
+		public string JourneyId { get; set; }
 		public Command AddImageCommand { get; }
 		public Command<ImageCard> ImageTapped { get; }
 		public Command<DayCard> DayTapped { get; }
@@ -32,7 +30,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		public Command CreateEntryCommand { get; }
 		/** */
 
-		public JourneyOngoingViewModel()
+		public JourneyTemplateViewModel()
 		{
 			AddImageCommand = new Command(() => AddImageC());
 			ModifyJourneyCommand = new Command(() => ModifyJourneyC());
@@ -52,47 +50,32 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			ExecuteLoadDataCommand();
 		}
 
-		async Task ExecuteLoadDataCommand()
+		public override void LoadData()
 		{
-			IsBusy = true;
+			JourneyId = "1";
+			var temp = new DayCard();
+			temp.Day = "2";
+			temp.Month = "2";
+			JourneyDays.Add(temp);
 
-			try
-			{
-				JourneyId = "1";
-				var temp = new DayCard();
-				temp.Day = "2";
-				temp.Month = "2";
-				JourneyDays.Add(temp);
+			var temp2 = new DayCard();
+			temp2.Day = "3";
+			temp2.Month = "2";
+			var etemp1 = new EntryCard();
+			etemp1.Title = "Prueba titulo";
+			temp2.JourneyEntries.Add(etemp1);
+			temp2.Entries = 1;
+			JourneyDays.Add(temp2);
 
-				var temp2 = new DayCard();
-				temp2.Day = "3";
-				temp2.Month = "2";
-				var etemp1 = new EntryCard();
-				etemp1.Title = "Prueba titulo";
-				temp2.JourneyEntries.Add(etemp1);
-				temp2.Entries = 1;
-				JourneyDays.Add(temp2);
+			var temp3 = new DayCard();
+			temp3.Day = "4";
+			temp3.Month = "2";
+			JourneyDays.Add(temp3);
+			//JourneyImages.Add(new ImageCard());
 
-				var temp3 = new DayCard();
-				temp3.Day = "4";
-				temp3.Month = "2";
-				JourneyDays.Add(temp3);
-				//JourneyImages.Add(new ImageCard());
-
-				daySelected = JourneyDays[0];
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
-			finally
-			{
-				IsBusy = false;
-			}
+			daySelected = JourneyDays[0];
 		}
 
-		public void OnAppearing()
-			=> IsBusy = true;
 
 		#region Photos
 
@@ -224,6 +207,5 @@ namespace Travelogue_2.Main.ViewModels.Journal
 				foreach (DayCard day in e.OldItems)
 					day.PropertyChanged -= OnPropertyChanged;
 		}
-
 	}
 }

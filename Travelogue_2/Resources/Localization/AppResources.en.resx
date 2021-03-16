@@ -198,6 +198,9 @@
   <data name="Galery" xml:space="preserve">
     <value>Galery</value>
   </data>
+  <data name="JourneyName" xml:space="preserve">
+    <value>Journeys Name</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>

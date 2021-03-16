@@ -4,6 +4,7 @@
              x:Class="Travelogue_2.Main.Views.Settings.SettingsView">
     <ContentPage.Content>
 
+        
         <Grid Padding="15,15,15,5" x:Name="MainGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

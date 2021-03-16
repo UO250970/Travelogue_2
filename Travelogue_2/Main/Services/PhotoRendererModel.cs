@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Services
 {
-	public abstract class PhotoRendererModel : BaseViewModel
+	public abstract class PhotoRendererModel : DataBaseViewModel
 	{
 
 		public ImageCard AddImage(MediaFile file)

@@ -21,8 +21,8 @@
                     </border:SfBorder.DashArray>
 
                     <border:SfBorder.Content >
-                        
-                        <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding CoverImage.ImageSour}"/>
+
+                        <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding CoverImage.ImageSour}" Aspect="AspectFill" />
 
                     </border:SfBorder.Content>
 

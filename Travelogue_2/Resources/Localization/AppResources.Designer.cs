@@ -304,6 +304,24 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Portada.
+        /// </summary>
+        internal static string JourneyCover {
+            get {
+                return ResourceManager.GetString("JourneyCover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nombre del viaje.
+        /// </summary>
+        internal static string JourneyName {
+            get {
+                return ResourceManager.GetString("JourneyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Idioma.
         /// </summary>
         internal static string Language {

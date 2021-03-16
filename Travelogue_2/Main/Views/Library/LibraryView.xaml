@@ -78,7 +78,7 @@
                                 <local:JourneyCardView BindingContext="{Binding .}">
                                     <local:JourneyCardView.GestureRecognizers>
                                         <TapGestureRecognizer 
-                                            Command="{Binding JourneyTapped}"		
+                                            Command="{Binding Path=BindingContext.JourneyTapped, Source={x:Reference LibraryViewName}}"		
                                             CommandParameter="{Binding .}"/>
                                     </local:JourneyCardView.GestureRecognizers>
                                 </local:JourneyCardView>

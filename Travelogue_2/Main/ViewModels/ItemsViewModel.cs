@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class ItemsViewModel : DataBaseViewModel
     {
         private Item _selectedItem;
 
@@ -19,7 +19,7 @@ namespace Travelogue_2.Main.ViewModels
 
         public ItemsViewModel()
         {
-            Title = "Browse";
+            //Title = "Browse";
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
@@ -80,5 +80,10 @@ namespace Travelogue_2.Main.ViewModels
             // This will push the ItemDetailPage onto the navigation stack
             await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
         }
-    }
+
+		public override void LoadData()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

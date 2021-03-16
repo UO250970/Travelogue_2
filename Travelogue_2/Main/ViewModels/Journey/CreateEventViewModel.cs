@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Models.Entries;
 using Xamarin.Forms;
@@ -11,7 +10,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 {
 	[QueryProperty("JourneyId", "JourneyId")]
 	[QueryProperty("DaySelected", "DaySelected")]
-	public class CreateEventViewModel : BaseViewModel
+	public class CreateEventViewModel : DataBaseViewModel
 	{
 		public string JourneyId { get; set; }
 
@@ -42,53 +41,36 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			ExecuteLoadDataCommand();
 		}
 
-		async Task ExecuteLoadDataCommand()
+		public override void LoadData()
 		{
-			IsBusy = true;
+			var temp = new DayCard();
+			temp.Day = "2";
+			temp.Month = "2";
+			temp.Year = "2021";
+			JourneyDays.Add(temp);
 
-			try
-			{
-				var temp = new DayCard();
-				temp.Day = "2";
-				temp.Month = "2";
-				temp.Year = "2021";
-				JourneyDays.Add(temp);
+			var temp2 = new DayCard();
+			temp2.Day = "3";
+			temp2.Month = "2";
+			temp2.Year = "2021";
+			var etemp1 = new EntryCard();
+			etemp1.Title = "Prueba titulo";
+			temp2.JourneyEntries.Add(etemp1);
+			temp2.Entries = 1;
+			JourneyDays.Add(temp2);
 
-				var temp2 = new DayCard();
-				temp2.Day = "3";
-				temp2.Month = "2";
-				temp2.Year = "2021";
-				var etemp1 = new EntryCard();
-				etemp1.Title = "Prueba titulo";
-				temp2.JourneyEntries.Add(etemp1);
-				temp2.Entries = 1;
-				JourneyDays.Add(temp2);
+			var temp3 = new DayCard();
+			temp3.Day = "4";
+			temp3.Month = "2";
+			temp3.Year = "2021";
+			JourneyDays.Add(temp3);
 
-				var temp3 = new DayCard();
-				temp3.Day = "4";
-				temp3.Month = "2";
-				temp3.Year = "2021";
-				JourneyDays.Add(temp3);
+			var minimumDate = JourneyDays.First();
+			MinimumDate = new DateTime(int.Parse(minimumDate.Year), int.Parse(minimumDate.MonthNum), int.Parse(minimumDate.Day));
 
-				var minimumDate = JourneyDays.First();
-				MinimumDate = new DateTime(int.Parse(minimumDate.Year), int.Parse(minimumDate.MonthNum), int.Parse(minimumDate.Day));
-
-				var maximumDate = JourneyDays.Last();
-				MaximumDate = new DateTime(int.Parse(maximumDate.Year), int.Parse(maximumDate.MonthNum), int.Parse(maximumDate.Day));
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
-			finally
-			{
-				IsBusy = false;
-			}
+			var maximumDate = JourneyDays.Last();
+			MaximumDate = new DateTime(int.Parse(maximumDate.Year), int.Parse(maximumDate.MonthNum), int.Parse(maximumDate.Day));
 		}
-
-		public void OnAppearing()
-			=> IsBusy = true;
-
 
 		private DateTime date;
 

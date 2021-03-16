@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Models.Entries;
 using Xamarin.Forms;
@@ -9,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Journal
 {
-	public class CreateEntryViewModel : BaseViewModel
+	public class CreateEntryViewModel : DataBaseViewModel
 	{
 		public string JourneyId { get; set; }
 		public string DaySelected { get; set; }
@@ -28,44 +27,27 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			ExecuteLoadDataCommand();
 		}
 
-		async Task ExecuteLoadDataCommand()
+		public override void LoadData()
 		{
-			IsBusy = true;
+			var temp = new DayCard();
+			temp.Day = "2";
+			temp.Month = "2";
+			JourneyDays.Add(temp);
 
-			try
-			{
-				var temp = new DayCard();
-				temp.Day = "2";
-				temp.Month = "2";
-				JourneyDays.Add(temp);
+			var temp2 = new DayCard();
+			temp2.Day = "3";
+			temp2.Month = "2";
+			var etemp1 = new EntryCard();
+			etemp1.Title = "Prueba titulo";
+			temp2.JourneyEntries.Add(etemp1);
+			temp2.Entries = 1;
+			JourneyDays.Add(temp2);
 
-				var temp2 = new DayCard();
-				temp2.Day = "3";
-				temp2.Month = "2";
-				var etemp1 = new EntryCard();
-				etemp1.Title = "Prueba titulo";
-				temp2.JourneyEntries.Add(etemp1);
-				temp2.Entries = 1;
-				JourneyDays.Add(temp2);
-
-				var temp3 = new DayCard();
-				temp3.Day = "4";
-				temp3.Month = "2";
-				JourneyDays.Add(temp3);
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
-			finally
-			{
-				IsBusy = false;
-			}
+			var temp3 = new DayCard();
+			temp3.Day = "4";
+			temp3.Month = "2";
+			JourneyDays.Add(temp3);
 		}
-
-		public void OnAppearing()
-			=> IsBusy = true;
-
 
 		private int daySelectedNum;
 		public int DaySelectedNum

@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AbsoluteLayout xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+                x:Class="Travelogue_2.Main.Views.Fragments.JourneyTemplateView"
+                BackgroundColor="{StaticResource PrimaryFaded}"
+                x:Name="JourneyTemplateViewName">
+
+    <ScrollView x:Name="MainScroll" AbsoluteLayout.LayoutFlags="All"
+                        AbsoluteLayout.LayoutBounds="0,0,1,1" >
+        <StackLayout>
+            <AbsoluteLayout HeightRequest="180" >
+
+                <Image x:Name="Image" 
+                               HeightRequest="{Binding CoverImageHeight}" Source="{Binding CoverImage.ImageSour}"
+                               Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
+
+            </AbsoluteLayout>
+            <StackLayout>
+
+                <CollectionView x:Name="DaysCollection"
+                                            HeightRequest="60"
+                                            ItemsSource="{Binding JourneyDays}"
+                                            SelectionMode="None">
+
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Horizontal"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+
+                                <Button HeightRequest="50" WidthRequest="50" BorderRadius="25" Text="{Binding .Day}"
+                                                BackgroundColor="{Binding .Background}"  Margin="10, 5" 
+                                                Command="{Binding Path=BindingContext.DayTapped, Source={x:Reference JourneyTemplateViewName}}"
+                                                CommandParameter="{Binding .}"></Button>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Frame x:Name="EntriesScroll" VerticalOptions="StartAndExpand" 
+                                    Margin="10, 0, 10, 0">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding DaySelected.Day}" FontSize="Title" TextColor="{StaticResource Primary}"/>
+                            <Label Text="{Binding DaySelected.Month}" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                        </StackLayout>
+
+                        <Rectangle HeightRequest="1" WidthRequest="200" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource Grey}"/>
+
+                        <CollectionView x:Name="EventsCollection"
+                                            HeightRequest="0"
+                                            ItemsSource="{Binding JourneyEvents}"
+                                            SelectionMode="None">
+
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <StackLayout x:Name="EntriesCollection" BindableLayout.ItemsSource="{Binding DaySelected.JourneyEntries}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+
+                                    <Label HeightRequest="40" Text="{Binding .Title}"></Label>
+
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+
+                        <!--CollectionView x:Name="EntriesCollection"
+                                            HeightRequest="{Binding EntriesHeight}"
+                                            ItemsSource="{Binding DaySelected.JourneyEntries}"
+                                            SelectionMode="None">
+
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Vertical"/>
+                                    </CollectionView.ItemsLayout>
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout>
+
+                                                <Label HeightRequest="40" Text="{Binding .Title}"></Label>
+
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </-->
+
+                    </StackLayout>
+
+                </Frame>
+
+                <Frame HasShadow="True" Margin="10, 0, 10, 5" Padding="5">
+                    <StackLayout>
+                        <Label Text="Fotos" FontSize="Large" TextColor="{StaticResource Primary}"/>
+
+                        <CollectionView x:Name="ImagesCollection"
+                                            HeightRequest="100"
+                                            Margin="10, 0, 10, 10"
+                                            ItemsSource="{Binding JourneyImages}"
+                                            SelectionMode="Single"
+                                            SelectionChangedCommand="{Binding ImageTapped}"
+                                            SelectionChangedCommandParameter="{Binding SelectedImage, Source={x:Reference ImagesCollection}}">
+
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.Header>
+
+                                <border:SfBorder BorderColor="{StaticResource Grey}" BorderWidth="2" CornerRadius="10">
+                                    <border:SfBorder.DashArray>
+                                        <x:Array Type="{x:Type x:Double}">
+                                            <x:Double>3</x:Double>
+                                            <x:Double>4</x:Double>
+                                        </x:Array>
+                                    </border:SfBorder.DashArray>
+
+                                    <border:SfBorder.Content >
+
+                                        <Image HeightRequest="{Binding CardImagesHeight}" WidthRequest="{Binding CardImagesHeight}" Source="{Binding BlanckImage.ImageSour}"
+                                                       />
+
+                                    </border:SfBorder.Content>
+
+                                    <border:SfBorder.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding AddImageCommand}"/>
+                                    </border:SfBorder.GestureRecognizers>
+
+                                </border:SfBorder>
+
+                            </CollectionView.Header>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Padding="5">
+                                        <Image HeightRequest="{Binding CardImagesHeight}" Source="{Binding .ImageSour}"/>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+            <!--tabView:SfTabView EnableSwiping="False" VisibleHeaderCount="3"  VerticalOptions="FillAndExpand" DisplayMode="Image">
+                        
+                        <tabView:SfTabView.SelectionIndicatorSettings>
+                            <tabView:SelectionIndicatorSettings />
+                        </tabView:SfTabView.SelectionIndicatorSettings>
+
+                        <tabView:SfTabItem Title="Diario"
+                               IconFont="&#xe953;"
+                               FontIconFontColor="{StaticResource Primary}"
+                               FontIconFontFamily="{StaticResource Icon}">
+                        </tabView:SfTabItem>
+
+                        <tabView:SfTabItem Title="Itinerario"
+                               IconFont="&#xe953;"
+                               FontIconFontColor="{StaticResource Primary}"
+                               FontIconFontFamily="{StaticResource Icon}">
+                        </tabView:SfTabItem>
+
+                        <tabView:SfTabItem Title="Fotos"
+                               IconFont="&#xe953;"
+                               FontIconFontColor="{StaticResource Primary}"
+                               FontIconFontFamily="{StaticResource Icon}">
+                        </tabView:SfTabItem>
+
+                    </-->
+            <!--StackLayout x:Name="Body" Padding="5, 10, 5, 10"  VerticalOptions="FillAndExpand"/-->
+        </StackLayout>
+    </ScrollView>
+
+    <BoxView x:Name="JourneyNameBoxView" HeightRequest="30"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds="0,0.15,1,0.06" 
+                    Opacity="0"
+                    BackgroundColor="{StaticResource Primary}"   
+                    ></BoxView>
+
+    <Label x:Name="JourneyName"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    AbsoluteLayout.LayoutBounds="0.1,0.15"
+                    FontSize="24" Text="Prueba"
+                    TextColor="{StaticResource White}"/>
+
+    <Button x:Name="ModifyJourneyButton" 
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    AbsoluteLayout.LayoutBounds="1,0"
+                    FontSize="Title"
+                    TextColor="{StaticResource White}"
+                    BackgroundColor="{StaticResource None}"
+                    Command="{Binding ModifyJourneyCommand}"
+                    HorizontalOptions="StartAndExpand"  Text="&#xe9bd;" FontFamily="{StaticResource Icon}" />
+
+    <Button x:Name="AddToJourneyButton" 
+                    Style="{StaticResource circleButtonAddStyle}"
+                    Command="{Binding AddToJourneyCommand}"
+                    HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}" />
+
+</AbsoluteLayout>

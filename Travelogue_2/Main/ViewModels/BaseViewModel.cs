@@ -2,42 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
-using Travelogue_2.Main.Utils;
-using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
-
-        bool isBusy = false;
-        public bool IsBusy
-        {
-            get => isBusy;
-            set => SetProperty(ref isBusy, value);
-        }
-
-        string title = string.Empty;
-        public string Title
-        {
-            get => title;
-            set => SetProperty(ref title, value);
-        }
-
         public LocalizedResources Resources
         {
             get => App.LocResources;
             private set { }
         }
-
-        /*public LocalizedResources Resources
-        {
-            get { return new LocalizedResources(typeof(AppResources), App.CurrentLanguage); }
-            internal set { }
-        }*/
 
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName] string propertyName = "",

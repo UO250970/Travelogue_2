@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Journal
 {
-	public class JourneyViewModel : BaseViewModel
+	public class JourneyViewModel : DataBaseViewModel
 	{
 
 		private string journeyId;
@@ -30,7 +30,12 @@ namespace Travelogue_2.Main.ViewModels.Journal
             }
         }
 
-        public async void LoadJourneyId(string journeyId)
+		public override void LoadData()
+		{
+			throw new NotImplementedException();
+		}
+
+		public async void LoadJourneyId(string journeyId)
         {
             IsBusy = true;
 

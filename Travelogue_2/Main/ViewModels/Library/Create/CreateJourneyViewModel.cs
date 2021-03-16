@@ -59,9 +59,8 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 				SetProperty(ref coverImage, value);
 			}
 		}
-		#endregion
-
 		public int CoverImageHeight { get => CommonVariables.ImageMaxHeight; }
+		#endregion
 
 		#region Title
 		private string title = "";
@@ -145,47 +144,31 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 		}
 		#endregion
 
-		async Task ExecuteLoadDataCommand()
+		public override void LoadData()
 		{
-			IsBusy = true;
-
-			try
+			DestiniesList.Clear();
+			IEnumerable<string> temp1 = CommonVariables.AvailableDestinies?.Select(x => x.Name);
+			foreach (string destiny in temp1)
 			{
-				DestiniesList.Clear();
-				IEnumerable<string> temp1 = CommonVariables.AvailableDestinies?.Select(x => x.Name);
-				foreach (string destiny in temp1)
-				{
-					DestiniesList.Add(destiny);
-				}
-
-				DaysSelected.Clear();
-
-				DateTime dateTemp = iniDate;
-				do
-				{
-					DayCard temp = new DayCard();
-					temp.Day = dateTemp.Day.ToString();
-					temp.Month = dateTemp.Month.ToString();
-					temp.Entries = 0;
-					temp.Events = 0;
-					DaysSelected.Add(temp);
-
-					dateTemp = dateTemp.AddDays(1);
-				}
-				while (dateTemp.CompareTo(endDate) <= 0);
+				DestiniesList.Add(destiny);
 			}
-			catch (Exception ex)
+
+			DaysSelected.Clear();
+
+			DateTime dateTemp = iniDate;
+			do
 			{
-				Debug.WriteLine(ex);
+				DayCard temp = new DayCard();
+				temp.Day = dateTemp.Day.ToString();
+				temp.Month = dateTemp.Month.ToString();
+				temp.Entries = 0;
+				temp.Events = 0;
+				DaysSelected.Add(temp);
+
+				dateTemp = dateTemp.AddDays(1);
 			}
-			finally
-			{
-				IsBusy = false;
-			}
+			while (dateTemp.CompareTo(endDate) <= 0);
 		}
-
-		public void OnAppearing()
-			=> IsBusy = true;
 
 		async internal void AddCoverC()
 		{
@@ -277,6 +260,5 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			DestiniesSelected.Remove(destiny);
 
 		}
-
 	}
 }

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using Travelogue_2.Main.Services;
-using Travelogue_2.Main.Utils;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Settings
 {
-    public class SettingsLanguageViewModel : BaseViewModel
+    public class SettingsLanguageViewModel : DataBaseViewModel
     {
 
         private string selectedLanguage;
@@ -27,38 +25,21 @@ namespace Travelogue_2.Main.ViewModels.Settings
 
             LanguageTapped = new Command<string>(OnLanguageSelected);
 
-            ExecuteLoadLanguagesCommand();
+            ExecuteLoadDataCommand();
         }
 
-        void ExecuteLoadLanguagesCommand()
+        public override void LoadData()
         {
-            IsBusy = true;
-
-            try
+            Languages.Clear();
+            foreach (string lang in CommonVariables.AvailableLanguages)
             {
-                Languages.Clear();
-                foreach (string lang in CommonVariables.AvailableLanguages)
-				{
-                    LanguageLabel temp = new LanguageLabel();
-                    temp.language = lang;
-                    temp.image = CommonVariables.GetFlag(lang);
+                LanguageLabel temp = new LanguageLabel();
+                temp.language = lang;
+                temp.image = CommonVariables.GetFlag(lang);
 
-                    Languages.Add(temp);
-                }
+                Languages.Add(temp);
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-
         }
-
-        public void OnAppearing()
-            => IsBusy = true;
 
         async internal void SearchLanguageC()
         {
@@ -115,8 +96,9 @@ namespace Travelogue_2.Main.ViewModels.Settings
             await Alerter.AlertLanguageChanged();
             await Shell.Current.GoToAsync("..");
         }
-        #endregion
-    }
+
+		#endregion
+	}
 
     public class LanguageLabel
 	{

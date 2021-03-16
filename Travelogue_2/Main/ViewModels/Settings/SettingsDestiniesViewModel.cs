@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Models.Cards;
 using Xamarin.Forms;
@@ -10,13 +8,13 @@ using Travelogue_2.Main.Models;
 
 namespace Travelogue_2.Main.ViewModels.Settings
 {
-	public class SettingsDestiniesViewModel : BaseViewModel
+	public class SettingsDestiniesViewModel : DataBaseViewModel
 	{
         public Command SearchDestinyCommand { get; }
         public Command AddDestinyCommand { get; }
-        public Dictionary<string,List<DestinyCard>> DestiniesOrdered { get; }
+        public Dictionary<string,List<DestinyCard>> DestiniesOrdered { get; set; }
         public ObservableCollection<DestinyCard> Destinies { get; }
-        public ObservableCollection<DestinyCard> DestiniesSearched { get; }
+        public ObservableCollection<DestinyCard> DestiniesSearched { get; set; }
 
         public SettingsDestiniesViewModel()
         {
@@ -27,53 +25,35 @@ namespace Travelogue_2.Main.ViewModels.Settings
             Destinies = new ObservableCollection<DestinyCard>();
             DestiniesSearched = new ObservableCollection<DestinyCard>();
 
-            ExecuteLoadLanguagesCommand();
+            ExecuteLoadDataCommand();
         }
 
-        void ExecuteLoadLanguagesCommand()
+        public override void LoadData()
         {
-            IsBusy = true;
-
-            try
+            Destinies.Clear();
+            foreach (Destiny dest in CommonVariables.AvailableDestinies)
             {
-                Destinies.Clear();
-                foreach (Destiny dest in CommonVariables.AvailableDestinies)
+                DestinyCard temp = new DestinyCard();
+                temp.Destiny = dest.Name;
+                temp.Code = dest.Code;
+                temp.EmbassiesCities = dest.Embassies.Select(x => x.City).ToList();
+                temp.Embassies = new Dictionary<string, string>();
+                foreach (Embassy emb in dest.Embassies)
                 {
-                    DestinyCard temp = new DestinyCard();
-                    temp.Destiny = dest.Name;
-                    temp.Code = dest.Code;
-                    temp.EmbassiesCities = dest.Embassies.Select(x => x.City).ToList();
-                    temp.Embassies = new Dictionary<string, string>();
-                    foreach( Embassy emb in dest.Embassies)
-					{
-                        temp.Embassies.Add(emb.City, emb.PhoneNumber);
-					}
-
-                    Destinies.Add(temp);
+                    temp.Embassies.Add(emb.City, emb.PhoneNumber);
                 }
 
-                foreach(string s in CommonVariables.Alphabet)
-				{
-                    var tempList = Destinies.Where(x => x.Destiny.ToUpper().StartsWith(s.ToUpper())).ToList();
-                    DestiniesOrdered.Add(s, tempList);
-				}
-
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
+                Destinies.Add(temp);
             }
 
+            foreach (string s in CommonVariables.Alphabet)
+            {
+                var tempList = Destinies.Where(x => x.Destiny.ToUpper().StartsWith(s.ToUpper())).ToList();
+                DestiniesOrdered.Add(s, tempList);
+            }
         }
 
-        public void OnAppearing()
-            => IsBusy = true;
-
-        public void SearchDestinyC()
+        async internal void SearchDestinyC()
 		{
             SearchText = "";
             SearchVisible = !SearchVisible;
@@ -117,5 +97,6 @@ namespace Travelogue_2.Main.ViewModels.Settings
         {
 
         }
-    }
+
+	}
 }
