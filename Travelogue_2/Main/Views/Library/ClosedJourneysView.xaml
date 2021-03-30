@@ -6,7 +6,7 @@
 
     <ContentPage.Content>
 
-        <Grid BackgroundColor="{StaticResource PrimaryFaded}">
+        <Grid BackgroundColor="{DynamicResource PrimaryFaded}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>

@@ -19,7 +19,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Text="{Binding Resources[Destinies]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
                     <Label Grid.Column="1" Text="&#x1f50d;" FontFamily="{StaticResource Icon}" FontSize="Large"  VerticalTextAlignment="Center" HorizontalOptions="Center"
-                               TextColor="{StaticResource Primary}">
+                               TextColor="{DynamicResource Primary}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SearchDestinyCommand}"/>
                         </Label.GestureRecognizers>
@@ -38,7 +38,7 @@
 
                         <Frame>
                             <StackLayout>
-                                <Label Text="{Binding Key}" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                                <Label Text="{Binding Key}" FontSize="Large" TextColor="{DynamicResource Primary}"/>
                                 <Rectangle HeightRequest="1" WidthRequest="400" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource Grey}"/>
 
                                 <StackLayout BindableLayout.ItemsSource="{Binding Value}" 

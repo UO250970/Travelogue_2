@@ -6,7 +6,7 @@
              x:Name="ModelationViewName">
 
     <ContentPage.Content>
-        <StackLayout Padding="10,10,10,5" BackgroundColor="{StaticResource PrimaryFaded}">
+        <StackLayout Padding="10,10,10,5" BackgroundColor="{DynamicResource PrimaryFaded}">
 
             <Frame Padding="5">
                 
@@ -18,7 +18,7 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Text="{Binding Resources[StartEditing]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
                         <Label Grid.Column="1" Text="&#xea42;" FontFamily="{StaticResource Icon}" FontSize="Title"  VerticalTextAlignment="Center" HorizontalOptions="Center"
-                               TextColor="{StaticResource Primary}">
+                               TextColor="{DynamicResource Primary}">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding StarJournalViewCommand}"/>
                             </Label.GestureRecognizers>
@@ -59,7 +59,7 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Text="{Binding Resources[ContinueEditing]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
                         <Label Grid.Column="1" Text="&#xea42;" FontFamily="{StaticResource Icon}" FontSize="Title"  VerticalTextAlignment="Center" HorizontalOptions="Center"
-                               TextColor="{StaticResource Primary}">
+                               TextColor="{DynamicResource Primary}">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ContinueJournalViewCommand}"/>
                             </Label.GestureRecognizers>
@@ -91,7 +91,7 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Text="{Binding Resources[ClosedEditing]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
                         <Label Grid.Column="1" Text="&#xea42;" FontFamily="{StaticResource Icon}" FontSize="Title"  VerticalTextAlignment="Center" HorizontalOptions="Center"
-                               TextColor="{StaticResource Primary}">
+                               TextColor="{DynamicResource Primary}">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ClosedJournalViewCommand}"/>
                             </Label.GestureRecognizers>

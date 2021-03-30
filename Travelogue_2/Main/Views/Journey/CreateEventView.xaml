@@ -12,21 +12,21 @@
 
             <Frame HasShadow="True" Margin="5" Padding="5">
                 <StackLayout>
-                    <Label Text="Titulo" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                    <Label Text="Titulo" FontSize="Large" TextColor="{DynamicResource Primary}"/>
                     <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
                 </StackLayout>
             </Frame>
 
             <Frame HasShadow="True" Margin="5" Padding="5">
                 <StackLayout>
-                    <Label Text="Descripcion" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                    <Label Text="Descripcion" FontSize="Large" TextColor="{DynamicResource Primary}"/>
                     <Entry Text="{Binding Description, Mode=TwoWay}" FontSize="Medium" />
                 </StackLayout>
             </Frame>
 
             <Frame HasShadow="True" Margin="5" Padding="5">
                 <StackLayout>
-                    <Label Text="Fecha" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                    <Label Text="Fecha" FontSize="Large" TextColor="{DynamicResource Primary}"/>
                     <DatePicker Date="{Binding Date}" FontSize="Medium" 
                                 MaximumDate="{Binding MaximumDate}" MinimumDate="{Binding MinimumDate}"/>
                 </StackLayout>

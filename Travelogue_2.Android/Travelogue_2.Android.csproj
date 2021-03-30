@@ -66,6 +66,7 @@
     <Compile Include="PresentationActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BroadcastReceiver.cs" />
     <Compile Include="Services\LocalNotifications.cs" />
   </ItemGroup>
   <ItemGroup>

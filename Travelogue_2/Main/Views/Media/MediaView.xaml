@@ -15,7 +15,7 @@
 
             <tabView:SfTabItem Title="{Binding Resources[Calendar]}"
                                IconFont="&#xe953;"
-                               FontIconFontColor="{StaticResource Primary}"
+                               FontIconFontColor="{DynamicResource Primary}"
                                FontIconFontFamily="{StaticResource Icon}">
                 <tabView:SfTabItem.Content>
 
@@ -49,7 +49,7 @@
 
             <tabView:SfTabItem Title="{Binding Resources[Map]}"
                                IconFont="&#xe94b;"
-                               FontIconFontColor="{StaticResource Primary}"
+                               FontIconFontColor="{DynamicResource Primary}"
                                FontIconFontFamily="{StaticResource Icon}">
                 <tabView:SfTabItem.Content>
 
@@ -60,7 +60,7 @@
 
             <tabView:SfTabItem Title="{Binding Resources[Gallery]}"
                                IconFont="&#xe90e;"
-                               FontIconFontColor="{StaticResource Primary}"
+                               FontIconFontColor="{DynamicResource Primary}"
                                FontIconFontFamily="{StaticResource Icon}">
                 <tabView:SfTabItem.Content>
                     

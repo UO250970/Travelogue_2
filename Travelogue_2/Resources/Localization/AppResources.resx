@@ -288,6 +288,9 @@
   <data name="Style" xml:space="preserve">
     <value>Estilo</value>
   </data>
+  <data name="Styles" xml:space="preserve">
+    <value>Estilos</value>
+  </data>
   <data name="TakePhoto" xml:space="preserve">
     <value>Sacar foto</value>
   </data>

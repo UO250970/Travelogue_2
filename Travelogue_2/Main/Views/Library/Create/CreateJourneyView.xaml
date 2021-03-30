@@ -34,23 +34,23 @@
 
                 <Frame HasShadow="True" Margin="5" Padding="5">
                     <StackLayout>
-                        <Label Text="Titulo" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                        <Label Text="Titulo" FontSize="Large" TextColor="{DynamicResource Primary}"/>
                         <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
                     </StackLayout>
                 </Frame>
 
                 <Frame HasShadow="True" Margin="5" Padding="5">
                     <StackLayout>
-                        <Label Text="Fechas" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                        <Label Text="Fechas" FontSize="Large" TextColor="{DynamicResource Primary}"/>
                         <StackLayout Orientation="Horizontal">
 
-                            <Label Text="&#xea0a;" FontFamily="{StaticResource Icon}"  FontSize="Medium" TextColor="{StaticResource Primary}" VerticalTextAlignment="Center"/>
+                            <Label Text="&#xea0a;" FontFamily="{StaticResource Icon}"  FontSize="Medium" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center"/>
                             <DatePicker Format="{Binding Resources[DateFormat]}"
                                         x:Name="IniDatePicker"
                                         Date="{Binding IniDate, Mode=TwoWay}"
                                         MinimumDate="{Binding MinimumDate}"
-                                        DateSelected="CheckNewIniDate" HorizontalOptions="FillAndExpand"/>  
-                            <Label Text="&#xea0a;" FontFamily="{StaticResource Icon}"  FontSize="Medium" TextColor="{StaticResource Primary}" VerticalTextAlignment="Center"/>
+                                        DateSelected="CheckNewIniDate" HorizontalOptions="FillAndExpand"/>
+                            <Label Text="&#xea0a;" FontFamily="{StaticResource Icon}"  FontSize="Medium" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center"/>
                             <DatePicker Format="{Binding Resources[DateFormat]}"
                                         x:Name="EndDatePicker"
                                         Date="{Binding EndDate, Mode=TwoWay}"
@@ -58,29 +58,13 @@
                                         DateSelected="CheckNewEndDate" HorizontalOptions="FillAndExpand"/>
 
                         </StackLayout>
-
-                        <!--CollectionView ItemsSource="{Binding DaysSelected}"  HeightRequest="100">
-
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
-                            </CollectionView.ItemsLayout>
-
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackLayout>
-                                        <local:DayCardView BindingContext="{Binding .}"/>
-                                    </StackLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-
-                        </-->
-
+                        
                     </StackLayout>
                 </Frame>
 
                 <Frame HasShadow="True" Margin="5" Padding="8">
                     <StackLayout>
-                        <Label Text="Destinos" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                        <Label Text="Destinos" FontSize="Large" TextColor="{DynamicResource Primary}"/>
                         <StackLayout Orientation="Horizontal">
 
                             <autocomplete:SfAutoComplete x:Name="AutocompleteDestiny"

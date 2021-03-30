@@ -3,7 +3,7 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
                 xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
                 x:Class="Travelogue_2.Main.Views.Fragments.JourneyTemplateView"
-                BackgroundColor="{StaticResource PrimaryFaded}"
+                BackgroundColor="{DynamicResource PrimaryFaded}"
                 x:Name="JourneyTemplateViewName">
 
     <ScrollView x:Name="MainScroll" AbsoluteLayout.LayoutFlags="All"
@@ -45,8 +45,8 @@
                                     Margin="10, 0, 10, 0">
                     <StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="{Binding DaySelected.Day}" FontSize="Title" TextColor="{StaticResource Primary}"/>
-                            <Label Text="{Binding DaySelected.Month}" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                            <Label Text="{Binding DaySelected.Day}" FontSize="Title" TextColor="{DynamicResource Primary}"/>
+                            <Label Text="{Binding DaySelected.Month}" FontSize="Large" TextColor="{DynamicResource Primary}"/>
                         </StackLayout>
 
                         <Rectangle HeightRequest="1" WidthRequest="200" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource Grey}"/>
@@ -79,33 +79,13 @@
                             </BindableLayout.ItemTemplate>
                         </StackLayout>
 
-                        <!--CollectionView x:Name="EntriesCollection"
-                                            HeightRequest="{Binding EntriesHeight}"
-                                            ItemsSource="{Binding DaySelected.JourneyEntries}"
-                                            SelectionMode="None">
-
-                                    <CollectionView.ItemsLayout>
-                                        <GridItemsLayout Orientation="Vertical"/>
-                                    </CollectionView.ItemsLayout>
-
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackLayout>
-
-                                                <Label HeightRequest="40" Text="{Binding .Title}"></Label>
-
-                                            </StackLayout>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </-->
-
                     </StackLayout>
 
                 </Frame>
 
                 <Frame HasShadow="True" Margin="10, 0, 10, 5" Padding="5">
                     <StackLayout>
-                        <Label Text="Fotos" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                        <Label Text="Fotos" FontSize="Large" TextColor="{DynamicResource Primary}"/>
 
                         <CollectionView x:Name="ImagesCollection"
                                             HeightRequest="100"
@@ -156,32 +136,7 @@
                 </Frame>
 
             </StackLayout>
-            <!--tabView:SfTabView EnableSwiping="False" VisibleHeaderCount="3"  VerticalOptions="FillAndExpand" DisplayMode="Image">
-                        
-                        <tabView:SfTabView.SelectionIndicatorSettings>
-                            <tabView:SelectionIndicatorSettings />
-                        </tabView:SfTabView.SelectionIndicatorSettings>
-
-                        <tabView:SfTabItem Title="Diario"
-                               IconFont="&#xe953;"
-                               FontIconFontColor="{StaticResource Primary}"
-                               FontIconFontFamily="{StaticResource Icon}">
-                        </tabView:SfTabItem>
-
-                        <tabView:SfTabItem Title="Itinerario"
-                               IconFont="&#xe953;"
-                               FontIconFontColor="{StaticResource Primary}"
-                               FontIconFontFamily="{StaticResource Icon}">
-                        </tabView:SfTabItem>
-
-                        <tabView:SfTabItem Title="Fotos"
-                               IconFont="&#xe953;"
-                               FontIconFontColor="{StaticResource Primary}"
-                               FontIconFontFamily="{StaticResource Icon}">
-                        </tabView:SfTabItem>
-
-                    </-->
-            <!--StackLayout x:Name="Body" Padding="5, 10, 5, 10"  VerticalOptions="FillAndExpand"/-->
+            
         </StackLayout>
     </ScrollView>
 
@@ -189,7 +144,7 @@
                     AbsoluteLayout.LayoutFlags="All"
                     AbsoluteLayout.LayoutBounds="0,0.15,1,0.06" 
                     Opacity="0"
-                    BackgroundColor="{StaticResource Primary}"   
+                    BackgroundColor="{DynamicResource Primary}"   
                     ></BoxView>
 
     <Label x:Name="JourneyName"

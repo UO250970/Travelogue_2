@@ -574,6 +574,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Estilos.
+        /// </summary>
+        internal static string Styles {
+            get {
+                return ResourceManager.GetString("Styles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sacar foto.
         /// </summary>
         internal static string TakePhoto {

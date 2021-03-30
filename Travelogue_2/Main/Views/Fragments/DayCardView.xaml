@@ -17,7 +17,7 @@
             <Label x:Name="Day"
                         Text="{Binding Day}"
                         FontSize="24"
-                        TextColor="{StaticResource Primary}"/>
+                        TextColor="{DynamicResource Primary}"/>
 
             <Label x:Name="Month"
                         Text="{Binding Month}"

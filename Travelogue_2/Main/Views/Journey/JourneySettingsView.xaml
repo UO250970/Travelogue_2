@@ -13,7 +13,7 @@
             <StackLayout>
                 <Frame HasShadow="True" Margin="5" Padding="5">
                     <StackLayout>
-                        <Label Text="{Binding Resources[JourneyCover]}" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                        <Label Text="{Binding Resources[JourneyCover]}" FontSize="Large" TextColor="{DynamicResource Primary}"/>
                         <AbsoluteLayout>
 
                             <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding CoverImage.ImageSour}"
@@ -35,14 +35,33 @@
 
                 <Frame HasShadow="True" Margin="5" Padding="5">
                     <StackLayout>
-                        <Label Text="{Binding JourneyName}" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                        <Label Text="{Binding JourneyName}" FontSize="Large" TextColor="{DynamicResource Primary}"/>
                         <Entry Text="{Binding JourneyName, Mode=TwoWay}" FontSize="Medium" />
                     </StackLayout>
                 </Frame>
 
                 <Frame HasShadow="True" Margin="5" Padding="5">
+                    <StackLayout Orientation="Horizontal">
+
+                        <Label Text="&#xea0a;" FontFamily="{StaticResource Icon}"  FontSize="Medium" TextColor="{StaticResource Primary}" VerticalTextAlignment="Center"/>
+                        <DatePicker Format="{Binding Resources[DateFormat]}"
+                                    x:Name="IniDatePicker"
+                                    Date="{Binding IniDate, Mode=TwoWay}"
+                                    MinimumDate="{Binding MinimumDate}"
+                                    DateSelected="CheckNewIniDate" HorizontalOptions="FillAndExpand"/>
+                        <Label Text="&#xea0a;" FontFamily="{StaticResource Icon}"  FontSize="Medium" TextColor="{StaticResource Primary}" VerticalTextAlignment="Center"/>
+                        <DatePicker Format="{Binding Resources[DateFormat]}"
+                                    x:Name="EndDatePicker"
+                                    Date="{Binding EndDate, Mode=TwoWay}"
+                                    MinimumDate="{Binding MinimumDate}"
+                                    DateSelected="CheckNewEndDate" HorizontalOptions="FillAndExpand"/>
+
+                    </StackLayout>
+                </Frame>
+
+                <Frame HasShadow="True" Margin="5" Padding="5">
                     <StackLayout>
-                        <Label Text="Destinos" FontSize="Large" TextColor="{StaticResource Primary}"/>
+                        <Label Text="Destinos" FontSize="Large" TextColor="{DynamicResource Primary}"/>
 
                         <StackLayout x:Name="DestiniesCollection"
                                      BindableLayout.ItemsSource="{Binding JourneyDestinies}"
@@ -98,7 +117,7 @@
 
                                                 <Label Grid.Column="0"
                                                                 FontSize="Medium"
-                                                                TextColor="#3D6D9B"
+                                                                TextColor="#3D6D9B" 
                                                                 x:Name="DestinyURL"
                                                                 Text="{Binding .MoreInfoCountry}">
                                                     <Label.GestureRecognizers>
@@ -125,7 +144,7 @@
                                                         </Grid.ColumnDefinitions>
 
                                                         <Label Grid.Column="0" Text="{Binding Key}"/>
-                                                        <Label Grid.Column="1" Text="{Binding Value}" TextColor="{StaticResource Primary}">
+                                                        <Label Grid.Column="1" Text="{Binding Value}" TextColor="{DynamicResource Primary}">
                                                             <Label.GestureRecognizers>
                                                                 <TapGestureRecognizer Command="{Binding BindingContext.PhoneNumberTappedCommand, Source={x:Reference JourneySettingsViewName}}" 
                                                                                       CommandParameter="{Binding Value}"/>

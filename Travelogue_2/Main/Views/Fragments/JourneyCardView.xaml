@@ -4,7 +4,7 @@
        x:Class="Travelogue_2.Main.Views.Fragments.JourneyCardView" HeightRequest="80">
 
     <StackLayout  HeightRequest="80" WidthRequest="150">
-        <AbsoluteLayout BackgroundColor="{StaticResource Secondary}" >
+        <AbsoluteLayout BackgroundColor="{DynamicResource Secondary}" >
 
             <Image  x:Name="JourneyImage" 
                     Source="{Binding Image}"

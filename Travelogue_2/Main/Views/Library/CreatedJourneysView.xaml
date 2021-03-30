@@ -6,7 +6,7 @@
              x:Name="CreatedJourneysViewName">
 
     <ContentPage.Content>
-        <AbsoluteLayout BackgroundColor="{StaticResource PrimaryFaded}">
+        <AbsoluteLayout BackgroundColor="{DynamicResource PrimaryFaded}">
 
             <Grid >
                 <Grid.RowDefinitions>

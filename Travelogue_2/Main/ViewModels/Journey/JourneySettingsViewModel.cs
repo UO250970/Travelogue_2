@@ -6,6 +6,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Utils;
+using System;
 
 namespace Travelogue_2.Main.ViewModels.Journal
 {
@@ -75,6 +76,33 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		public int CoverImageHeight { get => CommonVariables.ImageMaxHeight; }
 		#endregion
 
+		#region MinimumDate
+		private DateTime minimumDate = DateTime.Today;
+		public DateTime MinimumDate
+		{
+			get => minimumDate;
+			set => SetProperty(ref minimumDate, value);
+		}
+		#endregion
+
+		#region IniDate
+		private DateTime iniDate = DateTime.Today;
+		public DateTime IniDate
+		{
+			get => iniDate;
+			set => SetProperty(ref iniDate, value);
+		}
+		#endregion
+
+		#region EndDate
+		private DateTime endDate = DateTime.Today;
+		public DateTime EndDate
+		{
+			get => endDate;
+			set => SetProperty(ref endDate, value);
+		}
+		#endregion
+
 		async internal void ModifyCoverC()
 		{
 			ImageCard success = await CameraUtil.Photo(this);
@@ -89,18 +117,25 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			await Browser.OpenAsync(path);
 		}
 
+		ILocalNotifications notificationManager = DependencyService.Get<ILocalNotifications>();
+
 		internal void PhoneNumberTappedC(string number)
 		{
 			PhoneDialer.Open(number);
 
-			var temp = DependencyService.Get<ILocalNotifications>();
+			notificationManager.SendNotification("Title", "Message");
+		}
 
+		internal void CheckNewIniDate(DatePicker iniDatePicker, DatePicker endDatePicker)
+		{
+			if (iniDatePicker.Date.CompareTo(EndDate.Date) > 0) endDatePicker.Date = iniDatePicker.Date;
+			//ExecuteLoadDataCommand();
+		}
 
-			temp.SendLocalNotification(
-					"Notification title",
-					"Notification content / description",
-					0
-			);
+		internal void CheckNewEndDate(DatePicker iniDatePicker, DatePicker endDatePicker)
+		{
+			if (iniDatePicker.Date.CompareTo(EndDate.Date) > 0) iniDatePicker.Date = endDatePicker.Date;
+			//ExecuteLoadDataCommand();
 		}
 
 	}

@@ -7,10 +7,11 @@
     -->
     <Application.Resources>
         <ResourceDictionary>
+
             <Color x:Key="Primary">#3D6D9B</Color>
             <Color x:Key="PrimaryFaded">#B2D4F4</Color>
             <Color x:Key="Secondary">#247c7c</Color>
-            
+
             <Color x:Key="White">White</Color>
             <Color x:Key="Grey">#999999</Color>
             <Color x:Key="None">Transparent</Color>
@@ -21,13 +22,13 @@
                 <Rectangle.Fill>
                     <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
                         <GradientStop Color="{StaticResource White}" Offset="0.0" />
-                        <GradientStop Color="{StaticResource Secondary}" Offset="0.6" />
+                        <GradientStop Color="{DynamicResource Secondary}" Offset="0.6" />
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>
 
             <Style x:Key="buttonStyle" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
                 <Setter Property="TextColor" Value="{StaticResource White}"/>
                 <Setter Property="Padding" Value="10" />
             </Style>
@@ -55,7 +56,7 @@
                 <Setter Property="BorderRadius" Value="30"/>
                 <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
                 <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.98,0.98,60,60"/>
-                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource Primary}"/>
                 <Setter Property="TextColor" Value="{StaticResource White}"/>
             </Style>
 
@@ -77,7 +78,7 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                    <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Disabled">

@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Frame xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Travelogue_2.Main.Views.Fragments.JourneyBookView" BackgroundColor="{StaticResource PrimaryFaded}">
+             x:Class="Travelogue_2.Main.Views.Fragments.JourneyBookView" BackgroundColor="{DynamicResource PrimaryFaded}">
 
-    <StackLayout BackgroundColor="{StaticResource Secondary}" HeightRequest="180">
+    <StackLayout BackgroundColor="{DynamicResource Secondary}" HeightRequest="180">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="150"/>
@@ -18,7 +18,7 @@
                     FontSize="24"
                     Text="{Binding Name}"
                     TextColor="{StaticResource White}"
-                    BackgroundColor="{StaticResource Primary}"/>
+                    BackgroundColor="{DynamicResource Primary}"/>
         </Grid>
     </StackLayout>
     

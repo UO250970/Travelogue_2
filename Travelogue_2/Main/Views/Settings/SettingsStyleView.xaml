@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Travelogue_2.Main.Views.Settings.SettingsStyleView">
+    
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Label Padding="10,10,10,5" Grid.Row="0" Text="{Binding Resources[Styles]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+
+        <CollectionView Grid.Row="1" x:Name="StylesCollection"
+                        ItemsSource="{Binding Styles}"
+                        SelectionMode="Single"
+                        SelectionChangedCommand="{Binding StyleTapped}"
+                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference StylesCollection}}">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                        Span="2"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    
+                    <StackLayout Padding="5" 
+                                 Margin="10" BackgroundColor="{StaticResource Grey}">
+                        <Image Source="{Binding Image}"
+                                HorizontalOptions="Center"
+                                VerticalOptions="CenterAndExpand" />
+                        <Label Text="{Binding Name}"
+                                HorizontalOptions="Center"
+                                VerticalOptions="End" />
+                    </StackLayout>
+                    
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+    </Grid>
+    
+</ContentPage>
