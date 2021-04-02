@@ -69,7 +69,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			MinimumDate = new DateTime(int.Parse(minimumDate.Year), int.Parse(minimumDate.MonthNum), int.Parse(minimumDate.Day));
 
 			var maximumDate = JourneyDays.Last();
-			MaximumDate = new DateTime(int.Parse(maximumDate.Year), int.Parse(maximumDate.MonthNum), int.Parse(maximumDate.Day));
+			MaximumDate = maximumDate.ToDateTime();
 		}
 
 		private DateTime date;

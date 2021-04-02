@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using Travelogue_2.Main.Models.Cards;
@@ -23,11 +24,24 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		public ObservableCollection<EventCard> JourneyEvents { get; }
 		public ObservableCollection<EntryCard> JourneyEntries { get; }
 
-		/** Pop Ups */
+		/** Pop Ups*/
+		public AddEntryPopUp AddEntryPU;
+		/** */
+
+		/** Pop Up Commands*/
 		public Command ModifyJourneyCommand { get; }
 		public Command AddToJourneyCommand { get; }
+
+		public Command AddEventCommand { get; }
 		public Command CreateEventCommand { get; }
+
+		public Command AddEntryCommand { get; }
 		public Command CreateEntryCommand { get; }
+
+		public Command AddToEntryCommand { get; }
+		public Command CreateToEntryCommand { get; }
+
+		public Command CancelCommand { get; }
 		/** */
 
 		public JourneyTemplateViewModel()
@@ -35,8 +49,14 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			AddImageCommand = new Command(() => AddImageC());
 			ModifyJourneyCommand = new Command(() => ModifyJourneyC());
 			AddToJourneyCommand = new Command(() => AddToJourneyC());
-			CreateEventCommand = new Command(() => CreateEventC());
+			//CreateEventCommand = new Command(() => CreateEventC());
+
+			AddEntryCommand = new Command(() => AddEntryC());
 			CreateEntryCommand = new Command(() => CreateEntryC());
+
+			AddToEntryCommand = new Command(() => AddToEntryC());
+
+			CancelCommand = new Command(() => CancelC());
 
 			JourneyImages = new ObservableCollection<ImageCard>();
 			JourneyDays = new ObservableCollection<DayCard>();
@@ -56,13 +76,19 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			var temp = new DayCard();
 			temp.Day = "2";
 			temp.Month = "2";
+			temp.Year = "2021";
 			JourneyDays.Add(temp);
 
 			var temp2 = new DayCard();
 			temp2.Day = "3";
 			temp2.Month = "2";
+			temp2.Year = "2021";
 			var etemp1 = new EntryCard();
 			etemp1.Title = "Prueba titulo";
+			var ectemp1 = new EntryTextCard();
+			ectemp1.Text = "Hoy me divertí mucho corriendo detrás de patos :')";
+			ectemp1.Time = DateTime.Today.Hour.ToString() + ":" + DateTime.Today.Minute.ToString();
+			etemp1.Content.Add(ectemp1);
 			temp2.JourneyEntries.Add(etemp1);
 			temp2.Entries = 1;
 			var etemp2 = new EventCard();
@@ -76,6 +102,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			var temp3 = new DayCard();
 			temp3.Day = "4";
 			temp3.Month = "2";
+			temp3.Year = "2021";
 			JourneyDays.Add(temp3);
 			//JourneyImages.Add(new ImageCard());
 
@@ -145,7 +172,25 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			}
 		}
 
-		public int DaySelectedNum { get; set; }
+		//public int DaySelectedNum { get; set; }
+
+		#endregion
+
+		#region DaySelectedPU
+
+		private DateTime DaySelectedPU = new DateTime();
+
+		#endregion
+
+		#region MaxDaySelectedPU
+
+		private DateTime MaxDaySelectedPU = new DateTime();
+
+		#endregion
+
+		#region MinDaySelectedPU
+
+		private DateTime MinDaySelectedPU = new DateTime();
 
 		#endregion
 
@@ -167,7 +212,8 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		async internal void AddToJourneyC()
 		{
-			AddToJourneyPopUp popup = new AddToJourneyPopUp(this);
+			//AddToJourneyPopUp popup = new AddToJourneyPopUp();
+			//popup.BindingContext = this;
 			//popup.model.journey = JourneyCard;
 		}
 
@@ -177,10 +223,37 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			await Shell.Current.GoToAsync($"{nameof(CreateEventView)}?{nameof(CreateEventViewModel.DaySelected)}={JourneyDays.IndexOf(DaySelected)}&{nameof(CreateEventViewModel.JourneyId)}={JourneyId}");
 		}
 
+		async internal void AddEntryC()
+		{
+			AddEntryPU = new AddEntryPopUp
+			{
+				BindingContext = this
+			};
+			DaySelectedPU = DaySelected.ToDateTime();
+			MinDaySelectedPU = JourneyDays.First().ToDateTime();
+			MaxDaySelectedPU = JourneyDays.Last().ToDateTime();
+
+			AddEntryPU.Show();
+		}
+
 		async internal void CreateEntryC()
 		{
-			await Shell.Current.GoToAsync($"{nameof(CreateEntryView)}?{nameof(CreateEntryViewModel.DaySelectedNum)}={DaySelectedNum}" +
-																	$"&{nameof(CreateEntryViewModel.JourneyId)}={JourneyId}");
+			//await Shell.Current.GoToAsync($"{nameof(CreateEntryView)}?{nameof(CreateEntryViewModel.DaySelectedNum)}={DaySelectedNum}" +
+			//$"&{nameof(CreateEntryViewModel.JourneyId)}={JourneyId}");
+			AddEntryPU.Dismiss();
+		}
+
+		async internal void AddToEntryC()
+		{
+			/*AddEntryPU = new AddEntryPopUp
+			{
+				BindingContext = this
+			};*/
+		}
+
+		async internal void CancelC()
+		{
+			AddEntryPU.Dismiss();
 		}
 
 		#endregion

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Travelogue_2.Main.Models.Entries;
 using Xamarin.Forms;
@@ -65,6 +66,10 @@ namespace Travelogue_2.Main.Models.Cards
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
+		public DateTime ToDateTime()
+		{
+			return new DateTime(int.Parse(Year), int.Parse(MonthNum), int.Parse(Day));
+		}
 
 		public bool Equals(DayCard obj)
 		{
@@ -79,7 +84,6 @@ namespace Travelogue_2.Main.Models.Cards
 				return (Day == p.Day) && (Month == p.Month) && (Year == p.Year);
 			}
 		}
-
 
 	}
 

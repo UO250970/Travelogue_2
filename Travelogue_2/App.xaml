@@ -60,14 +60,14 @@
                 <Setter Property="TextColor" Value="{StaticResource White}"/>
             </Style>
 
-            <Style x:Key="circleButtonDeleteStyle" TargetType="Button">
+            <Style x:Key="smallCircleButtonStyle" TargetType="Button">
                 <Setter Property="WidthRequest" Value="40"/>
                 <Setter Property="HeightRequest" Value="40"/>
                 <Setter Property="BorderRadius" Value="20"/>
                 <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional"/>
                 <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.02,0.02,40,40"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource None}"/>
-                <Setter Property="TextColor" Value="{StaticResource Grey}"/>
+                <Setter Property="TextColor" Value="{StaticResource White}"/>
                 <Setter Property="FontSize" Value="Large"/>
             </Style>
 

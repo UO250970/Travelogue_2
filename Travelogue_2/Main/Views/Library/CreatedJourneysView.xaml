@@ -57,7 +57,7 @@
                                 <local:JourneyBookView BindingContext="{Binding .}"/>
 
                                 <Button x:Name="DeleteJourneyButton" 
-                                            Style="{StaticResource circleButtonDeleteStyle}"
+                                            Style="{StaticResource smallCircleButtonStyle}"
                                             BackgroundColor="{StaticResource None}"
                                             HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
                                             Command="{Binding BindingContext.JourneyTappedDelete, Source={x:Reference CreatedJourneysViewName}}"

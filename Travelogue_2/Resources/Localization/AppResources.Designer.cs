@@ -79,6 +79,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Añadir nueva entrada.
+        /// </summary>
+        internal static string AddNewEntry {
+            get {
+                return ResourceManager.GetString("AddNewEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Añadir al viaje.
         /// </summary>
         internal static string AddToJourney {
@@ -219,6 +228,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string Currency {
             get {
                 return ResourceManager.GetString("Currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fecha.
+        /// </summary>
+        internal static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
             }
         }
         

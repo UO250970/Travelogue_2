@@ -10,7 +10,7 @@
             <StackLayout Orientation="Horizontal" HeightRequest="40">
 
                 <Button x:Name="DeletePageJournalButton" 
-                        Style="{StaticResource circleButtonDeleteStyle}"
+                        Style="{StaticResource smallCircleButtonStyle}"
                         HorizontalOptions="StartAndExpand"  Text="&#xea0b;" FontFamily="{StaticResource Icon}"/>
 
 
@@ -19,7 +19,7 @@
                 </CollectionView>
 
                 <Button x:Name="AddPageJournalButton" 
-                        Style="{StaticResource circleButtonDeleteStyle}"
+                        Style="{StaticResource smallCircleButtonStyle}"
                         HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}"/>
 
             </StackLayout>

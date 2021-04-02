@@ -123,6 +123,9 @@
   <data name="AddEvent" xml:space="preserve">
     <value>Add an event</value>
   </data>
+  <data name="AddNewEntry" xml:space="preserve">
+    <value>Add new entry</value>
+  </data>
   <data name="AddToJourney" xml:space="preserve">
     <value>Add to the journey</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="Currency" xml:space="preserve">
     <value>Currency</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
   </data>
   <data name="DateFormat" xml:space="preserve">
     <value>MM-dd-yyyy</value>
