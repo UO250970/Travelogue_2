@@ -31,7 +31,13 @@ namespace Travelogue_2.Main.Models.Cards
 			set => year = value;
 		}
 
-		public Color Background = (Color)Application.Current.Resources["PrimaryFaded"];
+		public Color background = (Color) App.Current.Resources["PrimaryFaded"];
+		public Color Background 
+		{ 
+			get => background;
+			set => background = value;
+				//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Background"));
+		}
 		
 		public int Entries { get; set; }
 
@@ -54,6 +60,8 @@ namespace Travelogue_2.Main.Models.Cards
 				return Events + " " + App.LocResources["Events"];
 			}
 		}
+
+		public ObservableCollection<EventCard> JourneyEvents { get; set; } = new ObservableCollection<EventCard>();
 
 		public event PropertyChangedEventHandler PropertyChanged;
 

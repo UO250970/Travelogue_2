@@ -192,8 +192,14 @@
   <data name="Entries" xml:space="preserve">
     <value>Entradas</value>
   </data>
+  <data name="EntriesEmpty" xml:space="preserve">
+    <value>Sin entradas</value>
+  </data>
   <data name="Events" xml:space="preserve">
     <value>Eventos</value>
+  </data>
+  <data name="EventsEmpty" xml:space="preserve">
+    <value>Sin eventos</value>
   </data>
   <data name="Gallery" xml:space="preserve">
     <value>Galería</value>

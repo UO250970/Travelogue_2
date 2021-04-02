@@ -31,16 +31,16 @@ namespace Travelogue_2.Main.ViewModels.Settings
             Style temp2 = new Style();
             temp2.Name = "Secundario";
             temp2.Primary = "#D075BF";
-            temp2.PrimaryFaded = "#B2D4F4";
-            temp2.Secondary = "#247c7c";
+            temp2.PrimaryFaded = "#E8BADF";
+            temp2.Secondary = "#75D086";
 
             Styles.Add(temp2);
 
             Style temp3 = new Style();
             temp3.Name = "Terciario";
-            temp3.Primary = "#8DD075";
-            temp3.PrimaryFaded = "#B2D4F4";
-            temp3.Secondary = "#247c7c";
+            temp3.Primary = "#79D957";
+            temp3.PrimaryFaded = "#ABE796";
+            temp3.Secondary = "#B757D9";
 
             Styles.Add(temp3);
         }

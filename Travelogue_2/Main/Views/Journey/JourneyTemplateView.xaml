@@ -19,9 +19,9 @@
             <StackLayout>
 
                 <CollectionView x:Name="DaysCollection"
-                                            HeightRequest="60"
-                                            ItemsSource="{Binding JourneyDays}"
-                                            SelectionMode="None">
+                                HeightRequest="60"
+                                ItemsSource="{Binding JourneyDays}"
+                                SelectionMode="None">
 
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Horizontal"/>
@@ -32,14 +32,37 @@
                             <StackLayout>
 
                                 <Button HeightRequest="50" WidthRequest="50" BorderRadius="25" Text="{Binding .Day}"
-                                                BackgroundColor="{Binding .Background}"  Margin="10, 5" 
-                                                Command="{Binding Path=BindingContext.DayTapped, Source={x:Reference JourneyTemplateViewName}}"
-                                                CommandParameter="{Binding .}"></Button>
+                                        BackgroundColor="{Binding .Background}"  Margin="10, 5" 
+                                        Command="{Binding Path=BindingContext.DayTapped, Source={x:Reference JourneyTemplateViewName}}"
+                                        CommandParameter="{Binding .}"></Button>
 
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+
+                <StackLayout x:Name="EventsCollection" BindableLayout.ItemsSource="{Binding DaySelected.JourneyEvents}" >
+
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+
+                            <StackLayout>
+                                <Label HeightRequest="40" Text="11:20 - Evento 1"></Label>
+
+                                <Rectangle HeightRequest="1" WidthRequest="200" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource Grey}"/>
+                            </StackLayout>
+                            
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+
+                </StackLayout>
+
+                <Label Text="&#xea0a;" FontFamily="{StaticResource Icon}" FontSize="Medium"  VerticalTextAlignment="Center" HorizontalOptions="Center"
+                               TextColor="{DynamicResource Grey}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CreateEventCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
 
                 <Frame x:Name="EntriesScroll" VerticalOptions="StartAndExpand" 
                                     Margin="10, 0, 10, 0">
@@ -50,30 +73,45 @@
                         </StackLayout>
 
                         <Rectangle HeightRequest="1" WidthRequest="200" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource Grey}"/>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="8*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <CollectionView x:Name="EventsCollection"
-                                            HeightRequest="0"
-                                            ItemsSource="{Binding JourneyEvents}"
-                                            SelectionMode="None">
-
-                            <CollectionView.ItemsLayout>
-                                <GridItemsLayout Orientation="Horizontal"/>
-                            </CollectionView.ItemsLayout>
-
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackLayout>
-
-                                    </StackLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                            <Label Grid.Column="0" Text="{Binding Resources[Entries]}" FontSize="Medium" TextColor="{DynamicResource PrimaryFaded}"/>
+                            <Label Grid.Column="1" Text="&#xea0a;" FontFamily="{StaticResource Icon}" FontSize="Medium"  VerticalTextAlignment="Center" HorizontalOptions="End"
+                               TextColor="{DynamicResource Primary}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CreateEntryCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
 
                         <StackLayout x:Name="EntriesCollection" BindableLayout.ItemsSource="{Binding DaySelected.JourneyEntries}">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
 
-                                    <Label HeightRequest="40" Text="{Binding .Title}"></Label>
+                                    <Label FontSize="Medium" TextColor="{DynamicResource PrimaryFaded}" HeightRequest="40" Text="{Binding .Title}"></Label>
+
+                                    <StackLayout x:Name="EntryContentCollection" BindableLayout.ItemsSource="{Binding .Content}">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate>
+
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="8*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Label Grid.Column="0" Text="{Binding .Time}" FontSize="Default"/>
+                                                    <Label Grid.Column="1" FontSize="Default" HeightRequest="40" Text="{Binding .Text}"/>
+                                                </Grid>
+                                                
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </StackLayout>
 
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
@@ -162,9 +200,9 @@
                     Command="{Binding ModifyJourneyCommand}"
                     HorizontalOptions="StartAndExpand"  Text="&#xe9bd;" FontFamily="{StaticResource Icon}" />
 
-    <Button x:Name="AddToJourneyButton" 
+    <!--Button x:Name="AddToJourneyButton" 
                     Style="{StaticResource circleButtonAddStyle}"
                     Command="{Binding AddToJourneyCommand}"
-                    HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}" />
+                    HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}" /-->
 
 </AbsoluteLayout>

@@ -65,6 +65,12 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			etemp1.Title = "Prueba titulo";
 			temp2.JourneyEntries.Add(etemp1);
 			temp2.Entries = 1;
+			var etemp2 = new EventCard();
+			etemp2.Text = "Concierto de Lady Gaga";
+			etemp2.Address = "Calle fulanito";
+			etemp2.Time = "12:00";
+			temp2.JourneyEvents.Add(etemp2);
+			temp2.Events = 1;
 			JourneyDays.Add(temp2);
 
 			var temp3 = new DayCard();
@@ -73,7 +79,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			JourneyDays.Add(temp3);
 			//JourneyImages.Add(new ImageCard());
 
-			daySelected = JourneyDays[0];
+			DaySelected = JourneyDays[0];
 		}
 
 
@@ -122,14 +128,20 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			set
 			{
 				SetProperty(ref daySelected, value);
+
 				foreach(DayCard day in JourneyDays)
 				{
-					day.Background = (Color)Application.Current.Resources["PrimaryFaded"];
+					day.Background = (Color) App.Current.Resources["PrimaryFaded"];
 				}
-				JourneyDays.First(x => x == daySelected).Background = (Color)Application.Current.Resources["Primary"];
-				//Color change = (Color) Application.Current.Resources["Primary"];
-				//Color temp1 = JourneyDays.First(x => x == daySelected).Background;
-				//SetProperty(ref temp1, change);
+				JourneyDays.First(x => x == daySelected).Background = (Color) Application.Current.Resources["Primary"];
+
+				var temp = new ObservableCollection<DayCard>(JourneyDays);
+				JourneyDays.Clear();
+
+				foreach (DayCard day in temp)
+				{
+					JourneyDays.Add(day);
+				}
 			}
 		}
 

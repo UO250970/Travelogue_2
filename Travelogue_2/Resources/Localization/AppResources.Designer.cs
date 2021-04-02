@@ -286,11 +286,29 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sin entradas.
+        /// </summary>
+        internal static string EntriesEmpty {
+            get {
+                return ResourceManager.GetString("EntriesEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Eventos.
         /// </summary>
         internal static string Events {
             get {
                 return ResourceManager.GetString("Events", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sin eventos.
+        /// </summary>
+        internal static string EventsEmpty {
+            get {
+                return ResourceManager.GetString("EventsEmpty", resourceCulture);
             }
         }
         
