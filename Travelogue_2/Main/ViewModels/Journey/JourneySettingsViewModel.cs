@@ -10,9 +10,22 @@ using System;
 
 namespace Travelogue_2.Main.ViewModels.Journal
 {
+	[QueryProperty(nameof(JourneyId), nameof(JourneyId))]
 	public class JourneySettingsViewModel : PhotoRendererModel
 	{
-		public string JourneyId;
+		public string journeyId;
+		public string JourneyId
+		{
+			get
+			{
+				return journeyId;
+			}
+			set
+			{
+				journeyId = value;
+				LoadData();
+			}
+		}
 
 		public Command ModifyCoverCommand { get; }
 		public Command MoreInfoCommand { get; }

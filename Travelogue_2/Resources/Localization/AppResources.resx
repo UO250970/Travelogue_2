@@ -123,14 +123,26 @@
   <data name="AddEvent" xml:space="preserve">
     <value>Añadir evento</value>
   </data>
-  <data name="AddNewEntry" xml:space="preserve">
-    <value>Añadir nueva entrada</value>
+  <data name="AddReservation" xml:space="preserve">
+    <value>Añadir reserva</value>
   </data>
   <data name="AddToJourney" xml:space="preserve">
     <value>Añadir al viaje</value>
   </data>
+  <data name="AlertNoDaySelected" xml:space="preserve">
+    <value>Sin fecha seleccionada</value>
+  </data>
   <data name="AlertNoNameInJourney" xml:space="preserve">
     <value>Nombre de viaje vacio</value>
+  </data>
+  <data name="AlertNoTitleInEntry" xml:space="preserve">
+    <value>Entrada sin título</value>
+  </data>
+  <data name="AlertNoTitleInEvent" xml:space="preserve">
+    <value>Evento sin título</value>
+  </data>
+  <data name="AlertNoTitleInReservation" xml:space="preserve">
+    <value>Reserva sin titulo</value>
   </data>
   <data name="Calendar" xml:space="preserve">
     <value>Calendario</value>
@@ -180,6 +192,9 @@
   <data name="DateFormat" xml:space="preserve">
     <value>dd-MM-yyyy</value>
   </data>
+  <data name="DeleteJourney" xml:space="preserve">
+    <value>Eliminar viaje</value>
+  </data>
   <data name="Destinies" xml:space="preserve">
     <value>Destinos</value>
   </data>
@@ -191,6 +206,9 @@
   </data>
   <data name="Empty" xml:space="preserve">
     <value />
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Fecha fin</value>
   </data>
   <data name="EnterADestiny" xml:space="preserve">
     <value>Introduce un destino</value>
@@ -210,6 +228,9 @@
   <data name="Gallery" xml:space="preserve">
     <value>Galería</value>
   </data>
+  <data name="IniDate" xml:space="preserve">
+    <value>Fecha inicio</value>
+  </data>
   <data name="JourneyCover" xml:space="preserve">
     <value>Portada</value>
   </data>
@@ -225,11 +246,17 @@
   <data name="LocalizationFirstDay" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="Location" xml:space="preserve">
+    <value>Localizacion</value>
+  </data>
   <data name="Map" xml:space="preserve">
     <value>Mapa</value>
   </data>
   <data name="Media" xml:space="preserve">
     <value>Media</value>
+  </data>
+  <data name="MessButtonDeleteJourney" xml:space="preserve">
+    <value>Los eventos, reservas y entradas asociadas al viaje se eliminaran. Las imagenes seguirán siendo accesibles desde la pestaña "Media".</value>
   </data>
   <data name="MessDeleteJourney" xml:space="preserve">
     <value>¿Quieres eliminar el viaje? (Las entradas y eventos se eliminarán)</value>
@@ -237,17 +264,38 @@
   <data name="MessDestinyAlreadySelected" xml:space="preserve">
     <value>El destino seleccionado ya está incluido en el viaje</value>
   </data>
+  <data name="MessEntryCreated" xml:space="preserve">
+    <value>La entrada se ha creado correctamente</value>
+  </data>
+  <data name="MessEventCreated" xml:space="preserve">
+    <value>El evento se ha creado correctamente</value>
+  </data>
   <data name="MessJourCreated" xml:space="preserve">
     <value>El viaje se ha creado correctamente</value>
   </data>
   <data name="MessLanguageChanged" xml:space="preserve">
-    <value>Se ha cambiado el idioma de la aplicación.</value>
+    <value>Se ha cambiado el idioma de la aplicación</value>
+  </data>
+  <data name="MessNoDaySelected" xml:space="preserve">
+    <value>Se debe seleccionar una fecha</value>
   </data>
   <data name="MessNoNameInJourney" xml:space="preserve">
     <value>Se debe introducir un nombre de viaje</value>
   </data>
+  <data name="MessNoTitleInEntry" xml:space="preserve">
+    <value>Se debe introducir un título a la entrada</value>
+  </data>
+  <data name="MessNoTitleInEvent" xml:space="preserve">
+    <value>Se debe introducir un título al evento</value>
+  </data>
+  <data name="MessNoTitleInReservation" xml:space="preserve">
+    <value>Se debe introducir un título a la reserva</value>
+  </data>
+  <data name="MessReservationCreated" xml:space="preserve">
+    <value>La reserva se ha creado correctamente</value>
+  </data>
   <data name="MessTooManyDestinies" xml:space="preserve">
-    <value>El viaje ya contiene demasiados destinos.</value>
+    <value>El viaje ya contiene demasiados destinos</value>
   </data>
   <data name="Minus" xml:space="preserve">
     <value>-</value>
@@ -269,6 +317,9 @@
   </data>
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Número de tfn.</value>
   </data>
   <data name="PickPhoto" xml:space="preserve">
     <value>Seleccionar foto</value>

@@ -6,6 +6,7 @@ using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Models.Entries;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.ViewModels.PopUps;
 using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.PopUps;
 using Xamarin.Forms;
@@ -24,39 +25,20 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		public ObservableCollection<EventCard> JourneyEvents { get; }
 		public ObservableCollection<EntryCard> JourneyEntries { get; }
 
-		/** Pop Ups*/
-		public AddEntryPopUp AddEntryPU;
-		/** */
-
-		/** Pop Up Commands*/
-		public Command ModifyJourneyCommand { get; }
-		public Command AddToJourneyCommand { get; }
-
+		/** Commands*/
 		public Command AddEventCommand { get; }
-		public Command CreateEventCommand { get; }
-
 		public Command AddEntryCommand { get; }
-		public Command CreateEntryCommand { get; }
-
 		public Command AddToEntryCommand { get; }
-		public Command CreateToEntryCommand { get; }
-
-		public Command CancelCommand { get; }
+		public Command ModifyJourneyCommand { get; }
 		/** */
-
+		
 		public JourneyTemplateViewModel()
 		{
+			AddEventCommand = new Command(() => AddEventC());
+			AddEntryCommand = new Command(() => AddEntryC());
+			AddToEntryCommand = new Command(() => AddToEntryC());
 			AddImageCommand = new Command(() => AddImageC());
 			ModifyJourneyCommand = new Command(() => ModifyJourneyC());
-			AddToJourneyCommand = new Command(() => AddToJourneyC());
-			//CreateEventCommand = new Command(() => CreateEventC());
-
-			AddEntryCommand = new Command(() => AddEntryC());
-			CreateEntryCommand = new Command(() => CreateEntryC());
-
-			AddToEntryCommand = new Command(() => AddToEntryC());
-
-			CancelCommand = new Command(() => CancelC());
 
 			JourneyImages = new ObservableCollection<ImageCard>();
 			JourneyDays = new ObservableCollection<DayCard>();
@@ -146,7 +128,6 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		#endregion
 
 		#region DaySelected
-
 		private DayCard daySelected = new DayCard();
 
 		public DayCard DaySelected
@@ -160,7 +141,8 @@ namespace Travelogue_2.Main.ViewModels.Journal
 				{
 					day.Background = (Color) App.Current.Resources["PrimaryFaded"];
 				}
-				JourneyDays.First(x => x == daySelected).Background = (Color) Application.Current.Resources["Primary"];
+				var selected = JourneyDays.First(x => x == daySelected);
+				selected.Background = (Color) Application.Current.Resources["Primary"];
 
 				var temp = new ObservableCollection<DayCard>(JourneyDays);
 				JourneyDays.Clear();
@@ -169,29 +151,12 @@ namespace Travelogue_2.Main.ViewModels.Journal
 				{
 					JourneyDays.Add(day);
 				}
+
+				DaySelectedNum = JourneyDays.IndexOf(selected);
 			}
 		}
 
-		//public int DaySelectedNum { get; set; }
-
-		#endregion
-
-		#region DaySelectedPU
-
-		private DateTime DaySelectedPU = new DateTime();
-
-		#endregion
-
-		#region MaxDaySelectedPU
-
-		private DateTime MaxDaySelectedPU = new DateTime();
-
-		#endregion
-
-		#region MinDaySelectedPU
-
-		private DateTime MinDaySelectedPU = new DateTime();
-
+		public int DaySelectedNum = 0;
 		#endregion
 
 		#region Commands
@@ -210,50 +175,23 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			}
 		}
 
-		async internal void AddToJourneyC()
+		async internal void AddEventC()
 		{
-			//AddToJourneyPopUp popup = new AddToJourneyPopUp();
-			//popup.BindingContext = this;
-			//popup.model.journey = JourneyCard;
-		}
-
-		//TO-DO checkear
-		async internal void CreateEventC()
-		{ // TO-DO Aqui mas alante podría pasarle el ID del Day y buscarlo en BBDD....
-			await Shell.Current.GoToAsync($"{nameof(CreateEventView)}?{nameof(CreateEventViewModel.DaySelected)}={JourneyDays.IndexOf(DaySelected)}&{nameof(CreateEventViewModel.JourneyId)}={JourneyId}");
+			//TO-DO checkear
+			await Shell.Current.GoToAsync($"{nameof(AddEventPopUp)}?{nameof(AddToJourneyPopUpModel.JourneyId)}={JourneyId}&" +
+																	$"{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}");
 		}
 
 		async internal void AddEntryC()
 		{
-			AddEntryPU = new AddEntryPopUp
-			{
-				BindingContext = this
-			};
-			DaySelectedPU = DaySelected.ToDateTime();
-			MinDaySelectedPU = JourneyDays.First().ToDateTime();
-			MaxDaySelectedPU = JourneyDays.Last().ToDateTime();
-
-			AddEntryPU.Show();
-		}
-
-		async internal void CreateEntryC()
-		{
-			//await Shell.Current.GoToAsync($"{nameof(CreateEntryView)}?{nameof(CreateEntryViewModel.DaySelectedNum)}={DaySelectedNum}" +
-			//$"&{nameof(CreateEntryViewModel.JourneyId)}={JourneyId}");
-			AddEntryPU.Dismiss();
+			//TO-DO checkear
+			await Shell.Current.GoToAsync($"{nameof(AddEntryPopUp)}?{nameof(AddToJourneyPopUpModel.JourneyId)}={JourneyId}&" +
+																	$"{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}");
 		}
 
 		async internal void AddToEntryC()
 		{
-			/*AddEntryPU = new AddEntryPopUp
-			{
-				BindingContext = this
-			};*/
-		}
-
-		async internal void CancelC()
-		{
-			AddEntryPU.Dismiss();
+			//await Shell.Current.GoToAsync($"{nameof(AddToEntryPopUp)}?{nameof(AddToJourneyPopUpModel.JourneyId)}={JourneyId}");
 		}
 
 		#endregion

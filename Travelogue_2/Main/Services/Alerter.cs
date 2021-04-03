@@ -16,6 +16,10 @@ namespace Travelogue_2.Main.Services
 
 		/** Dates */
 
+		public static async Task AlertNoDaySelected()
+		{
+			await Page?.DisplayAlert(App.LocResources["AlertNoDaySelected"], App.LocResources["MessNoDaySelected"], App.LocResources["Ok"]);
+		}
 		/*
 		public static async Task AlertDayOccupied()
 		{
@@ -52,7 +56,7 @@ namespace Travelogue_2.Main.Services
 
 		public static async Task AlertJourneyCreated()
 		{
-			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessJourCreated"], AppResources.Ok);
+			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessJourCreated"], App.LocResources["Ok"]);
 		}
 
 		/*
@@ -60,12 +64,22 @@ namespace Travelogue_2.Main.Services
 		{
 			await Page?.DisplayAlert(AppResources.Empty, AppResources.MessJourAlreadyCreated, AppResources.Ok);
 		}
+		*/
+		internal static async Task AlertEventCreated()
+		{
+			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEventCreated"], App.LocResources["Ok"]);
+		}
+
+		internal static async Task AlertReservationCreated()
+		{
+			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessReservationCreated"], App.LocResources["Ok"]);
+		}
 
 		internal static async Task AlertEntryCreated()
 		{
-			await Page?.DisplayAlert(AppResources.Empty, AppResources.MessEventCreated, AppResources.Ok);
+			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEntryCreated"], App.LocResources["Ok"]);
 		}
-
+		/*
 		internal static async Task AlertTextCreated()
 		{
 			await Page?.DisplayAlert(AppResources.Empty, AppResources.MessTextCreated, AppResources.Ok);
@@ -97,12 +111,23 @@ namespace Travelogue_2.Main.Services
 		{
 			await Page?.DisplayAlert(App.LocResources["AlertNoNameInJourney"], App.LocResources["MessNoNameInJourney"], App.LocResources["Ok"]);
 		}
-		/*
-		public static async Task AlertNoNameInEntry()
+
+
+		public static async Task AlertNoTitleInEvent()
 		{
-			await Page?.DisplayAlert(AppResources.AlertNoNameInEntry, AppResources.MessNoNameInEntry, AppResources.Ok);
+			await Page?.DisplayAlert(App.LocResources["AlertNoTitleInEvent"], App.LocResources["MessNoTitleInEvent"], App.LocResources["Ok"]);
 		}
 
+		public static async Task AlertNoTitleInReservation()
+		{
+			await Page?.DisplayAlert(App.LocResources["AlertNoTitleInReservation"], App.LocResources["MessNoTitleInReservation"], App.LocResources["Ok"]);
+		}
+
+		public static async Task AlertNoTitleInEntry()
+		{
+			await Page?.DisplayAlert(App.LocResources["AlertNoTitleInEntry"], App.LocResources["MessNoTitleInEntry"], App.LocResources["Ok"]);
+		}
+		/*
 		public static async Task AlertNoNameInEvent()
 		{
 			await Page?.DisplayAlert(AppResources.AlertNoNameInEvent, AppResources.MessNoNameInEvent, AppResources.Ok);

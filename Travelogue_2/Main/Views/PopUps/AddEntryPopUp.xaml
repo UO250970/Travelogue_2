@@ -1,47 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<popuplayout:SfPopupLayout xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:popuplayout="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms" 
-             x:Class="Travelogue_2.Main.Views.PopUps.AddEntryPopUp">
+             Shell.PresentationMode="ModalNotAnimated"
+             x:Class="Travelogue_2.Main.Views.PopUps.AddEntryPopUp"
+             BackgroundColor="#40000000">
 
-    <popuplayout:SfPopupLayout.PopupView>
-        <popuplayout:PopupView ShowHeader="False" ShowFooter="True" VerticalOptions="Fill">
+    <ContentPage.Content >
 
-            <popuplayout:PopupView.ContentTemplate>
-                <DataTemplate>
+        <Grid>
 
-                    <StackLayout>
-                        <Label Text="{Binding Resources[AddNewEntry]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="185"></RowDefinition>
+            </Grid.RowDefinitions>
 
-                        <StackLayout Margin="10">
+            <Frame Grid.Row="1" BackgroundColor="{StaticResource White}"
+                   Margin="20, 0, 20, 2">
 
-                            <Label Text="{Binding Resources[Date]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                            <DatePicker Date="{Binding DaySelectedPU}" FontSize="Medium" 
-                                MaximumDate="{Binding MaxDaySelectedPU}" MinimumDate="{Binding MinDaySelectedPU}"/>
+                <StackLayout>
+                    <Label Text="{Binding Resources[AddEntry]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
 
+                    <StackLayout Margin="10">
 
-                            <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                            <DatePicker Date="{Binding DaySelectedPU}" FontSize="Medium" 
-                                MaximumDate="{Binding MaxDaySelectedPU}" MinimumDate="{Binding MinDaySelectedPU}"/>
+                        <Label Text="{Binding Resources[Date]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                        <DatePicker Date="{Binding DaySelected, Mode=TwoWay}" FontSize="Medium" 
+                                    MaximumDate="{Binding MaxDaySelected}" MinimumDate="{Binding MinDaySelected}"/>
 
-                        </StackLayout>
+                        <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                        <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
+
                     </StackLayout>
-                    
-                </DataTemplate>
-            </popuplayout:PopupView.ContentTemplate>
+                </StackLayout>
+                
+            </Frame>
 
-            <popuplayout:PopupView.FooterTemplate>
-                <DataTemplate>
-                    
-                    <StackLayout Orientation="Horizontal">
-                        <Button Text="{Binding Resources[Cancel]}" HorizontalOptions="FillAndExpand" Command="{Binding CreateEntryCommand}" BackgroundColor="{DynamicResource Primary}"/>
-                        <Button Text="{Binding Resources[Save]}" HorizontalOptions="FillAndExpand" Command="{Binding CancelCommand}" BackgroundColor="{DynamicResource Primary}"/>
-                    </StackLayout>
+            <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="20, 0">
+                <Button Text="{Binding Resources[Cancel]}" HorizontalOptions="FillAndExpand" Command="{Binding CancelCommand}" BackgroundColor="{DynamicResource Primary}"/>
+                <Button Text="{Binding Resources[Save]}" HorizontalOptions="FillAndExpand" Command="{Binding CreateEntryCommand}" BackgroundColor="{DynamicResource Primary}"/>
+            </StackLayout>
 
-                </DataTemplate>
-            </popuplayout:PopupView.FooterTemplate>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CancelCommand}"/>
+            </Grid.GestureRecognizers>
+        </Grid>
 
-        </popuplayout:PopupView>
-    </popuplayout:SfPopupLayout.PopupView>
+    </ContentPage.Content>
     
-</popuplayout:SfPopupLayout>
+</ContentPage>

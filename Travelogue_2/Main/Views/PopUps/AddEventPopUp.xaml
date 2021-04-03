@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.PresentationMode="ModalNotAnimated"
+             x:Class="Travelogue_2.Main.Views.PopUps.AddEventPopUp"
+             BackgroundColor="#40000000">
+    
+    <ContentPage.Content>
+
+        <StackLayout>
+
+            <Grid x:Name="GridEvent" IsVisible="True">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="110"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Frame Grid.Row="1" BackgroundColor="{StaticResource White}"
+                   Margin="20, 0, 20, 2">
+
+                    <StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Button Text="Evento" HorizontalOptions="CenterAndExpand" Clicked="CreateEvent"/>
+                            <Button Text="Reserva" HorizontalOptions="CenterAndExpand" Clicked="CreateReservation"/>
+                        </StackLayout>
+
+                        <Label Text="{Binding Resources[AddEvent]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+
+                        <StackLayout Margin="10">
+
+                            <Label Text="{Binding Resources[Date]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                            <DatePicker Date="{Binding DaySelected, Mode=TwoWay}" FontSize="Medium" 
+                                    MaximumDate="{Binding MaxDaySelected}" MinimumDate="{Binding MinDaySelected}"/>
+
+                            <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                            <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
+
+                            <Label Text="{Binding Resources[Location]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                            <Entry Text="{Binding Location, Mode=TwoWay}" FontSize="Medium" />
+
+                        </StackLayout>
+                    </StackLayout>
+
+                </Frame>
+
+                <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="20, 0">
+                    <Button Text="{Binding Resources[Cancel]}" HorizontalOptions="FillAndExpand" Command="{Binding CancelCommand}" BackgroundColor="{DynamicResource Primary}"/>
+                    <Button Text="{Binding Resources[Save]}" HorizontalOptions="FillAndExpand" Command="{Binding CreateEventCommand}" BackgroundColor="{DynamicResource Primary}"/>
+                </StackLayout>
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CancelCommand}"/>
+                </Grid.GestureRecognizers>
+            </Grid>
+
+            <Grid x:Name="GridReservation" IsVisible="False">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="65"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Frame Grid.Row="1" BackgroundColor="{StaticResource White}"
+                   Margin="20, 0, 20, 2">
+
+                    <StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Button Text="Evento" HorizontalOptions="CenterAndExpand" Clicked="CreateEvent"/>
+                            <Button Text="Reserva" HorizontalOptions="CenterAndExpand" Clicked="CreateReservation"/>
+                        </StackLayout>
+
+                        <Label Text="{Binding Resources[AddReservation]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+
+                        <StackLayout Margin="10">
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label HorizontalOptions="StartAndExpand" Text="{Binding Resources[IniDate]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                                <Label HorizontalOptions="StartAndExpand" Text="{Binding Resources[EndDate]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <DatePicker HorizontalOptions="StartAndExpand" Date="{Binding IniDaySelected, Mode=TwoWay}" FontSize="Medium" 
+                                    MaximumDate="{Binding MaxDaySelected}" MinimumDate="{Binding MinDaySelected}"/>
+                                <DatePicker HorizontalOptions="StartAndExpand" Date="{Binding EndDaySelected, Mode=TwoWay}" FontSize="Medium" 
+                                    MaximumDate="{Binding MaxDaySelected}" MinimumDate="{Binding MinDaySelected}"/>
+                            </StackLayout>
+
+                            <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                            <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
+
+                            <Label Text="{Binding Resources[Location]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                            <Entry Text="{Binding Location, Mode=TwoWay}" FontSize="Medium" />
+                            
+                            <Label Text="{Binding Resources[PhoneNumber]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                            <Entry Text="{Binding Location, Mode=TwoWay}" FontSize="Medium" />
+
+                        </StackLayout>
+                    </StackLayout>
+
+                </Frame>
+
+                <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="20, 0">
+                    <Button Text="{Binding Resources[Cancel]}" HorizontalOptions="FillAndExpand" Command="{Binding CancelCommand}" BackgroundColor="{DynamicResource Primary}"/>
+                    <Button Text="{Binding Resources[Save]}" HorizontalOptions="FillAndExpand" Command="{Binding CreateReservationCommand}" BackgroundColor="{DynamicResource Primary}"/>
+                </StackLayout>
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CancelCommand}"/>
+                </Grid.GestureRecognizers>
+            </Grid>
+
+        </StackLayout>
+        
+    </ContentPage.Content>
+    
+</ContentPage>

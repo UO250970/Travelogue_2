@@ -16,6 +16,7 @@
             <Color x:Key="Grey">#999999</Color>
             <Color x:Key="None">Transparent</Color>
             <Color x:Key="Disabled">#332196F3</Color>
+            <Color x:Key="Red">#AB0E0E</Color>
             
 
             <Rectangle x:Key="LinearOpacityBrush">

@@ -4,6 +4,7 @@ using Travelogue_2.Main.Views.Library;
 using Travelogue_2.Main.Views.Library.Create;
 using Travelogue_2.Main.Views.Modelation;
 using Travelogue_2.Main.Views.Modelation.Modelate;
+using Travelogue_2.Main.Views.PopUps;
 using Travelogue_2.Main.Views.Settings;
 using Xamarin.Forms;
 
@@ -34,6 +35,9 @@ namespace Travelogue_2
             Routing.RegisterRoute(nameof(SettingsLanguageView), typeof(SettingsLanguageView));
             Routing.RegisterRoute(nameof(SettingsDestiniesView), typeof(SettingsDestiniesView));
             Routing.RegisterRoute(nameof(SettingsStyleView), typeof(SettingsStyleView));
+
+            Routing.RegisterRoute(nameof(AddEntryPopUp), typeof(AddEntryPopUp));
+            Routing.RegisterRoute(nameof(AddEventPopUp), typeof(AddEventPopUp));
         }
 
     }

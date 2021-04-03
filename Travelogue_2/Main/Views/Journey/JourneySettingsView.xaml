@@ -164,6 +164,17 @@
                     </StackLayout>
                 </Frame>
 
+                <Frame HasShadow="True" Margin="5" Padding="5">
+                    <StackLayout Orientation="Horizontal">
+                        
+                        <StackLayout>
+                            <Button BackgroundColor="{StaticResource Red}" Text="{Binding Resources[DeleteJourney]}" FontSize="Large" TextColor="{StaticResource White}"/>
+                            <Label Text="{Binding Resources[MessButtonDeleteJourney]}" FontSize="Caption" />
+                        </StackLayout>
+                        
+                    </StackLayout>
+                </Frame>
+                
             </StackLayout>
         
         </ScrollView>
