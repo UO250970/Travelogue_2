@@ -38,6 +38,7 @@ namespace Travelogue_2
 
             Routing.RegisterRoute(nameof(AddEntryPopUp), typeof(AddEntryPopUp));
             Routing.RegisterRoute(nameof(AddEventPopUp), typeof(AddEventPopUp));
+            Routing.RegisterRoute(nameof(AddToEntryPopUp), typeof(AddToEntryPopUp));
         }
 
     }

@@ -91,6 +91,18 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			DaySelected = JourneyDays[0];
 		}
 
+		public override void OnAppearing()
+		{
+			IsBusy = true;
+
+			var temp = new ObservableCollection<DayCard>(JourneyDays);
+			JourneyDays.Clear();
+
+			foreach (DayCard day in temp)
+			{
+				JourneyDays.Add(day);
+			}
+		}
 
 		#region Photos
 
@@ -191,7 +203,8 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		async internal void AddToEntryC()
 		{
-			//await Shell.Current.GoToAsync($"{nameof(AddToEntryPopUp)}?{nameof(AddToJourneyPopUpModel.JourneyId)}={JourneyId}");
+			await Shell.Current.GoToAsync($"{nameof(AddToEntryPopUp)}?{nameof(AddToJourneyPopUpModel.JourneyId)}={JourneyId}&" +
+																	$"{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}");
 		}
 
 		#endregion

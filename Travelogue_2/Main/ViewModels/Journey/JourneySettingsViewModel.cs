@@ -46,8 +46,10 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		public override void LoadData()
 		{
-			JourneyId = "1";
+			journeyId = "1";
 			JourneyName = "Prueba titulo";
+
+			JourneyDestinies.Clear();
 
 			DestinyCard temp = new DestinyCard();
 			Destiny tempDestiny = CommonVariables.AvailableDestinies.Find(x => x.Name == "Canada");

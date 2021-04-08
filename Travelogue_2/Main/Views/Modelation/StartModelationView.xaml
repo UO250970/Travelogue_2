@@ -4,7 +4,7 @@
              x:Class="Travelogue_2.Main.Views.Modelation.StartModelationView"
              xmlns:local="clr-namespace:Travelogue_2.Main.Views.Fragments">
 
-    <ContentPage.Content>
+    <ContentPage.Content BackgroundColor="{DynamicResource PrimaryFaded}">
         <Grid Padding="10,10,10,5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 using Travelogue_2.Main.Services;
+using Travelogue_2.Main.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
@@ -46,7 +47,8 @@ namespace Travelogue_2.Main.ViewModels.Media
 
 		internal Position GetPosition()
 		{
-			string loca = Resources.CurrentCulture();
+			return GeolocalizationUtil.GetPosition();
+			/**string loca = Resources.CurrentCulture();
 			if (CommonVariables.AvailableLanguagesLocations.ContainsKey(loca.ToUpper()))
 			{
 				var temp = CommonVariables.AvailableLanguagesLocations[loca.ToUpper()];
@@ -54,7 +56,7 @@ namespace Travelogue_2.Main.ViewModels.Media
 			} else
 			{
 				return new Position();
-			}
+			}*/
 		}
 
 		protected void OnResourcesChanged(object s, PropertyChangedEventArgs e)

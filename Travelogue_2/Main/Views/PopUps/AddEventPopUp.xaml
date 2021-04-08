@@ -19,18 +19,18 @@
                 </Grid.RowDefinitions>
 
                 <Frame Grid.Row="1" BackgroundColor="{StaticResource White}"
-                   Margin="20, 0, 20, 2">
+                   Margin="20, 0, 20, 2" Padding="0">
 
                     <StackLayout>
 
-                        <StackLayout Orientation="Horizontal">
-                            <Button Text="Evento" HorizontalOptions="CenterAndExpand" Clicked="CreateEvent"/>
-                            <Button Text="Reserva" HorizontalOptions="CenterAndExpand" Clicked="CreateReservation"/>
+                        <StackLayout Orientation="Horizontal" Padding="0">
+                            <Button BackgroundColor="{DynamicResource White}" TextColor="{StaticResource Black}" Text="{Binding Resources[Event]}" HorizontalOptions="FillAndExpand"/>
+                            <Button BackgroundColor="{DynamicResource PrimaryFaded}" TextColor="{StaticResource White}" Text="{Binding Resources[Reservation]}" HorizontalOptions="FillAndExpand" Clicked="CreateReservation"/>
                         </StackLayout>
 
-                        <Label Text="{Binding Resources[AddEvent]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        <!--Label Text="{Binding Resources[AddEvent]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/-->
 
-                        <StackLayout Margin="10">
+                        <StackLayout Margin="20">
 
                             <Label Text="{Binding Resources[Date]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
                             <DatePicker Date="{Binding DaySelected, Mode=TwoWay}" FontSize="Medium" 
@@ -67,18 +67,18 @@
                 </Grid.RowDefinitions>
 
                 <Frame Grid.Row="1" BackgroundColor="{StaticResource White}"
-                   Margin="20, 0, 20, 2">
+                   Margin="20, 0, 20, 2" Padding="0">
 
                     <StackLayout>
 
                         <StackLayout Orientation="Horizontal">
-                            <Button Text="Evento" HorizontalOptions="CenterAndExpand" Clicked="CreateEvent"/>
-                            <Button Text="Reserva" HorizontalOptions="CenterAndExpand" Clicked="CreateReservation"/>
+                            <Button BackgroundColor="{DynamicResource PrimaryFaded}" TextColor="{StaticResource White}" Text="{Binding Resources[Event]}" HorizontalOptions="FillAndExpand" Clicked="CreateEvent"/>
+                            <Button BackgroundColor="{DynamicResource White}" TextColor="{StaticResource Black}" Text="{Binding Resources[Reservation]}" HorizontalOptions="FillAndExpand"/>
                         </StackLayout>
 
-                        <Label Text="{Binding Resources[AddReservation]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        <!--Label Text="{Binding Resources[AddReservation]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/-->
 
-                        <StackLayout Margin="10">
+                        <StackLayout Margin="20">
 
                             <StackLayout Orientation="Horizontal">
                                 <Label HorizontalOptions="StartAndExpand" Text="{Binding Resources[IniDate]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
@@ -98,7 +98,7 @@
                             <Entry Text="{Binding Location, Mode=TwoWay}" FontSize="Medium" />
                             
                             <Label Text="{Binding Resources[PhoneNumber]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                            <Entry Text="{Binding Location, Mode=TwoWay}" FontSize="Medium" />
+                            <Entry Text="{Binding PhoneNumber, Mode=TwoWay}" FontSize="Medium" />
 
                         </StackLayout>
                     </StackLayout>

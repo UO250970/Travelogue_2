@@ -25,24 +25,16 @@ namespace Travelogue_2.Main.Utils
         private static async Task<Location> GetLocationAsync()
         {
             CheckPermissions();
-            Location loc = null;
+            Location location = null;
             try
             {
-                //var request = new GeolocationRequest(GeolocationAccuracy.Medium, timeout: TimeSpan.FromSeconds(10));
-                //CancellationTokenSource cts = new CancellationTokenSource();
-                var location = await Geolocation.GetLocationAsync();
-
-                if (loc == null)
-                {
-                    loc = Geolocation.GetLastKnownLocationAsync().Result;
-                }
-                return Geolocation.GetLocationAsync().Result;
+                return await Geolocation.GetLastKnownLocationAsync();
             }
             catch (Exception ext)
             {
                 Console.WriteLine($"Excepcion: {ext.Message}");
             }
-            return loc;
+            return location;
         }
 
         public static Location GetLocation()

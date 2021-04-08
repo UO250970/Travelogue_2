@@ -129,11 +129,20 @@
   <data name="AddToJourney" xml:space="preserve">
     <value>Añadir al viaje</value>
   </data>
+  <data name="AlertEmptyData" xml:space="preserve">
+    <value>Campo vacio</value>
+  </data>
   <data name="AlertNoDaySelected" xml:space="preserve">
     <value>Sin fecha seleccionada</value>
   </data>
+  <data name="AlertNoImageSelected" xml:space="preserve">
+    <value>Sin imagen seleccionada</value>
+  </data>
   <data name="AlertNoNameInJourney" xml:space="preserve">
     <value>Nombre de viaje vacio</value>
+  </data>
+  <data name="AlertNoText" xml:space="preserve">
+    <value>Sin texto</value>
   </data>
   <data name="AlertNoTitleInEntry" xml:space="preserve">
     <value>Entrada sin título</value>
@@ -149,6 +158,9 @@
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancelar</value>
+  </data>
+  <data name="Caption" xml:space="preserve">
+    <value>Pie de foto</value>
   </data>
   <data name="CardHolder" xml:space="preserve">
     <value>Tarjetera</value>
@@ -219,6 +231,9 @@
   <data name="EntriesEmpty" xml:space="preserve">
     <value>Sin entradas</value>
   </data>
+  <data name="Event" xml:space="preserve">
+    <value>Evento</value>
+  </data>
   <data name="Events" xml:space="preserve">
     <value>Eventos</value>
   </data>
@@ -227,6 +242,9 @@
   </data>
   <data name="Gallery" xml:space="preserve">
     <value>Galería</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Imagen</value>
   </data>
   <data name="IniDate" xml:space="preserve">
     <value>Fecha inicio</value>
@@ -264,11 +282,23 @@
   <data name="MessDestinyAlreadySelected" xml:space="preserve">
     <value>El destino seleccionado ya está incluido en el viaje</value>
   </data>
+  <data name="MessEmptyData" xml:space="preserve">
+    <value>Se debe rellenar los campos obligatorios</value>
+  </data>
   <data name="MessEntryCreated" xml:space="preserve">
     <value>La entrada se ha creado correctamente</value>
   </data>
   <data name="MessEventCreated" xml:space="preserve">
     <value>El evento se ha creado correctamente</value>
+  </data>
+  <data name="MessImageAdded" xml:space="preserve">
+    <value>La imagen se ha añadido correctamente</value>
+  </data>
+  <data name="MessInfoAdded" xml:space="preserve">
+    <value>La información se ha añadido correctamente</value>
+  </data>
+  <data name="MessInfoWillBeLost" xml:space="preserve">
+    <value>Si cierra la pestaña la información introducida se perderá</value>
   </data>
   <data name="MessJourCreated" xml:space="preserve">
     <value>El viaje se ha creado correctamente</value>
@@ -279,8 +309,14 @@
   <data name="MessNoDaySelected" xml:space="preserve">
     <value>Se debe seleccionar una fecha</value>
   </data>
+  <data name="MessNoImageSelected" xml:space="preserve">
+    <value>Se debe seleccionar una imagen</value>
+  </data>
   <data name="MessNoNameInJourney" xml:space="preserve">
     <value>Se debe introducir un nombre de viaje</value>
+  </data>
+  <data name="MessNoText" xml:space="preserve">
+    <value>Se debe introducir un texto</value>
   </data>
   <data name="MessNoTitleInEntry" xml:space="preserve">
     <value>Se debe introducir un título a la entrada</value>
@@ -293,6 +329,9 @@
   </data>
   <data name="MessReservationCreated" xml:space="preserve">
     <value>La reserva se ha creado correctamente</value>
+  </data>
+  <data name="MessTextAdded" xml:space="preserve">
+    <value>El texto se ha añadido correctamente</value>
   </data>
   <data name="MessTooManyDestinies" xml:space="preserve">
     <value>El viaje ya contiene demasiados destinos</value>
@@ -327,6 +366,9 @@
   <data name="Plus" xml:space="preserve">
     <value>+</value>
   </data>
+  <data name="Reservation" xml:space="preserve">
+    <value>Reserva</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Guardar</value>
   </data>
@@ -356,6 +398,9 @@
   </data>
   <data name="TakePhoto" xml:space="preserve">
     <value>Sacar foto</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Texto</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Si</value>

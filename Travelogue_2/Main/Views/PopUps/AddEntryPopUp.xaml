@@ -20,7 +20,9 @@
                    Margin="20, 0, 20, 2">
 
                 <StackLayout>
-                    <Label Text="{Binding Resources[AddEntry]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+
+                    <Button BackgroundColor="{DynamicResource PrimaryFaded}" TextColor="{StaticResource White}" Text="{Binding Resources[Entry]}" HorizontalOptions="FillAndExpand"/>
+                    <!--Label Text="{Binding Resources[AddEntry]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/-->
 
                     <StackLayout Margin="10">
 

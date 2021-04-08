@@ -23,11 +23,10 @@
                                         Span="2"/>
             </CollectionView.ItemsLayout>
 
-            <CollectionView.ItemTemplate>
+            <CollectionView.ItemTemplate >
                 <DataTemplate>
                     
-                    <StackLayout Padding="5" 
-                                 Margin="10" BackgroundColor="{StaticResource Grey}">
+                    <StackLayout Margin="10" Padding="10"  HeightRequest="125" BackgroundColor="{Binding Primary}">
                         <Image Source="{Binding Image}"
                                 HorizontalOptions="Center"
                                 VerticalOptions="CenterAndExpand" />

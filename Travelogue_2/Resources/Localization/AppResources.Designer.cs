@@ -97,6 +97,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Campo vacio.
+        /// </summary>
+        internal static string AlertEmptyData {
+            get {
+                return ResourceManager.GetString("AlertEmptyData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sin fecha seleccionada.
         /// </summary>
         internal static string AlertNoDaySelected {
@@ -106,11 +115,29 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sin imagen seleccionada.
+        /// </summary>
+        internal static string AlertNoImageSelected {
+            get {
+                return ResourceManager.GetString("AlertNoImageSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nombre de viaje vacio.
         /// </summary>
         internal static string AlertNoNameInJourney {
             get {
                 return ResourceManager.GetString("AlertNoNameInJourney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sin texto.
+        /// </summary>
+        internal static string AlertNoText {
+            get {
+                return ResourceManager.GetString("AlertNoText", resourceCulture);
             }
         }
         
@@ -156,6 +183,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pie de foto.
+        /// </summary>
+        internal static string Caption {
+            get {
+                return ResourceManager.GetString("Caption", resourceCulture);
             }
         }
         
@@ -367,6 +403,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Evento.
+        /// </summary>
+        internal static string Event {
+            get {
+                return ResourceManager.GetString("Event", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Eventos.
         /// </summary>
         internal static string Events {
@@ -390,6 +435,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string Gallery {
             get {
                 return ResourceManager.GetString("Gallery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imagen.
+        /// </summary>
+        internal static string Image {
+            get {
+                return ResourceManager.GetString("Image", resourceCulture);
             }
         }
         
@@ -502,6 +556,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Se debe rellenar los campos obligatorios.
+        /// </summary>
+        internal static string MessEmptyData {
+            get {
+                return ResourceManager.GetString("MessEmptyData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to La entrada se ha creado correctamente.
         /// </summary>
         internal static string MessEntryCreated {
@@ -516,6 +579,33 @@ namespace Travelogue_2.Resources.Localization {
         internal static string MessEventCreated {
             get {
                 return ResourceManager.GetString("MessEventCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La imagen se ha añadido correctamente.
+        /// </summary>
+        internal static string MessImageAdded {
+            get {
+                return ResourceManager.GetString("MessImageAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La información se ha añadido correctamente.
+        /// </summary>
+        internal static string MessInfoAdded {
+            get {
+                return ResourceManager.GetString("MessInfoAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Si cierra la pestaña la información introducida se perderá.
+        /// </summary>
+        internal static string MessInfoWillBeLost {
+            get {
+                return ResourceManager.GetString("MessInfoWillBeLost", resourceCulture);
             }
         }
         
@@ -547,11 +637,29 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Se debe seleccionar una imagen.
+        /// </summary>
+        internal static string MessNoImageSelected {
+            get {
+                return ResourceManager.GetString("MessNoImageSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Se debe introducir un nombre de viaje.
         /// </summary>
         internal static string MessNoNameInJourney {
             get {
                 return ResourceManager.GetString("MessNoNameInJourney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Se debe introducir un texto.
+        /// </summary>
+        internal static string MessNoText {
+            get {
+                return ResourceManager.GetString("MessNoText", resourceCulture);
             }
         }
         
@@ -588,6 +696,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string MessReservationCreated {
             get {
                 return ResourceManager.GetString("MessReservationCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El texto se ha añadido correctamente.
+        /// </summary>
+        internal static string MessTextAdded {
+            get {
+                return ResourceManager.GetString("MessTextAdded", resourceCulture);
             }
         }
         
@@ -691,6 +808,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reserva.
+        /// </summary>
+        internal static string Reservation {
+            get {
+                return ResourceManager.GetString("Reservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Guardar.
         /// </summary>
         internal static string Save {
@@ -777,6 +903,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string TakePhoto {
             get {
                 return ResourceManager.GetString("TakePhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Texto.
+        /// </summary>
+        internal static string Text {
+            get {
+                return ResourceManager.GetString("Text", resourceCulture);
             }
         }
         

@@ -1,10 +1,7 @@
-﻿using Plugin.Media.Abstractions;
-using System;
+﻿using System;
 using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
-using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Services;
 using Xamarin.Forms;
 
@@ -42,7 +39,7 @@ namespace Travelogue_2.Main.ViewModels
 
 		public abstract void LoadData();
 
-        public void OnAppearing()
+        public virtual void OnAppearing()
             => IsBusy = true;
 
 	}

@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.PresentationMode="ModalNotAnimated"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
+             x:Class="Travelogue_2.Main.Views.PopUps.AddToEntryPopUp"
+             BackgroundColor="#40000000">
+    
+    <ContentPage.Content>
+        
+        <StackLayout>
+
+            <Grid x:Name="GridText" IsVisible="True">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="110"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Frame Grid.Row="1" BackgroundColor="{StaticResource White}"
+                   Margin="20, 0, 20, 2" Padding="0">
+                    
+                    <StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Padding="0">
+                            <Button BackgroundColor="{DynamicResource White}" TextColor="{StaticResource Black}" Text="{Binding Resources[Text]}" HorizontalOptions="FillAndExpand"/>
+                            <Button BackgroundColor="{DynamicResource PrimaryFaded}" TextColor="{StaticResource White}" Text="{Binding Resources[Image]}" HorizontalOptions="FillAndExpand" Clicked="CreateImage"/>
+                        </StackLayout>
+                        
+                        <StackLayout Margin="20">
+
+                            <Editor Text="{Binding Text, Mode=TwoWay}" FontSize="Medium" HeightRequest="200"/>
+                            
+                        </StackLayout>
+
+                    </StackLayout>
+
+                </Frame>
+
+                <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="20, 0">
+                    <Button Text="{Binding Resources[Cancel]}" HorizontalOptions="FillAndExpand" Command="{Binding CancelCommand}" BackgroundColor="{DynamicResource Primary}"/>
+                    <Button Text="{Binding Resources[Save]}" HorizontalOptions="FillAndExpand" Command="{Binding CreateTextCommand}" BackgroundColor="{DynamicResource Primary}"/>
+                </StackLayout>
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CancelCommand}"/>
+                </Grid.GestureRecognizers>
+                
+            </Grid>
+
+            <Grid x:Name="GridImage" IsVisible="False">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="110"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="50"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Frame Grid.Row="1" BackgroundColor="{StaticResource White}"
+                   Margin="20, 0, 20, 2" Padding="0">
+
+                    <StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Padding="0">
+                            <Button BackgroundColor="{DynamicResource PrimaryFaded}" TextColor="{StaticResource White}" Text="{Binding Resources[Text]}" HorizontalOptions="FillAndExpand" Clicked="CreateText"/>
+                            <Button BackgroundColor="{DynamicResource White}" TextColor="{StaticResource Black}" Text="{Binding Resources[Image]}" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+
+                        <StackLayout Margin="20">
+
+                            <border:SfBorder BorderColor="{StaticResource Grey}" BorderWidth="2" CornerRadius="10">
+                                <border:SfBorder.DashArray>
+                                    <x:Array Type="{x:Type x:Double}">
+                                        <x:Double>3</x:Double>
+                                        <x:Double>4</x:Double>
+                                    </x:Array>
+                                </border:SfBorder.DashArray>
+
+                                <border:SfBorder.Content >
+
+                                    <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding Image.ImageSour}" Aspect="AspectFill" />
+
+                                </border:SfBorder.Content>
+
+                                <border:SfBorder.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddImageCommand}"/>
+                                </border:SfBorder.GestureRecognizers>
+
+                            </border:SfBorder>
+
+                            <Label Text="{Binding Resources[Caption]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                            <Entry Text="{Binding Caption, Mode=TwoWay}" FontSize="Medium" />
+                            
+                        </StackLayout>
+                        
+                    </StackLayout>
+
+                </Frame>
+
+                <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="20, 0">
+                    <Button Text="{Binding Resources[Cancel]}" HorizontalOptions="FillAndExpand" Command="{Binding CancelCommand}" BackgroundColor="{DynamicResource Primary}"/>
+                    <Button Text="{Binding Resources[Save]}" HorizontalOptions="FillAndExpand" Command="{Binding CreateImageCommand}" BackgroundColor="{DynamicResource Primary}"/>
+                </StackLayout>
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CancelCommand}"/>
+                </Grid.GestureRecognizers>
+
+
+            </Grid>
+
+        </StackLayout>
+        
+    </ContentPage.Content>
+    
+</ContentPage>

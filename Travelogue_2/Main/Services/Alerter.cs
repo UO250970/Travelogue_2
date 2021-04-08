@@ -79,25 +79,20 @@ namespace Travelogue_2.Main.Services
 		{
 			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEntryCreated"], App.LocResources["Ok"]);
 		}
-		/*
-		internal static async Task AlertTextCreated()
+		
+		internal static async Task AlertInfoAdded()
 		{
-			await Page?.DisplayAlert(AppResources.Empty, AppResources.MessTextCreated, AppResources.Ok);
+			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessInfoAdded"], App.LocResources["Ok"]);
 		}
 
-		internal static async Task AlertImageCreated()
+		internal static async Task AlertTextAdded()
 		{
-			await Page?.DisplayAlert(AppResources.Empty, AppResources.MessImageCreated, AppResources.Ok);
+			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessTextAdded"], App.LocResources["Ok"]);
 		}
 
-		internal static async Task AlertReservationCreated()
+		internal static async Task AlertImageAdded()
 		{
-			await Page?.DisplayAlert(AppResources.Empty, AppResources.MessReservationCreated, AppResources.Ok);
-		}
-
-		public static async Task AlertNoText()
-		{
-			await Page?.DisplayAlert(AppResources.AlertNoText, AppResources.MessNoText, AppResources.Ok);
+			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessImageAdded"], App.LocResources["Ok"]);
 		}
 
 		/** No Name */
@@ -127,24 +122,24 @@ namespace Travelogue_2.Main.Services
 		{
 			await Page?.DisplayAlert(App.LocResources["AlertNoTitleInEntry"], App.LocResources["MessNoTitleInEntry"], App.LocResources["Ok"]);
 		}
-		/*
-		public static async Task AlertNoNameInEvent()
+		
+		public static async Task AlertEmptyData()
 		{
-			await Page?.DisplayAlert(AppResources.AlertNoNameInEvent, AppResources.MessNoNameInEvent, AppResources.Ok);
+			await Page?.DisplayAlert(App.LocResources["AlertEmptyData"], App.LocResources["MessEmptyData"], App.LocResources["Ok"]);
 		}
 
-		internal static async Task AlertNoNameInReservation()
+		public static async Task AlertNoText()
 		{
-			await Page?.DisplayAlert(AppResources.AlertNoNameInReservation, AppResources.MessNoNameInReservation, AppResources.Ok);
+			await Page?.DisplayAlert(App.LocResources["AlertNoText"], App.LocResources["MessNoText"], App.LocResources["Ok"]);
 		}
 
-		internal static async Task AlertNoImageSelected()
+		public static async Task AlertNoImageSelected()
 		{
-			await Page?.DisplayAlert(AppResources.AlertNoImageSelected, AppResources.MessNoImageSelected, AppResources.Ok);
+			await Page?.DisplayAlert(App.LocResources["AlertNoImageSelected"], App.LocResources["MessNoImageSelected"], App.LocResources["Ok"]);
 		}
 
 		/** Too Many */
-		
+
 		internal static async Task AlertTooManyDestiniesInJourney()
 		{
 			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessTooManyDestinies"], App.LocResources["Ok"]);
@@ -172,8 +167,11 @@ namespace Travelogue_2.Main.Services
 		internal static async Task<bool> AlertDeleteJourney()
 			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessDeleteJourney"], App.LocResources["Ok"], App.LocResources["Cancel"]);
 
+		internal static async Task<bool> AlertInfoWillBeLost()
+			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessInfoWillBeLost"], App.LocResources["Ok"], App.LocResources["Cancel"]);
+
 		/** Photo */
-		
+
 		// Gochada -> True es take, false es pick
 		internal static async Task<string> AlertPhoto()
 		{

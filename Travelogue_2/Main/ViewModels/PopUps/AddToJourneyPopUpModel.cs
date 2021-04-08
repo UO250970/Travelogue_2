@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Services;
+using Travelogue_2.Main.Utils;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.PopUps
@@ -20,7 +22,6 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			set
 			{
 				journeyId = value;
-				LoadData();
 			}
 		}
 
@@ -41,7 +42,9 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		public Command CreateEventCommand { get; }
 		public Command CreateReservationCommand { get; }
 		public Command CreateEntryCommand { get; }
-		public Command CreateToEntryCommand { get; }
+		public Command AddImageCommand { get; }
+		public Command CreateTextCommand { get; }
+		public Command CreateImageCommand { get; }
 		public Command CancelCommand { get; }
 
 		public AddToJourneyPopUpModel()
@@ -49,7 +52,9 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			CreateEventCommand = new Command(() => CreateEventC());
 			CreateReservationCommand = new Command(() => CreateReservationC());
 			CreateEntryCommand = new Command(() => CreateEntryC());
-			CreateToEntryCommand = new Command(() => CreateToEntryC());
+			AddImageCommand = new Command(() => AddImageC());
+			CreateTextCommand = new Command(() => CreateTextC());
+			CreateImageCommand = new Command(() => CreateImageC());
 
 			CancelCommand = new Command(() => CancelC());
 		}
@@ -161,7 +166,57 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		}
 
 		#endregion
-		
+
+		#region PhoneNumber
+		private string phoneNumber = "";
+		public string PhoneNumber
+		{
+			get => phoneNumber;
+			set
+			{
+				SetProperty(ref phoneNumber, value);
+			}
+		}
+		#endregion
+
+		#region Text
+		private string text = "";
+		public string Text
+		{
+			get => text;
+			set
+			{
+				SetProperty(ref text, value);
+			}
+		}
+		#endregion
+
+		#region Image
+		private ImageCard image = new ImageCard();
+		public ImageCard Image
+		{
+			get => image;
+			set
+			{
+				SetProperty(ref image, value);
+			}
+		}
+
+		public int CoverImageHeight { get => CommonVariables.ImageMaxHeight; }
+		#endregion
+
+		#region Caption
+		private string caption = "";
+		public string Caption
+		{
+			get => caption;
+			set
+			{
+				SetProperty(ref caption, value);
+			}
+		}
+		#endregion
+
 		async internal void CreateEventC()
 		{ // TO-DO Aqui mas alante podría pasarle el ID del Day y buscarlo en BBDD....
 		  //await Shell.Current.GoToAsync($"{nameof(CreateEventView)}?{nameof(CreateEventViewModel.DaySelected)}={JourneyDays.IndexOf(DaySelected)}&{nameof(CreateEventViewModel.JourneyId)}={JourneyId}");
@@ -216,17 +271,53 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			}
 		}
 
-		async internal void CreateToEntryC()
+		async internal void AddImageC()
 		{
-			/*AddEntryPU = new AddEntryPopUp
+			ImageCard success = await CameraUtil.Photo(this);
+			if (success != null)
 			{
-				BindingContext = this
-			};*/
+				Image = success;
+			}
+		}
+
+		async internal void CreateTextC()
+		{
+			if (Text == "")
+			{
+				await Alerter.AlertNoText();
+			}
+			else
+			{
+				await Alerter.AlertTextAdded();
+				await Shell.Current.GoToAsync("..");
+			}
+		}
+
+		async internal void CreateImageC()
+		{
+			if (Image.ImageSour == null)
+			{
+				await Alerter.AlertNoImageSelected();
+			}
+			else
+			{
+				await Alerter.AlertImageAdded();
+				await Shell.Current.GoToAsync("..");
+			}
 		}
 
 		async internal void CancelC()
 		{
-			await Shell.Current.GoToAsync("..");
+			if (Title != "" || Location != "" || PhoneNumber != "")
+			{
+				bool result = await Alerter.AlertInfoWillBeLost();
+
+				if (result) await Shell.Current.GoToAsync("..");
+			}
+			else
+			{
+				await Shell.Current.GoToAsync("..");
+			}
 		}
 	}
 }
