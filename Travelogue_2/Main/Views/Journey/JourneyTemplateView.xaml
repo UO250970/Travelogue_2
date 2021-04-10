@@ -1,11 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <AbsoluteLayout xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-                xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+                xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" xmlns:effects="clr-namespace:Travelogue_2.Main.Services"
                 x:Class="Travelogue_2.Main.Views.Fragments.JourneyTemplateView"
                 BackgroundColor="{DynamicResource PrimaryFaded}"
                 x:Name="JourneyTemplateViewName">
 
+    <AbsoluteLayout.Resources>
+
+        <DataTemplate x:Key="textTemplate">
+
+            <StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="8*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="{Binding .Time}" FontSize="Default"/>
+                    <Label Grid.Column="1" FontSize="Default" Text="{Binding .Text}"/>
+                </Grid>
+
+            </StackLayout>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="imageNoFootTemplate">
+
+            <StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="8*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="{Binding .Time}" FontSize="Default"/>
+                    <StackLayout Grid.Column="1">
+                        <Image HeightRequest="{Binding BindingContext.CardImagesHeight, Source={x:Reference JourneyTemplateViewName}}" 
+                           WidthRequest="{Binding BindingContext.CardImagesHeight, Source={x:Reference JourneyTemplateViewName}}" 
+                           Source="{Binding .ImageSour}"/>
+                        <Label FontSize="Caption" Text="{Binding .ImageFoot}"/>
+                    </StackLayout>
+                </Grid>
+
+            </StackLayout>
+
+        </DataTemplate>
+
+        <DataTemplate x:Key="imageFootTemplate">
+
+            <StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="8*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Text="{Binding .Time}" FontSize="Default"/>
+                    <Image Grid.Column ="1" HeightRequest="{Binding BindingContext.CardImagesHeight, Source={x:Reference JourneyTemplateViewName}}" 
+                           WidthRequest="{Binding BindingContext.CardImagesHeight, Source={x:Reference JourneyTemplateViewName}}" 
+                           Source="{Binding .ImageSour}"/>
+                </Grid>
+
+            </StackLayout>
+
+        </DataTemplate>
+
+        <effects:EntryTemplateSelector TextTemplate="{StaticResource textTemplate}" 
+                                       ImageNoFootTemplate="{StaticResource imageNoFootTemplate}"
+                                       ImageFootTemplate="{StaticResource imageFootTemplate}" 
+                                       x:Key="entryTemplateSelector" />
+
+    </AbsoluteLayout.Resources>
+    
     <ScrollView x:Name="MainScroll" AbsoluteLayout.LayoutFlags="All"
                         AbsoluteLayout.LayoutBounds="0,0,1,1" >
         <StackLayout>
@@ -47,10 +114,17 @@
                         <DataTemplate>
 
                             <StackLayout>
-                                <StackLayout Orientation="Horizontal">
+                                <StackLayout Orientation="Horizontal" 
+                                             effects:LongPressedEffect.Command="{Binding Path=BindingContext.EditOrDeleteEventCommand, Source={x:Reference JourneyTemplateViewName}}"
+                                             effects:LongPressedEffect.CommandParameter="{Binding .}">
                                     <Label Text="{Binding .Time}" FontSize="Small" TextColor="{DynamicResource Primary}"></Label>
                                     <Label Text="{Binding .Text}" FontSize="Small"></Label>
                                     <Label Text="{Binding .Address}" FontSize="Caption" FontAttributes="Italic"></Label>
+
+                                    <StackLayout.Effects>
+                                        <effects:LongPressedEffect />
+                                    </StackLayout.Effects>
+
                                 </StackLayout>
 
                                 <Rectangle HeightRequest="1" WidthRequest="250" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource Grey}"/>
@@ -99,33 +173,18 @@
                                     <StackLayout>
                                         <Label FontSize="Medium" TextColor="{DynamicResource PrimaryFaded}" Text="{Binding .Title}"></Label>
 
-                                        <StackLayout x:Name="EntryContentCollection" BindableLayout.ItemsSource="{Binding .Content}">
-                                            <BindableLayout.ItemTemplate>
-                                                <DataTemplate>
+                                        <StackLayout x:Name="EntryContentCollection" BindableLayout.ItemsSource="{Binding .Content}" 
+                                                     BindableLayout.ItemTemplateSelector="{StaticResource entryTemplateSelector}" >
 
-                                                    <StackLayout>
-                                                        <Grid>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="*"/>
-                                                                <ColumnDefinition Width="8*"/>
-                                                            </Grid.ColumnDefinitions>
-
-                                                            <Label Grid.Column="0" Text="{Binding .Time}" FontSize="Default"/>
-                                                            <Label Grid.Column="1" FontSize="Default" Text="{Binding .Text}"/>
-                                                        </Grid>
-
-
-                                                        <Label Text="&#xea0a;" FontFamily="{StaticResource Icon}" FontSize="Medium"  VerticalTextAlignment="Center" HorizontalOptions="Center"
-                                                        TextColor="{DynamicResource Grey}" Margin="10, 0, 10, 10">
-                                                            <Label.GestureRecognizers>
-                                                                <TapGestureRecognizer Command="{Binding BindingContext.AddToEntryCommand, Source={x:Reference JourneyTemplateViewName}}"/>
-                                                            </Label.GestureRecognizers>
-                                                        </Label>
-                                                    </StackLayout>
-
-                                                </DataTemplate>
-                                            </BindableLayout.ItemTemplate>
                                         </StackLayout>
+                                        
+                                        <Label Text="&#xea0a;" FontFamily="{StaticResource Icon}" FontSize="Medium"  VerticalTextAlignment="Center" HorizontalOptions="Center"
+                                                        TextColor="{DynamicResource Grey}" Margin="10, 0, 10, 10">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.AddToEntryCommand, Source={x:Reference JourneyTemplateViewName}}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                        
                                     </StackLayout>
 
                                 </DataTemplate>
@@ -170,7 +229,7 @@
                                     </border:SfBorder.Content>
 
                                     <border:SfBorder.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding AddImageCommand}"/>
+                                        <TapGestureRecognizer Command="{Binding AddImageCommand}" />
                                     </border:SfBorder.GestureRecognizers>
 
                                 </border:SfBorder>
@@ -215,7 +274,7 @@
                     Command="{Binding ModifyJourneyCommand}"
                     HorizontalOptions="StartAndExpand"  Text="&#xe9bd;" FontFamily="{StaticResource Icon}" />
 
-    <!--Button x:Name="AddToJourneyButton" 
+    <!--Button x:Name="DeleteModeButton" 
                     Style="{StaticResource circleButtonAddStyle}"
                     Command="{Binding AddToJourneyCommand}"
                     HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}" /-->

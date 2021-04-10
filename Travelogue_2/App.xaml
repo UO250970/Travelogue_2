@@ -92,8 +92,7 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
-
-
+            
             <OnPlatform x:Key="Icon" x:TypeArguments="x:String">
                 <On Platform="Android" Value="icomoon.ttf#icomoon" />
             </OnPlatform>

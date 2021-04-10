@@ -192,8 +192,8 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		#endregion
 
 		#region Image
-		private ImageCard image = new ImageCard();
-		public ImageCard Image
+		private EntryImageCard image = new EntryImageCard();
+		public EntryImageCard Image
 		{
 			get => image;
 			set
@@ -273,7 +273,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		async internal void AddImageC()
 		{
-			ImageCard success = await CameraUtil.Photo(this);
+			EntryImageCard success = await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				Image = success;

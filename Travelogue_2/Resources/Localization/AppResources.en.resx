@@ -201,6 +201,9 @@
   <data name="DateFormat" xml:space="preserve">
     <value>MM-dd-yyyy</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
   <data name="DeleteJourney" xml:space="preserve">
     <value>Datele journey</value>
   </data>
@@ -209,6 +212,9 @@
   </data>
   <data name="Destiny" xml:space="preserve">
     <value>Destiny</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="Embassies" xml:space="preserve">
     <value>Embassies</value>

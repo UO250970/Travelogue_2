@@ -50,8 +50,8 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 		}
 
 		#region CoverImage
-		public ImageCard coverImage = new ImageCard();
-		public ImageCard CoverImage
+		public EntryImageCard coverImage = new EntryImageCard();
+		public EntryImageCard CoverImage
 		{
 			get => coverImage;
 			set
@@ -172,7 +172,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
 		async internal void AddCoverC()
 		{
-			ImageCard success = await CameraUtil.Photo(this);
+			EntryImageCard success = await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				CoverImage = success;

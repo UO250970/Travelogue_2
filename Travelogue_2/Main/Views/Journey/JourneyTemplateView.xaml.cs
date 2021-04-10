@@ -21,6 +21,7 @@ namespace Travelogue_2.Main.Views.Fragments
 			MainScroll.PropertyChanged += OnScrollViewPropertyChanged;
 		}
 
+		// TODO - Añadir a documentación https://alexdunn.org/2017/12/27/xamarin-tip-xamarin-forms-long-press-effect/
 
 		protected void OnAppearing()
 		{

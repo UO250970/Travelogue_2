@@ -11,9 +11,9 @@ namespace Travelogue_2.Main.Services
 	public abstract class PhotoRendererModel : DataBaseViewModel
 	{
 
-		public ImageCard AddImage(MediaFile file)
+		public EntryImageCard AddImage(MediaFile file)
 		{
-			ImageCard image = new ImageCard();
+			EntryImageCard image = new EntryImageCard();
 			try
 			{
 				if (file != null)

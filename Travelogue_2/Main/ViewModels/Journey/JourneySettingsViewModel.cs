@@ -34,7 +34,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		public JourneySettingsViewModel()
 		{
-			coverImage = new ImageCard();
+			coverImage = new EntryImageCard();
 			JourneyDestinies = new ObservableCollection<DestinyCard>();
 
 			ModifyCoverCommand = new Command(x => ModifyCoverC());
@@ -79,8 +79,8 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		#endregion
 
 		#region CoverImage
-		public ImageCard coverImage;
-		public ImageCard CoverImage
+		public EntryImageCard coverImage;
+		public EntryImageCard CoverImage
 		{
 			get => coverImage;
 			set
@@ -120,7 +120,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		async internal void ModifyCoverC()
 		{
-			ImageCard success = await CameraUtil.Photo(this);
+			EntryImageCard success = await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				CoverImage = success;

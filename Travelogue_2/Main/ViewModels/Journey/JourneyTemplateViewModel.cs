@@ -18,9 +18,9 @@ namespace Travelogue_2.Main.ViewModels.Journal
 	{
 		public string JourneyId { get; set; }
 		public Command AddImageCommand { get; }
-		public Command<ImageCard> ImageTapped { get; }
+		public Command<EntryImageCard> ImageTapped { get; }
 		public Command<DayCard> DayTapped { get; }
-		public ObservableCollection<ImageCard> JourneyImages { get; }
+		public ObservableCollection<EntryImageCard> JourneyImages { get; }
 		public ObservableCollection<DayCard> JourneyDays { get; }
 		public ObservableCollection<EventCard> JourneyEvents { get; }
 		public ObservableCollection<EntryCard> JourneyEntries { get; }
@@ -30,8 +30,10 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		public Command AddEntryCommand { get; }
 		public Command AddToEntryCommand { get; }
 		public Command ModifyJourneyCommand { get; }
+		public Command<EventCard> EditOrDeleteEventCommand { get; }
+		public Command<EntryCard> EditOrDeleteEntryCommand { get; }
 		/** */
-		
+
 		public JourneyTemplateViewModel()
 		{
 			AddEventCommand = new Command(() => AddEventC());
@@ -40,13 +42,16 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			AddImageCommand = new Command(() => AddImageC());
 			ModifyJourneyCommand = new Command(() => ModifyJourneyC());
 
-			JourneyImages = new ObservableCollection<ImageCard>();
+			EditOrDeleteEventCommand = new Command<EventCard>((EventCard e) => EditOrDeleteEventC(e));
+			EditOrDeleteEntryCommand = new Command<EntryCard>((EntryCard e) => EditOrDeleteEntryC(e));
+
+			JourneyImages = new ObservableCollection<EntryImageCard>();
 			JourneyDays = new ObservableCollection<DayCard>();
 			JourneyDays.CollectionChanged += JourneyDaysChanged;
 			JourneyEvents = new ObservableCollection<EventCard>();
 			JourneyEntries = new ObservableCollection<EntryCard>();
 
-			ImageTapped = new Command<ImageCard>(OnImageSelected);
+			ImageTapped = new Command<EntryImageCard>(OnImageSelected);
 			DayTapped = new Command<DayCard>(OnDaySelected);
 
 			ExecuteLoadDataCommand();
@@ -69,8 +74,11 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			etemp1.Title = "Prueba titulo";
 			var ectemp1 = new EntryTextCard();
 			ectemp1.Text = "Hoy me divertí mucho corriendo detrás de patos :')";
-			ectemp1.Time = DateTime.Today.Hour.ToString() + ":" + DateTime.Today.Minute.ToString();
+			ectemp1.Time = DateTime.Now.ToString("HH:mm");  // TODO - Pasar a documetnación https://stackoverflow.com/questions/11107465/getting-only-hour-minute-of-datetime/11107508
 			etemp1.Content.Add(ectemp1);
+			var ectemp2 = new EntryImageCard();
+			ectemp2.Time = DateTime.Now.ToString("HH:mm");
+			etemp1.Content.Add(ectemp2);
 			temp2.JourneyEntries.Add(etemp1);
 			temp2.Entries = 1;
 			var etemp2 = new EventCard();
@@ -106,8 +114,8 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		#region Photos
 
-		public ImageCard blanckImage = new ImageCard();
-		public ImageCard BlanckImage
+		public EntryImageCard blanckImage = new EntryImageCard();
+		public EntryImageCard BlanckImage
 		{
 			get => blanckImage;
 			set
@@ -121,12 +129,12 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		#region Cover
 
-		private ImageCard coverImage = new ImageCard()
+		private EntryImageCard coverImage = new EntryImageCard()
 		{
 			ImageSour = CommonVariables.GetImage()
 		};
 
-		public ImageCard CoverImage
+		public EntryImageCard CoverImage
 		{
 			get => coverImage;
 			set
@@ -180,7 +188,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		async internal void AddImageC()
 		{
-			ImageCard success = await CameraUtil.Photo(this);
+			EntryImageCard success = await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				JourneyImages.Add(success);
@@ -207,11 +215,20 @@ namespace Travelogue_2.Main.ViewModels.Journal
 																	$"{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}");
 		}
 
+		async internal void EditOrDeleteEventC(EventCard eventC)
+		{
+			await Alerter.AlertEmptyData();
+		}
+		
+		async internal void EditOrDeleteEntryC(EntryCard entryC)
+		{
+			await Alerter.AlertEmptyData();
+		}
 		#endregion
 
 		#region OnAction
 
-		async void OnImageSelected(ImageCard image)
+		async void OnImageSelected(EntryImageCard image)
 		{
 			if (image == null)
 				return;

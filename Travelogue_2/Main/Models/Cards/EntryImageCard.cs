@@ -1,12 +1,11 @@
-﻿using Travelogue_2.Main.Services;
+﻿using Travelogue_2.Main.Models.Entries;
+using Travelogue_2.Main.Services;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Models.Cards
 {
-	public class ImageCard
+	public class EntryImageCard : IEntry
 	{
-		public int Id { get; set; }
-
 		public ImageSource ImageSour { get; set; } = ImageSource.FromResource(CommonVariables.GenericImageImage);
 
 		public string ImagePath { get; set; } = string.Empty;

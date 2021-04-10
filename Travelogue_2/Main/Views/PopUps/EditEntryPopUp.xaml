@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.PresentationMode="ModalNotAnimated"
+             x:Class="Travelogue_2.Main.Views.PopUps.EditEntryPopUp"
+             BackgroundColor="#40000000">
+    
+    <ContentPage.Content>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="185"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Row="1" BackgroundColor="{StaticResource White}"
+                   Margin="20, 0, 20, 2">
+
+                <StackLayout>
+
+                    <Button BackgroundColor="{DynamicResource PrimaryFaded}" TextColor="{StaticResource White}" Text="{Binding Resources[Entry]}" HorizontalOptions="FillAndExpand"/>
+                    <!--Label Text="{Binding Resources[AddEntry]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/-->
+
+                    <StackLayout Margin="10">
+
+                        <Label Text="{Binding Resources[Date]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                        <DatePicker Date="{Binding DaySelected, Mode=TwoWay}" FontSize="Medium" 
+                                    MaximumDate="{Binding MaxDaySelected}" MinimumDate="{Binding MinDaySelected}"/>
+
+                        <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                        <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
+
+                    </StackLayout>
+                </StackLayout>
+
+            </Frame>
+
+            <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="20, 0">
+                <Button Text="{Binding Resources[Delete]}" HorizontalOptions="FillAndExpand" Command="{Binding DeleteCommand}" BackgroundColor="{DynamicResource Red}"/>
+                <Button Text="{Binding Resources[Save]}" HorizontalOptions="FillAndExpand" Command="{Binding CreateEntryCommand}" BackgroundColor="{DynamicResource Primary}"/>
+            </StackLayout>
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CancelCommand}"/>
+            </Grid.GestureRecognizers>
+        </Grid>
+
+    </ContentPage.Content>
+    
+</ContentPage>

@@ -36,7 +36,7 @@ namespace Travelogue_2.Main.Utils
 			}
 		}
 
-		internal static async Task<ImageCard> Photo(PhotoRendererModel model)
+		internal static async Task<EntryImageCard> Photo(PhotoRendererModel model)
 		{
 			CheckPermissions();
 			string photo = await Alerter.AlertPhoto();
