@@ -94,7 +94,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			set => SetProperty(ref maximumDate, value);
 		}
 
-		private string title = "";
+		private string title = string.Empty;
 
 		public string Title
 		{
@@ -102,7 +102,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			set => SetProperty(ref title, value);
 		}
 
-		private string description = "";
+		private string description = string.Empty;
 
 		public string Description
 		{

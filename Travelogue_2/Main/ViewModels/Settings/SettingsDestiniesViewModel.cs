@@ -12,7 +12,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
 	{
         public Command SearchDestinyCommand { get; }
         public Command AddDestinyCommand { get; }
-        public Dictionary<string,List<DestinyCard>> DestiniesOrdered { get; set; }
+        public ObservableDictionary<string,List<DestinyCard>> DestiniesOrdered { get; set; }
         public ObservableCollection<DestinyCard> Destinies { get; }
         public ObservableCollection<DestinyCard> DestiniesSearched { get; set; }
 
@@ -21,7 +21,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
             SearchDestinyCommand = new Command(() => SearchDestinyC());
             AddDestinyCommand = new Command(() => AddDestinyC());
 
-            DestiniesOrdered = new Dictionary<string, List<DestinyCard>>();
+            DestiniesOrdered = new ObservableDictionary<string, List<DestinyCard>>();
             Destinies = new ObservableCollection<DestinyCard>();
             DestiniesSearched = new ObservableCollection<DestinyCard>();
 
@@ -55,7 +55,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
 
         async internal void SearchDestinyC()
 		{
-            SearchText = "";
+            SearchText = string.Empty;
             SearchVisible = !SearchVisible;
         }
 
@@ -67,7 +67,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
             set => SetProperty(ref searchVisible, value);
         }
 
-        private string searchText = "";
+        private string searchText = string.Empty;
         public string SearchText
         {
             get => searchText;

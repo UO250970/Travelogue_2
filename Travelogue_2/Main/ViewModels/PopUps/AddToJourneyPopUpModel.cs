@@ -10,28 +10,36 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 {
 	[QueryProperty(nameof(JourneyId), nameof(JourneyId))]
 	[QueryProperty(nameof(DaySelectedNum), nameof(DaySelectedNum))]
+	[QueryProperty(nameof(EntryTextId), nameof(EntryTextId))]
+	[QueryProperty(nameof(EntryImageId), nameof(EntryImageId))]
 	public class AddToJourneyPopUpModel : PhotoRendererModel
 	{
 		public string journeyId;
 		public string JourneyId
 		{
-			get
-			{
-				return journeyId;
-			}
-			set
-			{
-				journeyId = value;
-			}
+			get => journeyId;
+			set => journeyId = value;
+		}
+
+
+		public string entryTextId;
+		public string EntryTextId
+		{
+			get => entryTextId;
+			set => entryTextId = value;
+		}
+
+		public string entryImageId;
+		public string EntryImageId
+		{
+			get => entryImageId;
+			set => entryImageId = value;
 		}
 
 		public string daySelectedNum;
 		public string DaySelectedNum
 		{
-			get
-			{
-				return daySelectedNum;
-			}
+			get => daySelectedNum;
 			set
 			{
 				daySelectedNum = value;
@@ -40,8 +48,11 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		}
 
 		public Command CreateEventCommand { get; }
+
 		public Command CreateReservationCommand { get; }
+
 		public Command CreateEntryCommand { get; }
+
 		public Command AddImageCommand { get; }
 		public Command CreateTextCommand { get; }
 		public Command CreateImageCommand { get; }
@@ -50,8 +61,11 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		public AddToJourneyPopUpModel()
 		{
 			CreateEventCommand = new Command(() => CreateEventC());
+
 			CreateReservationCommand = new Command(() => CreateReservationC());
+
 			CreateEntryCommand = new Command(() => CreateEntryC());
+
 			AddImageCommand = new Command(() => AddImageC());
 			CreateTextCommand = new Command(() => CreateTextC());
 			CreateImageCommand = new Command(() => CreateImageC());
@@ -79,7 +93,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		#region Title
 
-		public string Title { get; set; } = "";
+		public string Title { get; set; } = string.Empty;
 
 		#endregion
 
@@ -155,7 +169,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		#region Location
 
-		private string location = "";
+		private string location = string.Empty;
 		public string Location
 		{
 			get => location;
@@ -168,7 +182,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		#endregion
 
 		#region PhoneNumber
-		private string phoneNumber = "";
+		private string phoneNumber = string.Empty;
 		public string PhoneNumber
 		{
 			get => phoneNumber;
@@ -180,7 +194,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		#endregion
 
 		#region Text
-		private string text = "";
+		private string text = string.Empty;
 		public string Text
 		{
 			get => text;
@@ -201,12 +215,10 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 				SetProperty(ref image, value);
 			}
 		}
-
-		public int CoverImageHeight { get => CommonVariables.ImageMaxHeight; }
 		#endregion
 
 		#region Caption
-		private string caption = "";
+		private string caption = string.Empty;
 		public string Caption
 		{
 			get => caption;
@@ -217,6 +229,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		}
 		#endregion
 
+		#region EventCommands
 		async internal void CreateEventC()
 		{ // TO-DO Aqui mas alante podría pasarle el ID del Day y buscarlo en BBDD....
 		  //await Shell.Current.GoToAsync($"{nameof(CreateEventView)}?{nameof(CreateEventViewModel.DaySelected)}={JourneyDays.IndexOf(DaySelected)}&{nameof(CreateEventViewModel.JourneyId)}={JourneyId}");
@@ -226,7 +239,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			{
 				await Alerter.AlertNoDaySelected();
 			}
-			else if (Title == "")
+			else if (Title == string.Empty)
 			{
 				await Alerter.AlertNoTitleInEvent();
 			}
@@ -236,6 +249,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 				await Shell.Current.GoToAsync("..");
 			}
 		}
+		#endregion 
 
 		async internal void CreateReservationC()
 		{
@@ -244,7 +258,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			{
 				await Alerter.AlertNoDaySelected();
 			}
-			else if (Title == "")
+			else if (Title == string.Empty)
 			{
 				await Alerter.AlertNoTitleInReservation();
 			}
@@ -255,13 +269,14 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			}
 		}
 
+		#region EntryCommands
 		async internal void CreateEntryC()
 		{
 			if (DaySelected == null)
 			{
 				await Alerter.AlertNoDaySelected();
 			} 
-			else if (Title == "")
+			else if (Title == string.Empty)
 			{
 				await Alerter.AlertNoTitleInEntry();
 			} else
@@ -270,6 +285,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 				await Shell.Current.GoToAsync("..");
 			}
 		}
+		#endregion
 
 		async internal void AddImageC()
 		{
@@ -282,7 +298,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		async internal void CreateTextC()
 		{
-			if (Text == "")
+			if (Text == string.Empty)
 			{
 				await Alerter.AlertNoText();
 			}
@@ -308,7 +324,8 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		async internal void CancelC()
 		{
-			if (Title != "" || Location != "" || PhoneNumber != "")
+			if (Title != string.Empty || Location != string.Empty || PhoneNumber != string.Empty 
+				|| Text != string.Empty || Image.ImageName != string.Empty || Caption != string.Empty)
 			{
 				bool result = await Alerter.AlertInfoWillBeLost();
 

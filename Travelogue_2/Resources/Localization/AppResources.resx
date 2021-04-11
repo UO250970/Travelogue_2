@@ -252,6 +252,9 @@
   <data name="Image" xml:space="preserve">
     <value>Imagen</value>
   </data>
+  <data name="Images" xml:space="preserve">
+    <value>Imagenes</value>
+  </data>
   <data name="IniDate" xml:space="preserve">
     <value>Fecha inicio</value>
   </data>
@@ -260,6 +263,9 @@
   </data>
   <data name="JourneyName" xml:space="preserve">
     <value>Nombre del viaje</value>
+  </data>
+  <data name="JourneyWithoutImages" xml:space="preserve">
+    <value>Viaje sin imagenes</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Idioma</value>
@@ -357,6 +363,9 @@
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="NoJourneyAssociated" xml:space="preserve">
+    <value>Sin viaje asociado</value>
+  </data>
   <data name="NoResultsFound" xml:space="preserve">
     <value>Sin resultados</value>
   </data>
@@ -365,6 +374,9 @@
   </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>Número de tfn.</value>
+  </data>
+  <data name="Photos" xml:space="preserve">
+    <value>Fotos</value>
   </data>
   <data name="PickPhoto" xml:space="preserve">
     <value>Seleccionar foto</value>

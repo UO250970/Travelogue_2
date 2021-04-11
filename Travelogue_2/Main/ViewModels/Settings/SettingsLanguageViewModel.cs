@@ -43,7 +43,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
 
         async internal void SearchLanguageC()
         {
-            SearchText = "";
+            SearchText = string.Empty;
             SearchVisible = !SearchVisible;
         }
 
@@ -55,7 +55,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
             set => SetProperty(ref searchVisible, value);
         }
 
-        private string searchText = "";
+        private string searchText = string.Empty;
         public string SearchText
         {
             get => searchText;

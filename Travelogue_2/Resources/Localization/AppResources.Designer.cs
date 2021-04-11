@@ -466,6 +466,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Imagenes.
+        /// </summary>
+        internal static string Images {
+            get {
+                return ResourceManager.GetString("Images", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fecha inicio.
         /// </summary>
         internal static string IniDate {
@@ -489,6 +498,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string JourneyName {
             get {
                 return ResourceManager.GetString("JourneyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Viaje sin imagenes.
+        /// </summary>
+        internal static string JourneyWithoutImages {
+            get {
+                return ResourceManager.GetString("JourneyWithoutImages", resourceCulture);
             }
         }
         
@@ -781,6 +799,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sin viaje asociado.
+        /// </summary>
+        internal static string NoJourneyAssociated {
+            get {
+                return ResourceManager.GetString("NoJourneyAssociated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sin resultados.
         /// </summary>
         internal static string NoResultsFound {
@@ -804,6 +831,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string PhoneNumber {
             get {
                 return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fotos.
+        /// </summary>
+        internal static string Photos {
+            get {
+                return ResourceManager.GetString("Photos", resourceCulture);
             }
         }
         

@@ -59,12 +59,11 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 				SetProperty(ref coverImage, value);
 			}
 		}
-		public int CoverImageHeight { get => CommonVariables.ImageMaxHeight; }
 		#endregion
 
 		#region Title
-		private string title = "";
-		public new string Title
+		private string title = string.Empty;
+		public string Title
 		{
 			get => title;
 			set => SetProperty(ref title, value);
@@ -201,7 +200,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			{
 				await Alerter.AlertTooManyDestiniesInJourney();
 			}
-			DestinyText = "";
+			DestinyText = string.Empty;
 		}
 
 		async internal void MoreInfoC(string path)
@@ -214,7 +213,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
 		async internal void SaveC()
 		{ 
-			if (title.Equals(""))
+			if (title.Equals(string.Empty))
 			{
 				await Alerter.AlertNoNameInJourney();
 			} else

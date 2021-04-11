@@ -16,11 +16,11 @@ namespace Travelogue_2.Main.Models.Cards
 		public string Month
 		{
 			get => month;
-			set 
+			set
 			{
 				month = App.LocResources["MonthShort_" + value];
 				MonthNum = value;
-			} 
+			}
 		}
 
 		public string MonthNum { get; set; }
@@ -64,7 +64,7 @@ namespace Travelogue_2.Main.Models.Cards
 
 		public ObservableCollection<EventCard> JourneyEvents { get; set; } = new ObservableCollection<EventCard>();
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		//public event PropertyChangedEventHandler PropertyChanged;
 
 		public DateTime ToDateTime()
 		{

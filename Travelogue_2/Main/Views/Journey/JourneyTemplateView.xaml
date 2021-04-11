@@ -10,7 +10,8 @@
 
         <DataTemplate x:Key="textTemplate">
 
-            <StackLayout>
+            <StackLayout effects:LongPressedEffect.Command="{Binding Path=BindingContext.EditOrDeleteEntryCommand, Source={x:Reference JourneyTemplateViewName}}"
+                    effects:LongPressedEffect.CommandParameter="{Binding .}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -20,6 +21,11 @@
                     <Label Grid.Column="0" Text="{Binding .Time}" FontSize="Default"/>
                     <Label Grid.Column="1" FontSize="Default" Text="{Binding .Text}"/>
                 </Grid>
+
+
+                <StackLayout.Effects>
+                    <effects:LongPressedEffect />
+                </StackLayout.Effects>
 
             </StackLayout>
 
@@ -170,8 +176,16 @@
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
 
-                                    <StackLayout>
-                                        <Label FontSize="Medium" TextColor="{DynamicResource PrimaryFaded}" Text="{Binding .Title}"></Label>
+                                    <StackLayout >
+                                        <Label FontSize="Medium" TextColor="{DynamicResource PrimaryFaded}" Text="{Binding .Title}"
+                                               effects:LongPressedEffect.Command="{Binding Path=BindingContext.EditOrDeleteEntryCommand, Source={x:Reference JourneyTemplateViewName}}"
+                                               effects:LongPressedEffect.CommandParameter="{Binding .}">
+
+                                            <Label.Effects>
+                                                <effects:LongPressedEffect />
+                                            </Label.Effects>
+
+                                        </Label>
 
                                         <StackLayout x:Name="EntryContentCollection" BindableLayout.ItemsSource="{Binding .Content}" 
                                                      BindableLayout.ItemTemplateSelector="{StaticResource entryTemplateSelector}" >
@@ -184,7 +198,7 @@
                                                 <TapGestureRecognizer Command="{Binding BindingContext.AddToEntryCommand, Source={x:Reference JourneyTemplateViewName}}"/>
                                             </Label.GestureRecognizers>
                                         </Label>
-                                        
+
                                     </StackLayout>
 
                                 </DataTemplate>
@@ -197,7 +211,7 @@
 
                 <Frame HasShadow="True" Margin="10, 0, 10, 5" Padding="5">
                     <StackLayout>
-                        <Label Text="Fotos" FontSize="Large" TextColor="{DynamicResource Primary}"/>
+                        <Label Text="{Binding Resources[Photos]}" FontSize="Large" TextColor="{DynamicResource Primary}"/>
 
                         <CollectionView x:Name="ImagesCollection"
                                             HeightRequest="100"
@@ -223,8 +237,7 @@
 
                                     <border:SfBorder.Content >
 
-                                        <Image HeightRequest="{Binding CardImagesHeight}" WidthRequest="{Binding CardImagesHeight}" Source="{Binding BlanckImage.ImageSour}"
-                                                       />
+                                        <Image HeightRequest="{Binding CardImagesHeight}" WidthRequest="{Binding CardImagesHeight}" Source="{Binding BlanckImage.ImageSour}"/>
 
                                     </border:SfBorder.Content>
 

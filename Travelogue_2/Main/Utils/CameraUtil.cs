@@ -75,8 +75,7 @@ namespace Travelogue_2.Main.Utils
 			}
 			catch (Exception ex)
 			{
-				//Xamarin.Insights.Report(ex);
-				//await DisplayAlert("Uh oh", "Something went wrong, but don't worry we captured it in Xamarin Insights! Thanks.", "OK");
+				Debug.WriteLine("Pick photo : " + ex);
 				return null;
 			}
 		}

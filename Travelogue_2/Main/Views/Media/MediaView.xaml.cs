@@ -16,10 +16,6 @@ namespace Travelogue_2.Main.Views.Media
             BindingContext = model = new MediaViewModel();
 
             Shell.SetNavBarIsVisible(this, false);
-
-            //map = new Map(MapSpan.FromCenterAndRadius(model.GetPosition(), Distance.FromKilometers(10)));
-            //map = new Map(MapSpan.FromCenterAndRadius(
-                 //new Position(36.9628066, -122.0194722), 0.01, 0.01);
         }
 
         protected override void OnAppearing()

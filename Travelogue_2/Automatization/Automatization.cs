@@ -47,7 +47,7 @@ namespace Travelogue_2.Automatization
 			var assembly = Assembly.GetExecutingAssembly();
 			var resourceNameDestiny = "Travelogue_2.Resources.JSON.ISO2CountryChecked.txt";
 			var resourceNameEmbassy = "Travelogue_2.Resources.JSON.ESEmbassyList.txt";
-			string result = "";
+			string result = string.Empty;
 
 			using (Stream stream = assembly.GetManifestResourceStream(resourceNameDestiny))
 			using (StreamReader reader = new StreamReader(stream))
@@ -56,7 +56,7 @@ namespace Travelogue_2.Automatization
 			}
 			var iso2ListDestiny = JsonConvert.DeserializeObject<List<Destiny>>(result);
 
-			result = "";
+			result = string.Empty;
 
 			using (Stream stream = assembly.GetManifestResourceStream(resourceNameEmbassy))
 			using (StreamReader reader = new StreamReader(stream))

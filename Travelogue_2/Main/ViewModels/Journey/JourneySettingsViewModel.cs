@@ -88,7 +88,6 @@ namespace Travelogue_2.Main.ViewModels.Journal
 				SetProperty(ref coverImage, value);
 			}
 		}
-		public int CoverImageHeight { get => CommonVariables.ImageMaxHeight; }
 		#endregion
 
 		#region MinimumDate

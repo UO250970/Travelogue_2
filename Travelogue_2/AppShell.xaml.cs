@@ -36,8 +36,10 @@ namespace Travelogue_2
             Routing.RegisterRoute(nameof(SettingsDestiniesView), typeof(SettingsDestiniesView));
             Routing.RegisterRoute(nameof(SettingsStyleView), typeof(SettingsStyleView));
 
-            Routing.RegisterRoute(nameof(AddEntryPopUp), typeof(AddEntryPopUp));
             Routing.RegisterRoute(nameof(AddEventPopUp), typeof(AddEventPopUp));
+            Routing.RegisterRoute(nameof(EditOrDeleteEventPopUp), typeof(EditOrDeleteEventPopUp));
+            Routing.RegisterRoute(nameof(AddEntryPopUp), typeof(AddEntryPopUp));
+            Routing.RegisterRoute(nameof(EditOrDeleteEntryPopUp), typeof(EditOrDeleteEntryPopUp));
             Routing.RegisterRoute(nameof(AddToEntryPopUp), typeof(AddToEntryPopUp));
         }
 

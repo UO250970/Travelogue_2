@@ -108,7 +108,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		async internal void SearchJourneyC()
 		{
-			SearchText = "";
+			SearchText = string.Empty;
 			SearchVisible = !SearchVisible;
 		}
 
@@ -120,7 +120,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 			set => SetProperty(ref searchVisible, value);
 		}
 
-		private string searchText = "";
+		private string searchText = string.Empty;
 		public string SearchText
 		{
 			get => searchText;

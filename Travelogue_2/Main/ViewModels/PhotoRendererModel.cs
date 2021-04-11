@@ -39,5 +39,8 @@ namespace Travelogue_2.Main.Services
 			
 		}
 
+		public int CoverImageHeight { get => CommonVariables.ImageMaxHeight; }
+
+		public int CardImagesHeight { get => CommonVariables.ImageCardMaxHeight; }
 	}
 }

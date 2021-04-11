@@ -47,7 +47,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 			JourneyImages = new ObservableCollection<EntryImageCard>();
 			JourneyDays = new ObservableCollection<DayCard>();
-			JourneyDays.CollectionChanged += JourneyDaysChanged;
+			//JourneyDays.CollectionChanged += JourneyDaysChanged;
 			JourneyEvents = new ObservableCollection<EventCard>();
 			JourneyEntries = new ObservableCollection<EntryCard>();
 
@@ -123,8 +123,6 @@ namespace Travelogue_2.Main.ViewModels.Journal
 				SetProperty(ref blanckImage, value);
 			}
 		}
-		public int CardImagesHeight { get => CommonVariables.ImageCardMaxHeight; }
-
 		#endregion
 
 		#region Cover
@@ -142,9 +140,6 @@ namespace Travelogue_2.Main.ViewModels.Journal
 				SetProperty(ref coverImage, value);
 			}
 		}
-
-		public int CoverImageHeight { get => CommonVariables.ImageMaxHeight; }
-
 		#endregion
 
 		#region DaySelected
@@ -202,27 +197,30 @@ namespace Travelogue_2.Main.ViewModels.Journal
 																	$"{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}");
 		}
 
+		async internal void EditOrDeleteEventC(EventCard eventC)
+		{
+			await Shell.Current.GoToAsync($"{nameof(EditOrDeleteEventPopUp)}?{nameof(EditOrDeleteEventPopUpModel.JourneyId)}={JourneyId}&" +
+																	$"{nameof(EditOrDeleteEventPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
+																	$"{nameof(EditOrDeleteEventPopUpModel.EventId)}={eventC.Id}");
+		}
+
 		async internal void AddEntryC()
 		{
-			//TO-DO checkear
 			await Shell.Current.GoToAsync($"{nameof(AddEntryPopUp)}?{nameof(AddToJourneyPopUpModel.JourneyId)}={JourneyId}&" +
 																	$"{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}");
+		}
+
+		async internal void EditOrDeleteEntryC(EntryCard entryC)
+		{
+			await Shell.Current.GoToAsync($"{nameof(EditOrDeleteEntryPopUp)}?{nameof(EditOrDeleteEntryPopUpModel.JourneyId)}={JourneyId}&" +
+																	$"{nameof(EditOrDeleteEntryPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
+																	$"{nameof(EditOrDeleteEntryPopUpModel.EntryId)}={entryC.Id}");
 		}
 
 		async internal void AddToEntryC()
 		{
 			await Shell.Current.GoToAsync($"{nameof(AddToEntryPopUp)}?{nameof(AddToJourneyPopUpModel.JourneyId)}={JourneyId}&" +
 																	$"{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}");
-		}
-
-		async internal void EditOrDeleteEventC(EventCard eventC)
-		{
-			await Alerter.AlertEmptyData();
-		}
-		
-		async internal void EditOrDeleteEntryC(EntryCard entryC)
-		{
-			await Alerter.AlertEmptyData();
 		}
 		#endregion
 
@@ -249,7 +247,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		#endregion
 
-		void JourneyDaysChanged(object sender, NotifyCollectionChangedEventArgs e)
+		/*void JourneyDaysChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 
 			if (e.NewItems != null)
@@ -259,6 +257,6 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			if (e.OldItems != null)
 				foreach (DayCard day in e.OldItems)
 					day.PropertyChanged -= OnPropertyChanged;
-		}
+		}*/
 	}
 }

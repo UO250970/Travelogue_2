@@ -37,7 +37,7 @@ namespace Travelogue_2.Main.Services
 			if (item is EntryTextCard e)
 			{
                 return TextTemplate;
-			} else if ( ((EntryImageCard)item).ImageFoot == "" )
+			} else if ( ((EntryImageCard)item).ImageFoot == string.Empty )
 			{
                 return imageNoFootTemplate;
 			}

@@ -4,7 +4,9 @@
              x:Class="Travelogue_2.Main.Views.Media.MediaView"
              xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
              xmlns:calendar="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
-             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps" >
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             x:Name="MediaViewName">
+    
     <ContentPage.Content>
 
         <tabView:SfTabView EnableSwiping="False" VisibleHeaderCount="3"  VerticalOptions="FillAndExpand" DisplayMode="Image">
@@ -63,10 +65,74 @@
                                FontIconFontColor="{DynamicResource Primary}"
                                FontIconFontFamily="{StaticResource Icon}">
                 <tabView:SfTabItem.Content>
-                    
-                    <StackLayout Padding="5, 10, 5, 10">
 
-                    </StackLayout>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <StackLayout Padding="10,10,10,5" Grid.Row="0">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <SearchBar Grid.Column="0" IsVisible="{Binding SearchVisible}" Placeholder="{Binding Resources[SearchDestiny]}" Text="{Binding SearchText, Mode=TwoWay}"/>
+                                <Label Grid.Column="1" Text="&#x1f50d;" FontFamily="{StaticResource Icon}" FontSize="Large"  VerticalTextAlignment="Center" HorizontalOptions="Center"
+                                        TextColor="{DynamicResource Primary}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SearchJourneyCommand}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                            
+                        </StackLayout>
+
+                        <StackLayout x:Name="ImagesListView"
+                                     BindableLayout.ItemsSource="{Binding ImagesOrdered}" Grid.Row="1"  >
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+
+                                    <Frame>
+                                        <StackLayout>
+                                            <Label Text="{Binding Key}" FontSize="Large" TextColor="{DynamicResource Primary}"/>
+                                            <Rectangle HeightRequest="1" WidthRequest="400" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource Grey}"/>
+
+                                            <CollectionView x:Name="CreatedJourneysCollection"
+                                                            ItemsSource="{Binding Value}"
+                                                            SelectionMode="None">
+
+                                                <CollectionView.ItemsLayout>
+                                                    <GridItemsLayout Orientation="Vertical"
+                                                                        Span="4"/>
+                                                </CollectionView.ItemsLayout>
+
+                                                <CollectionView.EmptyView>
+                                                    <Label Text="{Binding BindingContext.Resources[JourneyWithoutImages]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                                </CollectionView.EmptyView>
+
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate>
+
+                                                        <Frame Padding="5">
+                                                            <Image HeightRequest="{Binding Path=BindingContext.CardImagesHeight, Source={x:Reference MediaViewName}}"  Source="{Binding .ImageSour}"/>
+                                                        </Frame>
+
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                                
+                                            </CollectionView>
+
+                                        </StackLayout>
+                                    </Frame>
+
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+
+                    </Grid>
                     
                 </tabView:SfTabItem.Content>
             </tabView:SfTabItem>

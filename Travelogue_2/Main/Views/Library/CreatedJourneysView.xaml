@@ -35,10 +35,10 @@
                 </StackLayout>
 
                 <CollectionView Grid.Row="1" x:Name="CreatedJourneysCollection"
-                                    ItemsSource="{Binding JourneysCreatedSearched}"
-                                    SelectionMode="Single"
-                                    SelectionChangedCommand="{Binding JourneyTapped}"
-                                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CreatedJourneysCollection}}">
+                                ItemsSource="{Binding JourneysCreatedSearched}"
+                                SelectionMode="Single"
+                                SelectionChangedCommand="{Binding JourneyTapped}"
+                                SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CreatedJourneysCollection}}">
 
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical"
