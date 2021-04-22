@@ -15,8 +15,13 @@ namespace Travelogue_2
 
         public App()
         {
-			try
-			{
+            OnStart();
+        }
+
+        protected async override void OnStart()
+        {
+            try
+            {
                 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDIzMDM1QDMxMzkyZTMxMmUzMEZqOHlEVE5CMVFuOXMvcFNNcGpqTGQzQWRCM0xaY3ZGaStFSGoyTjFXNFE9");
                 InitializeComponent();
 
@@ -32,14 +37,11 @@ namespace Travelogue_2
                 Automatization.Automatization.CheckPermissionsAsync();
                 Automatization.Automatization.PrepareCountries();
 
-            } catch (Exception e)
-			{
+            }
+            catch (Exception e)
+            {
                 Debug.WriteLine(e);
             }
-        }
-
-        protected override void OnStart()
-        {
         }
 
         protected override void OnSleep()

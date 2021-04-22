@@ -62,7 +62,7 @@
 
         <Button x:Name="AddCardButton" 
                         Style="{StaticResource circleButtonAddStyle}"
-                        Command="{Binding AddDestinyCommand}"
+                        Command="{Binding AddCardCommand}"
                         HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}" />
 
     </AbsoluteLayout>

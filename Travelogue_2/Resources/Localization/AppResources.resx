@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddCard" xml:space="preserve">
+    <value>Añadir tarjeta</value>
+  </data>
+  <data name="AddCardEx" xml:space="preserve">
+    <value>DNI, NIF, pasaporte...</value>
+  </data>
   <data name="AddDestiny" xml:space="preserve">
     <value>Añadir destino</value>
   </data>
@@ -141,8 +147,14 @@
   <data name="AlertNoImageSelected" xml:space="preserve">
     <value>Sin imagen seleccionada</value>
   </data>
+  <data name="AlertNoImagesInCard" xml:space="preserve">
+    <value>Tarjeta sin imagenes</value>
+  </data>
+  <data name="AlertNoNameInCard" xml:space="preserve">
+    <value>Tarjeta sin nombre</value>
+  </data>
   <data name="AlertNoNameInJourney" xml:space="preserve">
-    <value>Nombre de viaje vacio</value>
+    <value>Viaje sin nombre</value>
   </data>
   <data name="AlertNoText" xml:space="preserve">
     <value>Sin texto</value>
@@ -155,6 +167,9 @@
   </data>
   <data name="AlertNoTitleInReservation" xml:space="preserve">
     <value>Reserva sin titulo</value>
+  </data>
+  <data name="AppName" xml:space="preserve">
+    <value>Travelogue</value>
   </data>
   <data name="Calendar" xml:space="preserve">
     <value>Calendario</value>
@@ -291,6 +306,9 @@
   <data name="MessButtonDeleteJourney" xml:space="preserve">
     <value>Los eventos, reservas y entradas asociadas al viaje se eliminaran. Las imagenes seguirán siendo accesibles desde la pestaña "Media".</value>
   </data>
+  <data name="MessCardCreated" xml:space="preserve">
+    <value>La tarjeta se ha creado correctamente</value>
+  </data>
   <data name="MessDeleteJourney" xml:space="preserve">
     <value>¿Quieres eliminar el viaje? (Las entradas y eventos se eliminarán)</value>
   </data>
@@ -326,6 +344,12 @@
   </data>
   <data name="MessNoImageSelected" xml:space="preserve">
     <value>Se debe seleccionar una imagen</value>
+  </data>
+  <data name="MessNoImagesInCard" xml:space="preserve">
+    <value>Se debe introducir al menos una imagen en la tarjeta</value>
+  </data>
+  <data name="MessNoNameInCard" xml:space="preserve">
+    <value>Se debe introducir un nombre a la tarjeta</value>
   </data>
   <data name="MessNoNameInJourney" xml:space="preserve">
     <value>Se debe introducir un nombre de viaje</value>
@@ -404,6 +428,9 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Ajustes</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Compartir</value>
   </data>
   <data name="StartEditing" xml:space="preserve">
     <value>Comenzar a editar...</value>

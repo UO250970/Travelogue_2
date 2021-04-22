@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddCard" xml:space="preserve">
+    <value>Add card</value>
+  </data>
+  <data name="AddCardEx" xml:space="preserve">
+    <value>NIF, DNI, passport...</value>
+  </data>
   <data name="AddDestiny" xml:space="preserve">
     <value>Add a destiny</value>
   </data>
@@ -138,8 +144,14 @@
   <data name="AlertNoImageSelected" xml:space="preserve">
     <value>Entry without image</value>
   </data>
+  <data name="AlertNoImagesInCard" xml:space="preserve">
+    <value>Card without images</value>
+  </data>
+  <data name="AlertNoNameInCard" xml:space="preserve">
+    <value>Card without name</value>
+  </data>
   <data name="AlertNoNameInJourney" xml:space="preserve">
-    <value>No journey name</value>
+    <value>Journey without name</value>
   </data>
   <data name="AlertNoText" xml:space="preserve">
     <value>Entry without text</value>
@@ -285,6 +297,9 @@
   <data name="MessButtonDeleteJourney" xml:space="preserve">
     <value>Events, reservations and entries will be deleted. Images will still be accesible from "Media" tab.</value>
   </data>
+  <data name="MessCardCreated" xml:space="preserve">
+    <value>Card created correctly</value>
+  </data>
   <data name="MessDeleteJourney" xml:space="preserve">
     <value>Do you want to delete the journey? (Entries and events will be deleted)</value>
   </data>
@@ -320,6 +335,12 @@
   </data>
   <data name="MessNoImageSelected" xml:space="preserve">
     <value>An image must be selected</value>
+  </data>
+  <data name="MessNoImagesInCard" xml:space="preserve">
+    <value>The card must have at least one image</value>
+  </data>
+  <data name="MessNoNameInCard" xml:space="preserve">
+    <value>The card must have a name</value>
   </data>
   <data name="MessNoNameInJourney" xml:space="preserve">
     <value>The journey must have a name</value>
@@ -395,6 +416,9 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Share</value>
   </data>
   <data name="StartEditing" xml:space="preserve">
     <value>Start editing...</value>

@@ -30,7 +30,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 				return;
 
 			// This will push the ItemDetailPage onto the navigation stack
-			await Shell.Current.GoToAsync($"{nameof(JourneyOngoingView)}?{nameof(ItemDetailViewModel.ItemId)}={journey.Id}");
+			await Shell.Current.GoToAsync($"{nameof(JourneyOngoingView)}?{nameof(ItemDetailViewModelNU.ItemId)}={journey.Id}");
 		}
 
 	}

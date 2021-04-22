@@ -11,7 +11,7 @@ namespace Travelogue_2.Main.Views
         public NewItemPage()
         {
             InitializeComponent();
-            BindingContext = new NewItemViewModel();
+            BindingContext = new NewItemViewModelNU();
         }
     }
 }

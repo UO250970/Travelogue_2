@@ -10,7 +10,7 @@ namespace Travelogue_2.Main.Views
         public LoginPage()
         {
             InitializeComponent();
-            this.BindingContext = new LoginViewModel();
+            this.BindingContext = new LoginViewModelNU();
         }
     }
 }

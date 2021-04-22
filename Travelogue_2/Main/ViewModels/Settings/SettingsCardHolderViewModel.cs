@@ -2,6 +2,7 @@
 using System.Linq;
 using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Services;
+using Travelogue_2.Main.Views.PopUps;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Settings
@@ -18,6 +19,9 @@ namespace Travelogue_2.Main.ViewModels.Settings
 		{
 			SearchCardCommand = new Command(() => SearchCardC());
             AddCardCommand = new Command(() => AddCardC());
+
+            Cards = new ObservableCollection<CardCard>();
+            CardsSearched = new ObservableCollection<CardCard>();
 
             ExecuteLoadDataCommand();
 		}
@@ -60,9 +64,9 @@ namespace Travelogue_2.Main.ViewModels.Settings
             }
         }
 
-        public void AddCardC()
+        public async void AddCardC()
         {
-
+            await Shell.Current.GoToAsync($"{nameof(AddCardPopUp)}");
         }
 
     }

@@ -5,7 +5,7 @@ using Xamarin.Forms;
 namespace Travelogue_2.Main.ViewModels
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
-    public class ItemDetailViewModel : BaseViewModel
+    public class ItemDetailViewModelNU : BaseViewModel
     {
         private string itemId;
         private string text;

@@ -4,12 +4,12 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels
 {
-    public class NewItemViewModel : BaseViewModel
+    public class NewItemViewModelNU : BaseViewModel
     {
         private string text;
         private string description;
 
-        public NewItemViewModel()
+        public NewItemViewModelNU()
         {
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);

@@ -3,11 +3,11 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModelNU : BaseViewModel
     {
         public Command LoginCommand { get; }
 
-        public LoginViewModel()
+        public LoginViewModelNU()
         {
             LoginCommand = new Command(OnLoginClicked);
         }

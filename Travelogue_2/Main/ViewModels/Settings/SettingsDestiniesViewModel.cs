@@ -5,6 +5,8 @@ using Xamarin.Forms;
 using System.Linq;
 using System.Collections.Generic;
 using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Views.PopUps;
+using Xamarin.Essentials;
 
 namespace Travelogue_2.Main.ViewModels.Settings
 {
@@ -12,6 +14,9 @@ namespace Travelogue_2.Main.ViewModels.Settings
 	{
         public Command SearchDestinyCommand { get; }
         public Command AddDestinyCommand { get; }
+        public Command PhoneNumberTappedCommand { get; }
+
+        public Command<DestinyCard> DestinyTapped { get; }
         public ObservableDictionary<string,List<DestinyCard>> DestiniesOrdered { get; set; }
         public ObservableCollection<DestinyCard> Destinies { get; }
         public ObservableCollection<DestinyCard> DestiniesSearched { get; set; }
@@ -19,11 +24,14 @@ namespace Travelogue_2.Main.ViewModels.Settings
         public SettingsDestiniesViewModel()
         {
             SearchDestinyCommand = new Command(() => SearchDestinyC());
-            AddDestinyCommand = new Command(() => AddDestinyC());
+            AddDestinyCommand = new Command(() => AddDestinyCAsync());
+            PhoneNumberTappedCommand = new Command<string>((x) => PhoneNumberTappedC(x));
 
             DestiniesOrdered = new ObservableDictionary<string, List<DestinyCard>>();
             Destinies = new ObservableCollection<DestinyCard>();
             DestiniesSearched = new ObservableCollection<DestinyCard>();
+
+            DestinyTapped = new Command<DestinyCard>(OnDestinySelected);
 
             ExecuteLoadDataCommand();
         }
@@ -31,6 +39,8 @@ namespace Travelogue_2.Main.ViewModels.Settings
         public override void LoadData()
         {
             Destinies.Clear();
+            DestiniesOrdered.Clear();
+            DestiniesSearched.Clear();
             foreach (Destiny dest in CommonVariables.AvailableDestinies)
             {
                 DestinyCard temp = new DestinyCard();
@@ -53,7 +63,8 @@ namespace Travelogue_2.Main.ViewModels.Settings
             }
         }
 
-        async internal void SearchDestinyC()
+		#region search
+		async internal void SearchDestinyC()
 		{
             SearchText = string.Empty;
             SearchVisible = !SearchVisible;
@@ -87,16 +98,36 @@ namespace Travelogue_2.Main.ViewModels.Settings
                     foreach (string s in CommonVariables.Alphabet)
                     {
                         var tempList = DestiniesSearched.Where(x => x.Destiny.ToUpper().StartsWith(s.ToUpper())).ToList();
-                        DestiniesOrdered.Add(s, tempList);
+                        if (tempList.Count != 0)
+						{
+                            DestiniesOrdered.Add(s, tempList);
+                        }
                     }
                 }
             }
         }
+        #endregion
 
-        public void AddDestinyC()
+        public async void AddDestinyCAsync()
         {
-
+            await Shell.Current.GoToAsync($"{nameof(AddDestinyPopUp)}");
         }
 
-	}
+        internal void PhoneNumberTappedC(string number)
+        {
+            PhoneDialer.Open(number);
+
+            //notificationManager.SendNotification("Title", "Message");
+        }
+
+        async void OnDestinySelected(DestinyCard destiny)
+        {
+            if (destiny == null)
+                return;
+
+            // TODO -  A futuros, abrir pestañita con info de forma chula
+            // This will push the ItemDetailPage onto the navigation stack
+            //await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyViewModel.JourneyId)}={journey.Id}");
+        }
+    }
 }

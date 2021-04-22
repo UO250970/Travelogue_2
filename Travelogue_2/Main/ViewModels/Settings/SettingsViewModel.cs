@@ -8,13 +8,14 @@ namespace Travelogue_2.Main.ViewModels.Settings
         public ImageSource FlagRoute;
 
         public Command LanguagesSettingsCommand { get; }
+        public Command CardHolderSettingsCommand { get; }
         public Command DestiniesSettingsCommand { get; }
-
         public Command StyleSettingsCommand { get; }
 
         public SettingsViewModel() 
         {
             LanguagesSettingsCommand = new Command(() => LanguagesSettingsC());
+            CardHolderSettingsCommand = new Command(() => CardHolderSettingsC());
             DestiniesSettingsCommand = new Command(() => DestiniesSettingsC());
             StyleSettingsCommand = new Command(() => StyleSettingsC());
         }
@@ -22,6 +23,8 @@ namespace Travelogue_2.Main.ViewModels.Settings
         async internal void LanguagesSettingsC()
             => await Shell.Current.GoToAsync(nameof(SettingsLanguageView));
 
+        async internal void CardHolderSettingsC()
+            => await Shell.Current.GoToAsync(nameof(SettingsCardHolderView));
 
         async internal void DestiniesSettingsC()
             => await Shell.Current.GoToAsync(nameof(SettingsDestiniesView));

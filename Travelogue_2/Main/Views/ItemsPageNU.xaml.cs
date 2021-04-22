@@ -5,13 +5,13 @@ namespace Travelogue_2.Main.Views
 {
     public partial class ItemsPage : ContentPage
     {
-        ItemsViewModel _viewModel;
+        ItemsViewModelNU _viewModel;
 
         public ItemsPage()
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ItemsViewModel();
+            BindingContext = _viewModel = new ItemsViewModelNU();
         }
 
         protected override void OnAppearing()

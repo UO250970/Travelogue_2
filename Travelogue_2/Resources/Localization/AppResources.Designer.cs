@@ -61,6 +61,24 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Añadir tarjeta.
+        /// </summary>
+        internal static string AddCard {
+            get {
+                return ResourceManager.GetString("AddCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DNI, NIF, pasaporte....
+        /// </summary>
+        internal static string AddCardEx {
+            get {
+                return ResourceManager.GetString("AddCardEx", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Añadir destino.
         /// </summary>
         internal static string AddDestiny {
@@ -133,7 +151,25 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nombre de viaje vacio.
+        ///   Looks up a localized string similar to Tarjeta sin imagenes.
+        /// </summary>
+        internal static string AlertNoImagesInCard {
+            get {
+                return ResourceManager.GetString("AlertNoImagesInCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tarjeta sin nombre.
+        /// </summary>
+        internal static string AlertNoNameInCard {
+            get {
+                return ResourceManager.GetString("AlertNoNameInCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Viaje sin nombre.
         /// </summary>
         internal static string AlertNoNameInJourney {
             get {
@@ -174,6 +210,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string AlertNoTitleInReservation {
             get {
                 return ResourceManager.GetString("AlertNoTitleInReservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Travelogue.
+        /// </summary>
+        internal static string AppName {
+            get {
+                return ResourceManager.GetString("AppName", resourceCulture);
             }
         }
         
@@ -583,6 +628,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to La tarjeta se ha creado correctamente.
+        /// </summary>
+        internal static string MessCardCreated {
+            get {
+                return ResourceManager.GetString("MessCardCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ¿Quieres eliminar el viaje? (Las entradas y eventos se eliminarán).
         /// </summary>
         internal static string MessDeleteJourney {
@@ -687,6 +741,24 @@ namespace Travelogue_2.Resources.Localization {
         internal static string MessNoImageSelected {
             get {
                 return ResourceManager.GetString("MessNoImageSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Se debe introducir al menos una imagen en la tarjeta.
+        /// </summary>
+        internal static string MessNoImagesInCard {
+            get {
+                return ResourceManager.GetString("MessNoImagesInCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Se debe introducir un nombre a la tarjeta.
+        /// </summary>
+        internal static string MessNoNameInCard {
+            get {
+                return ResourceManager.GetString("MessNoNameInCard", resourceCulture);
             }
         }
         
@@ -921,6 +993,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compartir.
+        /// </summary>
+        internal static string Share {
+            get {
+                return ResourceManager.GetString("Share", resourceCulture);
             }
         }
         

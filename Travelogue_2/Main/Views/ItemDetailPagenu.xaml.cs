@@ -8,7 +8,7 @@ namespace Travelogue_2.Main.Views
         public ItemDetailPage()
         {
             InitializeComponent();
-            BindingContext = new ItemDetailViewModel();
+            BindingContext = new ItemDetailViewModelNU();
         }
     }
 }

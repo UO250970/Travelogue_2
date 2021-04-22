@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Travelogue_2.Main.Views.Settings.SettingsDestiniesView">
+             x:Class="Travelogue_2.Main.Views.Settings.SettingsDestiniesView"
+             x:Name="SettingsDestiniesViewName">
 
     <AbsoluteLayout>
 
@@ -46,7 +47,102 @@
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate>
 
-                                            <Label Margin="5" Text="{Binding .Destiny}" FontSize="Medium" Padding="5, 0" HeightRequest="25"/>
+                                            <StackLayout>
+
+                                                <Label x:Name="DestinyName" FontSize="Medium" 
+                                                        Text="{Binding .Destiny}">
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding BindingContext.DestinyTapped, Source={x:Reference SettingsDestiniesViewName}}"
+                                                                              CommandParameter="{Binding .}"/>
+                                                    </Label.GestureRecognizers>
+                                                </Label>
+
+                                                <StackLayout x:Name="DestinyInfo" IsVisible="False">
+                                                    <Grid  Margin="5">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="4*" />
+                                                            <ColumnDefinition Width="7*" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Image x:Name="FlagImage"  
+                                                            Source="{Binding .Flag}"
+                                                            Aspect="AspectFill" Grid.Column="0" 
+                                                            HeightRequest="80"/>
+
+                                                        <StackLayout Grid.Column="1">
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <Label Grid.Column="0"
+                                                                        FontSize="Medium"
+                                                                        Text="{Binding BindingContext.Resources[Name], Source={x:Reference SettingsDestiniesViewName}}" />
+                                                                <Label Grid.Column="1"
+                                                                        x:Name="CountryName"
+                                                                        FontSize="Medium" 
+                                                                        Text="{Binding .Destiny}"/>
+
+                                                            </Grid>
+
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <Label Grid.Column="0"
+                                                                        FontSize="Medium"
+                                                                        Text="{Binding BindingContext.Resources[Currency], Source={x:Reference SettingsDestiniesViewName}}" />
+                                                                <Label Grid.Column="1"
+                                                                        x:Name="Currency"
+                                                                        FontSize="Medium"
+                                                                        Text="{Binding .Currency}" />
+
+                                                            </Grid>
+
+                                                            <Label Grid.Column="0"
+                                                                    FontSize="Medium"
+                                                                    TextColor="#3D6D9B" 
+                                                                    x:Name="DestinyURL"
+                                                                    Text="{Binding .MoreInfoCountry}">
+                                                                <Label.GestureRecognizers>
+                                                                    <TapGestureRecognizer Command="{Binding BindingContext.MoreInfoCommand, Source={x:Reference SettingsDestiniesViewName}}"
+                                                                                        CommandParameter="{Binding .MoreInfoCountry}"/>
+                                                                </Label.GestureRecognizers>
+                                                            </Label>
+                                                        </StackLayout>
+
+                                                    </Grid>
+
+                                                    <Label FontSize="Large" 
+                                                            Text="{Binding BindingContext.Resources[Embassies], Source={x:Reference SettingsDestiniesViewName}}"/>
+
+                                                    <StackLayout x:Name="EmbassiesCollection"
+                                                                BindableLayout.ItemsSource="{Binding .Embassies}">
+
+                                                        <BindableLayout.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                    </Grid.ColumnDefinitions>
+
+                                                                    <Label Grid.Column="0" Text="{Binding Key}"/>
+                                                                    <Label Grid.Column="1" Text="{Binding Value}" TextColor="{DynamicResource Primary}">
+                                                                        <Label.GestureRecognizers>
+                                                                            <TapGestureRecognizer Command="{Binding BindingContext.PhoneNumberTappedCommand, Source={x:Reference SettingsDestiniesViewName}}" 
+                                                                                            CommandParameter="{Binding Value}"/>
+                                                                        </Label.GestureRecognizers>
+                                                                    </Label>
+
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </BindableLayout.ItemTemplate>
+                                                    </StackLayout>
+
+                                                </StackLayout>
+                                            </StackLayout>
 
                                         </DataTemplate>
                                     </BindableLayout.ItemTemplate>

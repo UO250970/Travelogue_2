@@ -2,6 +2,7 @@
 using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.Library;
 using Travelogue_2.Main.Views.Library.Create;
+using Travelogue_2.Main.Views.Media;
 using Travelogue_2.Main.Views.Modelation;
 using Travelogue_2.Main.Views.Modelation.Modelate;
 using Travelogue_2.Main.Views.PopUps;
@@ -33,6 +34,7 @@ namespace Travelogue_2
             Routing.RegisterRoute(nameof(JournalModelationView), typeof(JournalModelationView));
 
             Routing.RegisterRoute(nameof(SettingsLanguageView), typeof(SettingsLanguageView));
+            Routing.RegisterRoute(nameof(SettingsCardHolderView), typeof(SettingsCardHolderView));
             Routing.RegisterRoute(nameof(SettingsDestiniesView), typeof(SettingsDestiniesView));
             Routing.RegisterRoute(nameof(SettingsStyleView), typeof(SettingsStyleView));
 
@@ -41,6 +43,14 @@ namespace Travelogue_2
             Routing.RegisterRoute(nameof(AddEntryPopUp), typeof(AddEntryPopUp));
             Routing.RegisterRoute(nameof(EditOrDeleteEntryPopUp), typeof(EditOrDeleteEntryPopUp));
             Routing.RegisterRoute(nameof(AddToEntryPopUp), typeof(AddToEntryPopUp));
+            Routing.RegisterRoute(nameof(EditOrDeleteFromEntryPopUp), typeof(EditOrDeleteFromEntryPopUp));
+
+            Routing.RegisterRoute(nameof(AddDestinyPopUp), typeof(AddDestinyPopUp));
+            Routing.RegisterRoute(nameof(EditOrDeleteDestinyPopUp), typeof(EditOrDeleteDestinyPopUp));
+            Routing.RegisterRoute(nameof(AddCardPopUp), typeof(AddCardPopUp));
+            Routing.RegisterRoute(nameof(EditOrDeleteCardPopUp), typeof(EditOrDeleteCardPopUp));
+
+            Routing.RegisterRoute(nameof(ImageView), typeof(ImageView));
         }
 
     }

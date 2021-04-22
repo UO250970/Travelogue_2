@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Travelogue_2.Main.Views.Media.ImageView"
+             BackgroundColor="{StaticResource Black}"
+             Shell.PresentationMode="ModalAnimated">
+    
+    <ContentPage.Content>
+        
+        <StackLayout>
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Text="{Binding ImageSelected.ImageName}" FontSize="Title" HorizontalTextAlignment="Center"></Label>
+
+                <StackLayout Grid.Row="1">
+
+                    <Image Source="{Binding ImageName.Source}" Aspect="AspectFit"/>
+
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+
+                    <Label Text="{Binding Resources[Edit]}"/>
+
+                    <Label Text="{Binding Resources[Delete]}"/>
+
+                    <Label Text="{Binding Resources[Share]}"/>
+
+                </StackLayout>
+
+            </Grid>
+            
+        </StackLayout>
+        
+    </ContentPage.Content>
+    
+</ContentPage>

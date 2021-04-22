@@ -74,14 +74,29 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Main\Views\AboutPageNU.xaml.cs">
+      <DependentUpon>AboutPageNU.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Main\Views\ItemDetailPagenu.xaml.cs">
+      <DependentUpon>ItemDetailPageNU.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Main\Views\ItemsPageNU.xaml.cs">
+      <DependentUpon>ItemsPageNU.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Main\Views\Journey\JourneyOngoingView.xaml.cs">
       <DependentUpon>JourneyOngoingView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Main\Views\Library\Create\CreateJourneyView.xaml.cs">
       <DependentUpon>CreateJourneyView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Main\Views\LoginPageNU.xaml.cs">
+      <DependentUpon>LoginPageNU.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Main\Views\Modelation\Modelate\JournalModelationView.xaml.cs">
       <DependentUpon>JournalModelationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Main\Views\NewItemPageNU.xaml.cs">
+      <DependentUpon>NewItemPageNU.xaml</DependentUpon>
     </Compile>
     <Compile Update="Main\Views\PopUps\EditOrDeleteEntryPopUp.xaml.cs">
       <DependentUpon>EditOrDeleteEntryPopUp.xaml</DependentUpon>
@@ -128,6 +143,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Library\Create\CreateJourneyView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Media\ImageView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Media\MediaView.xaml">
