@@ -29,7 +29,7 @@
                         </Label>
                         <Label Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding SaveCommand}"/>
+                                <TapGestureRecognizer Command="{Binding SaveEventCommand}"/>
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
@@ -52,7 +52,7 @@
             </Frame>
 
             <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="20, 0">
-                <Button Text="{Binding Resources[Delete]}" HorizontalOptions="FillAndExpand" Command="{Binding DeleteCommand}" BackgroundColor="{DynamicResource Red}"/>
+                <Button Text="{Binding Resources[Delete]}" HorizontalOptions="FillAndExpand" Command="{Binding DeleteEventCommand}" BackgroundColor="{DynamicResource Red}"/>
             </StackLayout>
 
             <Grid.GestureRecognizers>

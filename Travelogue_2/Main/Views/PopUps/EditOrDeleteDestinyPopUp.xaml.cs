@@ -5,15 +5,15 @@ using Xamarin.Forms.Xaml;
 namespace Travelogue_2.Main.Views.PopUps
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class EditOrDeleteToEntryPopUp : ContentPage
+	public partial class EditOrDeleteDestinyPopUp : ContentPage
 	{
-		public EditOrDeleteToEntryPopUpModel model;
-		
-		public EditOrDeleteToEntryPopUp()
+		public EditOrDeleteSettingsPopUpModel model; 
+
+		public EditOrDeleteDestinyPopUp()
 		{
 			InitializeComponent();
 
-			BindingContext = model = new EditOrDeleteToEntryPopUpModel();
+			BindingContext = model = new EditOrDeleteSettingsPopUpModel();
 		}
 	}
 }

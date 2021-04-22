@@ -23,7 +23,7 @@ namespace Travelogue_2
                 AppResources.Culture = new CultureInfo(CurrentLanguage);
                 LocResources = new LocalizedResources(typeof(AppResources), CurrentLanguage);
 
-                DependencyService.Register<MockDataStore>();
+                DependencyService.Register<MockDataStoreNU>();
                 MainPage = new AppShell();
 
                 // Alerter de la aplicación

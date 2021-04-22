@@ -212,9 +212,9 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		async internal void EditOrDeleteEntryC(EntryCard entryC)
 		{
-			await Shell.Current.GoToAsync($"{nameof(EditOrDeleteEntryPopUp)}?{nameof(EditOrDeleteEntryPopUpModel.JourneyId)}={JourneyId}&" +
-																	$"{nameof(EditOrDeleteEntryPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
-																	$"{nameof(EditOrDeleteEntryPopUpModel.EntryId)}={entryC.Id}");
+			await Shell.Current.GoToAsync($"{nameof(EditOrDeleteEntryPopUp)}?{nameof(EditOrDeleteFromJourneyPopUpModel.JourneyId)}={JourneyId}&" +
+																	$"{nameof(EditOrDeleteFromJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
+																	$"{nameof(EditOrDeleteFromJourneyPopUpModel.EntryId)}={entryC.Id}");
 		}
 
 		async internal void AddToEntryC()

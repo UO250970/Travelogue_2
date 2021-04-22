@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             Shell.PresentationMode="ModalNotAnimated"
              x:Class="Travelogue_2.Main.Views.PopUps.EditOrDeleteEntryPopUp"
-             BackgroundColor="#40000000">
+             BackgroundColor="#40000000"
+             Shell.PresentationMode="ModalNotAnimated">
     
     <ContentPage.Content>
 
@@ -29,7 +29,7 @@
                         </Label>
                         <Label Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding SaveCommand}"/>
+                                <TapGestureRecognizer Command="{Binding SaveEntryCommand}"/>
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
@@ -49,7 +49,7 @@
             </Frame>
 
             <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="20, 0">
-                <Button Text="{Binding Resources[Delete]}" HorizontalOptions="FillAndExpand" Command="{Binding DeleteCommand}" BackgroundColor="{DynamicResource Red}"/>
+                <Button Text="{Binding Resources[Delete]}" HorizontalOptions="FillAndExpand" Command="{Binding DeleteEntryCommand}" BackgroundColor="{DynamicResource Red}"/>
             </StackLayout>
 
             <Grid.GestureRecognizers>

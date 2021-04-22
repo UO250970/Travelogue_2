@@ -86,6 +86,12 @@
     <Compile Update="Main\Views\PopUps\EditOrDeleteEntryPopUp.xaml.cs">
       <DependentUpon>EditOrDeleteEntryPopUp.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Main\Views\PopUps\EditOrDeleteFromEntryPopUp.xaml.cs">
+      <DependentUpon>EditOrDeleteFromEntryPopUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Main\Views\PopUps\EditOrDeleteCardPopUp.xaml.cs">
+      <DependentUpon>EditOrDeleteCardPopUp.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Localization\AppResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -148,6 +154,12 @@
     <EmbeddedResource Update="Main\Views\Modelation\StartModelationView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\PopUps\AddCardPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\PopUps\AddDestinyPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\PopUps\AddEntryPopUp.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -157,13 +169,19 @@
     <EmbeddedResource Update="Main\Views\PopUps\AddToEntryPopUp.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\PopUps\EditOrDeleteDestinyPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\PopUps\EditOrDeleteEntryPopUp.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\PopUps\EditOrDeleteEventPopUp.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Main\Views\PopUps\EditOrDeleteToEntryPopUp.xaml">
+    <EmbeddedResource Update="Main\Views\PopUps\EditOrDeleteFromEntryPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\PopUps\EditOrDeleteCardPopUp.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Settings\SettingsCardHolderView.xaml">

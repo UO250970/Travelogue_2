@@ -61,6 +61,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Añadir destino.
+        /// </summary>
+        internal static string AddDestiny {
+            get {
+                return ResourceManager.GetString("AddDestiny", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Añadir entrada.
         /// </summary>
         internal static string AddEntry {

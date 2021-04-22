@@ -9,7 +9,8 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 	[QueryProperty(nameof(JourneyId), nameof(JourneyId))]
 	[QueryProperty(nameof(DaySelectedNum), nameof(DaySelectedNum))]
 	[QueryProperty(nameof(EventId), nameof(EventId))]
-	public class EditOrDeleteEventPopUpModel : DataBaseViewModel
+	[QueryProperty(nameof(EntryId), nameof(EntryId))]
+	public class EditOrDeleteFromJourneyPopUpModel : DataBaseViewModel
 	{
 		public string journeyId;
 		public string JourneyId
@@ -25,6 +26,13 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			set => eventId = value;
 		}
 
+		public string entryId;
+		public string EntryId
+		{
+			get => entryId;
+			set => entryId = value;
+		}
+
 		public string daySelectedNum;
 		public string DaySelectedNum
 		{
@@ -36,14 +44,27 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			}
 		}
 
-		public Command SaveCommand { get; }
-		public Command DeleteCommand { get; }
+		public Command SaveEventCommand { get; }
+		public Command DeleteEventCommand { get; }
+
+		public Command SaveEntryCommand { get; }
+		public Command DeleteEntryCommand { get; }
+
+		public Command SaveTextCommand { get; }
+		public Command DeleteTextCommand { get; }
+
 		public Command CancelCommand { get; }
 
-		public EditOrDeleteEventPopUpModel()
+		public EditOrDeleteFromJourneyPopUpModel()
 		{
-			SaveCommand = new Command(() => SaveC());
-			DeleteCommand = new Command(() => DeleteC());
+			SaveEventCommand = new Command(() => SaveEventC());
+			DeleteEventCommand = new Command(() => DeleteEventC());
+
+			SaveEntryCommand = new Command(() => SaveEntryC());
+			DeleteEntryCommand = new Command(() => DeleteEntryC());
+
+			SaveTextCommand = new Command(() => SaveyTextC());
+			DeleteTextCommand = new Command(() => DeleteTextC());
 
 			CancelCommand = new Command(() => CancelC());
 		}
@@ -66,7 +87,6 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			MaxDaySelected = Days.Last();
 		}
 
-
 		#region Title
 
 		public string Title { get; set; } = string.Empty;
@@ -86,7 +106,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		}
 
 		#endregion
-		
+
 		#region MinDaySelected
 
 		private DateTime minDaySelected = DateTime.Today;
@@ -115,26 +135,32 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		#endregion
 
-		#region Location
-
-		private string location = string.Empty;
-		public string Location
-		{
-			get => location;
-			set
-			{
-				SetProperty(ref location, value);
-			}
-		}
-
-		#endregion
-
-		async internal void SaveC()
+		async internal void SaveEventC()
 		{
 
 		}
 
-		async internal void DeleteC()
+		async internal void DeleteEventC()
+		{
+
+		}
+
+		async internal void SaveEntryC()
+		{
+
+		}
+
+		async internal void DeleteEntryC()
+		{
+
+		}
+
+		async internal void SaveyTextC()
+		{
+
+		}
+
+		async internal void DeleteTextC()
 		{
 
 		}

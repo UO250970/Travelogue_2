@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             Shell.PresentationMode="ModalNotAnimated"
-             x:Class="Travelogue_2.Main.Views.PopUps.AddEntryPopUp"
-             BackgroundColor="#40000000">
-
-    <ContentPage.Content >
+             x:Class="Travelogue_2.Main.Views.PopUps.AddDestinyPopUp"
+             BackgroundColor="#40000000"
+             Shell.PresentationMode="ModalNotAnimated">
+    
+    <ContentPage.Content>
 
         <Grid>
 
@@ -21,26 +21,24 @@
 
                 <StackLayout>
 
-                    <!--Button BackgroundColor="{DynamicResource PrimaryFaded}" TextColor="{StaticResource White}" Text="{Binding Resources[Entry]}" HorizontalOptions="FillAndExpand"/-->
-                    <Label Text="{Binding Resources[AddEntry]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Label Text="{Binding Resources[AddDestiny]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
 
                     <StackLayout Margin="10">
 
-                        <Label Text="{Binding Resources[Date]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                        <DatePicker Date="{Binding DaySelected, Mode=TwoWay}" FontSize="Medium" 
-                                    MaximumDate="{Binding MaxDaySelected}" MinimumDate="{Binding MinDaySelected}"/>
-
                         <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                        <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
+                        <Entry Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" />
+
+                        <Label Text="{Binding Resources[Currency]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                        <Entry Text="{Binding Currency, Mode=TwoWay}" FontSize="Medium" />
 
                     </StackLayout>
                 </StackLayout>
-                
+
             </Frame>
 
             <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="20, 0">
                 <Button Text="{Binding Resources[Cancel]}" HorizontalOptions="FillAndExpand" Command="{Binding CancelCommand}" BackgroundColor="{DynamicResource Primary}"/>
-                <Button Text="{Binding Resources[Save]}" HorizontalOptions="FillAndExpand" Command="{Binding CreateEntryCommand}" BackgroundColor="{DynamicResource Primary}"/>
+                <Button Text="{Binding Resources[Save]}" HorizontalOptions="FillAndExpand" Command="{Binding CreateDestinyCommand}" BackgroundColor="{DynamicResource Primary}"/>
             </StackLayout>
 
             <Grid.GestureRecognizers>
