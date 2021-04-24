@@ -3,8 +3,8 @@ using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
-using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Resources.Localization;
@@ -22,6 +22,10 @@ namespace Travelogue_2.Main.Utils
 			{
 				statusCamera = await CrossPermissions.Current.RequestPermissionAsync<CameraPermission>();
 			}
+
+			var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+			var directoryname = Path.Combine(documents, "Travelogue");
+			Directory.CreateDirectory(directoryname);
 
 			Debug.WriteLine("Permision camera : " + statusCamera);
 
@@ -58,7 +62,14 @@ namespace Travelogue_2.Main.Utils
 		{
 			try
 			{
-				return await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions());
+				//return await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions());
+				return await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+				{
+					Directory = CommonVariables.AppName,
+					Name = GetPhotoName() + CommonVariables.SavedImagesExtension,
+					SaveToAlbum = true,
+					SaveMetaData = true,
+				});
 			}
 			catch (Exception ex)
 			{
@@ -71,13 +82,23 @@ namespace Travelogue_2.Main.Utils
 		{
 			try
 			{
-				return await CrossMedia.Current.PickPhotoAsync();
+				MediaFile foto = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+				{
+					SaveMetaData = true,
+				});
+				return foto;
 			}
 			catch (Exception ex)
 			{
 				Debug.WriteLine("Pick photo : " + ex);
 				return null;
 			}
+		}
+
+		private static string GetPhotoName()
+		{
+			DateTime today = DateTime.Today;
+			return CommonVariables.AppName + "_" + today.Year + today.Month + today.Day;
 		}
 
 	}

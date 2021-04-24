@@ -17,21 +17,21 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Text="{Binding ImageSelected.ImageName}" FontSize="Title" HorizontalTextAlignment="Center"></Label>
+                <Label Grid.Row="0" Text="{Binding ImageName}" FontSize="Title" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource White}"></Label>
 
                 <StackLayout Grid.Row="1">
 
-                    <Image Source="{Binding ImageName.Source}" Aspect="AspectFit"/>
+                    <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding ImageSource}" Aspect="AspectFit"/>
 
                 </StackLayout>
 
-                <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
 
-                    <Label Text="{Binding Resources[Edit]}"/>
+                    <Label Text="{Binding Resources[Edit]}" VerticalTextAlignment="Center" TextColor="{StaticResource White}"/>
 
-                    <Label Text="{Binding Resources[Delete]}"/>
+                    <Label Text="{Binding Resources[Share]}" VerticalTextAlignment="Center" TextColor="{StaticResource White}"/>
 
-                    <Label Text="{Binding Resources[Share]}"/>
+                    <Label Text="{Binding Resources[Delete]}" VerticalTextAlignment="Center" TextColor="{StaticResource White}"/>
 
                 </StackLayout>
 

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Services;
@@ -171,7 +169,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
 		async internal void AddCoverC()
 		{
-			EntryImageCard success = await CameraUtil.Photo(this);
+			EntryImageCard success = (EntryImageCard) await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				CoverImage = success;

@@ -1,10 +1,10 @@
 ﻿
 namespace Travelogue_2.Main.Models.Entries
 {
-	public class IEntry
+	public interface IEntry
 	{
-		public int Id { get; set; }
+		int Id { get; set; }
 
-		public string Time { get; set; } = "00:00";
+		string Time { get; set; }
 	}
 }

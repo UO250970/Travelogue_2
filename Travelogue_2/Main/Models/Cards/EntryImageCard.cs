@@ -1,18 +1,25 @@
 ﻿using Travelogue_2.Main.Models.Entries;
-using Travelogue_2.Main.Services;
-using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Models.Cards
 {
-	public class EntryImageCard : IEntry
+	public class EntryImageCard : ImageCard, IEntry
 	{
-		public ImageSource ImageSour { get; set; } = ImageSource.FromResource(CommonVariables.GenericImageImage);
+		public int Id { get; set; }
+		public string Time { get; set; }
 
-		public string ImagePath { get; set; } = string.Empty;
-		public string ImageName { get; set; } = string.Empty;
+		public EntryImageCard()
+		{
+			Time = "00:00";
+		}
+
+		public EntryImageCard(int id)
+		{
+			Id = id;
+			Time = "00:00";
+		}
+
 		public string ImageFoot { get; set; } = string.Empty;
 
 		public string JourneyName { get; set; } = App.LocResources["NoJourneyAssociated"];
-
 	}
 }

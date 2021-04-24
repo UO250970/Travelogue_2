@@ -178,7 +178,7 @@
 
                                     <StackLayout >
                                         <Label FontSize="Medium" TextColor="{DynamicResource PrimaryFaded}" Text="{Binding .Title}"
-                                               effects:LongPressedEffect.Command="{Binding Path=BindingContext.EditOrDeleteEntryCommand, Source={x:Reference JourneyTemplateViewName}}"
+                                               effects:LongPressedEffect.Command="{Binding BindingContext.EditOrDeleteEntryCommand, Source={x:Reference JourneyTemplateViewName}}"
                                                effects:LongPressedEffect.CommandParameter="{Binding .}">
 
                                             <Label.Effects>
@@ -217,9 +217,7 @@
                                             HeightRequest="100"
                                             Margin="10, 0, 10, 10"
                                             ItemsSource="{Binding JourneyImages}"
-                                            SelectionMode="Single"
-                                            SelectionChangedCommand="{Binding ImageTapped}"
-                                            SelectionChangedCommandParameter="{Binding SelectedImage, Source={x:Reference ImagesCollection}}">
+                                            SelectionMode="None">
 
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Horizontal"/>
@@ -237,12 +235,18 @@
 
                                     <border:SfBorder.Content >
 
-                                        <Image HeightRequest="{Binding CardImagesHeight}" WidthRequest="{Binding CardImagesHeight}" Source="{Binding BlanckImage.ImageSour}"/>
+                                        <Image HeightRequest="{Binding CardImagesHeight}" WidthRequest="{Binding CardImagesHeight}" Source="{Binding BlanckImage.ImageSour}"
+                                               Aspect="AspectFill">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.AddImageCommand, Source={x:Reference JourneyTemplateViewName}}"
+                                                                      CommandParameter="{Binding .}"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
 
                                     </border:SfBorder.Content>
 
                                     <border:SfBorder.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding AddImageCommand}" />
+                                        <TapGestureRecognizer Command="{Binding BindingContext.AddImageCommand, Source={x:Reference JourneyTemplateViewName}}" />
                                     </border:SfBorder.GestureRecognizers>
 
                                 </border:SfBorder>
@@ -252,7 +256,15 @@
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Frame Padding="5">
-                                        <Image HeightRequest="{Binding CardImagesHeight}" Source="{Binding .ImageSour}"/>
+                                        <Image HeightRequest="{Binding CardImagesHeight}" Source="{Binding .ImageSour}"
+                                               effects:LongPressedEffect.Command="{Binding BindingContext.ViewImageCommand, Source={x:Reference JourneyTemplateViewName}}"
+                                               effects:LongPressedEffect.CommandParameter="{Binding .}">
+
+                                            <Image.Effects>
+                                                <effects:LongPressedEffect />
+                                            </Image.Effects>
+
+                                        </Image>
                                     </Frame>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>

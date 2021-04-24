@@ -77,7 +77,7 @@ namespace Travelogue_2.Automatization
 				CommonVariables.AvailableDestinies.Add(destiny);
 			}
 
-			//DataBase.InsertCountries(iso2List);
+			// TODO - DataBase.InsertCountries(iso2List);
 		}
 
 	}

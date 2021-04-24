@@ -79,8 +79,8 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		#endregion
 
 		#region CoverImage
-		public EntryImageCard coverImage;
-		public EntryImageCard CoverImage
+		public ImageCard coverImage;
+		public ImageCard CoverImage
 		{
 			get => coverImage;
 			set
@@ -119,7 +119,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		async internal void ModifyCoverC()
 		{
-			EntryImageCard success = await CameraUtil.Photo(this);
+			ImageCard success = await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				CoverImage = success;

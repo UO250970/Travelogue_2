@@ -289,7 +289,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		async internal void AddImageC()
 		{
-			EntryImageCard success = await CameraUtil.Photo(this);
+			EntryImageCard success = (EntryImageCard) await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				Image = success;

@@ -43,13 +43,13 @@
                 <Frame HasShadow="True" Margin="5" Padding="5">
                     <StackLayout Orientation="Horizontal">
 
-                        <Label Text="&#xea0a;" FontFamily="{StaticResource Icon}"  FontSize="Medium" TextColor="{StaticResource Primary}" VerticalTextAlignment="Center"/>
+                        <Label Text="&#xe953;" FontFamily="{StaticResource Icon}"  FontSize="Medium" TextColor="{StaticResource Primary}" VerticalTextAlignment="Center"/>
                         <DatePicker Format="{Binding Resources[DateFormat]}"
                                     x:Name="IniDatePicker"
                                     Date="{Binding IniDate, Mode=TwoWay}"
                                     MinimumDate="{Binding MinimumDate}"
                                     DateSelected="CheckNewIniDate" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="&#xea0a;" FontFamily="{StaticResource Icon}"  FontSize="Medium" TextColor="{StaticResource Primary}" VerticalTextAlignment="Center"/>
+                        <Label Text="&#xe953;" FontFamily="{StaticResource Icon}"  FontSize="Medium" TextColor="{StaticResource Primary}" VerticalTextAlignment="Center"/>
                         <DatePicker Format="{Binding Resources[DateFormat]}"
                                     x:Name="EndDatePicker"
                                     Date="{Binding EndDate, Mode=TwoWay}"

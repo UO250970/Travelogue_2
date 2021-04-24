@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Travelogue_2.Main.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -33,7 +32,9 @@ namespace Travelogue_2.Main.Services
 
 		public static string FlagImagesExtension { get => "_Flag" + ImagesExtension; } 
 
-		public static string ImagesExtension { get => ".png"; } 
+		public static string ImagesExtension { get => ".png"; }
+
+		public static string SavedImagesExtension { get => ".jpg"; }
 
 		public static string GenericImage { get => ImagesPath + ".default_image" + ImagesExtension; }
 

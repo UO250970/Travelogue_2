@@ -3,17 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
              x:Class="Travelogue_2.Main.Views.PopUps.AddCardPopUp"
              BackgroundColor="#40000000"
-             Shell.PresentationMode="ModalNotAnimated">
+             Shell.PresentationMode="ModalNotAnimated"
+             x:Name="AddCardPopUpName">
     
     <ContentPage.Content>
 
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="130"></RowDefinition>
+                <RowDefinition Height="110"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="185"></RowDefinition>
+                <RowDefinition Height="150"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Frame Grid.Row="1" BackgroundColor="{StaticResource White}"
@@ -21,22 +22,20 @@
 
                 <StackLayout>
 
-                    <Label Text="{Binding Resources[AddDestiny]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Label Text="{Binding Resources[AddCard]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
 
                     <StackLayout Margin="10">
 
                         <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                        <Entry Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" />
+                        <Entry Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" Placeholder="{Binding Resources[AddCardEx]}"/>
 
-                        <Label Text="{Binding Resources[Photos]}" FontSize="Large" TextColor="{DynamicResource Primary}"/>
+                        <Label Text="{Binding Resources[Photos]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
 
                         <CollectionView x:Name="ImagesCollection"
                                             HeightRequest="100"
                                             Margin="10, 0, 10, 10"
-                                            ItemsSource="{Binding JourneyImages}"
-                                            SelectionMode="Single"
-                                            SelectionChangedCommand="{Binding ImageTapped}"
-                                            SelectionChangedCommandParameter="{Binding SelectedImage, Source={x:Reference ImagesCollection}}">
+                                            ItemsSource="{Binding CardImages}"
+                                            SelectionMode="None">
 
                             <CollectionView.ItemsLayout>
                                 <GridItemsLayout Orientation="Horizontal"/>
@@ -54,12 +53,17 @@
 
                                     <border:SfBorder.Content >
 
-                                        <Image HeightRequest="{Binding CardImagesHeight}" WidthRequest="{Binding CardImagesHeight}" Source="{Binding BlanckImage.ImageSour}"/>
+                                        <Image HeightRequest="{Binding CardImagesHeight}" WidthRequest="{Binding CardImagesHeight}" Source="{Binding BlanckImage.ImageSour}">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.AddImageCommand, Source={x:Reference AddCardPopUpName}}"
+                                                                      CommandParameter="{Binding .}"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
 
                                     </border:SfBorder.Content>
 
                                     <border:SfBorder.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding AddImageCommand}" />
+                                        <TapGestureRecognizer Command="{Binding BindingContext.AddImageCommand, Source={x:Reference AddCardPopUpName}}" />
                                     </border:SfBorder.GestureRecognizers>
 
                                 </border:SfBorder>
@@ -73,8 +77,8 @@
                                     </Frame>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
+                            
                         </CollectionView>
-
                     </StackLayout>
                 </StackLayout>
 

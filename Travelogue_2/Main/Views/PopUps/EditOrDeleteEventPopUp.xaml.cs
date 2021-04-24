@@ -7,13 +7,13 @@ namespace Travelogue_2.Main.Views.PopUps
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class EditOrDeleteEventPopUp : ContentPage
 	{
-		public EditOrDeleteEventPopUpModel model;
+		public EditOrDeleteFromJourneyPopUpModel model;
 
 		public EditOrDeleteEventPopUp()
 		{
 			InitializeComponent();
 
-			BindingContext = model = new EditOrDeleteEventPopUpModel();
+			BindingContext = model = new EditOrDeleteFromJourneyPopUpModel();
 		}
 	}
 }

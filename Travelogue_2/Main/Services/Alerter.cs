@@ -95,6 +95,11 @@ namespace Travelogue_2.Main.Services
 			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessImageAdded"], App.LocResources["Ok"]);
 		}
 
+		internal static async Task AlertCardCreated()
+		{
+			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessCardCreated"], App.LocResources["Ok"]);
+		}
+
 		/** No Name */
 		/*
 		public static async Task AlertNoNameInNewCountry()
@@ -136,6 +141,16 @@ namespace Travelogue_2.Main.Services
 		public static async Task AlertNoImageSelected()
 		{
 			await Page?.DisplayAlert(App.LocResources["AlertNoImageSelected"], App.LocResources["MessNoImageSelected"], App.LocResources["Ok"]);
+		}
+
+		public static async Task AlertNoNameInCard()
+		{
+			await Page?.DisplayAlert(App.LocResources["AlertNoNameInCard"], App.LocResources["MessNoNameInCard"], App.LocResources["Ok"]);
+		}
+
+		public static async Task AlertNoImagesInCard()
+		{
+			await Page?.DisplayAlert(App.LocResources["AlertNoImagesInCard"], App.LocResources["MessNoImagesInCard"], App.LocResources["Ok"]);
 		}
 
 		/** Too Many */

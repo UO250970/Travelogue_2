@@ -1,5 +1,4 @@
-﻿using System;
-using Travelogue_2.Main.Models.Cards;
+﻿using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Models.Entries;
 using Xamarin.Forms;
 

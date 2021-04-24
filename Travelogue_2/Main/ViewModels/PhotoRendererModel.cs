@@ -4,12 +4,17 @@ using System.Diagnostics;
 using System.IO;
 using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.ViewModels;
+using Travelogue_2.Main.ViewModels.Media;
+using Travelogue_2.Main.Views.Media;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Services
 {
 	public abstract class PhotoRendererModel : DataBaseViewModel
 	{
+		public Command<ImageCard> ViewImageCommand { get; set; }
+
+		public ImageCard ImageSelected { get; set; }
 
 		public EntryImageCard AddImage(MediaFile file)
 		{
@@ -42,5 +47,22 @@ namespace Travelogue_2.Main.Services
 		public int CoverImageHeight { get => CommonVariables.ImageMaxHeight; }
 
 		public int CardImagesHeight { get => CommonVariables.ImageCardMaxHeight; }
+
+
+		public EntryImageCard blanckImage = new EntryImageCard();
+		public EntryImageCard BlanckImage
+		{
+			get => blanckImage;
+			set
+			{
+				SetProperty(ref blanckImage, value);
+			}
+		}
+
+		public async void ViewImageC(ImageCard image)
+		{
+			ImageSelected = image;
+			await Shell.Current.GoToAsync($"{nameof(ImageView)}?{ nameof(ImageViewModel.ImagePath)}={ image.ImagePath}");
+		}
 	}
 }

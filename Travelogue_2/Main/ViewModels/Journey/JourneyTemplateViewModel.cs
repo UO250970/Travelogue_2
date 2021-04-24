@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Models.Entries;
@@ -42,6 +41,8 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			AddImageCommand = new Command(() => AddImageC());
 			ModifyJourneyCommand = new Command(() => ModifyJourneyC());
 
+			ViewImageCommand = new Command<ImageCard>((ImageCard) => ViewImageC(ImageCard));
+
 			EditOrDeleteEventCommand = new Command<EventCard>((EventCard e) => EditOrDeleteEventC(e));
 			EditOrDeleteEntryCommand = new Command<EntryCard>((EntryCard e) => EditOrDeleteEntryC(e));
 
@@ -72,7 +73,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			temp2.Year = "2021";
 			var etemp1 = new EntryCard();
 			etemp1.Title = "Prueba titulo";
-			var ectemp1 = new EntryTextCard();
+			var ectemp1 = new EntryTextCard(4);
 			ectemp1.Text = "Hoy me divertí mucho corriendo detrás de patos :')";
 			ectemp1.Time = DateTime.Now.ToString("HH:mm");  // TODO - Pasar a documetnación https://stackoverflow.com/questions/11107465/getting-only-hour-minute-of-datetime/11107508
 			etemp1.Content.Add(ectemp1);
@@ -111,19 +112,6 @@ namespace Travelogue_2.Main.ViewModels.Journal
 				JourneyDays.Add(day);
 			}
 		}
-
-		#region Photos
-
-		public EntryImageCard blanckImage = new EntryImageCard();
-		public EntryImageCard BlanckImage
-		{
-			get => blanckImage;
-			set
-			{
-				SetProperty(ref blanckImage, value);
-			}
-		}
-		#endregion
 
 		#region Cover
 
@@ -199,9 +187,9 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		async internal void EditOrDeleteEventC(EventCard eventC)
 		{
-			await Shell.Current.GoToAsync($"{nameof(EditOrDeleteEventPopUp)}?{nameof(EditOrDeleteEventPopUpModel.JourneyId)}={JourneyId}&" +
-																	$"{nameof(EditOrDeleteEventPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
-																	$"{nameof(EditOrDeleteEventPopUpModel.EventId)}={eventC.Id}");
+			await Shell.Current.GoToAsync($"{nameof(EditOrDeleteEventPopUp)}?{nameof(EditOrDeleteFromJourneyPopUpModel.JourneyId)}={JourneyId}&" +
+																	$"{nameof(EditOrDeleteFromJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
+																	$"{nameof(EditOrDeleteFromJourneyPopUpModel.EventId)}={eventC.Id}");
 		}
 
 		async internal void AddEntryC()
