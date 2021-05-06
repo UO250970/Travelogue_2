@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travelogue_2.Android", "Travelogue_2.Android\Travelogue_2.Android.csproj", "{CC2D7CB3-B4BB-4B44-9B60-31C3D1227414}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travelogue_2", "Travelogue_2\Travelogue_2.csproj", "{B8431C7B-05F6-4DF6-84A9-FC2CFC58D41B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Travelogue_2", "Travelogue_2\Travelogue_2.csproj", "{B8431C7B-05F6-4DF6-84A9-FC2CFC58D41B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UITest", "UITest\UITest.csproj", "{5238F3F1-DFEC-49C2-BF30-2C0D175866C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{B8431C7B-05F6-4DF6-84A9-FC2CFC58D41B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8431C7B-05F6-4DF6-84A9-FC2CFC58D41B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B8431C7B-05F6-4DF6-84A9-FC2CFC58D41B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5238F3F1-DFEC-49C2-BF30-2C0D175866C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5238F3F1-DFEC-49C2-BF30-2C0D175866C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5238F3F1-DFEC-49C2-BF30-2C0D175866C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5238F3F1-DFEC-49C2-BF30-2C0D175866C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

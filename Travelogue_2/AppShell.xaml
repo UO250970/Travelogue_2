@@ -35,27 +35,27 @@
     </Shell.Resources>
 
     <TabBar >
-        <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate library:LibraryView}" >
+        <ShellContent ContentTemplate="{DataTemplate library:LibraryView}" AutomationId="LibraryViewButton">
             <ShellContent.Icon>
                 <FontImageSource Glyph="&#xe920;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>
         </ShellContent>
-        <ShellContent ContentTemplate="{DataTemplate media:MediaView}" >
+        <ShellContent ContentTemplate="{DataTemplate media:MediaView}" AutomationId="MediaViewButton">
             <ShellContent.Icon>
                 <FontImageSource Glyph="&#xe9ca;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>
         </ShellContent>
-        <ShellContent ContentTemplate="{DataTemplate journey:JourneyOngoingView}" >
+        <ShellContent ContentTemplate="{DataTemplate journey:JourneyOngoingView}" AutomationId="LibraryOnGoingViewButton">
             <ShellContent.Icon>
                 <FontImageSource Glyph="&#xea1c;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>
         </ShellContent>
-        <ShellContent ContentTemplate="{DataTemplate modelation:ModelationView}" >
+        <ShellContent ContentTemplate="{DataTemplate modelation:ModelationView}" AutomationId="ModelationViewButton">
             <ShellContent.Icon>
                 <FontImageSource Glyph="&#xe905;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>
         </ShellContent>
-        <ShellContent ContentTemplate="{DataTemplate settings:SettingsView}" >
+        <ShellContent ContentTemplate="{DataTemplate settings:SettingsView}" AutomationId="SettingsViewButton">
             <ShellContent.Icon>
                 <FontImageSource Glyph="&#xe994;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>
