@@ -16,7 +16,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Text="{Binding Resources[CreatedJourneys]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                        <Label Grid.Column="0" AutomationId="CreatedJourneysId" Text="{Binding Resources[CreatedJourneys]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
                         <Label Grid.Column="1" Text="&#xea42;" FontFamily="{StaticResource Icon}" FontSize="Title"  VerticalTextAlignment="Center" HorizontalOptions="Center"
                                TextColor="{DynamicResource Primary}">
                             <Label.GestureRecognizers>

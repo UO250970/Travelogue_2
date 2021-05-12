@@ -34,10 +34,10 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <TabBar >
+    <TabBar AutomationId="TabBar" >
         <ShellContent ContentTemplate="{DataTemplate library:LibraryView}" AutomationId="LibraryViewButton">
-            <ShellContent.Icon>
-                <FontImageSource Glyph="&#xe920;" FontFamily="{StaticResource Icon}" Size="Small"/>
+            <ShellContent.Icon x:Uid="LibraryViewIcon">
+                <FontImageSource AutomationId="LibraryView" Glyph="&#xe920;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>
         </ShellContent>
         <ShellContent ContentTemplate="{DataTemplate media:MediaView}" AutomationId="MediaViewButton">

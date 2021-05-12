@@ -27,11 +27,11 @@
                 </StackLayout.GestureRecognizers>
             </-->
 
-            <Button Text="{Binding Resources[Language]}" Grid.Column="0" Grid.Row="0" Command="{Binding LanguagesSettingsCommand}"></Button>
-            <Button Text="{Binding Resources[CardHolder]}" Grid.Column="1" Grid.Row="0" Command="{Binding CardHolderSettingsCommand}"></Button>
+            <Button AutomationId="LanguageButton" Text="{Binding Resources[Language]}" Grid.Column="0" Grid.Row="0" Command="{Binding LanguagesSettingsCommand}"></Button>
+            <Button AutomationId="CardHolderutton" Text="{Binding Resources[CardHolder]}" Grid.Column="1" Grid.Row="0" Command="{Binding CardHolderSettingsCommand}"></Button>
 
-            <Button Text="{Binding Resources[Style]}" Grid.Column="0" Grid.Row="1" Command="{Binding StyleSettingsCommand}"></Button>
-            <Button Text="{Binding Resources[Destinies]}" Grid.Column="1" Grid.Row="1" Command="{Binding DestiniesSettingsCommand}"></Button>
+            <Button AutomationId="StyleButton" Text="{Binding Resources[Style]}" Grid.Column="0" Grid.Row="1" Command="{Binding StyleSettingsCommand}"></Button>
+            <Button AutomationId="DestiniesButton" Text="{Binding Resources[Destinies]}" Grid.Column="1" Grid.Row="1" Command="{Binding DestiniesSettingsCommand}"></Button>
         </Grid>
         
         
