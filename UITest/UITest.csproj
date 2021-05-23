@@ -28,11 +28,6 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.12.0" />
-    <PackageReference Include="Xamarin.UITest" Version="3.0.5" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Travelogue_2.Android\Travelogue_2.Android.csproj">
       <Project>{cc2d7cb3-b4bb-4b44-9b60-31c3d1227414}</Project>
       <Name>Travelogue_2.Android</Name>

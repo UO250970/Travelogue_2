@@ -14,7 +14,6 @@ namespace Travelogue_2.Main.Utils
 {
 	public static class CameraUtil
 	{
-
 		public static async void CheckPermissions()
 		{
 			PermissionStatus statusCamera = CrossPermissions.Current.CheckPermissionStatusAsync<CameraPermission>().Result;
@@ -99,6 +98,13 @@ namespace Travelogue_2.Main.Utils
 		{
 			DateTime today = DateTime.Today;
 			return CommonVariables.AppName + "_" + today.Year + today.Month + today.Day;
+		}
+
+		public static void PhotoOngoingJourney()
+        {
+			//Database y todo eso
+			TakePhoto();
+
 		}
 
 	}

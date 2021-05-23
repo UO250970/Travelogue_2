@@ -240,6 +240,9 @@
   <data name="EndDate" xml:space="preserve">
     <value>End date</value>
   </data>
+  <data name="EndJournal" xml:space="preserve">
+    <value>End journal</value>
+  </data>
   <data name="EnterADestiny" xml:space="preserve">
     <value>Enter a destiny</value>
   </data>
@@ -389,6 +392,9 @@
   </data>
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
+  </data>
+  <data name="PagesCountMess" xml:space="preserve">
+    <value>{0} pages</value>
   </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>Phone number</value>

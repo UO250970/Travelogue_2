@@ -7,18 +7,22 @@ using Xamarin.Essentials;
 using Syncfusion.XForms.Android.PopupLayout;
 using Travelogue_2.Droid.Services;
 using Android.Content;
+using AndroidX.LocalBroadcastManager.Content;
 
 namespace Travelogue_2.Droid
 {
-    [Activity(Label = "Travelogue", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
+    [Activity(Label = "Travelogue", Icon = "@mipmap/icon", Theme = "@style/MainTheme",
+        MainLauncher = false,
+        LaunchMode = LaunchMode.SingleTop,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        Receiver receiver;
+        public const string REPLY_ACTION = "com.xamarin.directreply.REPLY";
+        public const string PHOTO_ACTION = "com.xamarin.directreply.REPLY";
+        public const string REQUEST_CODE = "request_code";
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            receiver = new Receiver();
-
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -36,20 +40,6 @@ namespace Travelogue_2.Droid
             Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-
-        protected override void OnResume()
-        {
-            base.OnResume();
-            RegisterReceiver(receiver, new IntentFilter("com.xamarin.example.TEST"));
-            // Code omitted for clarity
-        }
-
-        protected override void OnPause()
-        {
-            UnregisterReceiver(receiver);
-            // Code omitted for clarity
-            base.OnPause();
         }
 
     }

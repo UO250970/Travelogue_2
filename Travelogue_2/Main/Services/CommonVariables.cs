@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Travelogue_2.Main.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -23,6 +24,7 @@ namespace Travelogue_2.Main.Services
 		/** Common string */
 		public static string AppName { get => "Travelogue_2"; }
 		public static string ResourcesMonth { get => "Month_"; }
+		public static string Background { get => "Background_"; }
 
 		public static string CountryWebSite { get => "http://country.io/"; }
 
@@ -73,6 +75,18 @@ namespace Travelogue_2.Main.Services
 		public static ImageSource GetImage()
 		{
 			return ImageSource.FromResource(GenericImage);
+		}
+
+		public static List<string> AvailableBackgrounds { get => new List<string>() { Background + "1" + ImagesExtension }; }
+
+		public static ObservableCollection<ImageSource> GetBackgrounds() 
+		{
+			ObservableCollection<ImageSource> temp = new ObservableCollection<ImageSource>();
+			foreach( string back in AvailableBackgrounds)
+            {
+				temp.Add(ImageSource.FromResource(back));
+			}
+			return temp;
 		}
 
 	}

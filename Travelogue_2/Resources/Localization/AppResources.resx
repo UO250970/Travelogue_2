@@ -246,6 +246,9 @@
   <data name="EndDate" xml:space="preserve">
     <value>Fecha fin</value>
   </data>
+  <data name="EndJournal" xml:space="preserve">
+    <value>Cerrar diario de viaje</value>
+  </data>
   <data name="EnterADestiny" xml:space="preserve">
     <value>Introduce un destino</value>
   </data>
@@ -398,6 +401,9 @@
   </data>
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
+  </data>
+  <data name="PagesCountMess" xml:space="preserve">
+    <value>{0} páginas</value>
   </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>Número de tfn.</value>

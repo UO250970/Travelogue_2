@@ -2,30 +2,78 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Travelogue_2.Main.Views.Modelation.Modelate.JournalModelationView"
-             xmlns:imageeditor="clr-namespace:Syncfusion.SfImageEditor.XForms;assembly=Syncfusion.SfImageEditor.XForms"
-             Shell.PresentationMode="ModalAnimated">
+             Shell.NavBarIsVisible="True"
+             Shell.TabBarIsVisible="False"
+             Title="{Binding JourneyName}"
+             x:Name="JournalModelationViewName">
     <ContentPage.Content>
-        <StackLayout>
 
-            <StackLayout Orientation="Horizontal" HeightRequest="40">
+        <AbsoluteLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                <Button x:Name="DeletePageJournalButton" 
-                        Style="{StaticResource smallCircleButtonStyle}"
-                        HorizontalOptions="StartAndExpand"  Text="&#xea0b;" FontFamily="{StaticResource Icon}"/>
+                <StackLayout Grid.Row="0" >
 
+                    <Label Text="{Binding PagesCount}" FontSize="Caption" HorizontalTextAlignment="End" Margin="10"/>
 
-                <CollectionView>
+                    <CollectionView x:Name="PagesCollection"
+                                ItemsSource="{Binding Pages}"
+                                SelectionMode="Single"
+                                SelectionChangedCommand="{Binding PageTapped}"
+                                SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference PagesCollection}}">
 
-                </CollectionView>
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                                                Span="4"/>
+                        </CollectionView.ItemsLayout>
 
-                <Button x:Name="AddPageJournalButton" 
-                        Style="{StaticResource smallCircleButtonStyle}"
-                        HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}"/>
+                        <CollectionView.EmptyView>
+                            <Label Text="{Binding Resources[CreatedEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                        </CollectionView.EmptyView>
 
-            </StackLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
 
-            <imageeditor:SfImageEditor Source="{Binding Image}" />
-            
-        </StackLayout>
+                                <AbsoluteLayout>
+
+                                    <Image Source="{Binding .ImageSour}"/>
+
+                                    <Button x:Name="DeletePageButton" 
+                                                    Style="{StaticResource smallCircleButtonStyle}"
+                                                    BackgroundColor="{StaticResource None}"
+                                                    HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
+                                                    Command="{Binding BindingContext.PageTappedDelete, Source={x:Reference JournalModelationViewName}}"
+                                                    CommandParameter="{Binding .}"/>
+
+                                </AbsoluteLayout>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+
+                </StackLayout>
+               
+                <Frame Grid.Row="1" HasShadow="True" Margin="5" Padding="5">
+
+                    <StackLayout>
+                        <Button BackgroundColor="{DynamicResource Primary}" Text="{Binding Resources[EndJournal]}" FontSize="Large" TextColor="{StaticResource White}"/>
+                    </StackLayout>
+
+                </Frame>
+
+            </Grid>
+
+            <Button x:Name="CreatePageButton" 
+                    Style="{StaticResource circleButtonAddStyle}"
+                    Command="{Binding CreatePageCommand}"
+                    AbsoluteLayout.LayoutBounds="0.98,0.85,60,60"
+                    HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}" />
+
+        </AbsoluteLayout>
+
     </ContentPage.Content>
 </ContentPage>

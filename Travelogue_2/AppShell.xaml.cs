@@ -51,6 +51,7 @@ namespace Travelogue_2
             Routing.RegisterRoute(nameof(EditOrDeleteCardPopUp), typeof(EditOrDeleteCardPopUp));
 
             Routing.RegisterRoute(nameof(ImageView), typeof(ImageView));
+            Routing.RegisterRoute(nameof(BackgroundSelectorView), typeof(BackgroundSelectorView));
         }
 
     }

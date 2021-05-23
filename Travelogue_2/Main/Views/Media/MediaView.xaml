@@ -66,12 +66,8 @@
                                FontIconFontFamily="{StaticResource Icon}">
                 <tabView:SfTabItem.Content>
 
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        
+                    <AbsoluteLayout>
+
                         <StackLayout Padding="10,10,10,5" Grid.Row="0">
 
                             <Grid>
@@ -132,8 +128,8 @@
                             </BindableLayout.ItemTemplate>
                         </StackLayout>
 
-                    </Grid>
-                    
+                    </AbsoluteLayout>
+
                 </tabView:SfTabItem.Content>
             </tabView:SfTabItem>
 

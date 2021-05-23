@@ -33,7 +33,7 @@
 
 
                 </StackLayout>
-
+                
                 <CollectionView Grid.Row="1" x:Name="CreatedJourneysCollection"
                                 ItemsSource="{Binding JourneysCreatedSearched}"
                                 SelectionMode="Single"

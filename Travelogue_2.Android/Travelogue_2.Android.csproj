@@ -67,8 +67,8 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LongPressedEffect.cs" />
-    <Compile Include="Services\BroadcastReceiver.cs" />
-    <Compile Include="Services\LocalNotifications.cs" />
+    <Compile Include="Services\Notifications.cs" />
+    <Compile Include="Services\Receiver.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\icomoon.ttf" />

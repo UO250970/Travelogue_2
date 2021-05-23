@@ -45,7 +45,7 @@
                 <FontImageSource Glyph="&#xe9ca;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>
         </ShellContent>
-        <ShellContent ContentTemplate="{DataTemplate journey:JourneyOngoingView}" AutomationId="LibraryOnGoingViewButton">
+        <ShellContent Route="JourneyOngoingView" ContentTemplate="{DataTemplate journey:JourneyOngoingView}" AutomationId="LibraryOnGoingViewButton">
             <ShellContent.Icon>
                 <FontImageSource Glyph="&#xea1c;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>

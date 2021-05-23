@@ -131,13 +131,13 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			await Browser.OpenAsync(path);
 		}
 
-		ILocalNotifications notificationManager = DependencyService.Get<ILocalNotifications>();
+		INotifications notificationManager = DependencyService.Get<INotifications>();
 
 		internal void PhoneNumberTappedC(string number)
 		{
 			PhoneDialer.Open(number);
 
-			notificationManager.SendNotification("Title", "Message");
+			notificationManager.SendNotification("¡Estamos de viaje!", "Desliza si quieres añadir una entrada...");
 		}
 
 		internal void CheckNewIniDate(DatePicker iniDatePicker, DatePicker endDatePicker)
