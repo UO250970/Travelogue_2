@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Views.Modelation.Modelate;
 using Xamarin.Forms;
@@ -9,19 +9,19 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
 	public class JournalModelationViewModel : PhotoRendererModel
 	{
 		public string JourneyId; 
-		public ObservableCollection<ImageCard> Pages { get; set; }
+		public ObservableCollection<ImageModel> Pages { get; set; }
 		public Command CreatePageCommand { get; set; }
-		public Command<ImageCard> PageTapped { get; }
-		public Command<ImageCard> PageTappedDelete { get; }
+		public Command<ImageModel> PageTapped { get; }
+		public Command<ImageModel> PageTappedDelete { get; }
 
 		public JournalModelationViewModel()
 		{
-			Pages = new ObservableCollection<ImageCard>();
+			Pages = new ObservableCollection<ImageModel>();
 
 			CreatePageCommand = new Command(x => CreatePageC());
 
-			PageTapped = new Command<ImageCard>(OnPageSelected);
-			PageTappedDelete = new Command<ImageCard>(OnPageDelete);
+			PageTapped = new Command<ImageModel>(OnPageSelected);
+			PageTappedDelete = new Command<ImageModel>(OnPageDelete);
 
 			ExecuteLoadDataCommand();
 		}
@@ -69,7 +69,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
 			await Shell.Current.GoToAsync($"{nameof(BackgroundSelectorView)}");
 		}
 
-		async void OnPageSelected(ImageCard page)
+		async void OnPageSelected(ImageModel page)
 		{
 			if (page == null)
 				return;
@@ -78,7 +78,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
 			// This will push the ItemDetailPage onto the navigation stack
 		}
 
-		async void OnPageDelete(ImageCard page)
+		async void OnPageDelete(ImageModel page)
         {
 			if (page == null)
 				return;

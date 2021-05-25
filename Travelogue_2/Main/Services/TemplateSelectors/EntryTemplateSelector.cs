@@ -1,4 +1,4 @@
-﻿using Travelogue_2.Main.Models.Cards;
+﻿using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Models.Entries;
 using Xamarin.Forms;
 
@@ -33,10 +33,10 @@ namespace Travelogue_2.Main.Services
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
 		{
-			if (item is EntryTextCard e)
+			if (item is EntryTextModel e)
 			{
                 return TextTemplate;
-			} else if ( ((EntryImageCard)item).ImageFoot == string.Empty )
+			} else if ( ((EntryImageModel)item).ImageFoot == string.Empty )
 			{
                 return imageNoFootTemplate;
 			}

@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
 using Xamarin.Forms;
@@ -19,9 +19,9 @@ namespace Travelogue_2.Main.ViewModels.Media
 
 		public int localizationFirstDay;
 		public Command SearchJourneyCommand { get; }
-		public ObservableDictionary<string, List<EntryImageCard>> ImagesOrdered { get; set; }
-		public ObservableCollection<EntryImageCard> Images { get; }
-		public ObservableCollection<EntryImageCard> ImagesSearched { get; set; }
+		public ObservableDictionary<string, List<EntryImageModel>> ImagesOrdered { get; set; }
+		public ObservableCollection<EntryImageModel> Images { get; }
+		public ObservableCollection<EntryImageModel> ImagesSearched { get; set; }
 
 		public MediaViewModel()
 		{
@@ -32,9 +32,9 @@ namespace Travelogue_2.Main.ViewModels.Media
 
 			SearchJourneyCommand = new Command(() => SearchJourneyC());
 
-			ImagesOrdered = new ObservableDictionary<string, List<EntryImageCard>>();
-			Images = new ObservableCollection<EntryImageCard>();
-			ImagesSearched = new ObservableCollection<EntryImageCard>();
+			ImagesOrdered = new ObservableDictionary<string, List<EntryImageModel>>();
+			Images = new ObservableCollection<EntryImageModel>();
+			ImagesSearched = new ObservableCollection<EntryImageModel>();
 
 			ExecuteLoadDataCommand();
 		}
@@ -51,7 +51,7 @@ namespace Travelogue_2.Main.ViewModels.Media
 			CalendarJourneis.Add(jour);
 
 			Images.Clear();
-			EntryImageCard image = new EntryImageCard();
+			EntryImageModel image = new EntryImageModel();
 			Images.Add(image);
 
 			List<string> viajes = new List<string>();

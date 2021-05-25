@@ -1,12 +1,13 @@
-﻿
-namespace Travelogue_2.Main.Models.Entries
+﻿using Travelogue_2.Main.Models.Entries;
+
+namespace Travelogue_2.Main.Models
 {
-	public class EntryTextCard : IEntry
+	public class EntryTextModel : IEntry
 	{
 		public int Id { get; set; }
 		public string Time { get; set; }
 
-		public EntryTextCard(int id)
+		public EntryTextModel(int id)
 		{
 			Id = id;
 			Time = "00:00";

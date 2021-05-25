@@ -5,7 +5,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Resources.Localization;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
@@ -39,7 +39,7 @@ namespace Travelogue_2.Main.Utils
 			}
 		}
 
-		internal static async Task<EntryImageCard> Photo(PhotoRendererModel model)
+		internal static async Task<EntryImageModel> Photo(PhotoRendererModel model)
 		{
 			CheckPermissions();
 			string photo = await Alerter.AlertPhoto();

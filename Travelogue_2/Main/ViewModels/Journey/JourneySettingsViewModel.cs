@@ -4,7 +4,7 @@ using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Utils;
 using System;
 
@@ -30,12 +30,12 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		public Command ModifyCoverCommand { get; }
 		public Command MoreInfoCommand { get; }
 		public Command PhoneNumberTappedCommand { get; }
-		public ObservableCollection<DestinyCard> JourneyDestinies { get; }
+		public ObservableCollection<DestinyModel> JourneyDestinies { get; }
 
 		public JourneySettingsViewModel()
 		{
-			coverImage = new EntryImageCard();
-			JourneyDestinies = new ObservableCollection<DestinyCard>();
+			coverImage = new EntryImageModel();
+			JourneyDestinies = new ObservableCollection<DestinyModel>();
 
 			ModifyCoverCommand = new Command(x => ModifyCoverC());
 			MoreInfoCommand = new Command<string>((x) => MoreInfoC(x));
@@ -51,7 +51,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 			JourneyDestinies.Clear();
 
-			DestinyCard temp = new DestinyCard();
+			DestinyModel temp = new DestinyModel();
 			Destiny tempDestiny = CommonVariables.AvailableDestinies.Find(x => x.Name == "Canada");
 			temp.Destiny = tempDestiny.Name;
 			temp.Code = tempDestiny.Code;
@@ -79,8 +79,8 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		#endregion
 
 		#region CoverImage
-		public ImageCard coverImage;
-		public ImageCard CoverImage
+		public ImageModel coverImage;
+		public ImageModel CoverImage
 		{
 			get => coverImage;
 			set
@@ -119,7 +119,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		async internal void ModifyCoverC()
 		{
-			ImageCard success = await CameraUtil.Photo(this);
+			ImageModel success = await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				CoverImage = success;

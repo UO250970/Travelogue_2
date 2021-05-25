@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using Travelogue_2.Main.Models;
-using Travelogue_2.Main.Models.Cards;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Modelation
@@ -9,11 +8,11 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 	{
 
 		public Command<Item> JourneyTapped { get; }
-		public ObservableCollection<JourneyCard> ClosedJourals { get; set; }
+		public ObservableCollection<JourneyModel> ClosedJourals { get; set; }
 
 		public EndedModelationViewModel()
 		{
-			ClosedJourals = new ObservableCollection<JourneyCard>();
+			ClosedJourals = new ObservableCollection<JourneyModel>();
 
 			JourneyTapped = new Command<Item>(OnJourneySelected);
 

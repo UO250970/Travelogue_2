@@ -17,7 +17,7 @@ namespace Travelogue_2.Main.ViewModels
 			set => SetProperty(ref isBusy, value);
 		}
 
-		public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+		public IDataStoreNU<Item> DataStore => DependencyService.Get<IDataStoreNU<Item>>();
 
         public async Task ExecuteLoadDataCommand()
         {

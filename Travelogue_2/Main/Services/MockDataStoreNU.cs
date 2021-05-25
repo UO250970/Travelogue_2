@@ -6,7 +6,7 @@ using Travelogue_2.Main.Models;
 
 namespace Travelogue_2.Main.Services
 {
-    public class MockDataStoreNU : IDataStore<Item>
+    public class MockDataStoreNU : IDataStoreNU<Item>
     {
         readonly List<Item> items;
 

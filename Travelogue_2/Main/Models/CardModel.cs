@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Travelogue_2.Main.Models.Cards
+namespace Travelogue_2.Main.Models
 {
-	public class CardCard
+	public class CardModel
 	{
 		public string Name { get; set; }
 

@@ -1,6 +1,6 @@
-﻿namespace Travelogue_2.Main.Models.Cards
+﻿namespace Travelogue_2.Main.Models
 {
-	public class EventCard
+	public class EventModel
 	{
 		public int Id { get; set; }
 

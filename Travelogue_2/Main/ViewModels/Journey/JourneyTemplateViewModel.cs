@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Travelogue_2.Main.Models.Cards;
-using Travelogue_2.Main.Models.Entries;
+using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.ViewModels.PopUps;
@@ -17,11 +16,11 @@ namespace Travelogue_2.Main.ViewModels.Journal
 	{
 		public string JourneyId { get; set; }
 		public Command AddImageCommand { get; }
-		public Command<EntryImageCard> ImageTapped { get; }
-		public Command<DayCard> DayTapped { get; }
-		public ObservableCollection<EntryImageCard> JourneyImages { get; }
-		public ObservableCollection<DayCard> JourneyDays { get; }
-		public ObservableCollection<EventCard> JourneyEvents { get; }
+		public Command<EntryImageModel> ImageTapped { get; }
+		public Command<DayModel> DayTapped { get; }
+		public ObservableCollection<EntryImageModel> JourneyImages { get; }
+		public ObservableCollection<DayModel> JourneyDays { get; }
+		public ObservableCollection<EventModel> JourneyEvents { get; }
 		public ObservableCollection<EntryCard> JourneyEntries { get; }
 
 		/** Commands*/
@@ -29,7 +28,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		public Command AddEntryCommand { get; }
 		public Command AddToEntryCommand { get; }
 		public Command ModifyJourneyCommand { get; }
-		public Command<EventCard> EditOrDeleteEventCommand { get; }
+		public Command<EventModel> EditOrDeleteEventCommand { get; }
 		public Command<EntryCard> EditOrDeleteEntryCommand { get; }
 		/** */
 
@@ -41,19 +40,19 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			AddImageCommand = new Command(() => AddImageC());
 			ModifyJourneyCommand = new Command(() => ModifyJourneyC());
 
-			ViewImageCommand = new Command<ImageCard>((ImageCard) => ViewImageC(ImageCard));
+			ViewImageCommand = new Command<ImageModel>((ImageCard) => ViewImageC(ImageCard));
 
-			EditOrDeleteEventCommand = new Command<EventCard>((EventCard e) => EditOrDeleteEventC(e));
+			EditOrDeleteEventCommand = new Command<EventModel>((EventModel e) => EditOrDeleteEventC(e));
 			EditOrDeleteEntryCommand = new Command<EntryCard>((EntryCard e) => EditOrDeleteEntryC(e));
 
-			JourneyImages = new ObservableCollection<EntryImageCard>();
-			JourneyDays = new ObservableCollection<DayCard>();
+			JourneyImages = new ObservableCollection<EntryImageModel>();
+			JourneyDays = new ObservableCollection<DayModel>();
 			//JourneyDays.CollectionChanged += JourneyDaysChanged;
-			JourneyEvents = new ObservableCollection<EventCard>();
+			JourneyEvents = new ObservableCollection<EventModel>();
 			JourneyEntries = new ObservableCollection<EntryCard>();
 
-			ImageTapped = new Command<EntryImageCard>(OnImageSelected);
-			DayTapped = new Command<DayCard>(OnDaySelected);
+			ImageTapped = new Command<EntryImageModel>(OnImageSelected);
+			DayTapped = new Command<DayModel>(OnDaySelected);
 
 			ExecuteLoadDataCommand();
 		}
@@ -61,28 +60,28 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		public override void LoadData()
 		{
 			JourneyId = "1";
-			var temp = new DayCard();
+			var temp = new DayModel();
 			temp.Day = "2";
 			temp.Month = "2";
 			temp.Year = "2021";
 			JourneyDays.Add(temp);
 
-			var temp2 = new DayCard();
+			var temp2 = new DayModel();
 			temp2.Day = "3";
 			temp2.Month = "2";
 			temp2.Year = "2021";
 			var etemp1 = new EntryCard();
 			etemp1.Title = "Prueba titulo";
-			var ectemp1 = new EntryTextCard(4);
+			var ectemp1 = new EntryTextModel(4);
 			ectemp1.Text = "Hoy me divertí mucho corriendo detrás de patos :')";
 			ectemp1.Time = DateTime.Now.ToString("HH:mm");  // TODO - Pasar a documetnación https://stackoverflow.com/questions/11107465/getting-only-hour-minute-of-datetime/11107508
 			etemp1.Content.Add(ectemp1);
-			var ectemp2 = new EntryImageCard();
+			var ectemp2 = new EntryImageModel();
 			ectemp2.Time = DateTime.Now.ToString("HH:mm");
 			etemp1.Content.Add(ectemp2);
 			temp2.JourneyEntries.Add(etemp1);
 			temp2.Entries = 1;
-			var etemp2 = new EventCard();
+			var etemp2 = new EventModel();
 			etemp2.Text = "Concierto de Lady Gaga";
 			etemp2.Address = "Calle fulanito";
 			etemp2.Time = "12:00";
@@ -90,7 +89,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			temp2.Events = 1;
 			JourneyDays.Add(temp2);
 
-			var temp3 = new DayCard();
+			var temp3 = new DayModel();
 			temp3.Day = "4";
 			temp3.Month = "2";
 			temp3.Year = "2021";
@@ -104,10 +103,10 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		{
 			IsBusy = true;
 
-			var temp = new ObservableCollection<DayCard>(JourneyDays);
+			var temp = new ObservableCollection<DayModel>(JourneyDays);
 			JourneyDays.Clear();
 
-			foreach (DayCard day in temp)
+			foreach (DayModel day in temp)
 			{
 				JourneyDays.Add(day);
 			}
@@ -115,12 +114,12 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		#region Cover
 
-		private EntryImageCard coverImage = new EntryImageCard()
+		private EntryImageModel coverImage = new EntryImageModel()
 		{
 			ImageSour = CommonVariables.GetImage()
 		};
 
-		public EntryImageCard CoverImage
+		public EntryImageModel CoverImage
 		{
 			get => coverImage;
 			set
@@ -131,26 +130,26 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		#endregion
 
 		#region DaySelected
-		private DayCard daySelected = new DayCard();
+		private DayModel daySelected = new DayModel();
 
-		public DayCard DaySelected
+		public DayModel DaySelected
 		{
 			get => daySelected;
 			set
 			{
 				SetProperty(ref daySelected, value);
 
-				foreach(DayCard day in JourneyDays)
+				foreach(DayModel day in JourneyDays)
 				{
 					day.Background = (Color) App.Current.Resources["PrimaryFaded"];
 				}
 				var selected = JourneyDays.First(x => x == daySelected);
 				selected.Background = (Color) Application.Current.Resources["Primary"];
 
-				var temp = new ObservableCollection<DayCard>(JourneyDays);
+				var temp = new ObservableCollection<DayModel>(JourneyDays);
 				JourneyDays.Clear();
 
-				foreach (DayCard day in temp)
+				foreach (DayModel day in temp)
 				{
 					JourneyDays.Add(day);
 				}
@@ -171,7 +170,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		async internal void AddImageC()
 		{
-			EntryImageCard success = await CameraUtil.Photo(this);
+			EntryImageModel success = await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				JourneyImages.Add(success);
@@ -185,7 +184,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 																	$"{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}");
 		}
 
-		async internal void EditOrDeleteEventC(EventCard eventC)
+		async internal void EditOrDeleteEventC(EventModel eventC)
 		{
 			await Shell.Current.GoToAsync($"{nameof(EditOrDeleteEventPopUp)}?{nameof(EditOrDeleteFromJourneyPopUpModel.JourneyId)}={JourneyId}&" +
 																	$"{nameof(EditOrDeleteFromJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
@@ -214,7 +213,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		#region OnAction
 
-		async void OnImageSelected(EntryImageCard image)
+		async void OnImageSelected(EntryImageModel image)
 		{
 			if (image == null)
 				return;
@@ -223,7 +222,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			//await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyViewModel.JourneyId)}={journey.Id}");
 		}
 
-		async void OnDaySelected(DayCard day)
+		async void OnDaySelected(DayModel day)
 		{
 			if (day == null)
 				return;

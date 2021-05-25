@@ -2,9 +2,9 @@
 using Travelogue_2.Main.Services;
 using Xamarin.Forms;
 
-namespace Travelogue_2.Main.Models.Cards
+namespace Travelogue_2.Main.Models
 {
-	public class DestinyCard
+	public class DestinyModel
 	{
 		public string Code { get; set; }
 

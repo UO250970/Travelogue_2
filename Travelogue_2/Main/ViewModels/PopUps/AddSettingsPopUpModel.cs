@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
 using Xamarin.Forms;
@@ -10,13 +10,13 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 {
 	public class AddSettingsPopUpModel : PhotoRendererModel
 	{
-		public ObservableCollection<ImageCard> CardImages { get; }
+		public ObservableCollection<ImageModel> CardImages { get; }
 
 		public Command AddImageCommand { get; }
 		public Command CreateCardCommand { get; }
 		public Command CreateDestinyCommand { get; }
 		public Command CancelCommand { get; }
-		public Command<ImageCard> ImageTapped { get; }
+		public Command<ImageModel> ImageTapped { get; }
 
 		public AddSettingsPopUpModel()
 		{
@@ -26,9 +26,9 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			CancelCommand = new Command(() => CancelCAsync());
 
 
-			CardImages = new ObservableCollection<ImageCard>();
+			CardImages = new ObservableCollection<ImageModel>();
 
-			ImageTapped = new Command<ImageCard>(OnImageSelected);
+			ImageTapped = new Command<ImageModel>(OnImageSelected);
 		}
 
 		#region Title
@@ -44,7 +44,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		async internal void AddImageC()
 		{
-			ImageCard success = await CameraUtil.Photo(this);
+			ImageModel success = await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				CardImages.Add(success);
@@ -78,7 +78,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			await Shell.Current.GoToAsync("..");
 		}
 
-		async void OnImageSelected(ImageCard image)
+		async void OnImageSelected(ImageModel image)
 		{
 			if (image == null)
 				return;

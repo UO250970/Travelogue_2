@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Travelogue_2.Main.Services
 {
-    public interface IDataStore<T>
+    public interface IDataStoreNU<T>
     {
         Task<bool> AddItemAsync(T item);
         Task<bool> UpdateItemAsync(T item);

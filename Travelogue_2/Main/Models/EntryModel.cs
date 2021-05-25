@@ -1,7 +1,7 @@
-﻿
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using Travelogue_2.Main.Models.Entries;
 
-namespace Travelogue_2.Main.Models.Entries
+namespace Travelogue_2.Main.Models
 {
 	public class EntryCard : IEntry
 	{

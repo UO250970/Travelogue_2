@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
+using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Models.Entries;
 using Xamarin.Forms;
 
-namespace Travelogue_2.Main.Models.Cards
+namespace Travelogue_2.Main.Models
 {
-	public class DayCard
+	public class DayModel
 	{
 		public int Id { get; set; }
 
@@ -62,7 +62,7 @@ namespace Travelogue_2.Main.Models.Cards
 			}
 		}
 
-		public ObservableCollection<EventCard> JourneyEvents { get; set; } = new ObservableCollection<EventCard>();
+		public ObservableCollection<EventModel> JourneyEvents { get; set; } = new ObservableCollection<EventModel>();
 
 		//public event PropertyChangedEventHandler PropertyChanged;
 
@@ -71,7 +71,7 @@ namespace Travelogue_2.Main.Models.Cards
 			return new DateTime(int.Parse(Year), int.Parse(MonthNum), int.Parse(Day));
 		}
 
-		public bool Equals(DayCard obj)
+		public bool Equals(DayModel obj)
 		{
 			//Check for null and compare run-time types.
 			if ((obj == null) || !this.GetType().Equals(obj.GetType()))
@@ -80,7 +80,7 @@ namespace Travelogue_2.Main.Models.Cards
 			}
 			else
 			{
-				DayCard p = (DayCard)obj;
+				DayModel p = (DayModel)obj;
 				return (Day == p.Day) && (Month == p.Month) && (Year == p.Year);
 			}
 		}

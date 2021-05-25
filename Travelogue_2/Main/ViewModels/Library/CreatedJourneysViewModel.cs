@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.ViewModels.Journal;
 using Travelogue_2.Main.Views.Journey;
@@ -15,10 +15,10 @@ namespace Travelogue_2.Main.ViewModels.Library
 		public Command CreateJourneyCommand { get; }
 
 		public Command SearchJourneyCommand { get; }
-		public Command<JourneyCard> JourneyTapped { get; }
-		public Command<JourneyCard> JourneyTappedDelete { get; }
-		public ObservableCollection<JourneyCard> JourneysCreated { get; set; }
-		public ObservableCollection<JourneyCard> JourneysCreatedSearched { get; set; }
+		public Command<JourneyModel> JourneyTapped { get; }
+		public Command<JourneyModel> JourneyTappedDelete { get; }
+		public ObservableCollection<JourneyModel> JourneysCreated { get; set; }
+		public ObservableCollection<JourneyModel> JourneysCreatedSearched { get; set; }
 
 
 
@@ -28,11 +28,11 @@ namespace Travelogue_2.Main.ViewModels.Library
 			CreateJourneyCommand = new Command(() => CreateJourneyC());
 			SearchJourneyCommand = new Command(() => SearchJourneyC());
 
-			JourneysCreated = new ObservableCollection<JourneyCard>();
-			JourneysCreatedSearched = new ObservableCollection<JourneyCard>();
+			JourneysCreated = new ObservableCollection<JourneyModel>();
+			JourneysCreatedSearched = new ObservableCollection<JourneyModel>();
 
-			JourneyTapped = new Command<JourneyCard>(OnJourneySelected);
-			JourneyTappedDelete = new Command<JourneyCard>(OnJourneySelectedDelete);
+			JourneyTapped = new Command<JourneyModel>(OnJourneySelected);
+			JourneyTappedDelete = new Command<JourneyModel>(OnJourneySelectedDelete);
 
 			ExecuteLoadDataCommand();
 		}
@@ -41,43 +41,43 @@ namespace Travelogue_2.Main.ViewModels.Library
 		{
 			JourneysCreated.Clear();
 			JourneysCreatedSearched.Clear();
-			JourneyCard temp1 = new JourneyCard();
+			JourneyModel temp1 = new JourneyModel();
 			temp1.Id = 0;
 			temp1.Name = "Prueba";
 			temp1.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
 
-			JourneyCard temp2 = new JourneyCard();
+			JourneyModel temp2 = new JourneyModel();
 			temp1.Id = 1;
 			temp2.Name = "Prueba3";
 			temp2.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
-			JourneyCard temp3 = new JourneyCard();
+			JourneyModel temp3 = new JourneyModel();
 			temp1.Id = 2;
 			temp3.Name = "Prueba3";
 			temp3.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
-			JourneyCard temp4 = new JourneyCard();
+			JourneyModel temp4 = new JourneyModel();
 			temp1.Id = 3;
 			temp4.Name = "Prueba3";
 			temp4.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
-			JourneyCard temp5 = new JourneyCard();
+			JourneyModel temp5 = new JourneyModel();
 			temp1.Id = 4;
 			temp5.Name = "Prueba3";
 			temp5.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
-			JourneyCard temp6 = new JourneyCard();
+			JourneyModel temp6 = new JourneyModel();
 			temp1.Id = 5;
 			temp6.Name = "Prueba3";
 			temp6.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
-			JourneyCard temp7 = new JourneyCard();
+			JourneyModel temp7 = new JourneyModel();
 			temp1.Id = 6;
 			temp7.Name = "Prueba3";
 			temp7.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
-			JourneyCard temp8 = new JourneyCard();
+			JourneyModel temp8 = new JourneyModel();
 			temp1.Id = 7;
 			temp8.Name = "Prueba3";
 			temp8.Image = ImageSource.FromResource(CommonVariables.GenericImage);
@@ -143,7 +143,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 		async internal void CreateJourneyC()
 			=> await Shell.Current.GoToAsync(nameof(CreateJourneyView));
 
-		async void OnJourneySelected(JourneyCard journey)
+		async void OnJourneySelected(JourneyModel journey)
 		{
 			if (journey == null)
 				return;
@@ -152,7 +152,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 			await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyTemplateViewModel.JourneyId)}={journey.Id}");
 		}
 
-		async void OnJourneySelectedDelete(JourneyCard journey)
+		async void OnJourneySelectedDelete(JourneyModel journey)
 		{
 			if (journey == null)
 				return;

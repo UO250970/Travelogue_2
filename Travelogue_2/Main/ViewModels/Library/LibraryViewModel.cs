@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.ViewModels.Journal;
 using Travelogue_2.Main.Views.Journey;
@@ -11,13 +11,13 @@ namespace Travelogue_2.Main.ViewModels.Library
     public class LibraryViewModel : DataBaseViewModel
 	{
 		public Command LoadJourneysCommand { get; }
-		public Command<JourneyCard> JourneyTapped { get; }
+		public Command<JourneyModel> JourneyTapped { get; }
 		public Command CreatedJourneysViewCommand { get; }
         public Command ClosedJourneysViewCommand { get; }
 
 
-		public ObservableCollection<JourneyCard> JourneysCreated { get; }
-		public ObservableCollection<JourneyCard> JourneysClosed { get; }
+		public ObservableCollection<JourneyModel> JourneysCreated { get; }
+		public ObservableCollection<JourneyModel> JourneysClosed { get; }
 
 		public LibraryViewModel()
 		{
@@ -26,10 +26,10 @@ namespace Travelogue_2.Main.ViewModels.Library
 			CreatedJourneysViewCommand = new Command(() => CreatedJourneysViewC());
 			ClosedJourneysViewCommand = new Command(() => ClosedJourneysViewC());
 
-			JourneysCreated = new ObservableCollection<JourneyCard>();
-			JourneysClosed = new ObservableCollection<JourneyCard>();
+			JourneysCreated = new ObservableCollection<JourneyModel>();
+			JourneysClosed = new ObservableCollection<JourneyModel>();
 
-			JourneyTapped = new Command<JourneyCard>(OnJourneySelected);
+			JourneyTapped = new Command<JourneyModel>(OnJourneySelected);
 
 			ExecuteLoadDataCommand();
 		}
@@ -37,12 +37,12 @@ namespace Travelogue_2.Main.ViewModels.Library
 		public override void LoadData()
 		{
 			JourneysCreated.Clear();
-			JourneyCard temp1 = new JourneyCard();
+			JourneyModel temp1 = new JourneyModel();
 			temp1.Name = "Prueba";
 			temp1.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
 
-			JourneyCard temp2 = new JourneyCard();
+			JourneyModel temp2 = new JourneyModel();
 			temp2.Name = "Prueba2";
 			temp2.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
@@ -66,7 +66,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 			=> await Shell.Current.GoToAsync(nameof(ClosedJourneysView));
 		
 
-		async void OnJourneySelected(JourneyCard journey)
+		async void OnJourneySelected(JourneyModel journey)
 		{
 			if (journey == null)
 				return;

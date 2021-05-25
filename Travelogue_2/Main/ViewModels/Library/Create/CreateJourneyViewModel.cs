@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Travelogue_2.Main.BBDD;
 using Travelogue_2.Main.Models;
-using Travelogue_2.Main.Models.Cards;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
 using Xamarin.Essentials;
@@ -19,12 +19,12 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 		public Command CancelCommand { get; }
 		public Command SaveCommand { get; }
 
-		public ObservableCollection<DayCard> DaysSelected { get; }
-		public ObservableCollection<DestinyCard> DestiniesSelected { get; }
+		public ObservableCollection<DayModel> DaysSelected { get; }
+		public ObservableCollection<DestinyModel> DestiniesSelected { get; }
 		public ObservableCollection<string> DestiniesList { get; }
-		public Command<DestinyCard> DestinyTappedDelete { get; }
+		public Command<DestinyModel> DestinyTappedDelete { get; }
 
-		public Command<DayCard> DayTapped { get; }
+		public Command<DayModel> DayTapped { get; }
 		
 
 		public CreateJourneyViewModel()
@@ -37,19 +37,19 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			CancelCommand = new Command(() => CancelC());
 			SaveCommand = new Command(() => SaveC());
 
-			DaysSelected = new ObservableCollection<DayCard>();
-			DestiniesSelected = new ObservableCollection<DestinyCard>();
+			DaysSelected = new ObservableCollection<DayModel>();
+			DestiniesSelected = new ObservableCollection<DestinyModel>();
 			DestiniesList = new ObservableCollection<string>();
 
-			DayTapped = new Command<DayCard>(OnDayTapped);
-			DestinyTappedDelete = new Command<DestinyCard>(OnDestinySelectedDelete);
+			DayTapped = new Command<DayModel>(OnDayTapped);
+			DestinyTappedDelete = new Command<DestinyModel>(OnDestinySelectedDelete);
 
 			ExecuteLoadDataCommand();
 		}
 
 		#region CoverImage
-		public EntryImageCard coverImage = new EntryImageCard();
-		public EntryImageCard CoverImage
+		public EntryImageModel coverImage = new EntryImageModel();
+		public EntryImageModel CoverImage
 		{
 			get => coverImage;
 			set
@@ -155,7 +155,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			DateTime dateTemp = iniDate;
 			do
 			{
-				DayCard temp = new DayCard();
+				DayModel temp = new DayModel();
 				temp.Day = dateTemp.Day.ToString();
 				temp.Month = dateTemp.Month.ToString();
 				temp.Entries = 0;
@@ -169,7 +169,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
 		async internal void AddCoverC()
 		{
-			EntryImageCard success = (EntryImageCard) await CameraUtil.Photo(this);
+			EntryImageModel success = (EntryImageModel) await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				CoverImage = success;
@@ -181,7 +181,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			if ( DestiniesSelected.Count <= CommonVariables.DestiniesInJourney )
 			{
 				Destiny destiny = CommonVariables.AvailableDestinies.Find(x => x.Name == DestinyText);
-				DestinyCard temp = new DestinyCard();
+				DestinyModel temp = new DestinyModel();
 				temp.Destiny = destiny.Name;
 				temp.Code = destiny.Code;
 				temp.Currency = destiny.Currency;
@@ -216,7 +216,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 				await Alerter.AlertNoNameInJourney();
 			} else
 			{
-				JourneyCard journey = new JourneyCard();
+				Journey journey = new Journey();
 				journey.Name = Title;
 				journey.IniDate = IniDate;
 				journey.EndDate = EndDate;
@@ -240,7 +240,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			//ExecuteLoadDataCommand();
 		}
 
-		void OnDayTapped(DayCard day)
+		void OnDayTapped(DayModel day)
 		{
 			if (day == null)
 				return;
@@ -249,7 +249,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			//await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
 		}
 
-		async void OnDestinySelectedDelete(DestinyCard destiny)
+		async void OnDestinySelectedDelete(DestinyModel destiny)
 		{
 			if (destiny == null)
 				return;

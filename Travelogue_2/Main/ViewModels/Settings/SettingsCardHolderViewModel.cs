@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Views.PopUps;
 using Xamarin.Forms;
@@ -12,16 +12,16 @@ namespace Travelogue_2.Main.ViewModels.Settings
 		public Command SearchCardCommand { get; }
         public Command AddCardCommand { get; }
 
-        public ObservableCollection<CardCard> Cards { get; }
-        public ObservableCollection<CardCard> CardsSearched { get; set; }
+        public ObservableCollection<CardModel> Cards { get; }
+        public ObservableCollection<CardModel> CardsSearched { get; set; }
 
         public SettingsCardHolderViewModel()
 		{
 			SearchCardCommand = new Command(() => SearchCardC());
             AddCardCommand = new Command(() => AddCardC());
 
-            Cards = new ObservableCollection<CardCard>();
-            CardsSearched = new ObservableCollection<CardCard>();
+            Cards = new ObservableCollection<CardModel>();
+            CardsSearched = new ObservableCollection<CardModel>();
 
             ExecuteLoadDataCommand();
 		}

@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Travelogue_2.Resources.Localization;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Services

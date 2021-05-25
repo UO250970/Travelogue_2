@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
 using Xamarin.Forms;
@@ -206,8 +206,8 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		#endregion
 
 		#region Image
-		private EntryImageCard image = new EntryImageCard();
-		public EntryImageCard Image
+		private EntryImageModel image = new EntryImageModel();
+		public EntryImageModel Image
 		{
 			get => image;
 			set
@@ -289,7 +289,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		async internal void AddImageC()
 		{
-			EntryImageCard success = (EntryImageCard) await CameraUtil.Photo(this);
+			EntryImageModel success = (EntryImageModel) await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				Image = success;

@@ -1,11 +1,13 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace Travelogue_2.Main.Models.Cards
+namespace Travelogue_2.Main.Models
 {
-	public class JourneyCard 
+	public class JourneyModel 
 	{
 		public int Id { get; set; }
+
+		public State JourneyState { get; set; }
 
 		public string Name { get; set; }
 
@@ -15,5 +17,6 @@ namespace Travelogue_2.Main.Models.Cards
 
 		public DateTime EndDate { get; set; }
 
-	}
+        
+    }
 }

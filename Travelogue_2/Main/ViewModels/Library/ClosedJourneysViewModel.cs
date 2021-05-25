@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.ViewModels.Journal;
 using Travelogue_2.Main.Views.Journey;
@@ -13,21 +13,21 @@ namespace Travelogue_2.Main.ViewModels.Library
     {
 
 		public Command SearchJourneyCommand { get; }
-		public Command<JourneyCard> JourneyTapped { get; }
-		public Command<JourneyCard> JourneyTappedDelete { get; }
-		public ObservableCollection<JourneyCard> JourneysClosed { get; set; }
-		public ObservableCollection<JourneyCard> JourneysClosedSearched { get; set; }
+		public Command<JourneyModel> JourneyTapped { get; }
+		public Command<JourneyModel> JourneyTappedDelete { get; }
+		public ObservableCollection<JourneyModel> JourneysClosed { get; set; }
+		public ObservableCollection<JourneyModel> JourneysClosedSearched { get; set; }
 
 
 		public ClosedJourneysViewModel()
 		{
 			SearchJourneyCommand = new Command(() => SearchJourneyC());
 
-			JourneysClosed = new ObservableCollection<JourneyCard>();
-			JourneysClosedSearched = new ObservableCollection<JourneyCard>();
+			JourneysClosed = new ObservableCollection<JourneyModel>();
+			JourneysClosedSearched = new ObservableCollection<JourneyModel>();
 
-			JourneyTapped = new Command<JourneyCard>(OnJourneySelected);
-			JourneyTappedDelete = new Command<JourneyCard>(OnJourneySelectedDelete);
+			JourneyTapped = new Command<JourneyModel>(OnJourneySelected);
+			JourneyTappedDelete = new Command<JourneyModel>(OnJourneySelectedDelete);
 
 			ExecuteLoadDataCommand();
 		}
@@ -70,7 +70,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 			SearchVisible = !SearchVisible;
 		}
 
-		async void OnJourneySelected(JourneyCard journey)
+		async void OnJourneySelected(JourneyModel journey)
 		{
 			if (journey == null)
 				return;
@@ -79,7 +79,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 			await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyTemplateViewModel.JourneyId)}={journey.Id}");
 		}
 
-		async void OnJourneySelectedDelete(JourneyCard journey)
+		async void OnJourneySelectedDelete(JourneyModel journey)
 		{
 			if (journey == null)
 				return;

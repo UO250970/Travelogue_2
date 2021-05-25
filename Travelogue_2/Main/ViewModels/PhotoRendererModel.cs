@@ -2,7 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Models;
 using Travelogue_2.Main.ViewModels;
 using Travelogue_2.Main.ViewModels.Media;
 using Travelogue_2.Main.Views.Media;
@@ -12,13 +12,13 @@ namespace Travelogue_2.Main.Services
 {
 	public abstract class PhotoRendererModel : DataBaseViewModel
 	{
-		public Command<ImageCard> ViewImageCommand { get; set; }
+		public Command<ImageModel> ViewImageCommand { get; set; }
 
-		public ImageCard ImageSelected { get; set; }
+		public ImageModel ImageSelected { get; set; }
 
-		public EntryImageCard AddImage(MediaFile file)
+		public EntryImageModel AddImage(MediaFile file)
 		{
-			EntryImageCard image = new EntryImageCard();
+			EntryImageModel image = new EntryImageModel();
 			try
 			{
 				if (file != null)
@@ -49,8 +49,8 @@ namespace Travelogue_2.Main.Services
 		public int CardImagesHeight { get => CommonVariables.ImageCardMaxHeight; }
 
 
-		public EntryImageCard blanckImage = new EntryImageCard();
-		public EntryImageCard BlanckImage
+		public EntryImageModel blanckImage = new EntryImageModel();
+		public EntryImageModel BlanckImage
 		{
 			get => blanckImage;
 			set
@@ -59,7 +59,7 @@ namespace Travelogue_2.Main.Services
 			}
 		}
 
-		public async void ViewImageC(ImageCard image)
+		public async void ViewImageC(ImageModel image)
 		{
 			ImageSelected = image;
 			await Shell.Current.GoToAsync($"{nameof(ImageView)}?{ nameof(ImageViewModel.ImagePath)}={ image.ImagePath}");

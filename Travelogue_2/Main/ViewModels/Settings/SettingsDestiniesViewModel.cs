@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Travelogue_2.Main.Services;
-using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Models;
 using Xamarin.Forms;
 using System.Linq;
 using System.Collections.Generic;
@@ -16,10 +16,10 @@ namespace Travelogue_2.Main.ViewModels.Settings
         public Command AddDestinyCommand { get; }
         public Command PhoneNumberTappedCommand { get; }
 
-        public Command<DestinyCard> DestinyTapped { get; }
-        public ObservableDictionary<string,List<DestinyCard>> DestiniesOrdered { get; set; }
-        public ObservableCollection<DestinyCard> Destinies { get; }
-        public ObservableCollection<DestinyCard> DestiniesSearched { get; set; }
+        public Command<DestinyModel> DestinyTapped { get; }
+        public ObservableDictionary<string,List<DestinyModel>> DestiniesOrdered { get; set; }
+        public ObservableCollection<DestinyModel> Destinies { get; }
+        public ObservableCollection<DestinyModel> DestiniesSearched { get; set; }
 
         public SettingsDestiniesViewModel()
         {
@@ -27,11 +27,11 @@ namespace Travelogue_2.Main.ViewModels.Settings
             AddDestinyCommand = new Command(() => AddDestinyCAsync());
             PhoneNumberTappedCommand = new Command<string>((x) => PhoneNumberTappedC(x));
 
-            DestiniesOrdered = new ObservableDictionary<string, List<DestinyCard>>();
-            Destinies = new ObservableCollection<DestinyCard>();
-            DestiniesSearched = new ObservableCollection<DestinyCard>();
+            DestiniesOrdered = new ObservableDictionary<string, List<DestinyModel>>();
+            Destinies = new ObservableCollection<DestinyModel>();
+            DestiniesSearched = new ObservableCollection<DestinyModel>();
 
-            DestinyTapped = new Command<DestinyCard>(OnDestinySelected);
+            DestinyTapped = new Command<DestinyModel>(OnDestinySelected);
 
             ExecuteLoadDataCommand();
         }
@@ -43,7 +43,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
             DestiniesSearched.Clear();
             foreach (Destiny dest in CommonVariables.AvailableDestinies)
             {
-                DestinyCard temp = new DestinyCard();
+                DestinyModel temp = new DestinyModel();
                 temp.Destiny = dest.Name;
                 temp.Code = dest.Code;
                 temp.EmbassiesCities = dest.Embassies.Select(x => x.City).ToList();
@@ -120,7 +120,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
             //notificationManager.SendNotification("Title", "Message");
         }
 
-        async void OnDestinySelected(DestinyCard destiny)
+        async void OnDestinySelected(DestinyModel destiny)
         {
             if (destiny == null)
                 return;

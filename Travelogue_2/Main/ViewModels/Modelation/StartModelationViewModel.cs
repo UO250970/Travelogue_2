@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Views.Modelation.Modelate;
 using Xamarin.Forms;
@@ -9,14 +9,14 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 	public class StartModelationViewModel : DataBaseViewModel
 	{
 
-		public Command<JourneyCard> JourneyTapped { get; }
-		public ObservableCollection<JourneyCard> StartJournals { get; set; }
+		public Command<JourneyModel> JourneyTapped { get; }
+		public ObservableCollection<JourneyModel> StartJournals { get; set; }
 
 		public StartModelationViewModel()
 		{
-			StartJournals = new ObservableCollection<JourneyCard>();
+			StartJournals = new ObservableCollection<JourneyModel>();
 
-			JourneyTapped = new Command<JourneyCard>(OnJourneySelected);
+			JourneyTapped = new Command<JourneyModel>(OnJourneySelected);
 
 			ExecuteLoadDataCommand();
 		}
@@ -24,12 +24,12 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 		public override void LoadData()
 		{
 			StartJournals.Clear();
-			JourneyCard temp1 = new JourneyCard();
+			JourneyModel temp1 = new JourneyModel();
 			temp1.Name = "Prueba";
 			temp1.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
 
-			JourneyCard temp2 = new JourneyCard();
+			JourneyModel temp2 = new JourneyModel();
 			temp2.Name = "Prueba3";
 			temp2.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
@@ -37,7 +37,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 			StartJournals.Add(temp2);
 		}
 
-		async void OnJourneySelected(JourneyCard journey)
+		async void OnJourneySelected(JourneyModel journey)
 		{
 			if (journey == null)
 				return;

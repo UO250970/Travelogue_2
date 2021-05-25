@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using Travelogue_2.Main.Models.Cards;
+using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Models.Entries;
 using Xamarin.Forms;
 
@@ -12,7 +12,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 	{
 		public string JourneyId { get; set; }
 		public string DaySelected { get; set; }
-		public ObservableCollection<DayCard> JourneyDays { get; }
+		public ObservableCollection<DayModel> JourneyDays { get; }
 
 		public Command CancelCommand { get; }
 		public Command CreateCommand { get; }
@@ -22,19 +22,19 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			CancelCommand = new Command(() => CancelC());
 			CreateCommand = new Command(() => CreateC());
 
-			JourneyDays = new ObservableCollection<DayCard>();
+			JourneyDays = new ObservableCollection<DayModel>();
 
 			ExecuteLoadDataCommand();
 		}
 
 		public override void LoadData()
 		{
-			var temp = new DayCard();
+			var temp = new DayModel();
 			temp.Day = "2";
 			temp.Month = "2";
 			JourneyDays.Add(temp);
 
-			var temp2 = new DayCard();
+			var temp2 = new DayModel();
 			temp2.Day = "3";
 			temp2.Month = "2";
 			var etemp1 = new EntryCard();
@@ -43,7 +43,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			temp2.Entries = 1;
 			JourneyDays.Add(temp2);
 
-			var temp3 = new DayCard();
+			var temp3 = new DayModel();
 			temp3.Day = "4";
 			temp3.Month = "2";
 			JourneyDays.Add(temp3);

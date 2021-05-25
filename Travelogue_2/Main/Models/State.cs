@@ -1,5 +1,4 @@
-﻿
-namespace Travelogue_2.Main.Models
+﻿namespace Travelogue_2.Main.Models
 {
     public enum State
     {
