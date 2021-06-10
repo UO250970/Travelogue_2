@@ -417,8 +417,14 @@
   <data name="Plus" xml:space="preserve">
     <value>+</value>
   </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Rehacer</value>
+  </data>
   <data name="Reservation" xml:space="preserve">
     <value>Reserva</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Inicializar</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Guardar</value>
@@ -432,6 +438,9 @@
   <data name="SearchLanguage" xml:space="preserve">
     <value>Buscar un idioma...</value>
   </data>
+  <data name="SelectABackground" xml:space="preserve">
+    <value>Selecciona un fondo</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>Ajustes</value>
   </data>
@@ -444,6 +453,9 @@
   <data name="StartEditingEmpty" xml:space="preserve">
     <value>Sin viajes para editar</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
   <data name="Style" xml:space="preserve">
     <value>Estilo</value>
   </data>
@@ -455,6 +467,9 @@
   </data>
   <data name="Text" xml:space="preserve">
     <value>Texto</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Deshacer</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Si</value>

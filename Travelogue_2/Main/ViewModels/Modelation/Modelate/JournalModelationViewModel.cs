@@ -11,8 +11,8 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
 		public string JourneyId; 
 		public ObservableCollection<ImageModel> Pages { get; set; }
 		public Command CreatePageCommand { get; set; }
-		public Command<ImageModel> PageTapped { get; }
-		public Command<ImageModel> PageTappedDelete { get; }
+		public Command<ImageModel> PageTapped { get; set;  }
+		public Command<ImageModel> PageTappedDelete { get; set; }
 
 		public JournalModelationViewModel()
 		{

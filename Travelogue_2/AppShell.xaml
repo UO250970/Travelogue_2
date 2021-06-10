@@ -68,10 +68,10 @@
     
     
         
-    -->
+    >
     <TabBar>
         <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
     </TabBar>
-
+-->
 
 </Shell>

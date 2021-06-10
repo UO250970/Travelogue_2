@@ -14,7 +14,17 @@ namespace Travelogue_2.Main.ViewModels.Journal
 	[QueryProperty(nameof(JourneyId), nameof(JourneyId))]
 	public class JourneyTemplateViewModel : PhotoRendererModel
 	{
-		public string JourneyId { get; set; }
+		private string journeyId = "";
+		public string JourneyId 
+		{
+			get => journeyId;
+			set
+			{
+				journeyId = value;
+				LoadData();
+			} 
+		}
+
 		public Command AddImageCommand { get; }
 		public Command<EntryImageModel> ImageTapped { get; }
 		public Command<DayModel> DayTapped { get; }
@@ -59,6 +69,11 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		public override void LoadData()
 		{
+			if (JourneyId != "")
+			{
+
+			}
+
 			JourneyId = "1";
 			var temp = new DayModel();
 			temp.Day = "2";

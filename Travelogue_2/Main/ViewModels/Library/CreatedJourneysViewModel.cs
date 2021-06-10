@@ -2,6 +2,7 @@
 using System.Linq;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
+using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.ViewModels.Journal;
 using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.Library.Create;
@@ -41,7 +42,11 @@ namespace Travelogue_2.Main.ViewModels.Library
 		{
 			JourneysCreated.Clear();
 			JourneysCreatedSearched.Clear();
-			JourneyModel temp1 = new JourneyModel();
+
+			JourneysCreated = new ObservableCollection<JourneyModel>( DataBaseUtil.GetJourneysCreated() );
+			JourneysCreatedSearched = new ObservableCollection<JourneyModel>( JourneysCreated );
+
+			/**JourneyModel temp1 = new JourneyModel();
 			temp1.Id = 0;
 			temp1.Name = "Prueba";
 			temp1.Image = ImageSource.FromResource(CommonVariables.GenericImage);
@@ -97,7 +102,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 			JourneysCreated.Add(temp7);
 			JourneysCreatedSearched.Add(temp7);
 			JourneysCreated.Add(temp8);
-			JourneysCreatedSearched.Add(temp8);
+			JourneysCreatedSearched.Add(temp8);*/
 
 			//var items = await DataStore.GetItemsAsync(true);
 			//foreach (var item in items)

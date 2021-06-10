@@ -405,8 +405,14 @@
   <data name="PickPhoto" xml:space="preserve">
     <value>Pick a photo</value>
   </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
   <data name="Reservation" xml:space="preserve">
     <value>Reservation</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
@@ -419,6 +425,9 @@
   </data>
   <data name="SearchLanguage" xml:space="preserve">
     <value>Search a language...</value>
+  </data>
+  <data name="SelectABackground" xml:space="preserve">
+    <value>Select a Background</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
@@ -443,6 +452,9 @@
   </data>
   <data name="Text" xml:space="preserve">
     <value>Text</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Undo</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>

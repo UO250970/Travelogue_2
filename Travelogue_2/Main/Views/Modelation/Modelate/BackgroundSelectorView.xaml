@@ -1,14 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:imageeditor="clr-namespace:Syncfusion.SfImageEditor.XForms;assembly=Syncfusion.SfImageEditor.XForms"
-             x:Class="Travelogue_2.Main.Views.Modelation.Modelate.BackgroundSelectorView">
+             Shell.NavBarIsVisible="True"
+             Shell.TabBarIsVisible="False"
+             Title="{Binding Resources[SelectABackground]}"
+             x:Class="Travelogue_2.Main.Views.Modelation.Modelate.BackgroundSelectorView"
+             x:Name="BackgroundSelectorViewName">
+
     <ContentPage.Content>
         <StackLayout>
 
-            <Frame HasShadow="True" Margin="5" Padding="5">
-                <imageeditor:SfImageEditor Source="{Binding ImageSelected}" />
-            </Frame>
+            <CollectionView x:Name="BackgroundsCollection"
+                                ItemsSource="{Binding Backgrounds}"
+                                SelectionMode="Single"
+                                SelectionChangedCommand="{Binding BackgroundTapped}"
+                                SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference BackgroundsCollection}}"
+                            Margin="5">
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                                Span="4" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.EmptyView>
+                    <Label Text="{Binding Resources[CreatedEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <AbsoluteLayout>
+
+                            <Image Source="{Binding .ImageSour}" 
+                                   HeightRequest="{Binding BindingContext.CoverImageHeight, Source={x:Reference BackgroundSelectorViewName}}"/>
+
+                        </AbsoluteLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
 
         </StackLayout>
     </ContentPage.Content>

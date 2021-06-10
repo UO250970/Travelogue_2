@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 using System.Diagnostics;
 using System.Linq;
+using Plugin.Settings.Abstractions;
+using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.BBDD;
+using System;
 
 namespace Travelogue_2.Automatization
 {
@@ -67,7 +71,6 @@ namespace Travelogue_2.Automatization
 
 			foreach (Destiny destiny in iso2ListDestiny)
 			{
-				destiny.Flag = destiny.Code + "_Flag";
 				destiny.Original = true;
 
 				List<Embassy> listEmbassy = iso2ListEmbassy.Where(x => x.Country == destiny.Name)?.ToList();
@@ -77,7 +80,73 @@ namespace Travelogue_2.Automatization
 				CommonVariables.AvailableDestinies.Add(destiny);
 			}
 
-			// TODO - DataBase.InsertCountries(iso2List);
+			DataBaseUtil.InsertDestinies(iso2ListDestiny);
+		}
+		
+		private static void CreateFutur()
+		{
+			JourneyModel journey = DataBaseUtil.CreateJourney("StandardTrip", DateTime.Today.AddDays(3), DateTime.Today.Date.AddDays(5));
+			//Entry entry = new Entry(journey.Days[0], "Standard", "Description");
+			//Text_Info info = new Text_Info(entry, "Texto", DateTime.Now);
+
+			DataBaseUtil.JourneyInsertDestiny(journey, "Australia");
+
+			//DataBase.InsertJourney(journey);
+			//DataBase.UpdateCountry(country);
+			//DataBase.GetJourney(journey);
+
+			//DataBase.GetCountryByName("Australia");
+
+			//Entry entry2 = new Entry(journey.Days[1], "Standard");
+
+			//DataBase.InsertEntry(entry2);
+			
+			//DataBase.GetJourney(journey);
+
+			//Image_Info info2 = new Image_Info(entry2, "Path", "Nombre", "foot", DateTime.Now);
+
+			//DataBase.InsertIData(info2);
+			//DataBase.GetJourney(journey);
+
+			//Event_Info ivent = new Event_Info(journey.Days[2], "Name", DateTime.Now);
+
+			//DataBase.InsertEvent(ivent);
+			//DataBase.GetJourney(journey);
+		}
+
+		private static void CreateOnCourse()
+		{
+			DataBaseUtil.CreateJourney("StandardTrip", DateTime.Today.AddDays(-1), DateTime.Today.Date.AddDays(1)));
+		}
+
+		private static void CreateFinished()
+		{
+			DataBaseUtil.CreateJourney("StandardTrip", DateTime.Today.AddDays(-5), DateTime.Today.Date.AddDays(-3));
+		}
+
+		private static void ClearDB()
+		{
+			DataBaseUtil.ClearDataBase();
+		}
+
+		public static async void PrepareBd(ISettings properties)
+		{
+			ClearDB();
+
+			await CheckPermissionsAsync();
+
+			if (DataBaseUtil.HasJourneis() != "0")
+			{
+				properties.Clear();
+			}
+			if (DataBaseUtil.HasDestinies() != "0")
+			{
+				PrepareCountries();
+			}
+
+			CreateOnCourse();
+			CreateFutur();
+			CreateFinished();
 		}
 
 	}

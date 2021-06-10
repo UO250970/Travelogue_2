@@ -5,9 +5,6 @@ using Android.Runtime;
 using global::Xamarin.Forms;
 using Xamarin.Essentials;
 using Syncfusion.XForms.Android.PopupLayout;
-using Travelogue_2.Droid.Services;
-using Android.Content;
-using AndroidX.LocalBroadcastManager.Content;
 
 namespace Travelogue_2.Droid
 {

@@ -16,9 +16,6 @@ namespace Travelogue_2
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
-
             Routing.RegisterRoute(nameof(JourneyView), typeof(JourneyView));
             Routing.RegisterRoute(nameof(JourneySettingsView), typeof(JourneySettingsView));
             Routing.RegisterRoute(nameof(CreateEventView), typeof(CreateEventView));
@@ -52,6 +49,7 @@ namespace Travelogue_2
 
             Routing.RegisterRoute(nameof(ImageView), typeof(ImageView));
             Routing.RegisterRoute(nameof(BackgroundSelectorView), typeof(BackgroundSelectorView));
+            Routing.RegisterRoute(nameof(PageModelationView), typeof(PageModelationView));
         }
 
     }

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
+using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.ViewModels.Journal;
 using Travelogue_2.Main.Views.Journey;
 using Xamarin.Forms;
@@ -34,7 +35,11 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		public override void LoadData()
 		{
-			throw new NotImplementedException();
+			JourneysClosed.Clear();
+			JourneysClosedSearched.Clear();
+
+			JourneysClosed = new ObservableCollection<JourneyModel>( DataBaseUtil.GetJourneysClosed() );
+			JourneysClosedSearched = new ObservableCollection<JourneyModel>( JourneysClosed );
 		}
 
 		private bool searchVisible = false;

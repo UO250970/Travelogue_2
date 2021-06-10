@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
+using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.ViewModels.Journal;
 using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.Library;
@@ -16,8 +17,8 @@ namespace Travelogue_2.Main.ViewModels.Library
         public Command ClosedJourneysViewCommand { get; }
 
 
-		public ObservableCollection<JourneyModel> JourneysCreated { get; }
-		public ObservableCollection<JourneyModel> JourneysClosed { get; }
+		public ObservableCollection<JourneyModel> JourneysCreated { get; set; }
+		public ObservableCollection<JourneyModel> JourneysClosed { get; set; }
 
 		public LibraryViewModel()
 		{
@@ -37,7 +38,11 @@ namespace Travelogue_2.Main.ViewModels.Library
 		public override void LoadData()
 		{
 			JourneysCreated.Clear();
-			JourneyModel temp1 = new JourneyModel();
+
+			JourneysCreated = new ObservableCollection<JourneyModel>( DataBaseUtil.GetJourneysCreated() );
+			JourneysClosed = new ObservableCollection<JourneyModel>( DataBaseUtil.GetJourneysClosed() );
+
+			/*JourneyModel temp1 = new JourneyModel();
 			temp1.Name = "Prueba";
 			temp1.Image = ImageSource.FromResource(CommonVariables.GenericImage);
 
@@ -50,7 +55,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 			JourneysCreated.Add(temp2);
 
 			JourneysClosed.Clear();
-			JourneysClosed.Add(temp1);
+			JourneysClosed.Add(temp1);*/
 			//var items = await DataStore.GetItemsAsync(true);
 			//foreach (var item in items)
 			//{

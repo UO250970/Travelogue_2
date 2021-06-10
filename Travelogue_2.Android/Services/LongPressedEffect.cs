@@ -1,6 +1,4 @@
 ﻿using System;
-using Travelogue_2.Droid.Services;
-using Travelogue_2.Main.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;

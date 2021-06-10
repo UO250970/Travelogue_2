@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Travelogue_2.Main.Models.Cards;
-using Travelogue_2.Main.Models.Entries;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Models

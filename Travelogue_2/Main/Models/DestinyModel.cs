@@ -6,21 +6,24 @@ namespace Travelogue_2.Main.Models
 {
 	public class DestinyModel
 	{
-		public string Code { get; set; }
+		public string Code { get; set; } = "";
 
-		public string Destiny { get; set; }
+		public string Destiny { get; set; } = "";
 
-		public string Currency { get; set; }
+		public string Currency { get; set; } = "";
 
 		public ImageSource Flag
 		{
 			get => CommonVariables.GetFlag(Destiny);
 		}
 
-		public string MoreInfoCountry { get => CommonVariables.CountryWebSite + Code.ToLower(); }
+		public string MoreInfoCountry 
+		{ 
+			get => CommonVariables.CountryWebSite + Code.ToLower(); 
+		}
 
-		public Dictionary<string, string> Embassies { get; set; }
+		public Dictionary<string, string> Embassies { get; set; } = new Dictionary<string, string>();
 
-		public List<string> EmbassiesCities { get; set; }
+		public List<string> EmbassiesCities { get; set; } = new List<string>();
 	}
 }

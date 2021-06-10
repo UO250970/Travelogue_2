@@ -21,9 +21,13 @@ namespace Travelogue_2.Main.Services
 
 		public static int ImageCardMaxHeight { get => 85; }
 
+		public static int JourneyNameMaxLenght { get => 50; }
+
 		/** Common string */
 		public static string AppName { get => "Travelogue_2"; }
+
 		public static string ResourcesMonth { get => "Month_"; }
+
 		public static string Background { get => "Background_"; }
 
 		public static string CountryWebSite { get => "http://country.io/"; }
@@ -31,6 +35,8 @@ namespace Travelogue_2.Main.Services
 		public static string ImagesPath { get => AppName + ".Resources.Imgs"; }
 
 		public static string FlagImagesPath { get => ImagesPath + ".Flags."; }
+
+		public static string BackgroundImagesPath { get => ImagesPath + ".Backgrounds."; }
 
 		public static string FlagImagesExtension { get => "_Flag" + ImagesExtension; } 
 
@@ -77,16 +83,26 @@ namespace Travelogue_2.Main.Services
 			return ImageSource.FromResource(GenericImage);
 		}
 
-		public static List<string> AvailableBackgrounds { get => new List<string>() { Background + "1" + ImagesExtension }; }
+		public static List<string> AvailableBackgrounds { get => new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }; }
 
-		public static ObservableCollection<ImageSource> GetBackgrounds() 
+		public static ObservableCollection<ImageModel> GetBackgrounds() 
 		{
-			ObservableCollection<ImageSource> temp = new ObservableCollection<ImageSource>();
-			foreach( string back in AvailableBackgrounds)
-            {
-				temp.Add(ImageSource.FromResource(back));
+			ObservableCollection<ImageModel> temp = new ObservableCollection<ImageModel>();
+			foreach ( string back in AvailableBackgrounds)
+			{
+				ImageModel tempI = new ImageModel();
+				string tempString = (BackgroundImagesPath + Background + back + ImagesExtension);
+				tempI.ImageSour = ImageSource.FromResource(tempString);
+				tempI.ImageName = Background + back;
+				temp.Add(tempI);
 			}
 			return temp;
+		}
+
+		public static ImageSource GetBackground(string name)
+		{
+			string tempString = (BackgroundImagesPath + name + ImagesExtension);
+			return ImageSource.FromResource(tempString);
 		}
 
 	}

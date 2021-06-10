@@ -169,7 +169,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
 		async internal void AddCoverC()
 		{
-			EntryImageModel success = (EntryImageModel) await CameraUtil.Photo(this);
+			EntryImageModel success = await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				CoverImage = success;
@@ -180,6 +180,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 		{
 			if ( DestiniesSelected.Count <= CommonVariables.DestiniesInJourney )
 			{
+				DestinyModel destiny = DataBaseUtil.GetDestinyByName(DestinyText);
 				Destiny destiny = CommonVariables.AvailableDestinies.Find(x => x.Name == DestinyText);
 				DestinyModel temp = new DestinyModel();
 				temp.Destiny = destiny.Name;

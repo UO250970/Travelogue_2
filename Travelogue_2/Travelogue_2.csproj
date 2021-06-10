@@ -12,6 +12,17 @@
     <None Remove="Resources\Icons\icon_library.png" />
     <None Remove="Resources\Icons\icon_modelation.png" />
     <None Remove="Resources\Icons\icon_play.png" />
+    <None Remove="Resources\Imgs\Backgrounds\Background_1.png" />
+    <None Remove="Resources\Imgs\Backgrounds\Background_10.png" />
+    <None Remove="Resources\Imgs\Backgrounds\Background_2.png" />
+    <None Remove="Resources\Imgs\Backgrounds\Background_3.png" />
+    <None Remove="Resources\Imgs\Backgrounds\Background_4.png" />
+    <None Remove="Resources\Imgs\Backgrounds\Background_5.png" />
+    <None Remove="Resources\Imgs\Backgrounds\Background_6.png" />
+    <None Remove="Resources\Imgs\Backgrounds\Background_7.png" />
+    <None Remove="Resources\Imgs\Backgrounds\Background_8.png" />
+    <None Remove="Resources\Imgs\Backgrounds\Background_9.png" />
+    <None Remove="Resources\Imgs\Backgrounds\Bacogrund_9.png" />
     <None Remove="Resources\Imgs\default_image.png" />
     <None Remove="Resources\Imgs\default_image_image.png" />
     <None Remove="Resources\Imgs\Flags\AD_Flag.png" />
@@ -36,6 +47,16 @@
     <EmbeddedResource Include="Resources\Icons\icon_library.png" />
     <EmbeddedResource Include="Resources\Icons\icon_modelation.png" />
     <EmbeddedResource Include="Resources\Icons\icon_play.png" />
+    <EmbeddedResource Include="Resources\Imgs\Backgrounds\Background_1.png" />
+    <EmbeddedResource Include="Resources\Imgs\Backgrounds\Background_10.png" />
+    <EmbeddedResource Include="Resources\Imgs\Backgrounds\Background_2.png" />
+    <EmbeddedResource Include="Resources\Imgs\Backgrounds\Background_3.png" />
+    <EmbeddedResource Include="Resources\Imgs\Backgrounds\Background_4.png" />
+    <EmbeddedResource Include="Resources\Imgs\Backgrounds\Background_5.png" />
+    <EmbeddedResource Include="Resources\Imgs\Backgrounds\Background_6.png" />
+    <EmbeddedResource Include="Resources\Imgs\Backgrounds\Background_7.png" />
+    <EmbeddedResource Include="Resources\Imgs\Backgrounds\Background_8.png" />
+    <EmbeddedResource Include="Resources\Imgs\Backgrounds\Background_9.png" />
     <EmbeddedResource Include="Resources\Imgs\default_image.png" />
     <EmbeddedResource Include="Resources\Imgs\default_image_image.png" />
     <EmbeddedResource Include="Resources\Imgs\Flags\AD_Flag.png" />
@@ -56,49 +77,42 @@
 
   <ItemGroup>
     <PackageReference Include="CClarke.Plugin.Calendars" Version="1.0.14" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
     <PackageReference Include="SQLite" Version="3.13.0" />
     <PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
-    <PackageReference Include="Syncfusion.Licensing" Version="19.1.0.59" />
-    <PackageReference Include="Syncfusion.Xamarin.Core" Version="19.1.0.59" />
-    <PackageReference Include="Syncfusion.Xamarin.Pdf" Version="19.1.0.59" />
-    <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="19.1.0.59" />
-    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="19.1.0.59" />
-    <PackageReference Include="Syncfusion.Xamarin.SfImageEditor" Version="19.1.0.59" />
-    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="19.1.0.59" />
-    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="19.1.0.59" />
+    <PackageReference Include="Syncfusion.Licensing" Version="19.1.0.66" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="19.1.0.66" />
+    <PackageReference Include="Syncfusion.Xamarin.Pdf" Version="19.1.0.66" />
+    <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="19.1.0.66" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="19.1.0.66" />
+    <PackageReference Include="Syncfusion.Xamarin.SfImageEditor" Version="19.1.0.66" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="19.1.0.66" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="19.1.0.66" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
+    <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />  
     <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2012" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Main\Views\AboutPageNU.xaml.cs">
-      <DependentUpon>AboutPageNU.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Main\Views\ItemDetailPagenu.xaml.cs">
-      <DependentUpon>ItemDetailPageNU.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Main\Views\ItemsPageNU.xaml.cs">
-      <DependentUpon>ItemsPageNU.xaml</DependentUpon>
-    </Compile>
+    <Reference Include="Mono.Android">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v10.0\Mono.Android.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Main\Views\Journey\JourneyOngoingView.xaml.cs">
       <DependentUpon>JourneyOngoingView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Main\Views\Library\Create\CreateJourneyView.xaml.cs">
       <DependentUpon>CreateJourneyView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Main\Views\LoginPageNU.xaml.cs">
-      <DependentUpon>LoginPageNU.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Main\Views\Modelation\Modelate\JournalModelationView.xaml.cs">
       <DependentUpon>JournalModelationView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Main\Views\NewItemPageNU.xaml.cs">
-      <DependentUpon>NewItemPageNU.xaml</DependentUpon>
     </Compile>
     <Compile Update="Main\Views\PopUps\EditOrDeleteEntryPopUp.xaml.cs">
       <DependentUpon>EditOrDeleteEntryPopUp.xaml</DependentUpon>
@@ -163,6 +177,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Modelation\Modelate\JournalModelationView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Modelation\Modelate\PageModelationView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Modelation\ModelationView.xaml">
