@@ -1,7 +1,6 @@
 ﻿using SQLite;
 using SQLiteNetExtensions.Attributes;
 using System;
-using System.Collections.Generic;
 
 namespace Travelogue_2.Main.BBDD
 {
@@ -30,16 +29,12 @@ namespace Travelogue_2.Main.BBDD
 		[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
 		public List<Entry> Entries { get; set; } = new List<Entry>();*/
 
-		/** Constructor público sin parámetros necesario para la base de datos */
-		public Day() : this(new Journey(), DateTime.Today) { }
+		public Day() { }
 
-		/** Constructor público con dos parámetros
-         * Journey - Diario al que está asociado
+		/** Constructor público con un parámetro
          * Date - Fecha asociada dentro del viaje */
-		public Day(Journey journey, DateTime date) : base()
+		public Day(DateTime date) : base()
 		{
-			JourneyId = journey.Id;
-			Journey = journey;
 			Date = date;
 			//Entries = new List<Entry>();
 		}

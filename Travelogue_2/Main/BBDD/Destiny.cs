@@ -20,5 +20,7 @@ namespace Travelogue_2.Main.Models
 
 		[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
 		public List<Embassy> Embassies { get; set; }
+
+		public Destiny() { }
 	}
 }

@@ -7,7 +7,7 @@ namespace Travelogue_2.Main.Models
 	public class Embassy
 	{
 		[PrimaryKey, AutoIncrement, Column("_id"), NotNull]
-		public string Id { get; set; } = string.Empty;
+		public int Id { get; set; } = 0;
 
 		[ForeignKey(typeof(Destiny))]
 		public string DestinyId { get; set; }
@@ -23,5 +23,7 @@ namespace Travelogue_2.Main.Models
 
 		[Column("PhoneNumber")]
 		public string PhoneNumber { get; set; } = string.Empty;
+		
+		public Embassy() { }
 	}
 }

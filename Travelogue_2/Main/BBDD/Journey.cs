@@ -36,18 +36,16 @@ namespace Travelogue_2.Main.BBDD
         //public Journal Journal { get; set; }
         //public Journal Journal { get; set; }
 
-        [ForeignKey(typeof(Image))]
-        public int CoverId { get; set; }
+        //[ForeignKey(typeof(Image))]
+        //public int CoverId { get; set; }
 
-        [ManyToOne]
-        public Image Cover { get; set; }
+        //[ManyToOne]
+        //public Image Cover { get; set; }
 
         [OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
         public List<Day> Days { get; set; } = new List<Day>();
 
-
-        /** Constructor público sin parámetros necesario para la base de datos */
-        public Journey() : this("", DateTime.Today, DateTime.Today) { }
+        public Journey() { }
 
         /** Constructor público con tres parámetros:
          *  Name - Nombre del viaje
@@ -58,7 +56,6 @@ namespace Travelogue_2.Main.BBDD
             Name = name;
             IniDate = ini;
             EndDate = end;
-            JourneyState = State.CREATED;
 
             CreateDays();
         }
@@ -68,7 +65,7 @@ namespace Travelogue_2.Main.BBDD
         {
             int total_days = Duration();
             Days = Enumerable.Range(0, total_days).
-                Select(i => new Day(this, IniDate.AddDays(i))).
+                Select(i => new Day(IniDate.AddDays(i))).
                 ToList();
         }
 

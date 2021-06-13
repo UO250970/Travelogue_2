@@ -58,7 +58,22 @@ namespace Travelogue_2.Main.Utils
         public static JourneyModel CreateJourney(string name, DateTime ini, DateTime end)
 		{
             Journey jour = new Journey(name, ini, end);
+
+            if (jour.StartedAlready() && jour.FinishedAlready())
+			{
+                jour.JourneyState = State.CLOSED;
+			} else if (jour.StartedAlready() && !jour.FinishedAlready())
+			{
+                jour.JourneyState = State.OPEN;
+			} else
+			{
+                jour.JourneyState = State.CREATED;
+			}
+
             DataBase.InsertJourney(jour);
+
+            // TODO - SOLO EN PRUEBAS, que no quiero mil viajes creados en mi movil...
+            //CalendarUtil.AddJourney(jour);
 
             return JourneyToModel(jour);
 		}
@@ -87,7 +102,7 @@ namespace Travelogue_2.Main.Utils
             JourneyModel temp = new JourneyModel();
             temp.Id = journey.Id;
             temp.Name = journey.Name;
-            temp.Image = ImageSource.FromFile(journey.Cover.Path);
+            //temp.Image = ImageSource.FromFile(journey.Cover.Path);
             temp.IniDate = journey.IniDate;
             temp.EndDate = journey.EndDate;
 
@@ -111,6 +126,8 @@ namespace Travelogue_2.Main.Utils
 
             return temp;
         }
+
+        private static Destiny DestinyFromModel(DestinyModel destiny) => DataBase.GetDestinyByName(destiny.Destiny);
 
         #endregion
     }

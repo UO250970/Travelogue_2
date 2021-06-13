@@ -6,7 +6,6 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using Travelogue_2.Main.BBDD;
-using Travelogue_2.Main.Models;
 
 namespace Travelogue_2.Main.Utils
 {

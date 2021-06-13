@@ -68,7 +68,7 @@ namespace Travelogue_2.Main.BBDD
             }
             catch (SQLiteException ex)
             {
-                System.Diagnostics.Debug.WriteLine("Error en base de datos: " + ex.StackTrace);
+                System.Diagnostics.Debug.WriteLine("Error en base de datos: " + ex.Message);
                 return false;
             }
             finally
@@ -131,7 +131,7 @@ namespace Travelogue_2.Main.BBDD
                 conn.DropTable<Journey>();
                 //conn.DropTable<Journal>();
                 conn.DropTable<Destiny>();
-                conn.DeleteAll<Embassy>();
+                conn.DropTable<Embassy>();
                 conn.DropTable<Day>();
                 //conn.DropTable<DayReser>();
                 //conn.DropTable<Entry>();
@@ -200,6 +200,10 @@ namespace Travelogue_2.Main.BBDD
             void Act() => conn.UpdateWithChildren(journey);
             return QueryAct(Act);
         }
+
+		#endregion
+
+		#region Day
 
         #endregion
 

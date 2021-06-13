@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Travelogue_2.Main.BBDD;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
@@ -24,7 +23,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 		public ObservableCollection<string> DestiniesList { get; }
 		public Command<DestinyModel> DestinyTappedDelete { get; }
 
-		public Command<DayModel> DayTapped { get; }
+		//public Command<DayModel> DayTapped { get; }
 		
 
 		public CreateJourneyViewModel()
@@ -41,7 +40,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			DestiniesSelected = new ObservableCollection<DestinyModel>();
 			DestiniesList = new ObservableCollection<string>();
 
-			DayTapped = new Command<DayModel>(OnDayTapped);
+			//DayTapped = new Command<DayModel>(OnDayTapped);
 			DestinyTappedDelete = new Command<DestinyModel>(OnDestinySelectedDelete);
 
 			ExecuteLoadDataCommand();
@@ -181,14 +180,10 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			if ( DestiniesSelected.Count <= CommonVariables.DestiniesInJourney )
 			{
 				DestinyModel destiny = DataBaseUtil.GetDestinyByName(DestinyText);
-				Destiny destiny = CommonVariables.AvailableDestinies.Find(x => x.Name == DestinyText);
-				DestinyModel temp = new DestinyModel();
-				temp.Destiny = destiny.Name;
-				temp.Code = destiny.Code;
-				temp.Currency = destiny.Currency;
-				if (!DestiniesSelected.Contains(temp))
+				
+				if (!DestiniesSelected.Contains(destiny))
 				{
-					DestiniesSelected.Add(temp);
+					DestiniesSelected.Add(destiny);
 				}
 				else
 				{
@@ -217,11 +212,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 				await Alerter.AlertNoNameInJourney();
 			} else
 			{
-				Journey journey = new Journey();
-				journey.Name = Title;
-				journey.IniDate = IniDate;
-				journey.EndDate = EndDate;
-				CalendarUtil.AddJourney(journey);
+				DataBaseUtil.CreateJourney(Title, IniDate, EndDate);
 				//TO-DO create and store journey
 				await Alerter.AlertJourneyCreated();
 				//TO-DO checkear cuando empieza  eso y cambiar redirección
@@ -241,14 +232,14 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			//ExecuteLoadDataCommand();
 		}
 
-		void OnDayTapped(DayModel day)
+		/*void OnDayTapped(DayModel day)
 		{
 			if (day == null)
 				return;
 
 			// This will push the ItemDetailPage onto the navigation stack
 			//await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
-		}
+		}*/
 
 		async void OnDestinySelectedDelete(DestinyModel destiny)
 		{

@@ -11,7 +11,6 @@ using System.Diagnostics;
 using System.Linq;
 using Plugin.Settings.Abstractions;
 using Travelogue_2.Main.Utils;
-using Travelogue_2.Main.BBDD;
 using System;
 
 namespace Travelogue_2.Automatization
@@ -116,7 +115,7 @@ namespace Travelogue_2.Automatization
 
 		private static void CreateOnCourse()
 		{
-			DataBaseUtil.CreateJourney("StandardTrip", DateTime.Today.AddDays(-1), DateTime.Today.Date.AddDays(1)));
+			DataBaseUtil.CreateJourney("StandardTrip", DateTime.Today.AddDays(-1), DateTime.Today.Date.AddDays(1));
 		}
 
 		private static void CreateFinished()
@@ -131,7 +130,7 @@ namespace Travelogue_2.Automatization
 
 		public static async void PrepareBd(ISettings properties)
 		{
-			ClearDB();
+			//ClearDB();
 
 			await CheckPermissionsAsync();
 
