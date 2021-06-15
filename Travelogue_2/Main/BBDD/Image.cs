@@ -22,7 +22,7 @@ namespace Travelogue_2.Main.BBDD
         public DateTime Date { get; set; }
 
         /** Constructor público sin parámetros necesario para la base de datos */
-        public Image() : this("", "") { }
+        public Image() { }
 
         public Image(string path, string name)
         {

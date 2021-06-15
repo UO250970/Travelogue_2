@@ -31,7 +31,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		public ObservableCollection<EntryImageModel> JourneyImages { get; }
 		public ObservableCollection<DayModel> JourneyDays { get; }
 		public ObservableCollection<EventModel> JourneyEvents { get; }
-		public ObservableCollection<EntryCard> JourneyEntries { get; }
+		public ObservableCollection<EntryModel> JourneyEntries { get; }
 
 		/** Commands*/
 		public Command AddEventCommand { get; }
@@ -39,7 +39,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		public Command AddToEntryCommand { get; }
 		public Command ModifyJourneyCommand { get; }
 		public Command<EventModel> EditOrDeleteEventCommand { get; }
-		public Command<EntryCard> EditOrDeleteEntryCommand { get; }
+		public Command<EntryModel> EditOrDeleteEntryCommand { get; }
 		/** */
 
 		public JourneyTemplateViewModel()
@@ -53,13 +53,13 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			ViewImageCommand = new Command<ImageModel>((ImageCard) => ViewImageC(ImageCard));
 
 			EditOrDeleteEventCommand = new Command<EventModel>((EventModel e) => EditOrDeleteEventC(e));
-			EditOrDeleteEntryCommand = new Command<EntryCard>((EntryCard e) => EditOrDeleteEntryC(e));
+			EditOrDeleteEntryCommand = new Command<EntryModel>((EntryModel e) => EditOrDeleteEntryC(e));
 
 			JourneyImages = new ObservableCollection<EntryImageModel>();
 			JourneyDays = new ObservableCollection<DayModel>();
 			//JourneyDays.CollectionChanged += JourneyDaysChanged;
 			JourneyEvents = new ObservableCollection<EventModel>();
-			JourneyEntries = new ObservableCollection<EntryCard>();
+			JourneyEntries = new ObservableCollection<EntryModel>();
 
 			ImageTapped = new Command<EntryImageModel>(OnImageSelected);
 			DayTapped = new Command<DayModel>(OnDaySelected);
@@ -85,7 +85,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			temp2.Day = "3";
 			temp2.Month = "2";
 			temp2.Year = "2021";
-			var etemp1 = new EntryCard();
+			var etemp1 = new EntryModel();
 			etemp1.Title = "Prueba titulo";
 			var ectemp1 = new EntryTextModel(4);
 			ectemp1.Text = "Hoy me divertí mucho corriendo detrás de patos :')";
@@ -212,7 +212,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 																	$"{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}");
 		}
 
-		async internal void EditOrDeleteEntryC(EntryCard entryC)
+		async internal void EditOrDeleteEntryC(EntryModel entryC)
 		{
 			await Shell.Current.GoToAsync($"{nameof(EditOrDeleteEntryPopUp)}?{nameof(EditOrDeleteFromJourneyPopUpModel.JourneyId)}={JourneyId}&" +
 																	$"{nameof(EditOrDeleteFromJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +

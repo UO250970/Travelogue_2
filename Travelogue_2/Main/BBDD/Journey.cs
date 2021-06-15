@@ -16,7 +16,7 @@ namespace Travelogue_2.Main.BBDD
         [Column("State"), NotNull]
         public State JourneyState { get; set; } = State.CREATED;
 
-        [MaxLength(40), NotNull]
+        [Column("Name"), MaxLength(40), NotNull]
         public string Name { get; set; } = string.Empty;
 
         [Column("IniDate"), NotNull]

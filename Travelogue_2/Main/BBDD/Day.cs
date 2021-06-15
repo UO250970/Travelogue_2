@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using SQLiteNetExtensions.Attributes;
 using System;
+using System.Collections.Generic;
 
 namespace Travelogue_2.Main.BBDD
 {
@@ -23,11 +24,11 @@ namespace Travelogue_2.Main.BBDD
 		public List<Event_Info> EventList { get; set; } = new List<Event_Info>();
 
 		[ManyToMany(typeof(DayReser), CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
-		public List<Reser_Info> ReserList { get; set; } = new List<Reser_Info>();
+		public List<Reser_Info> ReserList { get; set; } = new List<Reser_Info>();*/
 
-		//[OneToMany(CascadeOperations = CascadeOperation.All)]
+
 		[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
-		public List<Entry> Entries { get; set; } = new List<Entry>();*/
+		public List<Entry> Entries { get; set; } = new List<Entry>();
 
 		public Day() { }
 

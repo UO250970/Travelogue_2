@@ -88,12 +88,18 @@ namespace Travelogue_2.Main.Utils
         public static void JourneyInsertDestiny(JourneyModel journey, string name)
 		{
             Journey jour = JourneyFromModel(journey);
-            Destiny destiny = DataBase.GetDestinyByName("Australia");
+            Destiny destiny = DataBase.GetDestinyByName(name);
 
             DataBase.UpdateJourney(jour);
             DataBase.UpdateDestiny(destiny);
             //destiny.Journeis.Add(journey);
             //journey.Countries.Add(country);
+        }
+
+        internal static void JourneyInsertEntry(JourneyModel journey, int dayInt, string title)
+        {
+            Day day = JourneyFromModel(journey).Days[dayInt - 1];
+            Entry entry = new Entry();
         }
 
         public static DestinyModel GetDestinyByName(string name) 
@@ -102,9 +108,10 @@ namespace Travelogue_2.Main.Utils
 			return DestinyToModel(destiny);
         }
 
-        #region Models
 
-        private static JourneyModel JourneyToModel(Journey journey)
+		#region Models
+
+		private static JourneyModel JourneyToModel(Journey journey)
 		{
             JourneyModel temp = new JourneyModel();
 

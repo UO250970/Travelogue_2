@@ -89,6 +89,7 @@ namespace Travelogue_2.Automatization
 			//Text_Info info = new Text_Info(entry, "Texto", DateTime.Now);
 
 			DataBaseUtil.JourneyInsertDestiny(journey, "Australia");
+			DataBaseUtil.JourneyInsertEntry(journey, 2, "Standard");
 
 			//DataBase.InsertJourney(journey);
 			//DataBase.UpdateCountry(country);

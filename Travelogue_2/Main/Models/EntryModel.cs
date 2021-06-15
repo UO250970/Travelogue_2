@@ -3,7 +3,7 @@ using Travelogue_2.Main.Models.Entries;
 
 namespace Travelogue_2.Main.Models
 {
-	public class EntryCard : IEntry
+	public class EntryModel : IEntry
 	{
 		public int Id { get; set; }
 		public string Time { get; set; }

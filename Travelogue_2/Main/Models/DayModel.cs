@@ -48,7 +48,7 @@ namespace Travelogue_2.Main.Models
 			} 
 		}
 
-		public ObservableCollection<EntryCard> JourneyEntries { get; set; } = new ObservableCollection<EntryCard>();
+		public ObservableCollection<EntryModel> JourneyEntries { get; set; } = new ObservableCollection<EntryModel>();
 
 		public int Events { get; set; }
 
