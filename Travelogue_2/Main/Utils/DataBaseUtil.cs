@@ -1,9 +1,9 @@
 ﻿using Plugin.Settings;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Travelogue_2.Main.BBDD;
 using Travelogue_2.Main.Models;
-using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Utils
 {
@@ -31,6 +31,13 @@ namespace Travelogue_2.Main.Utils
             /*Dictionary<DateTime, >
             Journey jour = DataBase.GetJourneyById(JourneyId);
              jour.Days()*/
+		}
+
+        public static JourneyModel GetJourneyOnGoing()
+		{
+            Journey temp = DataBase.GetJourneys(State.OPEN).FirstOrDefault();
+
+            return JourneyToModel(temp);
 		}
 
         public static List<JourneyModel> GetJourneysCreated()
@@ -100,6 +107,12 @@ namespace Travelogue_2.Main.Utils
         private static JourneyModel JourneyToModel(Journey journey)
 		{
             JourneyModel temp = new JourneyModel();
+
+            if (journey is null)
+			{
+                return temp;
+			}
+
             temp.Id = journey.Id;
             temp.Name = journey.Name;
             //temp.Image = ImageSource.FromFile(journey.Cover.Path);

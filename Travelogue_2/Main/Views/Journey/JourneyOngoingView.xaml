@@ -1,14 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:journey="clr-namespace:Travelogue_2.Main.Views.Fragments"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:journey="clr-namespace:Travelogue_2.Main.Views.Journey"
              x:Class="Travelogue_2.Main.Views.Journey.JourneyOngoingView"
              x:Name="JourneyOngoingViewName">
     <ContentPage.Content>
 
         <StackLayout>
 
-            <StackLayout></StackLayout>
+            <StackLayout IsVisible="{Binding JourneyNotOnGoing}" BackgroundColor="{DynamicResource PrimaryFaded}">
+                <Label Text=" No hay ningún viaje en curso :) "/>
+            </StackLayout>
 
             <journey:JourneyTemplateView IsVisible="{Binding JourneyOnGoing}"/>
 

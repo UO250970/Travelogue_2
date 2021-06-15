@@ -143,7 +143,7 @@ namespace Travelogue_2.Automatization
 				PrepareCountries();
 			}
 
-			CreateOnCourse();
+			//CreateOnCourse();
 			CreateFutur();
 			CreateFinished();
 		}

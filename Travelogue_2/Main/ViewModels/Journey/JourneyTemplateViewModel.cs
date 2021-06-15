@@ -64,7 +64,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			ImageTapped = new Command<EntryImageModel>(OnImageSelected);
 			DayTapped = new Command<DayModel>(OnDaySelected);
 
-			ExecuteLoadDataCommand();
+			//ExecuteLoadDataCommand();
 		}
 
 		public override void LoadData()
@@ -74,7 +74,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 			}
 
-			JourneyId = "1";
+			//JourneyId = "1";
 			var temp = new DayModel();
 			temp.Day = "2";
 			temp.Month = "2";

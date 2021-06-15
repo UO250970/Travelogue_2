@@ -17,6 +17,9 @@ namespace Travelogue_2.Main.Models
 
 		public DateTime EndDate { get; set; }
 
-        
-    }
+        public JourneyModel()
+		{
+			Id = -1;
+		}
+	}
 }

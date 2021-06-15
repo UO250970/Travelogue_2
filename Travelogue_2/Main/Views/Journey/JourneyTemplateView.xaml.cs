@@ -3,7 +3,7 @@ using Travelogue_2.Main.ViewModels.Journal;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Travelogue_2.Main.Views.Fragments
+namespace Travelogue_2.Main.Views.Journey
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class JourneyTemplateView : AbsoluteLayout
@@ -11,6 +11,7 @@ namespace Travelogue_2.Main.Views.Fragments
 		readonly JourneyTemplateViewModel model;
 
 		private double _journeyNameFrameTop;
+
 		public JourneyTemplateView()
 		{
 			InitializeComponent();
@@ -75,5 +76,6 @@ namespace Travelogue_2.Main.Views.Fragments
 				}
 			}
 		}
+	
 	}
 }

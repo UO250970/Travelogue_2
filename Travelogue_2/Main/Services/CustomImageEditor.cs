@@ -57,9 +57,9 @@ namespace Travelogue_2.Main.Services
 			ToolbarSettings.ToolbarItems.Add(
 				new HeaderToolbarItem() { Text = HeaderButtonsNames[1] });
 			ToolbarSettings.ToolbarItems.Add(
-				new HeaderToolbarItem() { Text = HeaderButtonsNames[3] });
+				new HeaderToolbarItem() { Text = HeaderButtonsNames[2] });
 			ToolbarSettings.ToolbarItems.Add(
-				new HeaderToolbarItem() { Text = HeaderButtonsNames[4] });
+				new HeaderToolbarItem() { Text = HeaderButtonsNames[3] });
 
 			//ToolbarSettings.ToolbarItems.Add(
 				//new FooterToolbarItem() { Icon = BitmapFactory.DecodeResource(Resources, Resource.Drawable.text) });

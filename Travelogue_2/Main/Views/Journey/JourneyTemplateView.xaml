@@ -2,7 +2,7 @@
 <AbsoluteLayout xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
                 xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" xmlns:effects="clr-namespace:Travelogue_2.Main.Services"
-                x:Class="Travelogue_2.Main.Views.Fragments.JourneyTemplateView"
+                x:Class="Travelogue_2.Main.Views.Journey.JourneyTemplateView"
                 BackgroundColor="{DynamicResource PrimaryFaded}"
                 x:Name="JourneyTemplateViewName">
 
@@ -275,6 +275,7 @@
             </StackLayout>
             
         </StackLayout>
+    
     </ScrollView>
 
     <BoxView x:Name="JourneyNameBoxView" HeightRequest="30"
@@ -298,10 +299,5 @@
                     BackgroundColor="{StaticResource None}"
                     Command="{Binding ModifyJourneyCommand}"
                     HorizontalOptions="StartAndExpand"  Text="&#xe9bd;" FontFamily="{StaticResource Icon}" />
-
-    <!--Button x:Name="DeleteModeButton" 
-                    Style="{StaticResource circleButtonAddStyle}"
-                    Command="{Binding AddToJourneyCommand}"
-                    HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}" /-->
 
 </AbsoluteLayout>
