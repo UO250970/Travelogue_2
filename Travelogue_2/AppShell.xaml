@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:local="clr-namespace:Travelogue_2.Main.Views"
        xmlns:journey="clr-namespace:Travelogue_2.Main.Views.Journey" 
        xmlns:library="clr-namespace:Travelogue_2.Main.Views.Library"
        xmlns:media="clr-namespace:Travelogue_2.Main.Views.Media"

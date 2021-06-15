@@ -6,7 +6,13 @@
              x:Name="JourneyOngoingViewName">
     <ContentPage.Content>
 
-        <journey:JourneyTemplateView/>
+        <StackLayout>
+
+            <StackLayout></StackLayout>
+
+            <journey:JourneyTemplateView IsVisible="{Binding JourneyOnGoing}"/>
+
+        </StackLayout>
 
     </ContentPage.Content>
 </ContentPage>
