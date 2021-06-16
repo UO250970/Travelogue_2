@@ -88,8 +88,8 @@ namespace Travelogue_2.Main.BBDD
                 conn.CreateTable<Embassy>();
                 conn.CreateTable<Day>();
                 //conn.CreateTable<DayReser>();
-                //conn.CreateTable<Entry>();
-                //conn.CreateTable<Data>();
+                conn.CreateTable<Entry>();
+                conn.CreateTable<EntryData>();
                 //conn.CreateTable<Text_Info>();
                 conn.CreateTable<Image>();
                 //conn.CreateTable<Place_Info>();
@@ -111,8 +111,8 @@ namespace Travelogue_2.Main.BBDD
                 conn.DeleteAll<Embassy>();
                 conn.DeleteAll<Day>();
                 //conn.DeleteAll<DayReser>();
-                //conn.DeleteAll<Entry>();
-                //conn.DeleteAll<Data>();
+                conn.DeleteAll<Entry>();
+                conn.DeleteAll<EntryData>();
                 //conn.DeleteAll<Text_Info>();
                 conn.DeleteAll<Image>();
                 //conn.DeleteAll<Place_Info>();
@@ -134,8 +134,8 @@ namespace Travelogue_2.Main.BBDD
                 conn.DropTable<Embassy>();
                 conn.DropTable<Day>();
                 //conn.DropTable<DayReser>();
-                //conn.DropTable<Entry>();
-                //conn.DropTable<Data>();
+                conn.DropTable<Entry>();
+                conn.DropTable<EntryData>();
                 //conn.DropTable<Text_Info>();
                 conn.DropTable<Image>();
                 //conn.DropTable<Place_Info>();
@@ -174,10 +174,7 @@ namespace Travelogue_2.Main.BBDD
         {
             if (FindJourney(journey) == null)
             {
-                void Act()
-                {
-                    conn.InsertWithChildren(journey, recursive: true);
-                }
+                void Act() => conn.InsertWithChildren(journey, recursive: true);
                 return QueryAct(Act);
             }
             else
@@ -214,6 +211,40 @@ namespace Travelogue_2.Main.BBDD
             return QueryAct(Act);
         }
 
+        #endregion
+
+        #region Entry
+
+        public static Entry GetEntryById(int id)
+        { // Igual este con solo get y el cascade me ahorra el find => No, porque puede no haber journeys
+            if (!id.Equals(0))
+            {
+                Entry Func() => conn.GetWithChildren<Entry>(id, recursive: true);
+                return QueryFunc(Func);
+            }
+            else { return null; }
+        }
+
+        public static bool InsertEntry(Entry entry)
+		{
+            void Act() => conn.InsertWithChildren(entry);
+            return QueryAct(Act);
+        }
+        
+        public static bool UpdateEntry(Entry entry)
+        {
+            void Act() => conn.UpdateWithChildren(entry);
+            return QueryAct(Act);
+        }
+        #endregion
+
+        #region EntryData
+
+        public static bool InsertEntryData(EntryData entryData)
+        {
+            void Act() => conn.InsertWithChildren(entryData, recursive: true);
+            return QueryAct(Act);
+        }
         #endregion
 
         #region Destiny

@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
 using System;
 
 namespace Travelogue_2.Main.BBDD
@@ -21,15 +22,14 @@ namespace Travelogue_2.Main.BBDD
         [Column("Date")]
         public DateTime Date { get; set; }
 
+        [ForeignKey(typeof(Entry))]
+        public int EntryId { get; set; }
+
+        [ManyToOne]
+        public Entry Entry { get; set; }
+
         /** Constructor público sin parámetros necesario para la base de datos */
         public Image() { }
-
-        public Image(string path, string name)
-        {
-            Path = path;
-            Name = name;
-            Date = DateTime.Now;
-        }
 
     }
 }

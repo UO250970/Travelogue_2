@@ -20,15 +20,15 @@ namespace Travelogue_2.Main.BBDD
 		[ManyToOne]
 		public Journey Journey { get; set; }
 
-		/**[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
-		public List<Event_Info> EventList { get; set; } = new List<Event_Info>();
+		//[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
+		//public List<Event> EventList { get; set; } = new List<Event>();
 
-		[ManyToMany(typeof(DayReser), CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
+		/**[ManyToMany(typeof(DayReser), CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
 		public List<Reser_Info> ReserList { get; set; } = new List<Reser_Info>();*/
 
 
-		//[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
-		//public List<Entry> Entries { get; set; } = new List<Entry>();
+		[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
+		public List<Entry> Entries { get; set; } = new List<Entry>();
 
 		public Day() { }
 

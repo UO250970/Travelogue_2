@@ -91,7 +91,7 @@ namespace Travelogue_2.Automatization
 
 			DataBaseUtil.JourneyInsertDestiny(journey, "Australia");
 
-			//DataBaseUtil.JourneyInsertEntry(journey, 2, "Standard");
+			EntryModel entry = DataBaseUtil.JourneyInsertEntry(journey, 1, "Standard");
 
 			//DataBase.InsertJourney(journey);
 			//DataBase.UpdateCountry(country);
@@ -102,10 +102,12 @@ namespace Travelogue_2.Automatization
 			//Entry entry2 = new Entry(journey.Days[1], "Standard");
 
 			//DataBase.InsertEntry(entry2);
-			
+
 			//DataBase.GetJourney(journey);
 
-			//Image_Info info2 = new Image_Info(entry2, "Path", "Nombre", "foot", DateTime.Now);
+			DataBaseUtil.EntryInsertImage(entry, "Path", "Nombre", "foot");
+
+			//ImageModel info2 = new ImageModel(entry, "Path", "Nombre", "foot", DateTime.Now);
 
 			//DataBase.InsertIData(info2);
 			//DataBase.GetJourney(journey);

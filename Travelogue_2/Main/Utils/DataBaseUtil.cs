@@ -8,6 +8,7 @@ using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Xamarin.Forms;
 using Entry = Travelogue_2.Main.BBDD.Entry;
+using Image = Travelogue_2.Main.BBDD.Image;
 
 namespace Travelogue_2.Main.Utils
 {
@@ -108,15 +109,36 @@ namespace Travelogue_2.Main.Utils
             DataBase.UpdateDestiny(destiny);
         }
 
-        internal static void JourneyInsertEntry(JourneyModel journey, int dayInt, string title)
+        public static EntryModel JourneyInsertEntry(JourneyModel journey, int dayInt, string title)
         {
             Day day = JourneyFromModel(journey).Days[dayInt - 1];
             Entry entry = new Entry();
-            entry.Time = title;
+            entry.Title = title;
+            entry.Time = DateTime.Now.ToString("HH:mm");
 
-            //day.Entries.Add(entry);
+            day.Entries.Add(entry);
 
+            DataBase.InsertEntry(entry);
             DataBase.UpdateDay(day);
+
+            return EntryToModel(entry);
+        }
+
+        public static void EntryInsertImage(EntryModel entry, string path, string name, string caption)
+		{
+            Entry ent = EntryFromModel(entry);
+
+            Image image = new Image();
+            image.Path = path;
+            image.Name = name;
+            image.Caption = caption;
+
+            EntryData entryData = new EntryData();
+            entryData.Time = DateTime.Now.ToString("HH:mm");
+            entryData.Image = image;
+
+            DataBase.InsertEntryData(entryData);
+            DataBase.UpdateEntry(ent);
         }
 
         public static DestinyModel GetDestinyByName(string name) 
@@ -187,16 +209,29 @@ namespace Travelogue_2.Main.Utils
             foreach (Day day in days)
             {
                 DayModel tempDay = new DayModel();
+
+                tempDay.Id = day.Id;
                 tempDay.Day = day.Date.Day.ToString();
                 tempDay.Month = day.Date.Month.ToString();
                 tempDay.Year = day.Date.Year.ToString();
 
                 temp.Add(tempDay);
                 //tempDay.JourneyEvents = new ObservableCollection<EventModel>( EventsToModel(day.Events) );
-                //tempDay.JourneyEntries = new ObservableCollection<EntryModel>( EntriesToModel(day.Entries) );
+                tempDay.JourneyEntries = new ObservableCollection<EntryModel>( EntriesToModel(day.Entries) );
             }
 
             return temp;
+        }
+        
+        private static EntryModel EntryToModel(Entry entry)
+        {              
+            EntryModel tempEntry = new EntryModel();
+
+            tempEntry.Id = entry.Id;
+            tempEntry.Title = entry.Title;
+            tempEntry.Time = entry.Time;
+
+            return tempEntry;
         }
 
         private static List<EntryModel> EntriesToModel(List<Entry> entries)
@@ -214,6 +249,8 @@ namespace Travelogue_2.Main.Utils
 
             return temp;
         }
+        
+        private static Entry EntryFromModel(EntryModel entry) => DataBase.GetEntryById(entry.Id);
 
         #endregion
     }
