@@ -1,12 +1,16 @@
 ﻿using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Utils;
-using Travelogue_2.Main.ViewModels.Journal;
-using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Journey
 {
-    public class JourneyOngoingViewModel : DataBaseViewModel
+    public class JourneyOngoingViewModel : JourneyTemplateViewModel
     {
+        public new string JourneyId
+        {
+            get => journeyId;
+            set => journeyId = value;
+        }
+
         private bool journeyOnGoing = false;
         public bool JourneyOnGoing
 		{
@@ -24,7 +28,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
             get => journeyNotOnGoing;
         }
 
-        public JourneyOngoingViewModel()
+        public JourneyOngoingViewModel() : base ()
 		{
             ExecuteLoadDataCommand();
 		}
@@ -35,13 +39,15 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
             if (journey.Id >= 0)
 			{
+                JourneyId = journey.Id.ToString();
+                base.LoadData();
                 JourneyOnGoing = true;
 
                 //JourneyTemplateViewModel model = new JourneyTemplateViewModel();
                 //model.JourneyId = journey.Id;
 
                 //await Shell.Current.GoToAsync("PAGE_URI", model);
-                await Shell.Current.GoToAsync($"..?{nameof(JourneyTemplateViewModel.JourneyId)}={journey.Id.ToString()}");
+                //JourneyId = journey.Id;
             }
 
         }

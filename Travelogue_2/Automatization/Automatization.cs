@@ -12,6 +12,7 @@ using System.Linq;
 using Plugin.Settings.Abstractions;
 using Travelogue_2.Main.Utils;
 using System;
+using Travelogue_2.Main.BBDD;
 
 namespace Travelogue_2.Automatization
 {
@@ -89,7 +90,8 @@ namespace Travelogue_2.Automatization
 			//Text_Info info = new Text_Info(entry, "Texto", DateTime.Now);
 
 			DataBaseUtil.JourneyInsertDestiny(journey, "Australia");
-			DataBaseUtil.JourneyInsertEntry(journey, 2, "Standard");
+
+			//DataBaseUtil.JourneyInsertEntry(journey, 2, "Standard");
 
 			//DataBase.InsertJourney(journey);
 			//DataBase.UpdateCountry(country);
@@ -133,7 +135,7 @@ namespace Travelogue_2.Automatization
 		{
 			//ClearDB();
 
-			await CheckPermissionsAsync();
+			CheckPermissionsAsync();
 
 			if (DataBaseUtil.HasJourneis() != "0")
 			{
@@ -144,7 +146,7 @@ namespace Travelogue_2.Automatization
 				PrepareCountries();
 			}
 
-			//CreateOnCourse();
+			CreateOnCourse();
 			CreateFutur();
 			CreateFinished();
 		}

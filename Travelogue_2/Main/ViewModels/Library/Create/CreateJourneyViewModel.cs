@@ -157,8 +157,8 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 				DayModel temp = new DayModel();
 				temp.Day = dateTemp.Day.ToString();
 				temp.Month = dateTemp.Month.ToString();
-				temp.Entries = 0;
-				temp.Events = 0;
+				//temp.Entries = 0;
+				//temp.Events = 0;
 				DaysSelected.Add(temp);
 
 				dateTemp = dateTemp.AddDays(1);

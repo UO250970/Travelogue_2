@@ -1,7 +1,7 @@
 ﻿using SQLite;
 using SQLiteNetExtensions.Attributes;
 
-namespace Travelogue_2.Main.Models
+namespace Travelogue_2.Main.BBDD
 {
 	[Table("Embassy")]
 	public class Embassy

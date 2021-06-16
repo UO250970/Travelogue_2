@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Travelogue_2.Main.BBDD;
 using Travelogue_2.Main.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;

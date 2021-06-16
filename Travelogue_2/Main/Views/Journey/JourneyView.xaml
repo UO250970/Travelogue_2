@@ -7,7 +7,8 @@
              x:Name="JourneyViewName">
     <ContentPage.Content>
 
-        <journey:JourneyTemplateView/>
+        <!--AbsoluteLayout x:Name="JourneySpace"/-->
+        <journey:JourneyTemplateView x:Name="JourneySpace"/>
 
     </ContentPage.Content>
 </ContentPage>

@@ -55,7 +55,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			var etemp1 = new EntryModel();
 			etemp1.Title = "Prueba titulo";
 			temp2.JourneyEntries.Add(etemp1);
-			temp2.Entries = 1;
+			//temp2.Entries = 1;
 			JourneyDays.Add(temp2);
 
 			var temp3 = new DayModel();

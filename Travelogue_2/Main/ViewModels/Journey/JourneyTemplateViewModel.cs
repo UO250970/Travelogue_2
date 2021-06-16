@@ -9,29 +9,21 @@ using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.PopUps;
 using Xamarin.Forms;
 
-namespace Travelogue_2.Main.ViewModels.Journal
+namespace Travelogue_2.Main.ViewModels.Journey
 {
-	[QueryProperty(nameof(JourneyId), nameof(JourneyId))]
 	public class JourneyTemplateViewModel : PhotoRendererModel
 	{
-		private string journeyId = "";
-		public string JourneyId 
-		{
-			get => journeyId;
-			set
-			{
-				journeyId = value;
-				LoadData();
-			} 
-		}
+		protected string journeyId;
+
+		public string JourneyId { get => journeyId; }
 
 		public Command AddImageCommand { get; }
 		public Command<EntryImageModel> ImageTapped { get; }
 		public Command<DayModel> DayTapped { get; }
 		public ObservableCollection<EntryImageModel> JourneyImages { get; }
-		public ObservableCollection<DayModel> JourneyDays { get; }
-		public ObservableCollection<EventModel> JourneyEvents { get; }
-		public ObservableCollection<EntryModel> JourneyEntries { get; }
+		public ObservableCollection<DayModel> JourneyDays { get; set;  }
+		//public ObservableCollection<EventModel> JourneyEvents { get; }
+		//public ObservableCollection<EntryModel> JourneyEntries { get; }
 
 		/** Commands*/
 		public Command AddEventCommand { get; }
@@ -43,7 +35,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 		/** */
 
 		public JourneyTemplateViewModel()
-		{
+        {
 			AddEventCommand = new Command(() => AddEventC());
 			AddEntryCommand = new Command(() => AddEntryC());
 			AddToEntryCommand = new Command(() => AddToEntryC());
@@ -58,8 +50,8 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			JourneyImages = new ObservableCollection<EntryImageModel>();
 			JourneyDays = new ObservableCollection<DayModel>();
 			//JourneyDays.CollectionChanged += JourneyDaysChanged;
-			JourneyEvents = new ObservableCollection<EventModel>();
-			JourneyEntries = new ObservableCollection<EntryModel>();
+			//JourneyEvents = new ObservableCollection<EventModel>();
+			//JourneyEntries = new ObservableCollection<EntryModel>();
 
 			ImageTapped = new Command<EntryImageModel>(OnImageSelected);
 			DayTapped = new Command<DayModel>(OnDaySelected);
@@ -69,13 +61,19 @@ namespace Travelogue_2.Main.ViewModels.Journal
 
 		public override void LoadData()
 		{
-			if (JourneyId != "")
+			if (JourneyId != null)
 			{
+				JourneyModel journey = DataBaseUtil.GetJourneyById(JourneyId);
+				JourneyName = journey.Name;
+				CoverImage.ImageSour = journey.Image;
 
+				// TODO - Chekear acciones según estado
+
+				JourneyDays = new ObservableCollection<DayModel>( DataBaseUtil.GetDaysFromJourney(journey) );
 			}
 
 			//JourneyId = "1";
-			var temp = new DayModel();
+			/**var temp = new DayModel();
 			temp.Day = "2";
 			temp.Month = "2";
 			temp.Year = "2021";
@@ -95,13 +93,13 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			ectemp2.Time = DateTime.Now.ToString("HH:mm");
 			etemp1.Content.Add(ectemp2);
 			temp2.JourneyEntries.Add(etemp1);
-			temp2.Entries = 1;
+			//temp2.Entries = 1;
 			var etemp2 = new EventModel();
 			etemp2.Text = "Concierto de Lady Gaga";
 			etemp2.Address = "Calle fulanito";
 			etemp2.Time = "12:00";
 			temp2.JourneyEvents.Add(etemp2);
-			temp2.Events = 1;
+			//temp2.Events = 1;
 			JourneyDays.Add(temp2);
 
 			var temp3 = new DayModel();
@@ -109,7 +107,7 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			temp3.Month = "2";
 			temp3.Year = "2021";
 			JourneyDays.Add(temp3);
-			//JourneyImages.Add(new ImageCard());
+			//JourneyImages.Add(new ImageCard());*/
 
 			DaySelected = JourneyDays[0];
 		}
@@ -127,14 +125,26 @@ namespace Travelogue_2.Main.ViewModels.Journal
 			}
 		}
 
+		#region Name
+
+		private string journeyName;
+
+		public string JourneyName
+        {
+			get => journeyName;
+			set => SetProperty(ref journeyName, value);
+        }
+
+		#endregion
+
 		#region Cover
 
-		private EntryImageModel coverImage = new EntryImageModel()
+		private ImageModel coverImage = new ImageModel()
 		{
 			ImageSour = CommonVariables.GetImage()
 		};
 
-		public EntryImageModel CoverImage
+		public ImageModel CoverImage
 		{
 			get => coverImage;
 			set

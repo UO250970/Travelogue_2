@@ -57,7 +57,7 @@
                                                     </Label.GestureRecognizers>
                                                 </Label>
 
-                                                <StackLayout x:Name="DestinyInfo" IsVisible="False">
+                                                <StackLayout x:Name="DestinyInfo" IsVisible="True">
                                                     <Grid  Margin="5">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="4*" />

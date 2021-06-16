@@ -4,11 +4,11 @@ using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Utils;
 using System;
+using Travelogue_2.Main.BBDD;
 
-namespace Travelogue_2.Main.ViewModels.Journal
+namespace Travelogue_2.Main.ViewModels.Journey
 {
 	[QueryProperty(nameof(JourneyId), nameof(JourneyId))]
 	public class JourneySettingsViewModel : PhotoRendererModel

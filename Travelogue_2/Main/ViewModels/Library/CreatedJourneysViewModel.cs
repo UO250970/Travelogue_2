@@ -4,6 +4,7 @@ using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.ViewModels.Journal;
+using Travelogue_2.Main.ViewModels.Journey;
 using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.Library.Create;
 using Xamarin.Forms;
@@ -154,7 +155,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 				return;
 
 			// This will push the ItemDetailPage onto the navigation stack
-			await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyTemplateViewModel.JourneyId)}={journey.Id}");
+			await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyViewModel.JourneyId)}={journey.Id}");
 		}
 
 		async void OnJourneySelectedDelete(JourneyModel journey)

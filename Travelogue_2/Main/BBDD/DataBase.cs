@@ -81,7 +81,7 @@ namespace Travelogue_2.Main.BBDD
         {
             void Act()
             {
-                //conn.CreateTable<JourneyCountry>();
+                conn.CreateTable<JourneyDestiny>();
                 conn.CreateTable<Journey>();
                 //conn.CreateTable<Journal>();
                 conn.CreateTable<Destiny>();
@@ -104,7 +104,7 @@ namespace Travelogue_2.Main.BBDD
         {
             void Act()
             {
-                //conn.DeleteAll<JourneyCountry>();
+                conn.DeleteAll<JourneyDestiny>();
                 conn.DeleteAll<Journey>();
                 //conn.DeleteAll<Journal>();
                 conn.DeleteAll<Destiny>();
@@ -127,7 +127,7 @@ namespace Travelogue_2.Main.BBDD
         {
             void Act()
             {
-                //conn.DropTable<JourneyCountry>();
+                conn.DropTable<JourneyDestiny>();
                 conn.DropTable<Journey>();
                 //conn.DropTable<Journal>();
                 conn.DropTable<Destiny>();
@@ -201,9 +201,18 @@ namespace Travelogue_2.Main.BBDD
             return QueryAct(Act);
         }
 
-		#endregion
+        #endregion
 
-		#region Day
+        #region Day
+
+
+
+            /** Update */
+        public static bool UpdateDay(Day day)
+        {
+            void Act() => conn.UpdateWithChildren(day);
+            return QueryAct(Act);
+        }
 
         #endregion
 

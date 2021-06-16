@@ -288,7 +288,7 @@
     <Label x:Name="JourneyName"
                     AbsoluteLayout.LayoutFlags="PositionProportional"
                     AbsoluteLayout.LayoutBounds="0.1,0.15"
-                    FontSize="24" Text="Prueba"
+                    FontSize="24" Text="{Binding JourneyName}"
                     TextColor="{StaticResource White}"/>
 
     <Button x:Name="ModifyJourneyButton" 

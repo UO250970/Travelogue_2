@@ -25,8 +25,8 @@ namespace Travelogue_2.Main.BBDD
         [Column("EndDate"), NotNull]
         public DateTime EndDate { get; set; } = DateTime.Today;
 
-        //[ManyToOne(typeof(JourneyCountry), "IdJourney", "Journeis", CascadeOperations = CascadeOperation.CascadeRead)]
-        //public List<Destiny> Destinies { get; set; } = new List<Destiny>();
+        [ManyToMany(typeof(JourneyDestiny), CascadeOperations = CascadeOperation.CascadeRead)]
+        public List<Destiny> Destinies { get; set; } = new List<Destiny>();
 
         // TODO Son nuevos, probar
         //[ForeignKey(typeof(Journal))]
@@ -36,11 +36,11 @@ namespace Travelogue_2.Main.BBDD
         //public Journal Journal { get; set; }
         //public Journal Journal { get; set; }
 
-        //[ForeignKey(typeof(Image))]
-        //public int CoverId { get; set; }
+        [ForeignKey(typeof(Image))]
+        public int CoverId { get; set; }
 
-        //[ManyToOne]
-        //public Image Cover { get; set; }
+        [OneToOne]
+        public Image Cover { get; set; }
 
         [OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
         public List<Day> Days { get; set; } = new List<Day>();

@@ -35,10 +35,9 @@ namespace Travelogue_2.Main.Models
 		{ 
 			get => background;
 			set => background = value;
-				//PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Background"));
 		}
 		
-		public int Entries { get; set; }
+		/*public int Entries { get; set; }
 
 		public string EntriesText 
 		{
@@ -46,19 +45,19 @@ namespace Travelogue_2.Main.Models
 			{
 				return Entries + " " + App.LocResources["Entries"];
 			} 
-		}
+		}*/
 
 		public ObservableCollection<EntryModel> JourneyEntries { get; set; } = new ObservableCollection<EntryModel>();
 
-		public int Events { get; set; }
+		//public int Events { get; set; }
 
-		public string EventsText
+		/*public string EventsText
 		{
 			get
 			{
 				return Events + " " + App.LocResources["Events"];
 			}
-		}
+		}*/
 
 		public ObservableCollection<EventModel> JourneyEvents { get; set; } = new ObservableCollection<EventModel>();
 

@@ -1,5 +1,5 @@
 ﻿using System;
-using Travelogue_2.Main.ViewModels.Journal;
+using Travelogue_2.Main.ViewModels.Journey;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

@@ -2,7 +2,7 @@
 using SQLiteNetExtensions.Attributes;
 using System.Collections.Generic;
 
-namespace Travelogue_2.Main.Models
+namespace Travelogue_2.Main.BBDD
 {
 	[Table("Destiny")]
 	public class Destiny
@@ -15,6 +15,9 @@ namespace Travelogue_2.Main.Models
 
 		[Column("Currency"), MaxLength(15)]
 		public string Currency { get; set; } = string.Empty;
+
+		[ManyToMany(typeof(JourneyDestiny))]
+		public List<Journey> Journeys { get; set; } = new List<Journey>();
 
 		public bool Original { get; set; } = true;
 

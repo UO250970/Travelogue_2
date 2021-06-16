@@ -14,7 +14,17 @@ namespace Travelogue_2.Main.Views.Journey
             Shell.SetNavBarIsVisible(this, false);
 
             BindingContext = model = new JourneyOngoingViewModel();
+
+            //JourneySpace = new JourneyTemplateView(model.JourneyId);
         }
 
-	}
+        protected override void OnAppearing()
+        {
+            model.OnAppearing();
+            //JourneyTemplateView view = 
+            JourneySpace = new JourneyTemplateView();
+            //JourneySpace.BindingContext = view.model;
+        }
+
+    }
 }

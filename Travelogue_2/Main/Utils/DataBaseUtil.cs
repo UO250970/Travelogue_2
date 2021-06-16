@@ -1,9 +1,13 @@
 ﻿using Plugin.Settings;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Travelogue_2.Main.BBDD;
 using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Services;
+using Xamarin.Forms;
+using Entry = Travelogue_2.Main.BBDD.Entry;
 
 namespace Travelogue_2.Main.Utils
 {
@@ -32,6 +36,13 @@ namespace Travelogue_2.Main.Utils
             Journey jour = DataBase.GetJourneyById(JourneyId);
              jour.Days()*/
 		}
+
+        public static JourneyModel GetJourneyById(string id)
+        {
+            Journey temp = DataBase.GetJourneyById( int.Parse(id) );
+
+            return JourneyToModel(temp);
+        }
 
         public static JourneyModel GetJourneyOnGoing()
 		{
@@ -90,16 +101,22 @@ namespace Travelogue_2.Main.Utils
             Journey jour = JourneyFromModel(journey);
             Destiny destiny = DataBase.GetDestinyByName(name);
 
+            jour.Destinies.Add(destiny);
+            destiny.Journeys.Add(jour);
+
             DataBase.UpdateJourney(jour);
             DataBase.UpdateDestiny(destiny);
-            //destiny.Journeis.Add(journey);
-            //journey.Countries.Add(country);
         }
 
         internal static void JourneyInsertEntry(JourneyModel journey, int dayInt, string title)
         {
             Day day = JourneyFromModel(journey).Days[dayInt - 1];
             Entry entry = new Entry();
+            entry.Time = title;
+
+            day.Entries.Add(entry);
+
+            DataBase.UpdateDay(day);
         }
 
         public static DestinyModel GetDestinyByName(string name) 
@@ -108,10 +125,16 @@ namespace Travelogue_2.Main.Utils
 			return DestinyToModel(destiny);
         }
 
+        public static List<DayModel> GetDaysFromJourney(JourneyModel journey)
+        {
+            Journey temp = JourneyFromModel(journey);
 
-		#region Models
+            return DaysToModel(temp.Days);
+        }
 
-		private static JourneyModel JourneyToModel(Journey journey)
+        #region Models
+
+        private static JourneyModel JourneyToModel(Journey journey)
 		{
             JourneyModel temp = new JourneyModel();
 
@@ -122,7 +145,15 @@ namespace Travelogue_2.Main.Utils
 
             temp.Id = journey.Id;
             temp.Name = journey.Name;
-            //temp.Image = ImageSource.FromFile(journey.Cover.Path);
+            if (journey.Cover is null)
+            {
+                temp.Image = CommonVariables.GetImage();
+            } else
+            {
+                //Stream stream = file.GetStream();
+                //temp.Image = ImageSource.FromStream(() => stream);
+                temp.Image = ImageSource.FromFile(journey.Cover.Path);
+            }
             temp.IniDate = journey.IniDate;
             temp.EndDate = journey.EndDate;
 
@@ -148,6 +179,40 @@ namespace Travelogue_2.Main.Utils
         }
 
         private static Destiny DestinyFromModel(DestinyModel destiny) => DataBase.GetDestinyByName(destiny.Destiny);
+
+        private static List<DayModel> DaysToModel(List<Day> days)
+        {
+            List<DayModel> temp = new List<DayModel>();
+
+            foreach (Day day in days)
+            {
+                DayModel tempDay = new DayModel();
+                tempDay.Day = day.Date.Day.ToString();
+                tempDay.MonthNum = day.Date.Month.ToString();
+                tempDay.Year = day.Date.Year.ToString();
+
+                //tempDay.JourneyEvents = new ObservableCollection<EventModel>( EventsToModel(day.Events) );
+                tempDay.JourneyEntries = new ObservableCollection<EntryModel>( EntriesToModel(day.Entries) );
+            }
+
+            return temp;
+        }
+
+        private static List<EntryModel> EntriesToModel(List<Entry> entries)
+        {
+            List<EntryModel> temp = new List<EntryModel>();
+
+            foreach (Entry entry in entries)
+            {
+                EntryModel tempEntry = new EntryModel();
+
+                tempEntry.Id = entry.Id;
+                tempEntry.Title = entry.Title;
+                tempEntry.Time = entry.Time;
+            }
+
+            return temp;
+        }
 
         #endregion
     }

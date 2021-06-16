@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Views.PopUps;
 using Xamarin.Essentials;
+using Travelogue_2.Main.BBDD;
 
 namespace Travelogue_2.Main.ViewModels.Settings
 {
@@ -14,6 +15,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
 	{
         public Command SearchDestinyCommand { get; }
         public Command AddDestinyCommand { get; }
+        public Command MoreInfoCommand { get; }
         public Command PhoneNumberTappedCommand { get; }
 
         public Command<DestinyModel> DestinyTapped { get; }
@@ -25,6 +27,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
         {
             SearchDestinyCommand = new Command(() => SearchDestinyC());
             AddDestinyCommand = new Command(() => AddDestinyCAsync());
+            MoreInfoCommand = new Command<string>((x) => MoreInfoC(x));
             PhoneNumberTappedCommand = new Command<string>((x) => PhoneNumberTappedC(x));
 
             DestiniesOrdered = new ObservableDictionary<string, List<DestinyModel>>();
@@ -111,6 +114,11 @@ namespace Travelogue_2.Main.ViewModels.Settings
         public async void AddDestinyCAsync()
         {
             await Shell.Current.GoToAsync($"{nameof(AddDestinyPopUp)}");
+        }
+
+        async internal void MoreInfoC(string path)
+        {
+            await Browser.OpenAsync(path);
         }
 
         internal void PhoneNumberTappedC(string number)
