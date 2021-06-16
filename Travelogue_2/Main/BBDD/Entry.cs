@@ -16,11 +16,11 @@ namespace Travelogue_2.Main.BBDD
 		[MaxLength(40), NotNull]
 		public string Time { get; set; } = string.Empty;
 
-		[ForeignKey(typeof(Day))]
-		public int DayId { get; set; }
+		//[ForeignKey(typeof(Day))]
+		//public int DayId { get; set; }
 
-		[ManyToOne]
-		public Day Day { get; set; }
+		//[ManyToOne]
+		//public Day Day { get; set; }
 
 		//[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
 		//public List<EntryText> TextList { get; set; } = new List<EntryText>();

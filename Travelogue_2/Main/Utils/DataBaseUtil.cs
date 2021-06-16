@@ -114,7 +114,7 @@ namespace Travelogue_2.Main.Utils
             Entry entry = new Entry();
             entry.Time = title;
 
-            day.Entries.Add(entry);
+            //day.Entries.Add(entry);
 
             DataBase.UpdateDay(day);
         }
@@ -188,11 +188,12 @@ namespace Travelogue_2.Main.Utils
             {
                 DayModel tempDay = new DayModel();
                 tempDay.Day = day.Date.Day.ToString();
-                tempDay.MonthNum = day.Date.Month.ToString();
+                tempDay.Month = day.Date.Month.ToString();
                 tempDay.Year = day.Date.Year.ToString();
 
+                temp.Add(tempDay);
                 //tempDay.JourneyEvents = new ObservableCollection<EventModel>( EventsToModel(day.Events) );
-                tempDay.JourneyEntries = new ObservableCollection<EntryModel>( EntriesToModel(day.Entries) );
+                //tempDay.JourneyEntries = new ObservableCollection<EntryModel>( EntriesToModel(day.Entries) );
             }
 
             return temp;

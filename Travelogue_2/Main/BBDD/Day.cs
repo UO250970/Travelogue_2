@@ -9,7 +9,7 @@ namespace Travelogue_2.Main.BBDD
     public class Day
     {
 		[PrimaryKey, AutoIncrement, Column("_id"), NotNull]
-		public int Id { get; set; }
+		public int Id { get; set; } = 0;
 
 		[NotNull]
 		public DateTime Date { get; set; } = DateTime.Today;
@@ -27,8 +27,8 @@ namespace Travelogue_2.Main.BBDD
 		public List<Reser_Info> ReserList { get; set; } = new List<Reser_Info>();*/
 
 
-		[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
-		public List<Entry> Entries { get; set; } = new List<Entry>();
+		//[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
+		//public List<Entry> Entries { get; set; } = new List<Entry>();
 
 		public Day() { }
 

@@ -375,8 +375,41 @@
   <data name="Modelation" xml:space="preserve">
     <value>Modelation</value>
   </data>
+  <data name="MonthShort_1" xml:space="preserve">
+    <value>JAN.</value>
+  </data>
+  <data name="MonthShort_10" xml:space="preserve">
+    <value>OCT.</value>
+  </data>
+  <data name="MonthShort_11" xml:space="preserve">
+    <value>NOV.</value>
+  </data>
+  <data name="MonthShort_12" xml:space="preserve">
+    <value>DEC.</value>
+  </data>
   <data name="MonthShort_2" xml:space="preserve">
     <value>FEB.</value>
+  </data>
+  <data name="MonthShort_3" xml:space="preserve">
+    <value>MAR.</value>
+  </data>
+  <data name="MonthShort_4" xml:space="preserve">
+    <value>APR.</value>
+  </data>
+  <data name="MonthShort_5" xml:space="preserve">
+    <value>MAY.</value>
+  </data>
+  <data name="MonthShort_6" xml:space="preserve">
+    <value>JUN.</value>
+  </data>
+  <data name="MonthShort_7" xml:space="preserve">
+    <value>JUL.</value>
+  </data>
+  <data name="MonthShort_8" xml:space="preserve">
+    <value>AUG.</value>
+  </data>
+  <data name="MonthShort_9" xml:space="preserve">
+    <value>SEP.</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
