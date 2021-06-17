@@ -24,7 +24,7 @@ namespace Travelogue_2.Main.BBDD
 		[ForeignKey(typeof(Image))]
 		public int ImageId { get; set; }
 
-		[OneToOne]
+		[OneToOne(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
 		public Image Image { get; set; }
 
 		public EntryData() { }

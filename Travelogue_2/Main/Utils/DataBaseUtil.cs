@@ -129,6 +129,7 @@ namespace Travelogue_2.Main.Utils
             Entry ent = EntryFromModel(entry);
 
             Image image = new Image();
+            image.Date = ent.Day.Date;
             image.Path = path;
             image.Name = name;
             image.Caption = caption;
@@ -138,6 +139,24 @@ namespace Travelogue_2.Main.Utils
             entryData.Image = image;
 
             DataBase.InsertEntryData(entryData);
+
+            ent.Content.Add(entryData);
+
+            DataBase.UpdateEntry(ent);
+        }
+
+        public static void EntryInsertText(EntryModel entry, string text)
+		{
+            Entry ent = EntryFromModel(entry);
+
+            EntryData entryData = new EntryData();
+            entryData.Time = DateTime.Now.ToString("HH:mm");
+            entryData.Text = text;
+
+            DataBase.InsertEntryData(entryData);
+
+            ent.Content.Add(entryData);
+
             DataBase.UpdateEntry(ent);
         }
 
@@ -215,9 +234,10 @@ namespace Travelogue_2.Main.Utils
                 tempDay.Month = day.Date.Month.ToString();
                 tempDay.Year = day.Date.Year.ToString();
 
-                temp.Add(tempDay);
                 //tempDay.JourneyEvents = new ObservableCollection<EventModel>( EventsToModel(day.Events) );
                 tempDay.JourneyEntries = new ObservableCollection<EntryModel>( EntriesToModel(day.Entries) );
+
+                temp.Add(tempDay);
             }
 
             return temp;
@@ -230,6 +250,31 @@ namespace Travelogue_2.Main.Utils
             tempEntry.Id = entry.Id;
             tempEntry.Title = entry.Title;
             tempEntry.Time = entry.Time;
+
+            foreach (EntryData data in entry.Content)
+			{
+                if (data.Text != "")
+				{
+                    EntryTextModel temp1 = new EntryTextModel();
+                    temp1.Id = data.Id;
+                    temp1.Time = data.Time;
+                    temp1.Text = data.Text;
+
+                    tempEntry.Content.Add(temp1);
+				}
+				else
+				{
+                    EntryImageModel temp2 = new EntryImageModel();
+                    temp2.Id = data.Id;
+                    temp2.ImageName = data.Image.Name;
+                    temp2.ImagePath = data.Image.Path;
+                    temp2.ImageCaption = data.Image.Caption;
+                    temp2.JourneyName = data.Entry.Day.Journey.Name;
+
+                    tempEntry.Content.Add(temp2);
+				}
+
+			}
 
             return tempEntry;
         }
@@ -245,6 +290,31 @@ namespace Travelogue_2.Main.Utils
                 tempEntry.Id = entry.Id;
                 tempEntry.Title = entry.Title;
                 tempEntry.Time = entry.Time;
+
+                foreach (EntryData data in entry.Content)
+                {
+                    if (data.Text != "")
+                    {
+                        EntryTextModel temp1 = new EntryTextModel();
+                        temp1.Id = data.Id;
+                        temp1.Time = data.Time;
+                        temp1.Text = data.Text;
+
+                        tempEntry.Content.Add(temp1);
+                    }
+                    else
+                    {
+                        EntryImageModel temp2 = new EntryImageModel();
+                        temp2.Id = data.Id;
+                        temp2.ImageName = data.Image.Name;
+                        temp2.ImagePath = data.Image.Path;
+                        temp2.ImageCaption = data.Image.Caption;
+                        temp2.JourneyName = data.Entry.Day.Journey.Name;
+
+                        tempEntry.Content.Add(temp2);
+                    }
+
+                }
             }
 
             return temp;

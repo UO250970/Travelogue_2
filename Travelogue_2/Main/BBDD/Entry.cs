@@ -26,7 +26,7 @@ namespace Travelogue_2.Main.BBDD
 		//public List<EntryText> TextList { get; set; } = new List<EntryText>();
 
 		[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
-		public List<Image> ImageList { get; set; } = new List<Image>();
+		public List<EntryData> Content { get; set; } = new List<EntryData>();
 
 		public Entry() { }
 	}

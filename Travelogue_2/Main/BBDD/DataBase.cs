@@ -245,6 +245,7 @@ namespace Travelogue_2.Main.BBDD
             void Act() => conn.InsertWithChildren(entryData, recursive: true);
             return QueryAct(Act);
         }
+
         #endregion
 
         #region Destiny
@@ -312,6 +313,16 @@ namespace Travelogue_2.Main.BBDD
             void Act() => conn.DeleteAllIds<Destiny>(countriesIds);
             return QueryAct(Act);
         }
+        #endregion
+
+        #region Image
+        
+        public static bool InsertImage(Image image)
+        {
+            void Act() => conn.InsertWithChildren(image);
+            return QueryAct(Act);
+        }
+
         #endregion
 
     }

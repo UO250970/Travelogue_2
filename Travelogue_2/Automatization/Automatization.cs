@@ -107,6 +107,8 @@ namespace Travelogue_2.Automatization
 
 			DataBaseUtil.EntryInsertImage(entry, "Path", "Nombre", "foot");
 
+			DataBaseUtil.EntryInsertText(entry, "Entry text");
+
 			//ImageModel info2 = new ImageModel(entry, "Path", "Nombre", "foot", DateTime.Now);
 
 			//DataBase.InsertIData(info2);
@@ -120,7 +122,13 @@ namespace Travelogue_2.Automatization
 
 		private static void CreateOnCourse()
 		{
-			DataBaseUtil.CreateJourney("StandardTrip", DateTime.Today.AddDays(-1), DateTime.Today.Date.AddDays(1));
+			JourneyModel journey = DataBaseUtil.CreateJourney("StandardTrip", DateTime.Today.AddDays(-1), DateTime.Today.Date.AddDays(1));
+
+			EntryModel entry = DataBaseUtil.JourneyInsertEntry(journey, 1, "Standard");
+
+			DataBaseUtil.EntryInsertImage(entry, "Path", "Nombre", "foot");
+
+			DataBaseUtil.EntryInsertText(entry, "Entry text");
 		}
 
 		private static void CreateFinished()
