@@ -109,7 +109,11 @@ namespace Travelogue_2.Automatization
 
 			DataBaseUtil.EntryInsertText(entry, "Entry text");
 
-			//ImageModel info2 = new ImageModel(entry, "Path", "Nombre", "foot", DateTime.Now);
+			DataBaseUtil.JourneyInsertEvent(journey, 1, "Concierto Manin", "Calle lapus");
+
+			DataBaseUtil.JourneyInsertReserv(journey, 1, 3, "Concierto Manin", "Calle lapus", "985 3816 36");
+
+			//ImageModel info2 = new ImageModel(entry, "Path", "Nombre", "foot", DateTime.Now); 
 
 			//DataBase.InsertIData(info2);
 			//DataBase.GetJourney(journey);
@@ -127,8 +131,9 @@ namespace Travelogue_2.Automatization
 			EntryModel entry = DataBaseUtil.JourneyInsertEntry(journey, 1, "Standard");
 
 			DataBaseUtil.EntryInsertImage(entry, "Path", "Nombre", "foot");
-
 			DataBaseUtil.EntryInsertText(entry, "Entry text");
+			DataBaseUtil.JourneyInsertEvent(journey, 1, "Concierto Manin", "Calle lapus");
+			DataBaseUtil.JourneyInsertReserv(journey, 1, 3, "Concierto Manin", "Calle lapus", "985 3816 36");
 		}
 
 		private static void CreateFinished()

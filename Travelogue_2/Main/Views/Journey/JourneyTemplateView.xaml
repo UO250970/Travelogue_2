@@ -124,7 +124,7 @@
                                              effects:LongPressedEffect.Command="{Binding Path=BindingContext.EditOrDeleteEventCommand, Source={x:Reference JourneyTemplateViewName}}"
                                              effects:LongPressedEffect.CommandParameter="{Binding .}">
                                     <Label Text="{Binding .Time}" FontSize="Small" TextColor="{DynamicResource Primary}"></Label>
-                                    <Label Text="{Binding .Text}" FontSize="Small"></Label>
+                                    <Label Text="{Binding .Title}" FontSize="Small"></Label>
                                     <Label Text="{Binding .Address}" FontSize="Caption" FontAttributes="Italic"></Label>
 
                                     <StackLayout.Effects>

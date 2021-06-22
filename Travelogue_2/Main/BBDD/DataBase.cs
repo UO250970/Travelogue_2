@@ -86,11 +86,11 @@ namespace Travelogue_2.Main.BBDD
                 //conn.CreateTable<Journal>();
                 conn.CreateTable<Destiny>();
                 conn.CreateTable<Embassy>();
+                conn.CreateTable<DayEvent>();
                 conn.CreateTable<Day>();
-                //conn.CreateTable<DayReser>();
+                conn.CreateTable<Event>();
                 conn.CreateTable<Entry>();
                 conn.CreateTable<EntryData>();
-                //conn.CreateTable<Text_Info>();
                 conn.CreateTable<Image>();
                 //conn.CreateTable<Place_Info>();
                 //conn.CreateTable<AbstractEvent>();
@@ -109,8 +109,9 @@ namespace Travelogue_2.Main.BBDD
                 //conn.DeleteAll<Journal>();
                 conn.DeleteAll<Destiny>();
                 conn.DeleteAll<Embassy>();
+                conn.DeleteAll<DayEvent>();
                 conn.DeleteAll<Day>();
-                //conn.DeleteAll<DayReser>();
+                conn.DeleteAll<Event>();
                 conn.DeleteAll<Entry>();
                 conn.DeleteAll<EntryData>();
                 //conn.DeleteAll<Text_Info>();
@@ -132,8 +133,9 @@ namespace Travelogue_2.Main.BBDD
                 //conn.DropTable<Journal>();
                 conn.DropTable<Destiny>();
                 conn.DropTable<Embassy>();
+                conn.DropTable<DayEvent>();
                 conn.DropTable<Day>();
-                //conn.DropTable<DayReser>();
+                conn.DropTable<Event>();
                 conn.DropTable<Entry>();
                 conn.DropTable<EntryData>();
                 //conn.DropTable<Text_Info>();
@@ -208,6 +210,22 @@ namespace Travelogue_2.Main.BBDD
         public static bool UpdateDay(Day day)
         {
             void Act() => conn.UpdateWithChildren(day);
+            return QueryAct(Act);
+        }
+
+        public static bool UpdateDays(List<Day> days)
+        {
+            void Act() => conn.UpdateAll(days);
+            return QueryAct(Act);
+        }
+
+        #endregion
+
+        #region Event
+
+        public static bool InsertEvent(Event evento)
+        {
+            void Act() => conn.InsertWithChildren(evento);
             return QueryAct(Act);
         }
 
@@ -300,17 +318,17 @@ namespace Travelogue_2.Main.BBDD
             void Act() => conn.UpdateWithChildren(destiny);
             return QueryAct(Act);
         }
-        public static bool UpdateDestinies(List<Destiny> countries)
+        public static bool UpdateDestinies(List<Destiny> destinies)
         {
-            void Act() => conn.UpdateAll(countries);
+            void Act() => conn.UpdateAll(destinies);
             return QueryAct(Act);
         }
 
             /** Remove */
         public static bool ResetToDefaultCountries()
         {
-            IEnumerable<string> countriesIds = GetNotDefaultCountries().Select(x => x.Code);
-            void Act() => conn.DeleteAllIds<Destiny>(countriesIds);
+            IEnumerable<string> destiniesIds = GetNotDefaultCountries().Select(x => x.Code);
+            void Act() => conn.DeleteAllIds<Destiny>(destiniesIds);
             return QueryAct(Act);
         }
         #endregion

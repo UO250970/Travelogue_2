@@ -124,6 +124,47 @@ namespace Travelogue_2.Main.Utils
             return EntryToModel(entry);
         }
 
+        internal static void JourneyInsertEvent(JourneyModel journey, int dayInt, string title, string address)
+        {
+            Day day = JourneyFromModel(journey).Days[dayInt - 1];
+
+            Event evento = new Event();
+            evento.Title = title;
+            evento.Address = address;
+            evento.Time = DateTime.Now.ToString("HH:mm");
+            evento.Days.Add(day);
+
+            day.Events.Add(evento);
+
+            DataBase.InsertEvent(evento);
+            DataBase.UpdateDay(day);
+        }
+        
+        internal static void JourneyInsertReserv(JourneyModel journey, int dayInt, int duration, string title, string address, string phoneNumber)
+        {
+            List<Day> days = JourneyFromModel(journey).Days;
+
+            List<Day> temp = new List<Day>();
+            temp.Add( days[dayInt - 1] );
+
+            for(int i = 0; i < duration - 1; i++)
+            {
+                temp.Add( days[dayInt + i] );
+            }
+
+            Event evento = new Event();
+            evento.Title = title;
+            evento.Address = address;
+            evento.PhoneNumber = phoneNumber;
+            evento.Time = DateTime.Now.ToString("HH:mm");
+            evento.Days = temp;
+
+            temp.ForEach(x => x.Events.Add(evento));
+
+            DataBase.InsertEvent(evento);
+            DataBase.UpdateDays(temp);
+        }
+
         public static void EntryInsertImage(EntryModel entry, string path, string name, string caption)
 		{
             Entry ent = EntryFromModel(entry);
@@ -234,7 +275,7 @@ namespace Travelogue_2.Main.Utils
                 tempDay.Month = day.Date.Month.ToString();
                 tempDay.Year = day.Date.Year.ToString();
 
-                //tempDay.JourneyEvents = new ObservableCollection<EventModel>( EventsToModel(day.Events) );
+                tempDay.JourneyEvents = new ObservableCollection<EventModel>( EventsToModel(day.Events) );
                 tempDay.JourneyEntries = new ObservableCollection<EntryModel>( EntriesToModel(day.Entries) );
 
                 temp.Add(tempDay);
@@ -243,6 +284,26 @@ namespace Travelogue_2.Main.Utils
             return temp;
         }
         
+        private static List<EventModel> EventsToModel(List<Event> events)
+        {
+            List<EventModel> temp = new List<EventModel>();
+
+            foreach (Event evento in events)
+            {
+                EventModel tempEvent = new EventModel();
+
+                tempEvent.Id = evento.Id;
+                tempEvent.Time = evento.Time;
+                tempEvent.Title = evento.Title;
+                tempEvent.Address = evento.Address;
+                tempEvent.PhoneNumber = evento.PhoneNumber;
+
+                temp.Add(tempEvent);
+            }
+
+            return temp;
+        }
+
         private static EntryModel EntryToModel(Entry entry)
         {              
             EntryModel tempEntry = new EntryModel();
@@ -315,6 +376,7 @@ namespace Travelogue_2.Main.Utils
                     }
 
                 }
+                temp.Add(tempEntry);
             }
 
             return temp;
