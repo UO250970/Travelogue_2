@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <AbsoluteLayout xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-                xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" xmlns:effects="clr-namespace:Travelogue_2.Main.Services"
+                xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
+                xmlns:effects="clr-namespace:Travelogue_2.Main.Services" 
+                xmlns:template="clr-namespace:Travelogue_2.Main.Services.TemplateSelectors"
                 x:Class="Travelogue_2.Main.Views.Journey.JourneyTemplateView"
                 BackgroundColor="{DynamicResource PrimaryFaded}"
                 x:Name="JourneyTemplateViewName">
@@ -72,10 +74,67 @@
 
         </DataTemplate>
 
-        <effects:EntryTemplateSelector TextTemplate="{StaticResource textTemplate}" 
+        <template:EntryTemplateSelector TextTemplate="{StaticResource textTemplate}" 
                                        ImageNoFootTemplate="{StaticResource imageNoFootTemplate}"
                                        ImageFootTemplate="{StaticResource imageFootTemplate}" 
                                        x:Key="entryTemplateSelector" />
+
+        <DataTemplate x:Key="eventTemplate">
+
+            <StackLayout>
+                <StackLayout Orientation="Horizontal" 
+                                             effects:LongPressedEffect.Command="{Binding Path=BindingContext.EditOrDeleteEventCommand, Source={x:Reference JourneyTemplateViewName}}"
+                                             effects:LongPressedEffect.CommandParameter="{Binding .}">
+
+                    <Label Text="{Binding .Time}" FontSize="Small" TextColor="{DynamicResource Primary}"></Label>
+                    <Label Text="{Binding .Title}" FontSize="Small"></Label>
+                    <Label Text="{Binding .Address}" FontSize="Caption" FontAttributes="Italic"></Label>
+
+                    <StackLayout.Effects>
+                        <effects:LongPressedEffect />
+                    </StackLayout.Effects>
+
+                </StackLayout>
+
+                <Rectangle HeightRequest="1" WidthRequest="250" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource Grey}"/>
+            </StackLayout>
+            
+        </DataTemplate>
+
+        <DataTemplate x:Key="reservTemplate">
+
+            <StackLayout>
+                <StackLayout Orientation="Horizontal" 
+                                             effects:LongPressedEffect.Command="{Binding Path=BindingContext.EditOrDeleteEventCommand, Source={x:Reference JourneyTemplateViewName}}"
+                                             effects:LongPressedEffect.CommandParameter="{Binding .}">
+
+                    <Label Text="{Binding .Time}" FontSize="Small" TextColor="{DynamicResource Primary}"></Label>
+                    <Label Text="{Binding .Title}" FontSize="Small"></Label>
+                    <Label Text="{Binding .Address}" FontSize="Caption" FontAttributes="Italic"></Label>
+
+                    <StackLayout.Effects>
+                        <effects:LongPressedEffect />
+                    </StackLayout.Effects>
+
+                </StackLayout>
+
+                <Label Text="{Binding .PhoneNumber}" FontSize="Caption" FontAttributes="Italic"></Label>
+                
+                <Label Text="{Binding Value}" TextColor="{DynamicResource Primary}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Path=BindingContext.PhoneNumberTappedCommand, Source={x:Reference JourneyTemplateViewName}}" 
+                                                                                      CommandParameter="{Binding Value}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                
+                <Rectangle HeightRequest="1" WidthRequest="250" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource Grey}"/>
+            </StackLayout>
+
+        </DataTemplate>
+
+        <template:EventTemplateSelector EventTemplate="{StaticResource eventTemplate}" 
+                                       ReservTemplate="{StaticResource reservTemplate}"
+                                       x:Key="eventTemplateSelector" />
 
     </AbsoluteLayout.Resources>
     
@@ -114,15 +173,19 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <StackLayout x:Name="EventsCollection" BindableLayout.ItemsSource="{Binding DaySelected.JourneyEvents}" Margin="20, 10, 20, 0">
+                <StackLayout x:Name="EventsCollection" BindableLayout.ItemsSource="{Binding DaySelected.JourneyEvents}" Margin="20, 10, 20, 0"
+                              BindableLayout.ItemTemplateSelector="{StaticResource eventTemplateSelector}">
 
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
 
                             <StackLayout>
-                                <StackLayout Orientation="Horizontal" 
+
+
+                                <StackLayout Orientation="Vertical" 
                                              effects:LongPressedEffect.Command="{Binding Path=BindingContext.EditOrDeleteEventCommand, Source={x:Reference JourneyTemplateViewName}}"
                                              effects:LongPressedEffect.CommandParameter="{Binding .}">
+                                    
                                     <Label Text="{Binding .Time}" FontSize="Small" TextColor="{DynamicResource Primary}"></Label>
                                     <Label Text="{Binding .Title}" FontSize="Small"></Label>
                                     <Label Text="{Binding .Address}" FontSize="Caption" FontAttributes="Italic"></Label>

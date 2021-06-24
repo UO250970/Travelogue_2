@@ -2,7 +2,7 @@
 using Travelogue_2.Main.Models.Entries;
 using Xamarin.Forms;
 
-namespace Travelogue_2.Main.Services
+namespace Travelogue_2.Main.Services.TemplateSelectors
 {
 	public class EntryTemplateSelector : DataTemplateSelector
 	{

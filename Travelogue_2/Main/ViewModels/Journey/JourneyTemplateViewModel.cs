@@ -7,6 +7,7 @@ using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.ViewModels.PopUps;
 using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.PopUps;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Journey
@@ -30,6 +31,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		public Command AddEntryCommand { get; }
 		public Command AddToEntryCommand { get; }
 		public Command ModifyJourneyCommand { get; }
+		public Command PhoneNumberTappedCommand { get; }
 		public Command<EventModel> EditOrDeleteEventCommand { get; }
 		public Command<EntryModel> EditOrDeleteEntryCommand { get; }
 		/** */
@@ -43,6 +45,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 			ModifyJourneyCommand = new Command(() => ModifyJourneyC());
 
 			ViewImageCommand = new Command<ImageModel>((ImageCard) => ViewImageC(ImageCard));
+			PhoneNumberTappedCommand = new Command<string>((x) => PhoneNumberTappedC(x));
 
 			EditOrDeleteEventCommand = new Command<EventModel>((EventModel e) => EditOrDeleteEventC(e));
 			EditOrDeleteEntryCommand = new Command<EntryModel>((EntryModel e) => EditOrDeleteEntryC(e));
@@ -187,6 +190,15 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		#endregion
 
 		#region Commands
+
+		INotifications notificationManager = DependencyService.Get<INotifications>();
+
+		internal void PhoneNumberTappedC(string number)
+		{
+			PhoneDialer.Open(number);
+
+			notificationManager.SendNotification("¡Estamos de viaje!", "Desliza si quieres añadir una entrada...");
+		}
 
 		async internal void ModifyJourneyC()
 		{

@@ -213,19 +213,24 @@ namespace Travelogue_2.Main.BBDD
             return QueryAct(Act);
         }
 
-        public static bool UpdateDays(List<Day> days)
+        public static void UpdateDays(List<Day> days)
         {
-            void Act() => conn.UpdateAll(days);
-            return QueryAct(Act);
+            foreach (Day day in days) UpdateDay(day);
         }
 
         #endregion
 
         #region Event
-
+        
         public static bool InsertEvent(Event evento)
         {
             void Act() => conn.InsertWithChildren(evento);
+            return QueryAct(Act);
+        }
+
+        public static bool UpdateEvent(Event evento)
+        {
+            void Act() => conn.Update(evento);
             return QueryAct(Act);
         }
 

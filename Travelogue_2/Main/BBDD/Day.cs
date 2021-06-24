@@ -11,7 +11,7 @@ namespace Travelogue_2.Main.BBDD
 		[PrimaryKey, AutoIncrement, Column("_id"), NotNull]
 		public int Id { get; set; } = 0;
 
-		[NotNull]
+		[NotNull, Unique]
 		public DateTime Date { get; set; } = DateTime.Today;
 
 		[ForeignKey(typeof(Journey))]

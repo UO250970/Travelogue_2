@@ -1,5 +1,4 @@
 ﻿using SQLite;
-using SQLiteNetExtensions.Attributes;
 using System;
 
 namespace Travelogue_2.Main.BBDD

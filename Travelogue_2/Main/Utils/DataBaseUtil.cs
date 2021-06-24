@@ -132,11 +132,12 @@ namespace Travelogue_2.Main.Utils
             evento.Title = title;
             evento.Address = address;
             evento.Time = DateTime.Now.ToString("HH:mm");
-            evento.Days.Add(day);
+            //evento.Days.Add(day);
+
+            DataBase.InsertEvent(evento);
 
             day.Events.Add(evento);
 
-            DataBase.InsertEvent(evento);
             DataBase.UpdateDay(day);
         }
         
@@ -144,25 +145,23 @@ namespace Travelogue_2.Main.Utils
         {
             List<Day> days = JourneyFromModel(journey).Days;
 
-            List<Day> temp = new List<Day>();
-            temp.Add( days[dayInt - 1] );
-
-            for(int i = 0; i < duration - 1; i++)
-            {
-                temp.Add( days[dayInt + i] );
-            }
-
             Event evento = new Event();
             evento.Title = title;
             evento.Address = address;
             evento.PhoneNumber = phoneNumber;
             evento.Time = DateTime.Now.ToString("HH:mm");
-            evento.Days = temp;
-
-            temp.ForEach(x => x.Events.Add(evento));
 
             DataBase.InsertEvent(evento);
-            DataBase.UpdateDays(temp);
+
+            days[dayInt - 1].Events.Add(evento);
+
+            for (int i = 0; i < duration - 1; i++)
+            {
+                days[dayInt + i].Events.Add(evento);
+            }
+
+            DataBase.UpdateDays(days);
+            //DataBase.UpdateEvent(evento);
         }
 
         public static void EntryInsertImage(EntryModel entry, string path, string name, string caption)
@@ -210,7 +209,6 @@ namespace Travelogue_2.Main.Utils
         public static List<DayModel> GetDaysFromJourney(JourneyModel journey)
         {
             Journey temp = JourneyFromModel(journey);
-
             return DaysToModel(temp.Days);
         }
 
