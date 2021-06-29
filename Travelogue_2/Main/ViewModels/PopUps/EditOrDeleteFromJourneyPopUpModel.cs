@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Linq;
+using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
+using Travelogue_2.Main.Utils;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.PopUps
@@ -16,21 +18,33 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		public string JourneyId
 		{
 			get => journeyId;
-			set => journeyId = value;
+			set
+			{
+				journeyId = value;
+				LoadData();
+			}
 		}
 
 		public string eventId;
 		public string EventId
 		{
 			get => eventId;
-			set => eventId = value;
+			set
+			{
+				eventId = value;
+				LoadEvent();
+			}
 		}
 
 		public string entryId;
 		public string EntryId
 		{
 			get => entryId;
-			set => entryId = value;
+			set
+			{
+				entryId = value;
+				LoadEntry();
+			}
 		}
 
 		public string daySelectedNum;
@@ -72,24 +86,73 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		public override void LoadData()
 		{
 			if (JourneyId != null && DaySelectedNum != null)
-			{
+            {
+				JourneyModel journey = DataBaseUtil.GetJourneyById(journeyId);
+				List<DayModel> Days = DataBaseUtil.GetDaysFromJourney(journey);
+
+				DaySelected = Days[int.Parse(DaySelectedNum)].Date;
+
+				MinDaySelected = Days.First().Date;
+				MaxDaySelected = Days.Last().Date;
 			}
-
-			ObservableCollection<DateTime> Days = new ObservableCollection<DateTime>
-			{
-				new DateTime(2021, 02, 02),
-				new DateTime(2021, 02, 03),
-				new DateTime(2021, 02, 04)
-			};
-
-			DaySelected = Days[int.Parse(DaySelectedNum)];
-			MinDaySelected = Days.First();
-			MaxDaySelected = Days.Last();
 		}
 
-		#region Title
+		public void LoadEvent()
+        {
+			if (eventId != null)
+            {
+				EventModel temp = DataBaseUtil.GetEventById(eventId);
 
-		public string Title { get; set; } = string.Empty;
+				Evento = temp;
+
+				if (Evento.Reservation) ReserVisible = true; 
+				else EventVisible = true;
+
+				Time = TimeSpan.Parse( temp.Time );
+			}
+        }
+
+		public void LoadEntry()
+        {
+			if (entryId != null)
+			{
+				EntryModel temp = DataBaseUtil.GetEntryById(entryId);
+
+				Entry = temp;
+			}
+		}
+
+		private EventModel evento;
+
+		public EventModel Evento
+		{
+			get => evento;
+			set => SetProperty(ref evento, value);
+		}
+
+		private EntryModel entry;
+
+		public EntryModel Entry
+        {
+			get => entry;
+			set => SetProperty(ref entry, value);
+        }
+
+		#region IsVisible
+
+		private bool eventVisible = false;
+		public bool EventVisible
+        {
+			get => eventVisible;
+			set => SetProperty(ref eventVisible, value);
+        }
+
+		private bool reserVisible = false;
+		public bool ReserVisible
+		{
+			get => reserVisible;
+			set => SetProperty(ref reserVisible, value);
+		}
 
 		#endregion
 
@@ -99,17 +162,24 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		public DateTime DaySelected
 		{
 			get => daySelected;
-			set
-			{
-				SetProperty(ref daySelected, value);
-			}
+			set => SetProperty(ref daySelected, value);
 		}
 
 		#endregion
 
-		#region MinDaySelected
+		#region Time
 
-		private DateTime minDaySelected = DateTime.Today;
+		private TimeSpan time;
+		public TimeSpan Time
+        {
+			get => time;
+			set => SetProperty(ref time, value);
+        }
+        #endregion
+
+        #region MinDaySelected
+
+        private DateTime minDaySelected = DateTime.Today;
 		public DateTime MinDaySelected
 		{
 			get => minDaySelected;
@@ -135,9 +205,26 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		#endregion
 
+		internal void CheckNewIniDate(DatePicker iniDatePicker)
+		{
+			if (!Evento.Reservation) Evento.EndDay = iniDatePicker.Date;
+		}
+
+		internal void CheckNewIniDate(DatePicker iniDatePicker, DatePicker endDatePicker)
+		{
+			if (iniDatePicker.Date.CompareTo(Evento.EndDay.Date) > 0) endDatePicker.Date = iniDatePicker.Date;
+		}
+
+		internal void CheckNewEndDate(DatePicker iniDatePicker, DatePicker endDatePicker)
+		{
+			if (iniDatePicker.Date.CompareTo(Evento.EndDay.Date) > 0) iniDatePicker.Date = endDatePicker.Date;
+		}
+
 		async internal void SaveEventC()
 		{
-
+			Evento.Time = Time.Hours + ":" + Time.Minutes;
+			DataBaseUtil.SaveEvent(Evento);
+			Back();
 		}
 
 		async internal void DeleteEventC()
@@ -167,7 +254,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		async internal void CancelC()
 		{
-			if (Title != string.Empty)
+			if ( Evento?.Title != string.Empty || Entry?.Title != string.Empty )
 			{
 				bool result = await Alerter.AlertInfoWillBeLost();
 
@@ -175,7 +262,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			}
 			else
 			{
-				await Shell.Current.GoToAsync("..");
+				Back();
 			}
 		}
 

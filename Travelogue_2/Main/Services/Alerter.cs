@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using Java.Util;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Services
@@ -48,10 +51,9 @@ namespace Travelogue_2.Main.Services
 		internal static async Task<bool> AlertRemoveJourneyWithPhotos()
 		{
 			return await Page?.DisplayAlert(AppResources.Empty, AppResources.MessRemoveJourneyWithPhotos, AppResources.Yes, AppResources.No);
-		}
+		}*/
 
-
-		/** Created */
+		#region Created
 
 		public static async Task AlertJourneyCreated()
 		{
@@ -99,18 +101,19 @@ namespace Travelogue_2.Main.Services
 			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessCardCreated"], App.LocResources["Ok"]);
 		}
 
-		/** No Name */
-		/*
+        #endregion
+
+        #region NotName
+        /*
 		public static async Task AlertNoNameInNewCountry()
 		{
 			await Page?.DisplayAlert(AppResources.AlertNoNameInNewCountry, AppResources.MessNoNameInNewCountry, AppResources.Ok);
 		}
 		*/
-		public static async Task AlertNoNameInJourney()
+        public static async Task AlertNoNameInJourney()
 		{
 			await Page?.DisplayAlert(App.LocResources["AlertNoNameInJourney"], App.LocResources["MessNoNameInJourney"], App.LocResources["Ok"]);
 		}
-
 
 		public static async Task AlertNoTitleInEvent()
 		{
@@ -152,17 +155,36 @@ namespace Travelogue_2.Main.Services
 			await Page?.DisplayAlert(App.LocResources["AlertNoImagesInCard"], App.LocResources["MessNoImagesInCard"], App.LocResources["Ok"]);
 		}
 
-		/** Too Many */
+        #endregion
 
-		internal static async Task AlertTooManyDestiniesInJourney()
+        #region TooMany
+
+        internal static async Task AlertTooManyDestiniesInJourney()
 		{
 			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessTooManyDestinies"], App.LocResources["Ok"]);
 		}
+
+		internal static async Task AlertTooManyEventsInDay()
+		{
+			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessTooManyEvents"], App.LocResources["Ok"]);
+		}
+
 		/*
 		internal static async Task AlertTooManyEntriesInDay()
 		{
 			await Page?.DisplayAlert(AppResources.Empty, AppResources.MessTooManyEntries, AppResources.Ok);
+		}*/
+
+		#endregion
+
+		#region Save
+
+		public static async Task AlertEventSaved()
+		{
+			await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEventSaved"], App.LocResources["Ok"]);
 		}
+
+		#endregion
 
 		/** Does not exists */
 		/*
@@ -176,18 +198,20 @@ namespace Travelogue_2.Main.Services
 		internal static async Task<bool> AlertDestinyAlreadySelected()
 			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessDestinyAlreadySelected"], App.LocResources["Ok"], App.LocResources["Cancel"]);
 
+        #region Delete
 
-		/** Delete */
-		internal static async Task<bool> AlertDeleteJourney()
+        internal static async Task<bool> AlertDeleteJourney()
 			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessDeleteJourney"], App.LocResources["Ok"], App.LocResources["Cancel"]);
 
 		internal static async Task<bool> AlertInfoWillBeLost()
 			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessInfoWillBeLost"], App.LocResources["Ok"], App.LocResources["Cancel"]);
 
-		/** Photo */
+        #endregion
 
-		// Gochada -> True es take, false es pick
-		internal static async Task<string> AlertPhoto()
+        /** Photo */
+
+        // Gochada -> True es take, false es pick
+        internal static async Task<string> AlertPhoto()
 		{
 			return await Page?.DisplayActionSheet(App.LocResources["Empty"], App.LocResources["Empty"], App.LocResources["Empty"], App.LocResources["TakePhoto"], App.LocResources["PickPhoto"]);
 		}

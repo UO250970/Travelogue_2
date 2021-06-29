@@ -41,7 +41,7 @@
                                     MaximumDate="{Binding MaxDaySelected}" MinimumDate="{Binding MinDaySelected}"/>
 
                         <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                        <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
+                        <Entry Text="{Binding Entry.Title, Mode=TwoWay}" FontSize="Medium" />
 
                     </StackLayout>
                 </StackLayout>

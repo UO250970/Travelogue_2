@@ -135,6 +135,9 @@
   <data name="AddReservation" xml:space="preserve">
     <value>Add a reservation</value>
   </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
   <data name="AddToJourney" xml:space="preserve">
     <value>Add to the journey</value>
   </data>
@@ -288,9 +291,6 @@
   <data name="LocalizationFirstDay" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Location" xml:space="preserve">
-    <value>Location</value>
-  </data>
   <data name="Map" xml:space="preserve">
     <value>Map</value>
   </data>
@@ -317,6 +317,9 @@
   </data>
   <data name="MessEventCreated" xml:space="preserve">
     <value>Event created correctly</value>
+  </data>
+  <data name="MessEventSaved" xml:space="preserve">
+    <value>Event saved correctly</value>
   </data>
   <data name="MessImageAdded" xml:space="preserve">
     <value>Image added correctly</value>
@@ -368,6 +371,9 @@
   </data>
   <data name="MessTooManyDestinies" xml:space="preserve">
     <value>There are already too many destinies in the journey</value>
+  </data>
+  <data name="MessTooManyEvents" xml:space="preserve">
+    <value>Some of the days selected have reached the maximum of events per day</value>
   </data>
   <data name="Minus" xml:space="preserve">
     <value>-</value>
@@ -485,6 +491,9 @@
   </data>
   <data name="Text" xml:space="preserve">
     <value>Text</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
   </data>
   <data name="Undo" xml:space="preserve">
     <value>Undo</value>

@@ -1,5 +1,6 @@
 ﻿using SQLite;
 using SQLiteNetExtensions.Attributes;
+using System;
 using System.Collections.Generic;
 
 namespace Travelogue_2.Main.BBDD
@@ -16,6 +17,8 @@ namespace Travelogue_2.Main.BBDD
         [MaxLength(40), NotNull]
         public string Time { get; set; } = string.Empty;
 
+        public bool Reserv { get; set; } = false;
+
         [Column("Address")]
         public string Address { get; set; }
 
@@ -26,5 +29,25 @@ namespace Travelogue_2.Main.BBDD
         public List<Day> Days { get; set; } = new List<Day>();
 
         public Event() { }
+
+
+        public override bool Equals(object obj)
+        {
+            try
+            {
+                Event temp = (Event) obj;
+                bool Title = this.Title.Equals(temp.Title);
+                bool Time = this.Title.Equals(temp.Time);
+                bool Address = this.Title.Equals(temp.Address);
+                bool Reserva = this.Reserv.Equals(temp.Reserv);
+                bool PhoneNumber = this.Title.Equals(temp.PhoneNumber);
+
+                return Title && Time && Address && Reserva && PhoneNumber;
+            } catch (Exception ex)
+            {
+                return false;
+            }
+            
+        }
     }
 }

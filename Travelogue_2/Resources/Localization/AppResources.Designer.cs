@@ -115,6 +115,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Dirección.
+        /// </summary>
+        internal static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Añadir al viaje.
         /// </summary>
         internal static string AddToJourney {
@@ -601,15 +610,6 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Localizacion.
-        /// </summary>
-        internal static string Location {
-            get {
-                return ResourceManager.GetString("Location", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Mapa.
         /// </summary>
         internal static string Map {
@@ -687,6 +687,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string MessEventCreated {
             get {
                 return ResourceManager.GetString("MessEventCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El evento se ha guardado correctamente.
+        /// </summary>
+        internal static string MessEventSaved {
+            get {
+                return ResourceManager.GetString("MessEventSaved", resourceCulture);
             }
         }
         
@@ -840,6 +849,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string MessTooManyDestinies {
             get {
                 return ResourceManager.GetString("MessTooManyDestinies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Alguno de los días seleccionados tiene el maximo de eventos permitidos.
+        /// </summary>
+        internal static string MessTooManyEvents {
+            get {
+                return ResourceManager.GetString("MessTooManyEvents", resourceCulture);
             }
         }
         
@@ -1200,6 +1218,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string Text {
             get {
                 return ResourceManager.GetString("Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hora.
+        /// </summary>
+        internal static string Time {
+            get {
+                return ResourceManager.GetString("Time", resourceCulture);
             }
         }
         

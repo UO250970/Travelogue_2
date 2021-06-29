@@ -149,6 +149,7 @@ namespace Travelogue_2.Main.Utils
             evento.Title = title;
             evento.Address = address;
             evento.PhoneNumber = phoneNumber;
+            evento.Reserv = true;
             evento.Time = DateTime.Now.ToString("HH:mm");
 
             DataBase.InsertEvent(evento);
@@ -199,7 +200,7 @@ namespace Travelogue_2.Main.Utils
 
             DataBase.UpdateEntry(ent);
         }
-
+        
         public static DestinyModel GetDestinyByName(string name) 
         {
             Destiny destiny = DataBase.GetDestinyByName(name);
@@ -210,6 +211,58 @@ namespace Travelogue_2.Main.Utils
         {
             Journey temp = JourneyFromModel(journey);
             return DaysToModel(temp.Days);
+        }
+
+        public static List<DayModel> GetDaysFromJourneyId(string journeyId)
+        {
+            Journey temp = DataBase.GetJourneyById(int.Parse(journeyId));
+            return DaysToModel(temp.Days);
+        }
+
+        public static EventModel GetEventById(string id)
+        {
+            Event temp = DataBase.GetEventById(int.Parse(id));
+
+            return EventToModel(temp);
+        }
+
+        public static bool SaveEvent(EventModel evento)
+        {
+            Event temp = EventFromModel(evento);
+
+            if ( !evento.Title.Equals(temp.Title) ) temp.Title = evento.Title;
+            if ( !evento.Time.Equals(temp.Time) ) temp.Time = evento.Time;
+            if ( !evento.Address.Equals(temp.Address) ) temp.Address = evento.Address;
+            if ( !evento.PhoneNumber.Equals(temp.PhoneNumber) ) temp.PhoneNumber = evento.PhoneNumber;
+
+            bool Days = evento.IniDay.Equals(temp.Days.First().Date) && evento.EndDay.Equals(temp.Days.Last().Date);
+
+            if ( !Days )
+            {
+                List<Day> days = DataBase.GetDaysBetweenDays(evento.IniDay, evento.EndDay);
+
+                List<Day> daysFilled = days.FindAll(x => x.Events.Count >= CommonVariables.EventsInDay);
+                if (daysFilled.Count != 0)
+                {
+                    Alerter.AlertTooManyEventsInDay();
+                    return false;
+                }
+                else
+                {
+                    temp.Days.Clear();
+                    temp.Days = days;
+                }
+            }
+
+            if (DataBase.UpdateEvent(temp)) Alerter.AlertEventSaved();
+            return true;
+        }
+
+        public static EntryModel GetEntryById(string id)
+        {
+            Entry temp = DataBase.GetEntryById(int.Parse(id));
+
+            return EntryToModel(temp);
         }
 
         #region Models
@@ -239,9 +292,7 @@ namespace Travelogue_2.Main.Utils
 
             return temp;
         }
-
         private static Journey JourneyFromModel(JourneyModel journey) => DataBase.GetJourneyById(journey.Id);
-
 
         private static DestinyModel DestinyToModel(Destiny destiny)
         {
@@ -257,7 +308,6 @@ namespace Travelogue_2.Main.Utils
 
             return temp;
         }
-
         private static Destiny DestinyFromModel(DestinyModel destiny) => DataBase.GetDestinyByName(destiny.Destiny);
 
         private static List<DayModel> DaysToModel(List<Day> days)
@@ -281,26 +331,35 @@ namespace Travelogue_2.Main.Utils
 
             return temp;
         }
-        
+
+        private static EventModel EventToModel(Event evento)
+        {
+            EventModel temp = new EventModel
+            {
+                Id = evento.Id,
+                Time = evento.Time,
+                Title = evento.Title,
+                Address = evento.Address,
+                PhoneNumber = evento.PhoneNumber != null ? evento.PhoneNumber :  string.Empty,
+                Reservation = evento.Reserv,
+                IniDay = evento.Days.First().Date,
+                EndDay = evento.Days.Last().Date
+        };
+
+            return temp;
+        }
         private static List<EventModel> EventsToModel(List<Event> events)
         {
             List<EventModel> temp = new List<EventModel>();
 
             foreach (Event evento in events)
             {
-                EventModel tempEvent = new EventModel();
-
-                tempEvent.Id = evento.Id;
-                tempEvent.Time = evento.Time;
-                tempEvent.Title = evento.Title;
-                tempEvent.Address = evento.Address;
-                tempEvent.PhoneNumber = evento.PhoneNumber;
-
-                temp.Add(tempEvent);
+                temp.Add( EventToModel(evento) );
             }
 
             return temp;
         }
+        private static Event EventFromModel(EventModel evento) => DataBase.GetEventById(evento.Id);
 
         private static EntryModel EntryToModel(Entry entry)
         {              
@@ -337,49 +396,17 @@ namespace Travelogue_2.Main.Utils
 
             return tempEntry;
         }
-
         private static List<EntryModel> EntriesToModel(List<Entry> entries)
         {
             List<EntryModel> temp = new List<EntryModel>();
 
             foreach (Entry entry in entries)
             {
-                EntryModel tempEntry = new EntryModel();
-
-                tempEntry.Id = entry.Id;
-                tempEntry.Title = entry.Title;
-                tempEntry.Time = entry.Time;
-
-                foreach (EntryData data in entry.Content)
-                {
-                    if (data.Text != "")
-                    {
-                        EntryTextModel temp1 = new EntryTextModel();
-                        temp1.Id = data.Id;
-                        temp1.Time = data.Time;
-                        temp1.Text = data.Text;
-
-                        tempEntry.Content.Add(temp1);
-                    }
-                    else
-                    {
-                        EntryImageModel temp2 = new EntryImageModel();
-                        temp2.Id = data.Id;
-                        temp2.ImageName = data.Image.Name;
-                        temp2.ImagePath = data.Image.Path;
-                        temp2.ImageCaption = data.Image.Caption;
-                        temp2.JourneyName = data.Entry.Day.Journey.Name;
-
-                        tempEntry.Content.Add(temp2);
-                    }
-
-                }
-                temp.Add(tempEntry);
+                temp.Add( EntryToModel(entry) );
             }
 
             return temp;
         }
-        
         private static Entry EntryFromModel(EntryModel entry) => DataBase.GetEntryById(entry.Id);
 
         #endregion

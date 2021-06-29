@@ -25,7 +25,7 @@ namespace Travelogue_2.Main.Services.TemplateSelectors
 		{
 			EventModel evento = (EventModel) item;
 
-			if (evento.PhoneNumber != "" || evento.PhoneNumber != null)
+			if (evento.Reservation)
 			{
 				return ReservTemplate;
 			}

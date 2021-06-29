@@ -83,7 +83,7 @@
 
             <StackLayout>
                 <StackLayout Orientation="Horizontal" 
-                                             effects:LongPressedEffect.Command="{Binding Path=BindingContext.EditOrDeleteEventCommand, Source={x:Reference JourneyTemplateViewName}}"
+                                             effects:LongPressedEffect.Command="{Binding BindingContext.EditOrDeleteEventCommand, Source={x:Reference JourneyTemplateViewName}}"
                                              effects:LongPressedEffect.CommandParameter="{Binding .}">
 
                     <Label Text="{Binding .Time}" FontSize="Small" TextColor="{DynamicResource Primary}"></Label>
@@ -105,29 +105,28 @@
 
             <StackLayout>
                 <StackLayout Orientation="Horizontal" 
-                                             effects:LongPressedEffect.Command="{Binding Path=BindingContext.EditOrDeleteEventCommand, Source={x:Reference JourneyTemplateViewName}}"
+                                             effects:LongPressedEffect.Command="{Binding BindingContext.EditOrDeleteEventCommand, Source={x:Reference JourneyTemplateViewName}}"
                                              effects:LongPressedEffect.CommandParameter="{Binding .}">
 
-                    <Label Text="{Binding .Time}" FontSize="Small" TextColor="{DynamicResource Primary}"></Label>
+                    <!--Label Text="{Binding .Time}" FontSize="Small" TextColor="{DynamicResource Primary}"></-->
                     <Label Text="{Binding .Title}" FontSize="Small"></Label>
                     <Label Text="{Binding .Address}" FontSize="Caption" FontAttributes="Italic"></Label>
+
+                    <Label Text="{Binding .PhoneNumber}" FontSize="Small" TextColor="{DynamicResource Primary}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BindingContext.PhoneNumberTappedCommand, Source={x:Reference JourneyTemplateViewName}}" 
+                                                                                      CommandParameter="{Binding .PhoneNumber}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
 
                     <StackLayout.Effects>
                         <effects:LongPressedEffect />
                     </StackLayout.Effects>
 
                 </StackLayout>
-
-                <Label Text="{Binding .PhoneNumber}" FontSize="Caption" FontAttributes="Italic"></Label>
-                
-                <Label Text="{Binding Value}" TextColor="{DynamicResource Primary}">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding Path=BindingContext.PhoneNumberTappedCommand, Source={x:Reference JourneyTemplateViewName}}" 
-                                                                                      CommandParameter="{Binding Value}"/>
-                    </Label.GestureRecognizers>
-                </Label>
                 
                 <Rectangle HeightRequest="1" WidthRequest="250" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource Grey}"/>
+                
             </StackLayout>
 
         </DataTemplate>
@@ -176,7 +175,7 @@
                 <StackLayout x:Name="EventsCollection" BindableLayout.ItemsSource="{Binding DaySelected.JourneyEvents}" Margin="20, 10, 20, 0"
                               BindableLayout.ItemTemplateSelector="{StaticResource eventTemplateSelector}">
 
-                    <BindableLayout.ItemTemplate>
+                    <!--BindableLayout.ItemTemplate>
                         <DataTemplate>
 
                             <StackLayout>
@@ -200,7 +199,7 @@
                             </StackLayout>
                             
                         </DataTemplate>
-                    </BindableLayout.ItemTemplate>
+                    </-->
 
                 </StackLayout>
 

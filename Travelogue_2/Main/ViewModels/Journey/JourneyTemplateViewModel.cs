@@ -22,9 +22,14 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		public Command<EntryImageModel> ImageTapped { get; }
 		public Command<DayModel> DayTapped { get; }
 		public ObservableCollection<EntryImageModel> JourneyImages { get; }
-		public ObservableCollection<DayModel> JourneyDays { get; set;  }
-		//public ObservableCollection<EventModel> JourneyEvents { get; }
-		//public ObservableCollection<EntryModel> JourneyEntries { get; }
+
+		private ObservableCollection<DayModel> journeyDays;
+
+		public ObservableCollection<DayModel> JourneyDays
+		{
+			get => journeyDays;
+			set => SetProperty(ref journeyDays, value);
+		}
 
 		/** Commands*/
 		public Command AddEventCommand { get; }
@@ -117,15 +122,21 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		public override void OnAppearing()
 		{
-			IsBusy = true;
+			base.OnAppearing();
 
-			var temp = new ObservableCollection<DayModel>(JourneyDays);
+			var temp = DataBaseUtil.GetDaysFromJourneyId(journeyId);
 			JourneyDays.Clear();
+			temp.First(x => x.Date.Equals(DaySelected.Date))?.Select();
 
-			foreach (DayModel day in temp)
+			JourneyDays = new ObservableCollection<DayModel>(temp);
+
+			DaySelected = JourneyDays[DaySelectedNum];
+
+			/*foreach (DayModel day in temp)
 			{
+				if (day.Date.Equals(DaySelected.Date)) day.Select();
 				JourneyDays.Add(day);
-			}
+			}*/
 		}
 
 		#region Name
@@ -169,10 +180,10 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 				foreach(DayModel day in JourneyDays)
 				{
-					day.Background = (Color) App.Current.Resources["PrimaryFaded"];
+					day.Unselect();
 				}
-				var selected = JourneyDays.First(x => x == daySelected);
-				selected.Background = (Color) Application.Current.Resources["Primary"];
+				var selected = JourneyDays.First(x => x.Date == daySelected.Date);
+				selected.Select();
 
 				var temp = new ObservableCollection<DayModel>(JourneyDays);
 				JourneyDays.Clear();

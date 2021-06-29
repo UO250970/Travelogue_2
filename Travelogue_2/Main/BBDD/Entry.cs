@@ -19,7 +19,7 @@ namespace Travelogue_2.Main.BBDD
 		[ForeignKey(typeof(Day))]
 		public int DayId { get; set; }
 
-		[ManyToOne]
+		[ManyToOne(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
 		public Day Day { get; set; }
 
 		//[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]

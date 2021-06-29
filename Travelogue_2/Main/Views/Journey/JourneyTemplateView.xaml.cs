@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using Travelogue_2.Main.ViewModels.Journey;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,7 +21,7 @@ namespace Travelogue_2.Main.Views.Journey
 
 		protected void OnAppearing()
 		{
-			//model.OnAppearing();
+			
 
 			JourneyName.TranslationY = _journeyNameFrameTop * 0.1;
 			JourneyNameBoxView.TranslationY = _journeyNameFrameTop * 0.1;

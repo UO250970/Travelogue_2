@@ -42,5 +42,9 @@ namespace Travelogue_2.Main.ViewModels
         public virtual void OnAppearing()
             => IsBusy = true;
 
-	}
+
+
+        async internal void Back() => await Shell.Current.GoToAsync("..");
+
+    }
 }

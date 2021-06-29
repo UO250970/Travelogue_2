@@ -17,7 +17,7 @@ namespace Travelogue_2.Main.BBDD
 		[ForeignKey(typeof(Journey))]
 		public int JourneyId { get; set; }
 
-		[ManyToOne]
+		[ManyToOne(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
 		public Journey Journey { get; set; }
 
 		[ManyToMany(typeof(DayEvent), CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]

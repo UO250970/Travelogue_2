@@ -4,4 +4,8 @@
        x:Class="Travelogue_2.Main.Views.Fragments.ImageCardView"
        Source="{Binding ImageSour}">
 
+    <Image.GestureRecognizers>
+        <TapGestureRecognizer></TapGestureRecognizer>
+    </Image.GestureRecognizers>
+    
 </Image>
