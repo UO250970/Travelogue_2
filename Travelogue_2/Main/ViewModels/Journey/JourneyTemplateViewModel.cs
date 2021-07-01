@@ -73,7 +73,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 			{
 				JourneyModel journey = DataBaseUtil.GetJourneyById(JourneyId);
 				JourneyName = journey.Name;
-				CoverImage.ImageSour = journey.Image;
+				CoverImage.ImageSour = journey.Cover;
 
 				// TODO - Chekear acciones según estado
 
@@ -155,7 +155,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		private ImageModel coverImage = new ImageModel()
 		{
-			ImageSour = CommonVariables.GetImage()
+			ImageSour = CommonVariables.GetGenericImage()
 		};
 
 		public ImageModel CoverImage

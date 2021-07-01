@@ -212,11 +212,14 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 				await Alerter.AlertNoNameInJourney();
 			} else
 			{
-				DataBaseUtil.CreateJourney(Title, IniDate, EndDate);
+				JourneyModel temp = DataBaseUtil.CreateJourney(Title, IniDate, EndDate);
+
+				if (temp != null)
+                {
+					await Shell.Current.GoToAsync("..");
+				}
 				//TO-DO create and store journey
-				await Alerter.AlertJourneyCreated();
 				//TO-DO checkear cuando empieza  eso y cambiar redirección
-				await Shell.Current.GoToAsync("..");
 			}
 		}
 

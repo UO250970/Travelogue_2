@@ -152,12 +152,8 @@ namespace Travelogue_2.Main.BBDD
 
         public static Journey GetJourneyById(int id)
         { // Igual este con solo get y el cascade me ahorra el find => No, porque puede no haber journeys
-            if (!id.Equals(0))
-            {
-                Journey Func() => conn.GetWithChildren<Journey>(id, recursive: true);
-                return QueryFunc(Func);
-            }
-            else { return null; }
+            Journey Func() => conn.GetWithChildren<Journey>(id, recursive: true);
+            return QueryFunc(Func);
         }
 
         public static List<Journey> GetJourneys(State state)
@@ -191,6 +187,12 @@ namespace Travelogue_2.Main.BBDD
         {
             Journey Func() => conn.FindWithChildren<Journey>(journey.Id, recursive: true);
             return QueryFunc(Func);
+        }
+
+        public static bool ExistsJourneyByName(string name)
+        {
+            Journey Func() => conn.FindWithQuery<Journey>("select * from Journey where name = ?", name);
+            return QueryFunc(Func) == null ? false : true;
         }
 
             /** Update */
@@ -262,7 +264,7 @@ namespace Travelogue_2.Main.BBDD
 
         public static bool InsertEntry(Entry entry)
 		{
-            void Act() => conn.InsertWithChildren(entry);
+            void Act() => conn.InsertWithChildren(entry, recursive: true);
             return QueryAct(Act);
         }
         
@@ -351,10 +353,15 @@ namespace Travelogue_2.Main.BBDD
         #endregion
 
         #region Image
-        
+        public static Image GetImageById(int id)
+        {
+            Image Func() => conn.GetWithChildren<Image>(id, recursive: true);
+            return QueryFunc(Func);
+        }
+
         public static bool InsertImage(Image image)
         {
-            void Act() => conn.InsertWithChildren(image);
+            void Act() => conn.InsertWithChildren(image, recursive: true);
             return QueryAct(Act);
         }
 

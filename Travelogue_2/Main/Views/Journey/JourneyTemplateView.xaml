@@ -47,7 +47,7 @@
                         <Image HeightRequest="{Binding BindingContext.CardImagesHeight, Source={x:Reference JourneyTemplateViewName}}" 
                            WidthRequest="{Binding BindingContext.CardImagesHeight, Source={x:Reference JourneyTemplateViewName}}" 
                            Source="{Binding .ImageSour}"/>
-                        <Label FontSize="Caption" Text="{Binding .ImageFoot}"/>
+                        <Label FontSize="Caption" Text="{Binding .ImageCaption}"/>
                     </StackLayout>
                 </Grid>
 

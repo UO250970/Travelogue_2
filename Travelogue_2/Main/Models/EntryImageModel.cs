@@ -7,7 +7,5 @@ namespace Travelogue_2.Main.Models
 		public int Id { get; set; }
 
 		public string Time { get; set; } = "00:00";
-
-		public string JourneyName { get; set; } = App.LocResources["NoJourneyAssociated"];
 	}
 }

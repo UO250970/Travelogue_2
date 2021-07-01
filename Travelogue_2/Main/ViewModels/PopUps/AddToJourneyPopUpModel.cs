@@ -325,7 +325,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		async internal void CancelC()
 		{
 			if (Title != string.Empty || Location != string.Empty || PhoneNumber != string.Empty 
-				|| Text != string.Empty || Image.ImageName != string.Empty || Caption != string.Empty)
+				|| Text != string.Empty || Caption != string.Empty)
 			{
 				bool result = await Alerter.AlertInfoWillBeLost();
 

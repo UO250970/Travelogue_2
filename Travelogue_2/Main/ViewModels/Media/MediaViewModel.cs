@@ -59,7 +59,7 @@ namespace Travelogue_2.Main.ViewModels.Media
 
 			foreach (string s in viajes)
 			{
-				var tempList = Images.Where(x => x.JourneyName.ToUpper().Equals(s.ToUpper())).ToList();
+				var tempList = Images.Where(x => x.Journey.ToUpper().Equals(s.ToUpper())).ToList();
 				ImagesOrdered.Add(s, tempList);
 			}
 		}
@@ -96,7 +96,7 @@ namespace Travelogue_2.Main.ViewModels.Media
 			set
 			{
 				SetProperty(ref searchText, value);
-				var temp = Images.Where(x => x.JourneyName.ToUpper().Contains(searchText.ToUpper()) == true);
+				var temp = Images.Where(x => x.Journey.ToUpper().Contains(searchText.ToUpper()) == true);
 				if (temp.Count() != ImagesSearched.Count())
 				{
 					ImagesSearched.Clear();
@@ -112,7 +112,7 @@ namespace Travelogue_2.Main.ViewModels.Media
 
 					foreach (string s in viajes)
 					{
-						var tempList = Images.Where(x => x.JourneyName.ToUpper().Equals(s.ToUpper())).ToList();
+						var tempList = Images.Where(x => x.Journey.ToUpper().Equals(s.ToUpper())).ToList();
 						ImagesOrdered.Add(s, tempList);
 					}
 				}

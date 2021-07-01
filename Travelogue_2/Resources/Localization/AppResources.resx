@@ -342,6 +342,9 @@
   <data name="MessJourCreated" xml:space="preserve">
     <value>El viaje se ha creado correctamente</value>
   </data>
+  <data name="MessJourneyNameAlreadUsed" xml:space="preserve">
+    <value>Ya existe un viaje registrado con ese nombre</value>
+  </data>
   <data name="MessLanguageChanged" xml:space="preserve">
     <value>Se ha cambiado el idioma de la aplicación</value>
   </data>

@@ -46,7 +46,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
 		#endregion
 
 		#region ImageSelected
-		public ImageSource imageSelected = CommonVariables.GetImage();
+		public ImageSource imageSelected = CommonVariables.GetGenericImage();
 
 		public ImageSource ImageSelected
 		{

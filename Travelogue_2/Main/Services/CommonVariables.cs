@@ -79,9 +79,14 @@ namespace Travelogue_2.Main.Services
 			}
 		}
 
-		public static ImageSource GetImage()
+		public static ImageSource GetGenericImage()
 		{
 			return ImageSource.FromResource(GenericImage);
+		}
+
+		public static ImageSource GetGenericImageImage()
+        {
+			return ImageSource.FromResource(GenericImageImage);
 		}
 
 		public static List<string> AvailableBackgrounds { get => new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }; }
@@ -94,7 +99,6 @@ namespace Travelogue_2.Main.Services
 				ImageModel tempI = new ImageModel();
 				string tempString = (BackgroundImagesPath + Background + back + ImagesExtension);
 				tempI.ImageSour = ImageSource.FromResource(tempString);
-				tempI.ImageName = Background + back;
 				temp.Add(tempI);
 			}
 			return temp;

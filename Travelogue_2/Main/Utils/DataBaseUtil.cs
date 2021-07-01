@@ -76,25 +76,37 @@ namespace Travelogue_2.Main.Utils
 
         public static JourneyModel CreateJourney(string name, DateTime ini, DateTime end)
 		{
-            Journey jour = new Journey(name, ini, end);
+            if (DataBase.ExistsJourneyByName(name))
+            {
+                Alerter.AlertJourneyNameInUse();
+                return null;
+            }
+            else
+            {
+                Journey jour = new Journey(name, ini, end);
 
-            if (jour.StartedAlready() && jour.FinishedAlready())
-			{
-                jour.JourneyState = State.CLOSED;
-			} else if (jour.StartedAlready() && !jour.FinishedAlready())
-			{
-                jour.JourneyState = State.OPEN;
-			} else
-			{
-                jour.JourneyState = State.CREATED;
-			}
+                if (jour.StartedAlready() && jour.FinishedAlready())
+                {
+                    jour.JourneyState = State.CLOSED;
+                }
+                else if (jour.StartedAlready() && !jour.FinishedAlready())
+                {
+                    jour.JourneyState = State.OPEN;
+                }
+                else
+                {
+                    jour.JourneyState = State.CREATED;
+                }
 
-            DataBase.InsertJourney(jour);
+                DataBase.InsertJourney(jour);
 
-            // TODO - SOLO EN PRUEBAS, que no quiero mil viajes creados en mi movil...
-            //CalendarUtil.AddJourney(jour);
+                // TODO - SOLO EN PRUEBAS, que no quiero mil viajes creados en mi movil...
+                //CalendarUtil.AddJourney(jour);
 
-            return JourneyToModel(jour);
+                Alerter.AlertJourneyCreated();
+
+                return JourneyToModel(jour);
+            }
 		}
 
         public static void JourneyInsertDestiny(JourneyModel journey, string name)
@@ -174,6 +186,7 @@ namespace Travelogue_2.Main.Utils
             image.Path = path;
             image.Name = name;
             image.Caption = caption;
+            image.Journey = ent.Day.Journey;
 
             EntryData entryData = new EntryData();
             entryData.Time = DateTime.Now.ToString("HH:mm");
@@ -265,6 +278,13 @@ namespace Travelogue_2.Main.Utils
             return EntryToModel(temp);
         }
 
+        public static ImageModel GetImageById(string id)
+        {
+            Image temp = DataBase.GetImageById(int.Parse(id));
+
+            return ImageToModel(temp);
+        }
+
         #region Models
 
         private static JourneyModel JourneyToModel(Journey journey)
@@ -280,12 +300,13 @@ namespace Travelogue_2.Main.Utils
             temp.Name = journey.Name;
             if (journey.Cover is null)
             {
-                temp.Image = CommonVariables.GetImage();
-            } else
+                temp.Cover = CommonVariables.GetGenericImage();
+            } 
+            else
             {
                 //Stream stream = file.GetStream();
                 //temp.Image = ImageSource.FromStream(() => stream);
-                temp.Image = ImageSource.FromFile(journey.Cover.Path);
+                temp.Cover = ImageSource.FromFile(journey.Cover.Path);
             }
             temp.IniDate = journey.IniDate;
             temp.EndDate = journey.EndDate;
@@ -384,10 +405,17 @@ namespace Travelogue_2.Main.Utils
 				{
                     EntryImageModel temp2 = new EntryImageModel();
                     temp2.Id = data.Id;
-                    temp2.ImageName = data.Image.Name;
-                    temp2.ImagePath = data.Image.Path;
-                    temp2.ImageCaption = data.Image.Caption;
-                    temp2.JourneyName = data.Entry.Day.Journey.Name;
+                    
+                    if (data.Image != null)
+                    {
+                        temp2.ImageSour = ImageSource.FromFile(data.Image.Path);
+                        temp2.ImageCaption = data.Image.Caption;
+                    } else
+                    {
+                        temp2.ImageSour = CommonVariables.GetGenericImageImage();
+                        temp2.ImageCaption = "";
+                    }
+                    temp2.Journey = data.Entry.Day.Journey.Name;
 
                     tempEntry.Content.Add(temp2);
 				}
@@ -408,6 +436,19 @@ namespace Travelogue_2.Main.Utils
             return temp;
         }
         private static Entry EntryFromModel(EntryModel entry) => DataBase.GetEntryById(entry.Id);
+        
+        private static ImageModel ImageToModel(Image image)
+        {
+            ImageModel temp = new ImageModel();
+
+            temp.Id = image.Id;
+            
+            temp.ImageSour = ImageSource.FromFile( image.Path );
+            temp.ImageCaption = image.Caption;
+            temp.Journey = image.Journey.Name;
+
+            return temp;
+        }
 
         #endregion
     }

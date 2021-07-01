@@ -333,6 +333,9 @@
   <data name="MessJourCreated" xml:space="preserve">
     <value>Journey created correctly</value>
   </data>
+  <data name="MessJourneyNameAlreadUsed" xml:space="preserve">
+    <value>There is already a Journey with that name</value>
+  </data>
   <data name="MessLanguageChanged" xml:space="preserve">
     <value>The app's language has been changed</value>
   </data>

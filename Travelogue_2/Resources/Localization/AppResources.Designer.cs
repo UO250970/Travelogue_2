@@ -736,6 +736,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ya existe un viaje registrado con ese nombre.
+        /// </summary>
+        internal static string MessJourneyNameAlreadUsed {
+            get {
+                return ResourceManager.GetString("MessJourneyNameAlreadUsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Se ha cambiado el idioma de la aplicación.
         /// </summary>
         internal static string MessLanguageChanged {

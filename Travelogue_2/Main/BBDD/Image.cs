@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
 using System;
 
 namespace Travelogue_2.Main.BBDD
@@ -20,6 +21,9 @@ namespace Travelogue_2.Main.BBDD
 
         [Column("Date")]
         public DateTime Date { get; set; }
+
+        [OneToOne(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
+        public Journey Journey { get; set; }
 
         /** Constructor público sin parámetros necesario para la base de datos */
         public Image() { }

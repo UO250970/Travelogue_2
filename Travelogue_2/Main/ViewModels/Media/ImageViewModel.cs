@@ -1,42 +1,57 @@
-﻿using Travelogue_2.Main.Services;
+﻿using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Services;
+using Travelogue_2.Main.Utils;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Media
 {
-	[QueryProperty(nameof(ImagePath), nameof(ImagePath))]
+	[QueryProperty(nameof(ImageId), nameof(ImageId))]
 	public class ImageViewModel : PhotoRendererModel
 	{
-		private string imagePath;
-		public string ImagePath
+		private string imageId;
+		public string ImageId
 		{
-			get => imagePath;
+			get => imageId;
 			set
 			{
-				SetProperty(ref imagePath, value);
+				SetProperty(ref imageId, value);
 				LoadData();
 			}
 		}
 
-		private string imageName;
-
-		public string ImageName
+		public override void LoadData()
 		{
-			get => imageName;
-			set => SetProperty(ref imageName, value);
+			if (ImageId != null)
+			{
+				ImageModel image = DataBaseUtil.GetImageById(ImageId);
+
+				Caption = image.ImageCaption;
+				//JourneyName = journey.Name;
+				//CoverImage.ImageSour = journey.Image;
+
+				// TODO - Chekear acciones según estado
+
+				ImageSource = image.ImageSour;
+			}
+			//ImageName = "Prueba de imagen";
 		}
 
-		private ImageSource imageSource;
-
-		public ImageSource ImageSource 
+        #region Source
+        private ImageSource imageSource;
+		public ImageSource ImageSource
 		{
 			get => imageSource;
 			set => SetProperty(ref imageSource, value);
 		}
+		#endregion
 
-		public override void LoadData()
+		#region Caption
+		private string caption;
+		public string Caption
 		{
-			ImageSource = ImageSource.FromResource(ImagePath);
-			ImageName = "Prueba de imagen";
+			get => caption;
+			set => SetProperty(ref caption, value);
 		}
+		#endregion
 	}
 }

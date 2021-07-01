@@ -1,7 +1,6 @@
 ﻿using Plugin.Media.Abstractions;
 using System;
 using System.Diagnostics;
-using System.IO;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.ViewModels;
 using Travelogue_2.Main.ViewModels.Media;
@@ -19,23 +18,26 @@ namespace Travelogue_2.Main.Services
 		public EntryImageModel AddImage(MediaFile file)
 		{
 			EntryImageModel image = new EntryImageModel();
+
 			try
 			{
 				if (file != null)
 				{
-					image.ImagePath = file.Path;
+					//image.ImagePath = file.Path;
 					//ImageName = CameraUtil.GenerateName();
-					image.ImagePath = image.ImagePath + "/" + image.ImageName;
+					image.ImageCaption = string.Empty;
+					image.ImageSour = ImageSource.FromFile( file.Path );
 
 					// TODO Guardar imagen en nueva ruta
-					if (!image.ImagePath.Equals(string.Empty))
-					{
-						Stream stream = file.GetStream();
-						image.ImageSour = ImageSource.FromStream(() => stream);
-					}
+					//if (!image.ImagePath.Equals(string.Empty))
+					//{
+						//Stream stream = file.GetStream();
+						//image.ImageSour = ImageSource.FromStream(() => stream);
+					//}
 					return image;
 				}
 				return null;
+
 			} catch(Exception ex)
 			{
 				Debug.WriteLine(ex);
@@ -62,7 +64,7 @@ namespace Travelogue_2.Main.Services
 		public async void ViewImageC(ImageModel image)
 		{
 			ImageSelected = image;
-			await Shell.Current.GoToAsync($"{nameof(ImageView)}?{ nameof(ImageViewModel.ImagePath)}={ image.ImagePath}");
+			await Shell.Current.GoToAsync($"{nameof(ImageView)}?{ nameof(ImageViewModel.ImageId)}={ image.Id}");
 		}
 	}
 }

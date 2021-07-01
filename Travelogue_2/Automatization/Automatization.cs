@@ -85,7 +85,7 @@ namespace Travelogue_2.Automatization
 		
 		private static void CreateFutur()
 		{
-			JourneyModel journey = DataBaseUtil.CreateJourney("StandardTrip", DateTime.Today.AddDays(3), DateTime.Today.Date.AddDays(5));
+			JourneyModel journey = DataBaseUtil.CreateJourney("StandardTrip Futur", DateTime.Today.AddDays(3), DateTime.Today.Date.AddDays(5));
 			//Entry entry = new Entry(journey.Days[0], "Standard", "Description");
 			//Text_Info info = new Text_Info(entry, "Texto", DateTime.Now);
 
@@ -123,7 +123,7 @@ namespace Travelogue_2.Automatization
 
 		private static void CreateOnCourse()
 		{
-			JourneyModel journey = DataBaseUtil.CreateJourney("StandardTrip", DateTime.Today.AddDays(-1), DateTime.Today.Date.AddDays(1));
+			JourneyModel journey = DataBaseUtil.CreateJourney("StandardTrip Course", DateTime.Today.AddDays(-1), DateTime.Today.Date.AddDays(1));
 
 			EntryModel entry = DataBaseUtil.JourneyInsertEntry(journey, 1, "Standard");
 
@@ -135,7 +135,7 @@ namespace Travelogue_2.Automatization
 
 		private static void CreateFinished()
 		{
-			DataBaseUtil.CreateJourney("StandardTrip", DateTime.Today.AddDays(-5), DateTime.Today.Date.AddDays(-3));
+			DataBaseUtil.CreateJourney("StandardTrip Finished", DateTime.Today.AddDays(-5), DateTime.Today.Date.AddDays(-3));
 		}
 
 		private static void ClearDB()

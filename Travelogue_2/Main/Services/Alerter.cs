@@ -198,9 +198,12 @@ namespace Travelogue_2.Main.Services
 		internal static async Task<bool> AlertDestinyAlreadySelected()
 			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessDestinyAlreadySelected"], App.LocResources["Ok"], App.LocResources["Cancel"]);
 
-        #region Delete
+		internal static async Task<bool> AlertJourneyNameInUse() 
+			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessJourneyNameAlreadUsed"], App.LocResources["Ok"], App.LocResources["Cancel"]);
 
-        internal static async Task<bool> AlertDeleteJourney()
+		#region Delete
+
+		internal static async Task<bool> AlertDeleteJourney()
 			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessDeleteJourney"], App.LocResources["Ok"], App.LocResources["Cancel"]);
 
 		internal static async Task<bool> AlertInfoWillBeLost()

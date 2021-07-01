@@ -65,7 +65,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 			JourneyDestinies.Add(temp);
 
-			coverImage.ImageSour = CommonVariables.GetImage(); 
+			coverImage.ImageSour = CommonVariables.GetGenericImage(); 
 		}
 
 		#region JourneyName

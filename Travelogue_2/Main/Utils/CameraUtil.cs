@@ -81,11 +81,10 @@ namespace Travelogue_2.Main.Utils
 		{
 			try
 			{
-				MediaFile foto = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+				return await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
 				{
 					SaveMetaData = true,
 				});
-				return foto;
 			}
 			catch (Exception ex)
 			{
