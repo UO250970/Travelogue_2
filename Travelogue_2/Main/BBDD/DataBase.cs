@@ -68,7 +68,7 @@ namespace Travelogue_2.Main.BBDD
             }
             catch (SQLiteException ex)
             {
-                System.Diagnostics.Debug.WriteLine("Error en base de datos: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine("Error en base de datos: " + ex.StackTrace);
                 return false;
             }
             finally

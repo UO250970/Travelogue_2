@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;

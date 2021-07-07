@@ -105,7 +105,7 @@ namespace Travelogue_2.Automatization
 
 			//DataBase.GetJourney(journey);
 
-			DataBaseUtil.EntryInsertImage(entry, "Path", "Nombre", "foot");
+			//DataBaseUtil.EntryInsertImage(entry, "Path", "Nombre", "foot");
 			DataBaseUtil.EntryInsertText(entry, "Entry text");
 			DataBaseUtil.JourneyInsertEvent(journey, 1, "Concierto Manin", "Calle lapus");
 			DataBaseUtil.JourneyInsertReserv(journey, 1, 3, "Concierto Manin", "Calle lapus", "985 3816 36");
