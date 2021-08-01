@@ -25,6 +25,9 @@ namespace Travelogue_2.Main.Services
 		public static int JourneyNameMaxLenght { get => 50; }
 
 		/** Common string */
+
+		public static string Blank { get => "Blank"; }
+
 		public static string AppName { get => "Travelogue_2"; }
 
 		public static string ResourcesMonth { get => "Month_"; }
@@ -98,7 +101,7 @@ namespace Travelogue_2.Main.Services
 			{
 				ImageModel tempI = new ImageModel();
 				string tempString = (BackgroundImagesPath + Background + back + ImagesExtension);
-				tempI.ImageSour = ImageSource.FromResource(tempString);
+				tempI.Path = tempString;
 				temp.Add(tempI);
 			}
 			return temp;

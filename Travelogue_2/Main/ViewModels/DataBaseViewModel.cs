@@ -44,7 +44,7 @@ namespace Travelogue_2.Main.ViewModels
 
 
 
-        async internal void Back() => await Shell.Current.GoToAsync("..");
+        async virtual internal void Back() => await Shell.Current.GoToAsync("..");
 
     }
 }

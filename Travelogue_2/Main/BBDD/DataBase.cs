@@ -162,6 +162,12 @@ namespace Travelogue_2.Main.BBDD
             return QueryFunc(Func);
         }
 
+        public static List<Journey> GetJourneis()
+        {
+            List<Journey> Func() => conn.GetAllWithChildren<Journey>(recursive: false);
+            return QueryFunc(Func);
+        }
+
         public static string HasJourneis()
         {
             string Func() => conn.GetTableInfo("Journey").Count().ToString();
@@ -202,11 +208,27 @@ namespace Travelogue_2.Main.BBDD
             return QueryAct(Act);
         }
 
+            /** Checks */
+        public static bool CheckNewJourneyDateIsEmpty(int JourneyId, DateTime dateIni, DateTime dateEnd)
+        {
+            List<Journey> list = GetJourneis();
+            Journey jour = list?.Find(x => ( x.Id != JourneyId && x.Collision(dateIni, dateEnd) == true));
+            return jour == null;
+        }
+
+            /** Delete */
+        public static bool DeleteJourneyById(int JourneyId)
+        {
+            Journey temp = GetJourneyById(JourneyId);
+            void Act() => conn.Delete(temp);
+            return QueryAct(Act);
+        }
+
         #endregion
 
         #region Day
 
-        public static List<Day> GetDaysBetweenDays(DateTime dateIni, DateTime dateEnd)
+        public static List<Day> GetDaysBetweenDates(DateTime dateIni, DateTime dateEnd)
         {
             Func<List<Day>> Func = () => conn.GetAllWithChildren<Day>().FindAll(x => (x.Date.CompareTo(dateIni.Date) >= 0)
                 && (x.Date.CompareTo(dateEnd.Date) <= 0));
@@ -362,6 +384,12 @@ namespace Travelogue_2.Main.BBDD
         public static bool InsertImage(Image image)
         {
             void Act() => conn.InsertWithChildren(image, recursive: true);
+            return QueryAct(Act);
+        }
+
+        public static bool UpdateImage(Image image)
+        {
+            void Act() => conn.UpdateWithChildren(image);
             return QueryAct(Act);
         }
 

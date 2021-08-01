@@ -87,7 +87,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		{
 			if (JourneyId != null && DaySelectedNum != null)
             {
-				JourneyModel journey = DataBaseUtil.GetJourneyById(journeyId);
+				JourneyModel journey = DataBaseUtil.GetJourneyById( int.Parse(journeyId) );
 				List<DayModel> Days = DataBaseUtil.GetDaysFromJourney(journey);
 
 				DaySelected = Days[int.Parse(DaySelectedNum)].Date;
@@ -101,7 +101,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
         {
 			if (eventId != null)
             {
-				EventModel temp = DataBaseUtil.GetEventById(eventId);
+				EventModel temp = DataBaseUtil.GetEventById( int.Parse(eventId) );
 
 				Evento = temp;
 
@@ -116,7 +116,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
         {
 			if (entryId != null)
 			{
-				EntryModel temp = DataBaseUtil.GetEntryById(entryId);
+				EntryModel temp = DataBaseUtil.GetEntryById( int.Parse(entryId) );
 
 				Entry = temp;
 			}

@@ -1,4 +1,5 @@
-﻿using Plugin.Settings;
+﻿using Java.Util;
+using Plugin.Settings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,9 +39,9 @@ namespace Travelogue_2.Main.Utils
              jour.Days()*/
 		}
 
-        public static JourneyModel GetJourneyById(string id)
+        public static JourneyModel GetJourneyById(int JourneyId)
         {
-            Journey temp = DataBase.GetJourneyById( int.Parse(id) );
+            Journey temp = DataBase.GetJourneyById( JourneyId );
 
             return JourneyToModel(temp);
         }
@@ -184,9 +185,8 @@ namespace Travelogue_2.Main.Utils
             Image image = new Image();
             image.Date = ent.Day.Date;
             image.Path = path;
-            image.Name = name;
             image.Caption = caption;
-            image.Journey = ent.Day.Journey;
+            image.Journey = ent.Day.Journey.Name;
 
             EntryData entryData = new EntryData();
             entryData.Time = DateTime.Now.ToString("HH:mm");
@@ -220,39 +220,118 @@ namespace Travelogue_2.Main.Utils
 			return DestinyToModel(destiny);
         }
 
+        public static List<DestinyModel> GetDestiniesFromJourney(JourneyModel journey)
+        {
+            Journey temp = JourneyFromModel(journey);
+            return DestiniesToModel(temp.Destinies);
+        }
+
         public static List<DayModel> GetDaysFromJourney(JourneyModel journey)
         {
             Journey temp = JourneyFromModel(journey);
             return DaysToModel(temp.Days);
         }
 
-        public static List<DayModel> GetDaysFromJourneyId(string journeyId)
+        public static List<DayModel> GetDaysFromJourneyId(int JourneyId)
         {
-            Journey temp = DataBase.GetJourneyById(int.Parse(journeyId));
+            Journey temp = DataBase.GetJourneyById( JourneyId );
             return DaysToModel(temp.Days);
         }
 
-        public static EventModel GetEventById(string id)
+        public static EventModel GetEventById(int EventId)
         {
-            Event temp = DataBase.GetEventById(int.Parse(id));
+            Event temp = DataBase.GetEventById( EventId );
 
             return EventToModel(temp);
+        }
+
+        public static EntryModel GetEntryById(int EntryId)
+        {
+            Entry temp = DataBase.GetEntryById( EntryId );
+
+            return EntryToModel(temp);
+        }
+
+        public static ImageModel GetImageById(int ImageId)
+        {
+            Image temp = DataBase.GetImageById( ImageId );
+
+            return ImageToModel(temp);
+        }
+
+        public static bool SaveJourney(JourneyModel journey)
+        {
+            Journey temp = JourneyFromModel(journey);
+
+            if (temp.IniDate != journey.IniDate && temp.EndDate != journey.EndDate) UpdadteDates(journey);
+            if (temp.CoverId != journey.CoverId)
+            {
+                Image coverTemp = ImageFromModel(GetImageById( journey.CoverId ));
+                temp.Cover = coverTemp;
+            }
+
+            return true;
+        }
+
+        public static bool UpdadteDates(JourneyModel journey)
+        {
+            if (DataBase.CheckNewJourneyDateIsEmpty(journey.Id, journey.IniDate, journey.EndDate))
+            {
+                Journey temp = DataBase.GetJourneyById(journey.Id);
+
+                List<Day> tempDays = DataBase.GetDaysBetweenDates(temp.IniDate, temp.EndDate);
+                List<Day> newDays = DataBase.GetDaysBetweenDates(journey.IniDate, journey.EndDate);
+
+                List<Day> deleteDays = tempDays.FindAll( x => !newDays.Contains(x) );
+                List<Day> createDays = newDays.FindAll( x => !tempDays.Contains(x) );
+
+                if ( deleteDays.Find(x => x.Events.Count != 0 || x.Entries.Count != 0) != null )
+                {
+                    bool check = Alerter.AlertDayInfoWillBeLost().Result;
+                    if (!check) return false;
+                }
+
+                DataBase.DeleteDays(deleteDays);
+
+                createDays.ForEach(x );
+
+                temp.IniDate = IniDate;
+                temp.EndDate = EndDate;
+
+                DataBase.UpdateJourney(temp);
+            }
+            else
+            {
+                Alerter.AlertDatesAlreadyInUse();
+            }
+            return true;
+        }
+
+        public static bool SaveImage(ImageModel image)
+        {
+            Image temp = ImageFromModel(image);
+
+            if (!image.Path.Equals(temp.Path)) temp.Path = image.Path;
+            if (!image.Caption.Equals(temp.Caption)) temp.Caption = image.Caption;
+
+            DataBase.UpdateImage(temp);
+            return true;
         }
 
         public static bool SaveEvent(EventModel evento)
         {
             Event temp = EventFromModel(evento);
 
-            if ( !evento.Title.Equals(temp.Title) ) temp.Title = evento.Title;
-            if ( !evento.Time.Equals(temp.Time) ) temp.Time = evento.Time;
-            if ( !evento.Address.Equals(temp.Address) ) temp.Address = evento.Address;
-            if ( !evento.PhoneNumber.Equals(temp.PhoneNumber) ) temp.PhoneNumber = evento.PhoneNumber;
+            if (!evento.Title.Equals(temp.Title)) temp.Title = evento.Title;
+            if (!evento.Time.Equals(temp.Time)) temp.Time = evento.Time;
+            if (!evento.Address.Equals(temp.Address)) temp.Address = evento.Address;
+            if (!evento.PhoneNumber.Equals(temp.PhoneNumber)) temp.PhoneNumber = evento.PhoneNumber;
 
             bool Days = evento.IniDay.Equals(temp.Days.First().Date) && evento.EndDay.Equals(temp.Days.Last().Date);
 
-            if ( !Days )
+            if (!Days)
             {
-                List<Day> days = DataBase.GetDaysBetweenDays(evento.IniDay, evento.EndDay);
+                List<Day> days = DataBase.GetDaysBetweenDates(evento.IniDay, evento.EndDay);
 
                 List<Day> daysFilled = days.FindAll(x => x.Events.Count >= CommonVariables.EventsInDay);
                 if (daysFilled.Count != 0)
@@ -271,18 +350,10 @@ namespace Travelogue_2.Main.Utils
             return true;
         }
 
-        public static EntryModel GetEntryById(string id)
+        public static bool DeleteJourney(int JourneyId)
         {
-            Entry temp = DataBase.GetEntryById(int.Parse(id));
-
-            return EntryToModel(temp);
-        }
-
-        public static ImageModel GetImageById(string id)
-        {
-            Image temp = DataBase.GetImageById(int.Parse(id));
-
-            return ImageToModel(temp);
+            if (DataBase.DeleteJourneyById(JourneyId)) Alerter.AlertJourneyDeleted();
+            return true;
         }
 
         #region Models
@@ -298,16 +369,8 @@ namespace Travelogue_2.Main.Utils
 
             temp.Id = journey.Id;
             temp.Name = journey.Name;
-            if (journey.Cover is null)
-            {
-                temp.Cover = CommonVariables.GetGenericImage();
-            } 
-            else
-            {
-                //Stream stream = file.GetStream();
-                //temp.Image = ImageSource.FromStream(() => stream);
-                temp.Cover = ImageSource.FromFile(journey.Cover.Path);
-            }
+            temp.JourneyState = journey.JourneyState;
+            temp.CoverId = journey.CoverId;
             temp.IniDate = journey.IniDate;
             temp.EndDate = journey.EndDate;
 
@@ -326,6 +389,17 @@ namespace Travelogue_2.Main.Utils
                 temp.EmbassiesCities.Add(emb.City);
                 temp.Embassies.Add(emb.City, emb.PhoneNumber);
 			}
+
+            return temp;
+        }
+        private static List<DestinyModel> DestiniesToModel(List<Destiny> destinies)
+        {
+            List<DestinyModel> temp = new List<DestinyModel>();
+
+            foreach (Destiny destiny in destinies)
+            {
+                temp.Add(DestinyToModel(destiny));
+            }
 
             return temp;
         }
@@ -405,15 +479,15 @@ namespace Travelogue_2.Main.Utils
 				{
                     EntryImageModel temp2 = new EntryImageModel();
                     temp2.Id = data.Id;
-                    
+                    temp2.Time = data.Time;
+
                     if (data.Image != null)
                     {
-                        temp2.ImageSour = ImageSource.FromFile(data.Image.Path);
-                        temp2.ImageCaption = data.Image.Caption;
+                        temp2.Path = data.Image.Path;
+                        temp2.Caption = data.Image.Caption;
                     } else
                     {
-                        temp2.ImageSour = CommonVariables.GetGenericImageImage();
-                        temp2.ImageCaption = "";
+                        temp2.Caption = "";
                     }
                     temp2.Journey = data.Entry.Day.Journey.Name;
 
@@ -442,13 +516,14 @@ namespace Travelogue_2.Main.Utils
             ImageModel temp = new ImageModel();
 
             temp.Id = image.Id;
-            
-            temp.ImageSour = ImageSource.FromFile( image.Path );
-            temp.ImageCaption = image.Caption;
-            temp.Journey = image.Journey.Name;
+
+            temp.Path = image.Path;
+            temp.Caption = image.Caption;
+            temp.Journey = image.Journey;
 
             return temp;
         }
+        private static Image ImageFromModel(ImageModel image) => DataBase.GetImageById(image.Id);
 
         #endregion
     }

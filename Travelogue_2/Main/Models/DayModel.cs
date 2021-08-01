@@ -11,7 +11,7 @@ namespace Travelogue_2.Main.Models
 
 		public DateTime Date
         {
-			get => new DateTime(Integer.ParseInt(year), Integer.ParseInt(MonthNum), Integer.ParseInt(Day));
+			get => new DateTime(Integer.ParseInt(Year), Integer.ParseInt(MonthNum), Integer.ParseInt(Day));
         } 
 
 		public string Day { get; set; }

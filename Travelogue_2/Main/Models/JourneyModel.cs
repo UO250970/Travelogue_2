@@ -11,7 +11,7 @@ namespace Travelogue_2.Main.Models
 
 		public string Name { get; set; }
 
-		public ImageSource Cover { get; set; }
+		public int CoverId { get; set; }
 
 		public DateTime IniDate { get; set; }
 

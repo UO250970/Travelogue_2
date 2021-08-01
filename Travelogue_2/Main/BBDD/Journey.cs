@@ -39,7 +39,7 @@ namespace Travelogue_2.Main.BBDD
         [ForeignKey(typeof(Image))]
         public int CoverId { get; set; }
 
-        [OneToOne]
+        [OneToOne(CascadeOperations = CascadeOperation.CascadeRead)]
         public Image Cover { get; set; }
 
         [OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]

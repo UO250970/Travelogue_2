@@ -33,7 +33,7 @@
 
         </DataTemplate>
 
-        <DataTemplate x:Key="imageNoFootTemplate">
+        <DataTemplate x:Key="imageFootTemplate">
 
             <StackLayout>
                 <Grid>
@@ -55,7 +55,7 @@
 
         </DataTemplate>
 
-        <DataTemplate x:Key="imageFootTemplate">
+        <DataTemplate x:Key="imageNoFootTemplate">
 
             <StackLayout>
                 <Grid>
@@ -299,7 +299,7 @@
 
                                         <Image HeightRequest="{Binding BindingContext.CardImagesHeight, Source={x:Reference JourneyTemplateViewName}}" 
                                                WidthRequest="{Binding BindingContext.CardImagesHeight, Source={x:Reference JourneyTemplateViewName}}" 
-                                               Source="{Binding BindingContext.BlanckImage.ImageSour, Source={x:Reference JourneyTemplateViewName}}"
+                                               Source="{Binding BindingContext.BlankImage.ImageSour, Source={x:Reference JourneyTemplateViewName}}"
                                                Aspect="AspectFill">
                                             <Image.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding BindingContext.AddImageCommand, Source={x:Reference JourneyTemplateViewName}}"

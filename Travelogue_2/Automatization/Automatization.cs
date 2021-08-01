@@ -18,6 +18,8 @@ namespace Travelogue_2.Automatization
 {
 	static class Automatization
 	{
+		public static string Image1 = "/storage/emulated/0/Android/data/com.companyname.travelogue_2/files/Pictures/temp/IMG_20210421_115029.jpg";
+
 		public static async Task CheckPermissionsAsync()
 		{
 
@@ -105,7 +107,7 @@ namespace Travelogue_2.Automatization
 
 			//DataBase.GetJourney(journey);
 
-			//DataBaseUtil.EntryInsertImage(entry, "Path", "Nombre", "foot");
+			DataBaseUtil.EntryInsertImage(entry, Image1, "Nombre", "foot");
 			DataBaseUtil.EntryInsertText(entry, "Entry text");
 			DataBaseUtil.JourneyInsertEvent(journey, 1, "Concierto Manin", "Calle lapus");
 			DataBaseUtil.JourneyInsertReserv(journey, 1, 3, "Concierto Manin", "Calle lapus", "985 3816 36");
@@ -127,7 +129,7 @@ namespace Travelogue_2.Automatization
 
 			EntryModel entry = DataBaseUtil.JourneyInsertEntry(journey, 1, "Standard");
 
-			DataBaseUtil.EntryInsertImage(entry, "Path", "Nombre", "foot");
+			DataBaseUtil.EntryInsertImage(entry, Image1, "Nombre", "foot");
 			DataBaseUtil.EntryInsertText(entry, "Entry text");
 			DataBaseUtil.JourneyInsertEvent(journey, 1, "Concierto Manin", "Calle lapus");
 			DataBaseUtil.JourneyInsertReserv(journey, 1, 3, "Reserva hotel", "Calle dandy", "985 3816 36");

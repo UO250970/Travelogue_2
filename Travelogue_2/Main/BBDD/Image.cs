@@ -14,8 +14,8 @@ namespace Travelogue_2.Main.BBDD
         [Column("Path")]
         public string Path { get; set; } = string.Empty;
 
-        [Column("Name")]
-        public string Name { get; set; } = string.Empty;
+        //[Column("Name")]
+        //public string Name { get; set; } = string.Empty;
 
         [Column("Caption")]
         public string Caption { get; set; } = string.Empty;
@@ -23,8 +23,8 @@ namespace Travelogue_2.Main.BBDD
         [Column("Date")]
         public DateTime Date { get; set; }
 
-        [OneToOne(CascadeOperations = CascadeOperation.CascadeRead)]
-        public Journey Journey { get; set; }
+        [Column("Journey")]
+        public string Journey { get; set; }
 
         /** Constructor público sin parámetros necesario para la base de datos */
         public Image() { }

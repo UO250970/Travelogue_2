@@ -70,9 +70,14 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		{
 			if (JourneyId != null)
 			{
-				JourneyModel journey = DataBaseUtil.GetJourneyById(JourneyId);
+				JourneyModel journey = DataBaseUtil.GetJourneyById( int.Parse(JourneyId) );
 				JourneyName = journey.Name;
-				CoverImage.ImageSour = journey.Cover;
+
+				if (journey.CoverId >= 1)
+                {
+					ImageModel cover = DataBaseUtil.GetImageById(journey.CoverId);
+					CoverImage = cover;
+				}
 
 				// TODO - Chekear acciones según estado
 
@@ -123,19 +128,23 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		{
 			base.OnAppearing();
 
-			var temp = DataBaseUtil.GetDaysFromJourneyId(journeyId);
-			JourneyDays.Clear();
-			temp.First(x => x.Date.Equals(DaySelected.Date))?.Select();
+			if (DaySelected.Day != null)
+            {
+				var temp = DataBaseUtil.GetDaysFromJourneyId(int.Parse(journeyId));
+				JourneyDays.Clear();
+				temp.First(x => x.Date.Equals(DaySelected.Date))?.Select();
 
-			JourneyDays = new ObservableCollection<DayModel>(temp);
+				JourneyDays = new ObservableCollection<DayModel>(temp);
 
-			DaySelected = JourneyDays[DaySelectedNum];
+				DaySelected = JourneyDays[DaySelectedNum];
 
-			/*foreach (DayModel day in temp)
-			{
-				if (day.Date.Equals(DaySelected.Date)) day.Select();
-				JourneyDays.Add(day);
-			}*/
+				/*foreach (DayModel day in temp)
+				{
+					if (day.Date.Equals(DaySelected.Date)) day.Select();
+					JourneyDays.Add(day);
+				}*/
+			}
+
 		}
 
 		#region Name
@@ -151,19 +160,11 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		#endregion
 
 		#region Cover
-
-		private ImageModel coverImage = new ImageModel()
-		{
-			ImageSour = CommonVariables.GetGenericImage()
-		};
-
+		private ImageModel coverImage = new ImageModel();
 		public ImageModel CoverImage
 		{
 			get => coverImage;
-			set
-			{
-				SetProperty(ref coverImage, value);
-			}
+			set => SetProperty(ref coverImage, value);
 		}
 		#endregion
 

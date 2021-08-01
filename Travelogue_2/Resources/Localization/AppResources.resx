@@ -312,6 +312,9 @@
   <data name="MessCardCreated" xml:space="preserve">
     <value>La tarjeta se ha creado correctamente</value>
   </data>
+  <data name="MessDatesAlreadyInUse" xml:space="preserve">
+    <value>Algunos de los días ya pertenecen a otros viajes</value>
+  </data>
   <data name="MessDeleteJourney" xml:space="preserve">
     <value>¿Quieres eliminar el viaje? (Las entradas y eventos se eliminarán)</value>
   </data>
@@ -342,11 +345,20 @@
   <data name="MessJourCreated" xml:space="preserve">
     <value>El viaje se ha creado correctamente</value>
   </data>
+  <data name="MessJourneyDeleted" xml:space="preserve">
+    <value>Se ha eliminado el viaje correctamente</value>
+  </data>
   <data name="MessJourneyNameAlreadUsed" xml:space="preserve">
     <value>Ya existe un viaje registrado con ese nombre</value>
   </data>
   <data name="MessLanguageChanged" xml:space="preserve">
     <value>Se ha cambiado el idioma de la aplicación</value>
+  </data>
+  <data name="MessModifyDatesInClosedJourney" xml:space="preserve">
+    <value>Las fechas de un viaje cerrado no se pueden modificar</value>
+  </data>
+  <data name="MessModifyIniDateInOpenJourney" xml:space="preserve">
+    <value>La fecha inicial de un viaje abierto no se puede modificar</value>
   </data>
   <data name="MessNoDaySelected" xml:space="preserve">
     <value>Se debe seleccionar una fecha</value>

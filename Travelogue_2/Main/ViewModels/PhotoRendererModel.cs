@@ -25,8 +25,8 @@ namespace Travelogue_2.Main.Services
 				{
 					//image.ImagePath = file.Path;
 					//ImageName = CameraUtil.GenerateName();
-					image.ImageCaption = string.Empty;
-					image.ImageSour = ImageSource.FromFile( file.Path );
+					image.Caption = string.Empty;
+					image.Path = file.Path;
 
 					// TODO Guardar imagen en nueva ruta
 					//if (!image.ImagePath.Equals(string.Empty))
@@ -51,13 +51,16 @@ namespace Travelogue_2.Main.Services
 		public int CardImagesHeight { get => CommonVariables.ImageCardMaxHeight; }
 
 
-		public EntryImageModel blanckImage = new EntryImageModel();
-		public EntryImageModel BlanckImage
+		public EntryImageModel blankImage = new EntryImageModel()
 		{
-			get => blanckImage;
+			Path = CommonVariables.Blank
+		};
+		public EntryImageModel BlankImage
+		{
+			get => blankImage;
 			set
 			{
-				SetProperty(ref blanckImage, value);
+				SetProperty(ref blankImage, value);
 			}
 		}
 

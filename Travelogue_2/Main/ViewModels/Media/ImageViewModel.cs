@@ -23,9 +23,9 @@ namespace Travelogue_2.Main.ViewModels.Media
 		{
 			if (ImageId != null)
 			{
-				ImageModel image = DataBaseUtil.GetImageById(ImageId);
+				ImageModel image = DataBaseUtil.GetImageById( int.Parse(ImageId) );
 
-				Caption = image.ImageCaption;
+				Caption = image.Caption;
 				//JourneyName = journey.Name;
 				//CoverImage.ImageSour = journey.Image;
 

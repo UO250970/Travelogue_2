@@ -26,12 +26,10 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 			StartJournals.Clear();
 			JourneyModel temp1 = new JourneyModel();
 			temp1.Name = "Prueba";
-			temp1.Cover = ImageSource.FromResource(CommonVariables.GenericImage);
 
 
 			JourneyModel temp2 = new JourneyModel();
 			temp2.Name = "Prueba3";
-			temp2.Cover = ImageSource.FromResource(CommonVariables.GenericImage);
 
 			StartJournals.Add(temp1);
 			StartJournals.Add(temp2);

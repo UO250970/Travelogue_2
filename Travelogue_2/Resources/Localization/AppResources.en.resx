@@ -303,6 +303,9 @@
   <data name="MessCardCreated" xml:space="preserve">
     <value>Card created correctly</value>
   </data>
+  <data name="MessDatesAlreadyInUse" xml:space="preserve">
+    <value>Some of the dates are already in use in other journeys</value>
+  </data>
   <data name="MessDeleteJourney" xml:space="preserve">
     <value>Do you want to delete the journey? (Entries and events will be deleted)</value>
   </data>
@@ -333,11 +336,20 @@
   <data name="MessJourCreated" xml:space="preserve">
     <value>Journey created correctly</value>
   </data>
+  <data name="MessJourneyDeleted" xml:space="preserve">
+    <value>Journey deleted correctly</value>
+  </data>
   <data name="MessJourneyNameAlreadUsed" xml:space="preserve">
     <value>There is already a Journey with that name</value>
   </data>
   <data name="MessLanguageChanged" xml:space="preserve">
     <value>The app's language has been changed</value>
+  </data>
+  <data name="MessModifyDatesInClosedJourney" xml:space="preserve">
+    <value>The dates of a closed journey can not be modified</value>
+  </data>
+  <data name="MessModifyIniDateInOpenJourney" xml:space="preserve">
+    <value>The inicial date of an open journey can not be modified</value>
   </data>
   <data name="MessNoDaySelected" xml:space="preserve">
     <value>A date must be selected</value>

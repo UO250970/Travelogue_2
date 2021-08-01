@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Travelogue_2.Main.Utils;
 using System;
-using Travelogue_2.Main.BBDD;
 
 namespace Travelogue_2.Main.ViewModels.Journey
 {
@@ -30,7 +28,8 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		public Command ModifyCoverCommand { get; }
 		public Command MoreInfoCommand { get; }
 		public Command PhoneNumberTappedCommand { get; }
-		public ObservableCollection<DestinyModel> JourneyDestinies { get; }
+		public Command DeleteJourneyCommand { get; }
+		public ObservableCollection<DestinyModel> JourneyDestinies { get; set; }
 
 		public JourneySettingsViewModel()
 		{
@@ -40,13 +39,35 @@ namespace Travelogue_2.Main.ViewModels.Journey
 			ModifyCoverCommand = new Command(x => ModifyCoverC());
 			MoreInfoCommand = new Command<string>((x) => MoreInfoC(x));
 			PhoneNumberTappedCommand = new Command<string>((x) => PhoneNumberTappedC(x));
+			DeleteJourneyCommand = new Command(x => DeleteJourneyC());
 
-			ExecuteLoadDataCommand();
+			//ExecuteLoadDataCommand();
 		}
 
 		public override void LoadData()
 		{
-			journeyId = "1";
+
+			if (JourneyId != null)
+			{
+				JourneyModel journey = DataBaseUtil.GetJourneyById(int.Parse(JourneyId));
+				JourneyName = journey.Name;
+				State = journey.JourneyState;
+
+				if (journey.CoverId >= 1)
+				{
+					ImageModel cover = DataBaseUtil.GetImageById(journey.CoverId);
+					CoverImage = cover;
+				}
+
+				IniDate = journey.IniDate;
+				IniDateEnabled = (State.Equals(State.CLOSED) || State.Equals(State.OPEN)) ? false : true;
+				EndDate = journey.EndDate;
+				EndDateEnabled = State.Equals(State.CLOSED) ? false : true;
+
+				JourneyDestinies = new ObservableCollection<DestinyModel>(DataBaseUtil.GetDestiniesFromJourney(journey));
+			}
+
+			/*journeyId = "1";
 			JourneyName = "Prueba titulo";
 
 			JourneyDestinies.Clear();
@@ -65,8 +86,20 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 			JourneyDestinies.Add(temp);
 
-			coverImage.ImageSour = CommonVariables.GetGenericImage(); 
+			coverImage.ImageSour = CommonVariables.GetGenericImage(); */
 		}
+
+		private JourneyModel journey;
+
+		public JourneyModel Journey
+		{
+			get => journey;
+			set => SetProperty(ref journey, value);
+		}
+
+		#region State
+		private State State { get; set; }
+		#endregion
 
 		#region JourneyName
 		public string journeyName;
@@ -79,13 +112,14 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		#endregion
 
 		#region CoverImage
-		public ImageModel coverImage;
+		private ImageModel coverImage = new ImageModel();
 		public ImageModel CoverImage
 		{
 			get => coverImage;
 			set
 			{
 				SetProperty(ref coverImage, value);
+				DataBaseUtil.SaveImage(coverImage);
 			}
 		}
 		#endregion
@@ -100,15 +134,33 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		#endregion
 
 		#region IniDate
+		private bool iniDateEnabled = true;
+		public bool IniDateEnabled
+        {
+			get => iniDateEnabled;
+			set => SetProperty(ref iniDateEnabled, value);
+		}
+
 		private DateTime iniDate = DateTime.Today;
 		public DateTime IniDate
 		{
 			get => iniDate;
-			set => SetProperty(ref iniDate, value);
+			set
+			{
+				if (value.CompareTo(minimumDate) < 0) MinimumDate = iniDate;
+				SetProperty(ref iniDate, value);
+			}
 		}
 		#endregion
 
 		#region EndDate
+		private bool endDateEnabled = true;
+		public bool EndDateEnabled
+		{
+			get => endDateEnabled;
+			set => SetProperty(ref endDateEnabled, value);
+		}
+
 		private DateTime endDate = DateTime.Today;
 		public DateTime EndDate
 		{
@@ -140,16 +192,27 @@ namespace Travelogue_2.Main.ViewModels.Journey
 			notificationManager.SendNotification("¡Estamos de viaje!", "Desliza si quieres añadir una entrada...");
 		}
 
+		internal void DeleteJourneyC()
+        {
+			DataBaseUtil.DeleteJourney( int.Parse(journeyId) );
+        }
+
 		internal void CheckNewIniDate(DatePicker iniDatePicker, DatePicker endDatePicker)
 		{
-			if (iniDatePicker.Date.CompareTo(EndDate.Date) > 0) endDatePicker.Date = iniDatePicker.Date;
-			//ExecuteLoadDataCommand();
+			if (iniDatePicker.Date.CompareTo(endDatePicker.Date) > 0)
+				endDatePicker.Date = iniDatePicker.Date;
 		}
 
 		internal void CheckNewEndDate(DatePicker iniDatePicker, DatePicker endDatePicker)
 		{
-			if (iniDatePicker.Date.CompareTo(EndDate.Date) > 0) iniDatePicker.Date = endDatePicker.Date;
-			//ExecuteLoadDataCommand();
+			if (endDatePicker.Date.CompareTo(iniDatePicker.Date) < 0)
+				iniDatePicker.Date = endDatePicker.Date
+		}
+
+		internal override void Back()
+		{
+			DataBaseUtil.SaveJourney(Journey);
+			base.Back();
 		}
 
 	}

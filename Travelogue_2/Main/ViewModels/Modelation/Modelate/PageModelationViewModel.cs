@@ -36,7 +36,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
 		{
 			if (BackgroundId != null)
             {
-				ImageSelectedSource = DataBaseUtil.GetImageById(BackgroundId).ImageSour;
+				ImageSelectedSource = DataBaseUtil.GetImageById( int.Parse(BackgroundId) ).ImageSour;
             }
 
 			//ImageSelectedSource = CommonVariables.GetBackground(BackgroundSelected);

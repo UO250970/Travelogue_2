@@ -36,7 +36,7 @@ namespace Travelogue_2.Main.Services.TemplateSelectors
 			if (item is EntryTextModel e)
 			{
                 return TextTemplate;
-			} else if ( ((EntryImageModel)item).ImageCaption == string.Empty )
+			} else if ( ((EntryImageModel)item).Caption == string.Empty )
 			{
                 return imageNoFootTemplate;
 			}

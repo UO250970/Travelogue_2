@@ -646,6 +646,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Algunos de los días ya pertenecen a otros viajes.
+        /// </summary>
+        internal static string MessDatesAlreadyInUse {
+            get {
+                return ResourceManager.GetString("MessDatesAlreadyInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a ¿Quieres eliminar el viaje? (Las entradas y eventos se eliminarán).
         /// </summary>
         internal static string MessDeleteJourney {
@@ -736,6 +745,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Se ha eliminado el viaje correctamente.
+        /// </summary>
+        internal static string MessJourneyDeleted {
+            get {
+                return ResourceManager.GetString("MessJourneyDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ya existe un viaje registrado con ese nombre.
         /// </summary>
         internal static string MessJourneyNameAlreadUsed {
@@ -750,6 +768,24 @@ namespace Travelogue_2.Resources.Localization {
         internal static string MessLanguageChanged {
             get {
                 return ResourceManager.GetString("MessLanguageChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Las fechas de un viaje cerrado no se pueden modificar.
+        /// </summary>
+        internal static string MessModifyDatesInClosedJourney {
+            get {
+                return ResourceManager.GetString("MessModifyDatesInClosedJourney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La fecha inicial de un viaje abierto no se puede modificar.
+        /// </summary>
+        internal static string MessModifyIniDateInOpenJourney {
+            get {
+                return ResourceManager.GetString("MessModifyIniDateInOpenJourney", resourceCulture);
             }
         }
         
