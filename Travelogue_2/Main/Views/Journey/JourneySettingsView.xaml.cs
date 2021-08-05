@@ -28,5 +28,11 @@ namespace Travelogue_2.Main.Views.Journey
 		{
 			model.CheckNewEndDate(IniDatePicker, EndDatePicker);
 		}
+
+		protected override bool OnBackButtonPressed()
+		{
+			model.Back();
+			return true;
+		}
 	} // TO-DO Sacar a estilo el color del enlaces
 }

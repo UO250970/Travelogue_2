@@ -99,7 +99,6 @@ namespace Travelogue_2.Main.BBDD
             }
             return QueryAct(Act);
         }
-
         public static bool ClearDataBase()
         {
             void Act()
@@ -123,7 +122,6 @@ namespace Travelogue_2.Main.BBDD
             }
             return QueryAct(Act);
         }
-
         public static bool DropDataBase()
         {
             void Act()
@@ -228,6 +226,12 @@ namespace Travelogue_2.Main.BBDD
 
         #region Day
 
+        public static bool InsertDay(Day day)
+        {
+            void Act() => conn.Insert(day);
+            return QueryAct(Act);
+        }
+
         public static List<Day> GetDaysBetweenDates(DateTime dateIni, DateTime dateEnd)
         {
             Func<List<Day>> Func = () => conn.GetAllWithChildren<Day>().FindAll(x => (x.Date.CompareTo(dateIni.Date) >= 0)
@@ -248,10 +252,22 @@ namespace Travelogue_2.Main.BBDD
             foreach (Day day in days) UpdateDay(day);
         }
 
+        /** Delete */
+        public static bool DeleteDay(Day day)
+        {
+            void Act() => conn.Delete(day);
+            return QueryAct(Act);
+        }
+
+        public static void DeleteDays(List<Day> days)
+        {
+            foreach (Day day in days) DeleteDay(day);
+        }
+
         #endregion
 
         #region Event
-        
+
         public static Event GetEventById(int id)
         {
             Event Func() => conn.GetWithChildren<Event>(id, recursive: true);

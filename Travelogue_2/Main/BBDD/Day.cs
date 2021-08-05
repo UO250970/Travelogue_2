@@ -38,5 +38,11 @@ namespace Travelogue_2.Main.BBDD
 			Date = date;
 			//Entries = new List<Entry>();
 		}
-	}
+
+        public override bool Equals(object obj)
+        {
+			DateTime temp = ((Day)obj).Date;
+			return (temp.Year == this.Date.Year) && (temp.Month == this.Date.Month) && (temp.Day == this.Date.Day);
+        }
+    }
 }

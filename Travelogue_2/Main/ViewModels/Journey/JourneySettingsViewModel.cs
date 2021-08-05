@@ -49,19 +49,19 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 			if (JourneyId != null)
 			{
-				JourneyModel journey = DataBaseUtil.GetJourneyById(int.Parse(JourneyId));
-				JourneyName = journey.Name;
-				State = journey.JourneyState;
+				Journey = DataBaseUtil.GetJourneyById(int.Parse(JourneyId));
+				JourneyName = Journey.Name;
+				State = Journey.JourneyState;
 
-				if (journey.CoverId >= 1)
+				if (Journey.CoverId >= 1)
 				{
 					ImageModel cover = DataBaseUtil.GetImageById(journey.CoverId);
 					CoverImage = cover;
 				}
 
-				IniDate = journey.IniDate;
+				IniDate = Journey.IniDate;
 				IniDateEnabled = (State.Equals(State.CLOSED) || State.Equals(State.OPEN)) ? false : true;
-				EndDate = journey.EndDate;
+				EndDate = Journey.EndDate;
 				EndDateEnabled = State.Equals(State.CLOSED) ? false : true;
 
 				JourneyDestinies = new ObservableCollection<DestinyModel>(DataBaseUtil.GetDestiniesFromJourney(journey));
@@ -107,7 +107,11 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		public string JourneyName
 		{
 			get => journeyName;
-			set => SetProperty(ref journeyName, value);
+			set
+			{
+				SetProperty(ref journeyName, value);
+				Journey.Name = JourneyName;
+			}
 		}
 		#endregion
 
@@ -206,13 +210,14 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		internal void CheckNewEndDate(DatePicker iniDatePicker, DatePicker endDatePicker)
 		{
 			if (endDatePicker.Date.CompareTo(iniDatePicker.Date) < 0)
-				iniDatePicker.Date = endDatePicker.Date
+				iniDatePicker.Date = endDatePicker.Date;
 		}
 
-		internal override void Back()
+		internal override async void Back()
 		{
-			DataBaseUtil.SaveJourney(Journey);
-			base.Back();
+			Journey.IniDate = IniDate;
+			Journey.EndDate = EndDate;
+			if( await DataBaseUtil.SaveJourney(Journey) ) base.Back();
 		}
 
 	}

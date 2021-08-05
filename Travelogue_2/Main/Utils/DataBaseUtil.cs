@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Travelogue_2.Main.BBDD;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
@@ -259,21 +260,20 @@ namespace Travelogue_2.Main.Utils
             return ImageToModel(temp);
         }
 
-        public static bool SaveJourney(JourneyModel journey)
+        public static async Task<bool> SaveJourney(JourneyModel journey)
         {
             Journey temp = JourneyFromModel(journey);
 
-            if (temp.IniDate != journey.IniDate && temp.EndDate != journey.EndDate) UpdadteDates(journey);
+            if (temp.IniDate != journey.IniDate || temp.EndDate != journey.EndDate) return await UpdadteDates(journey);
             if (temp.CoverId != journey.CoverId)
             {
                 Image coverTemp = ImageFromModel(GetImageById( journey.CoverId ));
                 temp.Cover = coverTemp;
             }
-
             return true;
         }
 
-        public static bool UpdadteDates(JourneyModel journey)
+        public static async Task<bool> UpdadteDates(JourneyModel journey)
         {
             if (DataBase.CheckNewJourneyDateIsEmpty(journey.Id, journey.IniDate, journey.EndDate))
             {
@@ -282,21 +282,29 @@ namespace Travelogue_2.Main.Utils
                 List<Day> tempDays = DataBase.GetDaysBetweenDates(temp.IniDate, temp.EndDate);
                 List<Day> newDays = DataBase.GetDaysBetweenDates(journey.IniDate, journey.EndDate);
 
-                List<Day> deleteDays = tempDays.FindAll( x => !newDays.Contains(x) );
-                List<Day> createDays = newDays.FindAll( x => !tempDays.Contains(x) );
+                List <Day> deleteDays = tempDays.FindAll( x => !newDays.Contains(x) );
 
                 if ( deleteDays.Find(x => x.Events.Count != 0 || x.Entries.Count != 0) != null )
                 {
-                    bool check = Alerter.AlertDayInfoWillBeLost().Result;
+                    bool check = await Alerter.AlertDayInfoWillBeLost();
                     if (!check) return false;
-                }
+                } 
 
                 DataBase.DeleteDays(deleteDays);
 
-                createDays.ForEach(x );
+                int duration = (int)(journey.EndDate - journey.IniDate).TotalDays + 1;
+                Enumerable.Range(0, duration).
+                    Where(i => !temp.Days.Contains(new Day(journey.IniDate.AddDays(i)))).
+                    Select(i => new Day(journey.IniDate.AddDays(i)) { Journey = temp, JourneyId = temp.Id }).
+                    ToList().
+                    ForEach(i => 
+                        {
+                            DataBase.InsertDay(i);
+                            temp.Days.Add(i); 
+                        });
 
-                temp.IniDate = IniDate;
-                temp.EndDate = EndDate;
+                temp.IniDate = journey.IniDate;
+                temp.EndDate = journey.EndDate;
 
                 DataBase.UpdateJourney(temp);
             }
