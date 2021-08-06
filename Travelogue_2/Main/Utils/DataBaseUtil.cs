@@ -1,5 +1,4 @@
-﻿using Java.Util;
-using Plugin.Settings;
+﻿using Plugin.Settings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +7,6 @@ using System.Threading.Tasks;
 using Travelogue_2.Main.BBDD;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
-using Xamarin.Forms;
 using Entry = Travelogue_2.Main.BBDD.Entry;
 using Image = Travelogue_2.Main.BBDD.Image;
 
@@ -118,6 +116,18 @@ namespace Travelogue_2.Main.Utils
 
             jour.Destinies.Add(destiny);
             destiny.Journeys.Add(jour);
+
+            DataBase.UpdateJourney(jour);
+            DataBase.UpdateDestiny(destiny);
+        }
+
+        public static void JourneyRemoveDestiny(JourneyModel journey, string name)
+        {
+            Journey jour = JourneyFromModel(journey);
+            Destiny destiny = DataBase.GetDestinyByName(name);
+
+            jour.Destinies.Remove(destiny);
+            destiny.Journeys.Remove(jour);
 
             DataBase.UpdateJourney(jour);
             DataBase.UpdateDestiny(destiny);
@@ -260,16 +270,32 @@ namespace Travelogue_2.Main.Utils
             return ImageToModel(temp);
         }
 
+        public static bool SaveJourneyDestinies(JourneyModel journey, List<DestinyModel> destinies)
+		{
+            List<DestinyModel> tempList = GetDestiniesFromJourney(journey);
+            if (!GetDestiniesFromJourney(journey).SequenceEqual(destinies))
+			{
+                tempList.ForEach( x => JourneyRemoveDestiny(journey, x.Destiny) );
+                destinies.ForEach( y => JourneyInsertDestiny(journey, y.Destiny) );
+			}
+            return true;
+		}
+
         public static async Task<bool> SaveJourney(JourneyModel journey)
         {
             Journey temp = JourneyFromModel(journey);
 
-            if (temp.IniDate != journey.IniDate || temp.EndDate != journey.EndDate) return await UpdadteDates(journey);
             if (temp.CoverId != journey.CoverId)
             {
-                Image coverTemp = ImageFromModel(GetImageById( journey.CoverId ));
+                Image coverTemp = ImageFromModel(GetImageById(journey.CoverId));
                 temp.Cover = coverTemp;
             }
+            if (temp.Name != journey.Name) temp.Name = journey.Name;
+
+            DataBase.UpdateJourney(temp);
+
+            if (temp.IniDate != journey.IniDate || temp.EndDate != journey.EndDate) return await UpdadteDates(journey);
+            
             return true;
         }
 
@@ -310,7 +336,8 @@ namespace Travelogue_2.Main.Utils
             }
             else
             {
-                Alerter.AlertDatesAlreadyInUse();
+                await Alerter.AlertDatesAlreadyInUse();
+                return false;
             }
             return true;
         }

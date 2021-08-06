@@ -249,7 +249,6 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 				await Shell.Current.GoToAsync("..");
 			}
 		}
-		#endregion 
 
 		async internal void CreateReservationC()
 		{
@@ -268,6 +267,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 				await Shell.Current.GoToAsync("..");
 			}
 		}
+		#endregion
 
 		#region EntryCommands
 		async internal void CreateEntryC()
@@ -282,10 +282,9 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			} else
 			{
 				await Alerter.AlertEntryCreated();
-				await Shell.Current.GoToAsync("..");
+				Back();
 			}
 		}
-		#endregion
 
 		async internal void AddImageC()
 		{
@@ -305,7 +304,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			else
 			{
 				await Alerter.AlertTextAdded();
-				await Shell.Current.GoToAsync("..");
+				Back();
 			}
 		}
 
@@ -318,22 +317,23 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			else
 			{
 				await Alerter.AlertImageAdded();
-				await Shell.Current.GoToAsync("..");
+				Back();
 			}
 		}
+		#endregion
 
 		async internal void CancelC()
 		{
-			if (Title != string.Empty || Location != string.Empty || PhoneNumber != string.Empty 
+			if (Title != string.Empty || Location != string.Empty || PhoneNumber != string.Empty
 				|| Text != string.Empty || Caption != string.Empty)
 			{
 				bool result = await Alerter.AlertInfoWillBeLost();
 
-				if (result) await Shell.Current.GoToAsync("..");
+				if (result) Back();
 			}
 			else
 			{
-				await Shell.Current.GoToAsync("..");
+				Back();
 			}
 		}
 	}

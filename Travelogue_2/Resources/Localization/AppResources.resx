@@ -315,6 +315,9 @@
   <data name="MessDatesAlreadyInUse" xml:space="preserve">
     <value>Algunos de los días ya pertenecen a otros viajes</value>
   </data>
+  <data name="MessDayInfoWillBeLost" xml:space="preserve">
+    <value>Se va a eliminar un día con informacion ¿Continuar?</value>
+  </data>
   <data name="MessDeleteJourney" xml:space="preserve">
     <value>¿Quieres eliminar el viaje? (Las entradas y eventos se eliminarán)</value>
   </data>
