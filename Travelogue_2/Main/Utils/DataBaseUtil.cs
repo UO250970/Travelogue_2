@@ -1,5 +1,4 @@
-﻿using Java.Util;
-using Plugin.Settings;
+﻿using Plugin.Settings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +7,6 @@ using System.Threading.Tasks;
 using Travelogue_2.Main.BBDD;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
-using Xamarin.Forms;
 using Entry = Travelogue_2.Main.BBDD.Entry;
 using Image = Travelogue_2.Main.BBDD.Image;
 
@@ -80,7 +78,7 @@ namespace Travelogue_2.Main.Utils
 		{
             if (DataBase.ExistsJourneyByName(name))
             {
-                Alerter.AlertJourneyNameInUse();
+                _ = Alerter.AlertJourneyNameInUse();
                 return null;
             }
             else
@@ -123,6 +121,12 @@ namespace Travelogue_2.Main.Utils
             DataBase.UpdateDestiny(destiny);
         }
 
+        internal static void JourneyInsertEntry(int journeyId, int dayInt, string title)
+        {
+            JourneyModel temp = GetJourneyById(journeyId);
+            JourneyInsertEntry(temp, dayInt, title);
+        }
+
         public static EntryModel JourneyInsertEntry(JourneyModel journey, int dayInt, string title)
         {
             Day day = JourneyFromModel(journey).Days[dayInt - 1];
@@ -137,8 +141,14 @@ namespace Travelogue_2.Main.Utils
 
             return EntryToModel(entry);
         }
+        
+        internal static void JourneyInsertEvent(int journeyId, int dayInt, string title, string time, string address)
+        {
+            JourneyModel temp = GetJourneyById(journeyId);
+            JourneyInsertEvent(temp, dayInt, title, time, address);
+        }
 
-        internal static void JourneyInsertEvent(JourneyModel journey, int dayInt, string title, string address)
+        internal static void JourneyInsertEvent(JourneyModel journey, int dayInt, string title, string time, string address)
         {
             Day day = JourneyFromModel(journey).Days[dayInt - 1];
 
@@ -154,7 +164,13 @@ namespace Travelogue_2.Main.Utils
 
             DataBase.UpdateDay(day);
         }
-        
+
+        internal static void JourneyInsertReserv(int journeyId, int dayInt, int duration, string title, string address, string phoneNumber)
+        {
+            JourneyModel temp = GetJourneyById(journeyId);
+            JourneyInsertReserv(temp, dayInt, duration, title, address, phoneNumber);
+        }
+
         internal static void JourneyInsertReserv(JourneyModel journey, int dayInt, int duration, string title, string address, string phoneNumber)
         {
             List<Day> days = JourneyFromModel(journey).Days;
@@ -310,7 +326,7 @@ namespace Travelogue_2.Main.Utils
             }
             else
             {
-                Alerter.AlertDatesAlreadyInUse();
+                await Alerter.AlertDatesAlreadyInUse();
             }
             return true;
         }
@@ -323,6 +339,29 @@ namespace Travelogue_2.Main.Utils
             if (!image.Caption.Equals(temp.Caption)) temp.Caption = image.Caption;
 
             DataBase.UpdateImage(temp);
+            return true;
+        }
+
+        public static bool SaveEntry(EntryModel entry, DateTime daySelected)
+        {
+            Entry temp = EntryFromModel(entry);
+            Day day = temp.Day;
+
+            if (!entry.Title.Equals(temp.Title)) temp.Title = entry.Title;
+            if (!temp.Day.Date.Equals(daySelected.Date))
+            {
+                Day newDay = DataBase.GetDayFromDate(daySelected);
+                day.Entries.Remove(temp);
+                newDay.Entries.Add(temp);
+
+                DataBase.UpdateDay(day);
+                DataBase.UpdateDay(newDay);
+
+                temp.Day = newDay;
+                temp.DayId = newDay.Id;
+            }
+
+            if (DataBase.UpdateEntry(temp)) Alerter.AlertEntrySaved();
             return true;
         }
 
@@ -361,6 +400,20 @@ namespace Travelogue_2.Main.Utils
         public static bool DeleteJourney(int JourneyId)
         {
             if (DataBase.DeleteJourneyById(JourneyId)) Alerter.AlertJourneyDeleted();
+            return true;
+        }
+
+        public static bool DeleteEvent(EventModel Event)
+        {
+            Event temp = EventFromModel(Event);
+            if (DataBase.DeleteEvent(temp)) Alerter.AlertEventDeleted();
+            return true;
+        }
+
+        public static bool DeleteEntry(EntryModel Entry)
+        {
+            Entry temp = EntryFromModel(Entry);
+            if (DataBase.DeleteEntry(temp)) Alerter.AlertEntryDeleted();
             return true;
         }
 

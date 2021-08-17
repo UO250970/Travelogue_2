@@ -67,7 +67,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
         }
 
 		#region search
-		async internal void SearchDestinyC()
+		internal void SearchDestinyC()
 		{
             SearchText = string.Empty;
             SearchVisible = !SearchVisible;

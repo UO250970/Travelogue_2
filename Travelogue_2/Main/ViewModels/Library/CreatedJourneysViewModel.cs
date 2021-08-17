@@ -3,7 +3,6 @@ using System.Linq;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
-using Travelogue_2.Main.ViewModels.Journal;
 using Travelogue_2.Main.ViewModels.Journey;
 using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.Library.Create;
@@ -26,7 +25,6 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		public CreatedJourneysViewModel()
 		{
-
 			CreateJourneyCommand = new Command(() => CreateJourneyC());
 			SearchJourneyCommand = new Command(() => SearchJourneyC());
 

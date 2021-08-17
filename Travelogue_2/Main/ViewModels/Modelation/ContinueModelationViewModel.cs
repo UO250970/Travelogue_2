@@ -24,7 +24,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 		{
 		}
 
-		async void OnJourneySelected(Item journey)
+		void OnJourneySelected(Item journey)
 		{
 			if (journey == null)
 				return;

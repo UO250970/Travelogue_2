@@ -261,7 +261,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		#region OnAction
 
-		async void OnImageSelected(EntryImageModel image)
+		void OnImageSelected(EntryImageModel image)
 		{
 			if (image == null)
 				return;
@@ -270,7 +270,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 			//await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyViewModel.JourneyId)}={journey.Id}");
 		}
 
-		async void OnDaySelected(DayModel day)
+		void OnDaySelected(DayModel day)
 		{
 			if (day == null)
 				return;

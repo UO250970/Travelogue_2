@@ -610,6 +610,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Dirección.
+        /// </summary>
+        internal static string Location {
+            get {
+                return ResourceManager.GetString("Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Mapa.
         /// </summary>
         internal static string Map {
@@ -691,11 +700,38 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La entrada se ha eliminado.
+        /// </summary>
+        internal static string MessEntryDeleted {
+            get {
+                return ResourceManager.GetString("MessEntryDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La entrada se ha guardado correctamente.
+        /// </summary>
+        internal static string MessEntrySaved {
+            get {
+                return ResourceManager.GetString("MessEntrySaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a El evento se ha creado correctamente.
         /// </summary>
         internal static string MessEventCreated {
             get {
                 return ResourceManager.GetString("MessEventCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El evento se ha eliminado.
+        /// </summary>
+        internal static string MessEventDeleted {
+            get {
+                return ResourceManager.GetString("MessEventDeleted", resourceCulture);
             }
         }
         

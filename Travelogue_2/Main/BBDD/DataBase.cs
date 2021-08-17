@@ -232,6 +232,12 @@ namespace Travelogue_2.Main.BBDD
             return QueryAct(Act);
         }
 
+        public static Day GetDayFromDate(DateTime day)
+        {
+            Func<Day> Func = () => conn.GetAllWithChildren<Day>().FirstOrDefault(x => x.Date.CompareTo(day.Date) == 0);
+            return QueryFunc(Func);
+        }
+
         public static List<Day> GetDaysBetweenDates(DateTime dateIni, DateTime dateEnd)
         {
             Func<List<Day>> Func = () => conn.GetAllWithChildren<Day>().FindAll(x => (x.Date.CompareTo(dateIni.Date) >= 0)
@@ -286,6 +292,12 @@ namespace Travelogue_2.Main.BBDD
             return QueryAct(Act);
         }
 
+        public static bool DeleteEvent(Event evento)
+        {
+            void Act() => conn.Delete(evento);
+            return QueryAct(Act);
+        }
+
         #endregion
 
         #region Entry
@@ -309,6 +321,12 @@ namespace Travelogue_2.Main.BBDD
         public static bool UpdateEntry(Entry entry)
         {
             void Act() => conn.UpdateWithChildren(entry);
+            return QueryAct(Act);
+        }
+
+        public static bool DeleteEntry(Entry entry)
+        {
+            void Act() => conn.Delete(entry);
             return QueryAct(Act);
         }
         #endregion

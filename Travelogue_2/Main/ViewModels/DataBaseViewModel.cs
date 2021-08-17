@@ -19,7 +19,7 @@ namespace Travelogue_2.Main.ViewModels
 
 		public IDataStoreNU<Item> DataStore => DependencyService.Get<IDataStoreNU<Item>>();
 
-        public async Task ExecuteLoadDataCommand()
+        public void ExecuteLoadDataCommand()
         {
             IsBusy = true;
 

@@ -33,7 +33,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
             ExecuteLoadDataCommand();
 		}
 
-        public override async void LoadData() 
+        public override void LoadData() 
         {
             JourneyModel journey = DataBaseUtil.GetJourneyOnGoing();
 
@@ -42,12 +42,6 @@ namespace Travelogue_2.Main.ViewModels.Journey
                 JourneyId = journey.Id.ToString();
                 base.LoadData();
                 JourneyOnGoing = true;
-
-                //JourneyTemplateViewModel model = new JourneyTemplateViewModel();
-                //model.JourneyId = journey.Id;
-
-                //await Shell.Current.GoToAsync("PAGE_URI", model);
-                //JourneyId = journey.Id;
             }
 
         }

@@ -17,8 +17,6 @@ namespace Travelogue_2
             InitializeComponent();
             Routing.RegisterRoute(nameof(JourneyView), typeof(JourneyView));
             Routing.RegisterRoute(nameof(JourneySettingsView), typeof(JourneySettingsView));
-            Routing.RegisterRoute(nameof(CreateEventView), typeof(CreateEventView));
-            Routing.RegisterRoute(nameof(CreateEntryView), typeof(CreateEntryView)); 
 
             Routing.RegisterRoute(nameof(CreatedJourneysView), typeof(CreatedJourneysView));
             Routing.RegisterRoute(nameof(ClosedJourneysView), typeof(ClosedJourneysView));

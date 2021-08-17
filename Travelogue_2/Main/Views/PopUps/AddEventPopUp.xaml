@@ -32,10 +32,17 @@
 
                         <StackLayout Margin="20">
 
-                            <Label Text="{Binding Resources[Date]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                            <DatePicker Date="{Binding DaySelected, Mode=TwoWay}" FontSize="Medium" 
-                                    MaximumDate="{Binding MaxDaySelected}" MinimumDate="{Binding MinDaySelected}"/>
-
+                            <StackLayout Orientation="Horizontal">
+                                <Label HorizontalOptions="StartAndExpand" Text="{Binding Resources[Date]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                                <Label HorizontalOptions="StartAndExpand" Text="{Binding Resources[Time]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <DatePicker HorizontalOptions="FillAndExpand" x:Name="IniDatePickerEvent" 
+                                            Date="{Binding DaySelected, Mode=TwoWay}" FontSize="Medium" 
+                                            MaximumDate="{Binding MaxDaySelected}" MinimumDate="{Binding MinDaySelected}"/>
+                                <TimePicker HorizontalOptions="FillAndExpand" Time="{Binding Time, Mode=TwoWay}" Format="HH:mm" FontSize="Medium"/>
+                            </StackLayout>
+                            
                             <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
                             <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
 
@@ -85,9 +92,9 @@
                                 <Label HorizontalOptions="StartAndExpand" Text="{Binding Resources[EndDate]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal">
-                                <DatePicker HorizontalOptions="StartAndExpand" Date="{Binding IniDaySelected, Mode=TwoWay}" FontSize="Medium" 
+                                <DatePicker HorizontalOptions="FillAndExpand" Date="{Binding IniDaySelected, Mode=TwoWay}" FontSize="Medium" 
                                     MaximumDate="{Binding MaxDaySelected}" MinimumDate="{Binding MinDaySelected}"/>
-                                <DatePicker HorizontalOptions="StartAndExpand" Date="{Binding EndDaySelected, Mode=TwoWay}" FontSize="Medium" 
+                                <DatePicker HorizontalOptions="FillAndExpand" Date="{Binding EndDaySelected, Mode=TwoWay}" FontSize="Medium" 
                                     MaximumDate="{Binding MaxDaySelected}" MinimumDate="{Binding MinDaySelected}"/>
                             </StackLayout>
 

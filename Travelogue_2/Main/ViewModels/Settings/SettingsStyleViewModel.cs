@@ -45,7 +45,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
             Styles.Add(temp3);
         }
 
-        async void OnStyleSelected(Style style)
+        void OnStyleSelected(Style style)
         {
             if (style == null)
                 return;

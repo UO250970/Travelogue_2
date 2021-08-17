@@ -69,7 +69,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
 			await Shell.Current.GoToAsync($"{nameof(BackgroundSelectorView)}");
 		}
 
-		async void OnPageSelected(ImageModel page)
+		void OnPageSelected(ImageModel page)
 		{
 			if (page == null)
 				return;
@@ -78,7 +78,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
 			// This will push the ItemDetailPage onto the navigation stack
 		}
 
-		async void OnPageDelete(ImageModel page)
+		void OnPageDelete(ImageModel page)
         {
 			if (page == null)
 				return;

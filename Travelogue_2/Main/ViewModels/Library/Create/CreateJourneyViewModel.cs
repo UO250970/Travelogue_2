@@ -244,13 +244,12 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			//await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
 		}*/
 
-		async void OnDestinySelectedDelete(DestinyModel destiny)
+		void OnDestinySelectedDelete(DestinyModel destiny)
 		{
 			if (destiny == null)
 				return;
 
 			DestiniesSelected.Remove(destiny);
-
 		}
 	}
 }

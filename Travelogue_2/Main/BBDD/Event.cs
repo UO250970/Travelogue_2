@@ -43,7 +43,7 @@ namespace Travelogue_2.Main.BBDD
                 bool PhoneNumber = this.Title.Equals(temp.PhoneNumber);
 
                 return Title && Time && Address && Reserva && PhoneNumber;
-            } catch (Exception ex)
+            } catch
             {
                 return false;
             }

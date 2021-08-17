@@ -77,8 +77,8 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			SaveEntryCommand = new Command(() => SaveEntryC());
 			DeleteEntryCommand = new Command(() => DeleteEntryC());
 
-			SaveTextCommand = new Command(() => SaveyTextC());
-			DeleteTextCommand = new Command(() => DeleteTextC());
+			//SaveTextCommand = new Command(() => SaveyTextC());
+			//DeleteTextCommand = new Command(() => DeleteTextC());
 
 			CancelCommand = new Command(() => CancelC());
 		}
@@ -92,8 +92,8 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 				DaySelected = Days[int.Parse(DaySelectedNum)].Date;
 
-				MinDaySelected = Days.First().Date;
 				MaxDaySelected = Days.Last().Date;
+				MinDaySelected = Days.First().Date;
 			}
 		}
 
@@ -101,14 +101,12 @@ namespace Travelogue_2.Main.ViewModels.PopUps
         {
 			if (eventId != null)
             {
-				EventModel temp = DataBaseUtil.GetEventById( int.Parse(eventId) );
-
-				Evento = temp;
+				Evento = DataBaseUtil.GetEventById( int.Parse(eventId) );
 
 				if (Evento.Reservation) ReserVisible = true; 
 				else EventVisible = true;
 
-				Time = TimeSpan.Parse( temp.Time );
+				Time = TimeSpan.Parse( Evento.Time );
 			}
         }
 
@@ -120,6 +118,12 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 				Entry = temp;
 			}
+			if (eventId != null)
+            {
+				EventModel temp = DataBaseUtil.GetEventById( int.Parse(eventId) );
+
+				Evento = temp;
+            }
 		}
 
 		private EventModel evento;
@@ -168,7 +172,6 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		#endregion
 
 		#region Time
-
 		private TimeSpan time;
 		public TimeSpan Time
         {
@@ -207,50 +210,55 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		internal void CheckNewIniDate(DatePicker iniDatePicker)
 		{
-			if (!Evento.Reservation) Evento.EndDay = iniDatePicker.Date;
+			if (Evento != null && !Evento.Reservation) Evento.EndDay = iniDatePicker.Date;
 		}
 
 		internal void CheckNewIniDate(DatePicker iniDatePicker, DatePicker endDatePicker)
 		{
-			if (iniDatePicker.Date.CompareTo(Evento.EndDay.Date) > 0) endDatePicker.Date = iniDatePicker.Date;
+			if (Evento != null && iniDatePicker.Date.CompareTo(Evento.EndDay.Date) > 0) endDatePicker.Date = iniDatePicker.Date;
 		}
 
 		internal void CheckNewEndDate(DatePicker iniDatePicker, DatePicker endDatePicker)
 		{
-			if (iniDatePicker.Date.CompareTo(Evento.EndDay.Date) > 0) iniDatePicker.Date = endDatePicker.Date;
+			if (Evento != null && iniDatePicker.Date.CompareTo(Evento.EndDay.Date) > 0) iniDatePicker.Date = endDatePicker.Date;
 		}
 
-		async internal void SaveEventC()
+        internal void SaveEventC()
+        {
+            //Evento.Time = Time.Hours + ":" + Time.Minutes;
+            DataBaseUtil.SaveEvent(Evento);
+            Back();
+        }
+
+        internal void DeleteEventC()
 		{
-			Evento.Time = Time.Hours + ":" + Time.Minutes;
-			DataBaseUtil.SaveEvent(Evento);
+			DataBaseUtil.DeleteEvent(Evento);
 			Back();
 		}
 
-		async internal void DeleteEventC()
+		internal void SaveEntryC()
 		{
-
+			DataBaseUtil.SaveEntry(Entry, DaySelected);
+			Back();
 		}
 
-		async internal void SaveEntryC()
+		internal void DeleteEntryC()
 		{
-
+			DataBaseUtil.DeleteEntry(Entry);
+			Back();
 		}
 
-		async internal void DeleteEntryC()
+		/*async internal void SaveyTextC()
 		{
-
-		}
-
-		async internal void SaveyTextC()
-		{
-
+			DataBaseUtil.SaveText(Text);
+			Back();
 		}
 
 		async internal void DeleteTextC()
 		{
-
-		}
+			DataBaseUtil.DeleteText(Text);
+			Back();
+		}*/
 
 		async internal void CancelC()
 		{

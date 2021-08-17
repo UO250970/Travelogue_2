@@ -291,6 +291,9 @@
   <data name="LocalizationFirstDay" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="Location" xml:space="preserve">
+    <value>Address</value>
+  </data>
   <data name="Map" xml:space="preserve">
     <value>Map</value>
   </data>
@@ -318,8 +321,17 @@
   <data name="MessEntryCreated" xml:space="preserve">
     <value>Entry created correctly</value>
   </data>
+  <data name="MessEntryDeleted" xml:space="preserve">
+    <value>Entry deletec correctly</value>
+  </data>
+  <data name="MessEntrySaved" xml:space="preserve">
+    <value>Entry saved correctly</value>
+  </data>
   <data name="MessEventCreated" xml:space="preserve">
     <value>Event created correctly</value>
+  </data>
+  <data name="MessEventDeleted" xml:space="preserve">
+    <value>Event deleted correctly</value>
   </data>
   <data name="MessEventSaved" xml:space="preserve">
     <value>Event saved correctly</value>

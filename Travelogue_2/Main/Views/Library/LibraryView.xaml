@@ -17,7 +17,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" AutomationId="CreatedJourneysId" Text="{Binding Resources[CreatedJourneys]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
-                        <Label Grid.Column="1" Text="&#xea42;" FontFamily="{StaticResource Icon}" FontSize="Title"  VerticalTextAlignment="Center" HorizontalOptions="Center"
+                        <Label Grid.Column="1" AutomationId="CreatedJourneysButton" Text="&#xea42;" FontFamily="{StaticResource Icon}" FontSize="Title"  VerticalTextAlignment="Center" HorizontalOptions="Center"
                                TextColor="{DynamicResource Primary}">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding CreatedJourneysViewCommand}"/>
@@ -57,8 +57,8 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Text="{Binding Resources[ClosedJourneys]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center" HeightRequest="40"/>
-                        <Label Grid.Column="1" Text="&#xea42;" FontFamily="{StaticResource Icon}" FontSize="Title"  VerticalTextAlignment="Center" HorizontalOptions="Center"
+                        <Label Grid.Column="0" AutomationId="ClosedJourneysId" Text="{Binding Resources[ClosedJourneys]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center" HeightRequest="40"/>
+                        <Label Grid.Column="1" AutomationId="ClosedJourneysButton" Text="&#xea42;" FontFamily="{StaticResource Icon}" FontSize="Title"  VerticalTextAlignment="Center" HorizontalOptions="Center"
                                TextColor="{DynamicResource Primary}">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding ClosedJourneysViewCommand}"/>

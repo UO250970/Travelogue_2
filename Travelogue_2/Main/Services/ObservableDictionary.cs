@@ -71,10 +71,7 @@ namespace Travelogue_2.Main.Services
             return !Equals(default(ObservableKeyValuePair<TKey, TValue>), r);
         }
 
-        bool Equals<TKey>(TKey a, TKey b)
-        {
-            return EqualityComparer<TKey>.Default.Equals(a, b);
-        }
+        bool Equals<TKey>(TKey a, TKey b) => EqualityComparer<TKey>.Default.Equals(a, b);
 
         private ObservableCollection<ObservableKeyValuePair<TKey, TValue>> ThisAsCollection()
         {

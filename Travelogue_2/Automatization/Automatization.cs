@@ -109,7 +109,7 @@ namespace Travelogue_2.Automatization
 
 			DataBaseUtil.EntryInsertImage(entry, Image1, "Nombre", "foot");
 			DataBaseUtil.EntryInsertText(entry, "Entry text");
-			DataBaseUtil.JourneyInsertEvent(journey, 1, "Concierto Manin", "Calle lapus");
+			DataBaseUtil.JourneyInsertEvent(journey, 1, "Concierto Manin", "12:12", "Calle lapus");
 			DataBaseUtil.JourneyInsertReserv(journey, 1, 3, "Concierto Manin", "Calle lapus", "985 3816 36");
 
 			//ImageModel info2 = new ImageModel(entry, "Path", "Nombre", "foot", DateTime.Now); 
@@ -131,7 +131,7 @@ namespace Travelogue_2.Automatization
 
 			DataBaseUtil.EntryInsertImage(entry, Image1, "Nombre", "foot");
 			DataBaseUtil.EntryInsertText(entry, "Entry text");
-			DataBaseUtil.JourneyInsertEvent(journey, 1, "Concierto Manin", "Calle lapus");
+			DataBaseUtil.JourneyInsertEvent(journey, 1, "Concierto Manin", "12:12", "Calle lapus");
 			DataBaseUtil.JourneyInsertReserv(journey, 1, 3, "Reserva hotel", "Calle dandy", "985 3816 36");
 		}
 
@@ -145,11 +145,11 @@ namespace Travelogue_2.Automatization
 			DataBaseUtil.ClearDataBase();
 		}
 
-		public static async void PrepareBd(ISettings properties)
+		public static void PrepareBd(ISettings properties)
 		{
-			//ClearDB();
+            //ClearDB();
 
-			CheckPermissionsAsync();
+            _ = CheckPermissionsAsync();
 
 			if (DataBaseUtil.HasJourneis() != "0")
 			{

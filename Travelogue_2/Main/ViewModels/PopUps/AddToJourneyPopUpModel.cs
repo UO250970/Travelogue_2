@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using Java.Lang;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
@@ -78,16 +79,13 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			if (JourneyId != null && DaySelectedNum != null)
 			{
 				// TODO - Pilla el journey de BBDD y pilla el list de dias o whatever
-				ObservableCollection<DateTime> Days = new ObservableCollection<DateTime>
-				{
-					new DateTime(2021, 02, 02),
-					new DateTime(2021, 02, 03),
-					new DateTime(2021, 02, 04)
-				};
-
-				DaySelected = Days[int.Parse(DaySelectedNum)];
-				MinDaySelected = Days.First();
-				MaxDaySelected = Days.Last();
+				Days = DataBaseUtil.GetDaysFromJourneyId( Integer.ParseInt(JourneyId) )
+					.OrderBy(x => x.Date)
+					.ToList();
+				
+				DaySelected = Days[int.Parse(DaySelectedNum)].Date;
+				MaxDaySelected = Days.Last().Date;
+				MinDaySelected = Days.First().Date;
 			}
 		}
 
@@ -95,6 +93,10 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		public string Title { get; set; } = string.Empty;
 
+		#endregion
+
+		#region Days
+		List<DayModel> Days { get; set; }
 		#endregion
 
 		#region DaySelected
@@ -167,6 +169,15 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		#endregion
 
+		#region Time
+		private TimeSpan time = new TimeSpan();
+		public TimeSpan Time
+		{
+			get => time;
+			set => SetProperty(ref time, value);
+		}
+		#endregion
+
 		#region Location
 
 		private string location = string.Empty;
@@ -231,10 +242,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		#region EventCommands
 		async internal void CreateEventC()
-		{ // TO-DO Aqui mas alante podría pasarle el ID del Day y buscarlo en BBDD....
-		  //await Shell.Current.GoToAsync($"{nameof(CreateEventView)}?{nameof(CreateEventViewModel.DaySelected)}={JourneyDays.IndexOf(DaySelected)}&{nameof(CreateEventViewModel.JourneyId)}={JourneyId}");
-		  // TO-DO Chekear que todo no null y crear. 
-
+		{
 			if (DaySelected == null)
 			{
 				await Alerter.AlertNoDaySelected();
@@ -245,15 +253,14 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			}
 			else
 			{
-				await Alerter.AlertEventCreated();
-				await Shell.Current.GoToAsync("..");
+				int dayInt = Days.FindIndex(x => x.Date.Equals(DaySelected.Date)) + 1;
+				DataBaseUtil.JourneyInsertEvent( Integer.ParseInt(JourneyId), dayInt, Title, Time.ToString(), Location);
+				Back();
 			}
 		}
-		#endregion 
 
 		async internal void CreateReservationC()
 		{
-
 			if (IniDaySelected == null && EndDaySelected == null)
 			{
 				await Alerter.AlertNoDaySelected();
@@ -264,10 +271,13 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			}
 			else
 			{
-				await Alerter.AlertReservationCreated();
-				await Shell.Current.GoToAsync("..");
+				int duration = (int)(EndDaySelected - IniDaySelected).TotalDays + 1;
+				int dayInt = Days.FindIndex(x => x.Date.Equals(IniDaySelected.Date)) + 1;
+				DataBaseUtil.JourneyInsertReserv( Integer.ParseInt(JourneyId), dayInt, duration, Title, Location, PhoneNumber);
+				Back();
 			}
 		}
+		#endregion
 
 		#region EntryCommands
 		async internal void CreateEntryC()
@@ -281,15 +291,16 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 				await Alerter.AlertNoTitleInEntry();
 			} else
 			{
-				await Alerter.AlertEntryCreated();
-				await Shell.Current.GoToAsync("..");
+				int dayInt = Days.FindIndex(x => x.Date.Equals(IniDaySelected.Date)) + 1;
+				DataBaseUtil.JourneyInsertEntry(Integer.ParseInt(JourneyId), dayInt, Title);
+				Back();
 			}
 		}
 		#endregion
 
 		async internal void AddImageC()
 		{
-			EntryImageModel success = (EntryImageModel) await CameraUtil.Photo(this);
+			EntryImageModel success = await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				Image = success;
@@ -304,8 +315,9 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			}
 			else
 			{
+
 				await Alerter.AlertTextAdded();
-				await Shell.Current.GoToAsync("..");
+				Back();
 			}
 		}
 
@@ -318,7 +330,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			else
 			{
 				await Alerter.AlertImageAdded();
-				await Shell.Current.GoToAsync("..");
+				Back();
 			}
 		}
 
@@ -329,11 +341,11 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			{
 				bool result = await Alerter.AlertInfoWillBeLost();
 
-				if (result) await Shell.Current.GoToAsync("..");
+				if (result) Back();
 			}
 			else
 			{
-				await Shell.Current.GoToAsync("..");
+				Back();
 			}
 		}
 	}

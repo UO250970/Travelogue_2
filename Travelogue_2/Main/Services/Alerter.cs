@@ -1,7 +1,4 @@
-﻿using Java.Util;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Services
@@ -153,6 +150,9 @@ namespace Travelogue_2.Main.Services
 
 		public static async Task AlertEventSaved()
 			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEventSaved"], App.LocResources["Ok"]);
+		
+		public static async Task AlertEntrySaved()
+			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEntrySaved"], App.LocResources["Ok"]);
 
 		#endregion
 
@@ -185,7 +185,11 @@ namespace Travelogue_2.Main.Services
 		internal static async Task<bool> AlertDayInfoWillBeLost() 
 			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessInfoWillBeLost"], App.LocResources["Ok"], App.LocResources["Cancel"]);
 
+		internal static async Task AlertEventDeleted()
+			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEventDeleted"], App.LocResources["Ok"]);
 
+		internal static async Task AlertEntryDeleted()
+			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEntryDeleted"], App.LocResources["Ok"]);
 		#endregion
 
 		/** Photo */
