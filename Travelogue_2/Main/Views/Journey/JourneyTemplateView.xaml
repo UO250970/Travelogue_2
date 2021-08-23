@@ -12,7 +12,7 @@
 
         <DataTemplate x:Key="textTemplate">
 
-            <StackLayout effects:LongPressedEffect.Command="{Binding Path=BindingContext.EditOrDeleteEntryCommand, Source={x:Reference JourneyTemplateViewName}}"
+            <StackLayout AutomationId="{Binding .Id}" effects:LongPressedEffect.Command="{Binding Path=BindingContext.EditOrDeleteEntryCommand, Source={x:Reference JourneyTemplateViewName}}"
                     effects:LongPressedEffect.CommandParameter="{Binding .}">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -82,7 +82,7 @@
         <DataTemplate x:Key="eventTemplate">
 
             <StackLayout>
-                <StackLayout Orientation="Horizontal" 
+                <StackLayout Orientation="Horizontal" AutomationId="{Binding .Id}"
                                              effects:LongPressedEffect.Command="{Binding BindingContext.EditOrDeleteEventCommand, Source={x:Reference JourneyTemplateViewName}}"
                                              effects:LongPressedEffect.CommandParameter="{Binding .}">
 
@@ -104,7 +104,7 @@
         <DataTemplate x:Key="reservTemplate">
 
             <StackLayout>
-                <StackLayout Orientation="Horizontal" 
+                <StackLayout AutomationId="{Binding .Id}" Orientation="Horizontal" 
                                              effects:LongPressedEffect.Command="{Binding BindingContext.EditOrDeleteEventCommand, Source={x:Reference JourneyTemplateViewName}}"
                                              effects:LongPressedEffect.CommandParameter="{Binding .}">
 

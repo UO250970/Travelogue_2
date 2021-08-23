@@ -21,7 +21,7 @@ namespace UITest
             //app = ConfigureApp.Android.StartApp();
 
             app = ConfigureApp.Android
-                 .ApkFile(@"C:\Users\lmendezl\AppData\Local\Xamarin\Mono for Android\Archives\2021-08-16\Travelogue_2.Android 8-16-21 3.59 PM.apkarchive\com.companyname.travelogue_2.apk")
+                 .ApkFile(@"C:\Users\lmendezl\AppData\Local\Xamarin\Mono for Android\Archives\2021-08-21\Travelogue_2.Android 8-21-21 8.15 PM.apkarchive\com.companyname.travelogue_2.apk")
                  .DeviceSerial("6PQ0217821002256")
                  .PreferIdeSettings()
                  .EnableLocalScreenshots()
@@ -48,22 +48,47 @@ namespace UITest
         [Test]
         public void CreateJourneyTest()
         {
-            //app.Back();
             app.Repl();
         }
 
         [Test]
-        public void ModifyEventTest()
+        public void ModifyEventInFuturTest()
         {
-            //app.Back();
             app.Repl();
-            app.Tap(x => x.Marked("StandardTrip Futur"));
-            
+            app.WaitForElement("StandardTrip Futur", timeout: TimeSpan.FromSeconds(100));
+            app.Tap(x => x.Marked("2"));
+
             // TODO - Este se quitará mas adelante también
+            app.WaitForElement("Ok", timeout: TimeSpan.FromSeconds(100));
             app.Tap(x => x.Marked("Ok"));
 
+            app.WaitForElement("Concierto Manin", timeout: TimeSpan.FromSeconds(100));
+            app.TouchAndHold(x => x.Marked("Concierto Manin"));
 
-            Assert.IsNotEmpty(app.Query("CreatedJourneysId"));
+            app.WaitForElement("Fecha", timeout: TimeSpan.FromSeconds(100));
+            app.Tap(x => x.Marked("DateSelectorE"));
+
+            DateTime iniDate = DateTime.Today.AddDays(3);
+            DateTime endDate = DateTime.Today.AddDays(5);
+
+            int month = endDate.Month - 1;
+            int day = endDate.Day; // de primer a último día
+            int year = endDate.Year;
+
+            app.Query(x => x.Class("datePicker").Invoke("updateDate", year, month, day));
+            app.WaitForElement(endDate.Date.ToString("dd/MM/yyyy"), timeout: TimeSpan.FromSeconds(100));
+            app.Tap(x => x.Marked("Cancelar"));
+
+            Assert.IsNotEmpty(app.Query(iniDate.Date.ToString("dd/MM/yyyy")));
+
+            app.Tap(x => x.Marked("DateSelectorE"));
+            app.Query(x => x.Class("datePicker").Invoke("updateDate", year, month, day));
+            app.WaitForElement(endDate.Date.ToString("dd/MM/yyyy"), timeout: TimeSpan.FromSeconds(100));
+            app.Tap(x => x.Marked("Aceptar"));
+
+            Assert.IsNotEmpty(app.Query(endDate.Date.ToString("dd/MM/yyyy")));
+
+            //Assert.IsNotEmpty(app.Query("CreatedJourneysId"));
 
         }
 

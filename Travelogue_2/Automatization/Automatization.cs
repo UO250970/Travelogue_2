@@ -110,7 +110,7 @@ namespace Travelogue_2.Automatization
 			DataBaseUtil.EntryInsertImage(entry, Image1, "Nombre", "foot");
 			DataBaseUtil.EntryInsertText(entry, "Entry text");
 			DataBaseUtil.JourneyInsertEvent(journey, 1, "Concierto Manin", "12:12", "Calle lapus");
-			DataBaseUtil.JourneyInsertReserv(journey, 1, 3, "Concierto Manin", "Calle lapus", "985 3816 36");
+			DataBaseUtil.JourneyInsertReserv(journey, 1, 3, "Hotel", "Calle milagros", "985 3816 36");
 
 			//ImageModel info2 = new ImageModel(entry, "Path", "Nombre", "foot", DateTime.Now); 
 

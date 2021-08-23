@@ -23,12 +23,12 @@
                     <StackLayout>
 
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="&#xea0f;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand">
+                            <Label AutomationId="CancelButtonE" Text="&#xea0f;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding CancelCommand}"/>
                                 </Label.GestureRecognizers>
                             </Label>
-                            <Label Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
+                            <Label AutomationId="SaveButtonE" Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding SaveEventCommand}"/>
                                 </Label.GestureRecognizers>
@@ -42,17 +42,17 @@
                                 <Label HorizontalOptions="StartAndExpand" Text="{Binding Resources[Time]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal">
-                                <DatePicker HorizontalOptions="FillAndExpand" x:Name="IniDatePickerEvent" 
+                                <DatePicker AutomationId="DateSelectorE" HorizontalOptions="FillAndExpand" x:Name="IniDatePickerEvent" 
                                             Date="{Binding Evento.IniDay, Mode=TwoWay}" FontSize="Medium" 
                                             MaximumDate="{Binding MaxDaySelected}" DateSelected="CheckNewIniDateEvent" MinimumDate="{Binding MinDaySelected}"/>
-                                <TimePicker HorizontalOptions="FillAndExpand" Time="{Binding Time, Mode=TwoWay}" FontSize="Medium"/>
+                                <TimePicker AutomationId="TimeSelectorE" HorizontalOptions="FillAndExpand" Time="{Binding Time, Mode=TwoWay}" FontSize="Medium"/>
                             </StackLayout>
                             
                             <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                            <Entry Text="{Binding Evento.Title, Mode=TwoWay}" FontSize="Medium" />
+                            <Entry AutomationId="TitleSelectorE" Text="{Binding Evento.Title, Mode=TwoWay}" FontSize="Medium" />
 
                             <Label Text="{Binding Resources[Address]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                            <Entry Text="{Binding Evento.Address, Mode=TwoWay}" FontSize="Medium" />
+                            <Entry AutomationId="AddressSelectorE" Text="{Binding Evento.Address, Mode=TwoWay}" FontSize="Medium" />
 
                         </StackLayout>
                     </StackLayout>
@@ -60,7 +60,7 @@
                 </Frame>
 
                 <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="20, 0">
-                    <Button Text="{Binding Resources[Delete]}" HorizontalOptions="FillAndExpand" Command="{Binding DeleteEventCommand}" BackgroundColor="{DynamicResource Red}"/>
+                    <Button AutomationId="DeleteButtonE" Text="{Binding Resources[Delete]}" HorizontalOptions="FillAndExpand" Command="{Binding DeleteEventCommand}" BackgroundColor="{DynamicResource Red}"/>
                 </StackLayout>
 
                 <Grid.GestureRecognizers>
@@ -83,12 +83,12 @@
                     <StackLayout>
 
                         <StackLayout Orientation="Horizontal">
-                            <Label Text="&#xea0f;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand">
+                            <Label AutomationId="CancelButtonR" Text="&#xea0f;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding CancelCommand}"/>
                                 </Label.GestureRecognizers>
                             </Label>
-                            <Label Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
+                            <Label AutomationId="SaveButtonR" Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding SaveEventCommand}"/>
                                 </Label.GestureRecognizers>
@@ -102,24 +102,24 @@
                                 <Label HorizontalOptions="StartAndExpand" Text="{Binding Resources[EndDate]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal">
-                                <DatePicker HorizontalOptions="FillAndExpand" x:Name="IniDatePicker"
+                                <DatePicker AutomationId="DateSelectorRI" HorizontalOptions="FillAndExpand" x:Name="IniDatePicker"
                                             Date="{Binding Evento.IniDay, Mode=TwoWay}" FontSize="Medium" 
                                             MaximumDate="{Binding MaxDaySelected}" 
                                             DateSelected="CheckNewIniDate" MinimumDate="{Binding MinDaySelected}"/>
-                                <DatePicker HorizontalOptions="FillAndExpand" x:Name="EndDatePicker" 
+                                <DatePicker AutomationId="DateSelectorRE" HorizontalOptions="FillAndExpand" x:Name="EndDatePicker" 
                                             Date="{Binding Evento.EndDay, Mode=TwoWay}" FontSize="Medium" 
                                             MaximumDate="{Binding MaxDaySelected}" 
                                             DateSelected="CheckNewEndDate" MinimumDate="{Binding MinDaySelected}"/>
                             </StackLayout>
 
                             <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                            <Entry Text="{Binding Evento.Title, Mode=TwoWay}" FontSize="Medium" />
+                            <Entry AutomationId="TitleSelectorR" Text="{Binding Evento.Title, Mode=TwoWay}" FontSize="Medium" />
 
                             <Label Text="{Binding Resources[Address]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                            <Entry Text="{Binding Evento.Address, Mode=TwoWay}" FontSize="Medium" />
+                            <Entry AutomationId="TitleSelectorR" Text="{Binding Evento.Address, Mode=TwoWay}" FontSize="Medium" />
 
                             <Label Text="{Binding Resources[PhoneNumber]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                            <Entry Text="{Binding Evento.PhoneNumber, Mode=TwoWay}" FontSize="Medium" />
+                            <Entry AutomationId="TitleSelectorR" Text="{Binding Evento.PhoneNumber, Mode=TwoWay}" FontSize="Medium" />
 
                         </StackLayout>
                     </StackLayout>
@@ -127,7 +127,7 @@
                 </Frame>
 
                 <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="20, 0">
-                    <Button Text="{Binding Resources[Delete]}" HorizontalOptions="FillAndExpand" Command="{Binding DeleteEventCommand}" BackgroundColor="{DynamicResource Red}"/>
+                    <Button AutomationId="DeleteButtonR" Text="{Binding Resources[Delete]}" HorizontalOptions="FillAndExpand" Command="{Binding DeleteEventCommand}" BackgroundColor="{DynamicResource Red}"/>
                 </StackLayout>
 
                 <Grid.GestureRecognizers>
