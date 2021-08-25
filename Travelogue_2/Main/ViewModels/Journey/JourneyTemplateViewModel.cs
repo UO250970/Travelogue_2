@@ -134,7 +134,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 				JourneyDays.Clear();
 				temp.First(x => x.Date.Equals(DaySelected.Date))?.Select();
 
-				JourneyDays = new ObservableCollection<DayModel>(temp);
+				JourneyDays = new ObservableCollection<DayModel>( temp.OrderBy(x => x.Date).ToList() );
 
 				DaySelected = JourneyDays[DaySelectedNum];
 

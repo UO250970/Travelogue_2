@@ -296,7 +296,6 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 				Back();
 			}
 		}
-		#endregion
 
 		async internal void AddImageC()
 		{
@@ -333,10 +332,11 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 				Back();
 			}
 		}
+		#endregion
 
 		async internal void CancelC()
 		{
-			if (Title != string.Empty || Location != string.Empty || PhoneNumber != string.Empty 
+			if (Title != string.Empty || Location != string.Empty || PhoneNumber != string.Empty
 				|| Text != string.Empty || Caption != string.Empty)
 			{
 				bool result = await Alerter.AlertInfoWillBeLost();

@@ -183,7 +183,7 @@ namespace Travelogue_2.Main.Services
 			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessJourneyDeleted"], App.LocResources["Ok"]);
 
 		internal static async Task<bool> AlertDayInfoWillBeLost() 
-			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessInfoWillBeLost"], App.LocResources["Ok"], App.LocResources["Cancel"]);
+			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessDayInfoWillBeLost"], App.LocResources["Ok"], App.LocResources["Cancel"]);
 
 		internal static async Task AlertEventDeleted()
 			=> await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEventDeleted"], App.LocResources["Ok"]);

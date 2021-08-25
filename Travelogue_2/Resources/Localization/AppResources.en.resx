@@ -309,6 +309,9 @@
   <data name="MessDatesAlreadyInUse" xml:space="preserve">
     <value>Some of the dates are already in use in other journeys</value>
   </data>
+  <data name="MessDayInfoWillBeLost" xml:space="preserve">
+    <value>A day with data will be deleted. Continue?</value>
+  </data>
   <data name="MessDeleteJourney" xml:space="preserve">
     <value>Do you want to delete the journey? (Entries and events will be deleted)</value>
   </data>

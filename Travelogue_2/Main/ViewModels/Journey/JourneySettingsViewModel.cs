@@ -5,6 +5,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Travelogue_2.Main.Utils;
 using System;
+using System.Collections.Generic;
 
 namespace Travelogue_2.Main.ViewModels.Journey
 {
@@ -40,8 +41,6 @@ namespace Travelogue_2.Main.ViewModels.Journey
 			MoreInfoCommand = new Command<string>((x) => MoreInfoC(x));
 			PhoneNumberTappedCommand = new Command<string>((x) => PhoneNumberTappedC(x));
 			DeleteJourneyCommand = new Command(x => DeleteJourneyC());
-
-			//ExecuteLoadDataCommand();
 		}
 
 		public override void LoadData()
@@ -66,27 +65,6 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 				JourneyDestinies = new ObservableCollection<DestinyModel>(DataBaseUtil.GetDestiniesFromJourney(journey));
 			}
-
-			/*journeyId = "1";
-			JourneyName = "Prueba titulo";
-
-			JourneyDestinies.Clear();
-
-			DestinyModel temp = new DestinyModel();
-			Destiny tempDestiny = CommonVariables.AvailableDestinies.Find(x => x.Name == "Canada");
-			temp.Destiny = tempDestiny.Name;
-			temp.Code = tempDestiny.Code;
-			temp.Currency = tempDestiny.Currency;
-			Dictionary<string, string> tempEmbassies = new Dictionary<string, string>();
-			foreach (Embassy embassy in tempDestiny.Embassies)
-			{
-				tempEmbassies.Add(embassy.City, embassy.PhoneNumber);
-			}
-			temp.Embassies = tempEmbassies;
-
-			JourneyDestinies.Add(temp);
-
-			coverImage.ImageSour = CommonVariables.GetGenericImage(); */
 		}
 
 		private JourneyModel journey;
@@ -217,7 +195,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		{
 			Journey.IniDate = IniDate;
 			Journey.EndDate = EndDate;
-			if( await DataBaseUtil.SaveJourney(Journey) ) base.Back();
+			if( await DataBaseUtil.SaveJourney(Journey) && DataBaseUtil.SaveJourneyDestinies(Journey, new List<DestinyModel>(JourneyDestinies)) ) base.Back();
 		}
 
 	}

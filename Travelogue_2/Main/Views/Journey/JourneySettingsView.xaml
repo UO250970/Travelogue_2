@@ -74,7 +74,7 @@
                                     <StackLayout>
 
                                         <Label x:Name="DestinyName" FontSize="Title" 
-                                               Text="{Binding .Destiny}"/>
+                                               Text="Holi"/>
                                         <Grid x:Name="DestinyInfo" Margin="5">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="4*" />
