@@ -139,7 +139,8 @@ namespace Travelogue_2.Automatization
 
 		private static void CreateFinished()
 		{
-			DataBaseUtil.CreateJourney("StandardTrip Finished", DateTime.Today.AddDays(-5), DateTime.Today.Date.AddDays(-3));
+			JourneyModel journey = DataBaseUtil.CreateJourney("StandardTrip Finished", DateTime.Today.AddDays(-5), DateTime.Today.Date.AddDays(-3));
+			DataBaseUtil.JourneyInsertEvent(journey, 2, "Concierto Manin", "12:12", "Calle lapus");
 		}
 
 		private static void ClearDB()

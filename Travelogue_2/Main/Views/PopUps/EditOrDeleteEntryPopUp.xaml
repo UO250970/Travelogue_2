@@ -22,12 +22,12 @@
                 <StackLayout>
 
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="&#xea0f;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand">
+                        <Label AutomationId="CancelButton" Text="&#xea0f;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding CancelCommand}"/>
                             </Label.GestureRecognizers>
                         </Label>
-                        <Label Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
+                        <Label AutomationId="SaveButton" Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding SaveEntryCommand}"/>
                             </Label.GestureRecognizers>

@@ -21,16 +21,16 @@ namespace UITest
             //app = ConfigureApp.Android.StartApp();
 
             app = ConfigureApp.Android
-                 .ApkFile(@"C:\Users\lmendezl\AppData\Local\Xamarin\Mono for Android\Archives\2021-08-21\Travelogue_2.Android 8-21-21 8.15 PM.apkarchive\com.companyname.travelogue_2.apk")
+                 .ApkFile(@"C:\Users\Lulu\AppData\Local\Xamarin\Mono for Android\Archives\2021-08-25\Travelogue_2.Android 8-25-21 6.50 PM.apkarchive\com.companyname.travelogue_2.apk")
                  .DeviceSerial("6PQ0217821002256")
                  .PreferIdeSettings()
                  .EnableLocalScreenshots()
                  .StartApp();
 
             // TODO - Esto se quitará mas adelante...
-            app.Tap(x => x.Marked("Ok"));
-            app.Tap(x => x.Marked("Ok"));
-            app.Tap(x => x.Marked("Ok"));
+            app.Tap(x => x.Marked(Variables.OkButton));
+            app.Tap(x => x.Marked(Variables.OkButton));
+            app.Tap(x => x.Marked(Variables.OkButton));
         }
 
         /** Navegación básica por las distintas lengüetas del menú */
@@ -51,22 +51,31 @@ namespace UITest
             app.Repl();
         }
 
-        [Test]
-        public void ModifyEventInFuturTest()
-        {
-            app.Repl();
+        public void EnterFuturTrip()
+		{
             app.WaitForElement("StandardTrip Futur", timeout: TimeSpan.FromSeconds(100));
             app.Tap(x => x.Marked("2"));
 
-            // TODO - Este se quitará mas adelante también
-            app.WaitForElement("Ok", timeout: TimeSpan.FromSeconds(100));
-            app.Tap(x => x.Marked("Ok"));
+            app.WaitForElement("Concierto Manin", timeout: TimeSpan.FromSeconds(100));
+        }
+
+        public void EnterPastTrip()
+        {
+            app.WaitForElement("StandardTrip Finished", timeout: TimeSpan.FromSeconds(100));
+            app.Tap(x => x.Marked("2"));
 
             app.WaitForElement("Concierto Manin", timeout: TimeSpan.FromSeconds(100));
+        }
+
+        [Test]
+        public void ModifyEventTest()
+        {
+            //app.Repl();
+            EnterFuturTrip();
             app.TouchAndHold(x => x.Marked("Concierto Manin"));
 
             app.WaitForElement("Fecha", timeout: TimeSpan.FromSeconds(100));
-            app.Tap(x => x.Marked("DateSelectorE"));
+            app.Tap(x => x.Marked(Variables.DateSelector));
 
             DateTime iniDate = DateTime.Today.AddDays(3);
             DateTime endDate = DateTime.Today.AddDays(5);
@@ -75,27 +84,112 @@ namespace UITest
             int day = endDate.Day; // de primer a último día
             int year = endDate.Year;
 
-            app.Query(x => x.Class("datePicker").Invoke("updateDate", year, month, day));
-            app.WaitForElement(endDate.Date.ToString("dd/MM/yyyy"), timeout: TimeSpan.FromSeconds(100));
-            app.Tap(x => x.Marked("Cancelar"));
+            TimeSpan time = DateTime.Now.AddHours(1).AddMinutes(5).TimeOfDay;
 
-            Assert.IsNotEmpty(app.Query(iniDate.Date.ToString("dd/MM/yyyy")));
+            Assert.IsNotEmpty(app.Query(iniDate.Date.ToString(Variables.DateFormat)));
 
-            app.Tap(x => x.Marked("DateSelectorE"));
-            app.Query(x => x.Class("datePicker").Invoke("updateDate", year, month, day));
-            app.WaitForElement(endDate.Date.ToString("dd/MM/yyyy"), timeout: TimeSpan.FromSeconds(100));
-            app.Tap(x => x.Marked("Aceptar"));
+            PickDateEvent(year, month, day);
+            PickTimeEvent(time.Hours, time.Minutes);
 
-            Assert.IsNotEmpty(app.Query(endDate.Date.ToString("dd/MM/yyyy")));
+            Assert.IsNotEmpty(app.Query(endDate.Date.ToString(Variables.DateFormat)));
+            Assert.IsNotEmpty(app.Query(time.ToString(Variables.TimeFormat)));
 
-            //Assert.IsNotEmpty(app.Query("CreatedJourneysId"));
+            SaveEventButton();
+            Assert.IsEmpty(app.Query("Concierto Manin"));
 
+            app.Tap(x => x.Marked(day.ToString()));
+            Assert.IsNotEmpty(app.Query("Concierto Manin"));
+            Assert.IsNotEmpty(app.Query("Calle lapus"));
+            Assert.IsEmpty(app.Query("Concierto Manin 2"));
+            Assert.IsEmpty(app.Query("Calle lapus 1"));
+
+            app.TouchAndHold(x => x.Marked("Concierto Manin"));
+
+            app.EnterText(x => x.Marked(Variables.TitleSelector), " 2");
+            app.EnterText(x => x.Marked(Variables.AddressSelector), " 1");
+            SaveEventButton();
+            app.Tap(x => x.Marked(day.ToString()));
+            Assert.IsEmpty(app.Query("Concierto Manin"));
+            Assert.IsEmpty(app.Query("Calle lapus"));
+            Assert.IsNotEmpty(app.Query("Concierto Manin 2"));
+            Assert.IsNotEmpty(app.Query("Calle lapus 1"));
         }
 
         [Test]
-        public void ModifyReservationTest()
+        public void ModifyReservTest()
         {
+            app.Repl();
+            EnterFuturTrip();
+            app.TouchAndHold(x => x.Marked("Hotel"));
 
+            app.WaitForElement("Fecha", timeout: TimeSpan.FromSeconds(100));
+            app.Tap(x => x.Marked(Variables.DateSelector));
+
+            DateTime iniDate = DateTime.Today.AddDays(3);
+            DateTime endDate = DateTime.Today.AddDays(5);
+
+            int month = endDate.Month - 1;
+            int day = endDate.Day; // de primer a último día
+            int year = endDate.Year;
+
+            TimeSpan time = DateTime.Now.AddHours(1).AddMinutes(5).TimeOfDay;
+
+            Assert.IsNotEmpty(app.Query(iniDate.Date.ToString(Variables.DateFormat)));
+
+            PickDateEvent(year, month, day);
+            PickTimeEvent(time.Hours, time.Minutes);
+
+            Assert.IsNotEmpty(app.Query(endDate.Date.ToString(Variables.DateFormat)));
+            Assert.IsNotEmpty(app.Query(time.ToString(Variables.TimeFormat)));
+
+            SaveEventButton();
+            Assert.IsEmpty(app.Query("Concierto Manin"));
+
+            app.Tap(x => x.Marked(day.ToString()));
+            Assert.IsNotEmpty(app.Query("Concierto Manin"));
+            Assert.IsNotEmpty(app.Query("Calle lapus"));
+            Assert.IsEmpty(app.Query("Concierto Manin 2"));
+            Assert.IsEmpty(app.Query("Calle lapus 1"));
+
+            app.TouchAndHold(x => x.Marked("Concierto Manin"));
+
+            app.EnterText(x => x.Marked(Variables.TitleSelector), " 2");
+            app.EnterText(x => x.Marked(Variables.AddressSelector), " 1");
+            SaveEventButton();
+            app.Tap(x => x.Marked(day.ToString()));
+            Assert.IsEmpty(app.Query("Concierto Manin"));
+            Assert.IsEmpty(app.Query("Calle lapus"));
+            Assert.IsNotEmpty(app.Query("Concierto Manin 2"));
+            Assert.IsNotEmpty(app.Query("Calle lapus 1"));
+        }
+
+        public void SaveEventButton()
+		{
+            app.Tap(x => x.Marked(Variables.SaveButtonE));
+            app.WaitForElement(Variables.OkButton, timeout: TimeSpan.FromSeconds(100));
+            app.Tap(x => x.Marked(Variables.OkButton));
+        }
+
+        public void PickDateEvent(int year, int month, int day)
+		{
+            app.Tap(x => x.Marked("DateSelectorE"));
+            app.Query(x => x.Class("datePicker").Invoke("updateDate", year, month, day));
+            app.Tap(x => x.Marked("Aceptar"));
+        }
+
+        public void PickTimeEvent(int hour, int minutes)
+		{
+            app.Tap(Variables.TimeSelector); 
+            app.Tap("toggle_mode");
+
+            app.ClearText();
+            app.EnterText(hour.ToString());
+
+            app.Tap(x => x.Marked("input_minute"));
+            app.ClearText();
+            app.EnterText(minutes.ToString());
+
+            app.Tap(Variables.AceptButton);
         }
 
         [Test]
@@ -103,5 +197,20 @@ namespace UITest
         {
 
         }
+    }
+
+    public static class Variables
+	{
+        public static string DateFormat { get => "dd/MM/yyyy"; }
+        public static string TimeFormat { get => @"hh\:mm"; }
+
+        public static string SaveButtonE { get => "SaveButtonE"; }
+        public static string OkButton { get => "Ok"; }
+        public static string AceptButton { get => "Aceptar"; }
+
+        public static string TitleSelector { get => "TitleSelectorE"; }
+        public static string AddressSelector { get => "AddressSelectorE"; }
+        public static string DateSelector { get => "DateSelectorE"; }
+        public static string TimeSelector { get => "TimeSelectorE"; }
     }
 }
