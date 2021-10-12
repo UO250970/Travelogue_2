@@ -34,7 +34,7 @@
     </Shell.Resources>
 
     <TabBar AutomationId="TabBar" >
-        <ShellContent ContentTemplate="{DataTemplate library:LibraryView}" AutomationId="LibraryViewButton">
+        <ShellContent Route="LibraryView" ContentTemplate="{DataTemplate library:LibraryView}" AutomationId="LibraryViewButton">
             <ShellContent.Icon x:Uid="LibraryViewIcon">
                 <FontImageSource AutomationId="LibraryView" Glyph="&#xe920;" FontFamily="{StaticResource Icon}" Size="Small"/>
             </ShellContent.Icon>

@@ -39,10 +39,8 @@ namespace Travelogue_2.Main.ViewModels
 
 		public abstract void LoadData();
 
-        public virtual void OnAppearing()
+        public virtual void OnAppearing() 
             => IsBusy = true;
-
-
 
         async virtual internal void Back() => await Shell.Current.GoToAsync("..");
 

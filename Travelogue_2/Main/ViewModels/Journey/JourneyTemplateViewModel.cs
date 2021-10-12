@@ -18,9 +18,9 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		public string JourneyId { get => journeyId; }
 
 		public Command AddImageCommand { get; }
-		public Command<EntryImageModel> ImageTapped { get; }
+		public Command<ImageModel> ImageTapped { get; }
 		public Command<DayModel> DayTapped { get; }
-		public ObservableCollection<EntryImageModel> JourneyImages { get; }
+		public ObservableCollection<ImageModel> JourneyImages { get; }
 
 		private ObservableCollection<DayModel> journeyDays;
 
@@ -44,7 +44,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
         {
 			AddEventCommand = new Command(() => AddEventC());
 			AddEntryCommand = new Command(() => AddEntryC());
-			AddToEntryCommand = new Command(() => AddToEntryC());
+			AddToEntryCommand = new Command<EntryModel>((x) => AddToEntryC(x));
 			AddImageCommand = new Command(() => AddImageC());
 			ModifyJourneyCommand = new Command(() => ModifyJourneyC());
 
@@ -54,13 +54,13 @@ namespace Travelogue_2.Main.ViewModels.Journey
 			EditOrDeleteEventCommand = new Command<EventModel>((EventModel e) => EditOrDeleteEventC(e));
 			EditOrDeleteEntryCommand = new Command<EntryModel>((EntryModel e) => EditOrDeleteEntryC(e));
 
-			JourneyImages = new ObservableCollection<EntryImageModel>();
+			JourneyImages = new ObservableCollection<ImageModel>();
 			JourneyDays = new ObservableCollection<DayModel>();
 			//JourneyDays.CollectionChanged += JourneyDaysChanged;
 			//JourneyEvents = new ObservableCollection<EventModel>();
 			//JourneyEntries = new ObservableCollection<EntryModel>();
 
-			ImageTapped = new Command<EntryImageModel>(OnImageSelected);
+			//ImageTapped = new Command<EntryImageModel>(OnImageSelected);
 			DayTapped = new Command<DayModel>(OnDaySelected);
 
 			//ExecuteLoadDataCommand();
@@ -137,12 +137,6 @@ namespace Travelogue_2.Main.ViewModels.Journey
 				JourneyDays = new ObservableCollection<DayModel>( temp.OrderBy(x => x.Date).ToList() );
 
 				DaySelected = JourneyDays[DaySelectedNum];
-
-				/*foreach (DayModel day in temp)
-				{
-					if (day.Date.Equals(DaySelected.Date)) day.Select();
-					JourneyDays.Add(day);
-				}*/
 			}
 
 		}
@@ -218,7 +212,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		async internal void AddImageC()
 		{
-			EntryImageModel success = await CameraUtil.Photo(this);
+			ImageModel success = await CameraUtil.Photo(this, journeyId);
 			if (success != null)
 			{
 				JourneyImages.Add(success);
@@ -252,23 +246,15 @@ namespace Travelogue_2.Main.ViewModels.Journey
 																	$"{nameof(EditOrDeleteFromJourneyPopUpModel.EntryId)}={entryC.Id}");
 		}
 
-		async internal void AddToEntryC()
+		async internal void AddToEntryC(EntryModel entryC)
 		{
-			await Shell.Current.GoToAsync($"{nameof(AddToEntryPopUp)}?{nameof(AddToJourneyPopUpModel.JourneyId)}={JourneyId}&" +
-																	$"{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}");
+			await Shell.Current.GoToAsync($"{nameof(AddToEntryPopUp)}?&{nameof(AddToJourneyPopUpModel.JourneyId)}={JourneyId}" +
+																	$"{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
+																	$"{nameof(AddToJourneyPopUpModel.EntryId)}={entryC.Id}");
 		}
 		#endregion
 
 		#region OnAction
-
-		void OnImageSelected(EntryImageModel image)
-		{
-			if (image == null)
-				return;
-
-			// This will push the ItemDetailPage onto the navigation stack
-			//await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyViewModel.JourneyId)}={journey.Id}");
-		}
 
 		void OnDaySelected(DayModel day)
 		{

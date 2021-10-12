@@ -19,7 +19,6 @@ namespace Travelogue_2.Main.BBDD
             conn = GetConnection();
             // Para Tests
             DropDataBase();
-            // Para Uso
             CreateDatabase();
         }
 
@@ -46,7 +45,7 @@ namespace Travelogue_2.Main.BBDD
                     return result;
                 }
             }
-            catch (SQLiteException ex)
+            catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Error en base de datos: " + ex.StackTrace);
                 return null;
@@ -77,7 +76,7 @@ namespace Travelogue_2.Main.BBDD
             }
         }
 
-        private static bool CreateDatabase()
+		private static bool CreateDatabase()
         {
             void Act()
             {
@@ -99,7 +98,8 @@ namespace Travelogue_2.Main.BBDD
             }
             return QueryAct(Act);
         }
-        public static bool ClearDataBase()
+
+		public static bool ClearDataBase()
         {
             void Act()
             {
@@ -150,11 +150,11 @@ namespace Travelogue_2.Main.BBDD
 
         public static Journey GetJourneyById(int id)
         { // Igual este con solo get y el cascade me ahorra el find => No, porque puede no haber journeys
-            Journey Func() => conn.GetWithChildren<Journey>(id, recursive: true);
+            Journey Func() => conn.FindWithChildren<Journey>(id, recursive: true);
             return QueryFunc(Func);
         }
 
-        public static List<Journey> GetJourneys(State state)
+        public static List<Journey> GetJourneis(State state)
 		{
             List<Journey> Func() => conn.GetAllWithChildren<Journey>(x => x.JourneyState.Equals(state), recursive: true);
             return QueryFunc(Func);
@@ -163,6 +163,12 @@ namespace Travelogue_2.Main.BBDD
         public static List<Journey> GetJourneis()
         {
             List<Journey> Func() => conn.GetAllWithChildren<Journey>(recursive: false);
+            return QueryFunc(Func);
+        }
+
+        internal static string GetNameFromJourney(string journeyId)
+        {
+            string Func() => conn.Find<Journey>(journeyId).Name;
             return QueryFunc(Func);
         }
 
@@ -207,10 +213,11 @@ namespace Travelogue_2.Main.BBDD
         }
 
             /** Checks */
-        public static bool CheckNewJourneyDateIsEmpty(int JourneyId, DateTime dateIni, DateTime dateEnd)
+
+        public static bool CheckDatesAreEmpty(DateTime dateIni, DateTime dateEnd, int JourneyId = -1)
         {
             List<Journey> list = GetJourneis();
-            Journey jour = list?.Find(x => ( x.Id != JourneyId && x.Collision(dateIni, dateEnd) == true));
+            Journey jour = list?.Find(x =>  x.Id != JourneyId && x.Collision(dateIni, dateEnd));
             return jour == null;
         }
 
@@ -225,6 +232,12 @@ namespace Travelogue_2.Main.BBDD
         #endregion
 
         #region Day
+
+        public static List<Day> GetDays()
+        {
+            List<Day> Func() => conn.GetAllWithChildren<Day>();
+            return QueryFunc(Func);
+        }
 
         public static bool InsertDay(Day day)
         {
@@ -268,6 +281,14 @@ namespace Travelogue_2.Main.BBDD
         public static void DeleteDays(List<Day> days)
         {
             foreach (Day day in days) DeleteDay(day);
+        }
+
+        /** Check */
+        public static bool CheckDateIsEmpty(DateTime date)
+        {
+            List<Day> list = GetDays();
+            Day day = list?.Find(x => x.Date.CompareTo(date) == 0);
+            return day == null;
         }
 
         #endregion
@@ -409,9 +430,17 @@ namespace Travelogue_2.Main.BBDD
         #endregion
 
         #region Image
+
+
+        internal static List<Image> GetImages()
+        {
+            List<Image> Func() => conn.GetAllWithChildren<Image>(recursive: false);
+            return QueryFunc(Func);
+        }
+
         public static Image GetImageById(int id)
         {
-            Image Func() => conn.GetWithChildren<Image>(id, recursive: true);
+            Image Func() => conn.FindWithChildren<Image>(id, recursive: true);
             return QueryFunc(Func);
         }
 

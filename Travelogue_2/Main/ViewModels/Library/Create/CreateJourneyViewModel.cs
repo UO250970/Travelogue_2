@@ -36,19 +36,17 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			CancelCommand = new Command(() => CancelC());
 			SaveCommand = new Command(() => SaveC());
 
-			DaysSelected = new ObservableCollection<DayModel>();
 			DestiniesSelected = new ObservableCollection<DestinyModel>();
 			DestiniesList = new ObservableCollection<string>();
 
-			//DayTapped = new Command<DayModel>(OnDayTapped);
 			DestinyTappedDelete = new Command<DestinyModel>(OnDestinySelectedDelete);
 
 			ExecuteLoadDataCommand();
 		}
 
 		#region CoverImage
-		public EntryImageModel coverImage = new EntryImageModel();
-		public EntryImageModel CoverImage
+		public ImageModel coverImage = new ImageModel();
+		public ImageModel CoverImage
 		{
 			get => coverImage;
 			set
@@ -77,7 +75,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 		#endregion
 
 		#region IniDate
-		private DateTime iniDate = DateTime.Today;
+		private DateTime iniDate;
 		public DateTime IniDate
 		{
 			get => iniDate;
@@ -86,7 +84,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 		#endregion
 
 		#region EndDate
-		private DateTime endDate = DateTime.Today;
+		private DateTime endDate;
 		public DateTime EndDate
 		{
 			get => endDate;
@@ -149,26 +147,13 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 				DestiniesList.Add(destiny);
 			}
 
-			DaysSelected.Clear();
-
-			DateTime dateTemp = iniDate;
-			do
-			{
-				DayModel temp = new DayModel();
-				temp.Day = dateTemp.Day.ToString();
-				temp.Month = dateTemp.Month.ToString();
-				//temp.Entries = 0;
-				//temp.Events = 0;
-				DaysSelected.Add(temp);
-
-				dateTemp = dateTemp.AddDays(1);
-			}
-			while (dateTemp.CompareTo(endDate) <= 0);
+			IniDate = DataBaseUtil.GetNextDayAvailable();
+			EndDate = IniDate;
 		}
 
 		async internal void AddCoverC()
 		{
-			EntryImageModel success = await CameraUtil.Photo(this);
+			ImageModel success = await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				CoverImage = success;
@@ -212,7 +197,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 				await Alerter.AlertNoNameInJourney();
 			} else
 			{
-				JourneyModel temp = DataBaseUtil.CreateJourney(Title, IniDate, EndDate);
+				JourneyModel temp = DataBaseUtil.CreateJourney(Title, IniDate, EndDate, CoverImage);
 
 				if (temp != null)
                 {
@@ -226,23 +211,12 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 		internal void CheckNewIniDate(DatePicker iniDatePicker, DatePicker endDatePicker)
 		{
 			if (iniDatePicker.Date.CompareTo(EndDate.Date) > 0) endDatePicker.Date = iniDatePicker.Date;
-			//ExecuteLoadDataCommand();
 		}
 
 		internal void CheckNewEndDate(DatePicker iniDatePicker, DatePicker endDatePicker)
 		{
 			if (iniDatePicker.Date.CompareTo(EndDate.Date) > 0) iniDatePicker.Date = endDatePicker.Date;
-			//ExecuteLoadDataCommand();
 		}
-
-		/*void OnDayTapped(DayModel day)
-		{
-			if (day == null)
-				return;
-
-			// This will push the ItemDetailPage onto the navigation stack
-			//await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
-		}*/
 
 		void OnDestinySelectedDelete(DestinyModel destiny)
 		{

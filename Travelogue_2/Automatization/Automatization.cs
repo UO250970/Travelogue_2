@@ -22,30 +22,36 @@ namespace Travelogue_2.Automatization
 
 		public static async Task CheckPermissionsAsync()
 		{
-
-			PermissionStatus statusLocation = CrossPermissions.Current.CheckPermissionStatusAsync<LocationWhenInUsePermission>().Result;
-			if (statusLocation != PermissionStatus.Granted)
+			try
 			{
-				statusLocation = await CrossPermissions.Current.RequestPermissionAsync<LocationWhenInUsePermission>();
+				PermissionStatus statusLocation = CrossPermissions.Current.CheckPermissionStatusAsync<LocationWhenInUsePermission>().Result;
+				if (statusLocation != PermissionStatus.Granted)
+				{
+					statusLocation = CrossPermissions.Current.RequestPermissionAsync<LocationWhenInUsePermission>().Result;
+				}
+
+				Debug.WriteLine("Permision location : " + statusLocation);
+
+				PermissionStatus statusCamera = CrossPermissions.Current.CheckPermissionStatusAsync<CameraPermission>().Result;
+				if (statusCamera != PermissionStatus.Granted)
+				{
+					statusCamera = CrossPermissions.Current.RequestPermissionAsync<CameraPermission>().Result;
+				}
+
+				Debug.WriteLine("Permision camera : " + statusCamera);
+
+				PermissionStatus statusCalendar = CrossPermissions.Current.CheckPermissionStatusAsync<CalendarPermission>().Result;
+				if (statusCalendar != PermissionStatus.Granted)
+				{
+					statusCalendar = CrossPermissions.Current.RequestPermissionAsync<CalendarPermission>().Result;
+				}
+
+				Debug.WriteLine("Permision calendar : " + statusCalendar);
 			}
-
-			Debug.WriteLine("Permision location : " + statusLocation);
-
-			PermissionStatus statusCamera = CrossPermissions.Current.CheckPermissionStatusAsync<CameraPermission>().Result;
-			if (statusCamera != PermissionStatus.Granted)
+			catch(Exception e)
 			{
-				statusCamera = await CrossPermissions.Current.RequestPermissionAsync<CameraPermission>();
+				Debug.WriteLine("Error : " + e.StackTrace);
 			}
-
-			Debug.WriteLine("Permision camera : " + statusCamera);
-
-			PermissionStatus statusCalendar = await CrossPermissions.Current.CheckPermissionStatusAsync<CalendarPermission>();
-			if (statusCalendar != PermissionStatus.Granted)
-			{
-				statusCalendar = await CrossPermissions.Current.RequestPermissionAsync<CalendarPermission>();
-			}
-
-			Debug.WriteLine("Permision calendar : " + statusCalendar);
 		}
 
 		public static void PrepareCountries()
@@ -88,8 +94,6 @@ namespace Travelogue_2.Automatization
 		private static void CreateFutur()
 		{
 			JourneyModel journey = DataBaseUtil.CreateJourney("StandardTrip Futur", DateTime.Today.AddDays(3), DateTime.Today.Date.AddDays(5));
-			//Entry entry = new Entry(journey.Days[0], "Standard", "Description");
-			//Text_Info info = new Text_Info(entry, "Texto", DateTime.Now);
 
 			DataBaseUtil.JourneyInsertDestiny(journey, "Australia");
 			DataBaseUtil.JourneyInsertDestiny(journey, "Barbados");
@@ -97,32 +101,9 @@ namespace Travelogue_2.Automatization
 
 			EntryModel entry = DataBaseUtil.JourneyInsertEntry(journey, 1, "Standard");
 
-			//DataBase.InsertJourney(journey);
-			//DataBase.UpdateCountry(country);
-			//DataBase.GetJourney(journey);
-
-			//DataBase.GetCountryByName("Australia");
-
-			//Entry entry2 = new Entry(journey.Days[1], "Standard");
-
-			//DataBase.InsertEntry(entry2);
-
-			//DataBase.GetJourney(journey);
-
-			DataBaseUtil.EntryInsertImage(entry, Image1, "Nombre", "foot");
 			DataBaseUtil.EntryInsertText(entry, "Entry text");
-			DataBaseUtil.JourneyInsertEvent(journey, 1, "Concierto Manin", "12:12", "Calle lapus");
+			DataBaseUtil.JourneyInsertEvent(journey, 1, "Concierto Manin", TimeSpan.Parse("12:12"), "Calle lapus");
 			DataBaseUtil.JourneyInsertReserv(journey, 1, 3, "Hotel", "Calle milagros", "985 3816 36");
-
-			//ImageModel info2 = new ImageModel(entry, "Path", "Nombre", "foot", DateTime.Now); 
-
-			//DataBase.InsertIData(info2);
-			//DataBase.GetJourney(journey);
-
-			//Event_Info ivent = new Event_Info(journey.Days[2], "Name", DateTime.Now);
-
-			//DataBase.InsertEvent(ivent);
-			//DataBase.GetJourney(journey);
 		}
 
 		private static void CreateOnCourse()
@@ -131,16 +112,15 @@ namespace Travelogue_2.Automatization
 
 			EntryModel entry = DataBaseUtil.JourneyInsertEntry(journey, 1, "Standard");
 
-			DataBaseUtil.EntryInsertImage(entry, Image1, "Nombre", "foot");
 			DataBaseUtil.EntryInsertText(entry, "Entry text");
-			DataBaseUtil.JourneyInsertEvent(journey, 1, "Concierto Manin", "12:12", "Calle lapus");
+			DataBaseUtil.JourneyInsertEvent(journey, 1, "Concierto Manin", TimeSpan.Parse("12:12"), "Calle lapus");
 			DataBaseUtil.JourneyInsertReserv(journey, 1, 3, "Reserva hotel", "Calle dandy", "985 3816 36");
 		}
 
 		private static void CreateFinished()
 		{
 			JourneyModel journey = DataBaseUtil.CreateJourney("StandardTrip Finished", DateTime.Today.AddDays(-5), DateTime.Today.Date.AddDays(-3));
-			DataBaseUtil.JourneyInsertEvent(journey, 2, "Concierto Manin", "12:12", "Calle lapus");
+			DataBaseUtil.JourneyInsertEvent(journey, 2, "Concierto Manin", TimeSpan.Parse("12:12"), "Calle lapus");
 		}
 
 		private static void ClearDB()
@@ -150,10 +130,10 @@ namespace Travelogue_2.Automatization
 
 		public static void PrepareBd(ISettings properties)
 		{
-            //ClearDB();
+            ClearDB();
 
-            _ = CheckPermissionsAsync();
-
+			//_ = CheckPermissionsAsync();
+ 
 			if (DataBaseUtil.HasJourneis() != "0")
 			{
 				properties.Clear();

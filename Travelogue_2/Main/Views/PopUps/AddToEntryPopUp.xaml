@@ -81,7 +81,7 @@
 
                                 <border:SfBorder.Content >
 
-                                    <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding Image.ImageSour}" Aspect="AspectFill" />
+                                    <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding Image, Mode=TwoWay}" Aspect="AspectFill" />
 
                                 </border:SfBorder.Content>
 

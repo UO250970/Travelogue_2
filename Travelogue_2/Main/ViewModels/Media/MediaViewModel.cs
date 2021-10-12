@@ -1,8 +1,5 @@
 ﻿using Syncfusion.SfCalendar.XForms;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using Travelogue_2.Main.Models;
@@ -15,13 +12,12 @@ namespace Travelogue_2.Main.ViewModels.Media
 {
 	public class MediaViewModel : PhotoRendererModel
 	{
-		public CalendarEventCollection CalendarJourneis { get; }
+		public CalendarEventCollection CalendarJourneis { get; set; }
 
 		public int localizationFirstDay;
 		public Command SearchJourneyCommand { get; }
-		public ObservableDictionary<string, List<EntryImageModel>> ImagesOrdered { get; set; }
-		public ObservableCollection<EntryImageModel> Images { get; }
-		public ObservableCollection<EntryImageModel> ImagesSearched { get; set; }
+		public ObservableDictionary<string, List<ImageModel>> ImagesOrdered { get; set; }
+		public ObservableDictionary<string, List<ImageModel>> ImagesSearched { get; set; }
 
 		public MediaViewModel()
 		{
@@ -32,36 +28,20 @@ namespace Travelogue_2.Main.ViewModels.Media
 
 			SearchJourneyCommand = new Command(() => SearchJourneyC());
 
-			ImagesOrdered = new ObservableDictionary<string, List<EntryImageModel>>();
-			Images = new ObservableCollection<EntryImageModel>();
-			ImagesSearched = new ObservableCollection<EntryImageModel>();
+			ImagesOrdered = new ObservableDictionary<string, List<ImageModel>>();
+			ImagesSearched = new ObservableDictionary<string, List<ImageModel>>();
 
 			ExecuteLoadDataCommand();
 		}
 
 		public override void LoadData()
 		{
-			CalendarInlineEvent jour = new CalendarInlineEvent();
-			jour.AutomationId = "1";
-			jour.StartTime = DateTime.Today;
-			jour.EndTime = DateTime.Today.AddDays(4);
-			jour.Subject = "Prueba 5";
-			jour.Color = Color.FromHex("#3D6D9B");
-
-			CalendarJourneis.Add(jour);
-
-			Images.Clear();
-			EntryImageModel image = new EntryImageModel();
-			Images.Add(image);
-
-			List<string> viajes = new List<string>();
-			viajes.Add(App.LocResources["NoJourneyAssociated"]);
-
-			foreach (string s in viajes)
-			{
-				var tempList = Images.Where(x => x.Journey.ToUpper().Equals(s.ToUpper())).ToList();
-				ImagesOrdered.Add(s, tempList);
-			}
+			CalendarJourneis.Clear();
+			CalendarJourneis = CalendarUtil.GetJourneis();
+			            
+			ImagesOrdered.Clear();
+			ImagesOrdered = DataBaseUtil.GetJourneisWithImages();
+			ImagesSearched = ImagesOrdered;
 		}
 
 		#region calendar
@@ -74,7 +54,7 @@ namespace Travelogue_2.Main.ViewModels.Media
 		}
 		#endregion
 
-		#region gallery
+		#region Gallery
 		async internal void SearchJourneyC()
 		{
 			SearchText = string.Empty;
@@ -96,24 +76,13 @@ namespace Travelogue_2.Main.ViewModels.Media
 			set
 			{
 				SetProperty(ref searchText, value);
-				var temp = Images.Where(x => x.Journey.ToUpper().Contains(searchText.ToUpper()) == true);
-				if (temp.Count() != ImagesSearched.Count())
+				if (ImagesOrdered.Count != 0)
 				{
-					ImagesSearched.Clear();
-					foreach (var card in temp)
+					ImagesSearched = ImagesOrdered;
+					List<string> keysToRemove = ImagesOrdered.Keys.Where(x => !x.ToUpper().Contains(searchText.ToUpper())).ToList();
+					foreach ( string key in keysToRemove)
 					{
-						ImagesSearched.Add(card);
-					}
-
-					ImagesOrdered.Clear();
-
-					List<string> viajes = new List<string>();
-					viajes.Add(App.LocResources["NoJourneyAssociated"]);
-
-					foreach (string s in viajes)
-					{
-						var tempList = Images.Where(x => x.Journey.ToUpper().Equals(s.ToUpper())).ToList();
-						ImagesOrdered.Add(s, tempList);
+						ImagesSearched.Remove(key);
 					}
 				}
 			}
@@ -125,10 +94,10 @@ namespace Travelogue_2.Main.ViewModels.Media
 			return GeolocalizationUtil.GetPosition();
 		}
 
-		protected void OnResourcesChanged(object s, PropertyChangedEventArgs e)
+		/*public void OnAppearing()
 		{
-			//SetProperty(ref localization, Resources.CurrentCultureI(), "localization");
-		}
+			LoadData();
+		}*/
 
 	}
 }

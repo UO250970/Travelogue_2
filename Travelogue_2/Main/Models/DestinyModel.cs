@@ -12,10 +12,7 @@ namespace Travelogue_2.Main.Models
 
 		public string Currency { get; set; } = "";
 
-		public ImageSource Flag
-		{
-			get => CommonVariables.GetFlag(Destiny);
-		}
+		public ImageSource Flag { get; set; }
 
 		public string MoreInfoCountry 
 		{ 

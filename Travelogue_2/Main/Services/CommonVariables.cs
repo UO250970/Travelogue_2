@@ -7,12 +7,12 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Services
 {
-    class CommonVariables
-    {
+	class CommonVariables
+	{
 		/** Common values */
 		public static int EntriesInDay { get => 50; }
 
-		public static int DestiniesInJourney { get => 50; } 
+		public static int DestiniesInJourney { get => 50; }
 
 		public static int DataInEntry { get => 50; }
 
@@ -25,6 +25,8 @@ namespace Travelogue_2.Main.Services
 		public static int JourneyNameMaxLenght { get => 50; }
 
 		/** Common string */
+
+		public static string BlankName { get => "NoJourneyAssociated"; }
 
 		public static string Blank { get => "Blank"; }
 

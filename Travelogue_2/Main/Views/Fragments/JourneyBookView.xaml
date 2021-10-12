@@ -11,7 +11,7 @@
             </Grid.RowDefinitions>
 
             <Image Grid.Row="0" x:Name="JourneyImage" 
-                    Source="{Binding Cover}"
+                    Source="{Binding CoverSource}"
                     Aspect="AspectFill"/>
 
             <Label Grid.Row="1" x:Name="JourneyName"

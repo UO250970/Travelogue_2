@@ -13,15 +13,30 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 	[QueryProperty(nameof(DaySelectedNum), nameof(DaySelectedNum))]
 	[QueryProperty(nameof(EntryTextId), nameof(EntryTextId))]
 	[QueryProperty(nameof(EntryImageId), nameof(EntryImageId))]
+	[QueryProperty(nameof(EntryId), nameof(EntryId))]
 	public class AddToJourneyPopUpModel : PhotoRendererModel
 	{
 		public string journeyId;
 		public string JourneyId
 		{
 			get => journeyId;
-			set => journeyId = value;
+			set
+			{
+				journeyId = value;
+				LoadData();
+			}
 		}
 
+		public string entryId;
+		public string EntryId
+		{
+			get => entryId;
+			set
+			{
+				entryId = value;
+				LoadEntry();
+			}
+		}
 
 		public string entryTextId;
 		public string EntryTextId
@@ -87,6 +102,24 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 				MaxDaySelected = Days.Last().Date;
 				MinDaySelected = Days.First().Date;
 			}
+		}
+
+		public void LoadEntry()
+		{
+			if (entryId != null)
+			{
+				EntryModel temp = DataBaseUtil.GetEntryById(int.Parse(entryId));
+
+				Entry = temp;
+			}
+		}
+
+		private EntryModel entry;
+
+		public EntryModel Entry
+		{
+			get => entry;
+			set => SetProperty(ref entry, value);
 		}
 
 		#region Title
@@ -217,13 +250,16 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		#endregion
 
 		#region Image
-		private EntryImageModel image = new EntryImageModel();
-		public EntryImageModel Image
+		public ImageSource Image = null;
+
+		private string imagePath = string.Empty;
+		public string ImagePath
 		{
-			get => image;
+			get => imagePath;
 			set
 			{
-				SetProperty(ref image, value);
+				SetProperty(ref imagePath, value);
+				Image = ImageSource.FromFile(imagePath);
 			}
 		}
 		#endregion
@@ -254,7 +290,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			else
 			{
 				int dayInt = Days.FindIndex(x => x.Date.Equals(DaySelected.Date)) + 1;
-				DataBaseUtil.JourneyInsertEvent( Integer.ParseInt(JourneyId), dayInt, Title, Time.ToString(), Location);
+				DataBaseUtil.JourneyInsertEvent( Integer.ParseInt(JourneyId), dayInt, Title, Time, Location);
 				Back();
 			}
 		}
@@ -291,7 +327,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 				await Alerter.AlertNoTitleInEntry();
 			} else
 			{
-				int dayInt = Days.FindIndex(x => x.Date.Equals(IniDaySelected.Date)) + 1;
+				int dayInt = Days.FindIndex(x => x.Date.Equals(DaySelected.Date)) + 1;
 				DataBaseUtil.JourneyInsertEntry(Integer.ParseInt(JourneyId), dayInt, Title);
 				Back();
 			}
@@ -299,10 +335,10 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		async internal void AddImageC()
 		{
-			EntryImageModel success = await CameraUtil.Photo(this);
+			ImageModel success = await CameraUtil.Photo(this, journeyId);
 			if (success != null)
 			{
-				Image = success;
+				ImagePath = success.Path;
 			}
 		}
 
@@ -314,6 +350,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			}
 			else
 			{
+				DataBaseUtil.EntryInsertText(Entry, Text);
 
 				await Alerter.AlertTextAdded();
 				Back();
@@ -322,12 +359,14 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		async internal void CreateImageC()
 		{
-			if (Image.ImageSour == null)
+			if (ImagePath == null)
 			{
 				await Alerter.AlertNoImageSelected();
 			}
 			else
 			{
+				DataBaseUtil.EntryInsertImage(Entry, "", Caption);
+
 				await Alerter.AlertImageAdded();
 				Back();
 			}

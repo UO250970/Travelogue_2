@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Travelogue_2.Main.Views.Media.ImageView"
              BackgroundColor="{StaticResource Black}"
-             Shell.PresentationMode="ModalAnimated">
+             Shell.PresentationMode="ModalNotAnimated">
     
     <ContentPage.Content>
         
@@ -21,7 +21,7 @@
 
                 <StackLayout Grid.Row="1">
 
-                    <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding ImageSource}" Aspect="AspectFit"/>
+                    <Image Source="{Binding ImageSource}" Aspect="AspectFit"/>
 
                 </StackLayout>
 

@@ -7,7 +7,7 @@
         <AbsoluteLayout BackgroundColor="{DynamicResource Secondary}" >
 
             <Image  x:Name="JourneyImage" 
-                    Source="{Binding Cover}"
+                    Source="{Binding CoverSource}"
                     Aspect="AspectFill" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"/>
 
             <Label  x:Name="JourneyName"

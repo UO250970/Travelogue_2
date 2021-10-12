@@ -16,8 +16,19 @@ namespace Travelogue_2.Main.ViewModels.Library
         public Command ClosedJourneysViewCommand { get; }
 
 
-		public ObservableCollection<JourneyModel> JourneysCreated { get; set; }
-		public ObservableCollection<JourneyModel> JourneysClosed { get; set; }
+		public ObservableCollection<JourneyModel> journeysCreated;
+		public ObservableCollection<JourneyModel> JourneysCreated
+		{
+			get => journeysCreated;
+			set => SetProperty(ref journeysCreated, value);
+		}
+
+		public ObservableCollection<JourneyModel> journeysClosed;
+		public ObservableCollection<JourneyModel> JourneysClosed
+		{
+			get => journeysClosed;
+			set => SetProperty(ref journeysClosed, value);
+		}
 
 		public LibraryViewModel()
 		{
@@ -37,29 +48,10 @@ namespace Travelogue_2.Main.ViewModels.Library
 		public override void LoadData()
 		{
 			JourneysCreated.Clear();
+			JourneysClosed.Clear();
 
 			JourneysCreated = new ObservableCollection<JourneyModel>( DataBaseUtil.GetJourneysCreated() );
 			JourneysClosed = new ObservableCollection<JourneyModel>( DataBaseUtil.GetJourneysClosed() );
-
-			/*JourneyModel temp1 = new JourneyModel();
-			temp1.Name = "Prueba";
-			temp1.Image = ImageSource.FromResource(CommonVariables.GenericImage);
-
-
-			JourneyModel temp2 = new JourneyModel();
-			temp2.Name = "Prueba2";
-			temp2.Image = ImageSource.FromResource(CommonVariables.GenericImage);
-
-			JourneysCreated.Add(temp1);
-			JourneysCreated.Add(temp2);
-
-			JourneysClosed.Clear();
-			JourneysClosed.Add(temp1);*/
-			//var items = await DataStore.GetItemsAsync(true);
-			//foreach (var item in items)
-			//{
-			//Journeys.Add(item);
-			//}
 		}
 
 		async internal void CreatedJourneysViewC()

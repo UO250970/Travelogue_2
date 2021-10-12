@@ -38,7 +38,7 @@
                                     <calendar:MonthViewSettings.InlineItemTemplate>
                                         <DataTemplate>
                                             <Button AutomationId="{Binding AutomationId}" 
-                                                    Text="Texto" TextColor="#bbd5ed"/>
+                                                    Text="{Binding .Subject}" TextColor="#bbd5ed"/>
                                         </DataTemplate>
                                     </calendar:MonthViewSettings.InlineItemTemplate>
                                 </calendar:MonthViewSettings>
@@ -75,7 +75,7 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <SearchBar Grid.Column="0" IsVisible="{Binding SearchVisible}" Placeholder="{Binding Resources[SearchDestiny]}" Text="{Binding SearchText, Mode=TwoWay}"/>
+                                <SearchBar Grid.Column="0" IsVisible="{Binding SearchVisible}" Placeholder="{Binding Resources[SearchJourney]}" Text="{Binding SearchText, Mode=TwoWay}"/>
                                 <Label Grid.Column="1" Text="&#x1f50d;" FontFamily="{StaticResource Icon}" FontSize="Large"  VerticalTextAlignment="Center" HorizontalOptions="Center"
                                         TextColor="{DynamicResource Primary}">
                                     <Label.GestureRecognizers>
@@ -87,7 +87,7 @@
                         </StackLayout>
 
                         <StackLayout x:Name="ImagesListView"
-                                     BindableLayout.ItemsSource="{Binding ImagesOrdered}" Grid.Row="1"  >
+                                     BindableLayout.ItemsSource="{Binding ImagesSearched}" Grid.Row="1"  >
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
 
@@ -113,7 +113,14 @@
                                                     <DataTemplate>
 
                                                         <Frame Padding="5">
-                                                            <Image HeightRequest="{Binding Path=BindingContext.CardImagesHeight, Source={x:Reference MediaViewName}}"  Source="{Binding .ImageSour}"/>
+                                                            <Image HeightRequest="{Binding Path=BindingContext.CardImagesHeight, Source={x:Reference MediaViewName}}"  Source="{Binding .ImageSour}">
+
+                                                                <Image.GestureRecognizers>
+                                                                    <TapGestureRecognizer Command="{Binding BindingContext.ViewImageCommand, Source={x:Reference MediaViewName}}"
+                                                                           CommandParameter="{Binding .}"/>
+                                                                </Image.GestureRecognizers>
+                                                                
+                                                            </Image>
                                                         </Frame>
 
                                                     </DataTemplate>

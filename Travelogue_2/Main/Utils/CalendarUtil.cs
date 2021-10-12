@@ -2,32 +2,47 @@
 using Plugin.Calendars.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using Syncfusion.SfCalendar.XForms;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using Travelogue_2.Main.BBDD;
+using Travelogue_2.Main.Models;
+using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Utils
 {
 	public static class CalendarUtil
 	{
 
-		public static async void CheckPermissions()
+		public static async Task<PermissionStatus> CheckPermissions()
 		{
-			PermissionStatus statusCalendar = await CrossPermissions.Current.CheckPermissionStatusAsync<CalendarPermission>();
-			if (statusCalendar != PermissionStatus.Granted)
+			PermissionStatus statusCalendar = PermissionStatus.Unknown;
+			try
 			{
-				statusCalendar = await CrossPermissions.Current.RequestPermissionAsync<CalendarPermission>();
+				statusCalendar = CrossPermissions.Current.CheckPermissionStatusAsync<CalendarPermission>().Result;
+				if (statusCalendar != PermissionStatus.Granted)
+				{
+					statusCalendar = await CrossPermissions.Current.RequestPermissionAsync<CalendarPermission>();
+				}
+
+				Debug.WriteLine("Permision calendar: " + statusCalendar);
+
+				return statusCalendar;
+			}
+			catch (Exception e)
+			{
+				Debug.WriteLine("Error permision calendar: " + e.StackTrace);
 			}
 
-			Debug.WriteLine("Permision calendar : " + statusCalendar);
-
+			return statusCalendar;
 		}
 
 		public async static void AddJourney(Journey journey)
 		{
-			CheckPermissions();
-
+			await CheckPermissions();
 			var calendars = await CrossCalendars.Current.GetCalendarsAsync();
 			var calendarEvent = new CalendarEvent
 			{
@@ -50,5 +65,26 @@ namespace Travelogue_2.Main.Utils
 			}
 		}
 
+		internal static CalendarEventCollection GetJourneis()
+		{
+			CalendarEventCollection collection = new CalendarEventCollection();
+
+			List<JourneyModel> journeis = DataBaseUtil.GetJourneys();
+
+			foreach (JourneyModel jour in journeis)
+			{
+				CalendarInlineEvent evento = new CalendarInlineEvent();
+
+				evento.AutomationId = jour.Id.ToString();
+				evento.StartTime = jour.IniDate;
+				evento.EndTime = jour.EndDate;
+				evento.Subject = jour.Name;
+				evento.Color = Color.FromHex("#3D6D9B");
+
+				collection.Add(evento);
+			}
+
+			return collection;
+		}
 	}
 }

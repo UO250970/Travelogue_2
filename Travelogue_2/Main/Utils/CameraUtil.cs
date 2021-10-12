@@ -14,21 +14,33 @@ namespace Travelogue_2.Main.Utils
 {
 	public static class CameraUtil
 	{
-		public static async void CheckPermissions()
+		public static async Task<PermissionStatus> CheckPermissions()
 		{
-			PermissionStatus statusCamera = CrossPermissions.Current.CheckPermissionStatusAsync<CameraPermission>().Result;
-			if (statusCamera != PermissionStatus.Granted)
+			PermissionStatus statusCalendar = PermissionStatus.Unknown;
+			try
 			{
-				statusCamera = await CrossPermissions.Current.RequestPermissionAsync<CameraPermission>();
+				PermissionStatus statusCamera = CrossPermissions.Current.CheckPermissionStatusAsync<CameraPermission>().Result;
+				if (statusCamera != PermissionStatus.Granted)
+				{
+					statusCamera = await CrossPermissions.Current.RequestPermissionAsync<CameraPermission>();
+				}
+
+				var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+				var directoryname = Path.Combine(documents, "Travelogue");
+				Directory.CreateDirectory(directoryname);
+
+				Debug.WriteLine("Permision camera: " + statusCamera);
+
+				Start();
+
+				return statusCalendar;
+			}
+			catch (Exception e)
+			{
+				Debug.WriteLine("Error permision camera: " + e.StackTrace);
 			}
 
-			var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-			var directoryname = Path.Combine(documents, "Travelogue");
-			Directory.CreateDirectory(directoryname);
-
-			Debug.WriteLine("Permision camera : " + statusCamera);
-
-			Start();
+			return statusCalendar;
 		}
 
 		private static async void Start()
@@ -39,19 +51,19 @@ namespace Travelogue_2.Main.Utils
 			}
 		}
 
-		internal static async Task<EntryImageModel> Photo(PhotoRendererModel model)
+		internal static async Task<ImageModel> Photo(PhotoRendererModel model, string journeyId = null)
 		{
-			CheckPermissions();
+			await CheckPermissions();
 			string photo = await Alerter.AlertPhoto();
 			if (photo != null)
 			{
 				if (photo.Equals(AppResources.TakePhoto))
 				{
-					return model.AddImage(await TakePhoto());
+					return model.AddImage(await TakePhoto(), journeyId);
 				}
 				else if (photo.Equals(AppResources.PickPhoto))
 				{
-					return model.AddImage(await PickPhoto());
+					return model.AddImage(await PickPhoto(), journeyId);
 				}
 			}
 			return null;

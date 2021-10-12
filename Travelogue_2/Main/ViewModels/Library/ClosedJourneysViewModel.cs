@@ -16,9 +16,6 @@ namespace Travelogue_2.Main.ViewModels.Library
 		public Command SearchJourneyCommand { get; }
 		public Command<JourneyModel> JourneyTapped { get; }
 		public Command<JourneyModel> JourneyTappedDelete { get; }
-		public ObservableCollection<JourneyModel> JourneysClosed { get; set; }
-		public ObservableCollection<JourneyModel> JourneysClosedSearched { get; set; }
-
 
 		public ClosedJourneysViewModel()
 		{
@@ -35,13 +32,23 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		public override void LoadData()
 		{
-			JourneysClosed.Clear();
-			JourneysClosedSearched.Clear();
-
-			JourneysClosed = new ObservableCollection<JourneyModel>( DataBaseUtil.GetJourneysClosed() );
-			JourneysClosedSearched = new ObservableCollection<JourneyModel>( JourneysClosed );
 		}
 
+		public ObservableCollection<JourneyModel> journeysClosed;
+		public ObservableCollection<JourneyModel> JourneysClosed
+		{
+			get => journeysClosed;
+			set => SetProperty(ref journeysClosed, value);
+		}
+
+		public ObservableCollection<JourneyModel> journeysClosedSearched;
+		public ObservableCollection<JourneyModel> JourneysClosedSearched
+		{
+			get => journeysClosedSearched;
+			set => SetProperty(ref journeysClosedSearched, value);
+		}
+
+		#region SearchText
 		private bool searchVisible = false;
 
 		public bool SearchVisible
@@ -68,6 +75,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 				}
 			}
 		}
+		#endregion
 
 		async internal void SearchJourneyC()
 		{
@@ -95,6 +103,17 @@ namespace Travelogue_2.Main.ViewModels.Library
 				JourneysClosed.Remove(journey);
 				JourneysClosedSearched.Remove(journey);
 			}
+		}
+
+		public override void OnAppearing()
+		{
+			JourneysClosed.Clear();
+			JourneysClosedSearched.Clear();
+
+			JourneysClosed = new ObservableCollection<JourneyModel>(DataBaseUtil.GetJourneysCreated());
+			JourneysClosedSearched = new ObservableCollection<JourneyModel>(JourneysClosed);
+
+			base.OnAppearing();
 		}
 
 	}

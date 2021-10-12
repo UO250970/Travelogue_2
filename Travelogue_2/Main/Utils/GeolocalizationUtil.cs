@@ -11,20 +11,32 @@ namespace Travelogue_2.Main.Utils
 	public static class GeolocalizationUtil
 	{
 
-        public static async void CheckPermissions()
+        public static async Task<PermissionStatus> CheckPermissions()
         {
-            PermissionStatus statusLocation = CrossPermissions.Current.CheckPermissionStatusAsync<LocationWhenInUsePermission>().Result;
-            if (statusLocation != PermissionStatus.Granted)
+            PermissionStatus statusCalendar = PermissionStatus.Unknown;
+            try
             {
-                statusLocation = await CrossPermissions.Current.RequestPermissionAsync<LocationWhenInUsePermission>();
-            } 
+                PermissionStatus statusLocation = CrossPermissions.Current.CheckPermissionStatusAsync<LocationWhenInUsePermission>().Result;
+                if (statusLocation != PermissionStatus.Granted)
+                {
+                    statusLocation = await CrossPermissions.Current.RequestPermissionAsync<LocationWhenInUsePermission>();
+                }
 
-            Debug.WriteLine("Permision location : " + statusLocation);
+                Debug.WriteLine("Permision location: " + statusLocation);
+
+                return statusCalendar;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error permision location: " + e.StackTrace);
+            }
+
+            return statusCalendar;
         }
 
         private static async Task<Location> GetLocationAsync()
         {
-            CheckPermissions();
+            await CheckPermissions();
             Location location = null;
             try
             {
@@ -37,15 +49,8 @@ namespace Travelogue_2.Main.Utils
             return location;
         }
 
-        public static Location GetLocation()
-        {
-            CheckPermissions();
-            return GetLocationAsync().Result;
-        }
-
         public static Position GetPosition()
         {
-            CheckPermissions();
             Location temp = GetLocationAsync().Result;
             if (temp is null) temp = new Location();
             return new Position(temp.Latitude, temp.Longitude);

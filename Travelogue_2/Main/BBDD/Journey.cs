@@ -105,5 +105,16 @@ namespace Travelogue_2.Main.BBDD
 
             return colisionDate || colisionPeriod;
         }
+
+        public void StartJourney()
+        {
+            this.JourneyState = State.OPEN;
+        }
+
+        public void FinishJourney()
+        {
+            this.JourneyState = State.CLOSED;
+        }
+
     }
 }

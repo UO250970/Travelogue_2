@@ -1,7 +1,5 @@
 ﻿using SQLite;
-using SQLiteNetExtensions.Attributes;
 using System;
-using System.Collections.Generic;
 
 namespace Travelogue_2.Main.BBDD
 {
@@ -28,6 +26,13 @@ namespace Travelogue_2.Main.BBDD
 
         /** Constructor público sin parámetros necesario para la base de datos */
         public Image() { }
+
+        public Image(string path, string caption, string journey)
+		{
+            this.Path = path;
+            this.Caption = caption;
+            this.Journey = journey;
+        }
 
     }
 }

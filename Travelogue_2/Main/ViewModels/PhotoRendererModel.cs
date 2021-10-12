@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.ViewModels;
 using Travelogue_2.Main.ViewModels.Media;
 using Travelogue_2.Main.Views.Media;
@@ -13,27 +14,28 @@ namespace Travelogue_2.Main.Services
 	{
 		public Command<ImageModel> ViewImageCommand { get; set; }
 
+		public PhotoRendererModel()
+		{
+			ViewImageCommand = new Command<ImageModel>(x => ViewImageC(x));
+		}
+
 		public ImageModel ImageSelected { get; set; }
 
-		public EntryImageModel AddImage(MediaFile file)
+		public ImageModel AddImage(MediaFile file, string journeyId)
 		{
-			EntryImageModel image = new EntryImageModel();
-
 			try
 			{
 				if (file != null)
 				{
-					//image.ImagePath = file.Path;
-					//ImageName = CameraUtil.GenerateName();
-					image.Caption = string.Empty;
-					image.Path = file.Path;
-
-					// TODO Guardar imagen en nueva ruta
-					//if (!image.ImagePath.Equals(string.Empty))
-					//{
-						//Stream stream = file.GetStream();
-						//image.ImageSour = ImageSource.FromStream(() => stream);
-					//}
+					string name = "";
+					if (journeyId != null)
+					{
+						name = DataBaseUtil.GetNameFromJourney(journeyId);
+					} else
+					{
+						name = App.LocResources[CommonVariables.BlankName];
+					}
+					ImageModel image = DataBaseUtil.CreateImage(file.Path, "", name);
 					return image;
 				}
 				return null;
@@ -43,7 +45,6 @@ namespace Travelogue_2.Main.Services
 				Debug.WriteLine(ex);
 				return null;
 			}
-			
 		}
 
 		public int CoverImageHeight { get => CommonVariables.ImageMaxHeight; }

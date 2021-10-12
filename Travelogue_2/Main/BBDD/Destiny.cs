@@ -23,7 +23,5 @@ namespace Travelogue_2.Main.BBDD
 
 		[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
 		public List<Embassy> Embassies { get; set; }
-
-		public Destiny() { }
 	}
 }

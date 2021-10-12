@@ -210,7 +210,10 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		internal void CheckNewIniDate(DatePicker iniDatePicker)
 		{
-			if (Evento != null && !Evento.Reservation) Evento.EndDay = iniDatePicker.Date;
+			if (Evento != null && !Evento.Reservation)
+			{
+				Evento.EndDay = iniDatePicker.Date;
+			}
 		}
 
 		internal void CheckNewIniDate(DatePicker iniDatePicker, DatePicker endDatePicker)
