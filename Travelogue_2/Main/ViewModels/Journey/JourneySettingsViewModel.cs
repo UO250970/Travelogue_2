@@ -63,7 +63,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 				EndDate = Journey.EndDate;
 				EndDateEnabled = State.Equals(State.CLOSED) ? false : true;
 
-				JourneyDestinies = new ObservableCollection<DestinyModel>(DataBaseUtil.GetDestiniesFromJourney(journey));
+				DataBaseUtil.GetDestiniesFromJourney(journey).ForEach(x => JourneyDestinies.Add(x));
 			}
 		}
 

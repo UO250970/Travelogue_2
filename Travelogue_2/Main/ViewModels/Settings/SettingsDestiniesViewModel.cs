@@ -4,7 +4,6 @@ using Travelogue_2.Main.Models;
 using Xamarin.Forms;
 using System.Linq;
 using System.Collections.Generic;
-using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Views.PopUps;
 using Xamarin.Essentials;
 using Travelogue_2.Main.BBDD;
