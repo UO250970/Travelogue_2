@@ -29,9 +29,9 @@ namespace Travelogue_2.Main.BBDD
 
         public Image(string path, string caption, string journey)
 		{
-            this.Path = path;
-            this.Caption = caption;
-            this.Journey = journey;
+            Path = path;
+            Caption = caption;
+            Journey = journey;
         }
 
     }

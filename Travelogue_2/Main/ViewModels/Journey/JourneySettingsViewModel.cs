@@ -101,7 +101,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 			set
 			{
 				SetProperty(ref coverImage, value);
-				DataBaseUtil.SaveImage(coverImage);
+				Journey.CoverId = coverImage.Id;
 			}
 		}
 		#endregion
@@ -131,6 +131,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 			{
 				if (value.CompareTo(minimumDate) < 0) MinimumDate = iniDate;
 				SetProperty(ref iniDate, value);
+				Journey.IniDate = IniDate;
 			}
 		}
 		#endregion
@@ -147,13 +148,17 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		public DateTime EndDate
 		{
 			get => endDate;
-			set => SetProperty(ref endDate, value);
+			set 
+			{
+				SetProperty(ref endDate, value);
+				Journey.EndDate = EndDate; 
+			}
 		}
 		#endregion
 
 		async internal void ModifyCoverC()
 		{
-			ImageModel success = await CameraUtil.Photo(this, journey.Name);
+			ImageModel success = await CameraUtil.Photo(this, journey.Id.ToString());
 			if (success != null)
 			{
 				CoverImage = success;
@@ -193,9 +198,8 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		internal override async void Back()
 		{
-			Journey.IniDate = IniDate;
-			Journey.EndDate = EndDate;
-			if( await DataBaseUtil.SaveJourney(Journey) && DataBaseUtil.SaveJourneyDestinies(Journey, new List<DestinyModel>(JourneyDestinies)) ) base.Back();
+			if( await DataBaseUtil.SaveJourney(Journey) && DataBaseUtil.SaveJourneyDestinies(Journey, new List<DestinyModel>(JourneyDestinies)) 
+				&& DataBaseUtil.SaveImage(CoverImage)) base.Back();
 		}
 
 	}

@@ -21,7 +21,7 @@ namespace Travelogue_2.Main.Views.Media
         protected override void OnAppearing()
         {
             map.MoveToRegion(MapSpan.FromCenterAndRadius(model.GetPosition(), Distance.FromKilometers(10)));
-            //model.OnAppearing();
+            model.OnAppearing();
             base.OnAppearing();
         }
 

@@ -117,8 +117,11 @@ namespace Travelogue_2.Main.ViewModels.Library
 			JourneysCreated.Clear();
 			JourneysCreatedSearched.Clear();
 
-			JourneysCreated = new ObservableCollection<JourneyModel>(DataBaseUtil.GetJourneysCreated());
-			JourneysCreatedSearched = new ObservableCollection<JourneyModel>(JourneysCreated);
+			DataBaseUtil.GetJourneysCreated().ForEach(x => 
+			{
+				JourneysCreated.Add(x);
+				JourneysCreatedSearched.Add(x);
+			});
 
 			base.OnAppearing();
 		}

@@ -6,6 +6,7 @@ using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Maps;
 
 namespace Travelogue_2.Main.ViewModels.Media
@@ -17,7 +18,13 @@ namespace Travelogue_2.Main.ViewModels.Media
 		public int localizationFirstDay;
 		public Command SearchJourneyCommand { get; }
 		public ObservableDictionary<string, List<ImageModel>> ImagesOrdered { get; set; }
-		public ObservableDictionary<string, List<ImageModel>> ImagesSearched { get; set; }
+
+		private ObservableDictionary<string, List<ImageModel>> imagesSearched;
+		public ObservableDictionary<string, List<ImageModel>> ImagesSearched
+		{
+			get => imagesSearched;
+			set => SetProperty(ref imagesSearched, value);
+		}
 
 		public MediaViewModel()
 		{
@@ -37,11 +44,17 @@ namespace Travelogue_2.Main.ViewModels.Media
 		public override void LoadData()
 		{
 			CalendarJourneis.Clear();
-			CalendarJourneis = CalendarUtil.GetJourneis();
+			CalendarUtil.GetJourneis().ForEach(x => CalendarJourneis.Add(x));
 			            
 			ImagesOrdered.Clear();
-			ImagesOrdered = DataBaseUtil.GetJourneisWithImages();
-			ImagesSearched = ImagesOrdered;
+			ImagesSearched.Clear();
+			ObservableDictionary<string, List<ImageModel>> temp = DataBaseUtil.GetJourneisWithImages();
+
+			temp.Keys.ForEach(x => 
+			{
+				ImagesOrdered.Add(x, temp[x]);
+				ImagesSearched.Add(x, temp[x]);
+			});
 		}
 
 		#region calendar
@@ -94,10 +107,10 @@ namespace Travelogue_2.Main.ViewModels.Media
 			return GeolocalizationUtil.GetPosition();
 		}
 
-		/*public void OnAppearing()
+		public void OnAppearing()
 		{
 			LoadData();
-		}*/
+		}
 
 	}
 }

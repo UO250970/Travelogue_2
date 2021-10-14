@@ -16,7 +16,7 @@ namespace Travelogue_2.Main.ViewModels.Library
         public Command ClosedJourneysViewCommand { get; }
 
 
-		public ObservableCollection<JourneyModel> journeysCreated;
+		private ObservableCollection<JourneyModel> journeysCreated;
 		public ObservableCollection<JourneyModel> JourneysCreated
 		{
 			get => journeysCreated;
@@ -47,11 +47,6 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		public override void LoadData()
 		{
-			JourneysCreated.Clear();
-			JourneysClosed.Clear();
-
-			JourneysCreated = new ObservableCollection<JourneyModel>( DataBaseUtil.GetJourneysCreated() );
-			JourneysClosed = new ObservableCollection<JourneyModel>( DataBaseUtil.GetJourneysClosed() );
 		}
 
 		async internal void CreatedJourneysViewC()
@@ -69,6 +64,17 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 			// This will push the ItemDetailPage onto the navigation stack
 			await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyViewModel.JourneyId)}={journey.Id}");
+		}
+
+		public override void OnAppearing()
+		{
+			JourneysCreated.Clear();
+			JourneysClosed.Clear();
+
+			DataBaseUtil.GetJourneysCreated().ForEach(x => JourneysCreated.Add(x) );
+			DataBaseUtil.GetJourneysClosed().ForEach(x => JourneysClosed.Add(x) );
+
+			base.OnAppearing();
 		}
 
 	}

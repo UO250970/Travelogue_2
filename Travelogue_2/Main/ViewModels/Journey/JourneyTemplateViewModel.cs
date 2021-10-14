@@ -56,11 +56,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 			JourneyImages = new ObservableCollection<ImageModel>();
 			JourneyDays = new ObservableCollection<DayModel>();
-			//JourneyDays.CollectionChanged += JourneyDaysChanged;
-			//JourneyEvents = new ObservableCollection<EventModel>();
-			//JourneyEntries = new ObservableCollection<EntryModel>();
 
-			//ImageTapped = new Command<EntryImageModel>(OnImageSelected);
 			DayTapped = new Command<DayModel>(OnDaySelected);
 
 			//ExecuteLoadDataCommand();
@@ -80,46 +76,8 @@ namespace Travelogue_2.Main.ViewModels.Journey
 				}
 
 				// TODO - Chekear acciones según estado
-
 				JourneyDays = new ObservableCollection<DayModel>( DataBaseUtil.GetDaysFromJourney(journey) );
 			}
-
-			//JourneyId = "1";
-			/**var temp = new DayModel();
-			temp.Day = "2";
-			temp.Month = "2";
-			temp.Year = "2021";
-			JourneyDays.Add(temp);
-
-			var temp2 = new DayModel();
-			temp2.Day = "3";
-			temp2.Month = "2";
-			temp2.Year = "2021";
-			var etemp1 = new EntryModel();
-			etemp1.Title = "Prueba titulo";
-			var ectemp1 = new EntryTextModel(4);
-			ectemp1.Text = "Hoy me divertí mucho corriendo detrás de patos :')";
-			ectemp1.Time = DateTime.Now.ToString("HH:mm");  // TODO - Pasar a documetnación https://stackoverflow.com/questions/11107465/getting-only-hour-minute-of-datetime/11107508
-			etemp1.Content.Add(ectemp1);
-			var ectemp2 = new EntryImageModel();
-			ectemp2.Time = DateTime.Now.ToString("HH:mm");
-			etemp1.Content.Add(ectemp2);
-			temp2.JourneyEntries.Add(etemp1);
-			//temp2.Entries = 1;
-			var etemp2 = new EventModel();
-			etemp2.Text = "Concierto de Lady Gaga";
-			etemp2.Address = "Calle fulanito";
-			etemp2.Time = "12:00";
-			temp2.JourneyEvents.Add(etemp2);
-			//temp2.Events = 1;
-			JourneyDays.Add(temp2);
-
-			var temp3 = new DayModel();
-			temp3.Day = "4";
-			temp3.Month = "2";
-			temp3.Year = "2021";
-			JourneyDays.Add(temp3);
-			//JourneyImages.Add(new ImageCard());*/
 
 			DaySelected = JourneyDays[0];
 		}
@@ -128,13 +86,15 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		{
 			base.OnAppearing();
 
+			CoverImage = DataBaseUtil.GetCoverFromJourney( int.Parse(journeyId)) ;
+
 			if (DaySelected.Day != null)
             {
 				var temp = DataBaseUtil.GetDaysFromJourneyId(int.Parse(journeyId));
 				JourneyDays.Clear();
-				temp.First(x => x.Date.Equals(DaySelected.Date))?.Select();
 
-				JourneyDays = new ObservableCollection<DayModel>( temp.OrderBy(x => x.Date).ToList() );
+				temp.First(x => x.Date.Equals(DaySelected.Date))?.Select();
+				temp.OrderBy(x => x.Date).ToList().ForEach(x => JourneyDays.Add(x));
 
 				DaySelected = JourneyDays[DaySelectedNum];
 			}
@@ -153,7 +113,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		#endregion
 
-		#region Cover
+		#region CoverImage
 		private ImageModel coverImage = new ImageModel();
 		public ImageModel CoverImage
 		{
@@ -268,16 +228,5 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		#endregion
 
-		/*void JourneyDaysChanged(object sender, NotifyCollectionChangedEventArgs e)
-		{
-
-			if (e.NewItems != null)
-				foreach (DayCard day in e.NewItems)
-					day.PropertyChanged += OnPropertyChanged;
-
-			if (e.OldItems != null)
-				foreach (DayCard day in e.OldItems)
-					day.PropertyChanged -= OnPropertyChanged;
-		}*/
 	}
 }

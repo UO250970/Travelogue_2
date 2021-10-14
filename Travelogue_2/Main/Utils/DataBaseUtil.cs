@@ -114,6 +114,12 @@ namespace Travelogue_2.Main.Utils
             return temp;
         }
 
+        public static ImageModel GetCoverFromJourney(int journeyId)
+        {
+            Image temp = DataBase.GetCoverFromJourney(journeyId);
+            return ImageToModel(temp);
+        }
+
         public static List<ImageModel> GetImages()
         {
             List<ImageModel> collection = new List<ImageModel>();
@@ -363,7 +369,7 @@ namespace Travelogue_2.Main.Utils
         {
             Image temp = DataBase.GetImageById( ImageId );
 
-            return temp == null ? null : ImageToModel(temp);
+            return ImageToModel(temp);
         }
 
         public static bool SaveJourneyDestinies(JourneyModel journey, List<DestinyModel> destinies)
@@ -693,6 +699,8 @@ namespace Travelogue_2.Main.Utils
         private static ImageModel ImageToModel(Image image)
         {
             ImageModel temp = new ImageModel();
+
+            if (image == null) return temp;
 
             temp.Id = image.Id;
 

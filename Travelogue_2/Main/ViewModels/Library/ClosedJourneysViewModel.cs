@@ -110,8 +110,11 @@ namespace Travelogue_2.Main.ViewModels.Library
 			JourneysClosed.Clear();
 			JourneysClosedSearched.Clear();
 
-			JourneysClosed = new ObservableCollection<JourneyModel>(DataBaseUtil.GetJourneysCreated());
-			JourneysClosedSearched = new ObservableCollection<JourneyModel>(JourneysClosed);
+			DataBaseUtil.GetJourneysClosed().ForEach(x =>
+			{
+				JourneysClosed.Add(x);
+				JourneysClosedSearched.Add(x);
+			});
 
 			base.OnAppearing();
 		}

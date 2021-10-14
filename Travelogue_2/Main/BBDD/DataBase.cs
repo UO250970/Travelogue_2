@@ -166,6 +166,12 @@ namespace Travelogue_2.Main.BBDD
             return QueryFunc(Func);
         }
 
+        public static Image GetCoverFromJourney(int journeyId)
+        {
+            Image Func() => conn.FindWithChildren<Journey>(journeyId, recursive: true).Cover;
+            return QueryFunc(Func);
+        }
+
         internal static string GetNameFromJourney(string journeyId)
         {
             string Func() => conn.Find<Journey>(journeyId).Name;
