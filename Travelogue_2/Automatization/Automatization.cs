@@ -84,13 +84,27 @@ namespace Travelogue_2.Automatization
 				List<Embassy> listEmbassy = iso2ListEmbassy.Where(x => x.Country == destiny.Name)?.ToList();
 
 				destiny.Embassies = listEmbassy;
-
-				CommonVariables.AvailableDestinies.Add(destiny);
 			}
 
 			DataBaseUtil.InsertDestinies(iso2ListDestiny);
 		}
-		
+
+		public static void PrepareStyles()
+		{
+			var assembly = Assembly.GetExecutingAssembly();
+			var resourceNameStyles = "Travelogue_2.Resources.JSON.Styles.txt";
+			string result = string.Empty;
+
+			using (Stream stream = assembly.GetManifestResourceStream(resourceNameStyles))
+			using (StreamReader reader = new StreamReader(stream))
+			{
+				result = reader.ReadToEnd();
+			}
+			var styles = JsonConvert.DeserializeObject<List<Style>>(result);
+
+			DataBaseUtil.InsertStyles(styles);
+		}
+
 		private static void CreateFutur()
 		{
 			JourneyModel journey = DataBaseUtil.CreateJourney("StandardTrip Futur", DateTime.Today.AddDays(3), DateTime.Today.Date.AddDays(5));
@@ -138,10 +152,18 @@ namespace Travelogue_2.Automatization
 			{
 				properties.Clear();
 			}
+
 			if (DataBaseUtil.HasDestinies() != "0")
 			{
 				PrepareCountries();
 			}
+			DataBaseUtil.GetDestinies().ForEach(x => CommonVariables.AvailableDestinies.Add(x));
+
+			if (DataBaseUtil.HasStyles() == "0")
+            {
+				PrepareStyles();
+            }
+			DataBaseUtil.GetStyles().ForEach(x => CommonVariables.AvailableStyles.Add(x));
 
 			CreateOnCourse();
 			CreateFutur();

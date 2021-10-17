@@ -4,6 +4,7 @@ using Travelogue_2.Main.BBDD;
 using Travelogue_2.Main.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Style = Travelogue_2.Main.BBDD.Style;
 
 namespace Travelogue_2.Main.Services
 {
@@ -57,7 +58,10 @@ namespace Travelogue_2.Main.Services
 		public static string GenericFlag { get => FlagImagesPath + "DEFAULT" + FlagImagesExtension; }  
 
 		public static List<string> AvailableLanguages { get => new List<string>() { "ES", "FR", "EN" }; }
-		public static List<Destiny> AvailableDestinies { get; set; } = new List<Destiny>();
+		
+		public static List<StyleModel> AvailableStyles{ get; set; } = new List<StyleModel>();
+
+		public static List<DestinyModel> AvailableDestinies { get; set; } = new List<DestinyModel>();
 
 		public static Dictionary<string, Location> AvailableLanguagesLocations 
 		{
@@ -102,7 +106,7 @@ namespace Travelogue_2.Main.Services
 			foreach ( string back in AvailableBackgrounds)
 			{
 				ImageModel tempI = new ImageModel();
-				string tempString = (BackgroundImagesPath + Background + back + ImagesExtension);
+				string tempString = BackgroundImagesPath + Background + back + ImagesExtension;
 				tempI.Path = tempString;
 				temp.Add(tempI);
 			}
@@ -111,7 +115,7 @@ namespace Travelogue_2.Main.Services
 
 		public static ImageSource GetBackground(string name)
 		{
-			string tempString = (BackgroundImagesPath + name + ImagesExtension);
+			string tempString = BackgroundImagesPath + name + ImagesExtension;
 			return ImageSource.FromResource(tempString);
 		}
 

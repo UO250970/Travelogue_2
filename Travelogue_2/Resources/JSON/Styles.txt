@@ -1,0 +1,5 @@
+[
+	{name: "Original", primary: "#3D6D9B", PrimaryFaded: "#B2D4F4", Secondary: "#247c7c"}, 
+	{name: "Secundario", primary: "#D075BF", PrimaryFaded: "#E8BADF", Secondary: "#75D086"}, 
+	{name: "Terciario", primary: "#79D957", PrimaryFaded: "#ABE796", Secondary: "#B757D9"} 
+]

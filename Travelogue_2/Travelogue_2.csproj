@@ -38,6 +38,7 @@
     <None Remove="Resources\JSON\ESEmbassyList.txt" />
     <None Remove="Resources\JSON\ISO2CountryChecked.txt" />
     <None Remove="Resources\JSON\ISO2Currency.txt" />
+    <None Remove="Resources\JSON\Styles.txt" />
     <None Remove="Resources\xamarin_logo.png" />
   </ItemGroup>
 
@@ -72,6 +73,7 @@
     <EmbeddedResource Include="Resources\JSON\ESEmbassyList.txt" />
     <EmbeddedResource Include="Resources\JSON\ISO2CountryChecked.txt" />
     <EmbeddedResource Include="Resources\JSON\ISO2Currency.txt" />
+    <EmbeddedResource Include="Resources\JSON\Styles.txt" />
     <EmbeddedResource Include="Resources\xamarin_logo.png" />
   </ItemGroup>
 

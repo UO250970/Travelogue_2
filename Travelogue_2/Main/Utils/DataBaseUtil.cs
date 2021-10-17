@@ -30,6 +30,8 @@ namespace Travelogue_2.Main.Utils
 
         public static string HasDestinies() => DataBase.HasDestinies();
 
+        public static string HasStyles() => DataBase.HasStyles();
+
         public static void InsertDestinies(List<Destiny> list) => DataBase.InsertDestinies(list);
 
         public static void GetJourneyForJournal(int JourneyId)
@@ -53,6 +55,28 @@ namespace Travelogue_2.Main.Utils
             foreach (Journey jour in tempDB)
             {
                 temp.Add(JourneyToModel(jour));
+            }
+            return temp;
+        }
+
+        public static List<DestinyModel> GetDestinies()
+        {
+            List<DestinyModel> temp = new List<DestinyModel>();
+            List<Destiny> tempDB = DataBase.GetDestinies();
+            foreach (Destiny dest in tempDB)
+            {
+                temp.Add(DestinyToModel(dest));
+            }
+            return temp;
+        }
+
+        public static List<StyleModel> GetStyles()
+        {
+            List<StyleModel> temp = new List<StyleModel>();
+            List<Style> tempDB = DataBase.GetStyles();
+            foreach (Style style in tempDB)
+            {
+                temp.Add(StyleToModel(style));
             }
             return temp;
         }
@@ -110,6 +134,8 @@ namespace Travelogue_2.Main.Utils
             }
             return temp;
         }
+
+        internal static void InsertStyles(List<Style> list) => DataBase.InsertStyles(list);
 
         public static ImageModel GetCoverFromJourney(int journeyId)
         {
@@ -756,5 +782,17 @@ namespace Travelogue_2.Main.Utils
 
         public static DateTime GetNextDayAvailable() => DayTracker.GetNextDayAvailable();
 
+
+        private static StyleModel StyleToModel(Style style)
+        {
+            StyleModel temp = new StyleModel();
+            temp.Name = style.Name;
+            temp.Primary = style.Primary;
+            temp.PrimaryFaded = style.PrimaryFaded;
+            temp.Secondary = style.Secondary;
+
+            return temp;
+        }
+        private static Style StyleFromModel(StyleModel style) => DataBase.GetStyleByName(style.Name);
     }
 }

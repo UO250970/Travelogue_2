@@ -37,7 +37,7 @@ namespace Travelogue_2.Main.ViewModels.Fragments
 			DataBaseUtil.GetDestiniesFromJourney(int.Parse(CurrentJourneyId))
 				.ForEach(x => DestiniesSelected.Add(x));
 
-			CommonVariables.AvailableDestinies?.Select(x => x.Name).ToList()
+			CommonVariables.AvailableDestinies?.Select(x => x.Destiny).ToList()
 				.ForEach(x => DestiniesList.Add(x));
 		}
 

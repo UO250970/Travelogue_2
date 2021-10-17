@@ -13,7 +13,7 @@ namespace Travelogue_2.Main.BBDD
         private static readonly string Db_name = "Travelogue.db3";
         private static string Folder;
 
-        public static void OpenDataBase(String folder)
+        public static void OpenDataBase(string folder)
         {
             Folder = folder;
             conn = GetConnection();
@@ -91,10 +91,8 @@ namespace Travelogue_2.Main.BBDD
                 conn.CreateTable<Entry>();
                 conn.CreateTable<EntryData>();
                 conn.CreateTable<Image>();
-                //conn.CreateTable<Place_Info>();
-                //conn.CreateTable<AbstractEvent>();
-                //conn.CreateTable<Event_Info>();
-                //conn.CreateTable<Reser_Info>();
+
+                conn.CreateTable<Style>();
             }
             return QueryAct(Act);
         }
@@ -113,12 +111,9 @@ namespace Travelogue_2.Main.BBDD
                 conn.DeleteAll<Event>();
                 conn.DeleteAll<Entry>();
                 conn.DeleteAll<EntryData>();
-                //conn.DeleteAll<Text_Info>();
                 conn.DeleteAll<Image>();
-                //conn.DeleteAll<Place_Info>();
-                //conn.DeleteAll<AbstractEvent>();
-                //conn.DeleteAll<Event_Info>();
-                //conn.DeleteAll<Reser_Info>();
+
+                conn.DeleteAll<Style>();
             }
             return QueryAct(Act);
         }
@@ -136,12 +131,9 @@ namespace Travelogue_2.Main.BBDD
                 conn.DropTable<Event>();
                 conn.DropTable<Entry>();
                 conn.DropTable<EntryData>();
-                //conn.DropTable<Text_Info>();
                 conn.DropTable<Image>();
-                //conn.DropTable<Place_Info>();
-                //conn.DropTable<AbstractEvent>();
-                //conn.DropTable<Event_Info>();
-                //conn.DropTable<Reser_Info>();
+
+                conn.DropTable<Style>();
             }
             return QueryAct(Act);
         }
@@ -390,6 +382,12 @@ namespace Travelogue_2.Main.BBDD
         }
 
             /** Get */
+        public static List<Destiny> GetDestinies()
+        {
+            List<Destiny> Func() => conn.GetAllWithChildren<Destiny>(recursive: false);
+            return QueryFunc(Func);
+        }
+
         internal static bool GetDestiny(Destiny destiny)
         {
             void Act()
@@ -462,6 +460,34 @@ namespace Travelogue_2.Main.BBDD
             return QueryAct(Act);
         }
 
+        #endregion
+
+        #region Style
+
+            /** Get */
+        public static List<Style> GetStyles()
+        {
+            List<Style> Func() => conn.GetAllWithChildren<Style>(recursive: false);
+            return QueryFunc(Func);
+        }
+        public static Style GetStyleByName(string styleName)
+        {
+            Style Func() => conn.GetAllWithChildren<Style>().Find(x => x.Name.Equals(styleName));
+            return QueryFunc(Func);
+        }
+
+            /** Insert */
+        public static bool InsertStyles(List<Style> styles)
+        {
+            void Act() => conn.InsertAllWithChildren(styles);
+            return QueryAct(Act);
+        }
+
+        public static string HasStyles()
+        {
+            string Func() => conn.GetTableInfo("Style").Count().ToString();
+            return QueryFunc(Func);
+        }
         #endregion
 
     }

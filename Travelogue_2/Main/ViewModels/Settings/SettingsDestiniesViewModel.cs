@@ -43,20 +43,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
             Destinies.Clear();
             DestiniesOrdered.Clear();
             DestiniesSearched.Clear();
-            foreach (Destiny dest in CommonVariables.AvailableDestinies)
-            {
-                DestinyModel temp = new DestinyModel();
-                temp.Destiny = dest.Name;
-                temp.Code = dest.Code;
-                temp.EmbassiesCities = dest.Embassies.Select(x => x.City).ToList();
-                temp.Embassies = new Dictionary<string, string>();
-                foreach (Embassy emb in dest.Embassies)
-                {
-                    temp.Embassies.Add(emb.City, emb.PhoneNumber);
-                }
-
-                Destinies.Add(temp);
-            }
+            CommonVariables.AvailableDestinies.ForEach(x => Destinies.Add(x) );
 
             foreach (string s in CommonVariables.Alphabet)
             {
