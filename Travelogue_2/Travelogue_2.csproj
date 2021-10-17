@@ -140,7 +140,7 @@
     <EmbeddedResource Update="Main\Views\Fragments\DayCardView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Main\Views\Fragments\DestinyCardView.xaml">
+    <EmbeddedResource Update="Main\Views\Fragments\DestiniesCollectionView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Fragments\ImageCardView.xaml">

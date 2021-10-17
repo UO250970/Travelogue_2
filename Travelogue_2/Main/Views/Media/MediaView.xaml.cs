@@ -1,4 +1,5 @@
-﻿using Travelogue_2.Main.ViewModels.Media;
+﻿using System;
+using Travelogue_2.Main.ViewModels.Media;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
@@ -22,6 +23,11 @@ namespace Travelogue_2.Main.Views.Media
         {
             map.MoveToRegion(MapSpan.FromCenterAndRadius(model.GetPosition(), Distance.FromKilometers(10)));
             model.OnAppearing();
+            base.OnAppearing();
+        }
+
+        void JourneyTapped(object sender, EventArgs e)
+        {
             base.OnAppearing();
         }
 

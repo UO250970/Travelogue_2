@@ -17,6 +17,8 @@ namespace Travelogue_2.Main.Services
             CrossSettings.Current.AddOrUpdateValue(nameof(LastDay), LastDay.Date);
         }
 
+        public static string CurrentJourneyId = string.Empty;
+
         private static bool OnTrack;
         public static bool IsJourneyOnTrack() { return OnTrack; }
         private static void SetOnTrack(bool newOnTrack)
@@ -25,17 +27,23 @@ namespace Travelogue_2.Main.Services
             CrossSettings.Current.AddOrUpdateValue(nameof(OnTrack), OnTrack);
         }
 
+
         private static int JourneyOnTrackId;
         private static Journey JourneyOnTrack;
         public static Journey GetJourneyOnTrack() { return JourneyOnTrack; }
         private static void SetJourneyOnTrack(Journey journey)
         {
-            JourneyOnTrack = journey;
-            if (JourneyOnTrack == null)
+            if (journey == null)
+			{
                 CrossSettings.Current.AddOrUpdateValue(nameof(JourneyOnTrackId), 0);
-            else
+            }
+			else
+            {
+                JourneyOnTrack = journey;
                 CrossSettings.Current.AddOrUpdateValue(nameof(JourneyOnTrackId), JourneyOnTrack.Id);
+            }
         }
+
 
         private static int CurrentDay;
         public static int GetCurrentDay() { return CurrentDay; }
@@ -44,6 +52,8 @@ namespace Travelogue_2.Main.Services
             CurrentDay = currentDay;
             CrossSettings.Current.AddOrUpdateValue(nameof(CurrentDay), CurrentDay);
         }
+
+
         private static int TotalDays;
         public static int GetTotalDays() { return TotalDays; }
         private static void SetTotalDays(int totalDays)
@@ -51,6 +61,7 @@ namespace Travelogue_2.Main.Services
             TotalDays = totalDays;
             CrossSettings.Current.AddOrUpdateValue(nameof(TotalDays), TotalDays);
         }
+
 
         private static DateTime NextDayAvailable;
         public static DateTime GetNextDayAvailable()

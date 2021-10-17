@@ -13,10 +13,10 @@ namespace Travelogue_2.Main.Utils
 
         public static async Task<PermissionStatus> CheckPermissions()
         {
-            PermissionStatus statusCalendar = PermissionStatus.Unknown;
+            PermissionStatus statusLocation = PermissionStatus.Unknown;
             try
             {
-                PermissionStatus statusLocation = CrossPermissions.Current.CheckPermissionStatusAsync<LocationWhenInUsePermission>().Result;
+                statusLocation = CrossPermissions.Current.CheckPermissionStatusAsync<LocationWhenInUsePermission>().Result;
                 if (statusLocation != PermissionStatus.Granted)
                 {
                     statusLocation = await CrossPermissions.Current.RequestPermissionAsync<LocationWhenInUsePermission>();
@@ -24,14 +24,14 @@ namespace Travelogue_2.Main.Utils
 
                 Debug.WriteLine("Permision location: " + statusLocation);
 
-                return statusCalendar;
+                return statusLocation;
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Error permision location: " + e.StackTrace);
             }
 
-            return statusCalendar;
+            return statusLocation;
         }
 
         private static async Task<Location> GetLocationAsync()
@@ -49,9 +49,9 @@ namespace Travelogue_2.Main.Utils
             return location;
         }
 
-        public static Position GetPosition()
+        public async static Task<Position> GetPosition()
         {
-            Location temp = GetLocationAsync().Result;
+            Location temp = await GetLocationAsync();
             if (temp is null) temp = new Location();
             return new Position(temp.Latitude, temp.Longitude);
         }

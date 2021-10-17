@@ -5,6 +5,7 @@
              Shell.TabBarIsVisible="False"
              Title="{Binding JourneyName}"
              x:Name="JourneySettingsViewName"
+             xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
              x:Class="Travelogue_2.Main.Views.Journey.JourneySettingsView">
 
     <ContentPage.Content>
@@ -65,6 +66,21 @@
                     <StackLayout>
                         <Label Text="Destinos" FontSize="Large" TextColor="{DynamicResource Primary}"/>
 
+                        <StackLayout Orientation="Horizontal">
+
+                            <autocomplete:SfAutoComplete x:Name="AutocompleteDestiny"
+                                                         DataSource="{Binding DestiniesList}"
+                                                         NoResultsFoundText="{Binding Resources[NoResultsFound]}"
+                                                         Text="{Binding DestinyText, Mode=TwoWay}"
+                                                         SuggestionBoxPlacement="Top"
+                                                         Watermark="{Binding Resources[EnterADestiny]}"
+                                                         HorizontalOptions="FillAndExpand"/>
+                            <Button x:Name="AddDestinyButton"
+                                    Command="{Binding AddDestinyCommand}"
+                                    IsEnabled="{Binding CorrectDestinyText}"
+                                    Text="&#xea0a;" FontFamily="{StaticResource Icon}"  FontSize="Medium"/>
+                        </StackLayout>
+                        
                         <StackLayout x:Name="DestiniesCollection"
                                      BindableLayout.ItemsSource="{Binding JourneyDestinies}"
                                      Margin="5, 5, 5, 5">

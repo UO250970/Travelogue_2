@@ -5,6 +5,8 @@ using System.Linq;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.ViewModels.Journey;
+using Travelogue_2.Main.Views.Journey;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Maps;
@@ -17,6 +19,7 @@ namespace Travelogue_2.Main.ViewModels.Media
 
 		public int localizationFirstDay;
 		public Command SearchJourneyCommand { get; }
+		public Command<string> JourneyTapped { get; }
 		public ObservableDictionary<string, List<ImageModel>> ImagesOrdered { get; set; }
 
 		private ObservableDictionary<string, List<ImageModel>> imagesSearched;
@@ -37,6 +40,8 @@ namespace Travelogue_2.Main.ViewModels.Media
 
 			ImagesOrdered = new ObservableDictionary<string, List<ImageModel>>();
 			ImagesSearched = new ObservableDictionary<string, List<ImageModel>>();
+
+			JourneyTapped = new Command<string>(OnJourneySelected);
 
 			ExecuteLoadDataCommand();
 		}
@@ -104,7 +109,17 @@ namespace Travelogue_2.Main.ViewModels.Media
 
 		internal Position GetPosition()
 		{
-			return GeolocalizationUtil.GetPosition();
+			return GeolocalizationUtil.GetPosition().Result;
+		}
+
+		async void OnJourneySelected(string journeyId)
+		{
+			if (journeyId == null)
+				return;
+
+			// This will push the ItemDetailPage onto the navigation stack
+			CurrentJourneyId = journeyId;
+			await Shell.Current.GoToAsync($"{nameof(JourneyView)}");
 		}
 
 		public void OnAppearing()

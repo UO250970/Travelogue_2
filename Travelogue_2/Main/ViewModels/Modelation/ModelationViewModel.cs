@@ -65,7 +65,8 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 				return;
 
 			// This will push the ItemDetailPage onto the navigation stack
-			await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyTemplateViewModel.JourneyId)}={journey.Id}");
+			CurrentJourneyId = journey.Id.ToString();
+			await Shell.Current.GoToAsync($"{nameof(JourneyView)}");
 		}
 	}
 }

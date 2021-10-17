@@ -5,12 +5,6 @@ namespace Travelogue_2.Main.ViewModels.Journey
 {
     public class JourneyOngoingViewModel : JourneyTemplateViewModel
     {
-        public new string JourneyId
-        {
-            get => journeyId;
-            set => journeyId = value;
-        }
-
         private bool journeyOnGoing = false;
         public bool JourneyOnGoing
 		{
@@ -39,7 +33,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
             if (journey.Id >= 0)
 			{
-                JourneyId = journey.Id.ToString();
+                CurrentJourneyId = journey.Id.ToString();
                 base.LoadData();
                 JourneyOnGoing = true;
             }

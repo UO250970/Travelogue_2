@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Travelogue_2.Main.BBDD;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
-using Xamarin.Forms;
 using Entry = Travelogue_2.Main.BBDD.Entry;
 using Image = Travelogue_2.Main.BBDD.Image;
 
@@ -87,9 +86,7 @@ namespace Travelogue_2.Main.Utils
 
         public static JourneyModel GetJourneyOnGoing()
 		{
-            Journey temp = DataBase.GetJourneis(State.OPEN).FirstOrDefault();
-
-            return JourneyToModel(temp);
+            return JourneyToModel( DayTracker.GetJourneyOnTrack() );
 		}
 
         public static List<JourneyModel> GetJourneysCreated()
@@ -139,6 +136,11 @@ namespace Travelogue_2.Main.Utils
             DataBase.InsertImage(image);
 
             return ImageToModel(image);
+		}
+
+        public static string CreateEmptyJourney()
+		{
+            DataBase.InsertJourney( new Journey() );
 		}
 
         public static JourneyModel CreateJourney(string name, DateTime ini, DateTime end, ImageModel cover = null)
@@ -446,6 +448,7 @@ namespace Travelogue_2.Main.Utils
         public static bool SaveImage(ImageModel image)
         {
             Image temp = ImageFromModel(image);
+            if (temp == null) return true;
 
             if (!image.Path.Equals(temp.Path)) temp.Path = image.Path;
             if (!image.Caption.Equals(temp.Caption)) temp.Caption = image.Caption;

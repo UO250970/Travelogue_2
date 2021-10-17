@@ -41,6 +41,8 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
 			DestinyTappedDelete = new Command<DestinyModel>(OnDestinySelectedDelete);
 
+			CurrentJourneyId = DataBaseUtil.CreateEmptyJourney();
+
 			ExecuteLoadDataCommand();
 		}
 

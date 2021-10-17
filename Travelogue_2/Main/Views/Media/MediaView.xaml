@@ -37,8 +37,12 @@
                                 <calendar:MonthViewSettings>
                                     <calendar:MonthViewSettings.InlineItemTemplate>
                                         <DataTemplate>
-                                            <Button AutomationId="{Binding AutomationId}" 
-                                                    Text="{Binding .Subject}" TextColor="#bbd5ed"/>
+                                            <Button AutomationId="{Binding .AutomationId}" 
+                                                    IsEnabled="True"
+                                                    Clicked="JourneyTapped"
+                                                    Text="{Binding .Subject}" TextColor="{DynamicResource PrimaryFaded}"
+                                                    Command="{Binding Path=BindingContext.JourneyTapped, Source={x:Reference MediaViewName}}"
+                                                    CommandParameter="{Binding .AutomationId}"/>
                                         </DataTemplate>
                                     </calendar:MonthViewSettings.InlineItemTemplate>
                                 </calendar:MonthViewSettings>
@@ -68,72 +72,79 @@
 
                     <AbsoluteLayout>
 
-                        <StackLayout Padding="10,10,10,5" Grid.Row="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>    
+                        
+                            <StackLayout Padding="10,10,10,5" Grid.Row="0">
 
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <SearchBar Grid.Column="0" IsVisible="{Binding SearchVisible}" Placeholder="{Binding Resources[SearchJourney]}" Text="{Binding SearchText, Mode=TwoWay}"/>
-                                <Label Grid.Column="1" Text="&#x1f50d;" FontFamily="{StaticResource Icon}" FontSize="Large"  VerticalTextAlignment="Center" HorizontalOptions="Center"
-                                        TextColor="{DynamicResource Primary}">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding SearchJourneyCommand}"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
-                            </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <SearchBar Grid.Column="0" IsVisible="{Binding SearchVisible}" Placeholder="{Binding Resources[SearchJourney]}" Text="{Binding SearchText, Mode=TwoWay}"/>
+                                    <Label Grid.Column="1" Text="&#x1f50d;" FontFamily="{StaticResource Icon}" FontSize="Large"  VerticalTextAlignment="Center" HorizontalOptions="Center"
+                                            TextColor="{DynamicResource Primary}">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SearchJourneyCommand}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Grid>
                             
-                        </StackLayout>
+                            </StackLayout>
 
-                        <StackLayout x:Name="ImagesListView"
-                                     BindableLayout.ItemsSource="{Binding ImagesSearched}" Grid.Row="1"  >
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate>
+                            <StackLayout x:Name="ImagesListView"
+                                         BindableLayout.ItemsSource="{Binding ImagesSearched}" Grid.Row="1"  >
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
 
-                                    <Frame>
-                                        <StackLayout>
-                                            <Label Text="{Binding Key}" FontSize="Large" TextColor="{DynamicResource Primary}"/>
-                                            <Rectangle HeightRequest="1" WidthRequest="400" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource Grey}"/>
+                                        <Frame>
+                                            <StackLayout>
+                                                <Label Text="{Binding Key}" FontSize="Large" TextColor="{DynamicResource Primary}"/>
+                                                <Rectangle HeightRequest="1" WidthRequest="400" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource Grey}"/>
 
-                                            <CollectionView x:Name="CreatedJourneysCollection"
-                                                            ItemsSource="{Binding Value}"
-                                                            SelectionMode="None">
+                                                <CollectionView x:Name="CreatedJourneysCollection"
+                                                                ItemsSource="{Binding Value}"
+                                                                SelectionMode="None">
 
-                                                <CollectionView.ItemsLayout>
-                                                    <GridItemsLayout Orientation="Vertical"
-                                                                        Span="4"/>
-                                                </CollectionView.ItemsLayout>
+                                                    <CollectionView.ItemsLayout>
+                                                        <GridItemsLayout Orientation="Vertical"
+                                                                            Span="4"/>
+                                                    </CollectionView.ItemsLayout>
 
-                                                <CollectionView.EmptyView>
-                                                    <Label Text="{Binding BindingContext.Resources[JourneyWithoutImages]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                                                </CollectionView.EmptyView>
+                                                    <CollectionView.EmptyView>
+                                                        <Label Text="{Binding BindingContext.Resources[JourneyWithoutImages]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                                    </CollectionView.EmptyView>
 
-                                                <CollectionView.ItemTemplate>
-                                                    <DataTemplate>
+                                                    <CollectionView.ItemTemplate>
+                                                        <DataTemplate>
 
-                                                        <Frame Padding="5">
-                                                            <Image HeightRequest="{Binding Path=BindingContext.CardImagesHeight, Source={x:Reference MediaViewName}}"  Source="{Binding .ImageSour}">
+                                                            <Frame Padding="5">
+                                                                <Image HeightRequest="{Binding Path=BindingContext.CardImagesHeight, Source={x:Reference MediaViewName}}"  Source="{Binding .ImageSour}">
 
-                                                                <Image.GestureRecognizers>
-                                                                    <TapGestureRecognizer Command="{Binding BindingContext.ViewImageCommand, Source={x:Reference MediaViewName}}"
-                                                                           CommandParameter="{Binding .}"/>
-                                                                </Image.GestureRecognizers>
+                                                                    <Image.GestureRecognizers>
+                                                                        <TapGestureRecognizer Command="{Binding BindingContext.ViewImageCommand, Source={x:Reference MediaViewName}}"
+                                                                               CommandParameter="{Binding .}"/>
+                                                                    </Image.GestureRecognizers>
                                                                 
-                                                            </Image>
-                                                        </Frame>
+                                                                </Image>
+                                                            </Frame>
 
-                                                    </DataTemplate>
-                                                </CollectionView.ItemTemplate>
+                                                        </DataTemplate>
+                                                    </CollectionView.ItemTemplate>
                                                 
-                                            </CollectionView>
+                                                </CollectionView>
 
-                                        </StackLayout>
-                                    </Frame>
+                                            </StackLayout>
+                                        </Frame>
 
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </Grid>
 
                     </AbsoluteLayout>
 

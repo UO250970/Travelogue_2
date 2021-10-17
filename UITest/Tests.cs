@@ -21,7 +21,7 @@ namespace UITest
             //app = ConfigureApp.Android.StartApp();
 
             app = ConfigureApp.Android
-                 .ApkFile(@"C:\Users\Lulu\AppData\Local\Xamarin\Mono for Android\Archives\2021-08-25\Travelogue_2.Android 8-25-21 6.50 PM.apkarchive\com.companyname.travelogue_2.apk")
+                 .ApkFile(@"C:\Users\Lulu\AppData\Local\Xamarin\Mono for Android\Archives\2021-10-16\Travelogue_2.Android 10-16-21 7.16 PM.apkarchive\com.companyname.travelogue_2.apk")
                  .DeviceSerial("6PQ0217821002256")
                  .PreferIdeSettings()
                  .EnableLocalScreenshots()
@@ -66,11 +66,17 @@ namespace UITest
 
             app.WaitForElement("Concierto Manin", timeout: TimeSpan.FromSeconds(100));
         }
+        
+        [Test]
+        public void SeeJourneyFromLibrary()
+		{
+
+		}
 
         [Test]
         public void ModifyEventTest()
         {
-            //app.Repl();
+            app.Repl();
             EnterFuturTrip();
             app.TouchAndHold(x => x.Marked("Concierto Manin"));
 

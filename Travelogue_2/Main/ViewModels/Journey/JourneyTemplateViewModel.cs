@@ -13,10 +13,6 @@ namespace Travelogue_2.Main.ViewModels.Journey
 {
 	public class JourneyTemplateViewModel : PhotoRendererModel
 	{
-		protected string journeyId;
-
-		public string JourneyId { get => journeyId; }
-
 		public Command AddImageCommand { get; }
 		public Command<ImageModel> ImageTapped { get; }
 		public Command<DayModel> DayTapped { get; }
@@ -59,14 +55,14 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 			DayTapped = new Command<DayModel>(OnDaySelected);
 
-			//ExecuteLoadDataCommand();
+			ExecuteLoadDataCommand();
 		}
 
 		public override void LoadData()
 		{
-			if (JourneyId != null)
+			if (CurrentJourneyId != string.Empty)
 			{
-				JourneyModel journey = DataBaseUtil.GetJourneyById( int.Parse(JourneyId) );
+				JourneyModel journey = DataBaseUtil.GetJourneyById( int.Parse(CurrentJourneyId) );
 				JourneyName = journey.Name;
 
 				if (journey.CoverId >= 1)
@@ -84,20 +80,20 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		public override void OnAppearing()
 		{
-			base.OnAppearing();
-
-			CoverImage = DataBaseUtil.GetCoverFromJourney( int.Parse(journeyId)) ;
+			LoadData();
+			/*
+			CoverImage = DataBaseUtil.GetCoverFromJourney( int.Parse(CurrentJourneyId)) ;
 
 			if (DaySelected.Day != null)
             {
-				var temp = DataBaseUtil.GetDaysFromJourneyId(int.Parse(journeyId));
+				var temp = DataBaseUtil.GetDaysFromJourneyId( int.Parse(CurrentJourneyId) );
 				JourneyDays.Clear();
 
 				temp.First(x => x.Date.Equals(DaySelected.Date))?.Select();
 				temp.OrderBy(x => x.Date).ToList().ForEach(x => JourneyDays.Add(x));
 
 				DaySelected = JourneyDays[DaySelectedNum];
-			}
+			}*/
 
 		}
 
@@ -167,12 +163,12 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		async internal void ModifyJourneyC()
 		{
-			await Shell.Current.GoToAsync($"{nameof(JourneySettingsView)}?{nameof(JourneySettingsViewModel.JourneyId)}={JourneyId}");
+			await Shell.Current.GoToAsync($"{nameof(JourneySettingsView)}?{nameof(CurrentJourneyId)}={CurrentJourneyId}");
 		}
 
 		async internal void AddImageC()
 		{
-			ImageModel success = await CameraUtil.Photo(this, journeyId);
+			ImageModel success = await CameraUtil.Photo(this, CurrentJourneyId);
 			if (success != null)
 			{
 				JourneyImages.Add(success);
@@ -182,34 +178,29 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		async internal void AddEventC()
 		{
 			//TO-DO checkear
-			await Shell.Current.GoToAsync($"{nameof(AddEventPopUp)}?{nameof(AddToJourneyPopUpModel.JourneyId)}={JourneyId}&" +
-																	$"{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}");
+			await Shell.Current.GoToAsync($"{nameof(AddEventPopUp)}?{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}");
 		}
 
 		async internal void EditOrDeleteEventC(EventModel eventC)
 		{
-			await Shell.Current.GoToAsync($"{nameof(EditOrDeleteEventPopUp)}?{nameof(EditOrDeleteFromJourneyPopUpModel.JourneyId)}={JourneyId}&" +
-																	$"{nameof(EditOrDeleteFromJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
+			await Shell.Current.GoToAsync($"{nameof(EditOrDeleteEventPopUp)}?{nameof(EditOrDeleteFromJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
 																	$"{nameof(EditOrDeleteFromJourneyPopUpModel.EventId)}={eventC.Id}");
 		}
 
 		async internal void AddEntryC()
 		{
-			await Shell.Current.GoToAsync($"{nameof(AddEntryPopUp)}?{nameof(AddToJourneyPopUpModel.JourneyId)}={JourneyId}&" +
-																	$"{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}");
+			await Shell.Current.GoToAsync($"{nameof(AddEntryPopUp)}?{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}");
 		}
 
 		async internal void EditOrDeleteEntryC(EntryModel entryC)
 		{
-			await Shell.Current.GoToAsync($"{nameof(EditOrDeleteEntryPopUp)}?{nameof(EditOrDeleteFromJourneyPopUpModel.JourneyId)}={JourneyId}&" +
-																	$"{nameof(EditOrDeleteFromJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
+			await Shell.Current.GoToAsync($"{nameof(EditOrDeleteEntryPopUp)}?{nameof(EditOrDeleteFromJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
 																	$"{nameof(EditOrDeleteFromJourneyPopUpModel.EntryId)}={entryC.Id}");
 		}
 
 		async internal void AddToEntryC(EntryModel entryC)
 		{
-			await Shell.Current.GoToAsync($"{nameof(AddToEntryPopUp)}?&{nameof(AddToJourneyPopUpModel.JourneyId)}={JourneyId}" +
-																	$"{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
+			await Shell.Current.GoToAsync($"{nameof(AddToEntryPopUp)}?{nameof(AddToJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
 																	$"{nameof(AddToJourneyPopUpModel.EntryId)}={entryC.Id}");
 		}
 		#endregion

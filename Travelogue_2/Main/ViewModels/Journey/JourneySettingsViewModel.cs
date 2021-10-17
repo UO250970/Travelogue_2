@@ -9,23 +9,8 @@ using System.Collections.Generic;
 
 namespace Travelogue_2.Main.ViewModels.Journey
 {
-	[QueryProperty(nameof(JourneyId), nameof(JourneyId))]
 	public class JourneySettingsViewModel : PhotoRendererModel
 	{
-		public string journeyId;
-		public string JourneyId
-		{
-			get
-			{
-				return journeyId;
-			}
-			set
-			{
-				journeyId = value;
-				LoadData();
-			}
-		}
-
 		public Command ModifyCoverCommand { get; }
 		public Command MoreInfoCommand { get; }
 		public Command PhoneNumberTappedCommand { get; }
@@ -41,14 +26,16 @@ namespace Travelogue_2.Main.ViewModels.Journey
 			MoreInfoCommand = new Command<string>((x) => MoreInfoC(x));
 			PhoneNumberTappedCommand = new Command<string>((x) => PhoneNumberTappedC(x));
 			DeleteJourneyCommand = new Command(x => DeleteJourneyC());
+
+			ExecuteLoadDataCommand();
 		}
 
 		public override void LoadData()
 		{
 
-			if (JourneyId != null)
+			if (CurrentJourneyId != string.Empty)
 			{
-				Journey = DataBaseUtil.GetJourneyById(int.Parse(JourneyId));
+				Journey = DataBaseUtil.GetJourneyById( int.Parse(CurrentJourneyId) );
 				JourneyName = Journey.Name;
 				State = Journey.JourneyState;
 
@@ -181,7 +168,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		internal void DeleteJourneyC()
         {
-			DataBaseUtil.DeleteJourney( int.Parse(journeyId) );
+			DataBaseUtil.DeleteJourney( int.Parse(CurrentJourneyId) );
         }
 
 		internal void CheckNewIniDate(DatePicker iniDatePicker, DatePicker endDatePicker)
