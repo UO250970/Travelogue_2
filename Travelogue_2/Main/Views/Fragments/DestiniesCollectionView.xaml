@@ -1,20 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Frame xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
-             x:Class="Travelogue_2.Main.Views.Fragments.DestiniesCollectionView">
+<Frame  HasShadow="True" Margin="5" Padding="5"
+        xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
+        x:Class="Travelogue_2.Main.Views.Fragments.DestiniesCollectionView"
+        x:Name="DestiniesCollectionViewName">
 
     <StackLayout>
         <Label Text="Destinos" FontSize="Large" TextColor="{DynamicResource Primary}"/>
         <StackLayout Orientation="Horizontal">
 
             <autocomplete:SfAutoComplete x:Name="AutocompleteDestiny"
-                                                         DataSource="{Binding DestiniesList}"
-                                                         NoResultsFoundText="{Binding Resources[NoResultsFound]}"
-                                                         Text="{Binding DestinyText, Mode=TwoWay}"
-                                                         SuggestionBoxPlacement="Top"
-                                                         Watermark="{Binding Resources[EnterADestiny]}"
-                                                         HorizontalOptions="FillAndExpand"/>
+                                        DataSource="{Binding DestiniesList}"
+                                        NoResultsFoundText="{Binding Resources[NoResultsFound]}"
+                                        Text="{Binding DestinyText, Mode=TwoWay}"
+                                        SuggestionBoxPlacement="Top"
+                                        Watermark="{Binding Resources[EnterADestiny]}"
+                                        HorizontalOptions="FillAndExpand"/>
             <Button x:Name="AddDestinyButton"
                                     Command="{Binding AddDestinyCommand}"
                                     IsEnabled="{Binding CorrectDestinyText}"
@@ -51,7 +53,7 @@
                                                 </Grid.ColumnDefinitions>
                                                 <Label Grid.Column="0"
                                                                     FontSize="Medium"
-                                                                    Text="{Binding BindingContext.Resources[Name], Source={x:Reference CreateJourneyViewName}}" />
+                                                                    Text="{Binding BindingContext.Resources[Name], Source={x:Reference DestiniesCollectionViewName}}" />
                                                 <Label Grid.Column="1"
                                                                     x:Name="CountryName"
                                                                     FontSize="Medium" 
@@ -66,7 +68,7 @@
                                                 </Grid.ColumnDefinitions>
                                                 <Label Grid.Column="0"
                                                                     FontSize="Medium"
-                                                                    Text="{Binding BindingContext.Resources[Currency], Source={x:Reference CreateJourneyViewName}}" />
+                                                                    Text="{Binding BindingContext.Resources[Currency], Source={x:Reference DestiniesCollectionViewName}}" />
                                                 <Label Grid.Column="1"
                                                                     x:Name="Currency"
                                                                     FontSize="Medium"
@@ -80,7 +82,7 @@
                                                                 x:Name="DestinyURL"
                                                                 Text="{Binding .MoreInfoCountry}">
                                                 <Label.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding BindingContext.MoreInfoCommand, Source={x:Reference CreateJourneyViewName}}"
+                                                    <TapGestureRecognizer Command="{Binding BindingContext.MoreInfoCommand, Source={x:Reference DestiniesCollectionViewName}}"
                                                                                         CommandParameter="{Binding .MoreInfoCountry}"/>
                                                 </Label.GestureRecognizers>
                                             </Label>
@@ -95,7 +97,7 @@
                                                 BackgroundColor="{StaticResource None}"
                                                 FontSize="Medium"
                                                 HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
-                                                Command="{Binding BindingContext.DestinyTappedDelete, Source={x:Reference CreateJourneyViewName}}"
+                                                Command="{Binding BindingContext.DestinyTappedDelete, Source={x:Reference DestiniesCollectionViewName}}"
                                                 CommandParameter="{Binding .}"/>
 
                         </AbsoluteLayout>

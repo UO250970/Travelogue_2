@@ -21,8 +21,6 @@ namespace Travelogue_2.Main.Views.Journey
 
 		protected void OnAppearing()
 		{
-			
-
 			JourneyName.TranslationY = _journeyNameFrameTop * 0.1;
 			JourneyNameBoxView.TranslationY = _journeyNameFrameTop * 0.1;
 

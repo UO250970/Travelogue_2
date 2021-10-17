@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
@@ -29,6 +30,16 @@ namespace Travelogue_2.Main.ViewModels.Fragments
 			ExecuteLoadDataCommand();
 		}
 
+		public override void LoadData()
+		{
+			DestiniesList.Clear();
+
+			DataBaseUtil.GetDestiniesFromJourney(int.Parse(CurrentJourneyId))
+				.ForEach(x => DestiniesSelected.Add(x));
+
+			CommonVariables.AvailableDestinies?.Select(x => x.Name).ToList()
+				.ForEach(x => DestiniesList.Add(x));
+		}
 
 		#region CorrectDestinyText
 		private bool correctDestinyText;
@@ -65,13 +76,14 @@ namespace Travelogue_2.Main.ViewModels.Fragments
 			{
 				DestinyModel destiny = DataBaseUtil.GetDestinyByName(DestinyText);
 
-				if (!DestiniesSelected.Contains(destiny))
+				if (DestiniesSelected.Contains(destiny))
 				{
-					DestiniesSelected.Add(destiny);
+					await Alerter.AlertDestinyAlreadySelected();
 				}
 				else
 				{
-					await Alerter.AlertDestinyAlreadySelected();
+					DataBaseUtil.JourneyInsertDestiny(int.Parse(CurrentJourneyId), destiny.Destiny);
+					DestiniesSelected.Add(destiny);
 				}
 			}
 			else
@@ -91,11 +103,9 @@ namespace Travelogue_2.Main.ViewModels.Fragments
 			if (destiny == null)
 				return;
 
+			DataBaseUtil.JourneyRemoveDestiny( int.Parse(CurrentJourneyId), destiny.Destiny);
 			DestiniesSelected.Remove(destiny);
 		}
 
-		public override void LoadData()
-		{
-		}
 	}
 }

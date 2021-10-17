@@ -5,7 +5,6 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Travelogue_2.Main.Utils;
 using System;
-using System.Collections.Generic;
 
 namespace Travelogue_2.Main.ViewModels.Journey
 {
@@ -32,26 +31,20 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		public override void LoadData()
 		{
+			Journey = DataBaseUtil.GetJourneyById( int.Parse(CurrentJourneyId) );
+			JourneyName = Journey.Name;
+			State = Journey.JourneyState;
 
-			if (CurrentJourneyId != string.Empty)
+			if (Journey.CoverId >= 1)
 			{
-				Journey = DataBaseUtil.GetJourneyById( int.Parse(CurrentJourneyId) );
-				JourneyName = Journey.Name;
-				State = Journey.JourneyState;
-
-				if (Journey.CoverId >= 1)
-				{
-					ImageModel cover = DataBaseUtil.GetImageById(journey.CoverId);
-					CoverImage = cover;
-				}
-
-				IniDate = Journey.IniDate;
-				IniDateEnabled = (State.Equals(State.CLOSED) || State.Equals(State.OPEN)) ? false : true;
-				EndDate = Journey.EndDate;
-				EndDateEnabled = State.Equals(State.CLOSED) ? false : true;
-
-				DataBaseUtil.GetDestiniesFromJourney(journey).ForEach(x => JourneyDestinies.Add(x));
+				ImageModel cover = DataBaseUtil.GetImageById(journey.CoverId);
+				CoverImage = cover;
 			}
+
+			IniDate = Journey.IniDate;
+			IniDateEnabled = (State.Equals(State.CLOSED) || State.Equals(State.OPEN)) ? false : true;
+			EndDate = Journey.EndDate;
+			EndDateEnabled = State.Equals(State.CLOSED) ? false : true;
 		}
 
 		private JourneyModel journey;
@@ -185,8 +178,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		internal override async void Back()
 		{
-			if( await DataBaseUtil.SaveJourney(Journey) && DataBaseUtil.SaveJourneyDestinies(Journey, new List<DestinyModel>(JourneyDestinies)) 
-				&& DataBaseUtil.SaveImage(CoverImage)) base.Back();
+			if( await DataBaseUtil.SaveJourney(Journey) && DataBaseUtil.SaveImage(CoverImage) ) base.Back();
 		}
 
 	}

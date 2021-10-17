@@ -5,7 +5,7 @@
              Shell.TabBarIsVisible="False"
              Title="{Binding JourneyName}"
              x:Name="JourneySettingsViewName"
-             xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
+             xmlns:destinies="clr-namespace:Travelogue_2.Main.Views.Fragments"
              x:Class="Travelogue_2.Main.Views.Journey.JourneySettingsView">
 
     <ContentPage.Content>
@@ -62,7 +62,7 @@
                     </StackLayout>
                 </Frame>
 
-                <Frame HasShadow="True" Margin="5" Padding="5">
+                <!--Frame HasShadow="True" Margin="5" Padding="5">
                     <StackLayout>
                         <Label Text="Destinos" FontSize="Large" TextColor="{DynamicResource Primary}"/>
 
@@ -180,7 +180,9 @@
                         </StackLayout>
 
                     </StackLayout>
-                </Frame>
+                </Frame-->
+
+                <destinies:DestiniesCollectionView/>
 
                 <Frame HasShadow="True" Margin="5" Padding="5">
 

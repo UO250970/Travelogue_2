@@ -22,5 +22,19 @@ namespace Travelogue_2.Main.Models
 		public Dictionary<string, string> Embassies { get; set; } = new Dictionary<string, string>();
 
 		public List<string> EmbassiesCities { get; set; } = new List<string>();
+
+		public override bool Equals(object obj)
+		{
+			//Check for null and compare run-time types.
+			if ((obj == null) || !GetType().Equals(obj.GetType()))
+			{
+				return false;
+			}
+			else
+			{
+				DestinyModel p = (DestinyModel)obj;
+				return Code == p.Code;
+			}
+		}
 	}
 }

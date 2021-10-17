@@ -119,8 +119,10 @@ namespace Travelogue_2.Main.Services
             //Assert.IsFalse(DataBase.GetJourneis().Where(x => x.HasStarted() == true).Count() > 1);
         }
 
-        public static void UpdateDataBaseWithJourney(Journey journey)
-		{
+        /** Método llamado desde la creación de viajes, 
+         * con estado CREATED, si empieza hoy se inicia el viaje */
+        public static void UpdateJourney(Journey journey)
+        {
             if (!journey.HasStarted() && !journey.HasFinished())
             {
                 if (journey.FinishedAlready()) { CloseJourney(journey); }
@@ -128,7 +130,6 @@ namespace Travelogue_2.Main.Services
             }
             else if (journey.HasStarted() && !journey.HasFinished() && journey.FinishedAlready()) { CloseJourney(journey); }
         }
-
 
         static INotifications notificationManager = DependencyService.Get<INotifications>();
 
@@ -188,18 +189,6 @@ namespace Travelogue_2.Main.Services
 
                 CheckInitialTabAsync();
             }
-        }
-
-        /** Método llamado desde la creación de viajes, 
-         * con estado CREATED, si empieza hoy se inicia el viaje */
-        public static void UpdateJourney(Journey journey)
-        {
-            if (!journey.HasStarted() && !journey.HasFinished())
-            {
-                if (journey.FinishedAlready()) { CloseJourney(journey); }
-                else if ((journey.StartsToday() || journey.StartedAlready()) && !journey.JourneyState.Equals(State.OPEN)) { OpenJourney(journey); }
-            }
-            else if (journey.HasStarted() && !journey.HasFinished() && journey.FinishedAlready()) { CloseJourney(journey); }
         }
 
         private static void ReStart()

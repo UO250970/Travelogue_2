@@ -1,5 +1,4 @@
-﻿using Java.Lang;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Travelogue_2.Main.Models;
@@ -94,7 +93,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			if (JourneyId != null && DaySelectedNum != null)
 			{
 				// TODO - Pilla el journey de BBDD y pilla el list de dias o whatever
-				Days = DataBaseUtil.GetDaysFromJourneyId( Integer.ParseInt(JourneyId) )
+				Days = DataBaseUtil.GetDaysFromJourneyId( int.Parse(JourneyId) )
 					.OrderBy(x => x.Date)
 					.ToList();
 				
@@ -290,7 +289,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			else
 			{
 				int dayInt = Days.FindIndex(x => x.Date.Equals(DaySelected.Date)) + 1;
-				DataBaseUtil.JourneyInsertEvent( Integer.ParseInt(JourneyId), dayInt, Title, Time, Location);
+				DataBaseUtil.JourneyInsertEvent( int.Parse(JourneyId), dayInt, Title, Time, Location);
 				Back();
 			}
 		}
@@ -309,7 +308,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			{
 				int duration = (int)(EndDaySelected - IniDaySelected).TotalDays + 1;
 				int dayInt = Days.FindIndex(x => x.Date.Equals(IniDaySelected.Date)) + 1;
-				DataBaseUtil.JourneyInsertReserv( Integer.ParseInt(JourneyId), dayInt, duration, Title, Location, PhoneNumber);
+				DataBaseUtil.JourneyInsertReserv( int.Parse(JourneyId), dayInt, duration, Title, Location, PhoneNumber);
 				Back();
 			}
 		}
@@ -328,7 +327,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			} else
 			{
 				int dayInt = Days.FindIndex(x => x.Date.Equals(DaySelected.Date)) + 1;
-				DataBaseUtil.JourneyInsertEntry(Integer.ParseInt(JourneyId), dayInt, Title);
+				DataBaseUtil.JourneyInsertEntry( int.Parse(JourneyId), dayInt, Title);
 				Back();
 			}
 		}

@@ -60,20 +60,17 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		public override void LoadData()
 		{
-			if (CurrentJourneyId != string.Empty)
-			{
-				JourneyModel journey = DataBaseUtil.GetJourneyById( int.Parse(CurrentJourneyId) );
-				JourneyName = journey.Name;
+			JourneyModel journey = DataBaseUtil.GetJourneyById( int.Parse(CurrentJourneyId) );
+			JourneyName = journey.Name;
 
-				if (journey.CoverId >= 1)
-                {
-					ImageModel cover = DataBaseUtil.GetImageById(journey.CoverId);
-					CoverImage = cover;
-				}
-
-				// TODO - Chekear acciones según estado
-				JourneyDays = new ObservableCollection<DayModel>( DataBaseUtil.GetDaysFromJourney(journey) );
+			if (journey.CoverId >= 1)
+            {
+				ImageModel cover = DataBaseUtil.GetImageById(journey.CoverId);
+				CoverImage = cover;
 			}
+
+			// TODO - Chekear acciones según estado
+			JourneyDays = new ObservableCollection<DayModel>( DataBaseUtil.GetDaysFromJourney(journey) );
 
 			DaySelected = JourneyDays[0];
 		}
@@ -81,20 +78,6 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		public override void OnAppearing()
 		{
 			LoadData();
-			/*
-			CoverImage = DataBaseUtil.GetCoverFromJourney( int.Parse(CurrentJourneyId)) ;
-
-			if (DaySelected.Day != null)
-            {
-				var temp = DataBaseUtil.GetDaysFromJourneyId( int.Parse(CurrentJourneyId) );
-				JourneyDays.Clear();
-
-				temp.First(x => x.Date.Equals(DaySelected.Date))?.Select();
-				temp.OrderBy(x => x.Date).ToList().ForEach(x => JourneyDays.Add(x));
-
-				DaySelected = JourneyDays[DaySelectedNum];
-			}*/
-
 		}
 
 		#region Name
@@ -163,7 +146,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		async internal void ModifyJourneyC()
 		{
-			await Shell.Current.GoToAsync($"{nameof(JourneySettingsView)}?{nameof(CurrentJourneyId)}={CurrentJourneyId}");
+			await Shell.Current.GoToAsync($"{nameof(JourneySettingsView)}");
 		}
 
 		async internal void AddImageC()

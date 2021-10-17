@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
-             xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms"
+             xmlns:destinies="clr-namespace:Travelogue_2.Main.Views.Fragments"
              x:Class="Travelogue_2.Main.Views.Library.Create.CreateJourneyView"
              Shell.PresentationMode="ModalAnimated"
              x:Name="CreateJourneyViewName">
@@ -62,7 +62,7 @@
                     </StackLayout>
                 </Frame>
 
-                <Frame HasShadow="True" Margin="5" Padding="8">
+                <!--Frame HasShadow="True" Margin="5" Padding="8">
                     <StackLayout>
                         <Label Text="Destinos" FontSize="Large" TextColor="{DynamicResource Primary}"/>
                         <StackLayout Orientation="Horizontal">
@@ -166,7 +166,9 @@
                         </StackLayout>
 
                     </StackLayout>
-                </Frame>
+                </Frame-->
+
+                <destinies:DestiniesCollectionView/>
 
                 <StackLayout Orientation="Horizontal">
                     <Button Text="{Binding Resources[Cancel]}" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>

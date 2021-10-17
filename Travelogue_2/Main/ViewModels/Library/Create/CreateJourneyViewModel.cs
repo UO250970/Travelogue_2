@@ -5,7 +5,6 @@ using System.Linq;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Library.Create
@@ -13,35 +12,19 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 	public class CreateJourneyViewModel : PhotoRendererModel
 	{
 		public Command AddCoverCommand { get; }
-		public Command AddDestinyCommand { get; }
-		public Command MoreInfoCommand { get; }
 		public Command CancelCommand { get; }
 		public Command SaveCommand { get; }
 
 		public ObservableCollection<DayModel> DaysSelected { get; }
-		public ObservableCollection<DestinyModel> DestiniesSelected { get; }
-		public ObservableCollection<string> DestiniesList { get; }
-		public Command<DestinyModel> DestinyTappedDelete { get; }
-
-		//public Command<DayModel> DayTapped { get; }
-		
 
 		public CreateJourneyViewModel()
 		{
 			AddCoverCommand = new Command(() => AddCoverC());
 
-			AddDestinyCommand = new Command(() => AddDestinyC());
-			MoreInfoCommand = new Command<string>((x) => MoreInfoC(x));
-
-			CancelCommand = new Command(() => CancelC());
+			CancelCommand = new Command(() => Back());
 			SaveCommand = new Command(() => SaveC());
 
-			DestiniesSelected = new ObservableCollection<DestinyModel>();
-			DestiniesList = new ObservableCollection<string>();
-
-			DestinyTappedDelete = new Command<DestinyModel>(OnDestinySelectedDelete);
-
-			CurrentJourneyId = DataBaseUtil.CreateEmptyJourney();
+			CurrentJourneyId = DataBaseUtil.CreateEmptyJourney().Id.ToString();
 
 			ExecuteLoadDataCommand();
 		}
@@ -94,34 +77,6 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 		}
 		#endregion
 
-		#region CorrectDestinyText
-		private bool correctDestinyText;
-		public bool CorrectDestinyText
-		{
-			get => correctDestinyText;
-			set => SetProperty(ref correctDestinyText, value);
-		}
-		#endregion
-
-		#region DestinyText
-		private string destinyText;
-		public string DestinyText
-		{
-			get => destinyText;
-			set 
-			{
-				if (DestiniesList.Contains(value))
-				{
-					CorrectDestinyText = true;
-				} else
-				{
-					CorrectDestinyText = false;
-				}
-				SetProperty(ref destinyText, value);
-			}
-		}
-		#endregion
-
 		#region ImageVisible
 		private bool imageVisible = false;
 		public bool ImageVisible
@@ -142,13 +97,6 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
 		public override void LoadData()
 		{
-			DestiniesList.Clear();
-			IEnumerable<string> temp1 = CommonVariables.AvailableDestinies?.Select(x => x.Name);
-			foreach (string destiny in temp1)
-			{
-				DestiniesList.Add(destiny);
-			}
-
 			IniDate = DataBaseUtil.GetNextDayAvailable();
 			EndDate = IniDate;
 		}
@@ -162,36 +110,6 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			}
 		}
 
-		async internal void AddDestinyC()
-		{
-			if ( DestiniesSelected.Count <= CommonVariables.DestiniesInJourney )
-			{
-				DestinyModel destiny = DataBaseUtil.GetDestinyByName(DestinyText);
-				
-				if (!DestiniesSelected.Contains(destiny))
-				{
-					DestiniesSelected.Add(destiny);
-				}
-				else
-				{
-					await Alerter.AlertDestinyAlreadySelected();
-				}
-			}
-			else
-			{
-				await Alerter.AlertTooManyDestiniesInJourney();
-			}
-			DestinyText = string.Empty;
-		}
-
-		async internal void MoreInfoC(string path)
-		{
-			await Browser.OpenAsync(path);
-		}
-
-		async internal void CancelC()
-			=> await Shell.Current.GoToAsync("..");
-
 		async internal void SaveC()
 		{ 
 			if (title.Equals(string.Empty))
@@ -199,14 +117,17 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 				await Alerter.AlertNoNameInJourney();
 			} else
 			{
-				JourneyModel temp = DataBaseUtil.CreateJourney(Title, IniDate, EndDate, CoverImage);
-
-				if (temp != null)
-                {
+				JourneyModel temp = new JourneyModel()
+				{
+					Id = int.Parse(CurrentJourneyId),
+					Name = Title,
+					IniDate = IniDate,
+					EndDate = EndDate,
+					CoverId = CoverImage.Id
+				};
+				if (await DataBaseUtil.SaveJourney(temp))
 					await Shell.Current.GoToAsync("..");
-				}
 				//TO-DO create and store journey
-				//TO-DO checkear cuando empieza  eso y cambiar redirección
 			}
 		}
 
@@ -220,12 +141,10 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			if (iniDatePicker.Date.CompareTo(EndDate.Date) > 0) iniDatePicker.Date = endDatePicker.Date;
 		}
 
-		void OnDestinySelectedDelete(DestinyModel destiny)
+		public void Back()
 		{
-			if (destiny == null)
-				return;
-
-			DestiniesSelected.Remove(destiny);
+			DataBaseUtil.DeleteJourney(int.Parse(CurrentJourneyId));
+			base.Back();
 		}
 	}
 }

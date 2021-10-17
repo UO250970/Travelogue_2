@@ -116,5 +116,19 @@ namespace Travelogue_2.Main.BBDD
             this.JourneyState = State.CLOSED;
         }
 
+        public override bool Equals(object obj)
+        {
+            //Check for null and compare run-time types.
+            if ((obj == null) || !GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Journey p = (Journey)obj;
+                return Id == p.Id;
+            }
+        }
+
     }
 }

@@ -247,7 +247,7 @@ namespace Travelogue_2.Main.BBDD
 
         public static bool InsertDay(Day day)
         {
-            void Act() => conn.Insert(day);
+            void Act() => conn.InsertWithChildren(day);
             return QueryAct(Act);
         }
 

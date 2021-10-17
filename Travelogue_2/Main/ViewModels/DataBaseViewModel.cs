@@ -22,6 +22,9 @@ namespace Travelogue_2.Main.ViewModels
             try
             {
                 LoadData();
+                /**if (CurrentJourneyId != string.Empty)
+                {
+                }*/
             }
             catch (Exception ex)
             {

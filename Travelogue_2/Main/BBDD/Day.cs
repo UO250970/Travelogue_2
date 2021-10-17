@@ -23,9 +23,6 @@ namespace Travelogue_2.Main.BBDD
 		[ManyToMany(typeof(DayEvent), CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
 		public List<Event> Events { get; set; } = new List<Event>();
 
-		/**[ManyToMany(typeof(DayReser), CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
-		public List<Reser_Info> ReserList { get; set; } = new List<Reser_Info>();*/
-
 		[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
 		public List<Entry> Entries { get; set; } = new List<Entry>();
 

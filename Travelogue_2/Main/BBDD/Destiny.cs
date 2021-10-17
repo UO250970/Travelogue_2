@@ -23,5 +23,19 @@ namespace Travelogue_2.Main.BBDD
 
 		[OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
 		public List<Embassy> Embassies { get; set; }
+
+		public override bool Equals(object obj)
+		{
+			//Check for null and compare run-time types.
+			if ((obj == null) || !GetType().Equals(obj.GetType()))
+			{
+				return false;
+			}
+			else
+			{
+				Destiny p = (Destiny)obj;
+				return Code == p.Code;
+			}
+		}
 	}
 }

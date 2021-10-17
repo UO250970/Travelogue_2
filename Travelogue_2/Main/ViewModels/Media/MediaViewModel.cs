@@ -5,7 +5,6 @@ using System.Linq;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
-using Travelogue_2.Main.ViewModels.Journey;
 using Travelogue_2.Main.Views.Journey;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;

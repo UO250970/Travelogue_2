@@ -34,8 +34,8 @@ namespace Travelogue_2.Main.ViewModels.Journey
             if (journey.Id >= 0)
 			{
                 CurrentJourneyId = journey.Id.ToString();
-                base.LoadData();
                 JourneyOnGoing = true;
+                base.LoadData();
             }
 
         }

@@ -25,6 +25,12 @@ namespace Travelogue_2.Main.Views.Library.Create
 			base.OnAppearing();
 		}
 
+		protected override bool OnBackButtonPressed()
+        {
+			model.Back();
+			return true;
+		}
+
 		public void CheckNewIniDate(object sender, EventArgs e)
 		{
 			model.CheckNewIniDate(IniDatePicker, EndDatePicker);

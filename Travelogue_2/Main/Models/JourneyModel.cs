@@ -23,5 +23,19 @@ namespace Travelogue_2.Main.Models
 		{
 			Id = -1;
 		}
+
+		public override bool Equals(object obj)
+		{
+			//Check for null and compare run-time types.
+			if ((obj == null) || !GetType().Equals(obj.GetType()))
+			{
+				return false;
+			}
+			else
+			{
+				JourneyModel p = (JourneyModel)obj;
+				return Id == p.Id;
+			}
+		}
 	}
 }

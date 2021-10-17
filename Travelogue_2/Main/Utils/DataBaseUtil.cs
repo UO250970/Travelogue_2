@@ -138,10 +138,15 @@ namespace Travelogue_2.Main.Utils
             return ImageToModel(image);
 		}
 
-        public static string CreateEmptyJourney()
-		{
-            DataBase.InsertJourney( new Journey() );
-		}
+        public static JourneyModel CreateEmptyJourney()
+        {
+            Journey temp = new Journey();
+            DataBase.InsertJourney(temp);
+
+            Journey journey = DataBase.FindJourney(temp);
+
+            return JourneyToModel(journey);
+        }
 
         public static JourneyModel CreateJourney(string name, DateTime ini, DateTime end, ImageModel cover = null)
 		{
@@ -176,13 +181,17 @@ namespace Travelogue_2.Main.Utils
 
                 // TODO - SOLO EN PRUEBAS, que no quiero mil viajes creados en mi movil...
                 //CalendarUtil.AddJourney(journeyUpdated);
-                DayTracker.UpdateDataBaseWithJourney(journeyUpdated);
-
+                DayTracker.UpdateJourney(journeyUpdated);
                 Alerter.AlertJourneyCreated();
 
                 return JourneyToModel(journeyUpdated);
             }
 		}
+        
+        public static void JourneyInsertDestiny(int journeyId, string name)
+        {
+            JourneyInsertDestiny(GetJourneyById(journeyId), name);
+        }
 
         public static void JourneyInsertDestiny(JourneyModel journey, string name)
 		{
@@ -200,6 +209,11 @@ namespace Travelogue_2.Main.Utils
         {
             JourneyModel temp = GetJourneyById(journeyId);
             JourneyInsertEntry(temp, dayInt, title);
+        }
+
+        public static void JourneyRemoveDestiny(int journeyId, string name)
+        {
+            JourneyRemoveDestiny(GetJourneyById(journeyId), name);
         }
 
         public static void JourneyRemoveDestiny(JourneyModel journey, string name)
@@ -335,6 +349,11 @@ namespace Travelogue_2.Main.Utils
 			return destiny == null ? null : DestinyToModel(destiny);
         }
 
+        public static List<DestinyModel> GetDestiniesFromJourney(int journeyId)
+        {
+            return GetDestiniesFromJourney(GetJourneyById(journeyId));
+        }
+
         public static List<DestinyModel> GetDestiniesFromJourney(JourneyModel journey)
         {
             Journey temp = JourneyFromModel(journey);
@@ -396,11 +415,12 @@ namespace Travelogue_2.Main.Utils
             }
             if (temp.Name != journey.Name) temp.Name = journey.Name;
 
-            DataBase.UpdateJourney(temp);
+            if (temp.IniDate != journey.IniDate || temp.EndDate != journey.EndDate)
+            {
+                if (!await UpdadteDates(journey)) return false;
+            }     
 
-            if (temp.IniDate != journey.IniDate || temp.EndDate != journey.EndDate) return await UpdadteDates(journey);
-            
-            return true;
+            return DataBase.UpdateJourney(temp);
         }
 
         public static async Task<bool> UpdadteDates(JourneyModel journey)
@@ -437,10 +457,13 @@ namespace Travelogue_2.Main.Utils
                 temp.EndDate = journey.EndDate;
 
                 DataBase.UpdateJourney(temp);
+
+                DayTracker.UpdateJourney(temp);
             }
             else
             {
                 await Alerter.AlertDatesAlreadyInUse();
+                return false;
             }
             return true;
         }
@@ -514,7 +537,8 @@ namespace Travelogue_2.Main.Utils
 
         public static bool DeleteJourney(int JourneyId)
         {
-            if (DataBase.DeleteJourneyById(JourneyId)) Alerter.AlertJourneyDeleted();
+            ////ToDo revisar alerter  if (DataBase.DeleteJourneyById(JourneyId)) Alerter.AlertJourneyDeleted();
+            DataBase.DeleteJourneyById(JourneyId);
             return true;
         }
 

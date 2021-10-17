@@ -1,5 +1,4 @@
-﻿using Java.Lang;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 
@@ -11,7 +10,7 @@ namespace Travelogue_2.Main.Models
 
 		public DateTime Date
         {
-			get => new DateTime(Integer.ParseInt(Year), Integer.ParseInt(MonthNum), Integer.ParseInt(Day));
+			get => new DateTime( int.Parse(Year), int.Parse(MonthNum), int.Parse(Day));
         } 
 
 		public string Day { get; set; }

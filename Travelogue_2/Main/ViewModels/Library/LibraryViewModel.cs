@@ -47,6 +47,11 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		public override void LoadData()
 		{
+			JourneysCreated.Clear();
+			JourneysClosed.Clear();
+
+			DataBaseUtil.GetJourneysCreated().ForEach(x => JourneysCreated.Add(x));
+			DataBaseUtil.GetJourneysClosed().ForEach(x => JourneysClosed.Add(x));
 		}
 
 		async internal void CreatedJourneysViewC()
@@ -68,13 +73,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		public override void OnAppearing()
 		{
-			JourneysCreated.Clear();
-			JourneysClosed.Clear();
-
-			DataBaseUtil.GetJourneysCreated().ForEach(x => JourneysCreated.Add(x) );
-			DataBaseUtil.GetJourneysClosed().ForEach(x => JourneysClosed.Add(x) );
-
-			base.OnAppearing();
+			LoadData();
 		}
 
 	}
