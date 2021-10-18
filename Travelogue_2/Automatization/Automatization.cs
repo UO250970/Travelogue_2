@@ -147,19 +147,19 @@ namespace Travelogue_2.Automatization
             ClearDB();
 
 			//_ = CheckPermissionsAsync();
- 
-			if (DataBaseUtil.HasJourneis() != "0")
+
+			if (!DataBaseUtil.HasJourneis())
 			{
 				properties.Clear();
 			}
 
-			if (DataBaseUtil.HasDestinies() != "0")
+			if (!DataBaseUtil.HasDestinies())
 			{
 				PrepareCountries();
 			}
 			DataBaseUtil.GetDestinies().ForEach(x => CommonVariables.AvailableDestinies.Add(x));
 
-			if (DataBaseUtil.HasStyles() == "0")
+			if (!DataBaseUtil.HasStyles())
             {
 				PrepareStyles();
             }

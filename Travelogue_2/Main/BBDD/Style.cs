@@ -5,7 +5,7 @@ namespace Travelogue_2.Main.BBDD
     [Table("Style")]
     public class Style
     {
-        [PrimaryKey, AutoIncrement, Column("Name"), NotNull]
+        [PrimaryKey, Column("Name"), NotNull]
         public string Name { get; set; }
 
         [Column("Primary")]

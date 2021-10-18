@@ -113,7 +113,7 @@ namespace Travelogue_2.Main.BBDD
                 conn.DeleteAll<EntryData>();
                 conn.DeleteAll<Image>();
 
-                conn.DeleteAll<Style>();
+                //conn.DeleteAll<Style>();
             }
             return QueryAct(Act);
         }
@@ -170,10 +170,10 @@ namespace Travelogue_2.Main.BBDD
             return QueryFunc(Func);
         }
 
-        public static string HasJourneis()
+        public static bool HasJourneis()
         {
-            string Func() => conn.GetTableInfo("Journey").Count().ToString();
-            return QueryFunc(Func);
+            var temp = GetJourneis();
+            return temp != null && temp.Count() != 0;
         }
 
         internal static bool InsertJourney(Journey journey)
@@ -362,10 +362,10 @@ namespace Travelogue_2.Main.BBDD
 
         #region Destiny
 
-        public static string HasDestinies()
+        public static bool HasDestinies()
         {
-            string Func() => conn.GetTableInfo("Destiny").Count().ToString();
-            return QueryFunc(Func);
+            var temp = GetDestinies();
+            return temp != null && temp.Count() != 0;
         }
 
             /** Insert */
@@ -483,10 +483,10 @@ namespace Travelogue_2.Main.BBDD
             return QueryAct(Act);
         }
 
-        public static string HasStyles()
+        public static bool HasStyles()
         {
-            string Func() => conn.GetTableInfo("Style").Count().ToString();
-            return QueryFunc(Func);
+            var temp = GetStyles();
+            return temp != null && temp.Count() != 0;
         }
         #endregion
 

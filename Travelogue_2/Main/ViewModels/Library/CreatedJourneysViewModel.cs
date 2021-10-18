@@ -35,6 +35,14 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		public override void LoadData()
 		{
+			JourneysCreated.Clear();
+			JourneysCreatedSearched.Clear();
+
+			DataBaseUtil.GetJourneysCreated()?.ForEach(x =>
+			{
+				JourneysCreated.Add(x);
+				JourneysCreatedSearched.Add(x);
+			});
 		}
 
 		public ObservableCollection<JourneyModel> journeysCreated;
@@ -115,16 +123,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		public override void OnAppearing()
 		{
-			JourneysCreated.Clear();
-			JourneysCreatedSearched.Clear();
-
-			DataBaseUtil.GetJourneysCreated().ForEach(x => 
-			{
-				JourneysCreated.Add(x);
-				JourneysCreatedSearched.Add(x);
-			});
-
-			base.OnAppearing();
+			LoadData();
 		}
 	}
 }

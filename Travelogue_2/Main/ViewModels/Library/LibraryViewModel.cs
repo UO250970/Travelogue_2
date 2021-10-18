@@ -50,8 +50,8 @@ namespace Travelogue_2.Main.ViewModels.Library
 			JourneysCreated.Clear();
 			JourneysClosed.Clear();
 
-			DataBaseUtil.GetJourneysCreated().ForEach(x => JourneysCreated.Add(x));
-			DataBaseUtil.GetJourneysClosed().ForEach(x => JourneysClosed.Add(x));
+			DataBaseUtil.GetJourneysCreated()?.ForEach(x => JourneysCreated.Add(x));
+			DataBaseUtil.GetJourneysClosed()?.ForEach(x => JourneysClosed.Add(x));
 		}
 
 		async internal void CreatedJourneysViewC()

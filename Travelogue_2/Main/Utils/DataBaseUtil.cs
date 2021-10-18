@@ -26,11 +26,11 @@ namespace Travelogue_2.Main.Utils
 
         public static void ClearDataBase() => DataBase.ClearDataBase();
 
-		public static string HasJourneis() => DataBase.HasJourneis();
+		public static bool HasJourneis() => DataBase.HasJourneis();
 
-        public static string HasDestinies() => DataBase.HasDestinies();
+        public static bool HasDestinies() => DataBase.HasDestinies();
 
-        public static string HasStyles() => DataBase.HasStyles();
+        public static bool HasStyles() => DataBase.HasStyles();
 
         public static void InsertDestinies(List<Destiny> list) => DataBase.InsertDestinies(list);
 

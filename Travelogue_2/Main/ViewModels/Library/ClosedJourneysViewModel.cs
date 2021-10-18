@@ -32,6 +32,14 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		public override void LoadData()
 		{
+			JourneysClosed.Clear();
+			JourneysClosedSearched.Clear();
+
+			DataBaseUtil.GetJourneysClosed()?.ForEach(x =>
+			{
+				JourneysClosed.Add(x);
+				JourneysClosedSearched.Add(x);
+			});
 		}
 
 		public ObservableCollection<JourneyModel> journeysClosed;
@@ -108,16 +116,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		public override void OnAppearing()
 		{
-			JourneysClosed.Clear();
-			JourneysClosedSearched.Clear();
-
-			DataBaseUtil.GetJourneysClosed().ForEach(x =>
-			{
-				JourneysClosed.Add(x);
-				JourneysClosedSearched.Add(x);
-			});
-
-			base.OnAppearing();
+			LoadData();
 		}
 
 	}
