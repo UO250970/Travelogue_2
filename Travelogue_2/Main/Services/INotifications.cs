@@ -11,16 +11,16 @@ namespace Travelogue_2.Main.Services
 		void SendNotification(string title, string message);
 	}
 
-	public static class IReceiver
+	public interface IReceiver
 	{
-		public static void ReceiveText(string text)
+		/*public void ReceiveText(string text)
         {
 			var temp = text = text.ToLower();
         }
 
-		public static MediaFile ReceivePhoto()
+		public MediaFile ReceivePhoto()
 		{
 			return CameraUtil.PhotoOngoingJourney();
-		}
+		}*/
 	}
 }

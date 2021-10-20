@@ -53,6 +53,7 @@ namespace Travelogue_2.Droid.Services
 				else if (intent.GetStringExtra(Notifications.TypeKey) == Notifications.TypePhoto)
 				{
 					HandlePhotoIntent();
+				
 				}
 			}
 
@@ -61,7 +62,7 @@ namespace Travelogue_2.Droid.Services
 				Bundle remoteInput = RemoteInput.GetResultsFromIntent(intent);
 				string temp = remoteInput?.GetCharSequence(Notifications.KEY_TEXT_REPLY);
 
-				IReceiver.ReceiveText(temp);
+                Xamarin.Forms.DependencyService.Get<Receiver>().ReceiveText(temp);
 			}
 
 			private void HandlePhotoIntent()

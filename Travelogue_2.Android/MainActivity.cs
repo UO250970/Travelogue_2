@@ -40,5 +40,13 @@ namespace Travelogue_2.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
+        protected override void OnNewIntent(Android.Content.Intent intent)
+        {
+            var temp = DependencyService.Get<ReceiverService>();
+            temp.broadcastReceiver.OnReceive(this, intent);
+            base.OnNewIntent(intent);
+
+        }
+
     }
 }

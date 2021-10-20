@@ -1,7 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
 using System;
-using Travelogue_2.Droid.Services;
 using Travelogue_2.Main.Services;
 using Android.Graphics;
 using Android.OS;
@@ -10,6 +9,7 @@ using Xamarin.Forms;
 using AndroidApp = Android.App.Application;
 using RemoteInput = AndroidX.Core.App.RemoteInput;
 using static Travelogue_2.Droid.Services.ReceiverService;
+using Travelogue_2.Main.Utils;
 
 [assembly: Dependency(typeof(Travelogue_2.Droid.Services.Notifications))]
 namespace Travelogue_2.Droid.Services
@@ -101,7 +101,7 @@ namespace Travelogue_2.Droid.Services
             PendingIntent replyPendingIntent;
             if ((int)Build.VERSION.SdkInt >= 24)
             {
-                replyIntent = new Intent(BROADCASTFILTER)
+                replyIntent = new Intent(AndroidApp.Context, typeof(ReceiverService))
                         .AddFlags(ActivityFlags.IncludeStoppedPackages)
                         .SetAction(MainActivity.REPLY_ACTION)
                         .PutExtra(MainActivity.REQUEST_CODE, requestCode)
@@ -111,7 +111,7 @@ namespace Travelogue_2.Droid.Services
             }
             else
             {
-                replyIntent = new Intent(BROADCASTFILTER);
+                replyIntent = new Intent(AndroidApp.Context, typeof(ReceiverService));
                 replyIntent.AddFlags(ActivityFlags.ClearTop | ActivityFlags.NewTask)
                             .PutExtra(TypeKey, TypeReply);
 
@@ -127,7 +127,7 @@ namespace Travelogue_2.Droid.Services
 
         NotificationCompat.Action CreateImageIntent()
         {
-            photoIntent = new Intent(BROADCASTFILTER)
+            photoIntent = new Intent(AndroidApp.Context, typeof(ReceiverService))
                         .SetAction(MainActivity.PHOTO_ACTION)
                         .PutExtra(TypeKey, TypePhoto);
 
@@ -156,11 +156,5 @@ namespace Travelogue_2.Droid.Services
             channelInitialized = true;
         }
 
-        /*protected override void OnHandleIntent(Android.Content.Intent intent)
-        {
-            string fileToDownload = intent.GetStringExtra("file_to_download");
-
-            Log.Debug("DemoIntentService", $"File to download: {fileToDownload}.");
-        }*/
     }
 }
