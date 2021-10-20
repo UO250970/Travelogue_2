@@ -9,11 +9,12 @@ using AndroidX.Core.App;
 using Xamarin.Forms;
 using AndroidApp = Android.App.Application;
 using RemoteInput = AndroidX.Core.App.RemoteInput;
+using static Travelogue_2.Droid.Services.ReceiverService;
 
-[assembly: Dependency(typeof(Notifications))]
+[assembly: Dependency(typeof(Travelogue_2.Droid.Services.Notifications))]
 namespace Travelogue_2.Droid.Services
 {
-	class Notifications : INotifications
+	public class Notifications : INotifications
 	{
         const string channelId = "default";
         const string channelName = "Default";
@@ -47,6 +48,12 @@ namespace Travelogue_2.Droid.Services
                 CreateNotificationChannel();
                 Instance = this;
             }
+
+            var service = new Intent(AndroidApp.Context, typeof(ReceiverService));
+            AndroidApp.Context.StartService(service);
+
+            /*var temp2 = AndroidApp.Context;
+            AndroidApp.Context.StartService(service2);*/
         }
 
         public void SendNotification(string title, string message)
@@ -80,19 +87,21 @@ namespace Travelogue_2.Droid.Services
             NotificationCompat.Action image = CreateImageIntent();
             builder.AddAction(image);
 
-            Notification notification = builder.Build();
+            Notification notification = builder
+                .SetOngoing(true)
+                .Build();
             manager.Notify(messageId++, notification);
         }
 
         NotificationCompat.Action CreateReplyIntent()
         {
-            replyIntent = new Intent(AndroidApp.Context, typeof(MainActivity));
+            replyIntent = new Intent();
             int requestCode = replyPendingIntentId++;
 
             PendingIntent replyPendingIntent;
             if ((int)Build.VERSION.SdkInt >= 24)
             {
-                replyIntent = new Intent(MainActivity.REPLY_ACTION)
+                replyIntent = new Intent(BROADCASTFILTER)
                         .AddFlags(ActivityFlags.IncludeStoppedPackages)
                         .SetAction(MainActivity.REPLY_ACTION)
                         .PutExtra(MainActivity.REQUEST_CODE, requestCode)
@@ -102,11 +111,11 @@ namespace Travelogue_2.Droid.Services
             }
             else
             {
-                replyIntent = new Intent(AndroidApp.Context, typeof(MainActivity));
+                replyIntent = new Intent(BROADCASTFILTER);
                 replyIntent.AddFlags(ActivityFlags.ClearTop | ActivityFlags.NewTask)
                             .PutExtra(TypeKey, TypeReply);
 
-                replyPendingIntent = PendingIntent.GetActivity(AndroidApp.Context, requestCode, replyIntent, PendingIntentFlags.UpdateCurrent);
+                replyPendingIntent = PendingIntent.GetBroadcast(AndroidApp.Context, requestCode, replyIntent, PendingIntentFlags.UpdateCurrent);
             }
 
             // Create the reply action and add the remote input.
@@ -118,7 +127,7 @@ namespace Travelogue_2.Droid.Services
 
         NotificationCompat.Action CreateImageIntent()
         {
-            photoIntent = new Intent(MainActivity.PHOTO_ACTION)
+            photoIntent = new Intent(BROADCASTFILTER)
                         .SetAction(MainActivity.PHOTO_ACTION)
                         .PutExtra(TypeKey, TypePhoto);
 
@@ -147,5 +156,11 @@ namespace Travelogue_2.Droid.Services
             channelInitialized = true;
         }
 
+        /*protected override void OnHandleIntent(Android.Content.Intent intent)
+        {
+            string fileToDownload = intent.GetStringExtra("file_to_download");
+
+            Log.Debug("DemoIntentService", $"File to download: {fileToDownload}.");
+        }*/
     }
 }

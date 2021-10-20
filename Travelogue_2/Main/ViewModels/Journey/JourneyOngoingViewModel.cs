@@ -12,7 +12,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
             set
             {
                 SetProperty(ref journeyOnGoing, value);
-                SetProperty(ref journeyNotOnGoing, !value);
+                JourneyNotOnGoing = !value;
             }
         }
 
@@ -20,24 +20,25 @@ namespace Travelogue_2.Main.ViewModels.Journey
         public bool JourneyNotOnGoing
         {
             get => journeyNotOnGoing;
+            set
+            {
+                SetProperty(ref journeyNotOnGoing, value);
+            }
         }
-
-        public JourneyOngoingViewModel() : base ()
-		{
-            ExecuteLoadDataCommand();
-		}
 
         public override void LoadData() 
         {
             JourneyModel journey = DataBaseUtil.GetJourneyOnGoing();
 
-            if (journey.Id >= 0)
+            if (journey?.Id >= 0)
 			{
                 CurrentJourneyId = journey.Id.ToString();
                 JourneyOnGoing = true;
                 base.LoadData();
+            } else
+            {
+                JourneyOnGoing = false;
             }
-
         }
 
     }

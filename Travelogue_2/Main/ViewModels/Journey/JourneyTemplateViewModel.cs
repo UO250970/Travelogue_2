@@ -2,10 +2,10 @@
 using System.Linq;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
-using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.ViewModels.PopUps;
 using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.PopUps;
+using Travelogue_2.Main.Utils;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -60,24 +60,22 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		public override void LoadData()
 		{
-			JourneyModel journey = DataBaseUtil.GetJourneyById( int.Parse(CurrentJourneyId) );
-			JourneyName = journey.Name;
-
-			if (journey.CoverId >= 1)
+			if (CurrentJourneyId != "0")
             {
-				ImageModel cover = DataBaseUtil.GetImageById(journey.CoverId);
-				CoverImage = cover;
+				JourneyModel journey = DataBaseUtil.GetJourneyById(int.Parse(CurrentJourneyId));
+				JourneyName = journey.Name;
+
+				if (journey.CoverId >= 1)
+				{
+					ImageModel cover = DataBaseUtil.GetImageById(journey.CoverId);
+					CoverImage = cover;
+				}
+
+				// TODO - Chekear acciones según estado
+				JourneyDays = new ObservableCollection<DayModel>(DataBaseUtil.GetDaysFromJourney(journey));
+
+				DaySelected = JourneyDays[0];
 			}
-
-			// TODO - Chekear acciones según estado
-			JourneyDays = new ObservableCollection<DayModel>( DataBaseUtil.GetDaysFromJourney(journey) );
-
-			DaySelected = JourneyDays[0];
-		}
-
-		public override void OnAppearing()
-		{
-			LoadData();
 		}
 
 		#region Name

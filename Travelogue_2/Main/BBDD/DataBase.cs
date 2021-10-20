@@ -96,7 +96,6 @@ namespace Travelogue_2.Main.BBDD
             }
             return QueryAct(Act);
         }
-
 		public static bool ClearDataBase()
         {
             void Act()
@@ -223,10 +222,9 @@ namespace Travelogue_2.Main.BBDD
         public static bool DeleteJourneyById(int JourneyId)
         {
             Journey temp = GetJourneyById(JourneyId);
-            void Act() => conn.Delete(temp);
+            void Act() => conn.Delete(temp, recursive: true);
             return QueryAct(Act);
         }
-
         #endregion
 
         #region Day

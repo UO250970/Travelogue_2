@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using Travelogue_2.Main.Models;
-using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
-using Travelogue_2.Main.ViewModels.Journey;
 using Travelogue_2.Main.Views.Journey;
 using Xamarin.Forms;
 
@@ -15,7 +12,6 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		public Command SearchJourneyCommand { get; }
 		public Command<JourneyModel> JourneyTapped { get; }
-		public Command<JourneyModel> JourneyTappedDelete { get; }
 
 		public ClosedJourneysViewModel()
 		{
@@ -25,7 +21,6 @@ namespace Travelogue_2.Main.ViewModels.Library
 			JourneysClosedSearched = new ObservableCollection<JourneyModel>();
 
 			JourneyTapped = new Command<JourneyModel>(OnJourneySelected);
-			JourneyTappedDelete = new Command<JourneyModel>(OnJourneySelectedDelete);
 
 			ExecuteLoadDataCommand();
 		}
@@ -99,19 +94,6 @@ namespace Travelogue_2.Main.ViewModels.Library
 			// This will push the ItemDetailPage onto the navigation stack
 			CurrentJourneyId = journey.Id.ToString();
 			await Shell.Current.GoToAsync($"{nameof(JourneyView)}");
-		}
-
-		async void OnJourneySelectedDelete(JourneyModel journey)
-		{
-			if (journey == null)
-				return;
-
-			bool result = await Alerter.AlertDeleteJourney();
-			if (result)
-			{
-				JourneysClosed.Remove(journey);
-				JourneysClosedSearched.Remove(journey);
-			}
 		}
 
 		public override void OnAppearing()

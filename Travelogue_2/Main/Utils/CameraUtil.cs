@@ -111,11 +111,10 @@ namespace Travelogue_2.Main.Utils
 			return CommonVariables.AppName + "_" + today.Year + today.Month + today.Day;
 		}
 
-		public static void PhotoOngoingJourney()
+		public static MediaFile PhotoOngoingJourney()
         {
 			//Database y todo eso
-			TakePhoto();
-
+			return TakePhoto().Result;
 		}
 
 	}

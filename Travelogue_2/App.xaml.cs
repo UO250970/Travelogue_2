@@ -20,15 +20,15 @@ namespace Travelogue_2
                 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDkzOTY2QDMxMzkyZTMyMmUzMGtocktKSU5vaHZ3ZXI3UVN4UXE4eU9FNWdoOHBDQ2ZtaDdRYU0rTElhUEE9");
                 InitializeComponent();
 
+                MainPage = new AppShell();
+
+                DependencyService.Register<INotifications>();
+
                 AppResources.Culture = new CultureInfo(CurrentLanguage);
                 LocResources = new LocalizedResources(typeof(AppResources), CurrentLanguage);
 
-                DependencyService.Register<MockDataStoreNU>();
-                MainPage = new AppShell();
-
                 // Alerter de la aplicación
                 Alerter.SetPage(MainPage);
-
                 DataBaseUtil.Start();
             }
             catch (Exception e)

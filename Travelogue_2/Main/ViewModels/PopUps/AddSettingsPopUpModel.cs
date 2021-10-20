@@ -44,7 +44,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		async internal void AddImageC()
 		{
-			ImageModel success = await CameraUtil.Photo(this);
+			ImageModel success = DataBaseUtil.Photo(this);
 			if (success != null)
 			{
 				CardImages.Add(success);

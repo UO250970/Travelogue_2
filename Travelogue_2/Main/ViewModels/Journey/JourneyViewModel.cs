@@ -1,10 +1,16 @@
-﻿using Xamarin.Forms;
-
-namespace Travelogue_2.Main.ViewModels.Journey
+﻿namespace Travelogue_2.Main.ViewModels.Journey
 {
-    [QueryProperty(nameof(CurrentJourneyId), nameof(CurrentJourneyId))]
     public class JourneyViewModel : JourneyTemplateViewModel
     {
-
-	}
+        public override void LoadData()
+        {
+            if (CurrentJourneyId != "0")
+            {
+                base.LoadData();
+            } else
+            {
+                Back();
+            }
+        }
+    }
 }

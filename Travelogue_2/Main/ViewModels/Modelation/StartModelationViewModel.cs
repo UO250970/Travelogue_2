@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using Travelogue_2.Main.Models;
-using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Views.Modelation.Modelate;
 using Xamarin.Forms;
 

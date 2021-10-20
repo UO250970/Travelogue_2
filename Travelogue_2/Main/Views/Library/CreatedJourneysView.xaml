@@ -51,20 +51,7 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-
-                            <AbsoluteLayout>
-
-                                <local:JourneyBookView BindingContext="{Binding .}"/>
-
-                                <Button x:Name="DeleteJourneyButton" 
-                                            Style="{StaticResource smallCircleButtonStyle}"
-                                            BackgroundColor="{StaticResource None}"
-                                            HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
-                                            Command="{Binding BindingContext.JourneyTappedDelete, Source={x:Reference CreatedJourneysViewName}}"
-                                            CommandParameter="{Binding .}"/>
-
-                            </AbsoluteLayout>
-
+                            <local:JourneyBookView BindingContext="{Binding .}"/>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

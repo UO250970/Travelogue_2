@@ -65,11 +65,9 @@ namespace Travelogue_2.Main.Utils
 			}
 		}
 
-		internal static CalendarEventCollection GetJourneis()
+		internal static CalendarEventCollection GetJourneis(List<JourneyModel> journeis)
 		{
 			CalendarEventCollection collection = new CalendarEventCollection();
-
-			List<JourneyModel> journeis = DataBaseUtil.GetJourneys();
 
 			foreach (JourneyModel jour in journeis)
 			{

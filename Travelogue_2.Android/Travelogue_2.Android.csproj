@@ -72,7 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LongPressedEffect.cs" />
     <Compile Include="Services\Notifications.cs" />
-    <Compile Include="Services\Receiver.cs" />
+    <Compile Include="Services\ReceiverService.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\icomoon.ttf" />

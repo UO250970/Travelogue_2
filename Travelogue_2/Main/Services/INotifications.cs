@@ -1,5 +1,6 @@
 ﻿using System;
 using Travelogue_2.Main.Utils;
+using Plugin.Media.Abstractions;
 
 namespace Travelogue_2.Main.Services
 {
@@ -17,9 +18,9 @@ namespace Travelogue_2.Main.Services
 			var temp = text = text.ToLower();
         }
 
-		public static void ReceivePhoto()
+		public static MediaFile ReceivePhoto()
 		{
-			CameraUtil.PhotoOngoingJourney();
+			return CameraUtil.PhotoOngoingJourney();
 		}
 	}
 }

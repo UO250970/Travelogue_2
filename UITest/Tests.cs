@@ -45,14 +45,28 @@ namespace UITest
             //app.Tap(x => x.Marked("MediaViewButton"));
         }
 
-        [Test]
-        public void CreateJourneyTest()
+        #region Enter
+        /*public void EnterLibrary() => ;
+        public void EnterMedia() => ;
+        public void EnterOnGoing() => ;
+        public void EnterModeling() => ;
+        public void EnterSettings() => ;*/
+
+        public void EnterFuturLibrary()
         {
-            app.Repl();
+            //EnterLibrary();
+            app.Tap(x => x.Marked("CreatedJourneysButton"));
+        }
+
+        public void EnterPastLibrary()
+        {
+            //EnterLibrary();
+            app.Tap(x => x.Marked("ClosedJourneysButton"));
         }
 
         public void EnterFuturTrip()
 		{
+            //EnterLibrary();
             app.WaitForElement("StandardTrip Futur", timeout: TimeSpan.FromSeconds(100));
             app.Tap(x => x.Marked("2"));
 
@@ -61,17 +75,58 @@ namespace UITest
 
         public void EnterPastTrip()
         {
+            //EnterLibrary();
             app.WaitForElement("StandardTrip Finished", timeout: TimeSpan.FromSeconds(100));
             app.Tap(x => x.Marked("2"));
 
             app.WaitForElement("Concierto Manin", timeout: TimeSpan.FromSeconds(100));
         }
-        
+        #endregion
+
+
+        public void SaveEventButton()
+        {
+            app.Tap(x => x.Marked(Variables.SaveButtonE));
+            app.WaitForElement(Variables.OkButton, timeout: TimeSpan.FromSeconds(100));
+            app.Tap(x => x.Marked(Variables.OkButton));
+        }
+
+        public void PickDateEvent(int year, int month, int day)
+        {
+            app.Tap(x => x.Marked("DateSelectorE"));
+            app.Query(x => x.Class("datePicker").Invoke("updateDate", year, month, day));
+            app.Tap(x => x.Marked("Aceptar"));
+        }
+
+        public void PickTimeEvent(int hour, int minutes)
+        {
+            app.Tap(Variables.TimeSelector);
+            app.Tap("toggle_mode");
+
+            app.ClearText();
+            app.EnterText(hour.ToString());
+
+            app.Tap(x => x.Marked("input_minute"));
+            app.ClearText();
+            app.EnterText(minutes.ToString());
+
+            app.Tap(Variables.AceptButton);
+        }
+
+
+        [Test]
+        public void CreateJourneyTest()
+        {
+            app.Repl();
+
+        }
+
         [Test]
         public void SeeJourneyFromLibrary()
 		{
-
-		}
+            app.Repl();
+            EnterFuturLibrary();
+        }
 
         [Test]
         public void ModifyEventTest()
@@ -167,35 +222,6 @@ namespace UITest
             Assert.IsEmpty(app.Query("Calle lapus"));
             Assert.IsNotEmpty(app.Query("Concierto Manin 2"));
             Assert.IsNotEmpty(app.Query("Calle lapus 1"));
-        }
-
-        public void SaveEventButton()
-		{
-            app.Tap(x => x.Marked(Variables.SaveButtonE));
-            app.WaitForElement(Variables.OkButton, timeout: TimeSpan.FromSeconds(100));
-            app.Tap(x => x.Marked(Variables.OkButton));
-        }
-
-        public void PickDateEvent(int year, int month, int day)
-		{
-            app.Tap(x => x.Marked("DateSelectorE"));
-            app.Query(x => x.Class("datePicker").Invoke("updateDate", year, month, day));
-            app.Tap(x => x.Marked("Aceptar"));
-        }
-
-        public void PickTimeEvent(int hour, int minutes)
-		{
-            app.Tap(Variables.TimeSelector); 
-            app.Tap("toggle_mode");
-
-            app.ClearText();
-            app.EnterText(hour.ToString());
-
-            app.Tap(x => x.Marked("input_minute"));
-            app.ClearText();
-            app.EnterText(minutes.ToString());
-
-            app.Tap(Variables.AceptButton);
         }
 
         [Test]

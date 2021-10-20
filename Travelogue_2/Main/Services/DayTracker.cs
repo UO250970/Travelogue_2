@@ -33,13 +33,13 @@ namespace Travelogue_2.Main.Services
         public static Journey GetJourneyOnTrack() { return JourneyOnTrack; }
         private static void SetJourneyOnTrack(Journey journey)
         {
+            JourneyOnTrack = journey;
             if (journey == null)
-			{
+            {
                 CrossSettings.Current.AddOrUpdateValue(nameof(JourneyOnTrackId), 0);
             }
-			else
+            else
             {
-                JourneyOnTrack = journey;
                 CrossSettings.Current.AddOrUpdateValue(nameof(JourneyOnTrackId), JourneyOnTrack.Id);
             }
         }
@@ -157,16 +157,6 @@ namespace Travelogue_2.Main.Services
             notificationManager.SendNotification("¡Estamos de viaje!", "Desliza si quieres añadir una entrada...");
         }
 
-        private static void DelayJourney(Journey journey) // TODO Añadir al testeo
-        {
-            journey.EndDate.AddDays(1);
-            journey.IniDate.AddDays(1);
-            foreach (Day day in journey.Days)
-            {
-                day.Date.AddDays(1);
-            }
-        }
-
         /** Comprueba si se el viaje que se le pasa ha pasado la fecha final, y en caso
          * afirmativo lo cierra. Al cerrarse, se reinicia las variables de propiedades.*/
 
@@ -191,6 +181,15 @@ namespace Travelogue_2.Main.Services
             }
         }
 
+        public static async void DeleteJourney(int journeyId)
+        {
+            if (GetJourneyOnTrack() != null && GetJourneyOnTrack().Id == journeyId)
+            {
+                ReStart();
+            }
+            CurrentJourneyId = "0";
+        }
+
         private static void ReStart()
         {
             SetLastDay(DateTime.Today);
@@ -199,8 +198,6 @@ namespace Travelogue_2.Main.Services
 
             SetCurrentDay(0);
             SetTotalDays(0);
-
-            CheckInitialTabAsync();
         }
 
         /** Actualiza el día actual del viaje. Si el día actual es superior
@@ -219,6 +216,8 @@ namespace Travelogue_2.Main.Services
 
             //Si el current llega al final, se reinicia todo
             if (CurrentDay > TotalDays) { ReStart(); }
+
+            CheckInitialTabAsync();
         }
 
         // Retorna el siguiente día disponible para iniciar un viaje

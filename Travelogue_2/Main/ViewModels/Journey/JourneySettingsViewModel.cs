@@ -2,8 +2,8 @@
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 using Travelogue_2.Main.Utils;
+using Xamarin.Forms;
 using System;
 
 namespace Travelogue_2.Main.ViewModels.Journey
@@ -150,19 +150,16 @@ namespace Travelogue_2.Main.ViewModels.Journey
 			await Browser.OpenAsync(path);
 		}
 
-		INotifications notificationManager = DependencyService.Get<INotifications>();
-
 		internal void PhoneNumberTappedC(string number)
 		{
 			PhoneDialer.Open(number);
-
-			notificationManager.SendNotification("¡Estamos de viaje!", "Desliza si quieres añadir una entrada...");
 		}
 
 		internal void DeleteJourneyC()
-        {
-			DataBaseUtil.DeleteJourney( int.Parse(CurrentJourneyId) );
-        }
+		{
+			DataBaseUtil.DeleteJourney(int.Parse(CurrentJourneyId), true);
+			base.Back();
+		}
 
 		internal void CheckNewIniDate(DatePicker iniDatePicker, DatePicker endDatePicker)
 		{

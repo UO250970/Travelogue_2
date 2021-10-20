@@ -8,7 +8,6 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.PopUps
 {
-	[QueryProperty(nameof(JourneyId), nameof(JourneyId))]
 	[QueryProperty(nameof(DaySelectedNum), nameof(DaySelectedNum))]
 	[QueryProperty(nameof(EventId), nameof(EventId))]
 	[QueryProperty(nameof(EntryId), nameof(EntryId))]

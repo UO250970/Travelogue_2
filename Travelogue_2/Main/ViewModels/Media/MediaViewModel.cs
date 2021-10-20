@@ -4,8 +4,8 @@ using System.Globalization;
 using System.Linq;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
-using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.Views.Journey;
+using Travelogue_2.Main.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Maps;
@@ -48,7 +48,7 @@ namespace Travelogue_2.Main.ViewModels.Media
 		public override void LoadData()
 		{
 			CalendarJourneis.Clear();
-			CalendarUtil.GetJourneis().ForEach(x => CalendarJourneis.Add(x));
+			DataBaseUtil.GetCalendarJourneis().ForEach(x => CalendarJourneis.Add(x));
 			            
 			ImagesOrdered.Clear();
 			ImagesSearched.Clear();
@@ -108,7 +108,7 @@ namespace Travelogue_2.Main.ViewModels.Media
 
 		internal Position GetPosition()
 		{
-			return GeolocalizationUtil.GetPosition().Result;
+			return DataBaseUtil.GetPosition();
 		}
 
 		async void OnJourneySelected(string journeyId)

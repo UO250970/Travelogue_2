@@ -1,10 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using Travelogue_2.Main.Models;
-using Travelogue_2.Main.Services;
-using Travelogue_2.Main.Utils;
-using Travelogue_2.Main.ViewModels.Journey;
 using Travelogue_2.Main.Views.Journey;
+using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.Views.Library.Create;
 using Xamarin.Forms;
 
@@ -17,7 +15,6 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		public Command SearchJourneyCommand { get; }
 		public Command<JourneyModel> JourneyTapped { get; }
-		public Command<JourneyModel> JourneyTappedDelete { get; }
 
 		public CreatedJourneysViewModel()
 		{
@@ -28,7 +25,6 @@ namespace Travelogue_2.Main.ViewModels.Library
 			JourneysCreatedSearched = new ObservableCollection<JourneyModel>();
 
 			JourneyTapped = new Command<JourneyModel>(OnJourneySelected);
-			JourneyTappedDelete = new Command<JourneyModel>(OnJourneySelectedDelete);
 
 			ExecuteLoadDataCommand();
 		}
@@ -105,20 +101,6 @@ namespace Travelogue_2.Main.ViewModels.Library
 			// This will push the ItemDetailPage onto the navigation stack
 			CurrentJourneyId = journey.Id.ToString();
 			await Shell.Current.GoToAsync($"{nameof(JourneyView)}");
-		}
-
-		async void OnJourneySelectedDelete(JourneyModel journey)
-		{
-			if (journey == null)
-				return;
-
-			// TO-DO implementar
-			bool result = await Alerter.AlertDeleteJourney();
-			if (result)
-			{
-				JourneysCreated.Remove(journey);
-				JourneysCreatedSearched.Remove(journey);
-			}
 		}
 
 		public override void OnAppearing()

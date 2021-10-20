@@ -1,7 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using Travelogue_2.Main.Models;
-using Travelogue_2.Main.Services;
-using Travelogue_2.Main.ViewModels.Journey;
 using Travelogue_2.Main.Views.Journey;
 using Travelogue_2.Main.Views.Modelation;
 using Xamarin.Forms;

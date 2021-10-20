@@ -1,9 +1,8 @@
-﻿using Travelogue_2.Main.Utils;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
+using Travelogue_2.Main.Utils;
 
 namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
 {
-	[QueryProperty("JourneyId", "JourneyId")]
 	[QueryProperty("BackgroundId", "BackgroundId")]
 	public class PageModelationViewModel : DataBaseViewModel
 	{

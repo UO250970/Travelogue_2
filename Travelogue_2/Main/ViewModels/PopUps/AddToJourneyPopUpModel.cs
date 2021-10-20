@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
-using Travelogue_2.Main.Utils;
 using Xamarin.Forms;
+using Travelogue_2.Main.Utils;
 
 namespace Travelogue_2.Main.ViewModels.PopUps
 {
-	[QueryProperty(nameof(JourneyId), nameof(JourneyId))]
 	[QueryProperty(nameof(DaySelectedNum), nameof(DaySelectedNum))]
 	[QueryProperty(nameof(EntryTextId), nameof(EntryTextId))]
 	[QueryProperty(nameof(EntryImageId), nameof(EntryImageId))]

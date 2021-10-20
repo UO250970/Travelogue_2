@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Diagnostics;
-using Travelogue_2.Main.Services;
 using Xamarin.Forms;
+using Travelogue_2.Main.Utils;
 
 namespace Travelogue_2.Main.ViewModels
 {
 	public abstract class DataBaseViewModel : BaseViewModel
 	{
+
         public string CurrentJourneyId
 		{
-			get => DayTracker.CurrentJourneyId;
+			get => DataBaseUtil.GetCurrentJourneyId();
 			set
 			{
-                DayTracker.CurrentJourneyId = value;
+                DataBaseUtil.SetCurrentJourneyId(value);
             }
         }
 
@@ -22,20 +23,21 @@ namespace Travelogue_2.Main.ViewModels
             try
             {
                 LoadData();
-                /**if (CurrentJourneyId != string.Empty)
-                {
-                }*/
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex);
             }
         }
-        public virtual void OnAppearing() { }
+
+        public virtual void OnAppearing() 
+        {
+            ExecuteLoadDataCommand();
+        }
 
         public abstract void LoadData();
 
-        async virtual internal void Back() => await Shell.Current.GoToAsync("..");
+        internal virtual async void Back() => await Shell.Current.GoToAsync("..");
 
     }
 }

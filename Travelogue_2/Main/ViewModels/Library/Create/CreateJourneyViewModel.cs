@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
@@ -141,9 +139,9 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 			if (iniDatePicker.Date.CompareTo(EndDate.Date) > 0) iniDatePicker.Date = endDatePicker.Date;
 		}
 
-		public void Back()
+		internal override void Back()
 		{
-			DataBaseUtil.DeleteJourney(int.Parse(CurrentJourneyId));
+			DataBaseUtil.DeleteJourney( int.Parse(CurrentJourneyId) );
 			base.Back();
 		}
 	}

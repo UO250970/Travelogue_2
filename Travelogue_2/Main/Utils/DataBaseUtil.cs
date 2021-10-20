@@ -1,4 +1,5 @@
-﻿using Plugin.Settings;
+﻿using Plugin.Media.Abstractions;
+using Plugin.Settings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,8 +8,11 @@ using System.Threading.Tasks;
 using Travelogue_2.Main.BBDD;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
+using Xamarin.Forms.Maps;
+using Syncfusion.SfCalendar.XForms;
 using Entry = Travelogue_2.Main.BBDD.Entry;
 using Image = Travelogue_2.Main.BBDD.Image;
+using Travelogue_2.Main.ViewModels.PopUps;
 
 namespace Travelogue_2.Main.Utils
 {
@@ -41,6 +45,11 @@ namespace Travelogue_2.Main.Utils
              jour.Days()*/
 		}
 
+        internal static ImageModel Photo(AddSettingsPopUpModel addSettingsPopUpModel)
+        {
+            return CameraUtil.Photo(addSettingsPopUpModel).Result;
+        }
+
         public static JourneyModel GetJourneyById(int JourneyId)
         {
             Journey temp = DataBase.GetJourneyById( JourneyId );
@@ -48,7 +57,7 @@ namespace Travelogue_2.Main.Utils
             return JourneyToModel(temp);
         }
 
-        public static List<JourneyModel> GetJourneys()
+        public static List<JourneyModel> GetJourneis()
 		{
             List<JourneyModel> temp = new List<JourneyModel>();
             List<Journey> tempDB = DataBase.GetJourneis();
@@ -57,6 +66,11 @@ namespace Travelogue_2.Main.Utils
                 temp.Add(JourneyToModel(jour));
             }
             return temp;
+        }
+
+        internal static CalendarEventCollection GetCalendarJourneis()
+        {
+            return CalendarUtil.GetJourneis( GetJourneis() );
         }
 
         public static List<DestinyModel> GetDestinies()
@@ -68,6 +82,11 @@ namespace Travelogue_2.Main.Utils
                 temp.Add(DestinyToModel(dest));
             }
             return temp;
+        }
+
+        public static void NotificationNewPhoto(MediaFile photo)
+        {
+           // this.
         }
 
         public static List<StyleModel> GetStyles()
@@ -86,7 +105,7 @@ namespace Travelogue_2.Main.Utils
             ObservableDictionary<string, List<ImageModel>> temp = new ObservableDictionary<string, List<ImageModel>>();
 
             List<ImageModel> Images = GetImages();
-            List<string> viajes = GetJourneys().Select(x => x.Name).ToList();
+            List<string> viajes = GetJourneis().Select(x => x.Name).ToList();
 
             if (Images.Count != 0)
 			{
@@ -101,6 +120,11 @@ namespace Travelogue_2.Main.Utils
             }
 
             return temp;
+        }
+
+        internal static Position GetPosition()
+        {
+            return GeolocalizationUtil.GetPosition().Result;
         }
 
         internal static string GetNameFromJourney(string journeyId)
@@ -561,10 +585,12 @@ namespace Travelogue_2.Main.Utils
             return true;
         }
 
-        public static bool DeleteJourney(int JourneyId)
+        public static bool DeleteJourney(int JourneyId, bool alert = false)
         {
             ////ToDo revisar alerter  if (DataBase.DeleteJourneyById(JourneyId)) Alerter.AlertJourneyDeleted();
+            DayTracker.DeleteJourney(JourneyId);
             DataBase.DeleteJourneyById(JourneyId);
+            if (alert) Alerter.AlertDeleteJourney();
             return true;
         }
 
@@ -778,11 +804,6 @@ namespace Travelogue_2.Main.Utils
             return temp;
         }
 
-        #endregion
-
-        public static DateTime GetNextDayAvailable() => DayTracker.GetNextDayAvailable();
-
-
         private static StyleModel StyleToModel(Style style)
         {
             StyleModel temp = new StyleModel();
@@ -794,5 +815,18 @@ namespace Travelogue_2.Main.Utils
             return temp;
         }
         private static Style StyleFromModel(StyleModel style) => DataBase.GetStyleByName(style.Name);
+        #endregion
+
+        public static DateTime GetNextDayAvailable() => DayTracker.GetNextDayAvailable();
+
+        internal static string GetCurrentJourneyId()
+        {
+            return DayTracker.CurrentJourneyId;
+        }
+
+        internal static void SetCurrentJourneyId(string value)
+        {
+            DayTracker.CurrentJourneyId = value;
+        }
     }
 }

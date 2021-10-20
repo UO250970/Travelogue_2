@@ -17,6 +17,12 @@ namespace Travelogue_2.Main.Views.Library
             Shell.SetNavBarIsVisible(this, false);
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            model.Back();
+            return true;
+        }
+
         protected override void OnAppearing()
         {
             CreatedJourneysCollection.SelectedItem = null;
