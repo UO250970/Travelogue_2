@@ -47,7 +47,7 @@ namespace Travelogue_2.Main.Utils
 
         internal static ImageModel Photo(AddSettingsPopUpModel addSettingsPopUpModel)
         {
-            return CameraUtil.Photo(addSettingsPopUpModel).Result;
+            return CameraUtil.Photo(addSettingsPopUpModel, false).Result;
         }
 
         public static JourneyModel GetJourneyById(int JourneyId)
@@ -127,6 +127,28 @@ namespace Travelogue_2.Main.Utils
             return GeolocalizationUtil.GetPosition().Result;
         }
 
+        internal static List<CustomPin> GetMapPins()
+        {
+            List<CustomPin> temp = new List<CustomPin>();
+            List<ImageModel> tempImages = GetImages();
+
+            tempImages.ForEach( x =>
+            {
+                CustomPin pin = new CustomPin
+                {
+                    Type = PinType.Place,
+                    Position = new Position( Convert.ToDouble(x.Latitud), Convert.ToDouble(x.Longitud)),
+                    Label = x.Journey,
+                    Address = x.Caption,
+                    
+                };
+
+                temp.Add( pin );
+            });
+
+            return temp;
+        }
+
         internal static string GetNameFromJourney(string journeyId)
         {
             return DataBase.GetNameFromJourney(journeyId);
@@ -179,9 +201,9 @@ namespace Travelogue_2.Main.Utils
             return collection;
         }
 
-        public static ImageModel CreateImage(string path, string caption, string journey = "")
+        public static ImageModel CreateImage(string path, string caption, string journey = "", string latitud = "", string longitud = "")
 		{
-            Image image = new Image(path, caption, journey);
+            Image image = new Image(path, caption, journey, latitud, longitud);
 
             DataBase.InsertImage(image);
 
@@ -351,23 +373,27 @@ namespace Travelogue_2.Main.Utils
             //DataBase.UpdateEvent(evento);
         }
 
-        public static void EntryInsertImage(EntryModel entry, string path, string caption)
+        public static void EntryInsertImage(EntryModel entry, ImageModel image, string caption)
 		{
             Entry ent = EntryFromModel(entry);
 
-			Image image = new Image
-			{
-				Date = ent.Day.Date,
-				Path = path,
-				Caption = caption,
-				Journey = ent.Day.Journey.Name
-			};
+            Image newImage = new Image()
+            {
+                Path = image.Path,
+                Journey = image.Journey,
+                Latitud = image.Latitud,
+                Longitud = image.Longitud,
+                Date = ent.Day.Date,
+                Caption = caption
+            };
+
+            //DataBase.InsertImage(newImage);
 
 			EntryData entryData = new EntryData
 			{
 				Time = DateTime.Now.ToString("HH:mm"),
-				Image = image
-			};
+				Image = newImage
+            };
 
 			DataBase.InsertEntryData(entryData);
 
@@ -747,8 +773,12 @@ namespace Travelogue_2.Main.Utils
 
                     if (data.Image != null)
                     {
-                        temp2.Path = data.Image.Path;
-                        temp2.Caption = data.Image.Caption;
+                        ImageModel temp = GetImageById(data.ImageId);
+                        temp2.ImageId = temp.ImageId;
+                        temp2.Path = temp.Path;
+                        temp2.Caption = temp.Caption;
+                        temp2.Latitud = temp.Latitud;
+                        temp2.Longitud = temp.Longitud;
                     } else
                     {
                         temp2.Caption = "";
@@ -781,15 +811,18 @@ namespace Travelogue_2.Main.Utils
 
             if (image == null) return temp;
 
-            temp.Id = image.Id;
+            temp.ImageId = image.Id;
 
             temp.Path = image.Path;
             temp.Caption = image.Caption;
             temp.Journey = image.Journey;
 
+            temp.Latitud = image.Latitud;
+            temp.Longitud = image.Longitud;
+
             return temp;
         }
-        private static Image ImageFromModel(ImageModel image) => DataBase.GetImageById(image.Id);
+        private static Image ImageFromModel(ImageModel image) => DataBase.GetImageById(image.ImageId);
 
         private static EntryImageModel EntryImageToModel(Image image)
         {

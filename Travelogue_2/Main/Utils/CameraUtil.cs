@@ -51,7 +51,7 @@ namespace Travelogue_2.Main.Utils
 			}
 		}
 
-		internal static async Task<ImageModel> Photo(PhotoRendererModel model, string journeyId = null)
+		internal static async Task<ImageModel> Photo(PhotoRendererModel model, bool temporal = false)
 		{
 			await CheckPermissions();
 			string photo = await Alerter.AlertPhoto();
@@ -59,11 +59,11 @@ namespace Travelogue_2.Main.Utils
 			{
 				if (photo.Equals(AppResources.TakePhoto))
 				{
-					return model.AddImage(await TakePhoto(), journeyId);
+					return model.AddImage(await TakePhoto(), temporal);
 				}
 				else if (photo.Equals(AppResources.PickPhoto))
 				{
-					return model.AddImage(await PickPhoto(), journeyId);
+					return model.AddImage(await PickPhoto(), temporal);
 				}
 			}
 			return null;
@@ -79,7 +79,7 @@ namespace Travelogue_2.Main.Utils
 					Directory = CommonVariables.AppName,
 					Name = GetPhotoName() + CommonVariables.SavedImagesExtension,
 					SaveToAlbum = true,
-					SaveMetaData = true,
+					SaveMetaData = true
 				});
 			}
 			catch (Exception ex)

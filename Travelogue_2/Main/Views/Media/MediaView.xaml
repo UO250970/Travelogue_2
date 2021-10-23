@@ -4,12 +4,13 @@
              x:Class="Travelogue_2.Main.Views.Media.MediaView"
              xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
              xmlns:calendar="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
-             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:local="clr-namespace:Travelogue_2.Main.Services"
              x:Name="MediaViewName">
     
     <ContentPage.Content>
 
-        <tabView:SfTabView EnableSwiping="False" VisibleHeaderCount="3"  VerticalOptions="FillAndExpand" DisplayMode="Image">
+        <tabView:SfTabView EnableSwiping="False" VisibleHeaderCount="3"  VerticalOptions="FillAndExpand" DisplayMode="Image"
+                            TabItemTapped="TabView_TabItemTapped">
 
             <tabView:SfTabView.SelectionIndicatorSettings>
                 <tabView:SelectionIndicatorSettings />
@@ -57,9 +58,9 @@
                                IconFont="&#xe94b;"
                                FontIconFontColor="{DynamicResource Primary}"
                                FontIconFontFamily="{StaticResource Icon}">
-                <tabView:SfTabItem.Content>
+                <tabView:SfTabItem.Content >
 
-                    <maps:Map x:Name="map" MapType="Street" IsShowingUser="True" />
+                    <local:CustomMap x:Name="map" MapType="Street" IsShowingUser="True" />
 
                 </tabView:SfTabItem.Content>
             </tabView:SfTabItem>
@@ -74,7 +75,7 @@
 
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>    
                         

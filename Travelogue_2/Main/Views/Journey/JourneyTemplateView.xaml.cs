@@ -23,6 +23,8 @@ namespace Travelogue_2.Main.Views.Journey
 		{
 			JourneyName.TranslationY = _journeyNameFrameTop * 0.1;
 			JourneyNameBoxView.TranslationY = _journeyNameFrameTop * 0.1;
+			JourneyStateBoxView.TranslationY = _journeyNameFrameTop * 0.1;
+			JourneyState.TranslationY = _journeyNameFrameTop * 0.1;
 
 			JourneyNameBoxView.FadeTo(0, 0);
 		}
@@ -48,6 +50,8 @@ namespace Travelogue_2.Main.Views.Journey
 				{
 					JourneyName.TranslationY = (0 - scrolled);
 					JourneyNameBoxView.TranslationY = (0 - scrolled);
+					JourneyStateBoxView.TranslationY = (0 - scrolled);
+					JourneyState.TranslationY = (0 - scrolled);
 
 					JourneyNameBoxView.FadeTo(0, 100);
 				}
@@ -55,6 +59,8 @@ namespace Travelogue_2.Main.Views.Journey
 				{
 					JourneyName.TranslationY = (0 - _journeyNameFrameTop);
 					JourneyNameBoxView.TranslationY = (0 - _journeyNameFrameTop);
+					JourneyStateBoxView.TranslationY = (0 - _journeyNameFrameTop);
+					JourneyState.TranslationY = (0 - _journeyNameFrameTop);
 
 					JourneyNameBoxView.FadeTo(1, 100);
 				}

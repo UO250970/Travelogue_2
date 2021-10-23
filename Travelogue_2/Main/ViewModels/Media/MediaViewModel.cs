@@ -19,8 +19,8 @@ namespace Travelogue_2.Main.ViewModels.Media
 		public int localizationFirstDay;
 		public Command SearchJourneyCommand { get; }
 		public Command<string> JourneyTapped { get; }
-		public ObservableDictionary<string, List<ImageModel>> ImagesOrdered { get; set; }
 
+		public ObservableDictionary<string, List<ImageModel>> ImagesOrdered { get; set; }
 		private ObservableDictionary<string, List<ImageModel>> imagesSearched;
 		public ObservableDictionary<string, List<ImageModel>> ImagesSearched
 		{
@@ -109,6 +109,11 @@ namespace Travelogue_2.Main.ViewModels.Media
 		internal Position GetPosition()
 		{
 			return DataBaseUtil.GetPosition();
+		}
+
+		internal List<CustomPin> GetMapPins()
+		{
+			return DataBaseUtil.GetMapPins();
 		}
 
 		async void OnJourneySelected(string journeyId)

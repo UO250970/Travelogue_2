@@ -159,10 +159,10 @@
   {name: "Oman", code: "OM", currency: "Rial Omani"}, 
   
   
-  {name: "Netherlands", code: "NL", currency: "Euro"}, 
+  {name: "Paises Bajos", code: "NL", currency: "Euro"}, 
   {name: "Pakistan", code: "PK", currency: "Pakistan Rupee"}, 
   {name: "Palau", code: "PW", currency: "US Dollar"}, 
-  {name: "Palestinian Territory, Occupied", code: "PS", currency: "New Israeli Sheqel"}, 
+  {name: "Palestina", code: "PS", currency: "New Israeli Sheqel"}, 
   {name: "Panama", code: "PA", currency: "Balboa, US Dollar"}, 
   {name: "Papua New Guinea", code: "PG", currency: "Papua New Guinea Kina"}, 
   {name: "Paraguay", code: "PY", currency: "Paraguay Guarani"}, 
@@ -178,7 +178,7 @@
   {name: "United Kingdom", code: "GB", currency: "Pound Sterling"}, 
   {name: "Rwanda", code: "RW", currency: "Rwanda Franc"}, 
   {name: "Romania", code: "RO", currency: "Romanian Leu"}, 
-  {name: "Russian Federation", code: "RU", currency: "Russian Ruble"}, 
+  {name: "Russia", code: "RU", currency: "Russian Ruble"}, 
   
   
   {name: "Samoa", code: "WS", currency: "Tala"},  
@@ -204,7 +204,7 @@
   
   {name: "Thailand", code: "TH", currency: "Thai Baht"}, 
   {name: "Taiwan, Province of China", code: "TW", currency: "New Taiwan Dollar"}, 
-  {name: "Tanzania, United Republic of", code: "TZ", currency: "Tanzanian Shilling"},
+  {name: "Tanzania", code: "TZ", currency: "Tanzanian Shilling"},
   {name: "Tajikistan", code: "TJ", currency: "Somoni Tayiko"},  
   {name: "Timor-Leste", code: "TL", currency: "US Dollar"}, 
   {name: "Togo", code: "TG", currency: "CFA Franc"}, 
@@ -224,7 +224,7 @@
   
   {name: "Vanuatu", code: "VU", currency: "Vanuatu Vatu"}, 
   {name: "Venezuela", code: "VE", currency: "Venezuelan bolívar"}, 
-  {name: "Viet Nam", code: "VN", currency: "Viet Nam Dong"}, 
+  {name: "Vietnam", code: "VN", currency: "Viet Nam Dong"}, 
   
   
   {name: "Yemen", code: "YE", currency: "Yemeni Rial"}, 

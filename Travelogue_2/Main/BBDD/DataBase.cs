@@ -227,6 +227,30 @@ namespace Travelogue_2.Main.BBDD
         }
         #endregion
 
+        #region Journal
+
+        internal static bool InsertJournal(Journal journal)
+        {
+            if (FindJournal(journal) == null)
+            {
+                void Act() => conn.InsertWithChildren(journal, recursive: true);
+                return QueryAct(Act);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+            /** Find */
+        // Solo para el Insert
+        internal static Journal FindJournal(Journal journal)
+        {
+            Journal Func() => conn.FindWithChildren<Journal>(journal.Id);
+            return QueryFunc(Func);
+        }
+        #endregion
+
         #region Day
 
         public static List<Day> GetDays()

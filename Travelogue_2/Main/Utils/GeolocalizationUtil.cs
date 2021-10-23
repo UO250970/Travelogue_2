@@ -40,7 +40,7 @@ namespace Travelogue_2.Main.Utils
             Location location = null;
             try
             {
-                return await Geolocation.GetLastKnownLocationAsync();
+                return Geolocation.GetLastKnownLocationAsync().Result;
             }
             catch (Exception ext)
             {

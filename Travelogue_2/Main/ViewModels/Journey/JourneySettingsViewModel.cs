@@ -44,7 +44,6 @@ namespace Travelogue_2.Main.ViewModels.Journey
 			IniDate = Journey.IniDate;
 			IniDateEnabled = (State.Equals(State.CLOSED) || State.Equals(State.OPEN)) ? false : true;
 			EndDate = Journey.EndDate;
-			EndDateEnabled = State.Equals(State.CLOSED) ? false : true;
 		}
 
 		private JourneyModel journey;
@@ -81,7 +80,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 			set
 			{
 				SetProperty(ref coverImage, value);
-				Journey.CoverId = coverImage.Id;
+				Journey.CoverId = coverImage.ImageId;
 			}
 		}
 		#endregion
@@ -117,13 +116,6 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		#endregion
 
 		#region EndDate
-		private bool endDateEnabled = true;
-		public bool EndDateEnabled
-		{
-			get => endDateEnabled;
-			set => SetProperty(ref endDateEnabled, value);
-		}
-
 		private DateTime endDate = DateTime.Today;
 		public DateTime EndDate
 		{
@@ -138,7 +130,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		async internal void ModifyCoverC()
 		{
-			ImageModel success = await CameraUtil.Photo(this, journey.Id.ToString());
+			ImageModel success = await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				CoverImage = success;

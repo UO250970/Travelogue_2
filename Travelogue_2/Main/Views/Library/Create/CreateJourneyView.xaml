@@ -35,7 +35,7 @@
                 <Frame HasShadow="True" Margin="5" Padding="5">
                     <StackLayout>
                         <Label Text="Titulo" FontSize="Large" TextColor="{DynamicResource Primary}"/>
-                        <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
+                        <Entry AutomationId="TitleSelectorE" Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
                     </StackLayout>
                 </Frame>
 
@@ -45,13 +45,15 @@
                         <StackLayout Orientation="Horizontal">
 
                             <Label Text="&#xe953;" FontFamily="{StaticResource Icon}"  FontSize="Medium" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center"/>
-                            <DatePicker Format="{Binding Resources[DateFormat]}"
+                            <DatePicker AutomationId="DateSelectorIniE" 
+                                        Format="{Binding Resources[DateFormat]}"
                                         x:Name="IniDatePicker"
                                         Date="{Binding IniDate, Mode=TwoWay}"
                                         MinimumDate="{Binding MinimumDate}"
                                         DateSelected="CheckNewIniDate" HorizontalOptions="FillAndExpand"/>
                             <Label Text="&#xe953;" FontFamily="{StaticResource Icon}"  FontSize="Medium" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center"/>
-                            <DatePicker Format="{Binding Resources[DateFormat]}"
+                            <DatePicker AutomationId="DateSelectorEndE" 
+                                        Format="{Binding Resources[DateFormat]}"
                                         x:Name="EndDatePicker"
                                         Date="{Binding EndDate, Mode=TwoWay}"
                                         MinimumDate="{Binding MinimumDate}"
@@ -62,117 +64,11 @@
                     </StackLayout>
                 </Frame>
 
-                <!--Frame HasShadow="True" Margin="5" Padding="8">
-                    <StackLayout>
-                        <Label Text="Destinos" FontSize="Large" TextColor="{DynamicResource Primary}"/>
-                        <StackLayout Orientation="Horizontal">
-
-                            <autocomplete:SfAutoComplete x:Name="AutocompleteDestiny"
-                                                         DataSource="{Binding DestiniesList}"
-                                                         NoResultsFoundText="{Binding Resources[NoResultsFound]}"
-                                                         Text="{Binding DestinyText, Mode=TwoWay}"
-                                                         SuggestionBoxPlacement="Top"
-                                                         Watermark="{Binding Resources[EnterADestiny]}"
-                                                         HorizontalOptions="FillAndExpand"/>
-                            <Button x:Name="AddDestinyButton"
-                                    Command="{Binding AddDestinyCommand}"
-                                    IsEnabled="{Binding CorrectDestinyText}"
-                                    Text="&#xea0a;" FontFamily="{StaticResource Icon}"  FontSize="Medium"/>
-                        </StackLayout>
-
-                        <StackLayout BindableLayout.ItemsSource="{Binding DestiniesSelected}">
-
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate>
-
-                                    <StackLayout>
-                                        <AbsoluteLayout>
-
-                                            <Frame>
-                                                <StackLayout>
-                                                    <Label x:Name="DestinyName" FontSize="Medium" 
-                                                        Text="{Binding .Destiny}"/>
-                                                    <Grid x:Name="DestinyInfo">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="4*" />
-                                                            <ColumnDefinition Width="7*" />
-                                                        </Grid.ColumnDefinitions>
-
-                                                        <Image x:Name="FlagImage"  
-                                                            Source="{Binding .Flag}"
-                                                            Aspect="AspectFill" Grid.Column="0" HeightRequest="50" />
-
-                                                        <StackLayout Grid.Column="1">
-                                                            <Grid>
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="*"/>
-                                                                    <ColumnDefinition Width="*"/>
-                                                                </Grid.ColumnDefinitions>
-                                                                <Label Grid.Column="0"
-                                                                    FontSize="Medium"
-                                                                    Text="{Binding BindingContext.Resources[Name], Source={x:Reference CreateJourneyViewName}}" />
-                                                                <Label Grid.Column="1"
-                                                                    x:Name="CountryName"
-                                                                    FontSize="Medium" 
-                                                                    Text="{Binding .Destiny}"/>
-
-                                                            </Grid>
-
-                                                            <Grid>
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="*"/>
-                                                                    <ColumnDefinition Width="*"/>
-                                                                </Grid.ColumnDefinitions>
-                                                                <Label Grid.Column="0"
-                                                                    FontSize="Medium"
-                                                                    Text="{Binding BindingContext.Resources[Currency], Source={x:Reference CreateJourneyViewName}}" />
-                                                                <Label Grid.Column="1"
-                                                                    x:Name="Currency"
-                                                                    FontSize="Medium"
-                                                                    Text="{Binding .Currency}" />
-
-                                                            </Grid>
-
-                                                            <Label Grid.Column="0"
-                                                                FontSize="Medium"
-                                                                TextColor="#3D6D9B"
-                                                                x:Name="DestinyURL"
-                                                                Text="{Binding .MoreInfoCountry}">
-                                                                <Label.GestureRecognizers>
-                                                                    <TapGestureRecognizer Command="{Binding BindingContext.MoreInfoCommand, Source={x:Reference CreateJourneyViewName}}"
-                                                                                        CommandParameter="{Binding .MoreInfoCountry}"/>
-                                                                </Label.GestureRecognizers>
-                                                            </Label>
-                                                        </StackLayout>
-
-                                                    </Grid>
-                                                </StackLayout>
-                                            </Frame>
-
-                                            <Button x:Name="DeleteJourneyButton" 
-                                                Style="{StaticResource circleButtonDeleteStyle}"
-                                                BackgroundColor="{StaticResource None}"
-                                                FontSize="Medium"
-                                                HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
-                                                Command="{Binding BindingContext.DestinyTappedDelete, Source={x:Reference CreateJourneyViewName}}"
-                                                CommandParameter="{Binding .}"/>
-
-                                        </AbsoluteLayout>
-                                    </StackLayout>
-
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-
-                        </StackLayout>
-
-                    </StackLayout>
-                </Frame-->
-
                 <destinies:DestiniesCollectionView/>
 
                 <StackLayout Orientation="Horizontal">
-                    <Button Text="{Binding Resources[Cancel]}" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
-                    <Button Text="{Binding Resources[Save]}" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    <Button AutomationId="CancelButtonE" Text="{Binding Resources[Cancel]}" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    <Button AutomationId="SaveButtonE" Text="{Binding Resources[Save]}" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
                 </StackLayout>
 
             </StackLayout>

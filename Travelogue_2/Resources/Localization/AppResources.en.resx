@@ -192,6 +192,9 @@
   <data name="ClosedJourneys" xml:space="preserve">
     <value>Closed Journeys</value>
   </data>
+  <data name="ClosedMessage" xml:space="preserve">
+    <value> Closed Journey</value>
+  </data>
   <data name="ContinueEditing" xml:space="preserve">
     <value>Continue editing...</value>
   </data>
@@ -200,6 +203,9 @@
   </data>
   <data name="CreatedEmpty" xml:space="preserve">
     <value>No created journeys</value>
+  </data>
+  <data name="CreatedJourneyMessage" xml:space="preserve">
+    <value>Not opened Journey</value>
   </data>
   <data name="CreatedJourneys" xml:space="preserve">
     <value>Created Journeys</value>

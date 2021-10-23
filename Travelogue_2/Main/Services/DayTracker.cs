@@ -170,11 +170,9 @@ namespace Travelogue_2.Main.Services
                 if (GetJourneyOnTrack() != null && GetJourneyOnTrack().Id == journey.Id) ReStart();
 
                 journey.FinishJourney();
-                if (true) //   journe    y.Journal is null)
-                {
-                    //Journal journal = new Journal(journey);
-                    //DataBase.InsertJournal(journal);
-                }
+
+                Journal journal = new Journal(journey);
+                DataBase.InsertJournal(journal);
                 DataBase.UpdateJourney(journey);
 
                 CheckInitialTabAsync();

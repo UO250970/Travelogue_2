@@ -42,8 +42,8 @@ namespace Travelogue_2.Droid
 
         protected override void OnNewIntent(Android.Content.Intent intent)
         {
-            var temp = DependencyService.Get<ReceiverService>();
-            temp.broadcastReceiver.OnReceive(this, intent);
+            //var temp = DependencyService.Get<ReceiverService>();
+            //temp.broadcastReceiver.OnReceive(this, intent);
             base.OnNewIntent(intent);
 
         }

@@ -24,14 +24,22 @@ namespace Travelogue_2.Main.BBDD
         [Column("Journey")]
         public string Journey { get; set; }
 
+        [Column("Latitud")]
+        public string Latitud { get; set; }
+
+        [Column("Longitud")]
+        public string Longitud { get; set; }
+
         /** Constructor público sin parámetros necesario para la base de datos */
         public Image() { }
 
-        public Image(string path, string caption, string journey)
+        public Image(string path, string caption, string journey, string latitud, string longitud)
 		{
             Path = path;
             Caption = caption;
             Journey = journey;
+            Latitud = latitud;
+            Longitud = longitud;
         }
 
     }

@@ -32,7 +32,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
             if (background == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(PageModelationView)}?{nameof(PageModelationViewModel.BackgroundId)}={background.Id}");
+            await Shell.Current.GoToAsync($"{nameof(PageModelationView)}?{nameof(PageModelationViewModel.BackgroundId)}={background.ImageId}");
             // This will push the ItemDetailPage onto the navigation stack
         }
     }

@@ -101,7 +101,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
 		async internal void AddCoverC()
 		{
-			ImageModel success = await CameraUtil.Photo(this);
+			ImageModel success = await CameraUtil.Photo(this, true);
 			if (success != null)
 			{
 				CoverImage = success;
@@ -121,7 +121,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 					Name = Title,
 					IniDate = IniDate,
 					EndDate = EndDate,
-					CoverId = CoverImage.Id
+					CoverId = CoverImage.ImageId
 				};
 				if (await DataBaseUtil.SaveJourney(temp))
 					await Shell.Current.GoToAsync("..");

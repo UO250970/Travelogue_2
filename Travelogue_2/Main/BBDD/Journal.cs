@@ -1,5 +1,6 @@
 ﻿using SQLite;
 using SQLiteNetExtensions.Attributes;
+using System.Collections.Generic;
 using Travelogue_2.Main.Models;
 
 namespace Travelogue_2.Main.BBDD
@@ -25,10 +26,16 @@ namespace Travelogue_2.Main.BBDD
 		[OneToOne(CascadeOperations = CascadeOperation.CascadeRead)]
 		public Journey Journey { get; set; }
 
-		[Column("Path"), MaxLength(40), NotNull]
-		public string Path { get; set; } = string.Empty;
+		//[Column("Path"), MaxLength(40), NotNull]
+		//public string Path { get; set; } = string.Empty;
 
-		//[TextBlob("Pages")]
-		//public List<string> Pages { get; set; } = new List<string>();
+		[TextBlob("Pages")]
+		public List<string> Pages { get; set; } = new List<string>();
+
+		public Journal(Journey journey)
+        {
+			JourneyId = journey.Id;
+			Journey = journey;
+        }
 	}
 }

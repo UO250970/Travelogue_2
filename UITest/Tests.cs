@@ -21,7 +21,7 @@ namespace UITest
             //app = ConfigureApp.Android.StartApp();
 
             app = ConfigureApp.Android
-                 .ApkFile(@"C:\Users\Lulu\AppData\Local\Xamarin\Mono for Android\Archives\2021-10-16\Travelogue_2.Android 10-16-21 7.16 PM.apkarchive\com.companyname.travelogue_2.apk")
+                 .ApkFile(@"C:\Users\lmendezl\AppData\Local\Xamarin\Mono for Android\Archives\2021-10-20\Travelogue_2.Android 10-20-21 9.22 PM.apkarchive\com.companyname.travelogue_2.apk")
                  .DeviceSerial("6PQ0217821002256")
                  .PreferIdeSettings()
                  .EnableLocalScreenshots()
@@ -46,43 +46,72 @@ namespace UITest
         }
 
         #region Enter
-        /*public void EnterLibrary() => ;
-        public void EnterMedia() => ;
-        public void EnterOnGoing() => ;
-        public void EnterModeling() => ;
-        public void EnterSettings() => ;*/
-
-        public void EnterFuturLibrary()
-        {
-            //EnterLibrary();
-            app.Tap(x => x.Marked("CreatedJourneysButton"));
-        }
-
-        public void EnterPastLibrary()
-        {
-            //EnterLibrary();
-            app.Tap(x => x.Marked("ClosedJourneysButton"));
-        }
+        public void EnterLibrary() => app.Tap(x => x.Marked("NoResourceEntry-0"));
+        public void EnterMedia() => app.Tap(x => x.Marked("NoResourceEntry-1"));
+        public void EnterOnGoing() => app.Tap(x => x.Marked("NoResourceEntry-2"));
+        public void EnterModeling() => app.Tap(x => x.Marked("NoResourceEntry-3"));
+        public void EnterSettings() => app.Tap(x => x.Marked("NoResourceEntry-4"));
 
         public void EnterFuturTrip()
-		{
-            //EnterLibrary();
+        {
+            EnterLibrary();
             app.WaitForElement("StandardTrip Futur", timeout: TimeSpan.FromSeconds(100));
             app.Tap(x => x.Marked("2"));
 
             app.WaitForElement("Concierto Manin", timeout: TimeSpan.FromSeconds(100));
         }
 
-        public void EnterPastTrip()
+        public void EnterFuturLibrary()
         {
-            //EnterLibrary();
-            app.WaitForElement("StandardTrip Finished", timeout: TimeSpan.FromSeconds(100));
+            EnterLibrary();
+            app.Tap(x => x.Marked("CreatedJourneysButton"));
+            app.WaitForElement("FuturJourneisL", timeout: TimeSpan.FromSeconds(100));
+        }
+
+        public void EnterFuturLibraryTrip()
+        {
+            EnterFuturLibrary();
+            app.WaitForElement("StandardTrip Futur", timeout: TimeSpan.FromSeconds(100));
             app.Tap(x => x.Marked("2"));
 
             app.WaitForElement("Concierto Manin", timeout: TimeSpan.FromSeconds(100));
         }
-        #endregion
 
+        public void EnterCreateFuturJourney()
+        {
+            EnterFuturLibrary();
+            app.Tap(x => x.Marked(Variables.CreateJourneyButton));
+            app.WaitForElement("CreateJourneyTitleL", timeout: TimeSpan.FromSeconds(100));
+        }
+
+        public void EnterPastTrip()
+        {
+            EnterLibrary();
+            app.WaitForElement("StandardTrip Finished", timeout: TimeSpan.FromSeconds(100));
+            app.Tap(x => x.Marked("3"));
+
+            app.WaitForElement("Concierto Pepita", timeout: TimeSpan.FromSeconds(100));
+        }
+
+        public void EnterPastLibrary()
+        {
+            EnterLibrary();
+            app.Tap(x => x.Marked("ClosedJourneysButton"));
+            app.WaitForElement("ClosedJourneisL", timeout: TimeSpan.FromSeconds(100));
+        }
+
+        public void EnterText(string element, string text)
+        {
+            app.EnterText(x => x.Marked(element), text);
+        }
+
+        public void EnterPastLibraryTrip()
+        {
+            EnterPastLibrary();
+            app.WaitForElement("StandardTrip Finished", timeout: TimeSpan.FromSeconds(100));
+            app.Tap(x => x.Marked("3"));
+        }
+        #endregion
 
         public void SaveEventButton()
         {
@@ -113,19 +142,48 @@ namespace UITest
             app.Tap(Variables.AceptButton);
         }
 
-
         [Test]
         public void CreateJourneyTest()
         {
             app.Repl();
+            EnterCreateFuturJourney();
 
+            EnterText(Variables.TitleSelector, "Holi, test 1");
+
+            SelectDestiny();
         }
+
+        // TODO Tests
+
+        /*
+         *  - Modificar settings de journey
+         *      - Modificar nombre
+         *      - Modificar cover
+         *      - Modificar fechas
+         *      - Eliminar un destino, añadir un destino
+         *      - Salir y volver a entrar 
+         *      - Comprobar que sigue igual
+         *      
+         *  - Añadir info al journey
+         *      - Añadir una entry
+         *      - Modificar una entry
+         *      - Añadir texto a la entry
+         *      - Modificar texto a la entry
+         *      - Añadir foto a una entry
+         *      - Añadir pie a la foto
+         *      - Añadir foto a un viaje normal
+         * 
+         *  - Ver info en el media
+         *      - Ver journeis en el calendario
+         *      - Ver fotos en el mapa
+         *      - Ver fotos ordenadas por journey
+         */
 
         [Test]
         public void SeeJourneyFromLibrary()
 		{
             app.Repl();
-            EnterFuturLibrary();
+            EnterFuturLibraryTrip();
         }
 
         [Test]
@@ -166,8 +224,8 @@ namespace UITest
 
             app.TouchAndHold(x => x.Marked("Concierto Manin"));
 
-            app.EnterText(x => x.Marked(Variables.TitleSelector), " 2");
-            app.EnterText(x => x.Marked(Variables.AddressSelector), " 1");
+            EnterText(Variables.TitleSelector, " 2");
+            EnterText(Variables.AddressSelector, " 1");
             SaveEventButton();
             app.Tap(x => x.Marked(day.ToString()));
             Assert.IsEmpty(app.Query("Concierto Manin"));
@@ -214,8 +272,8 @@ namespace UITest
 
             app.TouchAndHold(x => x.Marked("Concierto Manin"));
 
-            app.EnterText(x => x.Marked(Variables.TitleSelector), " 2");
-            app.EnterText(x => x.Marked(Variables.AddressSelector), " 1");
+            EnterText(Variables.TitleSelector, " 2");
+            EnterText(Variables.AddressSelector, " 1");
             SaveEventButton();
             app.Tap(x => x.Marked(day.ToString()));
             Assert.IsEmpty(app.Query("Concierto Manin"));
@@ -233,6 +291,7 @@ namespace UITest
 
     public static class Variables
 	{
+        // Automation Ids
         public static string DateFormat { get => "dd/MM/yyyy"; }
         public static string TimeFormat { get => @"hh\:mm"; }
 
@@ -243,6 +302,12 @@ namespace UITest
         public static string TitleSelector { get => "TitleSelectorE"; }
         public static string AddressSelector { get => "AddressSelectorE"; }
         public static string DateSelector { get => "DateSelectorE"; }
+        
+        public static string DateIniSelector { get => "DateSelectorIniE"; }
+        public static string DateEndSelector { get => "DateSelectorEndE"; }
+
         public static string TimeSelector { get => "TimeSelectorE"; }
+
+        public static string CreateJourneyButton { get => "CreateJourneyB"; }
     }
 }

@@ -168,4 +168,126 @@
 	{country: "Liechtenstein", city: "Zurich", phoneNumber: "(+41) (0) 79 276 31 25"}, 
 	{country: "Lithuania", city: "Lituania", phoneNumber: "(+370) 620 21 232"}, 
 	{country: "Luxembourg", city: "Luxemburgo", phoneNumber: "(+352) 621401024"},
+	
+	
+	{country: "Macedonia, The Former Yugoslav Republic of", city: "Skopje", phoneNumber: "(+389) (0) 70252464 "}, 
+	{country: "Madagascar", city: "Ciudad del Cabo", phoneNumber: "(+27) 76 114 6152"}, 
+	{country: "Malaysia", city: "Malasia", phoneNumber: "(+60) 12 389 37 44"},
+	{country: "Malawi", city: "Harare - Zimbabue", phoneNumber: "(+263) 772 436 620"}, 
+	{country: "Maldives", city: "Nueva Delhi", phoneNumber: "(+91) 9810174160"}, 
+	{country: "Mali", city: "Bamako", phoneNumber: "(+223) 73 31 23 24"}, 
+	{country: "Malta", city: "Malta", phoneNumber: "(+356) 793 491 91"}, 
+	{country: "Morocco", city: "Agadir", phoneNumber: "(+212) 661 080 470"}, 
+	{country: "Morocco", city: "Casablanca", phoneNumber: "(+212) 660 488 848"}, 
+	{country: "Morocco", city: "Nador", phoneNumber: "(+212) 661 764 005"}, 
+	{country: "Morocco", city: "Rabat", phoneNumber: "(+212) 660 915 647"}, 
+	{country: "Morocco", city: "Tánger", phoneNumber: "(+212) 661 202 135"}, 
+	{country: "Morocco", city: "Tetuán", phoneNumber: "(+212) 6 61705 430"}, 
+	{country: "Mauritius", city: "Ciudad del Cabo", phoneNumber: "(+27) 76 114 6152"},
+	{country: "Mauritania", city: "Nuakchot", phoneNumber: "(+222) 4683 3662"},
+	{country: "Mexico", city: "México D.F.", phoneNumber: "(+521) 55 42 46 81 36 "}, 
+	{country: "Mexico", city: "Guadalajara", phoneNumber: "(+521) 33 31 16 42 72"}, 
+	{country: "Mexico", city: "monterrey", phoneNumber: "(+521) 81 12 66 53 64"}, 
+	{country: "Micronesia, Federated States of", city: "Manila", phoneNumber: "(+63) 91 782 66 046"}, 
+	{country: "Moldova, Republic of", city: "Bucarest", phoneNumber: "(+40) 745 102 780"}, 
+	{country: "Monaco", city: "Marsella", phoneNumber: "(+33) 608717988"},
+	{country: "Mongolia", city: "Pekín", phoneNumber: "(+86) 1391 1461 886"}, 
+	{country: "Mozambique", city: "Maputo", phoneNumber: "(+258) 84 32 82 900"}, 
+	{country: "Myanmar", city: "Bangkok", phoneNumber: "(+66) (0) 818687507"}, 
+	
+	
+	{country: "Namibia", city: "Windhoek", phoneNumber: "(+264) (0) 81 128 0571"}, 
+	{country: "Nauru", city: "Sidney", phoneNumber: "(+61) 412 258 989"}, 
+	{country: "Nepal", city: "Nueva Delhi", phoneNumber: "(+91) 98 10 17 41 60"}, 
+	{country: "Nicaragua", city: "Managua", phoneNumber: "(+ 505) 8889 5623"}, 
+	{country: "Niger", city: "Niamey", phoneNumber: "(+227) 96 83 83 94"},
+	{country: "Nigeria", city: "Lagos", phoneNumber: "(+234) 80 3360 1658"}, 
+	{country: "Norway", city: "Oslo", phoneNumber: "(+47) 92247979"},  
+	{country: "New Zealand", city: "Wellington", phoneNumber: "(+64) 21 836 725"}, 
+	
+	
+	{country: "Oman", city: "Omán", phoneNumber: "(+968) 99 47 33 70"},
+
+
+	{country: "Paises Bajos", city: "Amsterdam", phoneNumber: "(+31) 652665078"}, 
+	{country: "Pakistan", city: "Pakistán", phoneNumber: "(+92) 300 850 16 33"}, 
+	{country: "Palau", city: "Manila", phoneNumber: "(+63) 917 8266046"}, 
+	{country: "Palestina", city: "Jerusalén", phoneNumber: "(+972) 599 27 65 38"}, 
+	{country: "Panama", city: "Panamá", phoneNumber: "(+507) 64300642"}, 
+	{country: "Papua New Guinea", city: "Sydney", phoneNumber: "(+61) 412 258 989"}, 
+	{country: "Paraguay", city: "Asunción", phoneNumber: "(+595) 971 174 170"}, 
+	{country: "Peru", city: "Lima", phoneNumber: "(+51) (1) 995 655 898"},  
+	{country: "Poland", city: "Varsovia", phoneNumber: "(+48) 605 67 31 25"}, 
+	{country: "Portugal", city: "Lisboa", phoneNumber: "(+351) 91 726 74 02"}, 
+	{country: "Portugal", city: "Oporto", phoneNumber: "(+351) 965 386 547"}, 
+	{country: "Puerto Rico", city: "San Juan de Puerto Rico", phoneNumber: "(+1) 787 247 91 21"},	
+	
+  
+	{country: "Qatar", city: "Doha", phoneNumber: "(+974) 55862411"}, 
+	
+	{country: "United Kingdom", city: "Londres", phoneNumber: "(+44) 7712764151"}, 
+	{country: "United Kingdom", city: "Edimburgo", phoneNumber: "(+44) 7801371704"},
+	{country: "United Kingdom", city: "Mánchester", phoneNumber: "(+44) 7904319301"},
+	{country: "Rwanda", city: "Dar Es Salaam", phoneNumber: "(+255) 754 042 123"}, 
+	{country: "Romania", city: "Bucarest", phoneNumber: "(+40) 745 102 780"}, 
+	{country: "Russia", city: "Moscú", phoneNumber: "(+7) 903 136 39 02"}, 
+	{country: "Russia", city: "San Peterburgo", phoneNumber: "(+7) 921 551 30 86"}, 
+  
+  
+	{country: "Samoa", city: "Wellington", phoneNumber: "(+64) 421 836 725"},  
+	{country: "Saint Kitts and Nevis", city: "Kingston", phoneNumber: "(+1 876) 577 9719"},
+	{country: "San Marino", city: "Roma", phoneNumber: " (+39) 335 333438"},  
+	{country: "Saint Vincent and the Grenadines", city: "Puerto España", phoneNumber: "(+1 868) 780 26 79"}, 
+	{country: "Saint Lucia", city: "Puerto España", phoneNumber: "(+1 868) 780 26 79"}, 
+	{country: "Sao Tome and Principe", city: "Libreville", phoneNumber: "(+241) 04 44 46 71"}, 
+	{country: "Senegal", city: "Dakar", phoneNumber: "(+221) 77 569 28 89"}, 
+	{country: "Serbia", city: "Serbia", phoneNumber: "(+381) 63 285 082"}, 
+	{country: "Seychelles", city: "Addis Abeba", phoneNumber: "(+251) 911 219 403"}, 
+	{country: "Sierra Leone", city: "Abidjan", phoneNumber: "(+225) 07 42 57 89"},
+	{country: "Singapore", city: "Singapur", phoneNumber: "(+65) 9787 0732"},
+	{country: "Syrian Arab Republic", city: "Beirut", phoneNumber: "(+961) 3 11 00 74"}, 
+	{country: "Somalia", city: "Nairobi", phoneNumber: "(+254) 733631144"},
+	{country: "Sri Lanka", city: "Nueva Delhi", phoneNumber: "(+91) 98 10 17 41 60"},  
+	{country: "South Africa", city: "Pretoria", phoneNumber: "(+27) 76 114 61 51"}, 
+	{country: "South Africa", city: "Ciudad del Cabo", phoneNumber: "(+27) 761146152"}, 
+	{country: "Sudan", city: "Jartum", phoneNumber: "(+249) 912 36 33 77"},
+	{country: "Suecia", city: "Estocolmo", phoneNumber: "(+46) 70 304 2322"},  
+	{country: "Switzerland", city: "Berna", phoneNumber: "(+41) (0) 79 755 75 24"}, 
+	{country: "Switzerland", city: "Ginebra", phoneNumber: "(+41) (0) 79 303 80 50"}, 
+	{country: "Switzerland", city: "Zurich", phoneNumber: "(+41) (0) 79 27631 25"},
+	{country: "Suriname", city: "Puerto España", phoneNumber: "(+1 868) 780 26 79"},  
+  
+  
+	{country: "Thailand", city: "Bangkok", phoneNumber: "(+66) 818 68 7507"}, 
+	{country: "Taiwan, Province of China", city: "Manila", phoneNumber: "(+63) 917 782 66046"}, 
+	{country: "Tanzania", city: "Dar-es-Salaam", phoneNumber: "(+255) 754 04 21 23"},
+	{country: "Tajikistan", city: "Kazajstán", phoneNumber: "(+7) 7017 115502"},  
+	{country: "Timor-Leste", city: "Yakarta", phoneNumber: "(+62) 81380013988"}, 
+	{country: "Togo", city: "Accra", phoneNumber: "(+233) 540 11 35 82"}, 
+	{country: "Tonga", city: "Wellington", phoneNumber: "(+64) 421 836 725"}, 
+	{country: "Trinidad and Tobago", city: "Puerto España", phoneNumber: "(+1 868) 780 26 79"}, 
+	{country: "Tunez", city: "Túnez", phoneNumber: "(+216) 98 346 803"}, 
+	{country: "Turkmenistan", city: "Moscú", phoneNumber: "(+7) 903 136 39 02"}, 
+	{country: "Turkey", city: "Ankara", phoneNumber: "(+90) 533 397 69 07"}, 
+	{country: "Turkey", city: "Estambul", phoneNumber: "(+90) 532 547 49 43"}, 
+	{country: "Tuvalu", city: "Canberra", phoneNumber: "(+61) 418 628 275"}, 
+	
+
+	{country: "Ukraine", city: "Ucrania", phoneNumber: "(+38) 050 353 89 77"}, 
+	{country: "Uganda", city: "Nairobi", phoneNumber: "(+254) 733631144"}, 
+	{country: "Uruguay", city: "Montevideo", phoneNumber: "(+598) 94526613"}, 
+	{country: "Uzbekistan", city: "Moscú", phoneNumber: "(+7) 903 136 39 02"},
+  
+
+	{country: "Vanuatu", city: "Canberra", phoneNumber: "(+61) 418 628 275"},
+	{country: "Vanuatu", city: "Sydney", phoneNumber: "(+61) 412 258 989"}, 
+	{country: "Venezuela", city: "Caracas", phoneNumber: "(+58) 424 2090264"}, 
+	{country: "Vietnam", city: "Hanoi", phoneNumber: "(+84) 9 363 331 30"},
+  
+  
+	{country: "Yemen", city: "Sanáa", phoneNumber: "(+967) 712 200 003"}, 
+
+
+	{country: "Zambia", city: "Harare", phoneNumber: "(+263) 772 436 620"}, 
+	{country: "Zimbabwe", city: "Harare", phoneNumber: "(+263) 772 436 620"}
 ]

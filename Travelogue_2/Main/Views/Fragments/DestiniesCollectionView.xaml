@@ -10,7 +10,7 @@
         <Label Text="Destinos" FontSize="Large" TextColor="{DynamicResource Primary}"/>
         <StackLayout Orientation="Horizontal">
 
-            <autocomplete:SfAutoComplete x:Name="AutocompleteDestiny"
+            <autocomplete:SfAutoComplete AutomationId="" x:Name="AutocompleteDestiny"
                                         DataSource="{Binding DestiniesList}"
                                         NoResultsFoundText="{Binding Resources[NoResultsFound]}"
                                         Text="{Binding DestinyText, Mode=TwoWay}"

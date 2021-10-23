@@ -5,7 +5,7 @@ namespace Travelogue_2.Main.Models
 {
 	public class ImageModel
 	{
-		public int Id { get; set; }
+		public int ImageId { get; set; }
 		public string Path { get; set; } = string.Empty;
 		public ImageSource ImageSour
 		{
@@ -19,5 +19,8 @@ namespace Travelogue_2.Main.Models
 		public string Journey { get; set; } = App.LocResources["NoJourneyAssociated"];
 		public string Caption { get; set; } = string.Empty;
 		public bool Blank { get; set; } = false;
+
+		public string Latitud { get; set; }
+		public string Longitud { get; set; }
 	}
 }

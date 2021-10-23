@@ -49,7 +49,7 @@
                            Source="{Binding .ImageSour}">
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding BindingContext.ViewImageCommand, Source={x:Reference JourneyTemplateViewName}}"
-                                                                      CommandParameter="{Binding .}"/>
+                                                      CommandParameter="{Binding .}"/>
                             </Image.GestureRecognizers>
                         </Image>
                         <Label FontSize="Caption" Text="{Binding .ImageCaption}"/>
@@ -75,7 +75,7 @@
                            Source="{Binding .ImageSour}">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding BindingContext.ViewImageCommand, Source={x:Reference JourneyTemplateViewName}}"
-                                                                      CommandParameter="{Binding .}"/>
+                                                  CommandParameter="{Binding .}"/>
                         </Image.GestureRecognizers>
                     </Image>
                 </Grid>
@@ -184,33 +184,6 @@
 
                 <StackLayout x:Name="EventsCollection" BindableLayout.ItemsSource="{Binding DaySelected.JourneyEvents}" Margin="20, 10, 20, 0"
                               BindableLayout.ItemTemplateSelector="{StaticResource eventTemplateSelector}">
-
-                    <!--BindableLayout.ItemTemplate>
-                        <DataTemplate>
-
-                            <StackLayout>
-
-
-                                <StackLayout Orientation="Vertical" 
-                                             effects:LongPressedEffect.Command="{Binding Path=BindingContext.EditOrDeleteEventCommand, Source={x:Reference JourneyTemplateViewName}}"
-                                             effects:LongPressedEffect.CommandParameter="{Binding .}">
-                                    
-                                    <Label Text="{Binding .Time}" FontSize="Small" TextColor="{DynamicResource Primary}"></Label>
-                                    <Label Text="{Binding .Title}" FontSize="Small"></Label>
-                                    <Label Text="{Binding .Address}" FontSize="Caption" FontAttributes="Italic"></Label>
-
-                                    <StackLayout.Effects>
-                                        <effects:LongPressedEffect />
-                                    </StackLayout.Effects>
-
-                                </StackLayout>
-
-                                <Rectangle HeightRequest="1" WidthRequest="250" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource Grey}"/>
-                            </StackLayout>
-                            
-                        </DataTemplate>
-                    </-->
-
                 </StackLayout>
 
                 <Label Text="&#xea0a;" FontFamily="{StaticResource Icon}" FontSize="Medium"  VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
@@ -354,12 +327,27 @@
     
     </ScrollView>
 
-    <BoxView x:Name="JourneyNameBoxView" HeightRequest="30"
+    <BoxView x:Name="JourneyNameBoxView"
                     AbsoluteLayout.LayoutFlags="All"
                     AbsoluteLayout.LayoutBounds="0,0.15,1,0.06" 
                     Opacity="0"
                     BackgroundColor="{DynamicResource Primary}"   
                     ></BoxView>
+    
+    <BoxView x:Name="JourneyStateBoxView"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds="0,0.20,1,0.03"
+                    IsVisible="{Binding StateVisible}"
+                    BackgroundColor="{Binding Background}" 
+                    ></BoxView>
+
+    <Label x:Name="JourneyState"
+                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                    AbsoluteLayout.LayoutBounds="0.1,0.20"
+                    IsVisible="{Binding StateVisible}"
+                    FontAttributes="Italic"
+                    FontSize="14" Text="{Binding StateMessage}"
+                    TextColor="{StaticResource White}"/>
 
     <Label x:Name="JourneyName"
                     AbsoluteLayout.LayoutFlags="PositionProportional"
@@ -371,6 +359,7 @@
                     AbsoluteLayout.LayoutFlags="PositionProportional"
                     AbsoluteLayout.LayoutBounds="1,0"
                     FontSize="Title"
+                    IsVisible="{Binding SettingsVisible}"
                     TextColor="{StaticResource White}"
                     BackgroundColor="{StaticResource None}"
                     Command="{Binding ModifyJourneyCommand}"

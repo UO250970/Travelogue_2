@@ -18,7 +18,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Text="{Binding Resources[ClosedJourneys]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
+                    <Label AutomationId="ClosedJourneisL" Grid.Column="0" Text="{Binding Resources[ClosedJourneys]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
                     <Label Grid.Column="1" Text="&#x1f50d;" FontFamily="{StaticResource Icon}" FontSize="Large"  VerticalTextAlignment="Center" HorizontalOptions="Center"
                                TextColor="{StaticResource White}">
                         <Label.GestureRecognizers>
@@ -48,7 +48,7 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <local:JourneyBookView BindingContext="{Binding .}"/>
+                        <local:JourneyBookView AutomationId="{Binding .Id}" BindingContext="{Binding .}"/>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

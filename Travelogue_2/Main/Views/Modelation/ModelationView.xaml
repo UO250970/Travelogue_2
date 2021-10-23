@@ -33,8 +33,8 @@
 
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
-                                
-                                <local:JourneyCardView BindingContext="{Binding .}">
+
+                                <local:JourneyCardView AutomationId="{Binding .Id}" BindingContext="{Binding .}">
                                     <local:JourneyCardView.GestureRecognizers>
                                         <TapGestureRecognizer 
                                                 Command="{Binding Path=BindingContext.JourneyTapped, Source={x:Reference ModelationViewName}}"		

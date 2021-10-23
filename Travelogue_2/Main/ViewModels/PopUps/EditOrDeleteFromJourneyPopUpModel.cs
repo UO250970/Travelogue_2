@@ -13,17 +13,6 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 	[QueryProperty(nameof(EntryId), nameof(EntryId))]
 	public class EditOrDeleteFromJourneyPopUpModel : DataBaseViewModel
 	{
-		public string journeyId;
-		public string JourneyId
-		{
-			get => journeyId;
-			set
-			{
-				journeyId = value;
-				LoadData();
-			}
-		}
-
 		public string eventId;
 		public string EventId
 		{
@@ -84,9 +73,9 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		public override void LoadData()
 		{
-			if (JourneyId != null && DaySelectedNum != null)
+			if (CurrentJourneyId != null && DaySelectedNum != null)
             {
-				JourneyModel journey = DataBaseUtil.GetJourneyById( int.Parse(journeyId) );
+				JourneyModel journey = DataBaseUtil.GetJourneyById( int.Parse(CurrentJourneyId) );
 				List<DayModel> Days = DataBaseUtil.GetDaysFromJourney(journey);
 
 				DaySelected = Days[int.Parse(DaySelectedNum)].Date;

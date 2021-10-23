@@ -7,35 +7,56 @@ using Travelogue_2.Main.ViewModels;
 using Travelogue_2.Main.ViewModels.Media;
 using Travelogue_2.Main.Views.Media;
 using Xamarin.Forms;
+using ExifLib;
 
 namespace Travelogue_2.Main.Services
 {
 	public abstract class PhotoRendererModel : DataBaseViewModel
 	{
-		public Command<ImageModel> ViewImageCommand { get; set; }
+		public Command<EntryImageModel> ViewImageCommand { get; set; }
 
 		public PhotoRendererModel()
 		{
-			ViewImageCommand = new Command<ImageModel>(x => ViewImageC(x));
+			ViewImageCommand = new Command<EntryImageModel>(x => ViewImageC(x));
 		}
 
 		public ImageModel ImageSelected { get; set; }
 
-		public ImageModel AddImage(MediaFile file, string journeyId)
+		public ImageModel AddImage(MediaFile file, bool temporal)
 		{
 			try
 			{
 				if (file != null)
 				{
+					var temp = ExifReader.ReadJpeg( file.GetStream() );
+
+					string latitud = DecodeLatitude(temp).ToString();
+					string longitud = DecodeLongitude(temp).ToString(); 
+
 					string name = "";
-					if (journeyId != null)
+					if (CurrentJourneyId != null)
 					{
-						name = DataBaseUtil.GetNameFromJourney(journeyId);
+						name = DataBaseUtil.GetNameFromJourney(CurrentJourneyId);
 					} else
 					{
 						name = App.LocResources[CommonVariables.BlankName];
 					}
-					ImageModel image = DataBaseUtil.CreateImage(file.Path, "", name);
+
+					ImageModel image;
+					if (temporal)
+					{
+						image = new ImageModel()
+						{
+							Path = file.Path,
+							Journey = name,
+							Latitud = latitud,
+							Longitud = longitud
+						};
+					}
+					else
+					{
+						image = DataBaseUtil.CreateImage(file.Path, "", name, latitud, longitud);
+					}
 					return image;
 				}
 				return null;
@@ -45,6 +66,22 @@ namespace Travelogue_2.Main.Services
 				Debug.WriteLine(ex);
 				return null;
 			}
+		}
+		private static double DecodeLatitude(JpegInfo info)
+		{
+			double degrees = ToDegrees(info.GpsLatitude);
+			return info.GpsLatitudeRef == ExifGpsLatitudeRef.North ? degrees : -degrees;
+		}
+
+		private static double DecodeLongitude(JpegInfo info)
+		{
+			double degrees = ToDegrees(info.GpsLongitude);
+			return info.GpsLongitudeRef == ExifGpsLongitudeRef.East ? degrees : -degrees;
+		}
+
+		private static double ToDegrees(double[] coord)
+		{
+			return coord[0] + coord[1] / 60.0 + coord[2] / (60.0 * 60.0);
 		}
 
 		public int CoverImageHeight { get => CommonVariables.ImageMaxHeight; }
@@ -65,10 +102,10 @@ namespace Travelogue_2.Main.Services
 			}
 		}
 
-		public async void ViewImageC(ImageModel image)
+		public async void ViewImageC(EntryImageModel image)
 		{
 			ImageSelected = image;
-			await Shell.Current.GoToAsync($"{nameof(ImageView)}?{ nameof(ImageViewModel.ImageId)}={ image.Id}");
+			await Shell.Current.GoToAsync($"{nameof(ImageView)}?{ nameof(ImageViewModel.ImageId)}={ image.ImageId}");
 		}
 	}
 }

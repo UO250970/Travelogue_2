@@ -54,7 +54,6 @@
                         <Label Text="&#xe953;" FontFamily="{StaticResource Icon}"  FontSize="Medium" TextColor="{StaticResource Primary}" VerticalTextAlignment="Center"/>
                         <DatePicker Format="{Binding Resources[DateFormat]}"
                                     x:Name="EndDatePicker"
-                                    IsEnabled="{Binding EndDateEnabled}"
                                     Date="{Binding EndDate}"
                                     MinimumDate="{Binding MinimumDate}"
                                     DateSelected="CheckNewEndDate" HorizontalOptions="FillAndExpand"/>

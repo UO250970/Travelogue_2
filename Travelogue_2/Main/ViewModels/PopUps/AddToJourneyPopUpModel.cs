@@ -14,17 +14,6 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 	[QueryProperty(nameof(EntryId), nameof(EntryId))]
 	public class AddToJourneyPopUpModel : PhotoRendererModel
 	{
-		public string journeyId;
-		public string JourneyId
-		{
-			get => journeyId;
-			set
-			{
-				journeyId = value;
-				LoadData();
-			}
-		}
-
 		public string entryId;
 		public string EntryId
 		{
@@ -89,10 +78,10 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		public override void LoadData()
 		{
-			if (JourneyId != null && DaySelectedNum != null)
+			if (CurrentJourneyId != null && DaySelectedNum != null)
 			{
 				// TODO - Pilla el journey de BBDD y pilla el list de dias o whatever
-				Days = DataBaseUtil.GetDaysFromJourneyId( int.Parse(JourneyId) )
+				Days = DataBaseUtil.GetDaysFromJourneyId( int.Parse(CurrentJourneyId) )
 					.OrderBy(x => x.Date)
 					.ToList();
 				
@@ -248,16 +237,13 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		#endregion
 
 		#region Image
-		public ImageSource Image = null;
-
-		private string imagePath = string.Empty;
-		public string ImagePath
+		public ImageModel image = null;
+		public ImageModel Image
 		{
-			get => imagePath;
+			get => image;
 			set
 			{
-				SetProperty(ref imagePath, value);
-				Image = ImageSource.FromFile(imagePath);
+				SetProperty(ref image, value);
 			}
 		}
 		#endregion
@@ -288,7 +274,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			else
 			{
 				int dayInt = Days.FindIndex(x => x.Date.Equals(DaySelected.Date)) + 1;
-				DataBaseUtil.JourneyInsertEvent( int.Parse(JourneyId), dayInt, Title, Time, Location);
+				DataBaseUtil.JourneyInsertEvent( int.Parse(CurrentJourneyId), dayInt, Title, Time, Location);
 				Back();
 			}
 		}
@@ -307,7 +293,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			{
 				int duration = (int)(EndDaySelected - IniDaySelected).TotalDays + 1;
 				int dayInt = Days.FindIndex(x => x.Date.Equals(IniDaySelected.Date)) + 1;
-				DataBaseUtil.JourneyInsertReserv( int.Parse(JourneyId), dayInt, duration, Title, Location, PhoneNumber);
+				DataBaseUtil.JourneyInsertReserv( int.Parse(CurrentJourneyId), dayInt, duration, Title, Location, PhoneNumber);
 				Back();
 			}
 		}
@@ -326,18 +312,15 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			} else
 			{
 				int dayInt = Days.FindIndex(x => x.Date.Equals(DaySelected.Date)) + 1;
-				DataBaseUtil.JourneyInsertEntry( int.Parse(JourneyId), dayInt, Title);
+				DataBaseUtil.JourneyInsertEntry( int.Parse(CurrentJourneyId), dayInt, Title);
 				Back();
 			}
 		}
 
 		async internal void AddImageC()
 		{
-			ImageModel success = await CameraUtil.Photo(this, journeyId);
-			if (success != null)
-			{
-				ImagePath = success.Path;
-			}
+			ImageModel success = await CameraUtil.Photo(this, true);
+			Image = success;
 		}
 
 		async internal void CreateTextC()
@@ -357,13 +340,13 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		async internal void CreateImageC()
 		{
-			if (ImagePath == null)
+			if (Image == null)
 			{
 				await Alerter.AlertNoImageSelected();
 			}
 			else
 			{
-				DataBaseUtil.EntryInsertImage(Entry, "", Caption);
+				DataBaseUtil.EntryInsertImage(Entry, Image, Caption);
 
 				await Alerter.AlertImageAdded();
 				Back();

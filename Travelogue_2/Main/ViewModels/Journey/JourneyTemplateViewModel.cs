@@ -14,7 +14,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 	public class JourneyTemplateViewModel : PhotoRendererModel
 	{
 		public Command AddImageCommand { get; }
-		public Command<ImageModel> ImageTapped { get; }
+		public Command<EntryImageModel> ImageTapped { get; }
 		public Command<DayModel> DayTapped { get; }
 		public ObservableCollection<ImageModel> JourneyImages { get; }
 
@@ -44,7 +44,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 			AddImageCommand = new Command(() => AddImageC());
 			ModifyJourneyCommand = new Command(() => ModifyJourneyC());
 
-			ViewImageCommand = new Command<ImageModel>((ImageCard) => ViewImageC(ImageCard));
+			ViewImageCommand = new Command<EntryImageModel>((x) => ViewImageC(x));
 			PhoneNumberTappedCommand = new Command<string>((x) => PhoneNumberTappedC(x));
 
 			EditOrDeleteEventCommand = new Command<EventModel>((EventModel e) => EditOrDeleteEventC(e));
@@ -75,6 +75,20 @@ namespace Travelogue_2.Main.ViewModels.Journey
 				JourneyDays = new ObservableCollection<DayModel>(DataBaseUtil.GetDaysFromJourney(journey));
 
 				DaySelected = JourneyDays[0];
+
+				switch (journey.JourneyState)
+                {
+					case State.OPEN:
+						Background = (Color) Application.Current.Resources["Primary"];
+						break;
+					case State.CREATED:
+						StateCreated();
+						break;
+					case State.CLOSED:
+						StateClosed();
+						break;
+				}
+			
 			}
 		}
 
@@ -131,9 +145,46 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		public int DaySelectedNum = 0;
 		#endregion
 
-		#region Commands
+		#region State
 
-		INotifications notificationManager = DependencyService.Get<INotifications>();
+		private string stateMessage = "";
+		public string StateMessage
+        {
+			get => stateMessage;
+			set => SetProperty(ref stateMessage, value);
+		}
+
+		private bool stateVisible = false;
+		public bool StateVisible
+        {
+			get => stateVisible;
+			set => SetProperty(ref stateVisible, value);
+        }
+
+
+		private Color background;
+		public Color Background
+        {
+			get => background;
+			set => SetProperty(ref background, value);
+        }
+
+
+		#endregion
+
+		#region Settings
+		private bool settingsVisible = true;
+
+		public bool SettingsVisible
+        {
+			get => settingsVisible;
+			set => SetProperty(ref settingsVisible, value);
+        }
+        #endregion
+
+        #region Commands
+
+        INotifications notificationManager = DependencyService.Get<INotifications>();
 
 		internal void PhoneNumberTappedC(string number)
 		{
@@ -149,7 +200,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 		async internal void AddImageC()
 		{
-			ImageModel success = await CameraUtil.Photo(this, CurrentJourneyId);
+			ImageModel success = await CameraUtil.Photo(this);
 			if (success != null)
 			{
 				JourneyImages.Add(success);
@@ -199,6 +250,60 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		}
 
 		#endregion
+
+		/**
+		 * El usuario podrá:
+		 *		- Modificar el nombre
+		 *		- Modificar la cover
+		 *		- Modificar las fechas
+		 *		- Modificar los destinos
+		 *		- Modificar los eventos
+		 *		- Modificar las entradas
+		 *		- Modificar la información
+		 *		- Eliminar el viaje
+		 */
+		private void StateCreated()
+        {
+			Background = Color.FromHex(CommonVariables.CreatedColorHex);
+			StateMessage = Resources["CreatedJourneyMessage"];
+			StateVisible = true;
+		}
+
+		/** 
+		 * El usuario podrá:
+		 *		- Modificar los eventos
+		 *		- Modificar las entradas
+		 *		- Modificar la información
+		 *		
+		 * El usuario no podrá:
+		 *		- Modificar el nombre
+		 *		- Modificar la cover
+		 *		- Modificar las fechas
+		 *		- Modificar los destinos
+		 *		- Eliminar el viaje
+		 */
+		private void StateClosed()
+        {
+			Background = Color.FromHex(CommonVariables.ClosedColorHex);
+			StateMessage = Resources["ClosedMessage"];
+			StateVisible = true;
+			SettingsVisible = false;
+		}
+
+		/**
+		 * El usuario podrá a un viaje abierto:
+		 *		- Modificar el nombre
+		 *		- Modificar la cover
+		 *		- Modificar la fecha FINAL del viaje
+		 *		- Modificar los destinos
+		 *		- Modificar los eventos
+		 *		- Modificar las entradas
+		 *		- Modificar la información
+		 *		- Eliminar el viaje
+		 *		
+		 *	El usuario no podrá:
+		 *		- Modificar la fecha INICIAL del viaje
+		 */
 
 	}
 }

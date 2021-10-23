@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Travelogue_2.Main.BBDD;
 using Travelogue_2.Main.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Style = Travelogue_2.Main.BBDD.Style;
 
 namespace Travelogue_2.Main.Services
 {
@@ -21,7 +19,7 @@ namespace Travelogue_2.Main.Services
 
 		public static int ImageMaxHeight { get => 180; }
 
-		public static int ImageCardMaxHeight { get => 85; }
+		public static int ImageCardMaxHeight { get => 120; }
 
 		public static int JourneyNameMaxLenght { get => 50; }
 
@@ -118,6 +116,12 @@ namespace Travelogue_2.Main.Services
 			string tempString = BackgroundImagesPath + name + ImagesExtension;
 			return ImageSource.FromResource(tempString);
 		}
+
+		/** Common colors */
+
+		public static string CreatedColorHex { get => "#83F59A"; }
+
+		public static string ClosedColorHex { get => "#F58383"; }
 
 	}
 }
