@@ -16,7 +16,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		public Command AddImageCommand { get; }
 		public Command<EntryImageModel> ImageTapped { get; }
 		public Command<DayModel> DayTapped { get; }
-		public ObservableCollection<ImageModel> JourneyImages { get; }
+		public ObservableCollection<ImageModel> JourneyImages;
 
 		private ObservableCollection<DayModel> journeyDays;
 
@@ -34,6 +34,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		public Command PhoneNumberTappedCommand { get; }
 		public Command<EventModel> EditOrDeleteEventCommand { get; }
 		public Command<EntryModel> EditOrDeleteEntryCommand { get; }
+		public Command<IEntry> EditOrDeleteEntryDataCommand { get; }
 		/** */
 
 		public JourneyTemplateViewModel()
@@ -49,6 +50,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
 			EditOrDeleteEventCommand = new Command<EventModel>((EventModel e) => EditOrDeleteEventC(e));
 			EditOrDeleteEntryCommand = new Command<EntryModel>((EntryModel e) => EditOrDeleteEntryC(e));
+			EditOrDeleteEntryDataCommand = new Command<IEntry>((IEntry e) => EditOrDeleteEntryDataC(e));
 
 			JourneyImages = new ObservableCollection<ImageModel>();
 			JourneyDays = new ObservableCollection<DayModel>();
@@ -88,7 +90,8 @@ namespace Travelogue_2.Main.ViewModels.Journey
 						StateClosed();
 						break;
 				}
-			
+
+				JourneyImages = new ObservableCollection<ImageModel>(DataBaseUtil.GetImagesFromJourney(journey));
 			}
 		}
 
@@ -228,6 +231,12 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		{
 			await Shell.Current.GoToAsync($"{nameof(EditOrDeleteEntryPopUp)}?{nameof(EditOrDeleteFromJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
 																	$"{nameof(EditOrDeleteFromJourneyPopUpModel.EntryId)}={entryC.Id}");
+		}
+
+		async internal void EditOrDeleteEntryDataC(IEntry entryDataC)
+        {
+			await Shell.Current.GoToAsync($"{nameof(EditOrDeleteFromEntryPopUp)}?{nameof(EditOrDeleteFromJourneyPopUpModel.DaySelectedNum)}={DaySelectedNum}&" +
+																	$"{nameof(EditOrDeleteFromJourneyPopUpModel.EntryDataId)}={entryDataC.Id}");
 		}
 
 		async internal void AddToEntryC(EntryModel entryC)

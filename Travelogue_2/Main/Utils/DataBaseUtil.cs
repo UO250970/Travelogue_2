@@ -181,6 +181,12 @@ namespace Travelogue_2.Main.Utils
             return temp;
         }
 
+        public static IEntry GetEntryDataById(int entryDataId)
+        {
+            EntryData data = DataBase.GetEntryDataById(entryDataId);
+            return EntryDataToModel(data);
+        }
+
         internal static void InsertStyles(List<Style> list) => DataBase.InsertStyles(list);
 
         public static ImageModel GetCoverFromJourney(int journeyId)
@@ -357,7 +363,7 @@ namespace Travelogue_2.Main.Utils
 				Address = address,
 				PhoneNumber = phoneNumber,
 				Reserv = true,
-				Time = DateTime.Now.ToString()
+				Time = DateTime.Now.TimeOfDay.ToString()
 			};
 
 			DataBase.InsertEvent(evento);
@@ -440,6 +446,12 @@ namespace Travelogue_2.Main.Utils
         {
             Journey temp = JourneyFromModel(journey);
             return DaysToModel(temp.Days);
+        }
+
+        public static List<ImageModel> GetImagesFromJourney(JourneyModel journey)
+        {
+            List<Image> temp = DataBase.GetImagesByJourney(journey.Name);
+            return ImagesToModel(temp);
         }
 
         public static List<DayModel> GetDaysFromJourneyId(int JourneyId)
@@ -611,6 +623,28 @@ namespace Travelogue_2.Main.Utils
             return true;
         }
 
+        public static bool SaveEntryData(IEntry data)
+        {
+            EntryData temp = EntryDataFromModel(data);
+
+            if (data.GetType() == typeof(EntryTextModel))
+            {
+                EntryTextModel temp2 = (EntryTextModel) data;
+                if (!temp2.Text.Equals(temp.Text)) temp.Text = temp2.Text;
+
+                return DataBase.UpdateEntryData(temp);
+            }
+            else if (data.GetType() == typeof(EntryImageModel))
+            {
+                ImageModel temp3 = GetImageById( ((EntryImageModel) data).ImageId );
+                if (!temp3.Caption.Equals(temp.Image.Caption)) temp.Image.Caption = temp3.Caption;
+
+                return SaveImage(temp3);
+            }
+
+            return false;
+        }
+
         public static bool DeleteJourney(int JourneyId, bool alert = false)
         {
             ////ToDo revisar alerter  if (DataBase.DeleteJourneyById(JourneyId)) Alerter.AlertJourneyDeleted();
@@ -631,6 +665,13 @@ namespace Travelogue_2.Main.Utils
         {
             Entry temp = EntryFromModel(Entry);
             if (DataBase.DeleteEntry(temp)) Alerter.AlertEntryDeleted();
+            return true;
+        }
+        
+        public static bool DeleteEntryDataById(int dataId)
+        {
+            EntryData temp = EntryDataFromModel( GetEntryDataById(dataId) );
+            if (temp != null && DataBase.DeleteEntryData(temp)) Alerter.AlertEntryDataDeleted();
             return true;
         }
 
@@ -755,40 +796,10 @@ namespace Travelogue_2.Main.Utils
             tempEntry.Time = entry.Time;
 
             foreach (EntryData data in entry.Content)
-			{
-                if (data.Text != "")
-				{
-                    EntryTextModel temp1 = new EntryTextModel();
-                    temp1.Id = data.Id;
-                    temp1.Time = data.Time;
-                    temp1.Text = data.Text;
-
-                    tempEntry.Content.Add(temp1);
-				}
-				else
-				{
-                    EntryImageModel temp2 = new EntryImageModel();
-                    temp2.Id = data.Id;
-                    temp2.Time = data.Time;
-
-                    if (data.Image != null)
-                    {
-                        ImageModel temp = GetImageById(data.ImageId);
-                        temp2.ImageId = temp.ImageId;
-                        temp2.Path = temp.Path;
-                        temp2.Caption = temp.Caption;
-                        temp2.Latitud = temp.Latitud;
-                        temp2.Longitud = temp.Longitud;
-                    } else
-                    {
-                        temp2.Caption = "";
-                    }
-                    temp2.Journey = data.Entry.Day.Journey.Name;
-
-                    tempEntry.Content.Add(temp2);
-				}
-
-			}
+            {
+                var temp = EntryDataToModel(data);
+                if (temp != null) tempEntry.Content.Add( temp );
+            }
 
             return tempEntry;
         }
@@ -805,6 +816,58 @@ namespace Travelogue_2.Main.Utils
         }
         private static Entry EntryFromModel(EntryModel entry) => DataBase.GetEntryById(entry.Id);
         
+        private static IEntry EntryDataToModel(EntryData data)
+        {
+            if (data.Text != "")
+            {
+                EntryTextModel temp1 = new EntryTextModel();
+                temp1.Id = data.Id;
+                temp1.Time = data.Time;
+                temp1.Text = data.Text;
+
+                return temp1;
+            }
+            else if (data.Image != null)
+            {
+                EntryImageModel temp2 = new EntryImageModel();
+                temp2.Id = data.Id;
+                temp2.Time = data.Time;
+
+                if (data.Image != null)
+                {
+                    ImageModel temp = GetImageById(data.ImageId);
+                    temp2.ImageId = temp.ImageId;
+                    temp2.Path = temp.Path;
+                    temp2.Caption = temp.Caption;
+                    temp2.Latitud = temp.Latitud;
+                    temp2.Longitud = temp.Longitud;
+                }
+                else
+                {
+                    temp2.Caption = "";
+                }
+                temp2.Journey = data.Entry.Day.Journey.Name;
+
+                return temp2;
+            } else
+            {
+                DataBase.DeleteEntryData(data);
+                return null;
+            }
+        }
+        private static EntryData EntryDataFromModel(IEntry data) => DataBase.GetEntryDataById(data.Id);
+
+        private static List<ImageModel> ImagesToModel(List<Image> images)
+        {
+            List<ImageModel> temp = new List<ImageModel>();
+
+            foreach (Image image in images)
+            {
+                temp.Add(ImageToModel(image));
+            }
+
+            return temp;
+        }
         private static ImageModel ImageToModel(Image image)
         {
             ImageModel temp = new ImageModel();

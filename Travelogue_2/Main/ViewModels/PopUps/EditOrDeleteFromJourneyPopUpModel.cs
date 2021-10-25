@@ -11,6 +11,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 	[QueryProperty(nameof(DaySelectedNum), nameof(DaySelectedNum))]
 	[QueryProperty(nameof(EventId), nameof(EventId))]
 	[QueryProperty(nameof(EntryId), nameof(EntryId))]
+	[QueryProperty(nameof(EntryDataId), nameof(EntryDataId))]
 	public class EditOrDeleteFromJourneyPopUpModel : DataBaseViewModel
 	{
 		public string eventId;
@@ -35,6 +36,17 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			}
 		}
 
+		public string entryDataId;
+		public string EntryDataId
+        {
+			get => entryDataId;
+			set
+			{
+				entryDataId = value;
+				LoadEntryData();
+			}
+		}
+
 		public string daySelectedNum;
 		public string DaySelectedNum
 		{
@@ -54,6 +66,8 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
 		public Command SaveTextCommand { get; }
 		public Command DeleteTextCommand { get; }
+		public Command SaveImageCommand { get; }
+		public Command DeleteImageCommand { get; }
 
 		public Command CancelCommand { get; }
 
@@ -65,8 +79,10 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			SaveEntryCommand = new Command(() => SaveEntryC());
 			DeleteEntryCommand = new Command(() => DeleteEntryC());
 
-			//SaveTextCommand = new Command(() => SaveyTextC());
-			//DeleteTextCommand = new Command(() => DeleteTextC());
+			SaveTextCommand = new Command(() => SaveyTextC());
+			DeleteTextCommand = new Command(() => DeleteTextC());
+			SaveImageCommand = new Command(() => SaveImageC());
+			DeleteImageCommand = new Command(() => DeleteImageC());
 
 			CancelCommand = new Command(() => CancelC());
 		}
@@ -85,33 +101,18 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			}
 		}
 
+		#region Event
 		public void LoadEvent()
-        {
+		{
 			if (eventId != null)
-            {
-				Evento = DataBaseUtil.GetEventById( int.Parse(eventId) );
+			{
+				Evento = DataBaseUtil.GetEventById(int.Parse(eventId));
 
-				if (Evento.Reservation) ReserVisible = true; 
+				if (Evento.Reservation) ReserVisible = true;
 				else EventVisible = true;
 
-				Time = TimeSpan.Parse( Evento.Time );
+				Time = TimeSpan.Parse(Evento.Time);
 			}
-        }
-
-		public void LoadEntry()
-        {
-			if (entryId != null)
-			{
-				EntryModel temp = DataBaseUtil.GetEntryById( int.Parse(entryId) );
-
-				Entry = temp;
-			}
-			if (eventId != null)
-            {
-				EventModel temp = DataBaseUtil.GetEventById( int.Parse(eventId) );
-
-				Evento = temp;
-            }
 		}
 
 		private EventModel evento;
@@ -122,17 +123,69 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			set => SetProperty(ref evento, value);
 		}
 
+		#endregion
+
+		#region Entry
+
+		public void LoadEntry()
+		{
+			if (EntryId != null)
+			{
+				EntryModel temp = DataBaseUtil.GetEntryById(int.Parse(entryId));
+
+				Entry = temp;
+			}
+		}
+
 		private EntryModel entry;
 
 		public EntryModel Entry
-        {
+		{
 			get => entry;
 			set => SetProperty(ref entry, value);
+		}
+
+		#endregion
+
+		#region Info
+
+		public void LoadEntryData()
+		{
+			if (EntryDataId != null)
+			{
+				IEntry entry = DataBaseUtil.GetEntryDataById(int.Parse(EntryDataId));
+				if (entry?.GetType() == typeof(EntryTextModel))
+				{
+					Text = ((EntryTextModel)entry).Text;
+					TextVisible = true;
+				}
+				else if (entry?.GetType() == typeof(EntryImageModel))
+				{
+					Image = DataBaseUtil.GetImageById(((EntryImageModel)entry).ImageId);
+					ImageVisible = true;
+				}
+
+			}
+		}
+
+		private string text;
+		public string Text
+        {
+			get => text;
+			set => SetProperty(ref text, value);
         }
 
-		#region IsVisible
+		private ImageModel image;
+		public ImageModel Image
+        {
+			get => image;
+			set => SetProperty(ref image, value);
+        }
+        #endregion
 
-		private bool eventVisible = false;
+        #region IsVisible
+
+        private bool eventVisible = false;
 		public bool EventVisible
         {
 			get => eventVisible;
@@ -146,6 +199,19 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			set => SetProperty(ref reserVisible, value);
 		}
 
+		private bool textVisible = false;
+		public bool TextVisible
+        {
+			get => textVisible;
+			set => SetProperty(ref textVisible, value);
+        }
+
+		private bool imageVisible = false;
+		public bool ImageVisible
+        {
+			get => imageVisible;
+			set => SetProperty(ref imageVisible, value);
+		}
 		#endregion
 
 		#region DaySelected
@@ -239,17 +305,42 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			Back();
 		}
 
-		/*async internal void SaveyTextC()
+		async internal void SaveyTextC()
 		{
-			DataBaseUtil.SaveText(Text);
+			EntryTextModel data = (EntryTextModel) DataBaseUtil.GetEntryDataById( int.Parse(EntryDataId) );
+			if (data != null)
+			{
+				data.Text = Text;
+
+				DataBaseUtil.SaveEntryData(data);
+			}
 			Back();
 		}
 
 		async internal void DeleteTextC()
 		{
-			DataBaseUtil.DeleteText(Text);
+			DataBaseUtil.DeleteEntryDataById( int.Parse(EntryDataId) );
 			Back();
-		}*/
+		}
+
+		async internal void SaveImageC()
+		{
+			EntryImageModel data = (EntryImageModel) DataBaseUtil.GetEntryDataById( int.Parse(EntryDataId) );
+
+			if (data != null)
+            {
+				if (!Image.Caption.Equals(data.Caption)) data.Caption = Image.Caption;
+
+				DataBaseUtil.SaveEntryData(data);
+			}
+			Back();
+		}
+
+		async internal void DeleteImageC()
+		{
+			DataBaseUtil.DeleteEntryDataById(int.Parse(EntryDataId));
+			Back();
+		}
 
 		async internal void CancelC()
 		{

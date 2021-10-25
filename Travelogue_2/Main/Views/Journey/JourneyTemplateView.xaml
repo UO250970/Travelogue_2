@@ -12,8 +12,11 @@
 
         <DataTemplate x:Key="textTemplate">
 
-            <StackLayout AutomationId="{Binding .Id}" effects:LongPressedEffect.Command="{Binding Path=BindingContext.EditOrDeleteEntryCommand, Source={x:Reference JourneyTemplateViewName}}"
-                    effects:LongPressedEffect.CommandParameter="{Binding .}">
+            <StackLayout AutomationId="{Binding .Id}"
+                         effects:LongPressedEffect.Command="{Binding BindingContext.EditOrDeleteEntryDataCommand, Source={x:Reference JourneyTemplateViewName}}"
+                         effects:LongPressedEffect.CommandParameter="{Binding .}">
+                
+                
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -21,7 +24,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0" Text="{Binding .Time}" FontSize="Default"/>
-                    <Label Grid.Column="1" FontSize="Default" Text="{Binding .Text}"/>
+                    <Label Grid.Column="1" FontSize="Default" Text="{Binding .Text}" />
                 </Grid>
 
 
@@ -227,13 +230,15 @@
                                                effects:LongPressedEffect.CommandParameter="{Binding .}">
 
                                             <Label.Effects>
-                                                <effects:LongPressedEffect />
+                                                <effects:LongPressedEffect/>
                                             </Label.Effects>
 
                                         </Label>
 
                                         <StackLayout x:Name="EntryContentCollection" BindableLayout.ItemsSource="{Binding .Content}" 
-                                                     BindableLayout.ItemTemplateSelector="{StaticResource entryTemplateSelector}" >
+                                                     BindableLayout.ItemTemplateSelector="{StaticResource entryTemplateSelector}" 
+                                                     effects:LongPressedEffect.Command="{Binding BindingContext.EditOrDeleteEntryCommand, Source={x:Reference JourneyTemplateViewName}}"
+                                                     effects:LongPressedEffect.CommandParameter="{Binding .}">
 
                                         </StackLayout>
                                         

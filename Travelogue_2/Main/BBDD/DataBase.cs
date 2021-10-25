@@ -374,12 +374,29 @@ namespace Travelogue_2.Main.BBDD
 
         #region EntryData
 
+        public static EntryData GetEntryDataById(int id)
+        {
+            EntryData Func() => conn.FindWithChildren<EntryData>(id, recursive: true);
+            return QueryFunc(Func);
+        }
+
         public static bool InsertEntryData(EntryData entryData)
         {
             void Act() => conn.InsertWithChildren(entryData, recursive: true);
             return QueryAct(Act);
         }
 
+        public static bool UpdateEntryData(EntryData entryData)
+        {
+            void Act() => conn.UpdateWithChildren(entryData);
+            return QueryAct(Act);
+        }
+
+        public static bool DeleteEntryData(EntryData data)
+        {
+            void Act() => conn.Delete(data);
+            return QueryAct(Act);
+        }
         #endregion
 
         #region Destiny
@@ -457,6 +474,12 @@ namespace Travelogue_2.Main.BBDD
 
         #region Image
 
+        public static List<Image> GetImagesByJourney(string journey)
+        {
+            List<Image> Func() => conn.GetAllWithChildren<Image>().FindAll(x => x.Journey.Equals(journey));
+            return QueryFunc(Func);
+        }
+        
 
         internal static List<Image> GetImages()
         {

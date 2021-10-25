@@ -727,6 +727,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La información se ha eliminado de la entrada.
+        /// </summary>
+        internal static string MessEntryDataDeleted {
+            get {
+                return ResourceManager.GetString("MessEntryDataDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La entrada se ha eliminado.
         /// </summary>
         internal static string MessEntryDeleted {

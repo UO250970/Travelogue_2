@@ -339,6 +339,9 @@
   <data name="MessEntryCreated" xml:space="preserve">
     <value>La entrada se ha creado correctamente</value>
   </data>
+  <data name="MessEntryDataDeleted" xml:space="preserve">
+    <value>La información se ha eliminado de la entrada</value>
+  </data>
   <data name="MessEntryDeleted" xml:space="preserve">
     <value>La entrada se ha eliminado</value>
   </data>

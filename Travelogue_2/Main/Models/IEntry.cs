@@ -1,5 +1,5 @@
 ﻿
-namespace Travelogue_2.Main.Models.Entries
+namespace Travelogue_2.Main.Models
 {
 	public interface IEntry
 	{
