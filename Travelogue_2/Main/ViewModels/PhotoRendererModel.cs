@@ -13,11 +13,11 @@ namespace Travelogue_2.Main.Services
 {
 	public abstract class PhotoRendererModel : DataBaseViewModel
 	{
-		public Command<EntryImageModel> ViewImageCommand { get; set; }
+		public Command<ImageModel> ViewImageCommand { get; set; }
 
 		public PhotoRendererModel()
 		{
-			ViewImageCommand = new Command<EntryImageModel>(x => ViewImageC(x));
+			ViewImageCommand = new Command<ImageModel>(x => ViewImageC(x));
 		}
 
 		public ImageModel ImageSelected { get; set; }
@@ -102,7 +102,7 @@ namespace Travelogue_2.Main.Services
 			}
 		}
 
-		public async void ViewImageC(EntryImageModel image)
+		public async void ViewImageC(ImageModel image)
 		{
 			ImageSelected = image;
 			await Shell.Current.GoToAsync($"{nameof(ImageView)}?{ nameof(ImageViewModel.ImageId)}={ image.ImageId}");

@@ -81,10 +81,10 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 			if (CurrentJourneyId != null && DaySelectedNum != null)
 			{
 				// TODO - Pilla el journey de BBDD y pilla el list de dias o whatever
-				Days = DataBaseUtil.GetDaysFromJourneyId( int.Parse(CurrentJourneyId) )
+				Days = DataBaseUtil.GetDaysFromJourneyId(int.Parse(CurrentJourneyId))
 					.OrderBy(x => x.Date)
 					.ToList();
-				
+
 				DaySelected = Days[int.Parse(DaySelectedNum)].Date;
 				MaxDaySelected = Days.Last().Date;
 				MinDaySelected = Days.First().Date;
@@ -98,6 +98,8 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 				EntryModel temp = DataBaseUtil.GetEntryById(int.Parse(entryId));
 
 				Entry = temp;
+
+				Image.Path = BlankImage.Path;
 			}
 		}
 
@@ -237,7 +239,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 		#endregion
 
 		#region Image
-		public ImageModel image = null;
+		public ImageModel image = new ImageModel();
 		public ImageModel Image
 		{
 			get => image;

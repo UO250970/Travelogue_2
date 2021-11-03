@@ -16,10 +16,15 @@ namespace Travelogue_2.Main.ViewModels.Journey
 		public Command AddImageCommand { get; }
 		public Command<EntryImageModel> ImageTapped { get; }
 		public Command<DayModel> DayTapped { get; }
-		public ObservableCollection<ImageModel> JourneyImages;
+		
+		private ObservableCollection<ImageModel> journeyImages;
+		public ObservableCollection<ImageModel> JourneyImages
+		{
+			get => journeyImages;
+			set => SetProperty(ref journeyImages, value);
+		}
 
 		private ObservableCollection<DayModel> journeyDays;
-
 		public ObservableCollection<DayModel> JourneyDays
 		{
 			get => journeyDays;
@@ -45,7 +50,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 			AddImageCommand = new Command(() => AddImageC());
 			ModifyJourneyCommand = new Command(() => ModifyJourneyC());
 
-			ViewImageCommand = new Command<EntryImageModel>((x) => ViewImageC(x));
+			ViewImageCommand = new Command<ImageModel>((x) => ViewImageC(x));
 			PhoneNumberTappedCommand = new Command<string>((x) => PhoneNumberTappedC(x));
 
 			EditOrDeleteEventCommand = new Command<EventModel>((EventModel e) => EditOrDeleteEventC(e));
@@ -73,8 +78,8 @@ namespace Travelogue_2.Main.ViewModels.Journey
 					CoverImage = cover;
 				}
 
-				// TODO - Chekear acciones según estado
-				JourneyDays = new ObservableCollection<DayModel>(DataBaseUtil.GetDaysFromJourney(journey));
+				JourneyDays.Clear();
+				DataBaseUtil.GetDaysFromJourney(journey).ForEach(x => JourneyDays.Add(x));
 
 				DaySelected = JourneyDays[0];
 
@@ -91,7 +96,8 @@ namespace Travelogue_2.Main.ViewModels.Journey
 						break;
 				}
 
-				JourneyImages = new ObservableCollection<ImageModel>(DataBaseUtil.GetImagesFromJourney(journey));
+				JourneyImages.Clear();
+				DataBaseUtil.GetImagesFromJourney(journey).ForEach(x => JourneyImages.Add(x));
 			}
 		}
 

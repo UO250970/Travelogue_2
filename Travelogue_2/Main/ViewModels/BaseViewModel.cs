@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
-using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.Services;
 
 namespace Travelogue_2.Main.ViewModels

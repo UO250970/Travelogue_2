@@ -17,10 +17,10 @@ namespace Travelogue_2.Main.Views.Library
 
             Shell.SetNavBarIsVisible(this, false);
         }
+
         protected override void OnAppearing()
         {
             model.OnAppearing();
         }
-
     }
 }

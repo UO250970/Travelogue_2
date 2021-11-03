@@ -73,6 +73,17 @@ namespace Travelogue_2.Main.Utils
             return CalendarUtil.GetJourneis( GetJourneis() );
         }
 
+        public static List<JournalModel> GetJournals()
+        {
+            List<JournalModel> temp = new List<JournalModel>();
+            List<Journal> tempDB = DataBase.GetJournals();
+            foreach (Journal jour in tempDB)
+            {
+                temp.Add( JournalToModel(jour) );
+            }
+            return temp;
+        }
+
         public static List<DestinyModel> GetDestinies()
         {
             List<DestinyModel> temp = new List<DestinyModel>();
@@ -177,6 +188,39 @@ namespace Travelogue_2.Main.Utils
             foreach (Journey jour in tempDB)
             {
                 temp.Add(JourneyToModel(jour));
+            }
+            return temp;
+        }
+
+        public static List<JournalModel> GetJournalsToStart()
+        {
+            List<JournalModel> temp = new List<JournalModel>();
+            List<Journal> tempDB = DataBase.GetJournals(State.CREATED);
+            foreach (Journal jour in tempDB)
+            {
+                temp.Add(JournalToModel(jour));
+            }
+            return temp;
+        }
+
+        public static List<JournalModel> GetJournalsToContinue()
+        {
+            List<JournalModel> temp = new List<JournalModel>();
+            List<Journal> tempDB = DataBase.GetJournals(State.OPEN);
+            foreach (Journal jour in tempDB)
+            {
+                temp.Add(JournalToModel(jour));
+            }
+            return temp;
+        }
+
+        public static List<JournalModel> GetJournalsClosed()
+        {
+            List<JournalModel> temp = new List<JournalModel>();
+            List<Journal> tempDB = DataBase.GetJournals(State.CLOSED);
+            foreach (Journal jour in tempDB)
+            {
+                temp.Add(JournalToModel(jour));
             }
             return temp;
         }
@@ -627,19 +671,18 @@ namespace Travelogue_2.Main.Utils
         {
             EntryData temp = EntryDataFromModel(data);
 
+
             if (data.GetType() == typeof(EntryTextModel))
             {
-                EntryTextModel temp2 = (EntryTextModel) data;
-                if (!temp2.Text.Equals(temp.Text)) temp.Text = temp2.Text;
-
+                EntryTextModel entryData = (EntryTextModel) data;
+                if (!temp.Text.Equals(entryData.Text)) temp.Text = entryData.Text;
                 return DataBase.UpdateEntryData(temp);
             }
             else if (data.GetType() == typeof(EntryImageModel))
             {
-                ImageModel temp3 = GetImageById( ((EntryImageModel) data).ImageId );
-                if (!temp3.Caption.Equals(temp.Image.Caption)) temp.Image.Caption = temp3.Caption;
+                ImageModel entryData = (EntryImageModel) data;
 
-                return SaveImage(temp3);
+                return SaveImage(entryData);
             }
 
             return false;
@@ -707,12 +750,43 @@ namespace Travelogue_2.Main.Utils
         }
         private static Journey JourneyFromModel(JourneyModel journey) => DataBase.GetJourneyById(journey.Id);
 
+        private static JournalModel JournalToModel(Journal journal)
+        {
+            JournalModel temp = new JournalModel
+            {
+                Id = journal.Id,
+                JournalState = journal.JournalState,
+                Name = journal.Journey.Name,
+                JourneyId = journal.Journey.Id,
+                CoverId = journal.Journey.CoverId
+            };
+
+            ImageModel tempI = GetImageById(journal.Journey.CoverId);
+            if (tempI != null)
+            {
+                temp.CoverSource = tempI.ImageSour;
+            }
+            else
+            {
+                temp.CoverSource = new ImageModel().ImageSour;
+            }
+
+            temp.Pages = new List<ImageModel>();
+            journal.Pages.ForEach( x => temp.Pages.Add( ImageToModel(x) ) );
+
+            return temp;
+        }
+        private static Journal JournalFromModel(JournalModel journal) => DataBase.GetJournalById(journal.Id);
+
         private static DestinyModel DestinyToModel(Destiny destiny)
         {
-            DestinyModel temp = new DestinyModel();
-            temp.Code = destiny.Code;
-            temp.Currency = destiny.Currency;
-            temp.Destiny = destiny.Name;
+            DestinyModel temp = new DestinyModel
+            {
+                Code = destiny.Code,
+                Currency = destiny.Currency,
+                Destiny = destiny.Name
+            };
+
             foreach ( Embassy emb in destiny.Embassies)
 			{
                 temp.EmbassiesCities.Add(emb.City);
@@ -742,15 +816,16 @@ namespace Travelogue_2.Main.Utils
 
             foreach (Day day in days)
             {
-                DayModel tempDay = new DayModel();
+                DayModel tempDay = new DayModel
+                {
+                    Id = day.Id,
+                    Day = day.Date.Day.ToString(),
+                    Month = day.Date.Month.ToString(),
+                    Year = day.Date.Year.ToString(),
 
-                tempDay.Id = day.Id;
-                tempDay.Day = day.Date.Day.ToString();
-                tempDay.Month = day.Date.Month.ToString();
-                tempDay.Year = day.Date.Year.ToString();
-
-                tempDay.JourneyEvents = new ObservableCollection<EventModel>( EventsToModel(day.Events) );
-                tempDay.JourneyEntries = new ObservableCollection<EntryModel>( EntriesToModel(day.Entries) );
+                    JourneyEvents = new ObservableCollection<EventModel>(EventsToModel(day.Events)),
+                    JourneyEntries = new ObservableCollection<EntryModel>(EntriesToModel(day.Entries))
+                };
 
                 temp.Add(tempDay);
             }
@@ -789,11 +864,12 @@ namespace Travelogue_2.Main.Utils
 
         private static EntryModel EntryToModel(Entry entry)
         {
-            EntryModel tempEntry = new EntryModel();
-
-            tempEntry.Id = entry.Id;
-            tempEntry.Title = entry.Title;
-            tempEntry.Time = entry.Time;
+            EntryModel tempEntry = new EntryModel
+            {
+                Id = entry.Id,
+                Title = entry.Title,
+                Time = entry.Time
+            };
 
             foreach (EntryData data in entry.Content)
             {
@@ -879,6 +955,7 @@ namespace Travelogue_2.Main.Utils
             temp.Path = image.Path;
             temp.Caption = image.Caption;
             temp.Journey = image.Journey;
+            temp.Journal = image.Journal;
 
             temp.Latitud = image.Latitud;
             temp.Longitud = image.Longitud;

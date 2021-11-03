@@ -13,7 +13,7 @@ namespace Travelogue_2.Main.BBDD
 		public int Id { get; set; } = 0;
 
 		[Column("State"), NotNull]
-		public State JourneyState { get; set; } = State.CREATED;
+		public State JournalState { get; set; } = State.CREATED;
 
 		[Column("Name"), MaxLength(40), NotNull]
 		public string Name { get; set; } = string.Empty;
@@ -29,8 +29,8 @@ namespace Travelogue_2.Main.BBDD
 		//[Column("Path"), MaxLength(40), NotNull]
 		//public string Path { get; set; } = string.Empty;
 
-		[TextBlob("Pages")]
-		public List<string> Pages { get; set; } = new List<string>();
+		[OneToMany(CascadeOperations = CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
+		public List<Image> Pages { get; set; } = new List<Image>();
 
 		public Journal(Journey journey)
         {

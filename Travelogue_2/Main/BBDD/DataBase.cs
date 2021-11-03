@@ -82,7 +82,7 @@ namespace Travelogue_2.Main.BBDD
             {
                 conn.CreateTable<JourneyDestiny>();
                 conn.CreateTable<Journey>();
-                //conn.CreateTable<Journal>();
+                conn.CreateTable<Journal>();
                 conn.CreateTable<Destiny>();
                 conn.CreateTable<Embassy>();
                 conn.CreateTable<DayEvent>();
@@ -102,7 +102,7 @@ namespace Travelogue_2.Main.BBDD
             {
                 conn.DeleteAll<JourneyDestiny>();
                 conn.DeleteAll<Journey>();
-                //conn.DeleteAll<Journal>();
+                conn.DeleteAll<Journal>();
                 conn.DeleteAll<Destiny>();
                 conn.DeleteAll<Embassy>();
                 conn.DeleteAll<DayEvent>();
@@ -122,7 +122,7 @@ namespace Travelogue_2.Main.BBDD
             {
                 conn.DropTable<JourneyDestiny>();
                 conn.DropTable<Journey>();
-                //conn.DropTable<Journal>();
+                conn.DropTable<Journal>();
                 conn.DropTable<Destiny>();
                 conn.DropTable<Embassy>();
                 conn.DropTable<DayEvent>();
@@ -249,6 +249,26 @@ namespace Travelogue_2.Main.BBDD
             Journal Func() => conn.FindWithChildren<Journal>(journal.Id);
             return QueryFunc(Func);
         }
+
+        public static List<Journal> GetJournals()
+        {
+            List<Journal> Func() => conn.GetAllWithChildren<Journal>(recursive: false);
+            return QueryFunc(Func);
+        }
+
+        public static Journal GetJournalById(int id)
+        {
+            Journal Func() => conn.FindWithChildren<Journal>(id, recursive: true);
+            return QueryFunc(Func);
+        }
+
+        public static List<Journal> GetJournals(State state)
+        {
+            List<Journal> Func() => conn.GetAllWithChildren<Journal>(x => x.JournalState.Equals(state), recursive: true);
+            return QueryFunc(Func);
+        }
+
+
         #endregion
 
         #region Day
@@ -483,7 +503,7 @@ namespace Travelogue_2.Main.BBDD
 
         internal static List<Image> GetImages()
         {
-            List<Image> Func() => conn.GetAllWithChildren<Image>(recursive: false);
+            List<Image> Func() => conn.GetAllWithChildren<Image>(recursive: false).FindAll(x => x.Journal is null);
             return QueryFunc(Func);
         }
 

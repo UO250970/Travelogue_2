@@ -12,7 +12,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 	[QueryProperty(nameof(EventId), nameof(EventId))]
 	[QueryProperty(nameof(EntryId), nameof(EntryId))]
 	[QueryProperty(nameof(EntryDataId), nameof(EntryDataId))]
-	public class EditOrDeleteFromJourneyPopUpModel : DataBaseViewModel
+	public class EditOrDeleteFromJourneyPopUpModel : PhotoRendererModel
 	{
 		public string eventId;
 		public string EventId

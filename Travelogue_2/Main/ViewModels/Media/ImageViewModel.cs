@@ -26,7 +26,7 @@ namespace Travelogue_2.Main.ViewModels.Media
 				ImageModel image = DataBaseUtil.GetImageById( int.Parse(ImageId) );
 
 				Caption = image.Caption;
-				//JourneyName = journey.Name;
+				Journey = image.Journey;
 				//CoverImage.ImageSour = journey.Image;
 
 				// TODO - Chekear acciones según estado
@@ -35,6 +35,15 @@ namespace Travelogue_2.Main.ViewModels.Media
 			}
 			//ImageName = "Prueba de imagen";
 		}
+
+		#region Journey
+		private string journey;
+		public string Journey
+        {
+			get => journey;
+			set => SetProperty(ref journey, value);
+        }
+        #endregion
 
         #region Source
         private ImageSource imageSource;

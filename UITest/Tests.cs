@@ -150,7 +150,7 @@ namespace UITest
 
             EnterText(Variables.TitleSelector, "Holi, test 1");
 
-            SelectDestiny();
+            //SelectDestiny();
         }
 
         // TODO Tests
@@ -168,10 +168,14 @@ namespace UITest
          *      - Añadir una entry
          *      - Modificar una entry
          *      - Añadir texto a la entry
-         *      - Modificar texto a la entry
+         *      - Modificar texto de la entry
+         *      - Eliminar texto 
          *      - Añadir foto a una entry
          *      - Añadir pie a la foto
-         *      - Añadir foto a un viaje normal
+         *      - Añadir foto normal a un viaje
+         * 
+         *  - Eliminar info del journey
+         *      - 
          * 
          *  - Ver info en el media
          *      - Ver journeis en el calendario

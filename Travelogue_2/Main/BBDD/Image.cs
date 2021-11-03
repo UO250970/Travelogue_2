@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
 using System;
 
 namespace Travelogue_2.Main.BBDD
@@ -23,6 +24,12 @@ namespace Travelogue_2.Main.BBDD
 
         [Column("Journey")]
         public string Journey { get; set; }
+
+        [Column("Journal")]
+        public string Journal { get; set; }
+
+        [ForeignKey(typeof(Journal))]
+        public int JournalId { get; set; }
 
         [Column("Latitud")]
         public string Latitud { get; set; }

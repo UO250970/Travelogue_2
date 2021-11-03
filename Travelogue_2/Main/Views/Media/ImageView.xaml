@@ -14,18 +14,21 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Text="{Binding ImageName}" FontSize="Title" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource White}"></Label>
+                <Label Grid.Row="0" Text="{Binding Journey}" FontSize="Title" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource White}"></Label>
 
                 <StackLayout Grid.Row="1">
 
-                    <Image Source="{Binding ImageSource}" Aspect="AspectFit"/>
+                    <Image Source="{Binding ImageSource}" Aspect="AspectFill"/>
 
                 </StackLayout>
 
-                <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Label Grid.Row="2" Text="{Binding Caption}" FontSize="Caption" FontAttributes="Italic" VerticalTextAlignment="Center" TextColor="{StaticResource White}"></Label>
+
+                <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
 
                     <Label Text="{Binding Resources[Edit]}" VerticalTextAlignment="Center" TextColor="{StaticResource White}"/>
 

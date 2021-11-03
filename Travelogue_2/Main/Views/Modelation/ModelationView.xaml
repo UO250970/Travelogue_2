@@ -24,12 +24,8 @@
                             </Label.GestureRecognizers>
                         </Label>
                     </Grid>
-                    
-                    <CarouselView ItemsSource="{Binding JourneysStartEditing}" EmptyView="{Binding Resources[StartEditingEmpty]}" 
-                                PeekAreaInsets="50" Loop="False" HorizontalOptions="StartAndExpand" Position="0">
-                        <CarouselView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
-                        </CarouselView.ItemsLayout>
+
+                    <CarouselView ItemsSource="{Binding JournalsStartEditing}">
 
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
@@ -37,7 +33,7 @@
                                 <local:JourneyCardView AutomationId="{Binding .Id}" BindingContext="{Binding .}">
                                     <local:JourneyCardView.GestureRecognizers>
                                         <TapGestureRecognizer 
-                                                Command="{Binding Path=BindingContext.JourneyTapped, Source={x:Reference ModelationViewName}}"		
+                                                Command="{Binding Path=BindingContext.JournalTapped, Source={x:Reference ModelationViewName}}"		
                                                 CommandParameter="{Binding .}"/>
                                     </local:JourneyCardView.GestureRecognizers>
                                 </local:JourneyCardView>
@@ -66,15 +62,23 @@
                         </Label>
                     </Grid>
 
-                    <CarouselView ItemsSource="{Binding JourneysContinueEditing}" EmptyView="{Binding Resources[ContinueEditingEmpty]}" 
-                              PeekAreaInsets="50" Loop="False">
+                    <CarouselView ItemsSource="{Binding JournalsContinueEditing}" EmptyView="{Binding Resources[ContinueEditingEmpty]}" 
+                              PeekAreaInsets="50" Loop="False" HorizontalOptions="StartAndExpand" Position="0">
                         <CarouselView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
+                            <LinearItemsLayout Orientation="Horizontal" />
                         </CarouselView.ItemsLayout>
 
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
-                                <local:JourneyCardView BindingContext="{Binding .}"/>
+
+                                <local:JourneyCardView AutomationId="{Binding .Id}" BindingContext="{Binding .}">
+                                    <local:JourneyCardView.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                                Command="{Binding Path=BindingContext.JournalTapped, Source={x:Reference ModelationViewName}}"		
+                                                CommandParameter="{Binding .}"/>
+                                    </local:JourneyCardView.GestureRecognizers>
+                                </local:JourneyCardView>
+                                
                             </DataTemplate>
                         </CarouselView.ItemTemplate>
                     </CarouselView>
@@ -97,16 +101,24 @@
                             </Label.GestureRecognizers>
                         </Label>
                     </Grid>
-                    
-                    <CarouselView ItemsSource="{Binding JourneysClosedEditing}" EmptyView="{Binding Resources[ClosedEditingEmpty]}" 
-                              PeekAreaInsets="50" Loop="False">
+
+                    <CarouselView ItemsSource="{Binding JournalsClosedEditing}" EmptyView="{Binding Resources[ClosedEditingEmpty]}" 
+                              PeekAreaInsets="50" Loop="False" HorizontalOptions="StartAndExpand" Position="0">
                         <CarouselView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
+                            <LinearItemsLayout Orientation="Horizontal" />
                         </CarouselView.ItemsLayout>
 
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
-                                <local:JourneyCardView BindingContext="{Binding .}"/>
+
+                                <local:JourneyCardView AutomationId="{Binding .Id}" BindingContext="{Binding .}">
+                                    <local:JourneyCardView.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                                Command="{Binding Path=BindingContext.JournalTapped, Source={x:Reference ModelationViewName}}"		
+                                                CommandParameter="{Binding .}"/>
+                                    </local:JourneyCardView.GestureRecognizers>
+                                </local:JourneyCardView>
+
                             </DataTemplate>
                         </CarouselView.ItemTemplate>
                     </CarouselView>

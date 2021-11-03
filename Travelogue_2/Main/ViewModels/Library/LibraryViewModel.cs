@@ -40,8 +40,6 @@ namespace Travelogue_2.Main.ViewModels.Library
 			JourneysClosed = new ObservableCollection<JourneyModel>();
 
 			JourneyTapped = new Command<JourneyModel>(OnJourneySelected);
-
-			ExecuteLoadDataCommand();
 		}
 
 		public override void LoadData()
@@ -68,11 +66,6 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 			CurrentJourneyId = journey.Id.ToString();
 			await Shell.Current.GoToAsync($"{nameof(JourneyView)}");
-		}
-
-		public override void OnAppearing()
-		{
-			LoadData();
 		}
 
 	}

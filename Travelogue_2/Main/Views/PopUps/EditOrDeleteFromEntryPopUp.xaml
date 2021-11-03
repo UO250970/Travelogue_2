@@ -4,12 +4,12 @@
              Shell.PresentationMode="ModalNotAnimated"
              x:Class="Travelogue_2.Main.Views.PopUps.EditOrDeleteFromEntryPopUp"
              BackgroundColor="#40000000">
-    
+
     <ContentPage.Content>
 
         <StackLayout>
 
-            <Grid x:Name="GridText" IsVisible="True">
+            <Grid IsVisible="{Binding TextVisible}">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="110"></RowDefinition>
@@ -19,13 +19,21 @@
                 </Grid.RowDefinitions>
 
                 <Frame Grid.Row="1" BackgroundColor="{StaticResource White}"
-                   Margin="20, 0, 20, 2" Padding="0">
+                   Margin="20, 0, 20, 2">
 
                     <StackLayout>
 
-                        <StackLayout Orientation="Horizontal" Padding="0">
-                            <Button BackgroundColor="{DynamicResource White}" TextColor="{StaticResource Black}" Text="{Binding Resources[Text]}" HorizontalOptions="FillAndExpand"/>
-                            <Button BackgroundColor="{DynamicResource PrimaryFaded}" TextColor="{StaticResource White}" Text="{Binding Resources[Image]}" HorizontalOptions="FillAndExpand"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Label AutomationId="CancelButtonE" Text="&#xea0f;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CancelCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label AutomationId="SaveButtonE" Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SaveTextCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
                         </StackLayout>
 
                         <StackLayout Margin="20">
@@ -39,8 +47,7 @@
                 </Frame>
 
                 <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="20, 0">
-                    <Button Text="{Binding Resources[Cancel]}" HorizontalOptions="FillAndExpand" Command="{Binding CancelCommand}" BackgroundColor="{DynamicResource Primary}"/>
-                    <Button Text="{Binding Resources[Save]}" HorizontalOptions="FillAndExpand" Command="{Binding SaveTextCommand}" BackgroundColor="{DynamicResource Primary}"/>
+                    <Button AutomationId="DeleteButtonE" Text="{Binding Resources[Delete]}" HorizontalOptions="FillAndExpand" Command="{Binding DeleteTextCommand}" BackgroundColor="{DynamicResource Red}"/>
                 </StackLayout>
 
                 <Grid.GestureRecognizers>
@@ -49,7 +56,7 @@
 
             </Grid>
 
-            <Grid x:Name="GridImage" IsVisible="False">
+            <Grid IsVisible="{Binding ImageVisible}">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="110"></RowDefinition>
@@ -59,24 +66,25 @@
                 </Grid.RowDefinitions>
 
                 <Frame Grid.Row="1" BackgroundColor="{StaticResource White}"
-                   Margin="20, 0, 20, 2" Padding="0">
+                   Margin="20, 0, 20, 2">
 
                     <StackLayout>
 
-                        <StackLayout Orientation="Horizontal" Padding="0">
-                            <Button BackgroundColor="{DynamicResource PrimaryFaded}" TextColor="{StaticResource White}" Text="{Binding Resources[Text]}" HorizontalOptions="FillAndExpand"/>
-                            <Button BackgroundColor="{DynamicResource White}" TextColor="{StaticResource Black}" Text="{Binding Resources[Image]}" HorizontalOptions="FillAndExpand"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Label AutomationId="CancelButtonE" Text="&#xea0f;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding CancelCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label AutomationId="SaveButtonE" Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SaveImageCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
                         </StackLayout>
-
                         <StackLayout Margin="20">
 
                             <border:SfBorder BorderColor="{StaticResource Grey}" BorderWidth="2" CornerRadius="10">
-                                <border:SfBorder.DashArray>
-                                    <x:Array Type="{x:Type x:Double}">
-                                        <x:Double>3</x:Double>
-                                        <x:Double>4</x:Double>
-                                    </x:Array>
-                                </border:SfBorder.DashArray>
 
                                 <border:SfBorder.Content >
 
@@ -84,14 +92,10 @@
 
                                 </border:SfBorder.Content>
 
-                                <border:SfBorder.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding AddImageCommand}"/>
-                                </border:SfBorder.GestureRecognizers>
-
                             </border:SfBorder>
 
                             <Label Text="{Binding Resources[Caption]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                            <Entry Text="{Binding Caption, Mode=TwoWay}" FontSize="Medium" />
+                            <Entry Text="{Binding Image.Caption, Mode=TwoWay}" FontSize="Medium" />
 
                         </StackLayout>
 
@@ -100,8 +104,7 @@
                 </Frame>
 
                 <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="20, 0">
-                    <Button Text="{Binding Resources[Cancel]}" HorizontalOptions="FillAndExpand" Command="{Binding CancelCommand}" BackgroundColor="{DynamicResource Primary}"/>
-                    <Button Text="{Binding Resources[Save]}" HorizontalOptions="FillAndExpand" Command="{Binding CreateImageCommand}" BackgroundColor="{DynamicResource Primary}"/>
+                    <Button AutomationId="DeleteButtonR" Text="{Binding Resources[Delete]}" HorizontalOptions="FillAndExpand" Command="{Binding DeleteImageCommand}" BackgroundColor="{DynamicResource Red}"/>
                 </StackLayout>
 
                 <Grid.GestureRecognizers>
@@ -114,5 +117,5 @@
         </StackLayout>
 
     </ContentPage.Content>
-    
+
 </ContentPage>
