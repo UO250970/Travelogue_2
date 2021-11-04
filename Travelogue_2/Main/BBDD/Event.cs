@@ -1,6 +1,5 @@
 ﻿using SQLite;
 using SQLiteNetExtensions.Attributes;
-using System;
 using System.Collections.Generic;
 
 namespace Travelogue_2.Main.BBDD
@@ -35,7 +34,7 @@ namespace Travelogue_2.Main.BBDD
         {
             try
             {
-                Event temp = (Event) obj;
+                Event temp = (Event)obj;
                 bool Title = this.Title.Equals(temp.Title);
                 bool Time = this.Title.Equals(temp.Time);
                 bool Address = this.Title.Equals(temp.Address);
@@ -43,11 +42,12 @@ namespace Travelogue_2.Main.BBDD
                 bool PhoneNumber = this.Title.Equals(temp.PhoneNumber);
 
                 return Title && Time && Address && Reserva && PhoneNumber;
-            } catch
+            }
+            catch
             {
                 return false;
             }
-            
+
         }
     }
 }

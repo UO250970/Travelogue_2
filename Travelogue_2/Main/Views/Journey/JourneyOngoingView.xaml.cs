@@ -8,7 +8,7 @@ namespace Travelogue_2.Main.Views.Journey
     public partial class JourneyOngoingView : ContentPage
     {
         public JourneyOngoingViewModel model;
-		public JourneyOngoingView()
+        public JourneyOngoingView()
         {
             InitializeComponent();
             Shell.SetNavBarIsVisible(this, false);

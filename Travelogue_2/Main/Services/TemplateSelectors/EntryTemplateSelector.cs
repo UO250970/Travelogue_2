@@ -3,8 +3,8 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Services.TemplateSelectors
 {
-	public class EntryTemplateSelector : DataTemplateSelector
-	{
+    public class EntryTemplateSelector : DataTemplateSelector
+    {
 
         private DataTemplate textTemplate;
 
@@ -31,18 +31,19 @@ namespace Travelogue_2.Main.Services.TemplateSelectors
         }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
-		{
-			if (item is EntryTextModel e)
-			{
+        {
+            if (item is EntryTextModel e)
+            {
                 return TextTemplate;
-			} else if ( ((EntryImageModel)item).Caption == string.Empty )
-			{
+            }
+            else if (((EntryImageModel)item).Caption == string.Empty)
+            {
                 return imageNoFootTemplate;
-			}
-			else
-			{
+            }
+            else
+            {
                 return ImageFootTemplate;
-			}
-		}
-	}
+            }
+        }
+    }
 }

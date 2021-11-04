@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Syncfusion.XForms.TabView;
+using System;
 using Travelogue_2.Main.ViewModels.Media;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
-using Syncfusion.XForms.TabView;
 
 namespace Travelogue_2.Main.Views.Media
 {

@@ -10,7 +10,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
     {
         public ObservableCollection<ImageModel> Backgrounds { get; set; }
 
-        public Command NextCommand { get; set;  }
+        public Command NextCommand { get; set; }
         public Command<ImageModel> BackgroundTapped { get; }
 
         public BackgroundSelectorViewModel()

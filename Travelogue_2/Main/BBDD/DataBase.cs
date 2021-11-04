@@ -76,7 +76,7 @@ namespace Travelogue_2.Main.BBDD
             }
         }
 
-		private static bool CreateDatabase()
+        private static bool CreateDatabase()
         {
             void Act()
             {
@@ -96,7 +96,7 @@ namespace Travelogue_2.Main.BBDD
             }
             return QueryAct(Act);
         }
-		public static bool ClearDataBase()
+        public static bool ClearDataBase()
         {
             void Act()
             {
@@ -146,7 +146,7 @@ namespace Travelogue_2.Main.BBDD
         }
 
         public static List<Journey> GetJourneis(State state)
-		{
+        {
             List<Journey> Func() => conn.GetAllWithChildren<Journey>(x => x.JourneyState.Equals(state), recursive: true);
             return QueryFunc(Func);
         }
@@ -188,8 +188,8 @@ namespace Travelogue_2.Main.BBDD
             }
         }
 
-            /** Find */
-            // Solo para el Insert
+        /** Find */
+        // Solo para el Insert
         internal static Journey FindJourney(Journey journey)
         {
             Journey Func() => conn.FindWithChildren<Journey>(journey.Id, recursive: true);
@@ -202,23 +202,23 @@ namespace Travelogue_2.Main.BBDD
             return QueryFunc(Func) == null ? false : true;
         }
 
-            /** Update */
+        /** Update */
         public static bool UpdateJourney(Journey journey)
         {
             void Act() => conn.UpdateWithChildren(journey);
             return QueryAct(Act);
         }
 
-            /** Checks */
+        /** Checks */
 
         public static bool CheckDatesAreEmpty(DateTime dateIni, DateTime dateEnd, int JourneyId = -1)
         {
             List<Journey> list = GetJourneis();
-            Journey jour = list?.Find(x =>  x.Id != JourneyId && x.Collision(dateIni, dateEnd));
+            Journey jour = list?.Find(x => x.Id != JourneyId && x.Collision(dateIni, dateEnd));
             return jour == null;
         }
 
-            /** Delete */
+        /** Delete */
         public static bool DeleteJourneyById(int JourneyId)
         {
             Journey temp = GetJourneyById(JourneyId);
@@ -242,7 +242,7 @@ namespace Travelogue_2.Main.BBDD
             }
         }
 
-            /** Find */
+        /** Find */
         // Solo para el Insert
         internal static Journal FindJournal(Journal journal)
         {
@@ -374,11 +374,11 @@ namespace Travelogue_2.Main.BBDD
         }
 
         public static bool InsertEntry(Entry entry)
-		{
+        {
             void Act() => conn.InsertWithChildren(entry, recursive: true);
             return QueryAct(Act);
         }
-        
+
         public static bool UpdateEntry(Entry entry)
         {
             void Act() => conn.UpdateWithChildren(entry);
@@ -427,7 +427,7 @@ namespace Travelogue_2.Main.BBDD
             return temp != null && temp.Count() != 0;
         }
 
-            /** Insert */
+        /** Insert */
         public static bool InsertDestinies(List<Destiny> countries)
         {
             void Act() => conn.InsertAllWithChildren(countries);
@@ -440,7 +440,7 @@ namespace Travelogue_2.Main.BBDD
             return QueryAct(Act);
         }
 
-            /** Get */
+        /** Get */
         public static List<Destiny> GetDestinies()
         {
             List<Destiny> Func() => conn.GetAllWithChildren<Destiny>(recursive: false);
@@ -471,7 +471,7 @@ namespace Travelogue_2.Main.BBDD
             return QueryFunc(Func);
         }
 
-            /** Update */
+        /** Update */
         public static bool UpdateDestiny(Destiny destiny)
         {
             void Act() => conn.UpdateWithChildren(destiny);
@@ -483,7 +483,7 @@ namespace Travelogue_2.Main.BBDD
             return QueryAct(Act);
         }
 
-            /** Remove */
+        /** Remove */
         public static bool ResetToDefaultCountries()
         {
             IEnumerable<string> destiniesIds = GetNotDefaultCountries().Select(x => x.Code);
@@ -499,7 +499,7 @@ namespace Travelogue_2.Main.BBDD
             List<Image> Func() => conn.GetAllWithChildren<Image>().FindAll(x => x.Journey.Equals(journey));
             return QueryFunc(Func);
         }
-        
+
 
         internal static List<Image> GetImages()
         {
@@ -529,7 +529,7 @@ namespace Travelogue_2.Main.BBDD
 
         #region Style
 
-            /** Get */
+        /** Get */
         public static List<Style> GetStyles()
         {
             List<Style> Func() => conn.GetAllWithChildren<Style>(recursive: false);
@@ -541,7 +541,7 @@ namespace Travelogue_2.Main.BBDD
             return QueryFunc(Func);
         }
 
-            /** Insert */
+        /** Insert */
         public static bool InsertStyles(List<Style> styles)
         {
             void Act() => conn.InsertAllWithChildren(styles);

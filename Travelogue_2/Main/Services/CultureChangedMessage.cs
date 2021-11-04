@@ -10,7 +10,7 @@ namespace Travelogue_2.Main.Services
             : this(new CultureInfo(lngName))
         { }
 
-        public CultureChangedMessage(CultureInfo newCultureInfo) 
+        public CultureChangedMessage(CultureInfo newCultureInfo)
             => NewCultureInfo = newCultureInfo;
     }
 }

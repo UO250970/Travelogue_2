@@ -4,25 +4,25 @@ using Xamarin.Forms.Xaml;
 
 namespace Travelogue_2.Main.Views.Modelation
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class StartModelationView : ContentPage
-	{
-		readonly StartModelationViewModel model;
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class StartModelationView : ContentPage
+    {
+        readonly StartModelationViewModel model;
 
-		public StartModelationView()
-		{
-			InitializeComponent();
+        public StartModelationView()
+        {
+            InitializeComponent();
 
-			BindingContext = model = new StartModelationViewModel();
+            BindingContext = model = new StartModelationViewModel();
 
-			Shell.SetNavBarIsVisible(this, false);
-		}
+            Shell.SetNavBarIsVisible(this, false);
+        }
 
-		protected override void OnAppearing()
-		{
-			model.OnAppearing();
-			StartJournalsCollection.SelectedItem = null;
-			base.OnAppearing();
-		}
-	}
+        protected override void OnAppearing()
+        {
+            model.OnAppearing();
+            StartJournalsCollection.SelectedItem = null;
+            base.OnAppearing();
+        }
+    }
 }

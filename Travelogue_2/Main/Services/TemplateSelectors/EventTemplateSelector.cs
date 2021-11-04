@@ -3,36 +3,36 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Services.TemplateSelectors
 {
-	public class EventTemplateSelector : DataTemplateSelector
-	{
-		private DataTemplate reservTemplate;
+    public class EventTemplateSelector : DataTemplateSelector
+    {
+        private DataTemplate reservTemplate;
 
-		public DataTemplate ReservTemplate
-		{
-			get => reservTemplate;
-			set => reservTemplate = value;
-		}
+        public DataTemplate ReservTemplate
+        {
+            get => reservTemplate;
+            set => reservTemplate = value;
+        }
 
-		private DataTemplate eventTemplate;
+        private DataTemplate eventTemplate;
 
-		public DataTemplate EventTemplate
-		{
-			get => eventTemplate;
-			set => eventTemplate = value;
-		}
+        public DataTemplate EventTemplate
+        {
+            get => eventTemplate;
+            set => eventTemplate = value;
+        }
 
-		protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
-		{
-			EventModel evento = (EventModel) item;
+        protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
+        {
+            EventModel evento = (EventModel)item;
 
-			if (evento.Reservation)
-			{
-				return ReservTemplate;
-			}
-			else
-			{
-				return EventTemplate;
-			}
-		}
-	}
+            if (evento.Reservation)
+            {
+                return ReservTemplate;
+            }
+            else
+            {
+                return EventTemplate;
+            }
+        }
+    }
 }

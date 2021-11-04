@@ -12,8 +12,8 @@ using RemoteInput = AndroidX.Core.App.RemoteInput;
 [assembly: Dependency(typeof(Travelogue_2.Droid.Services.Notifications))]
 namespace Travelogue_2.Droid.Services
 {
-	public class Notifications : INotifications
-	{
+    public class Notifications : INotifications
+    {
         const string channelId = "default";
         const string channelName = "Default";
         const string channelDescription = "The default channel for notifications.";

@@ -7,29 +7,29 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Settings
 {
-	public class SettingsCardHolderViewModel : PhotoRendererModel
-	{
-		public Command SearchCardCommand { get; }
+    public class SettingsCardHolderViewModel : PhotoRendererModel
+    {
+        public Command SearchCardCommand { get; }
         public Command AddCardCommand { get; }
 
         public ObservableCollection<CardModel> Cards { get; }
         public ObservableCollection<CardModel> CardsSearched { get; set; }
 
         public SettingsCardHolderViewModel()
-		{
-			SearchCardCommand = new Command(() => SearchCardC());
+        {
+            SearchCardCommand = new Command(() => SearchCardC());
             AddCardCommand = new Command(() => AddCardC());
 
             Cards = new ObservableCollection<CardModel>();
             CardsSearched = new ObservableCollection<CardModel>();
 
             ExecuteLoadDataCommand();
-		}
+        }
 
-		public override void LoadData()
-		{
-			throw new System.NotImplementedException();
-		}
+        public override void LoadData()
+        {
+            throw new System.NotImplementedException();
+        }
 
         async internal void SearchCardC()
         {

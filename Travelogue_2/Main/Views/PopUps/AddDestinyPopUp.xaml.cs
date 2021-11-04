@@ -4,16 +4,16 @@ using Xamarin.Forms.Xaml;
 
 namespace Travelogue_2.Main.Views.PopUps
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AddDestinyPopUp : ContentPage
-	{
-		public AddSettingsPopUpModel model;
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class AddDestinyPopUp : ContentPage
+    {
+        public AddSettingsPopUpModel model;
 
-		public AddDestinyPopUp()
-		{
-			InitializeComponent();
+        public AddDestinyPopUp()
+        {
+            InitializeComponent();
 
-			BindingContext = model = new AddSettingsPopUpModel();
-		}
-	}
+            BindingContext = model = new AddSettingsPopUpModel();
+        }
+    }
 }

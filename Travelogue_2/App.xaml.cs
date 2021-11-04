@@ -1,10 +1,10 @@
-﻿using System.Globalization;
-using Travelogue_2.Resources.Localization;
+﻿using System;
+using System.Diagnostics;
+using System.Globalization;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
+using Travelogue_2.Resources.Localization;
 using Xamarin.Forms;
-using System;
-using System.Diagnostics;
 
 namespace Travelogue_2
 {

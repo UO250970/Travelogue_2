@@ -7,7 +7,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
     {
         private bool journeyOnGoing = false;
         public bool JourneyOnGoing
-		{
+        {
             get => journeyOnGoing;
             set
             {
@@ -26,16 +26,17 @@ namespace Travelogue_2.Main.ViewModels.Journey
             }
         }
 
-        public override void LoadData() 
+        public override void LoadData()
         {
             JourneyModel journey = DataBaseUtil.GetJourneyOnGoing();
 
             if (journey?.Id >= 0)
-			{
+            {
                 CurrentJourneyId = journey.Id.ToString();
                 JourneyOnGoing = true;
                 base.LoadData();
-            } else
+            }
+            else
             {
                 JourneyOnGoing = false;
             }

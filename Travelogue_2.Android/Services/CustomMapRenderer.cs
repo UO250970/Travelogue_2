@@ -10,7 +10,6 @@ using View = Android.Views.View;
 using Travelogue_2.Droid.Services;
 using Travelogue_2.Main.Services;
 using Xamarin.Forms.Maps.Android;
-
 [assembly: ExportRenderer(typeof(CustomMap), typeof(CustomMapRenderer))]
 namespace Travelogue_2.Droid.Services
 {

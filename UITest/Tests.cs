@@ -40,7 +40,7 @@ namespace UITest
             //app.Back();
             app.Repl();
             app.WaitForElement("CreatedJourneysId", timeout: TimeSpan.FromSeconds(100));
-         
+
             //Assert.IsNotEmpty( app.Query("CreatedJourneysId") );
             //app.Tap(x => x.Marked("MediaViewButton"));
         }
@@ -185,7 +185,7 @@ namespace UITest
 
         [Test]
         public void SeeJourneyFromLibrary()
-		{
+        {
             app.Repl();
             EnterFuturLibraryTrip();
         }
@@ -294,7 +294,7 @@ namespace UITest
     }
 
     public static class Variables
-	{
+    {
         // Automation Ids
         public static string DateFormat { get => "dd/MM/yyyy"; }
         public static string TimeFormat { get => @"hh\:mm"; }
@@ -306,7 +306,7 @@ namespace UITest
         public static string TitleSelector { get => "TitleSelectorE"; }
         public static string AddressSelector { get => "AddressSelectorE"; }
         public static string DateSelector { get => "DateSelectorE"; }
-        
+
         public static string DateIniSelector { get => "DateSelectorIniE"; }
         public static string DateEndSelector { get => "DateSelectorEndE"; }
 

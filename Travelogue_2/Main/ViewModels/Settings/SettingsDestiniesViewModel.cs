@@ -1,24 +1,23 @@
-﻿using System.Collections.ObjectModel;
-using Travelogue_2.Main.Services;
-using Travelogue_2.Main.Models;
-using Xamarin.Forms;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Collections.Generic;
+using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Views.PopUps;
 using Xamarin.Essentials;
-using Travelogue_2.Main.BBDD;
+using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Settings
 {
-	public class SettingsDestiniesViewModel : DataBaseViewModel
-	{
+    public class SettingsDestiniesViewModel : DataBaseViewModel
+    {
         public Command SearchDestinyCommand { get; }
         public Command AddDestinyCommand { get; }
         public Command MoreInfoCommand { get; }
         public Command PhoneNumberTappedCommand { get; }
 
         public Command<DestinyModel> DestinyTapped { get; }
-        public ObservableDictionary<string,List<DestinyModel>> DestiniesOrdered { get; set; }
+        public ObservableDictionary<string, List<DestinyModel>> DestiniesOrdered { get; set; }
         public ObservableCollection<DestinyModel> Destinies { get; }
         public ObservableCollection<DestinyModel> DestiniesSearched { get; set; }
 
@@ -43,7 +42,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
             Destinies.Clear();
             DestiniesOrdered.Clear();
             DestiniesSearched.Clear();
-            CommonVariables.AvailableDestinies.ForEach(x => Destinies.Add(x) );
+            CommonVariables.AvailableDestinies.ForEach(x => Destinies.Add(x));
 
             foreach (string s in CommonVariables.Alphabet)
             {
@@ -52,9 +51,9 @@ namespace Travelogue_2.Main.ViewModels.Settings
             }
         }
 
-		#region search
-		internal void SearchDestinyC()
-		{
+        #region search
+        internal void SearchDestinyC()
+        {
             SearchText = string.Empty;
             SearchVisible = !SearchVisible;
         }
@@ -88,7 +87,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
                     {
                         var tempList = DestiniesSearched.Where(x => x.Destiny.ToUpper().StartsWith(s.ToUpper())).ToList();
                         if (tempList.Count != 0)
-						{
+                        {
                             DestiniesOrdered.Add(s, tempList);
                         }
                     }

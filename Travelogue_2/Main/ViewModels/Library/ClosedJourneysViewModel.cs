@@ -10,96 +10,96 @@ namespace Travelogue_2.Main.ViewModels.Library
     public class ClosedJourneysViewModel : DataBaseViewModel
     {
 
-		public Command SearchJourneyCommand { get; }
-		public Command<JourneyModel> JourneyTapped { get; }
+        public Command SearchJourneyCommand { get; }
+        public Command<JourneyModel> JourneyTapped { get; }
 
-		public ClosedJourneysViewModel()
-		{
-			SearchJourneyCommand = new Command(() => SearchJourneyC());
+        public ClosedJourneysViewModel()
+        {
+            SearchJourneyCommand = new Command(() => SearchJourneyC());
 
-			JourneysClosed = new ObservableCollection<JourneyModel>();
-			JourneysClosedSearched = new ObservableCollection<JourneyModel>();
+            JourneysClosed = new ObservableCollection<JourneyModel>();
+            JourneysClosedSearched = new ObservableCollection<JourneyModel>();
 
-			JourneyTapped = new Command<JourneyModel>(OnJourneySelected);
+            JourneyTapped = new Command<JourneyModel>(OnJourneySelected);
 
-			ExecuteLoadDataCommand();
-		}
+            ExecuteLoadDataCommand();
+        }
 
-		public override void LoadData()
-		{
-			JourneysClosed.Clear();
-			JourneysClosedSearched.Clear();
+        public override void LoadData()
+        {
+            JourneysClosed.Clear();
+            JourneysClosedSearched.Clear();
 
-			DataBaseUtil.GetJourneysClosed()?.ForEach(x =>
-			{
-				JourneysClosed.Add(x);
-				JourneysClosedSearched.Add(x);
-			});
-		}
+            DataBaseUtil.GetJourneysClosed()?.ForEach(x =>
+            {
+                JourneysClosed.Add(x);
+                JourneysClosedSearched.Add(x);
+            });
+        }
 
-		public ObservableCollection<JourneyModel> journeysClosed;
-		public ObservableCollection<JourneyModel> JourneysClosed
-		{
-			get => journeysClosed;
-			set => SetProperty(ref journeysClosed, value);
-		}
+        public ObservableCollection<JourneyModel> journeysClosed;
+        public ObservableCollection<JourneyModel> JourneysClosed
+        {
+            get => journeysClosed;
+            set => SetProperty(ref journeysClosed, value);
+        }
 
-		public ObservableCollection<JourneyModel> journeysClosedSearched;
-		public ObservableCollection<JourneyModel> JourneysClosedSearched
-		{
-			get => journeysClosedSearched;
-			set => SetProperty(ref journeysClosedSearched, value);
-		}
+        public ObservableCollection<JourneyModel> journeysClosedSearched;
+        public ObservableCollection<JourneyModel> JourneysClosedSearched
+        {
+            get => journeysClosedSearched;
+            set => SetProperty(ref journeysClosedSearched, value);
+        }
 
-		#region SearchText
-		private bool searchVisible = false;
+        #region SearchText
+        private bool searchVisible = false;
 
-		public bool SearchVisible
-		{
-			get => searchVisible;
-			set => SetProperty(ref searchVisible, value);
-		}
+        public bool SearchVisible
+        {
+            get => searchVisible;
+            set => SetProperty(ref searchVisible, value);
+        }
 
-		private string searchText = string.Empty;
-		public string SearchText
-		{
-			get => searchText;
-			set
-			{
-				SetProperty(ref searchText, value);
-				var temp = JourneysClosed.Where(x => x.Name.ToUpper().Contains(searchText.ToUpper()) == true);
-				if (temp.Count() != JourneysClosedSearched.Count())
-				{
-					JourneysClosedSearched.Clear();
-					foreach (var card in temp)
-					{
-						JourneysClosedSearched.Add(card);
-					}
-				}
-			}
-		}
-		#endregion
+        private string searchText = string.Empty;
+        public string SearchText
+        {
+            get => searchText;
+            set
+            {
+                SetProperty(ref searchText, value);
+                var temp = JourneysClosed.Where(x => x.Name.ToUpper().Contains(searchText.ToUpper()) == true);
+                if (temp.Count() != JourneysClosedSearched.Count())
+                {
+                    JourneysClosedSearched.Clear();
+                    foreach (var card in temp)
+                    {
+                        JourneysClosedSearched.Add(card);
+                    }
+                }
+            }
+        }
+        #endregion
 
-		async internal void SearchJourneyC()
-		{
-			SearchText = string.Empty;
-			SearchVisible = !SearchVisible;
-		}
+        async internal void SearchJourneyC()
+        {
+            SearchText = string.Empty;
+            SearchVisible = !SearchVisible;
+        }
 
-		async void OnJourneySelected(JourneyModel journey)
-		{
-			if (journey == null)
-				return;
+        async void OnJourneySelected(JourneyModel journey)
+        {
+            if (journey == null)
+                return;
 
-			// This will push the ItemDetailPage onto the navigation stack
-			CurrentJourneyId = journey.Id.ToString();
-			await Shell.Current.GoToAsync($"{nameof(JourneyView)}");
-		}
+            // This will push the ItemDetailPage onto the navigation stack
+            CurrentJourneyId = journey.Id.ToString();
+            await Shell.Current.GoToAsync($"{nameof(JourneyView)}");
+        }
 
-		public override void OnAppearing()
-		{
-			LoadData();
-		}
+        public override void OnAppearing()
+        {
+            LoadData();
+        }
 
-	}
+    }
 }

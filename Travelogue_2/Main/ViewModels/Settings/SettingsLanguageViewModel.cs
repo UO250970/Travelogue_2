@@ -88,7 +88,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
         async void OnLanguageSelected(String language)
         {
             if (language == null)
-                   return;
+                return;
             App.CurrentLanguage = language;
             MessagingCenter.Send<object, CultureChangedMessage>(this,
                     String.Empty, new CultureChangedMessage(language));
@@ -97,12 +97,12 @@ namespace Travelogue_2.Main.ViewModels.Settings
             await Shell.Current.GoToAsync("..");
         }
 
-		#endregion
-	}
+        #endregion
+    }
 
     public class LanguageLabel
-	{
+    {
         public string language { get; set; }
         public ImageSource image { get; set; }
-	}
+    }
 }

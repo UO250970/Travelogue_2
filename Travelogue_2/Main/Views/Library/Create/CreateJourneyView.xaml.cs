@@ -5,41 +5,41 @@ using Xamarin.Forms.Xaml;
 
 namespace Travelogue_2.Main.Views.Library.Create
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CreateJourneyView : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class CreateJourneyView : ContentPage
+    {
 
-		readonly CreateJourneyViewModel model;
+        readonly CreateJourneyViewModel model;
 
-		public CreateJourneyView()
-		{
-			InitializeComponent();
-
-			BindingContext = model = new CreateJourneyViewModel();
-
-			Shell.SetNavBarIsVisible(this, false);
-		}
-		protected override void OnAppearing()
-		{
-			model.OnAppearing();
-			base.OnAppearing();
-		}
-
-		protected override bool OnBackButtonPressed()
+        public CreateJourneyView()
         {
-			model.Back();
-			return true;
-		}
+            InitializeComponent();
 
-		public void CheckNewIniDate(object sender, EventArgs e)
-		{
-			model.CheckNewIniDate(IniDatePicker, EndDatePicker);
-		}
+            BindingContext = model = new CreateJourneyViewModel();
 
-		public void CheckNewEndDate(object sender, EventArgs e)
-		{
-			model.CheckNewEndDate(IniDatePicker, EndDatePicker);
-		}
+            Shell.SetNavBarIsVisible(this, false);
+        }
+        protected override void OnAppearing()
+        {
+            model.OnAppearing();
+            base.OnAppearing();
+        }
 
-	}
+        protected override bool OnBackButtonPressed()
+        {
+            model.Back();
+            return true;
+        }
+
+        public void CheckNewIniDate(object sender, EventArgs e)
+        {
+            model.CheckNewIniDate(IniDatePicker, EndDatePicker);
+        }
+
+        public void CheckNewEndDate(object sender, EventArgs e)
+        {
+            model.CheckNewEndDate(IniDatePicker, EndDatePicker);
+        }
+
+    }
 }

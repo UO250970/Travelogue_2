@@ -41,7 +41,7 @@ namespace Travelogue_2.Main.BBDD
         public Image() { }
 
         public Image(string path, string caption, string journey, string latitud, string longitud)
-		{
+        {
             Path = path;
             Caption = caption;
             Journey = journey;

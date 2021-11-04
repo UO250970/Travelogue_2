@@ -1,9 +1,9 @@
 ﻿using Plugin.Settings;
 using System;
-using Travelogue_2.Main.Models;
-using Travelogue_2.Main.BBDD;
-using Xamarin.Forms;
 using System.Threading.Tasks;
+using Travelogue_2.Main.BBDD;
+using Travelogue_2.Main.Models;
+using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Services
 {

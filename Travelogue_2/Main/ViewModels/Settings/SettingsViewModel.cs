@@ -12,7 +12,7 @@ namespace Travelogue_2.Main.ViewModels.Settings
         public Command DestiniesSettingsCommand { get; }
         public Command StyleSettingsCommand { get; }
 
-        public SettingsViewModel() 
+        public SettingsViewModel()
         {
             LanguagesSettingsCommand = new Command(() => LanguagesSettingsC());
             CardHolderSettingsCommand = new Command(() => CardHolderSettingsC());

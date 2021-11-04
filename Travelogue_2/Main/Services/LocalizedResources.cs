@@ -1,7 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Resources;
-using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Services

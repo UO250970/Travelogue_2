@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Settings
 {
-	public class SettingsStyleViewModel : DataBaseViewModel
-	{
-        public Command<StyleModel> StyleTapped { get;}
+    public class SettingsStyleViewModel : DataBaseViewModel
+    {
+        public Command<StyleModel> StyleTapped { get; }
         public ObservableCollection<StyleModel> Styles { get; }
 
         public SettingsStyleViewModel()

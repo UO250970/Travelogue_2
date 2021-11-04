@@ -8,104 +8,104 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Fragments
 {
-	public class DestiniesCollectionViewModel : PhotoRendererModel
-	{
-		public Command AddDestinyCommand { get; }
-		public Command MoreInfoCommand { get; }
+    public class DestiniesCollectionViewModel : PhotoRendererModel
+    {
+        public Command AddDestinyCommand { get; }
+        public Command MoreInfoCommand { get; }
 
-		public ObservableCollection<DestinyModel> DestiniesSelected { get; }
-		public ObservableCollection<string> DestiniesList { get; }
-		public Command<DestinyModel> DestinyTappedDelete { get; }
+        public ObservableCollection<DestinyModel> DestiniesSelected { get; }
+        public ObservableCollection<string> DestiniesList { get; }
+        public Command<DestinyModel> DestinyTappedDelete { get; }
 
-		public DestiniesCollectionViewModel()
-		{
-			AddDestinyCommand = new Command(() => AddDestinyC());
-			MoreInfoCommand = new Command<string>((x) => MoreInfoC(x));
+        public DestiniesCollectionViewModel()
+        {
+            AddDestinyCommand = new Command(() => AddDestinyC());
+            MoreInfoCommand = new Command<string>((x) => MoreInfoC(x));
 
-			DestiniesSelected = new ObservableCollection<DestinyModel>();
-			DestiniesList = new ObservableCollection<string>();
+            DestiniesSelected = new ObservableCollection<DestinyModel>();
+            DestiniesList = new ObservableCollection<string>();
 
-			DestinyTappedDelete = new Command<DestinyModel>(OnDestinySelectedDelete);
+            DestinyTappedDelete = new Command<DestinyModel>(OnDestinySelectedDelete);
 
-			ExecuteLoadDataCommand();
-		}
+            ExecuteLoadDataCommand();
+        }
 
-		public override void LoadData()
-		{
-			DestiniesList.Clear();
+        public override void LoadData()
+        {
+            DestiniesList.Clear();
 
-			DataBaseUtil.GetDestiniesFromJourney(int.Parse(CurrentJourneyId))
-				.ForEach(x => DestiniesSelected.Add(x));
+            DataBaseUtil.GetDestiniesFromJourney(int.Parse(CurrentJourneyId))
+                .ForEach(x => DestiniesSelected.Add(x));
 
-			CommonVariables.AvailableDestinies?.Select(x => x.Destiny).ToList()
-				.ForEach(x => DestiniesList.Add(x));
-		}
+            CommonVariables.AvailableDestinies?.Select(x => x.Destiny).ToList()
+                .ForEach(x => DestiniesList.Add(x));
+        }
 
-		#region CorrectDestinyText
-		private bool correctDestinyText;
-		public bool CorrectDestinyText
-		{
-			get => correctDestinyText;
-			set => SetProperty(ref correctDestinyText, value);
-		}
-		#endregion
+        #region CorrectDestinyText
+        private bool correctDestinyText;
+        public bool CorrectDestinyText
+        {
+            get => correctDestinyText;
+            set => SetProperty(ref correctDestinyText, value);
+        }
+        #endregion
 
-		#region DestinyText
-		private string destinyText;
-		public string DestinyText
-		{
-			get => destinyText;
-			set
-			{
-				if (DestiniesList.Contains(value))
-				{
-					CorrectDestinyText = true;
-				}
-				else
-				{
-					CorrectDestinyText = false;
-				}
-				SetProperty(ref destinyText, value);
-			}
-		}
-		#endregion
+        #region DestinyText
+        private string destinyText;
+        public string DestinyText
+        {
+            get => destinyText;
+            set
+            {
+                if (DestiniesList.Contains(value))
+                {
+                    CorrectDestinyText = true;
+                }
+                else
+                {
+                    CorrectDestinyText = false;
+                }
+                SetProperty(ref destinyText, value);
+            }
+        }
+        #endregion
 
-		async internal void AddDestinyC()
-		{
-			if (DestiniesSelected.Count <= CommonVariables.DestiniesInJourney)
-			{
-				DestinyModel destiny = DataBaseUtil.GetDestinyByName(DestinyText);
+        async internal void AddDestinyC()
+        {
+            if (DestiniesSelected.Count <= CommonVariables.DestiniesInJourney)
+            {
+                DestinyModel destiny = DataBaseUtil.GetDestinyByName(DestinyText);
 
-				if (DestiniesSelected.Contains(destiny))
-				{
-					await Alerter.AlertDestinyAlreadySelected();
-				}
-				else
-				{
-					DataBaseUtil.JourneyInsertDestiny(int.Parse(CurrentJourneyId), destiny.Destiny);
-					DestiniesSelected.Add(destiny);
-				}
-			}
-			else
-			{
-				await Alerter.AlertTooManyDestiniesInJourney();
-			}
-			DestinyText = string.Empty;
-		}
+                if (DestiniesSelected.Contains(destiny))
+                {
+                    await Alerter.AlertDestinyAlreadySelected();
+                }
+                else
+                {
+                    DataBaseUtil.JourneyInsertDestiny(int.Parse(CurrentJourneyId), destiny.Destiny);
+                    DestiniesSelected.Add(destiny);
+                }
+            }
+            else
+            {
+                await Alerter.AlertTooManyDestiniesInJourney();
+            }
+            DestinyText = string.Empty;
+        }
 
-		async internal void MoreInfoC(string path)
-		{
-			await Browser.OpenAsync(path);
-		}
+        async internal void MoreInfoC(string path)
+        {
+            await Browser.OpenAsync(path);
+        }
 
-		void OnDestinySelectedDelete(DestinyModel destiny)
-		{
-			if (destiny == null)
-				return;
+        void OnDestinySelectedDelete(DestinyModel destiny)
+        {
+            if (destiny == null)
+                return;
 
-			DataBaseUtil.JourneyRemoveDestiny( int.Parse(CurrentJourneyId), destiny.Destiny);
-			DestiniesSelected.Remove(destiny);
-		}
+            DataBaseUtil.JourneyRemoveDestiny(int.Parse(CurrentJourneyId), destiny.Destiny);
+            DestiniesSelected.Remove(destiny);
+        }
 
-	}
+    }
 }

@@ -7,7 +7,8 @@
             if (CurrentJourneyId != "0")
             {
                 base.LoadData();
-            } else
+            }
+            else
             {
                 Back();
             }

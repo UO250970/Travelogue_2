@@ -4,62 +4,62 @@ using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Models
 {
-	public class DayModel
-	{
-		public int Id { get; set; }
+    public class DayModel
+    {
+        public int Id { get; set; }
 
-		public DateTime Date
+        public DateTime Date
         {
-			get => new DateTime( int.Parse(Year), int.Parse(MonthNum), int.Parse(Day));
-        } 
+            get => new DateTime(int.Parse(Year), int.Parse(MonthNum), int.Parse(Day));
+        }
 
-		public string Day { get; set; }
+        public string Day { get; set; }
 
-		private string month;
-		public string Month
-		{
-			get => month;
-			set
-			{
-				month = App.LocResources["MonthShort_" + value];
-				MonthNum = value;
-			}
-		}
-
-		public string MonthNum { get; set; }
-
-		private string year;
-		public string Year
-		{
-			get => year;
-			set => year = value;
-		}
-
-		public Color background = (Color) App.Current.Resources["PrimaryFaded"];
-		public Color Background 
-		{ 
-			get => background;
-			set => background = value;
-		}
-
-		public ObservableCollection<EntryModel> JourneyEntries { get; set; } = new ObservableCollection<EntryModel>();
-
-		public ObservableCollection<EventModel> JourneyEvents { get; set; } = new ObservableCollection<EventModel>();
-
-		public DateTime ToDateTime()
-		{
-			return new DateTime(int.Parse(Year), int.Parse(MonthNum), int.Parse(Day));
-		}
-
-		public void Select()
+        private string month;
+        public string Month
         {
-			Background = (Color)Application.Current.Resources["Primary"];
-		}
+            get => month;
+            set
+            {
+                month = App.LocResources["MonthShort_" + value];
+                MonthNum = value;
+            }
+        }
 
-		public void Unselect()
+        public string MonthNum { get; set; }
+
+        private string year;
+        public string Year
         {
-			Background = (Color)Application.Current.Resources["PrimaryFaded"];
-		}
+            get => year;
+            set => year = value;
+        }
 
-	}
+        public Color background = (Color)App.Current.Resources["PrimaryFaded"];
+        public Color Background
+        {
+            get => background;
+            set => background = value;
+        }
+
+        public ObservableCollection<EntryModel> JourneyEntries { get; set; } = new ObservableCollection<EntryModel>();
+
+        public ObservableCollection<EventModel> JourneyEvents { get; set; } = new ObservableCollection<EventModel>();
+
+        public DateTime ToDateTime()
+        {
+            return new DateTime(int.Parse(Year), int.Parse(MonthNum), int.Parse(Day));
+        }
+
+        public void Select()
+        {
+            Background = (Color)Application.Current.Resources["Primary"];
+        }
+
+        public void Unselect()
+        {
+            Background = (Color)Application.Current.Resources["PrimaryFaded"];
+        }
+
+    }
 }

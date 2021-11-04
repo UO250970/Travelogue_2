@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Diagnostics;
-using Xamarin.Forms;
 using Travelogue_2.Main.Utils;
+using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels
 {
-	public abstract class DataBaseViewModel : BaseViewModel
-	{
+    public abstract class DataBaseViewModel : BaseViewModel
+    {
 
         public string CurrentJourneyId
-		{
-			get => DataBaseUtil.GetCurrentJourneyId();
-			set
-			{
+        {
+            get => DataBaseUtil.GetCurrentJourneyId();
+            set
+            {
                 DataBaseUtil.SetCurrentJourneyId(value);
             }
         }
@@ -30,7 +30,7 @@ namespace Travelogue_2.Main.ViewModels
             }
         }
 
-        public virtual void OnAppearing() 
+        public virtual void OnAppearing()
         {
             ExecuteLoadDataCommand();
         }

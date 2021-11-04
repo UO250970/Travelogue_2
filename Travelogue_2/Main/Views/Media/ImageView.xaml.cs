@@ -4,18 +4,18 @@ using Xamarin.Forms.Xaml;
 
 namespace Travelogue_2.Main.Views.Media
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ImageView : ContentPage
-	{
-		public ImageViewModel model;
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ImageView : ContentPage
+    {
+        public ImageViewModel model;
 
-		public ImageView()
-		{
-			InitializeComponent();
+        public ImageView()
+        {
+            InitializeComponent();
 
-			BindingContext = model = new ImageViewModel();
+            BindingContext = model = new ImageViewModel();
 
-			Shell.SetNavBarIsVisible(this, false);
-		}
-	}
+            Shell.SetNavBarIsVisible(this, false);
+        }
+    }
 }

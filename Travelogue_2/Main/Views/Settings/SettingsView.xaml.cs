@@ -1,5 +1,4 @@
-﻿using System;
-using Travelogue_2.Main.ViewModels.Settings;
+﻿using Travelogue_2.Main.ViewModels.Settings;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.Views.Settings
@@ -23,7 +22,7 @@ namespace Travelogue_2.Main.Views.Settings
             double rowHeight = width / count;
             foreach (RowDefinition r in MainGrid.RowDefinitions)
             {
-                r.Height  = rowHeight;
+                r.Height = rowHeight;
             }
 
             base.OnSizeAllocated(width, height);

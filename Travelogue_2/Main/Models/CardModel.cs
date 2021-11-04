@@ -2,11 +2,11 @@
 
 namespace Travelogue_2.Main.Models
 {
-	public class CardModel
-	{
-		public string Name { get; set; }
+    public class CardModel
+    {
+        public string Name { get; set; }
 
-		public List<string> Images { get; set; }
+        public List<string> Images { get; set; }
 
-	}
+    }
 }

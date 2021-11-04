@@ -5,34 +5,34 @@ using Xamarin.Forms.Xaml;
 
 namespace Travelogue_2.Main.Views.Journey
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class JourneySettingsView : ContentPage
-	{
-		public JourneySettingsViewModel model;
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class JourneySettingsView : ContentPage
+    {
+        public JourneySettingsViewModel model;
 
-		public JourneySettingsView()
-		{
-			InitializeComponent();
+        public JourneySettingsView()
+        {
+            InitializeComponent();
 
-			BindingContext = model = new JourneySettingsViewModel();
+            BindingContext = model = new JourneySettingsViewModel();
 
-			Shell.SetNavBarIsVisible(this, true);
-		}
+            Shell.SetNavBarIsVisible(this, true);
+        }
 
-		public void CheckNewIniDate(object sender, EventArgs e)
-		{
-			model.CheckNewIniDate(IniDatePicker, EndDatePicker);
-		}
+        public void CheckNewIniDate(object sender, EventArgs e)
+        {
+            model.CheckNewIniDate(IniDatePicker, EndDatePicker);
+        }
 
-		public void CheckNewEndDate(object sender, EventArgs e)
-		{
-			model.CheckNewEndDate(IniDatePicker, EndDatePicker);
-		}
+        public void CheckNewEndDate(object sender, EventArgs e)
+        {
+            model.CheckNewEndDate(IniDatePicker, EndDatePicker);
+        }
 
-		protected override bool OnBackButtonPressed()
-		{
-			model.Back();
-			return true;
-		}
-	} // TO-DO Sacar a estilo el color del enlaces
+        protected override bool OnBackButtonPressed()
+        {
+            model.Back();
+            return true;
+        }
+    } // TO-DO Sacar a estilo el color del enlaces
 }
