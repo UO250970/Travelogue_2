@@ -40,5 +40,6 @@ namespace Travelogue_2.Main.ViewModels
             PropertyChanged?.Invoke(this, e);
         }
         #endregion
+
     }
 }

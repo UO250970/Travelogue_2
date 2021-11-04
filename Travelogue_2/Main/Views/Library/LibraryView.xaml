@@ -25,26 +25,27 @@
                         </Label>
                     </Grid>
 
-                    <CarouselView ItemsSource="{Binding JourneysCreated}" EmptyView="{Binding Resources[CreatedEmpty]}" 
-                                PeekAreaInsets="50" Loop="False" HorizontalOptions="StartAndExpand" Position="0">
-                        <CarouselView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal" />
-                        </CarouselView.ItemsLayout>
+                    <CollectionView x:Name="JourneisCreatedCollection" 
+                                    ItemsSource="{Binding JourneysCreated}"
+                                    SelectionMode="Single"
+                                    SelectionChangedCommand="{Binding JourneyTapped}"		
+                                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference JourneisCreatedCollection}}">
 
-                        <CarouselView.ItemTemplate>
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Horizontal"
+                                        Span="1"/>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.EmptyView>
+                            <Label Text="{Binding Resources[CreatedEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                        </CollectionView.EmptyView>
+
+                        <CollectionView.ItemTemplate>
                             <DataTemplate>
-
-                                <local:JourneyCardView AutomationId="{Binding .Id}" BindingContext="{Binding .}">
-                                    <local:JourneyCardView.GestureRecognizers>
-                                        <TapGestureRecognizer 
-                                            Command="{Binding Path=BindingContext.JourneyTapped, Source={x:Reference LibraryViewName}}"		
-                                            CommandParameter="{Binding .}"/>
-                                    </local:JourneyCardView.GestureRecognizers>
-                                </local:JourneyCardView>
-
+                                <local:JourneyCardView AutomationId="{Binding .Id}" BindingContext="{Binding .}"/>
                             </DataTemplate>
-                        </CarouselView.ItemTemplate>
-                    </CarouselView>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </StackLayout>
 
             </Frame>
@@ -66,26 +67,27 @@
                         </Label>
                     </Grid>
 
-                    <CarouselView ItemsSource="{Binding JourneysClosed}" EmptyView="{Binding Resources[ClosedEmpty]}" 
-                                  PeekAreaInsets="50" Loop="False" HorizontalOptions="StartAndExpand" Position="0">
-                        <CarouselView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal" />
-                        </CarouselView.ItemsLayout>
+                    <CollectionView x:Name="JourneisClosedCollection" 
+                                    ItemsSource="{Binding JourneysClosed}"
+                                    SelectionMode="Single"
+                                    SelectionChangedCommand="{Binding JourneyTapped}"		
+                                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference JourneisClosedCollection}}">
 
-                        <CarouselView.ItemTemplate>
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Horizontal"
+                                        Span="1"/>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.EmptyView>
+                            <Label Text="{Binding Resources[ClosedEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                        </CollectionView.EmptyView>
+
+                        <CollectionView.ItemTemplate>
                             <DataTemplate>
-
-                                <local:JourneyCardView AutomationId="{Binding .Id}" BindingContext="{Binding .}">
-                                    <local:JourneyCardView.GestureRecognizers>
-                                        <TapGestureRecognizer 
-                                            Command="{Binding Path=BindingContext.JourneyTapped, Source={x:Reference LibraryViewName}}"		
-                                            CommandParameter="{Binding .}"/>
-                                    </local:JourneyCardView.GestureRecognizers>
-                                </local:JourneyCardView>
-
+                                <local:JourneyCardView AutomationId="{Binding .Id}" BindingContext="{Binding .}"/>
                             </DataTemplate>
-                        </CarouselView.ItemTemplate>
-                    </CarouselView>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </StackLayout>
 
             </Frame>

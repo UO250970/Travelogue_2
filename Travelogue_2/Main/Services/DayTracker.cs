@@ -240,6 +240,43 @@ namespace Travelogue_2.Main.Services
             if (IsJourneyOnTrack()) { await Shell.Current.GoToAsync("//JourneyOngoingView"); }
             else { await Shell.Current.GoToAsync("//LibraryView"); }
         }
+
+
+        private static bool changedCreatedJourneis = false;
+        public static void ChangedCreatedJourneis()
+        {
+            changedCreatedJourneis = true;
+        }
+        public static bool GetChangedCreatedJourneis()
+        {
+            if (changedCreatedJourneis)
+            {
+                changedCreatedJourneis = false;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private static bool changedClosedJourneis = false;
+        public static void ChangedClosedJourneis()
+        {
+            changedClosedJourneis = true;
+        }
+        public static bool GetChangedClosedJourneis()
+        {
+            if (changedClosedJourneis)
+            {
+                changedClosedJourneis = false;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
 }

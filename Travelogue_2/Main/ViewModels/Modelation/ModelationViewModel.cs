@@ -52,13 +52,13 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 		public override void LoadData()
 		{
 			JournalsStartEditing.Clear();
-			//JournalsContinueEditing.Clear();
-			//JournalsClosedEditing.Clear();
+			JournalsContinueEditing.Clear();
+			JournalsClosedEditing.Clear();
 
 			//JournalsStartEditing = new ObservableCollection<JournalModel>(DataBaseUtil.GetJournalsToStart());
 			DataBaseUtil.GetJournalsToStart()?.ForEach( x => JournalsStartEditing.Add(x) );
-			//DataBaseUtil.GetJournalsToContinue()?.ForEach( x => JournalsContinueEditing.Add(x) );
-			//DataBaseUtil.GetJournalsClosed()?.ForEach( x => JournalsClosedEditing.Add(x) );
+			DataBaseUtil.GetJournalsToContinue()?.ForEach( x => JournalsContinueEditing.Add(x) );
+			DataBaseUtil.GetJournalsClosed()?.ForEach( x => JournalsClosedEditing.Add(x) );
 		}
 
 		async internal void StarJournalViewC() 

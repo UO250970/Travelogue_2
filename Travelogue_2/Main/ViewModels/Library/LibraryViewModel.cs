@@ -68,5 +68,13 @@ namespace Travelogue_2.Main.ViewModels.Library
 			await Shell.Current.GoToAsync($"{nameof(JourneyView)}");
 		}
 
+		public override void OnAppearing()
+        {
+			if (GetChangedCreatedJourneis() || GetChangedClosedJourneis())
+			{
+				base.OnAppearing();
+			}
+		}
+
 	}
 }

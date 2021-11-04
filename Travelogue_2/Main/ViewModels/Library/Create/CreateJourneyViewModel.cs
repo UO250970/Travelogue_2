@@ -125,7 +125,8 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 				};
 				if (await DataBaseUtil.SaveJourney(temp))
 					await Shell.Current.GoToAsync("..");
-				//TO-DO create and store journey
+
+				ChangedCreatedJourneis();
 			}
 		}
 

@@ -105,7 +105,10 @@ namespace Travelogue_2.Main.ViewModels.Library
 
 		public override void OnAppearing()
 		{
-			LoadData();
+			if (GetChangedCreatedJourneis())
+			{
+				base.OnAppearing();
+			}
 		}
 	}
 }
