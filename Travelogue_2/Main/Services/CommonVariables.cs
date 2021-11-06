@@ -31,6 +31,8 @@ namespace Travelogue_2.Main.Services
 
         public static string AppName { get => "Travelogue_2"; }
 
+        public static string AppNameJournal { get => ".Travelogue_2_Journal"; }
+
         public static string ResourcesMonth { get => "Month_"; }
 
         public static string Background { get => "Background_"; }
@@ -114,7 +116,7 @@ namespace Travelogue_2.Main.Services
 
         public static ImageSource GetBackground(string name)
         {
-            string tempString = BackgroundImagesPath + name + ImagesExtension;
+            string tempString = BackgroundImagesPath + Background + name + ImagesExtension;
             return ImageSource.FromResource(tempString);
         }
 

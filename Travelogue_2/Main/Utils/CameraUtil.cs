@@ -16,10 +16,10 @@ namespace Travelogue_2.Main.Utils
     {
         public static async Task<PermissionStatus> CheckPermissions()
         {
-            PermissionStatus statusCalendar = PermissionStatus.Unknown;
+            PermissionStatus statusCamera = PermissionStatus.Unknown;
             try
             {
-                PermissionStatus statusCamera = CrossPermissions.Current.CheckPermissionStatusAsync<CameraPermission>().Result;
+                statusCamera = CrossPermissions.Current.CheckPermissionStatusAsync<CameraPermission>().Result;
                 if (statusCamera != PermissionStatus.Granted)
                 {
                     statusCamera = await CrossPermissions.Current.RequestPermissionAsync<CameraPermission>();
@@ -32,15 +32,13 @@ namespace Travelogue_2.Main.Utils
                 Debug.WriteLine("Permision camera: " + statusCamera);
 
                 Start();
-
-                return statusCalendar;
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Error permision camera: " + e.StackTrace);
             }
 
-            return statusCalendar;
+            return statusCamera;
         }
 
         private static async void Start()

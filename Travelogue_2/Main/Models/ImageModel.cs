@@ -7,6 +7,17 @@ namespace Travelogue_2.Main.Models
     {
         public int ImageId { get; set; }
         public string Path { get; set; } = string.Empty;
+
+        public ImageSource ResourceImageSour
+        {
+            get
+            {
+                return Path == CommonVariables.Blank ? CommonVariables.GetGenericImageImage() :
+                    Path == string.Empty ? CommonVariables.GetGenericImage() :
+                    ImageSource.FromResource(Path);
+            }
+        }
+
         public ImageSource ImageSour
         {
             get

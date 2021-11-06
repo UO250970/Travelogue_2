@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.Views.Modelation.Modelate;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Modelation
@@ -7,29 +9,31 @@ namespace Travelogue_2.Main.ViewModels.Modelation
     public class EndedModelationViewModel : DataBaseViewModel
     {
 
-        public Command<Item> JourneyTapped { get; }
-        public ObservableCollection<JourneyModel> ClosedJourals { get; set; }
+        public Command<JournalModel> JournalTapped { get; }
+        public ObservableCollection<JournalModel> ClosedJournals { get; set; }
 
         public EndedModelationViewModel()
         {
-            ClosedJourals = new ObservableCollection<JourneyModel>();
+            ClosedJournals = new ObservableCollection<JournalModel>();
 
-            JourneyTapped = new Command<Item>(OnJourneySelected);
+            JournalTapped = new Command<JournalModel>(OnJourneySelected);
 
             ExecuteLoadDataCommand();
         }
 
         public override void LoadData()
         {
+            ClosedJournals.Clear();
+            DataBaseUtil.GetJournalsClosed()?.ForEach(x => ClosedJournals.Add(x));
         }
 
-        void OnJourneySelected(Item journey)
+        async void OnJourneySelected(JournalModel journal)
         {
-            if (journey == null)
+            if (journal == null)
                 return;
 
-            // This will push the ItemDetailPage onto the navigation stack
-            //await Shell.Current.GoToAsync($"{nameof(JourneyOngoingView)}?{nameof(ItemDetailViewModel.ItemId)}={journey.Id}");
+            CurrentJourneyId = journal.Id.ToString();
+            await Shell.Current.GoToAsync($"{nameof(JournalModelationView)}");
         }
     }
 }

@@ -11,15 +11,15 @@
         <StackLayout>
 
             <CollectionView x:Name="BackgroundsCollection"
-                                ItemsSource="{Binding Backgrounds}"
-                                SelectionMode="Single"
-                                SelectionChangedCommand="{Binding BackgroundTapped}"
-                                SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference BackgroundsCollection}}"
+                            ItemsSource="{Binding Backgrounds}"
+                            SelectionMode="Single"
+                            SelectionChangedCommand="{Binding BackgroundTapped}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference BackgroundsCollection}}"
                             Margin="5">
 
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"
-                                                Span="4" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
+                                     Span="3" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.EmptyView>
@@ -29,12 +29,8 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
 
-                        <AbsoluteLayout>
-
-                            <Image Source="{Binding .ImageSour}" 
-                                   HeightRequest="{Binding BindingContext.CoverImageHeight, Source={x:Reference BackgroundSelectorViewName}}"/>
-
-                        </AbsoluteLayout>
+                        <Image Source="{Binding ResourceImageSour}" 
+                               HeightRequest="{Binding BindingContext.CoverImageHeight, Source={x:Reference BackgroundSelectorViewName}}"/>
 
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

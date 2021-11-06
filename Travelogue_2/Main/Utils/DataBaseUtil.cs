@@ -38,11 +38,10 @@ namespace Travelogue_2.Main.Utils
 
         public static void InsertDestinies(List<Destiny> list) => DataBase.InsertDestinies(list);
 
-        public static void GetJourneyForJournal(int JourneyId)
+        public static JourneyModel GetJourneyForJournal(int JournalId)
         {
-            /*Dictionary<DateTime, >
-            Journey jour = DataBase.GetJourneyById(JourneyId);
-             jour.Days()*/
+            JournalModel journal = GetJournalById(JournalId);
+            return GetJourneyById(journal.JourneyId);
         }
 
         internal static ImageModel Photo(AddSettingsPopUpModel addSettingsPopUpModel)
@@ -71,6 +70,13 @@ namespace Travelogue_2.Main.Utils
         internal static CalendarEventCollection GetCalendarJourneis()
         {
             return CalendarUtil.GetJourneis(GetJourneis());
+        }
+
+        public static JournalModel GetJournalById(int JournalId)
+        {
+            Journal temp = DataBase.GetJournalById(JournalId);
+
+            return JournalToModel(temp);
         }
 
         public static List<JournalModel> GetJournals()
@@ -504,11 +510,38 @@ namespace Travelogue_2.Main.Utils
             return DaysToModel(temp.Days);
         }
 
+        public static List<EventModel> GetEventsFromJourney(int JourneyId, bool reserv)
+        {
+            Journey jour = DataBase.GetJourneyById(JourneyId);
+            List<EventModel> temp = new List<EventModel>();
+            foreach(Day day in jour.Days)
+            {
+                day.Events.FindAll(x => x.Reserv = reserv) 
+                        .Select(x => EventToModel(x)).ToList()
+                        .ForEach(x => temp.Add(x));
+            }
+
+            return temp;
+        }
+
         public static EventModel GetEventById(int EventId)
         {
             Event temp = DataBase.GetEventById(EventId);
 
             return temp == null ? null : EventToModel(temp);
+        }
+
+        public static List<EntryModel> GetEntriesFromJourney(int JourneyId)
+        {
+            Journey jour = DataBase.GetJourneyById(JourneyId);
+            List<EntryModel> temp = new List<EntryModel>();
+
+            foreach (Day day in jour.Days)
+            {
+                day.Entries.ForEach(x => temp.Add(EntryToModel(x)));
+            }
+
+            return temp;
         }
 
         public static EntryModel GetEntryById(int EntryId)

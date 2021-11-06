@@ -15,5 +15,10 @@ namespace Travelogue_2.Main.Views.Modelation.Modelate
 
             BindingContext = model = new BackgroundSelectorViewModel();
         }
+
+        protected override void OnAppearing()
+        {
+            BackgroundsCollection.SelectedItem = null;
+        }
     }
 }

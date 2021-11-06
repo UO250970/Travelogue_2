@@ -29,8 +29,6 @@ namespace Travelogue_2.Main.Utils
                 }
 
                 Debug.WriteLine("Permision calendar: " + statusCalendar);
-
-                return statusCalendar;
             }
             catch (Exception e)
             {

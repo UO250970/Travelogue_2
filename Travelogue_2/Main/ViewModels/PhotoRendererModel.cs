@@ -2,6 +2,7 @@
 using Plugin.Media.Abstractions;
 using System;
 using System.Diagnostics;
+using System.IO;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.ViewModels;
@@ -109,5 +110,10 @@ namespace Travelogue_2.Main.Services
             ImageSelected = image;
             await Shell.Current.GoToAsync($"{nameof(ImageView)}?{ nameof(ImageViewModel.ImageId)}={ image.ImageId}");
         }
+    }
+
+    public interface IDependency
+    {
+        void Save(Stream stream, string name); // Select Directory
     }
 }

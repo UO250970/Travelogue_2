@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.ViewModels.Modelation.Modelate;
 using Travelogue_2.Main.Views.Modelation;
 using Travelogue_2.Main.Views.Modelation.Modelate;
 using Xamarin.Forms;
@@ -55,7 +56,6 @@ namespace Travelogue_2.Main.ViewModels.Modelation
             JournalsContinueEditing.Clear();
             JournalsClosedEditing.Clear();
 
-            //JournalsStartEditing = new ObservableCollection<JournalModel>(DataBaseUtil.GetJournalsToStart());
             DataBaseUtil.GetJournalsToStart()?.ForEach(x => JournalsStartEditing.Add(x));
             DataBaseUtil.GetJournalsToContinue()?.ForEach(x => JournalsContinueEditing.Add(x));
             DataBaseUtil.GetJournalsClosed()?.ForEach(x => JournalsClosedEditing.Add(x));
@@ -75,12 +75,12 @@ namespace Travelogue_2.Main.ViewModels.Modelation
             if (journal == null)
                 return;
 
+            CurrentJourneyId = journal.Id.ToString();
+
             if (journal.JournalState != State.CREATED)
             {
-
+                await Shell.Current.GoToAsync($"{nameof(BackgroundSelectorView)}?{nameof(BackgroundSelectorViewModel.PageNum)}={0}");
             }
-
-            CurrentJourneyId = journal.Id.ToString();
             await Shell.Current.GoToAsync($"{nameof(JournalModelationView)}");
         }
     }

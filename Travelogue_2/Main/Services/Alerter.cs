@@ -154,6 +154,9 @@ namespace Travelogue_2.Main.Services
         public static async Task AlertEntrySaved()
             => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEntrySaved"], App.LocResources["Ok"]);
 
+        public static async Task AlertPageSaved()
+            => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEntrySaved"], App.LocResources["Ok"]);
+
         #endregion
 
         /** Does not exists */
@@ -211,5 +214,9 @@ namespace Travelogue_2.Main.Services
         internal static async Task<bool> AlertLanguageChanged()
             => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessLanguageChanged"], App.LocResources["Ok"], App.LocResources["Cancel"]);
 
+        #region Permissions
+        internal static async Task<bool> AlertNoStoragePermissions() 
+            => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessLanguageChanged"], App.LocResources["Ok"], App.LocResources["Cancel"]);
+        #endregion
     }
 }

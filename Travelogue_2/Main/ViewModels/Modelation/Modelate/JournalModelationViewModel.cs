@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
+using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.Views.Modelation.Modelate;
 using Xamarin.Forms;
 
@@ -28,11 +29,13 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
 
         public override void LoadData()
         {
-            //
-
-            JourneyName = "Prueba titulo";
-            PagesCount = string.Format(Resources["PagesCountMess"], Pages.Count);
-
+            if (CurrentJourneyId != "0")
+            {
+                JournalModel journal = DataBaseUtil.GetJournalById(int.Parse(CurrentJourneyId));
+                JourneyName = journal.Name;
+                journal.Pages.ForEach(x => Pages.Add(x));
+                PagesCount = string.Format(Resources["PagesCountMess"], Pages.Count);
+            }
         }
 
         #region JourneyName
@@ -66,7 +69,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
 
         public async void CreatePageC()
         {
-            await Shell.Current.GoToAsync($"{nameof(BackgroundSelectorView)}");
+            await Shell.Current.GoToAsync($"{nameof(BackgroundSelectorView)}?{nameof(BackgroundSelectorViewModel.PageNum)}={Pages.Count}");
         }
 
         void OnPageSelected(ImageModel page)

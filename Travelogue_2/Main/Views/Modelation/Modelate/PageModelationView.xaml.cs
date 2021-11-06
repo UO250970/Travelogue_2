@@ -1,4 +1,6 @@
-﻿using Travelogue_2.Main.Services;
+﻿using Syncfusion.SfImageEditor.XForms;
+using System.IO;
+using Travelogue_2.Main.Services;
 using Travelogue_2.Main.ViewModels.Modelation.Modelate;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,10 +18,19 @@ namespace Travelogue_2.Main.Views.Modelation.Modelate
 
             BindingContext = model = new PageModelationViewModel();
 
-            Content = new CustomImageEditor(model.JourneyId)
+            CustomEditor.Model = model;
+            //Content = new CustomImageEditor( int.Parse(model.CurrentJourneyId) );
+            //CustomEditor.Source = model.ImageSelectedSource;
+        }
+
+        private void ImageSaving(object sender, ImageSavingEventArgs args)
+        {
+            if (args.FileName is null || args.FileName == string.Empty)
             {
-                Source = model.imageSelectedSource
-            };
+                args.FileName = model.GetName();
+            }
+
+            model.Stream = args.Stream;
         }
 
     }

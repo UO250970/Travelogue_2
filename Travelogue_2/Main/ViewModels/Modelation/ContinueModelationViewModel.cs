@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.Views.Modelation.Modelate;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Modelation
@@ -7,28 +9,30 @@ namespace Travelogue_2.Main.ViewModels.Modelation
     public class ContinueModelationViewModel : DataBaseViewModel
     {
 
-        public Command<Item> JourneyTapped { get; }
-        public ObservableCollection<JourneyModel> ContinueJournals { get; set; }
+        public Command<JournalModel> JourneyTapped { get; }
+        public ObservableCollection<JournalModel> ContinueJournals { get; set; }
 
         public ContinueModelationViewModel()
         {
-            ContinueJournals = new ObservableCollection<JourneyModel>();
+            ContinueJournals = new ObservableCollection<JournalModel>();
 
-            JourneyTapped = new Command<Item>(OnJourneySelected);
+            JourneyTapped = new Command<JournalModel>(OnJournalSelected);
 
             ExecuteLoadDataCommand();
         }
         public override void LoadData()
         {
+            ContinueJournals.Clear();
+            DataBaseUtil.GetJournalsToContinue()?.ForEach(x => ContinueJournals.Add(x));
         }
 
-        void OnJourneySelected(Item journey)
+        async void OnJournalSelected(JournalModel journal)
         {
-            if (journey == null)
+            if (journal == null)
                 return;
 
-            // This will push the ItemDetailPage onto the navigation stack
-            //await Shell.Current.GoToAsync($"{nameof(JourneyOngoingView)}?{nameof(ItemDetailViewModelNU.ItemId)}={journey.Id}");
+            CurrentJourneyId = journal.Id.ToString();
+            await Shell.Current.GoToAsync($"{nameof(JournalModelationView)}");
         }
 
     }

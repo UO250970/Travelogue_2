@@ -113,6 +113,37 @@ namespace UITest
         }
         #endregion
 
+        #region Modify
+        public void ModifyEvent(string name)
+        {
+            app.TouchAndHold(x => x.Marked(name));
+
+            app.WaitForElement("Fecha", timeout: TimeSpan.FromSeconds(100));
+        }
+
+        public void ModifyReserv(string name)
+        {
+            app.TouchAndHold(x => x.Marked(name));
+
+            app.WaitForElement("Fecha", timeout: TimeSpan.FromSeconds(100));
+        }
+
+        public void ModifyEntry(string name)
+        {
+
+        }
+
+        public void ModifyEntryText(string name)
+        {
+
+        }
+
+        public void ModifyEntryImage(string name)
+        {
+
+        }
+        #endregion
+
         public void SaveEventButton()
         {
             app.Tap(x => x.Marked(Variables.SaveButtonE));
@@ -183,21 +214,21 @@ namespace UITest
          *      - Ver fotos ordenadas por journey
          */
 
+        /** Done */
         [Test]
         public void SeeJourneyFromLibrary()
         {
-            app.Repl();
+            //app.Repl();
             EnterFuturLibraryTrip();
         }
 
         [Test]
         public void ModifyEventTest()
         {
-            app.Repl();
+            //app.Repl();
             EnterFuturTrip();
-            app.TouchAndHold(x => x.Marked("Concierto Manin"));
+            ModifyEvent("Concierto Manin");
 
-            app.WaitForElement("Fecha", timeout: TimeSpan.FromSeconds(100));
             app.Tap(x => x.Marked(Variables.DateSelector));
 
             DateTime iniDate = DateTime.Today.AddDays(3);
@@ -241,11 +272,10 @@ namespace UITest
         [Test]
         public void ModifyReservTest()
         {
-            app.Repl();
+            //app.Repl();
             EnterFuturTrip();
-            app.TouchAndHold(x => x.Marked("Hotel"));
+            ModifyReserv("Hotel");
 
-            app.WaitForElement("Fecha", timeout: TimeSpan.FromSeconds(100));
             app.Tap(x => x.Marked(Variables.DateSelector));
 
             DateTime iniDate = DateTime.Today.AddDays(3);
@@ -289,6 +319,10 @@ namespace UITest
         [Test]
         public void ModifyEntryTest()
         {
+            //app.Repl();
+            EnterFuturTrip();
+            app.TouchAndHold(x => x.Marked("Standard"));
+
 
         }
     }

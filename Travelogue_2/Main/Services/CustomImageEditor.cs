@@ -1,22 +1,30 @@
-﻿using Syncfusion.SfImageEditor.XForms;
+﻿using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
+using Syncfusion.SfImageEditor.XForms;
 using System;
 using System.Collections.Generic;
-using Travelogue_2.Main.Utils;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using Travelogue_2.Main.ViewModels.Modelation.Modelate;
+using Xamarin.Forms;
+using ToolbarItem = Syncfusion.SfImageEditor.XForms.ToolbarItem;
 
 namespace Travelogue_2.Main.Services
 {
     public class CustomImageEditor : SfImageEditor
     {
-        public int JourneyId { get; set; }
+        public PageModelationViewModel Model { get; set; }
         private List<string> HeaderButtonsNames { get; set; }
         private Dictionary<string, Delegate> HeaderButtons { get; set; }
         private List<string> FooterButtonsNames { get; set; }
         private Dictionary<string, Delegate> FooterButtons { get; set; }
 
-        public CustomImageEditor(int JourneyId) : base()
-        {
-            this.JourneyId = JourneyId;
+        private List<string> SubFooterButtonsNames { get; set; }
+        private Dictionary<string, Delegate> SubFooterButtons { get; set; }
 
+        public CustomImageEditor() 
+        {
             PrepareButtons();
             StyleButtons();
 
@@ -37,14 +45,20 @@ namespace Travelogue_2.Main.Services
                 { HeaderButtonsNames[3], new Action(SaveButton) }
             };
 
-            DataBaseUtil.GetJourneyForJournal(JourneyId);
-
             FooterButtonsNames = new List<string>() { "Text", "Photo", "Shape" };
             FooterButtons = new Dictionary<string, Delegate>
             {
                 { FooterButtonsNames[0], new Action(TextButton) },
                 { FooterButtonsNames[1], new Action(PhotoButton) },
                 { FooterButtonsNames[2], new Action(ShapeButton) }
+            };
+
+            SubFooterButtonsNames = new List<string>() { "Event", "Reserv", "Entry" };
+            SubFooterButtons = new Dictionary<string, Delegate>
+            {
+                { SubFooterButtonsNames[0], new Action(EventButton) },
+                { SubFooterButtonsNames[1], new Action(ReservButton) },
+                { SubFooterButtonsNames[2], new Action(EntryButton) }
             };
         }
 
@@ -63,8 +77,24 @@ namespace Travelogue_2.Main.Services
 
             //ToolbarSettings.ToolbarItems.Add(
             //new FooterToolbarItem() { Icon = BitmapFactory.DecodeResource(Resources, Resource.Drawable.text) });
+            //ToolbarSettings.ToolbarItems.Add(
+                //new FooterToolbarItem() { Text = "More" });
+
             ToolbarSettings.ToolbarItems.Add(
-                new FooterToolbarItem() { Text = "More" });
+                new FooterToolbarItem() 
+                { 
+                    Text = FooterButtonsNames[0],
+                    SubItems = new ObservableCollection<ToolbarItem>
+                    {
+                        new ToolbarItem() { Text = SubFooterButtonsNames[0] },
+                        new ToolbarItem() { Text = SubFooterButtonsNames[1] },
+                        new ToolbarItem() { Text = SubFooterButtonsNames[2] }
+                    }
+                });
+            ToolbarSettings.ToolbarItems.Add(
+                new FooterToolbarItem() { Text = FooterButtonsNames[1] });
+            ToolbarSettings.ToolbarItems.Add(
+                new FooterToolbarItem() { Text = FooterButtonsNames[2] });
         }
 
         private void ToolbarSettings_ToolbarItemSelected(object sender, ToolbarItemSelectedEventArgs e)
@@ -113,14 +143,38 @@ namespace Travelogue_2.Main.Services
 
         public void RedoButton() => Redo();
 
-        public void SaveButton()
-        {
 
+        public async void SaveButton()
+        {
+            PermissionStatus permission = CheckPermissions().Result;
+            
+            if (permission == PermissionStatus.Granted)
+            {
+                DependencyService.Get<IDependency>().Save(Model.Stream, Model.GetName());
+                Alerter.AlertPageSaved();
+            } else
+            {
+                Alerter.AlertNoStoragePermissions();
+            }
         }
 
         public void TextButton()
         {
+        }
 
+        public void EventButton()
+        {
+            Model.GetEvents();
+        }
+
+        public void ReservButton()
+        {
+            Model.GetReservs();
+        }
+
+        public void EntryButton()
+        {
+            Model.GetEntries();
         }
 
         public void PhotoButton()
@@ -135,5 +189,25 @@ namespace Travelogue_2.Main.Services
 
         #endregion
 
+        public static async Task<PermissionStatus> CheckPermissions()
+        {
+            PermissionStatus statusStorage = PermissionStatus.Unknown;
+            try
+            {
+                statusStorage = CrossPermissions.Current.CheckPermissionStatusAsync<StoragePermission>().Result;
+                if (statusStorage != PermissionStatus.Granted)
+                {
+                    statusStorage = await CrossPermissions.Current.RequestPermissionAsync<StoragePermission>();
+                }
+
+                Debug.WriteLine("Permision storage: " + statusStorage);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error permision storage: " + e.StackTrace);
+            }
+
+            return statusStorage;
+        }
     }
 }

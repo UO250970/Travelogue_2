@@ -1,44 +1,93 @@
-﻿using Travelogue_2.Main.Utils;
+﻿using System.Collections.Generic;
+using System.IO;
+using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.Views.Modelation.Modelate;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
 {
-    [QueryProperty("BackgroundId", "BackgroundId")]
+    [QueryProperty("BackgroundPath", "BackgroundPath")]
+    [QueryProperty("PageNum", "PageNum")]
     public class PageModelationViewModel : DataBaseViewModel
     {
-        private string backgroundId;
-        public string BackgroundId
+        private string backgroundPath;
+        public string BackgroundPath
         {
-            get => backgroundId;
+            get => backgroundPath;
             set
             {
-                backgroundId = value;
+                backgroundPath = value;
                 LoadData();
             }
         }
 
-        public int journeyId;
-        public int JourneyId
+        private string pageNum;
+        public string PageNum
         {
-            get => journeyId;
-            set => SetProperty(ref journeyId, value);
+            get => pageNum;
+            set => pageNum = value;
         }
 
-        public ImageSource imageSelectedSource;
+        private string journalId;
+        public string JournalId
+        {
+            get => journalId;
+            set
+            {
+                journalId = value;
+                Journey = DataBaseUtil.GetJourneyForJournal(int.Parse(JournalId));
+            }
+        }
+        public JourneyModel Journey { get; set; }
+
+        private ImageSource imageSelectedSource;
         public ImageSource ImageSelectedSource
         {
             get => imageSelectedSource;
             set => SetProperty(ref imageSelectedSource, value);
         }
 
+        private Stream stream;
+        public Stream Stream
+        {
+            get => stream;
+            set => stream = value;
+        }
+
         public override void LoadData()
         {
-            if (BackgroundId != null)
+            if (BackgroundPath != null)
             {
-                ImageSelectedSource = DataBaseUtil.GetImageById(int.Parse(BackgroundId)).ImageSour;
+                ImageSelectedSource = ImageSource.FromResource(BackgroundPath);
+                JournalId = CurrentJourneyId;
             }
+        }
 
-            //ImageSelectedSource = CommonVariables.GetBackground(BackgroundSelected);
+        public List<EventModel> GetEvents()
+        {
+            return DataBaseUtil.GetEventsFromJourney(Journey.Id, false);
+        }
+
+        public List<EventModel> GetReservs()
+        {
+            return DataBaseUtil.GetEventsFromJourney(Journey.Id, true);
+        }
+
+        public List<EntryModel> GetEntries()
+        {
+            return DataBaseUtil.GetEntriesFromJourney(Journey.Id);
+        }
+
+        public string GetName()
+        {
+            CameraUtil.CheckPermissions();
+            return Journey.Name + "_journal_" + PageNum;
+        }
+
+        internal override async void Back()
+        {
+            await Shell.Current.GoToAsync($"{nameof(JournalModelationView)}");
         }
     }
 }

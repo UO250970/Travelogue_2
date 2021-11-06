@@ -23,8 +23,6 @@ namespace Travelogue_2.Main.Utils
                 }
 
                 Debug.WriteLine("Permision location: " + statusLocation);
-
-                return statusLocation;
             }
             catch (Exception e)
             {
