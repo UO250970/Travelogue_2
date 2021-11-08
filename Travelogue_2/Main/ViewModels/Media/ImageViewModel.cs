@@ -1,6 +1,8 @@
 ﻿using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.ViewModels.PopUps;
+using Travelogue_2.Main.Views.PopUps;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Media
@@ -19,6 +21,17 @@ namespace Travelogue_2.Main.ViewModels.Media
             }
         }
 
+        public Command SaveImageCommand { get; }
+        public Command ShareImageCommand { get; }
+        public Command DeleteImageCommand { get; }
+
+        public ImageViewModel()
+        {
+            SaveImageCommand = new Command(() => SaveImageC());
+            ShareImageCommand = new Command(() => ShareImageC());
+            DeleteImageCommand = new Command(() => DeleteImageC());
+        }
+
         public override void LoadData()
         {
             if (ImageId != null)
@@ -32,6 +45,7 @@ namespace Travelogue_2.Main.ViewModels.Media
                 // TODO - Chekear acciones según estado
 
                 ImageSource = image.ImageSour;
+
             }
             //ImageName = "Prueba de imagen";
         }
@@ -60,6 +74,34 @@ namespace Travelogue_2.Main.ViewModels.Media
         {
             get => caption;
             set => SetProperty(ref caption, value);
+        }
+        #endregion
+
+        #region Commands
+
+        internal async void SaveImageC()
+        {
+            ImageModel model = DataBaseUtil.GetImageById( int.Parse(ImageId));
+            model.Caption = caption;
+
+            if (DataBaseUtil.SaveImage(model)) await Alerter.AlertImageSaved();
+            Back();
+        }
+
+        internal void ShareImageC()
+        {
+            DataBaseUtil.ShareImage(int.Parse(ImageId));
+        }
+
+        internal async void DeleteImageC()
+        {
+            bool result = await Alerter.AlertImageWillBeDeleted();
+
+            if (result)
+            {
+                DataBaseUtil.DeleteImageById(int.Parse(ImageId));
+                Back();
+            }
         }
         #endregion
     }

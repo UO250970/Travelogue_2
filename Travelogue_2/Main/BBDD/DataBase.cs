@@ -268,6 +268,13 @@ namespace Travelogue_2.Main.BBDD
             return QueryFunc(Func);
         }
 
+        /** Update */
+        public static bool UpdateJournal(Journal journal)
+        {
+            void Act() => conn.UpdateWithChildren(journal);
+            return QueryAct(Act);
+        }
+
 
         #endregion
 
@@ -500,7 +507,6 @@ namespace Travelogue_2.Main.BBDD
             return QueryFunc(Func);
         }
 
-
         internal static List<Image> GetImages()
         {
             List<Image> Func() => conn.GetAllWithChildren<Image>(recursive: false).FindAll(x => x.Journal is null);
@@ -522,6 +528,14 @@ namespace Travelogue_2.Main.BBDD
         public static bool UpdateImage(Image image)
         {
             void Act() => conn.UpdateWithChildren(image);
+            return QueryAct(Act);
+        }
+
+        /** Delete */
+        public static bool DeleteImageById(int ImageId)
+        {
+            Image temp = GetImageById(ImageId);
+            void Act() => conn.Delete(temp, recursive: true);
             return QueryAct(Act);
         }
 

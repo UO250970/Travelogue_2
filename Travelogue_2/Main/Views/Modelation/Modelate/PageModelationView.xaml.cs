@@ -19,18 +19,18 @@ namespace Travelogue_2.Main.Views.Modelation.Modelate
             BindingContext = model = new PageModelationViewModel();
 
             CustomEditor.Model = model;
-            //Content = new CustomImageEditor( int.Parse(model.CurrentJourneyId) );
-            //CustomEditor.Source = model.ImageSelectedSource;
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            model.Back();
+            return true;
         }
 
         private void ImageSaving(object sender, ImageSavingEventArgs args)
         {
-            if (args.FileName is null || args.FileName == string.Empty)
-            {
-                args.FileName = model.GetName();
-            }
-
-            model.Stream = args.Stream;
+            args.Cancel = true; // To avoid the image saved into pictures library
+            model.Save(args);
         }
 
     }

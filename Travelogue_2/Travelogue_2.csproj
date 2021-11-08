@@ -85,14 +85,15 @@
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
     <PackageReference Include="SQLite" Version="3.13.0" />
     <PackageReference Include="SQLiteNetExtensions" Version="2.1.0" />
-    <PackageReference Include="Syncfusion.Licensing" Version="19.3.0.46" />
-    <PackageReference Include="Syncfusion.Xamarin.Core" Version="19.3.0.46" />
-    <PackageReference Include="Syncfusion.Xamarin.Pdf" Version="19.3.0.46" />
-    <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="19.3.0.46" />
-    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="19.3.0.46" />
-    <PackageReference Include="Syncfusion.Xamarin.SfImageEditor" Version="19.3.0.46" />
-    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="19.3.0.46" />
-    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="19.3.0.46" />
+    <PackageReference Include="Syncfusion.Licensing" Version="19.3.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="19.3.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.Pdf" Version="19.3.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="19.3.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="19.3.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfImageEditor" Version="19.3.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPdfViewer" Version="19.3.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="19.3.0.48" />
+    <PackageReference Include="Syncfusion.Xamarin.SfTabView" Version="19.3.0.48" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
@@ -191,6 +192,9 @@
     <EmbeddedResource Update="Main\Views\Fragments\JourneyCardView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\Modelation\PdfView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Modelation\StartModelationView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -222,6 +226,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\PopUps\EditOrDeleteCardPopUp.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Main\Views\PopUps\SelectImagePopUp.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Main\Views\Settings\SettingsCardHolderView.xaml">

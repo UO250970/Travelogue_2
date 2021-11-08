@@ -24,6 +24,9 @@ namespace Travelogue_2.Main.Services
         public static int JourneyNameMaxLenght { get => 50; }
 
         /** Common string */
+        public static string True { get => "True"; }
+
+        public static string False { get => "False"; }
 
         public static string BlankName { get => "NoJourneyAssociated"; }
 
@@ -50,6 +53,8 @@ namespace Travelogue_2.Main.Services
         public static string ImagesExtension { get => ".png"; }
 
         public static string SavedImagesExtension { get => ".jpg"; }
+
+        public static string JournalExtension { get => ".pdf"; }
 
         public static string GenericImage { get => ImagesPath + ".default_image" + ImagesExtension; }
 

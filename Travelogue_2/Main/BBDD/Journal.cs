@@ -26,8 +26,8 @@ namespace Travelogue_2.Main.BBDD
         [OneToOne(CascadeOperations = CascadeOperation.CascadeRead)]
         public Journey Journey { get; set; }
 
-        //[Column("Path"), MaxLength(40), NotNull]
-        //public string Path { get; set; } = string.Empty;
+        [Column("Path")]
+        public string Path { get; set; } = string.Empty;
 
         [OneToMany(CascadeOperations = CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
         public List<Image> Pages { get; set; } = new List<Image>();

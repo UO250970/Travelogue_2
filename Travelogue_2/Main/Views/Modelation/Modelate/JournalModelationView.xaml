@@ -15,7 +15,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <StackLayout Grid.Row="0" >
+                <StackLayout Grid.Row="0" Padding="5">
 
                     <Label Text="{Binding PagesCount}" FontSize="Caption" HorizontalTextAlignment="End" Margin="10"/>
 
@@ -27,7 +27,7 @@
 
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical"
-                                                Span="4"/>
+                                                Span="4" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
                         </CollectionView.ItemsLayout>
 
                         <CollectionView.EmptyView>
@@ -37,18 +37,8 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
 
-                                <AbsoluteLayout>
-
-                                    <Image Source="{Binding .ImageSour}"/>
-
-                                    <Button x:Name="DeletePageButton" 
-                                                    Style="{StaticResource smallCircleButtonStyle}"
-                                                    BackgroundColor="{StaticResource None}"
-                                                    HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
-                                                    Command="{Binding BindingContext.PageTappedDelete, Source={x:Reference JournalModelationViewName}}"
-                                                    CommandParameter="{Binding .}"/>
-
-                                </AbsoluteLayout>
+                                <Image Source="{Binding ImageSour}"
+                                       HeightRequest="{Binding BindingContext.CoverImageHeight, Source={x:Reference JournalModelationViewName}}"/>
 
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
@@ -60,7 +50,8 @@
                 <Frame Grid.Row="1" HasShadow="True" Margin="5" Padding="5">
 
                     <StackLayout>
-                        <Button BackgroundColor="{DynamicResource Primary}" Text="{Binding Resources[EndJournal]}" FontSize="Large" TextColor="{StaticResource White}"/>
+                        <Button BackgroundColor="{DynamicResource Primary}" Text="{Binding Resources[EndJournal]}" FontSize="Large" TextColor="{StaticResource White}"
+                                Command="{Binding EndJournalCommand}"/>
                     </StackLayout>
 
                 </Frame>
@@ -68,6 +59,7 @@
             </Grid>
 
             <Button x:Name="CreatePageButton" 
+                    IsEnabled="{Binding CreateJournalIsEnabled}"
                     Style="{StaticResource circleButtonAddStyle}"
                     Command="{Binding CreatePageCommand}"
                     AbsoluteLayout.LayoutBounds="0.98,0.85,60,60"

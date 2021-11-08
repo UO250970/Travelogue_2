@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.PresentationMode="ModalNotAnimated"
+             x:Class="Travelogue_2.Main.Views.PopUps.SelectImagePopUp"
+             BackgroundColor="#40000000">
+    
+    <ContentPage.Content>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="185"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Row="1" BackgroundColor="{StaticResource White}"
+                   Margin="20, 0, 20, 2">
+
+                <StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label AutomationId="CancelButtonE" Text="&#xea0f;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CancelCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label AutomationId="SaveButtonE" Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectPhotoCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+
+                    <CollectionView ItemsSource="{Binding Photos}"
+                                    SelectionMode="Single"
+                                    SelectionChangedCommand="{Binding PhotoTapped}"		
+                                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference JourneisCreatedCollection}}">
+
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Horizontal"
+                                        Span="1"/>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.EmptyView>
+                            <Label Text="{Binding Resources[ImagesEmpty]}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                        </CollectionView.EmptyView>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImageSour}"/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+
+            </Frame>
+            
+        </Grid>
+
+    </ContentPage.Content>
+    
+</ContentPage>

@@ -565,6 +565,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ninguna imagen para mostrar.
+        /// </summary>
+        internal static string ImagesEmpty {
+            get {
+                return ResourceManager.GetString("ImagesEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Fecha inicio.
         /// </summary>
         internal static string IniDate {
@@ -786,6 +795,24 @@ namespace Travelogue_2.Resources.Localization {
         internal static string MessImageAdded {
             get {
                 return ResourceManager.GetString("MessImageAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La imagen se ha guardado correctamente.
+        /// </summary>
+        internal static string MessImageSaved {
+            get {
+                return ResourceManager.GetString("MessImageSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Se va a eliminar la imagen ¿Continuar?.
+        /// </summary>
+        internal static string MessImageWillBeDeleted {
+            get {
+                return ResourceManager.GetString("MessImageWillBeDeleted", resourceCulture);
             }
         }
         

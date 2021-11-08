@@ -85,16 +85,16 @@ namespace Travelogue_2.Main.ViewModels.Settings
         }
 
         #region INotifyPropertyChanged
-        async void OnLanguageSelected(String language)
+        async void OnLanguageSelected(string language)
         {
             if (language == null)
                 return;
             App.CurrentLanguage = language;
             MessagingCenter.Send<object, CultureChangedMessage>(this,
-                    String.Empty, new CultureChangedMessage(language));
+                    string.Empty, new CultureChangedMessage(language));
 
             await Alerter.AlertLanguageChanged();
-            await Shell.Current.GoToAsync("..");
+            Back();
         }
 
         #endregion

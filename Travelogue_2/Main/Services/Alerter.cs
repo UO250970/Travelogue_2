@@ -63,7 +63,7 @@ namespace Travelogue_2.Main.Services
         #region Created
 
         public static async Task AlertJourneyCreated()
-            => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessJourCreated"], App.LocResources["Ok"]);
+            => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessJourfCreated"], App.LocResources["Ok"]);
 
         /*
 		public static async Task AlertJourneyAlreadyCreated()
@@ -154,6 +154,9 @@ namespace Travelogue_2.Main.Services
         public static async Task AlertEntrySaved()
             => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEntrySaved"], App.LocResources["Ok"]);
 
+        public static async Task AlertImageSaved()
+            => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessImageSaved"], App.LocResources["Ok"]);
+
         public static async Task AlertPageSaved()
             => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEntrySaved"], App.LocResources["Ok"]);
 
@@ -203,6 +206,9 @@ namespace Travelogue_2.Main.Services
         // Gochada -> True es take, false es pick
         internal static async Task<string> AlertPhoto()
             => await Page?.DisplayActionSheet(App.LocResources["Empty"], App.LocResources["Empty"], App.LocResources["Empty"], App.LocResources["TakePhoto"], App.LocResources["PickPhoto"]);
+
+        internal static async Task<bool> AlertImageWillBeDeleted()
+            => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessImageWillBeDeleted"], App.LocResources["Ok"], App.LocResources["Cancel"]);
 
         /** Servicios */
 

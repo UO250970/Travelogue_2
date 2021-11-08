@@ -37,7 +37,7 @@
                     <StackLayout Margin="10">
 
                         <Label Text="{Binding Resources[Date]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                        <DatePicker Date="{Binding DaySelected, Mode=TwoWay}" FontSize="Medium" 
+                        <DatePicker Date="{Binding Entry.Day, Mode=TwoWay}" FontSize="Medium" 
                                     MaximumDate="{Binding MaxDaySelected}" MinimumDate="{Binding MinDaySelected}"/>
 
                         <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>

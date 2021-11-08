@@ -30,6 +30,7 @@ namespace Travelogue_2.Main.Models
         public string Journey { get; set; } = App.LocResources["NoJourneyAssociated"];
         // TO DO 
         public string Journal { get; set; }
+        public string Page { get; set; }
         public string Caption { get; set; } = string.Empty;
         public bool Blank { get; set; } = false;
 

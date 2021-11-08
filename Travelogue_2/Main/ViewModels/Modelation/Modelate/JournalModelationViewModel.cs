@@ -9,9 +9,14 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
 {
     public class JournalModelationViewModel : PhotoRendererModel
     {
-        public string JourneyId;
-        public ObservableCollection<ImageModel> Pages { get; set; }
+        private ObservableCollection<ImageModel> pages;
+        public ObservableCollection<ImageModel> Pages
+        {
+            get => pages;
+            set => SetProperty(ref pages, value);
+        }
         public Command CreatePageCommand { get; set; }
+        public Command EndJournalCommand { get; set; }
         public Command<ImageModel> PageTapped { get; set; }
         public Command<ImageModel> PageTappedDelete { get; set; }
 
@@ -20,6 +25,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
             Pages = new ObservableCollection<ImageModel>();
 
             CreatePageCommand = new Command(x => CreatePageC());
+            EndJournalCommand = new Command(x => EndJournalC());
 
             PageTapped = new Command<ImageModel>(OnPageSelected);
             PageTappedDelete = new Command<ImageModel>(OnPageDelete);
@@ -33,8 +39,13 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
             {
                 JournalModel journal = DataBaseUtil.GetJournalById(int.Parse(CurrentJourneyId));
                 JourneyName = journal.Name;
+
+                Pages.Clear();
                 journal.Pages.ForEach(x => Pages.Add(x));
+
                 PagesCount = string.Format(Resources["PagesCountMess"], Pages.Count);
+
+                _ = int.Parse(PagesCount) > 0 ? CreateJournalIsEnabled = true : CreateJournalIsEnabled = false;
             }
         }
 
@@ -48,16 +59,6 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
         }
         #endregion
 
-        #region ImageSelected
-        public ImageSource imageSelected = CommonVariables.GetGenericImage();
-
-        public ImageSource ImageSelected
-        {
-            get => imageSelected;
-            set => SetProperty(ref imageSelected, value);
-        }
-        #endregion
-
         #region PagesCount
         public string pagesCount = "";
         public string PagesCount
@@ -67,26 +68,49 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
         }
         #endregion
 
+        #region CreateJournalIsEnabled
+        private bool createJournalIsEnabled = false;
+        public bool CreateJournalIsEnabled
+        {
+            get => createJournalIsEnabled;
+            set => SetProperty(ref createJournalIsEnabled, value);
+        }
+        #endregion
+
+        #region Commands
         public async void CreatePageC()
         {
             await Shell.Current.GoToAsync($"{nameof(BackgroundSelectorView)}?{nameof(BackgroundSelectorViewModel.PageNum)}={Pages.Count}");
         }
 
-        void OnPageSelected(ImageModel page)
+        public void EndJournalC()
+        {
+            DataBaseUtil.CloseJournal(int.Parse(CurrentJourneyId), GetName());
+        }
+        #endregion
+
+        async void OnPageSelected(ImageModel page)
         {
             if (page == null)
                 return;
 
-            ImageSelected = page.ImageSour;
-            // This will push the ItemDetailPage onto the navigation stack
+            await Shell.Current.GoToAsync($"{nameof(PageModelationView)}?{nameof(PageModelationViewModel.BackgroundPath)}={page.Path}&" +
+                                                                    $"{nameof(PageModelationViewModel.PageNum)}={page.Page}&" +
+                                                                    $"{nameof(PageModelationViewModel.NewPage)}={CommonVariables.False}");
         }
 
         void OnPageDelete(ImageModel page)
         {
             if (page == null)
                 return;
+
+            DataBaseUtil.DeleteImageById(page.ImageId);
         }
 
+        public string GetName()
+        {
+            return JourneyName + " Journal" + CommonVariables.JournalExtension;
+        }
 
     }
 }

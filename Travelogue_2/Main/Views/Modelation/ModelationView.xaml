@@ -111,7 +111,7 @@
                     <CollectionView x:Name="JournalClosedCollection" 
                                     ItemsSource="{Binding JournalsClosedEditing}"
                                     SelectionMode="Single"
-                                    SelectionChangedCommand="{Binding JournalTapped}"		
+                                    SelectionChangedCommand="{Binding ViewJournal}"		
                                     SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference JournalClosedCollection}}">
 
                         <CollectionView.ItemsLayout>

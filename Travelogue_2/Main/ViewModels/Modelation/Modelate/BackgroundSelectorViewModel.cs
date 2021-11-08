@@ -49,7 +49,8 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
                 return;
 
             await Shell.Current.GoToAsync($"{nameof(PageModelationView)}?{nameof(PageModelationViewModel.BackgroundPath)}={background.Path}&" +
-                                                                    $"{nameof(PageModelationViewModel.PageNum)}={PageNum}");
+                                                                    $"{nameof(PageModelationViewModel.PageNum)}={PageNum}&" +
+                                                                    $"{nameof(PageModelationViewModel.NewPage)}={CommonVariables.True}");
         }
     }
 }

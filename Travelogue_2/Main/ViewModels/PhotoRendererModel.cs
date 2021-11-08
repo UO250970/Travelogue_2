@@ -75,13 +75,11 @@ namespace Travelogue_2.Main.Services
             double degrees = ToDegrees(info.GpsLatitude);
             return info.GpsLatitudeRef == ExifGpsLatitudeRef.North ? degrees : -degrees;
         }
-
         private static double DecodeLongitude(JpegInfo info)
         {
             double degrees = ToDegrees(info.GpsLongitude);
             return info.GpsLongitudeRef == ExifGpsLongitudeRef.East ? degrees : -degrees;
         }
-
         private static double ToDegrees(double[] coord)
         {
             return coord[0] + coord[1] / 60.0 + coord[2] / (60.0 * 60.0);
@@ -114,6 +112,6 @@ namespace Travelogue_2.Main.Services
 
     public interface IDependency
     {
-        void Save(Stream stream, string name); // Select Directory
+        string Save(Stream stream, string name); // Select Directory
     }
 }

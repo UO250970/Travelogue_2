@@ -26,7 +26,7 @@ namespace Travelogue_2.Main.Utils
                 }
 
                 var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-                var directoryname = Path.Combine(documents, "Travelogue");
+                var directoryname = Path.Combine(documents, "Travelogue_2");
                 Directory.CreateDirectory(directoryname);
 
                 Debug.WriteLine("Permision camera: " + statusCamera);

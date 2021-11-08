@@ -231,6 +231,12 @@ namespace Travelogue_2.Main.Utils
             return temp;
         }
 
+        public static void CloseJournal(int journalId, string name)
+        {
+            JournalModel temp = GetJournalById(journalId);
+            PDFUtil.CreatePdfFromJournal(temp, name);
+        }
+
         public static IEntry GetEntryDataById(int entryDataId)
         {
             EntryData data = DataBase.GetEntryDataById(entryDataId);
@@ -257,6 +263,28 @@ namespace Travelogue_2.Main.Utils
             return collection;
         }
 
+        public static ImageModel CreateImageJournal(string path, int journalId)
+        {
+            Image image = new Image(path, "", "", "", "");
+
+            Journal journal = DataBase.GetJournalById(journalId);
+            journal.Pages.Add(image);
+
+            DataBase.InsertImage(image);
+
+            if (journal.Pages.Count() > 0) journal.JournalState = State.OPEN;
+            if (journal.Pages.Count() == 0) journal.JournalState = State.CREATED;
+
+            DataBase.UpdateJournal(journal);
+
+            return ImageToModel(image);
+        }
+
+        public static void DeleteImageById(int imageId)
+        {
+            DataBase.DeleteImageById(imageId);
+        }
+
         public static ImageModel CreateImage(string path, string caption, string journey = "", string latitud = "", string longitud = "")
         {
             Image image = new Image(path, caption, journey, latitud, longitud);
@@ -264,6 +292,12 @@ namespace Travelogue_2.Main.Utils
             DataBase.InsertImage(image);
 
             return ImageToModel(image);
+        }
+
+        public static void ShareImage(int ImageId)
+        {
+            Image temp = DataBase.GetImageById(ImageId);
+            ShareUtil.ShareImage(temp.Path);
         }
 
         public static JourneyModel CreateEmptyJourney()
@@ -575,7 +609,7 @@ namespace Travelogue_2.Main.Utils
 
             if (temp.CoverId != journey.CoverId)
             {
-                Image coverTemp = ImageFromModel(GetImageById(journey.CoverId));
+                Image coverTemp = DataBase.GetImageById(journey.CoverId);
                 temp.Cover = coverTemp;
             }
             if (temp.Name != journey.Name) temp.Name = journey.Name;
@@ -645,15 +679,15 @@ namespace Travelogue_2.Main.Utils
             return true;
         }
 
-        public static bool SaveEntry(EntryModel entry, DateTime daySelected)
+        public static bool SaveEntry(EntryModel entry)
         {
             Entry temp = EntryFromModel(entry);
             Day day = temp.Day;
 
             if (!entry.Title.Equals(temp.Title)) temp.Title = entry.Title;
-            if (!temp.Day.Date.Equals(daySelected.Date))
+            if (!entry.Day.Equals(temp.Day.Date))
             {
-                Day newDay = DataBase.GetDayFromDate(daySelected);
+                Day newDay = DataBase.GetDayFromDate(entry.Day);
                 day.Entries.Remove(temp);
                 newDay.Entries.Add(temp);
 
@@ -746,7 +780,7 @@ namespace Travelogue_2.Main.Utils
 
         public static bool DeleteEntryDataById(int dataId)
         {
-            EntryData temp = EntryDataFromModel(GetEntryDataById(dataId));
+            EntryData temp = DataBase.GetEntryDataById(dataId);
             if (temp != null && DataBase.DeleteEntryData(temp)) Alerter.AlertEntryDataDeleted();
             return true;
         }
@@ -792,7 +826,8 @@ namespace Travelogue_2.Main.Utils
                 JournalState = journal.JournalState,
                 Name = journal.Journey.Name,
                 JourneyId = journal.Journey.Id,
-                CoverId = journal.Journey.CoverId
+                CoverId = journal.Journey.CoverId,
+                JournalPath = journal.Path
             };
 
             ImageModel tempI = GetImageById(journal.Journey.CoverId);
@@ -902,7 +937,8 @@ namespace Travelogue_2.Main.Utils
             {
                 Id = entry.Id,
                 Title = entry.Title,
-                Time = entry.Time
+                Time = entry.Time,
+                Day = entry.Day.Date
             };
 
             foreach (EntryData data in entry.Content)
@@ -991,7 +1027,11 @@ namespace Travelogue_2.Main.Utils
             temp.Caption = image.Caption;
             temp.Journey = image.Journey;
             temp.Journal = image.Journal;
-
+            if (temp.Journal != null)
+            {
+                Journal journal = DataBase.GetJournalById(image.JournalId);
+                temp.Page = journal.Pages.FindIndex(x => x.Id == image.Id).ToString();
+            }
             temp.Latitud = image.Latitud;
             temp.Longitud = image.Longitud;
 

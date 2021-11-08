@@ -19,5 +19,7 @@ namespace Travelogue_2.Main.Models
         public ImageSource CoverSource { get; set; }
 
         public List<ImageModel> Pages { get; set; }
+
+        public string JournalPath { get; set; }
     }
 }

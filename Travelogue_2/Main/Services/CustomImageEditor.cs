@@ -7,8 +7,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Travelogue_2.Main.ViewModels.Modelation.Modelate;
-using Xamarin.Forms;
-using ToolbarItem = Syncfusion.SfImageEditor.XForms.ToolbarItem;
 
 namespace Travelogue_2.Main.Services
 {
@@ -143,23 +141,12 @@ namespace Travelogue_2.Main.Services
 
         public void RedoButton() => Redo();
 
+        public void SaveButton() => Save();
 
-        public async void SaveButton()
-        {
-            PermissionStatus permission = CheckPermissions().Result;
-            
-            if (permission == PermissionStatus.Granted)
-            {
-                DependencyService.Get<IDependency>().Save(Model.Stream, Model.GetName());
-                Alerter.AlertPageSaved();
-            } else
-            {
-                Alerter.AlertNoStoragePermissions();
-            }
-        }
 
         public void TextButton()
         {
+            AddText();
         }
 
         public void EventButton()
@@ -177,9 +164,11 @@ namespace Travelogue_2.Main.Services
             Model.GetEntries();
         }
 
-        public void PhotoButton()
+        public async void PhotoButton()
         {
-
+            var temp = Model.GetPhotos();
+            //await Shell.Current.GoToAsync($"{nameof(SelectImagePopUp)}");
+            AddCustomView(temp[0]);
         }
 
         public void ShapeButton()

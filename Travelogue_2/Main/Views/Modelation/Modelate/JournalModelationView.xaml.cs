@@ -34,5 +34,11 @@ namespace Travelogue_2.Main.Views.Modelation.Modelate
             graphics.DrawString("Hello World!!!", font, PdfBrushes.Black, new PointF(0, 0));
             //Shell.SetNavBarIsVisible(this, false);
         }
+
+        protected override void OnAppearing()
+        {
+            PagesCollection.SelectedItem = null;
+            model.OnAppearing();
+        }
     }
 }

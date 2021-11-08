@@ -125,7 +125,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
                     CoverId = CoverImage.ImageId
                 };
                 if (await DataBaseUtil.SaveJourney(temp))
-                    await Shell.Current.GoToAsync("..");
+                    Back();
 
                 //ChangedCreatedJourneis();
             }

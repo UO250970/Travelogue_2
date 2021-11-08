@@ -64,7 +64,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
             else
             {
                 await Alerter.AlertCardCreated();
-                await Shell.Current.GoToAsync("..");
+                Back();
             }
         }
 
@@ -75,7 +75,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
         public async Task CancelCAsync()
         {
-            await Shell.Current.GoToAsync("..");
+            Back();
         }
 
         async void OnImageSelected(ImageModel image)

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 namespace Travelogue_2.Main.Models
 {
@@ -11,5 +12,7 @@ namespace Travelogue_2.Main.Models
         public string Title { get; set; } = string.Empty;
 
         public ObservableCollection<IEntry> Content { get; set; } = new ObservableCollection<IEntry>();
+
+        public DateTime Day { get; set; }
     }
 }

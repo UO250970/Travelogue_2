@@ -12,31 +12,54 @@
             <Grid>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="10*"/>
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Text="{Binding Journey}" FontSize="Title" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="{StaticResource White}"></Label>
 
                 <StackLayout Grid.Row="1">
 
-                    <Image Source="{Binding ImageSource}" Aspect="AspectFill"/>
+                    <Image Source="{Binding ImageSource}" Aspect="AspectFill" VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="CenterAndExpand"/>
 
                 </StackLayout>
 
-                <Label Grid.Row="2" Text="{Binding Caption}" FontSize="Caption" FontAttributes="Italic" VerticalTextAlignment="Center" TextColor="{StaticResource White}"></Label>
+                <Entry Grid.Row="2" Text="{Binding Caption}" FontSize="Caption" HorizontalOptions="CenterAndExpand" FontAttributes="Italic" VerticalTextAlignment="Center" TextColor="{StaticResource White}"></Entry>
 
-                <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Grid Grid.Row="3" ColumnDefinitions="33.33*, 33.33*, 33.33*"
+                        ColumnSpacing="8" 
+                        HorizontalOptions="FillAndExpand">
+                    <Button Text="{Binding Resources[Save]}" Grid.Column="0" HorizontalOptions="FillAndExpand" TextColor="{StaticResource White}"
+                             Command="{Binding SaveImageCommand}"/>
+                    <Button Text="{Binding Resources[Share]}" Grid.Column="1" HorizontalOptions="FillAndExpand" TextColor="{StaticResource White}"
+                            Command="{Binding ShareImageCommand}"/>
+                    <Button Text="{Binding Resources[Delete]}" Grid.Column="2" HorizontalOptions="FillAndExpand" TextColor="{StaticResource White}"
+                            Command="{Binding DeleteImageCommand}"/>
+                </Grid>
 
-                    <Label Text="{Binding Resources[Edit]}" VerticalTextAlignment="Center" TextColor="{StaticResource White}"/>
+                <!--StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
 
-                    <Label Text="{Binding Resources[Share]}" VerticalTextAlignment="Center" TextColor="{StaticResource White}"/>
+                    <Label Text="{Binding Resources[Edit]}" VerticalTextAlignment="Center" TextColor="{StaticResource White}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditImageCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    
+                    <Label Text="{Binding Resources[Share]}" VerticalTextAlignment="Center" TextColor="{StaticResource White}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShareImageCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
 
-                    <Label Text="{Binding Resources[Delete]}" VerticalTextAlignment="Center" TextColor="{StaticResource White}"/>
-
-                </StackLayout>
+                    <Label Text="{Binding Resources[Delete]}" VerticalTextAlignment="Center" TextColor="{StaticResource White}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DeleteImageCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout-->
 
             </Grid>
             

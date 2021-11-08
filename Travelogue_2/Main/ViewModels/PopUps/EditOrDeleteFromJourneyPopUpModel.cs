@@ -79,7 +79,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
             SaveEntryCommand = new Command(() => SaveEntryC());
             DeleteEntryCommand = new Command(() => DeleteEntryC());
 
-            SaveTextCommand = new Command(() => SaveyTextC());
+            SaveTextCommand = new Command(() => SaveTextC());
             DeleteTextCommand = new Command(() => DeleteTextC());
             SaveImageCommand = new Command(() => SaveImageC());
             DeleteImageCommand = new Command(() => DeleteImageC());
@@ -295,7 +295,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
         internal void SaveEntryC()
         {
-            DataBaseUtil.SaveEntry(Entry, DaySelected);
+            DataBaseUtil.SaveEntry(Entry);
             Back();
         }
 
@@ -305,7 +305,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
             Back();
         }
 
-        async internal void SaveyTextC()
+        async internal void SaveTextC()
         {
             EntryTextModel data = (EntryTextModel)DataBaseUtil.GetEntryDataById(int.Parse(EntryDataId));
             if (data != null)
@@ -348,7 +348,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
             {
                 bool result = await Alerter.AlertInfoWillBeLost();
 
-                if (result) await Shell.Current.GoToAsync("..");
+                if (result) Back();
             }
             else
             {

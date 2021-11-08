@@ -12,6 +12,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation
     {
         public Command LoadJourneysCommand { get; }
         public Command<JournalModel> JournalTapped { get; }
+        public Command<JournalModel> ViewJournal { get; }
         public Command StarJournalViewCommand { get; }
         public Command ContinueJournalViewCommand { get; }
         public Command ClosedJournalViewCommand { get; }
@@ -48,6 +49,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation
             JournalsClosedEditing = new ObservableCollection<JournalModel>();
 
             JournalTapped = new Command<JournalModel>(OnJournalSelected);
+            ViewJournal = new Command<JournalModel>(OnViewJournal);
         }
 
         public override void LoadData()
@@ -82,6 +84,13 @@ namespace Travelogue_2.Main.ViewModels.Modelation
                 await Shell.Current.GoToAsync($"{nameof(BackgroundSelectorView)}?{nameof(BackgroundSelectorViewModel.PageNum)}={0}");
             }
             await Shell.Current.GoToAsync($"{nameof(JournalModelationView)}");
+        }
+
+        async void OnViewJournal(JournalModel journal)
+        {
+            CurrentJourneyId = journal.Id.ToString();
+
+            await Shell.Current.GoToAsync($"{nameof(PdfView)}");
         }
     }
 }

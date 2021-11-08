@@ -23,7 +23,7 @@ namespace Travelogue_2
                 MainPage = new AppShell();
 
                 DependencyService.Register<IDependency>();
-                //DependencyService.Register<Receiver>();
+                DependencyService.Register<ISave>();
 
                 AppResources.Culture = new CultureInfo(CurrentLanguage);
                 LocResources = new LocalizedResources(typeof(AppResources), CurrentLanguage);

@@ -285,6 +285,9 @@
   <data name="Images" xml:space="preserve">
     <value>Imagenes</value>
   </data>
+  <data name="ImagesEmpty" xml:space="preserve">
+    <value>Ninguna imagen para mostrar</value>
+  </data>
   <data name="IniDate" xml:space="preserve">
     <value>Fecha inicio</value>
   </data>
@@ -359,6 +362,12 @@
   </data>
   <data name="MessImageAdded" xml:space="preserve">
     <value>La imagen se ha añadido correctamente</value>
+  </data>
+  <data name="MessImageSaved" xml:space="preserve">
+    <value>La imagen se ha guardado correctamente</value>
+  </data>
+  <data name="MessImageWillBeDeleted" xml:space="preserve">
+    <value>Se va a eliminar la imagen ¿Continuar?</value>
   </data>
   <data name="MessInfoAdded" xml:space="preserve">
     <value>La información se ha añadido correctamente</value>
