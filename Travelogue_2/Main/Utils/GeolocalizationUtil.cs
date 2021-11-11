@@ -47,9 +47,9 @@ namespace Travelogue_2.Main.Utils
             return location;
         }
 
-        public async static Task<Position> GetPosition()
+        public static Position GetPosition()
         {
-            Location temp = await GetLocationAsync();
+            Location temp = GetLocationAsync().Result;
             if (temp is null) temp = new Location();
             return new Position(temp.Latitude, temp.Longitude);
         }

@@ -1150,6 +1150,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Sin pie de foto.
+        /// </summary>
+        internal static string NoCaption {
+            get {
+                return ResourceManager.GetString("NoCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sin viaje asociado.
         /// </summary>
         internal static string NoJourneyAssociated {

@@ -5,8 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Travelogue_2.Main.ViewModels.Modelation.Modelate;
+using Xamarin.Forms;
+using ToolbarItem = Syncfusion.SfImageEditor.XForms.ToolbarItem;
 
 namespace Travelogue_2.Main.Services
 {
@@ -20,6 +23,8 @@ namespace Travelogue_2.Main.Services
 
         private List<string> SubFooterButtonsNames { get; set; }
         private Dictionary<string, Delegate> SubFooterButtons { get; set; }
+
+        private Stream Edits;
 
         public CustomImageEditor() 
         {
@@ -46,8 +51,8 @@ namespace Travelogue_2.Main.Services
             FooterButtonsNames = new List<string>() { "Text", "Photo", "Shape" };
             FooterButtons = new Dictionary<string, Delegate>
             {
-                { FooterButtonsNames[0], new Action(TextButton) },
-                { FooterButtonsNames[1], new Action(PhotoButton) },
+                { FooterButtonsNames[0], new Action(TextButtonSelector) },
+                { FooterButtonsNames[1], new Action(PhotoButtonSelector) },
                 { FooterButtonsNames[2], new Action(ShapeButton) }
             };
 
@@ -58,6 +63,11 @@ namespace Travelogue_2.Main.Services
                 { SubFooterButtonsNames[1], new Action(ReservButton) },
                 { SubFooterButtonsNames[2], new Action(EntryButton) }
             };
+
+            ImageLoaded += TextButton;
+            ImageLoaded += PhotoButton;
+
+            RotatableElements = ImageEditorElements.Text | ImageEditorElements.CustomView;
         }
 
         private void StyleButtons()
@@ -72,11 +82,6 @@ namespace Travelogue_2.Main.Services
                 new HeaderToolbarItem() { Text = HeaderButtonsNames[2] });
             ToolbarSettings.ToolbarItems.Add(
                 new HeaderToolbarItem() { Text = HeaderButtonsNames[3] });
-
-            //ToolbarSettings.ToolbarItems.Add(
-            //new FooterToolbarItem() { Icon = BitmapFactory.DecodeResource(Resources, Resource.Drawable.text) });
-            //ToolbarSettings.ToolbarItems.Add(
-                //new FooterToolbarItem() { Text = "More" });
 
             ToolbarSettings.ToolbarItems.Add(
                 new FooterToolbarItem() 
@@ -143,10 +148,18 @@ namespace Travelogue_2.Main.Services
 
         public void SaveButton() => Save();
 
-
-        public void TextButton()
+        public void TextButtonSelector()
         {
-            AddText();
+            Model.SelectText();
+        }
+
+        public void TextButton(Object sender, ImageLoadedEventArgs args)
+        {
+            if (!Model.TextSelected.Equals(string.Empty))
+            {
+                AddText(Model.TextSelected);
+            }
+            Model.TextSelected = string.Empty;
         }
 
         public void EventButton()
@@ -164,11 +177,23 @@ namespace Travelogue_2.Main.Services
             Model.GetEntries();
         }
 
-        public async void PhotoButton()
+        public void PhotoButtonSelector()
         {
-            var temp = Model.GetPhotos();
-            //await Shell.Current.GoToAsync($"{nameof(SelectImagePopUp)}");
-            AddCustomView(temp[0]);
+            Model.SelectPhotos();
+        }
+
+        public void PhotoButton(Object sender, ImageLoadedEventArgs args)
+        {
+            if (!Model.ImageSelectedPath.Equals(string.Empty))
+            {
+                Image customImage = new Image() { HeightRequest = 200, WidthRequest = 200 };
+                string path = Model.ImageSelectedPath;
+                customImage.Source = ImageSource.FromFile(path);
+                AddCustomView(customImage, new CustomViewSettings());
+
+//                Model.ImageSelectedPath = string.Empty;
+            }
+
         }
 
         public void ShapeButton()

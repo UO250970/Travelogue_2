@@ -173,6 +173,12 @@ namespace UITest
             app.Tap(Variables.AceptButton);
         }
 
+        public void PickDestiny(string name)
+        {
+            app.Tap(Variables.DestinySelector);
+            app.EnterText(name);
+        }
+
         [Test]
         public void CreateJourneyTest()
         {
@@ -181,7 +187,7 @@ namespace UITest
 
             EnterText(Variables.TitleSelector, "Holi, test 1");
 
-            //SelectDestiny();
+            PickDestiny("SPAIN");
         }
 
         // TODO Tests
@@ -345,6 +351,8 @@ namespace UITest
         public static string DateEndSelector { get => "DateSelectorEndE"; }
 
         public static string TimeSelector { get => "TimeSelectorE"; }
+
+        public static string DestinySelector { get => "DestinySelectorAC"; }
 
         public static string CreateJourneyButton { get => "CreateJourneyB"; }
     }

@@ -19,8 +19,8 @@ namespace Travelogue_2.Main.Views.Library
 
         protected override void OnAppearing()
         {
+            ClosedJourneysCollection.SelectedItem = null;
             model.OnAppearing();
-            base.OnAppearing();
         }
     }
 }

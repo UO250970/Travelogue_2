@@ -106,8 +106,16 @@ namespace Travelogue_2.Main.ViewModels.Media
         }
         #endregion
 
+        #region Localization
+        public int LocalizationFirstDay
+        {
+            get => int.Parse(Resources["LocalizationFirstDay"]);
+        }
+        #endregion
+
         internal Position GetPosition()
         {
+            Shell.Current.GoToAsync("..");
             return DataBaseUtil.GetPosition();
         }
 

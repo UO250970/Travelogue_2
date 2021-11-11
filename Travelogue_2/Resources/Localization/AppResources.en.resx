@@ -471,6 +471,9 @@
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="NoCaption" xml:space="preserve">
+    <value>No caption</value>
+  </data>
   <data name="NoJourneyAssociated" xml:space="preserve">
     <value>No journey associated</value>
   </data>

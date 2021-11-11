@@ -19,7 +19,6 @@ namespace Travelogue_2.Main.ViewModels
 
         public void ExecuteLoadDataCommand()
         {
-
             try
             {
                 LoadData();

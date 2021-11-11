@@ -1,5 +1,6 @@
 ﻿using Syncfusion.XForms.TabView;
 using System;
+using System.Threading.Tasks;
 using Travelogue_2.Main.ViewModels.Media;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -18,21 +19,18 @@ namespace Travelogue_2.Main.Views.Media
             BindingContext = model = new MediaViewModel();
 
             Shell.SetNavBarIsVisible(this, false);
-            base.OnAppearing();
         }
 
         protected override void OnAppearing()
         {
             model.OnAppearing();
+            new Task(StartMap).Start();
         }
 
-        private void TabView_TabItemTapped(object sender, TabItemTappedEventArgs e)
+        private async void StartMap()
         {
-            if (e.TabItem.Title.Equals(model.Resources["Map"]))
-            {
-                map.MoveToRegion(MapSpan.FromCenterAndRadius(model.GetPosition(), Distance.FromKilometers(10)));
-                model.GetMapPins().ForEach(x => map.Pins.Add(x));
-            }
+            map.MoveToRegion(MapSpan.FromCenterAndRadius(model.GetPosition(), Distance.FromKilometers(10)));
+            model.GetMapPins().ForEach(x => map.Pins.Add(x));
         }
 
         void JourneyTapped(object sender, EventArgs e)

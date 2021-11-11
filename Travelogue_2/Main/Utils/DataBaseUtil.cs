@@ -141,7 +141,7 @@ namespace Travelogue_2.Main.Utils
 
         internal static Position GetPosition()
         {
-            return GeolocalizationUtil.GetPosition().Result;
+            return GeolocalizationUtil.GetPosition();
         }
 
         internal static List<CustomPin> GetMapPins()
@@ -531,6 +531,18 @@ namespace Travelogue_2.Main.Utils
             Journey temp = JourneyFromModel(journey);
             return DaysToModel(temp.Days);
         }
+        public static List<ImageModel> GetImagesFromJourneyId(int journeyId)
+        {
+            Journey temp = DataBase.GetJourneyById(journeyId);
+            return GetImagesFromJourney( JourneyToModel(temp) );
+        }
+        public static List<ImageModel> GetImagesFromJournalId(int journalId)
+        {
+            int id = GetJournalById(journalId).JourneyId;
+            Journey temp = DataBase.GetJourneyById(id);
+            return GetImagesFromJourney(JourneyToModel(temp));
+        }
+
 
         public static List<ImageModel> GetImagesFromJourney(JourneyModel journey)
         {
@@ -538,9 +550,9 @@ namespace Travelogue_2.Main.Utils
             return ImagesToModel(temp);
         }
 
-        public static List<DayModel> GetDaysFromJourneyId(int JourneyId)
+        public static List<DayModel> GetDaysFromJourneyId(int journeyId)
         {
-            Journey temp = DataBase.GetJourneyById(JourneyId);
+            Journey temp = DataBase.GetJourneyById(journeyId);
             return DaysToModel(temp.Days);
         }
 
@@ -591,6 +603,8 @@ namespace Travelogue_2.Main.Utils
 
             return ImageToModel(temp);
         }
+
+        #region Save
 
         public static bool SaveJourneyDestinies(JourneyModel journey, List<DestinyModel> destinies)
         {
@@ -754,6 +768,9 @@ namespace Travelogue_2.Main.Utils
 
             return false;
         }
+        #endregion
+
+        #region Delete
 
         public static bool DeleteJourney(int JourneyId, bool alert = false)
         {
@@ -784,6 +801,8 @@ namespace Travelogue_2.Main.Utils
             if (temp != null && DataBase.DeleteEntryData(temp)) Alerter.AlertEntryDataDeleted();
             return true;
         }
+
+        #endregion
 
         #region Models
 
@@ -1065,16 +1084,39 @@ namespace Travelogue_2.Main.Utils
         private static Style StyleFromModel(StyleModel style) => DataBase.GetStyleByName(style.Name);
         #endregion
 
+        #region StaticVariables
+
         public static DateTime GetNextDayAvailable() => DayTracker.GetNextDayAvailable();
 
         internal static string GetCurrentJourneyId()
         {
             return DayTracker.CurrentJourneyId;
         }
-
         internal static void SetCurrentJourneyId(string value)
         {
             DayTracker.CurrentJourneyId = value;
         }
+
+        private static string TextSelectedId = string.Empty;
+        internal static string GetTextSelectedId()
+        {
+            return TextSelectedId;
+        }
+        internal static void SetTextSelectedId(string value)
+        {
+            TextSelectedId = value;
+        }
+
+        private static string ImageSelectedPath = string.Empty;
+        internal static string GetImageSelectedPath()
+        {
+            return ImageSelectedPath;
+        }
+        internal static void SetImageSelectedPath(string value)
+        {
+            ImageSelectedPath = value;
+        }
+
+        #endregion
     }
 }

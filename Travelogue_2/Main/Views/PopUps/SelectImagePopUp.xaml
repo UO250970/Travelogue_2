@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Shell.PresentationMode="ModalNotAnimated"
              x:Class="Travelogue_2.Main.Views.PopUps.SelectImagePopUp"
+             x:Name="SelectIamgePopUpModel"
              BackgroundColor="#40000000">
     
     <ContentPage.Content>
@@ -13,7 +14,7 @@
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="185"></RowDefinition>
+                <RowDefinition Height="135"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Frame Grid.Row="1" BackgroundColor="{StaticResource White}"
@@ -29,19 +30,20 @@
                         </Label>
                         <Label AutomationId="SaveButtonE" Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding SelectPhotoCommand}"/>
+                                <TapGestureRecognizer Command="{Binding ContinueCommand}"/>
                             </Label.GestureRecognizers>
                         </Label>
                     </StackLayout>
 
-                    <CollectionView ItemsSource="{Binding Photos}"
+                    <CollectionView x:Name="PhotosCollection"
+                                    ItemsSource="{Binding Photos}"
                                     SelectionMode="Single"
                                     SelectionChangedCommand="{Binding PhotoTapped}"		
-                                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference JourneisCreatedCollection}}">
+                                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference PhotosCollection}}">
 
                         <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Horizontal"
-                                        Span="1"/>
+                            <GridItemsLayout Orientation="Vertical"
+                                        Span="3"/>
                         </CollectionView.ItemsLayout>
 
                         <CollectionView.EmptyView>
@@ -50,7 +52,7 @@
 
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImageSour}"/>
+                                <Image Source="{Binding ImageSour}" Margin="15"/>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

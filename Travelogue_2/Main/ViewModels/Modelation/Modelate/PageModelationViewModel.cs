@@ -2,9 +2,11 @@
 using Syncfusion.SfImageEditor.XForms;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
+using Travelogue_2.Main.Views.PopUps;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
@@ -12,7 +14,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
     [QueryProperty("BackgroundPath", "BackgroundPath")]
     [QueryProperty("NewPage", "NewPage")]
     [QueryProperty("PageNum", "PageNum")]
-    public class PageModelationViewModel : PhotoRendererModel
+    public class PageModelationViewModel : ModelationSelectorViewModel
     {
         private string backgroundPath;
         public string BackgroundPath
@@ -94,14 +96,19 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
             return DataBaseUtil.GetEntriesFromJourney(Journey.Id);
         }
 
-        public List<ImageModel> GetPhotos()
+        public async void SelectPhotos()
         {
-            return DataBaseUtil.GetImagesFromJourney(Journey);
+            Shell.Current.GoToAsync($"{nameof(SelectImagePopUp)}");
         }
+
+        public async void SelectText()
+        {
+
+        }
+
 
         public async void Save(ImageSavingEventArgs args)
         {
-
             PermissionStatus permission = await CameraUtil.CheckPermissions();
 
             try

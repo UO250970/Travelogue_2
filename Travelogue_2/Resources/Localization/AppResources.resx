@@ -480,6 +480,9 @@
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="NoCaption" xml:space="preserve">
+    <value>Sin pie de foto</value>
+  </data>
   <data name="NoJourneyAssociated" xml:space="preserve">
     <value>Sin viaje asociado</value>
   </data>

@@ -43,6 +43,7 @@ namespace Travelogue_2
             Routing.RegisterRoute(nameof(EditOrDeleteDestinyPopUp), typeof(EditOrDeleteDestinyPopUp));
             Routing.RegisterRoute(nameof(AddCardPopUp), typeof(AddCardPopUp));
             Routing.RegisterRoute(nameof(EditOrDeleteCardPopUp), typeof(EditOrDeleteCardPopUp));
+            Routing.RegisterRoute(nameof(SelectImagePopUp), typeof(SelectImagePopUp));
 
             Routing.RegisterRoute(nameof(ImageView), typeof(ImageView));
             Routing.RegisterRoute(nameof(BackgroundSelectorView), typeof(BackgroundSelectorView));

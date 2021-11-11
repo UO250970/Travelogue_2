@@ -18,8 +18,15 @@ namespace Travelogue_2.Main.Views.Library
             Shell.SetNavBarIsVisible(this, false);
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            return false;
+        }
+
         protected override void OnAppearing()
         {
+            JourneisCreatedCollection.SelectedItem = null;
+            JourneisClosedCollection.SelectedItem = null;
             model.OnAppearing();
         }
     }

@@ -27,7 +27,8 @@
 
                 </StackLayout>
 
-                <Entry Grid.Row="2" Text="{Binding Caption}" FontSize="Caption" HorizontalOptions="CenterAndExpand" FontAttributes="Italic" VerticalTextAlignment="Center" TextColor="{StaticResource White}"></Entry>
+                <Entry Grid.Row="2" Placeholder="{Binding Resources[NoCaption]}" PlaceholderColor="{StaticResource Grey}"
+                       Text="{Binding Caption}" FontSize="Caption" HorizontalOptions="CenterAndExpand" FontAttributes="Italic" VerticalTextAlignment="Center" TextColor="{StaticResource White}"></Entry>
 
                 <Grid Grid.Row="3" ColumnDefinitions="33.33*, 33.33*, 33.33*"
                         ColumnSpacing="8" 
