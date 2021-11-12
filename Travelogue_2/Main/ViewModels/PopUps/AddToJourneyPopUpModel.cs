@@ -322,8 +322,11 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
         async internal void AddImageC()
         {
-            ImageModel success = await CameraUtil.Photo(this, true);
-            Image = success;
+            ImageModel success = await DataBaseUtil.Photo(this, true);
+            if (success != null)
+            {
+                Image = success;
+            }
         }
 
         async internal void CreateTextC()

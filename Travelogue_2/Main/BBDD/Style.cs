@@ -8,6 +8,9 @@ namespace Travelogue_2.Main.BBDD
         [PrimaryKey, Column("Name"), NotNull]
         public string Name { get; set; }
 
+        [Column("OnUse")]
+        public bool OnUse { get; set; }
+
         [Column("Primary")]
         public string Primary { get; set; } // #3D6D9B - azul, #D075BF - rosa, #8DD075 - verde
 

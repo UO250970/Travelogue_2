@@ -44,9 +44,9 @@ namespace Travelogue_2.Main.Utils
             return GetJourneyById(journal.JourneyId);
         }
 
-        internal static ImageModel Photo(AddSettingsPopUpModel addSettingsPopUpModel)
+        internal async static Task<ImageModel> Photo(PhotoRendererModel photoModel, bool temporal = false)
         {
-            return CameraUtil.Photo(addSettingsPopUpModel, false).Result;
+            return await CameraUtil.Photo(photoModel, temporal);
         }
 
         public static JourneyModel GetJourneyById(int JourneyId)
@@ -79,6 +79,13 @@ namespace Travelogue_2.Main.Utils
             return JournalToModel(temp);
         }
 
+        public static CardModel GetCardById(int CardId)
+        {
+            Card temp = DataBase.GetCardById(CardId);
+
+            return CardToModel(temp);
+        }
+
         public static List<JournalModel> GetJournals()
         {
             List<JournalModel> temp = new List<JournalModel>();
@@ -99,11 +106,6 @@ namespace Travelogue_2.Main.Utils
                 temp.Add(DestinyToModel(dest));
             }
             return temp;
-        }
-
-        public static void NotificationNewPhoto(MediaFile photo)
-        {
-            // this.
         }
 
         public static List<StyleModel> GetStyles()
@@ -223,7 +225,7 @@ namespace Travelogue_2.Main.Utils
         public static List<JournalModel> GetJournalsClosed()
         {
             List<JournalModel> temp = new List<JournalModel>();
-            List<Journal> tempDB = DataBase.GetJournals(State.CLOSED);
+            List<Journal> tempDB = DataBase.GetJournals(State.OPEN).FindAll(x => !x.Path.Equals(string.Empty));
             foreach (Journal jour in tempDB)
             {
                 temp.Add(JournalToModel(jour));
@@ -234,13 +236,20 @@ namespace Travelogue_2.Main.Utils
         public static void CloseJournal(int journalId, string name)
         {
             JournalModel temp = GetJournalById(journalId);
-            PDFUtil.CreatePdfFromJournal(temp, name);
+            temp = PDFUtil.CreatePdfFromJournal(temp, name);
+            SaveJournal(temp);
         }
 
         public static IEntry GetEntryDataById(int entryDataId)
         {
             EntryData data = DataBase.GetEntryDataById(entryDataId);
             return EntryDataToModel(data);
+        }
+
+        public static List<CardModel> GetCards()
+        {
+            List<Card> cards = DataBase.GetCards();
+            return CardsToModel(cards);
         }
 
         internal static void InsertStyles(List<Style> list) => DataBase.InsertStyles(list);
@@ -261,6 +270,35 @@ namespace Travelogue_2.Main.Utils
             }
 
             return collection;
+        }
+
+        public static CardModel CreateCard(string name, ImageModel topIamge, ImageModel backImage)
+        {
+            Image Top = new Image()
+            {
+                Path = topIamge.Path,
+                Caption = name
+            };
+
+            DataBase.InsertImage(Top);
+
+            Image Back = new Image()
+            {
+                Path = backImage.Path,
+                Caption = name
+            };
+
+            DataBase.InsertImage(Back);
+
+            Card temp = new Card()
+            {
+                Name = name,
+                Top = Top.Id,
+                Back = Back.Id
+            };
+
+            DataBase.InsertCard(temp);
+            return CardToModel(temp);
         }
 
         public static ImageModel CreateImageJournal(string path, int journalId)
@@ -636,6 +674,16 @@ namespace Travelogue_2.Main.Utils
             return DataBase.UpdateJourney(temp);
         }
 
+        public static async Task<bool> SaveJournal(JournalModel journal)
+        {
+            Journal temp = JournalFromModel(journal);
+
+            if (temp.Path != journal.JournalPath) temp.Path = journal.JournalPath;
+            if (temp.Name != journal.Name) temp.Name = journal.Name;
+
+            return DataBase.UpdateJournal(temp);
+        }
+
         public static async Task<bool> UpdadteDates(JourneyModel journey)
         {
             if (DataBase.CheckDatesAreEmpty(journey.IniDate, journey.EndDate, journey.Id))
@@ -768,6 +816,29 @@ namespace Travelogue_2.Main.Utils
 
             return false;
         }
+
+        public static bool SaveCard(CardModel card)
+        {
+            Card temp = CardFromModel(card);
+
+            if (!card.Name.Equals(temp.Name)) temp.Name = card.Name;
+
+            Image top = DataBase.GetImageById(temp.Top);
+            Image back = DataBase.GetImageById(temp.Back);
+
+            if (!top.Path.Equals(temp.Top))
+            {
+                top.Path = card.Top;
+                DataBase.UpdateImage(top);
+            }
+            if (!back.Path.Equals(temp.Back))
+            {
+                back.Path = card.Back;
+                DataBase.UpdateImage(back);
+            }
+
+            return DataBase.UpdateCard(temp);
+        }
         #endregion
 
         #region Delete
@@ -799,6 +870,18 @@ namespace Travelogue_2.Main.Utils
         {
             EntryData temp = DataBase.GetEntryDataById(dataId);
             if (temp != null && DataBase.DeleteEntryData(temp)) Alerter.AlertEntryDataDeleted();
+            return true;
+        }
+
+        public static bool DeleteCard(CardModel Card)
+        {
+            Card temp = CardFromModel(Card);
+
+            if (DataBase.DeleteImageById(temp.Top) && DataBase.DeleteImageById(temp.Back) &&
+                DataBase.DeleteCardById(temp.Id))
+            {
+                Alerter.AlertCardDeleted();
+            }
             return true;
         }
 
@@ -1082,6 +1165,31 @@ namespace Travelogue_2.Main.Utils
             return temp;
         }
         private static Style StyleFromModel(StyleModel style) => DataBase.GetStyleByName(style.Name);
+
+        private static List<CardModel> CardsToModel(List<Card> cards)
+        {
+            List<CardModel> temp = new List<CardModel>();
+
+            foreach (Card card in cards)
+            {
+                temp.Add(CardToModel(card));
+            }
+
+            return temp;
+        }
+        private static CardModel CardToModel(Card card)
+        {
+            CardModel temp = new CardModel();
+            temp.Id = card.Id;
+            temp.Name = card.Name;
+            Image top = DataBase.GetImageById(card.Top);
+            temp.Top = top.Path;
+            Image back = DataBase.GetImageById(card.Back);
+            temp.Back = back.Path;
+
+            return temp;
+        }
+        private static Card CardFromModel(CardModel card) => DataBase.GetCardById(card.Id);
         #endregion
 
         #region StaticVariables

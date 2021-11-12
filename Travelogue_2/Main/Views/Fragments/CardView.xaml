@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Frame xmlns="http://xamarin.com/schemas/2014/forms"
+           CornerRadius="20"  
+           Padding="15"
+           BackgroundColor="{StaticResource Primary}"
+           HasShadow="True" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           x:Class="Travelogue_2.Main.Views.Fragments.CardView">
+
+    <StackLayout >
+        <Label Text="{Binding Name}" FontSize="Large" TextColor="{StaticResource White}"/>
+
+        <StackLayout Orientation="Horizontal" HeightRequest="150" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand" Spacing="5" BackgroundColor="{StaticResource PrimaryFaded}">
+
+            <Image Source="{Binding TopImageSour}" WidthRequest="150"/>
+            <Image Source="{Binding BackImageSour}"  WidthRequest="150"/>
+
+        </StackLayout>
+    </StackLayout>
+
+</Frame>

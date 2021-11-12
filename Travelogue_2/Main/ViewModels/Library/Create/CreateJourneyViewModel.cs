@@ -101,7 +101,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
         async internal void AddCoverC()
         {
-            ImageModel success = await CameraUtil.Photo(this, true);
+            ImageModel success = await DataBaseUtil.Photo(this, true);
             if (success != null)
             {
                 CoverImage = success;

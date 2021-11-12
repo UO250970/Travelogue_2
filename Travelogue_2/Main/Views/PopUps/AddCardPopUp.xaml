@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
              x:Class="Travelogue_2.Main.Views.PopUps.AddCardPopUp"
              BackgroundColor="#40000000"
              Shell.PresentationMode="ModalNotAnimated"
@@ -11,77 +12,71 @@
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="110"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition Height="150"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Frame Grid.Row="1" BackgroundColor="{StaticResource White}"
                    Margin="20, 0, 20, 2">
 
-                <StackLayout>
+                <ScrollView>
+                    <StackLayout>
 
-                    <Label Text="{Binding Resources[AddCard]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        <Label Text="{Binding Resources[AddCard]}" FontSize="Title" TextColor="{DynamicResource Primary}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
 
-                    <StackLayout Margin="10">
+                        <StackLayout Margin="10">
 
-                        <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                        <Entry Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" Placeholder="{Binding Resources[AddCardEx]}"/>
+                            <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                            <Entry Text="{Binding Name, Mode=TwoWay}" FontSize="Medium" Placeholder="{Binding Resources[AddCardEx]}"/>
 
-                        <Label Text="{Binding Resources[Photos]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                            <Label Text="{Binding Resources[TopImage]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                            <border:SfBorder BorderColor="{StaticResource Grey}" BorderWidth="2" CornerRadius="10">
+                                <border:SfBorder.DashArray>
+                                    <x:Array Type="{x:Type x:Double}">
+                                        <x:Double>3</x:Double>
+                                        <x:Double>4</x:Double>
+                                    </x:Array>
+                                </border:SfBorder.DashArray>
 
-                        <CollectionView x:Name="ImagesCollection"
-                                            HeightRequest="100"
-                                            Margin="10, 0, 10, 10"
-                                            ItemsSource="{Binding CardImages}"
-                                            SelectionMode="None">
+                                <border:SfBorder.Content >
 
-                            <CollectionView.ItemsLayout>
-                                <GridItemsLayout Orientation="Horizontal"/>
-                            </CollectionView.ItemsLayout>
+                                    <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding TopImage.ImageSour}" Aspect="AspectFill" />
 
-                            <CollectionView.Header>
+                                </border:SfBorder.Content>
 
-                                <border:SfBorder BorderColor="{StaticResource Grey}" BorderWidth="2" CornerRadius="10">
-                                    <border:SfBorder.DashArray>
-                                        <x:Array Type="{x:Type x:Double}">
-                                            <x:Double>3</x:Double>
-                                            <x:Double>4</x:Double>
-                                        </x:Array>
-                                    </border:SfBorder.DashArray>
+                                <border:SfBorder.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddTopImageCommand}"/>
+                                </border:SfBorder.GestureRecognizers>
 
-                                    <border:SfBorder.Content >
+                            </border:SfBorder>
 
-                                        <Image HeightRequest="{Binding CardImagesHeight}" WidthRequest="{Binding CardImagesHeight}" Source="{Binding BlanckImage.ImageSour}">
-                                            <Image.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding BindingContext.AddImageCommand, Source={x:Reference AddCardPopUpName}}"
-                                                                      CommandParameter="{Binding .}"/>
-                                            </Image.GestureRecognizers>
-                                        </Image>
 
-                                    </border:SfBorder.Content>
+                            <Label Text="{Binding Resources[BackImage]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
+                            <border:SfBorder BorderColor="{StaticResource Grey}" BorderWidth="2" CornerRadius="10">
+                                <border:SfBorder.DashArray>
+                                    <x:Array Type="{x:Type x:Double}">
+                                        <x:Double>3</x:Double>
+                                        <x:Double>4</x:Double>
+                                    </x:Array>
+                                </border:SfBorder.DashArray>
 
-                                    <border:SfBorder.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding BindingContext.AddImageCommand, Source={x:Reference AddCardPopUpName}}" />
-                                    </border:SfBorder.GestureRecognizers>
+                                <border:SfBorder.Content >
 
-                                </border:SfBorder>
+                                    <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding BackImage.ImageSour}" Aspect="AspectFill" />
 
-                            </CollectionView.Header>
+                                </border:SfBorder.Content>
 
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Frame Padding="5">
-                                        <Image HeightRequest="{Binding CardImagesHeight}" Source="{Binding .ImageSour}"/>
-                                    </Frame>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                            
-                        </CollectionView>
+                                <border:SfBorder.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddBackImageCommand}"/>
+                                </border:SfBorder.GestureRecognizers>
+
+                            </border:SfBorder>
+
+                        </StackLayout>
                     </StackLayout>
-                </StackLayout>
-
+                </ScrollView>
             </Frame>
 
             <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="20, 0">

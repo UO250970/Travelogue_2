@@ -1,4 +1,5 @@
-﻿using Travelogue_2.Main.Utils;
+﻿using Travelogue_2.Main.Models;
+using Travelogue_2.Main.Utils;
 
 namespace Travelogue_2.Main.ViewModels.Modelation
 {
@@ -13,7 +14,16 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 
         public override void LoadData()
         {
-            JournalPath = DataBaseUtil.GetJournalById( int.Parse(CurrentJourneyId)).JournalPath;
+            JournalModel temp = DataBaseUtil.GetJournalById(int.Parse(CurrentJourneyId));
+            JournalPath = temp.JournalPath;
+            JournalName = temp.Name;
+        }
+
+        private string journalName = string.Empty;
+        public string JournalName
+        {
+            get => journalName;
+            set => SetProperty(ref journalName, value);
         }
     }
 }

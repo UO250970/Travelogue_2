@@ -22,6 +22,7 @@ namespace Travelogue_2.Main.Views.Modelation
             Stream  fileStream = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream(model.JournalPath);
             //Load the PDF
             pdfViewerControl.LoadDocument(fileStream);
+            //pdfViewerControl.
         }
     }
 }

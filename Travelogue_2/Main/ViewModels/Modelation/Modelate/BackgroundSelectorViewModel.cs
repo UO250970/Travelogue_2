@@ -52,5 +52,6 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
                                                                     $"{nameof(PageModelationViewModel.PageNum)}={PageNum}&" +
                                                                     $"{nameof(PageModelationViewModel.NewPage)}={CommonVariables.True}");
         }
+
     }
 }

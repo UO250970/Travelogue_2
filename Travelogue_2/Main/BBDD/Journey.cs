@@ -16,7 +16,7 @@ namespace Travelogue_2.Main.BBDD
         [Column("State"), NotNull]
         public State JourneyState { get; set; } = State.CREATED;
 
-        [Column("Name"), MaxLength(40), NotNull]
+        [Column("Name"), NotNull]
         public string Name { get; set; } = string.Empty;
 
         [Column("IniDate"), NotNull]
@@ -27,14 +27,6 @@ namespace Travelogue_2.Main.BBDD
 
         [ManyToMany(typeof(JourneyDestiny), CascadeOperations = CascadeOperation.CascadeRead)]
         public List<Destiny> Destinies { get; set; } = new List<Destiny>();
-
-        // TODO Son nuevos, probar
-        //[ForeignKey(typeof(Journal))]
-        //public int journalId { get; set; }
-
-        //[OneToOne]
-        //public Journal Journal { get; set; }
-        //public Journal Journal { get; set; }
 
         [ForeignKey(typeof(Image))]
         public int CoverId { get; set; }

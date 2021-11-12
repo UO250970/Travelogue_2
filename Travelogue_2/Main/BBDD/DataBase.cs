@@ -93,6 +93,7 @@ namespace Travelogue_2.Main.BBDD
                 conn.CreateTable<Image>();
 
                 conn.CreateTable<Style>();
+                conn.CreateTable<Card>();
             }
             return QueryAct(Act);
         }
@@ -112,7 +113,8 @@ namespace Travelogue_2.Main.BBDD
                 conn.DeleteAll<EntryData>();
                 conn.DeleteAll<Image>();
 
-                //conn.DeleteAll<Style>();
+                conn.DeleteAll<Style>();
+                conn.DeleteAll<Card>();
             }
             return QueryAct(Act);
         }
@@ -133,6 +135,7 @@ namespace Travelogue_2.Main.BBDD
                 conn.DropTable<Image>();
 
                 conn.DropTable<Style>();
+                conn.DropTable<Card>();
             }
             return QueryAct(Act);
         }
@@ -566,6 +569,40 @@ namespace Travelogue_2.Main.BBDD
         {
             var temp = GetStyles();
             return temp != null && temp.Count() != 0;
+        }
+        #endregion
+
+        #region Card
+
+        public static List<Card> GetCards()
+        {
+            List<Card> Func() => conn.GetAllWithChildren<Card>(recursive: false);
+            return QueryFunc(Func);
+        }
+        public static Card GetCardById(int id)
+        {
+            Card Func() => conn.FindWithChildren<Card>(id, recursive: true);
+            return QueryFunc(Func);
+        }
+
+        public static bool UpdateCard(Card card)
+        {
+            void Act() => conn.UpdateWithChildren(card);
+            return QueryAct(Act);
+        }
+
+        public static bool InsertCard(Card card)
+        {
+            void Act() => conn.InsertWithChildren(card);
+            return QueryAct(Act);
+        }
+
+        /** Delete */
+        public static bool DeleteCardById(int CardId)
+        {
+            Card temp = GetCardById(CardId);
+            void Act() => conn.Delete(temp);
+            return QueryAct(Act);
         }
         #endregion
 

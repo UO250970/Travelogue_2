@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Travelogue_2.Main.Views.Settings.SettingsCardHolderView">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:fragments="clr-namespace:Travelogue_2.Main.Views.Fragments"
+             xmlns:effects="clr-namespace:Travelogue_2.Main.Services" 
+             x:Class="Travelogue_2.Main.Views.Settings.SettingsCardHolderView"
+             x:Name="SettingsCardHolderViewName">
 
     <AbsoluteLayout>
 
@@ -30,29 +33,26 @@
 
             </StackLayout>
 
-            <CollectionView x:Name="DestiniesListView"
-                            ItemsSource="{Binding DestiniesOrdered}"
-                            ItemsLayout="VerticalList" Grid.Row="1" >
+            <CollectionView x:Name="CardsListView"
+                            ItemsSource="{Binding Cards}"
+                            ItemsLayout="VerticalList" Grid.Row="1"
+                            SelectionChangedCommand="{Binding CardTapped}"		
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference CardsListView}}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
 
-                        <Frame>
-                            <StackLayout>
-                                <Label Text="{Binding Key}" FontSize="Large" TextColor="{DynamicResource Primary}"/>
-                                <Rectangle HeightRequest="1" WidthRequest="400" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource Grey}"/>
+                        <fragments:CardView BindingContext="{Binding .}"
+                                            Margin="10"
+                                            
+                         effects:LongPressedEffect.Command="{Binding BindingContext.EditOrDeleteCardCommand, Source={x:Reference SettingsCardHolderViewName}}"
+                         effects:LongPressedEffect.CommandParameter="{Binding .}">
 
-                                <StackLayout BindableLayout.ItemsSource="{Binding Value}" 
-                                                VerticalOptions="StartAndExpand">
-                                    <BindableLayout.ItemTemplate>
-                                        <DataTemplate>
 
-                                            <Label Margin="5" Text="{Binding .Destiny}" FontSize="Medium" Padding="5, 0" HeightRequest="25"/>
+                            <fragments:CardView.Effects>
+                                <effects:LongPressedEffect/>
+                            </fragments:CardView.Effects>
+                        </fragments:CardView>
 
-                                        </DataTemplate>
-                                    </BindableLayout.ItemTemplate>
-                                </StackLayout>
-                            </StackLayout>
-                        </Frame>
 
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

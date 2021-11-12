@@ -232,6 +232,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Reverso.
+        /// </summary>
+        internal static string BackImage {
+            get {
+                return ResourceManager.GetString("BackImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Calendario.
         /// </summary>
         internal static string Calendar {
@@ -727,6 +736,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a La tarjeta se ha eliminado.
+        /// </summary>
+        internal static string MessEntryCardDeleted {
+            get {
+                return ResourceManager.GetString("MessEntryCardDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a La entrada se ha creado correctamente.
         /// </summary>
         internal static string MessEntryCreated {
@@ -907,7 +925,7 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Se debe introducir al menos una imagen en la tarjeta.
+        ///   Busca una cadena traducida similar a Se deben introducir las dos imagenes en la tarjeta.
         /// </summary>
         internal static string MessNoImagesInCard {
             get {
@@ -1380,6 +1398,15 @@ namespace Travelogue_2.Resources.Localization {
         internal static string Time {
             get {
                 return ResourceManager.GetString("Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cara.
+        /// </summary>
+        internal static string TopImage {
+            get {
+                return ResourceManager.GetString("TopImage", resourceCulture);
             }
         }
         

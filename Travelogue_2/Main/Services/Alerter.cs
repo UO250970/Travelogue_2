@@ -196,9 +196,12 @@ namespace Travelogue_2.Main.Services
 
         internal static async Task AlertEntryDeleted()
             => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEntryDeleted"], App.LocResources["Ok"]);
-
+        
         internal static async Task AlertEntryDataDeleted()
             => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEntryDataDeleted"], App.LocResources["Ok"]);
+
+        internal static async Task AlertCardDeleted()
+            => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEntryCardDeleted"], App.LocResources["Ok"]);
         #endregion
 
         /** Photo */

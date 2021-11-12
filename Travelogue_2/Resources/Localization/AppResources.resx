@@ -174,6 +174,9 @@
   <data name="AppName" xml:space="preserve">
     <value>Travelogue</value>
   </data>
+  <data name="BackImage" xml:space="preserve">
+    <value>Reverso</value>
+  </data>
   <data name="Calendar" xml:space="preserve">
     <value>Calendario</value>
   </data>
@@ -339,6 +342,9 @@
   <data name="MessEmptyData" xml:space="preserve">
     <value>Se debe rellenar los campos obligatorios</value>
   </data>
+  <data name="MessEntryCardDeleted" xml:space="preserve">
+    <value>La tarjeta se ha eliminado</value>
+  </data>
   <data name="MessEntryCreated" xml:space="preserve">
     <value>La entrada se ha creado correctamente</value>
   </data>
@@ -400,7 +406,7 @@
     <value>Se debe seleccionar una imagen</value>
   </data>
   <data name="MessNoImagesInCard" xml:space="preserve">
-    <value>Se debe introducir al menos una imagen en la tarjeta</value>
+    <value>Se deben introducir las dos imagenes en la tarjeta</value>
   </data>
   <data name="MessNoNameInCard" xml:space="preserve">
     <value>Se debe introducir un nombre a la tarjeta</value>
@@ -557,6 +563,9 @@
   </data>
   <data name="Time" xml:space="preserve">
     <value>Hora</value>
+  </data>
+  <data name="TopImage" xml:space="preserve">
+    <value>Cara</value>
   </data>
   <data name="Undo" xml:space="preserve">
     <value>Deshacer</value>

@@ -31,6 +31,11 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
             PageTappedDelete = new Command<ImageModel>(OnPageDelete);
 
             ExecuteLoadDataCommand();
+
+            /*if (JournalState == State.CREATED)
+            {
+                CreatePageC();
+            }*/
         }
 
         public override void LoadData()
@@ -39,18 +44,19 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
             {
                 JournalModel journal = DataBaseUtil.GetJournalById(int.Parse(CurrentJourneyId));
                 JourneyName = journal.Name;
+                JournalState = journal.JournalState;
 
                 Pages.Clear();
                 journal.Pages.ForEach(x => Pages.Add(x));
 
                 PagesCount = string.Format(Resources["PagesCountMess"], Pages.Count);
 
-                _ = int.Parse(PagesCount) > 0 ? CreateJournalIsEnabled = true : CreateJournalIsEnabled = false;
+                _ = Pages.Count > 0 ? CreateJournalIsEnabled = true : CreateJournalIsEnabled = false;
             }
         }
 
         #region JourneyName
-        public string journeyName;
+        private string journeyName;
 
         public string JourneyName
         {
@@ -60,11 +66,20 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
         #endregion
 
         #region PagesCount
-        public string pagesCount = "";
+        private string pagesCount = "";
         public string PagesCount
         {
             get => pagesCount;
             set => SetProperty(ref pagesCount, value);
+        }
+        #endregion
+
+        #region JournalState
+        private State journalState;
+        public State JournalState
+        {
+            get => journalState;
+            set => SetProperty(ref journalState, value);
         }
         #endregion
 

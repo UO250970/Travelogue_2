@@ -209,7 +209,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
         async internal void AddImageC()
         {
-            ImageModel success = await CameraUtil.Photo(this);
+            ImageModel success = await DataBaseUtil.Photo(this);
             if (success != null)
             {
                 JourneyImages.Add(success);

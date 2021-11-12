@@ -15,7 +15,7 @@ namespace Travelogue_2.Main.BBDD
         [Column("State"), NotNull]
         public State JournalState { get; set; } = State.CREATED;
 
-        [Column("Name"), MaxLength(40), NotNull]
+        [Column("Name"), NotNull]
         public string Name { get; set; } = string.Empty;
 
         public Journal() { }

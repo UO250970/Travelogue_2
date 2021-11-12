@@ -79,10 +79,6 @@ namespace Travelogue_2.Main.ViewModels.Modelation
 
             CurrentJourneyId = journal.Id.ToString();
 
-            if (journal.JournalState != State.CREATED)
-            {
-                await Shell.Current.GoToAsync($"{nameof(BackgroundSelectorView)}?{nameof(BackgroundSelectorViewModel.PageNum)}={0}");
-            }
             await Shell.Current.GoToAsync($"{nameof(JournalModelationView)}");
         }
 

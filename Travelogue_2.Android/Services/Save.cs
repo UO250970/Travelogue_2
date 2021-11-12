@@ -9,6 +9,7 @@ using Android.Content.PM;
 using AndroidX.Core.Content;
 using AndroidX.Core.App;
 using Travelogue_2.Main.Utils;
+using Android.App;
 
 [assembly: Dependency(typeof(Travelogue_2.Droid.Services.Save))]
 namespace Travelogue_2.Droid.Services
@@ -21,21 +22,20 @@ namespace Travelogue_2.Droid.Services
         {
             string root = null;
 
-            if (ContextCompat.CheckSelfPermission(Forms.Context, Manifest.Permission.WriteExternalStorage) != Permission.Granted)
+            if (ContextCompat.CheckSelfPermission(Forms.Context.ApplicationContext, Manifest.Permission.WriteExternalStorage) != Permission.Granted)
             {
-                ActivityCompat.RequestPermissions((Android.App.Activity)Forms.Context, new String[] { Manifest.Permission.WriteExternalStorage }, 1);
+                ActivityCompat.RequestPermissions((Activity) Forms.Context, new string[] { Manifest.Permission.WriteExternalStorage }, 1);
             }
 
             //Get the root path in android device.
-            if (Android.OS.Environment.IsExternalStorageEmulated)
+            /*if (Android.OS.Environment.IsExternalStorageEmulated)
             {
                 root = Android.OS.Environment.ExternalStorageDirectory.ToString();
-            }
-            else
-                root = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            }*/
+            root = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             //Create directory and file 
-            Java.IO.File myDir = new Java.IO.File(root + "/Syncfusion");
+            Java.IO.File myDir = new Java.IO.File(root + "/Travelogue");
             myDir.Mkdir();
 
             Java.IO.File file = new Java.IO.File(myDir, fileName);
@@ -57,8 +57,11 @@ namespace Travelogue_2.Droid.Services
                 string mimeType = Android.Webkit.MimeTypeMap.Singleton.GetMimeTypeFromExtension(extension);
                 Intent intent = new Intent(Intent.ActionView);
                 intent.SetFlags(ActivityFlags.ClearTop | ActivityFlags.NewTask);
-                Android.Net.Uri path = FileProvider.GetUriForFile(Forms.Context, Android.App.Application.Context.PackageName + ".provider", file);
-                intent.SetDataAndType(path, mimeType);
+                //Android.Net.Uri path = FileProvider.GetUriForFile(Forms.Context, Android.App.Application.Context.PackageName + ".fileprovider", file); //Environment.GetFolderPath(Environment.SpecialFolder.Personal)
+                Android.Net.Uri uri = FileProvider.GetUriForFile(Android.App.Application.Context, Android.App.Application.Context.PackageName + ".fileprovider", file);
+                //Android.Net.Uri uri = FileProvider.GetUriForFile(Forms.Context.ApplicationContext, Android.App.Application.Context.PackageName + ".provider", file);
+                //Android.Net.Uri uri = FileProvider.GetUriForFile(Forms.Context.ApplicationContext, "com.company.app.fileprovider", file);
+                intent.SetDataAndType(uri, mimeType);
                 intent.AddFlags(ActivityFlags.GrantReadUriPermission);
                 Forms.Context.StartActivity(Intent.CreateChooser(intent, "Choose App"));
             }

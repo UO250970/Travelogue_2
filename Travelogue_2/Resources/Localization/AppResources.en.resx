@@ -168,6 +168,9 @@
   <data name="AlertNoTitleInReservation" xml:space="preserve">
     <value>Reservation without title</value>
   </data>
+  <data name="BackImage" xml:space="preserve">
+    <value>Back</value>
+  </data>
   <data name="Calendar" xml:space="preserve">
     <value>Calendar</value>
   </data>
@@ -330,6 +333,9 @@
   <data name="MessEmptyData" xml:space="preserve">
     <value>The mandatory data must be filled</value>
   </data>
+  <data name="MessEntryCardDeleted" xml:space="preserve">
+    <value>Card deleted correctly</value>
+  </data>
   <data name="MessEntryCreated" xml:space="preserve">
     <value>Entry created correctly</value>
   </data>
@@ -391,7 +397,7 @@
     <value>An image must be selected</value>
   </data>
   <data name="MessNoImagesInCard" xml:space="preserve">
-    <value>The card must have at least one image</value>
+    <value>The card must have two images</value>
   </data>
   <data name="MessNoNameInCard" xml:space="preserve">
     <value>The card must have a name</value>
@@ -545,6 +551,9 @@
   </data>
   <data name="Time" xml:space="preserve">
     <value>Time</value>
+  </data>
+  <data name="TopImage" xml:space="preserve">
+    <value>Top</value>
   </data>
   <data name="Undo" xml:space="preserve">
     <value>Undo</value>

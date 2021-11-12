@@ -3,14 +3,84 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Travelogue_2.Main.Views.PopUps.EditOrDeleteCardPopUp"
              BackgroundColor="#40000000"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
              Shell.PresentationMode="ModalNotAnimated">
     
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Frame Grid.Row="1" BackgroundColor="{StaticResource White}"
+                   Margin="20, 0, 20, 2">
+
+                <StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label AutomationId="CancelButton" Text="&#xea0f;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CancelCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        <Label AutomationId="SaveButton" Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SaveCardCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+
+                    <StackLayout Margin="10">
+
+                        <Entry Text="{Binding Card.Name, Mode=TwoWay}" FontSize="Medium" Placeholder="{Binding Resources[AddCardEx]}"/>
+
+                        <border:SfBorder BorderColor="{StaticResource Grey}" BorderWidth="2" CornerRadius="10">
+
+                            <border:SfBorder.Content >
+
+                                <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding TopImage.ImageSour}" Aspect="AspectFill" />
+
+                            </border:SfBorder.Content>
+
+                            <border:SfBorder.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AddTopImageCommand}"/>
+                            </border:SfBorder.GestureRecognizers>
+
+                        </border:SfBorder>
+
+                        <border:SfBorder BorderColor="{StaticResource Grey}" BorderWidth="2" CornerRadius="10">
+
+                            <border:SfBorder.Content >
+
+                                <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding BackImage.ImageSour}" Aspect="AspectFill" />
+
+                            </border:SfBorder.Content>
+
+                            <border:SfBorder.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding AddBackImageCommand}"/>
+                            </border:SfBorder.GestureRecognizers>
+
+                        </border:SfBorder>
+
+                    </StackLayout>
+                </StackLayout>
+
+            </Frame>
+
+            <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="20, 0">
+                <Button Text="{Binding Resources[Delete]}" HorizontalOptions="FillAndExpand" Command="{Binding DeleteCardCommand}" BackgroundColor="{DynamicResource Red}"/>
+            </StackLayout>
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CancelCommand}"/>
+            </Grid.GestureRecognizers>
+        </Grid>
+
     </ContentPage.Content>
     
 </ContentPage>

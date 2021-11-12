@@ -10,9 +10,8 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 {
     public class AddSettingsPopUpModel : PhotoRendererModel
     {
-        public ObservableCollection<ImageModel> CardImages { get; }
-
-        public Command AddImageCommand { get; }
+        public Command AddTopImageCommand { get; }
+        public Command AddBackImageCommand { get; }
         public Command CreateCardCommand { get; }
         public Command CreateDestinyCommand { get; }
         public Command CancelCommand { get; }
@@ -20,13 +19,11 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
         public AddSettingsPopUpModel()
         {
-            AddImageCommand = new Command(() => AddImageC());
-            CreateCardCommand = new Command(() => CreateCardCAsync());
+            AddTopImageCommand = new Command(() => AddTopImageC());
+            AddBackImageCommand = new Command(() => AddBackImageC());
+            CreateCardCommand = new Command(() => CreateCardC());
             CreateDestinyCommand = new Command(() => CreateDestinyC());
-            CancelCommand = new Command(() => CancelCAsync());
-
-
-            CardImages = new ObservableCollection<ImageModel>();
+            CancelCommand = new Command(() => CancelC());
 
             ImageTapped = new Command<ImageModel>(OnImageSelected);
         }
@@ -37,32 +34,66 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
         #endregion
 
-        public override void LoadData()
-        {
-            throw new NotImplementedException();
-        }
+        #region CardImages
 
-        async internal void AddImageC()
+        public ImageModel topImage = new ImageModel();
+        public ImageModel TopImage
         {
-            ImageModel success = DataBaseUtil.Photo(this);
-            if (success != null)
+            get => topImage;
+            set
             {
-                CardImages.Add(success);
+                SetProperty(ref topImage, value);
             }
         }
 
-        public async Task CreateCardCAsync()
+        public ImageModel backImage = new ImageModel();
+        public ImageModel BackImage
+        {
+            get => backImage;
+            set
+            {
+                SetProperty(ref backImage, value);
+            }
+        }
+
+        #endregion
+
+        public override void LoadData()
+        {
+            
+        }
+
+        async internal void AddTopImageC()
+        {
+            ImageModel success = await DataBaseUtil.Photo(this, true);
+            if (success != null)
+            {
+                TopImage = success;
+            }
+        }
+
+        async internal void AddBackImageC()
+        {
+            ImageModel success = await DataBaseUtil.Photo(this, true);
+            if (success != null)
+            {
+                BackImage = success;
+            }
+        }
+
+        async void CreateCardC()
         {
             if (Name == string.Empty)
             {
                 await Alerter.AlertNoNameInCard();
             }
-            else if (CardImages.Count == 0)
+            else if (TopImage.Path.Equals(string.Empty) || BackImage.Path.Equals(string.Empty))
             {
                 await Alerter.AlertNoImagesInCard();
             }
             else
             {
+                DataBaseUtil.CreateCard(Name, TopImage, BackImage);
                 await Alerter.AlertCardCreated();
                 Back();
             }
@@ -73,7 +104,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
 
         }
 
-        public async Task CancelCAsync()
+        public async Task CancelC()
         {
             Back();
         }

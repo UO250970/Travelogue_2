@@ -53,7 +53,7 @@ namespace Travelogue_2.Droid.Services
                     throw new Exception("Custom pin not found");
                 }
 
-                view = inflater.Inflate(Resource.Layout.MapInfoWindow, null);
+                /*view = inflater.Inflate(Resource.Layout.MapInfoWindow, null);
 
                 var infoTitle = view.FindViewById<TextView>(Resource.Id.InfoWindowTitle);
                 var infoSubtitle = view.FindViewById<TextView>(Resource.Id.InfoWindowSubtitle);
@@ -70,8 +70,8 @@ namespace Travelogue_2.Droid.Services
                 var image = new UIImageView(new CGRect(0, 0, 200, 84));
                 image.Image = UIImage.FromFile("xamarin.png");
 
-                return view;
-                //return null;
+                return view;*/
+                return null;
             }
             return null;
         }

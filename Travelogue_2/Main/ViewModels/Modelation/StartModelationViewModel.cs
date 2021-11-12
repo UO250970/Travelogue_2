@@ -35,7 +35,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation
                 return;
 
             CurrentJourneyId = journal.Id.ToString();
-            await Shell.Current.GoToAsync($"{nameof(BackgroundSelectorView)}?{nameof(BackgroundSelectorViewModel.PageNum)}={0}");
+            await Shell.Current.GoToAsync($"{nameof(JournalModelationView)}");
         }
 
     }

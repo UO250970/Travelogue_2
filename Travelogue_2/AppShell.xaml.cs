@@ -26,6 +26,7 @@ namespace Travelogue_2
             Routing.RegisterRoute(nameof(ContinueModelationView), typeof(ContinueModelationView));
             Routing.RegisterRoute(nameof(EndedModelationView), typeof(EndedModelationView));
             Routing.RegisterRoute(nameof(JournalModelationView), typeof(JournalModelationView));
+            Routing.RegisterRoute(nameof(PdfView), typeof(PdfView));
 
             Routing.RegisterRoute(nameof(SettingsLanguageView), typeof(SettingsLanguageView));
             Routing.RegisterRoute(nameof(SettingsCardHolderView), typeof(SettingsCardHolderView));
@@ -48,6 +49,16 @@ namespace Travelogue_2
             Routing.RegisterRoute(nameof(ImageView), typeof(ImageView));
             Routing.RegisterRoute(nameof(BackgroundSelectorView), typeof(BackgroundSelectorView));
             Routing.RegisterRoute(nameof(PageModelationView), typeof(PageModelationView));
+
+        }
+        protected override bool OnBackButtonPressed()
+        {
+            if (Current.Items.Count > 0)
+            {
+                base.OnBackButtonPressed();
+                return true;
+            }
+            return false;
         }
 
     }

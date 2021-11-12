@@ -130,7 +130,7 @@ namespace Travelogue_2.Main.ViewModels.Journey
 
         async internal void ModifyCoverC()
         {
-            ImageModel success = await CameraUtil.Photo(this);
+            ImageModel success = await DataBaseUtil.Photo(this);
             if (success != null)
             {
                 CoverImage = success;
