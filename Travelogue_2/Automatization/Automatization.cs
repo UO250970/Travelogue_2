@@ -152,7 +152,10 @@ namespace Travelogue_2.Automatization
 
             if (!DataBaseUtil.HasJourneis())
             {
-                properties.Clear();
+                properties.Clear(); 
+                CreateOnCourse();
+                CreateFutur();
+                CreateFinished();
             }
 
             if (!DataBaseUtil.HasDestinies())
@@ -167,9 +170,6 @@ namespace Travelogue_2.Automatization
             }
             DataBaseUtil.GetStyles().ForEach(x => CommonVariables.AvailableStyles.Add(x));
 
-            CreateOnCourse();
-            CreateFutur();
-            CreateFinished();
         }
 
     }
