@@ -44,6 +44,9 @@ namespace Travelogue_2.Main.ViewModels.PopUps
             if (CardId != null)
             {
                 Card = DataBaseUtil.GetCardById(int.Parse(CardId));
+
+                top = Card.Top;
+                back = Card.Back;
             }
         }
 
@@ -54,10 +57,19 @@ namespace Travelogue_2.Main.ViewModels.PopUps
             set => SetProperty(ref card, value);
         }
 
-        private Image topImage;
+        private string top;
+        public string Top
+		{
+            get => top;
+            set => SetProperty(ref top, value);
+        }
 
-
-        private Image backImage;
+        private string back;
+        public string Back
+        {
+            get => back;
+            set => SetProperty(ref back, value);
+        }
 
         async internal void AddTopImageC()
         {
@@ -65,6 +77,7 @@ namespace Travelogue_2.Main.ViewModels.PopUps
             if (success != null)
             {
                 Card.Top = success.Path;
+                Top = success.Path;
             }
         }
 
@@ -74,26 +87,29 @@ namespace Travelogue_2.Main.ViewModels.PopUps
             if (success != null)
             {
                 Card.Back = success.Path;
+                Back = success.Path;
             }
         }
 
         internal void SaveCardC()
         {
             DataBaseUtil.SaveCard(Card);
+            Back();
         }
 
         internal void DeleteCardC()
         {
             DataBaseUtil.DeleteCard(Card);
+            Back();
         }
 
         internal async void CancelC()
         {
-            if (!Card.Name.Equals(string.Empty))
+            if (Card.Name.Equals(string.Empty))
             {
                 await Alerter.AlertNoNameInCard();
             }
-            else if (!Card.Top.Equals(string.Empty) || !Card.Back.Equals(string.Empty))
+            else if (Card.Top.Equals(string.Empty) || Card.Back.Equals(string.Empty))
             {
                 await Alerter.AlertNoImagesInCard();
             } else

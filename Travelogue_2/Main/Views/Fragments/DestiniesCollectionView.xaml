@@ -15,6 +15,7 @@
                                         NoResultsFoundText="{Binding Resources[NoResultsFound]}"
                                         Text="{Binding DestinyText, Mode=TwoWay}"
                                         SuggestionBoxPlacement="Top"
+                                        IsEnabled="{Binding DestiniesEnabled}"
                                         Watermark="{Binding Resources[EnterADestiny]}"
                                         HorizontalOptions="FillAndExpand"/>
             <Button x:Name="AddDestinyButton"
@@ -92,13 +93,14 @@
                                 </StackLayout>
                             </Frame>
 
-                            <Button x:Name="DeleteJourneyButton" 
-                                                Style="{StaticResource circleButtonDeleteStyle}"
-                                                BackgroundColor="{StaticResource None}"
-                                                FontSize="Medium"
-                                                HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
-                                                Command="{Binding BindingContext.DestinyTappedDelete, Source={x:Reference DestiniesCollectionViewName}}"
-                                                CommandParameter="{Binding .}"/>
+                            <Button x:Name="DeleteDestinyButton" 
+                                    Style="{StaticResource circleButtonDeleteStyle}"
+                                    BackgroundColor="{StaticResource None}"
+                                    FontSize="Medium"
+                                    IsEnabled="{Binding DestiniesEnabled}"
+                                    HorizontalOptions="StartAndExpand"  Text="&#xea0f;" FontFamily="{StaticResource Icon}" 
+                                    Command="{Binding BindingContext.DestinyTappedDelete, Source={x:Reference DestiniesCollectionViewName}}"
+                                    CommandParameter="{Binding .}"/>
 
                         </AbsoluteLayout>
                     </StackLayout>

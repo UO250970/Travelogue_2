@@ -11,14 +11,6 @@ namespace Travelogue_2.Main.Services
 
     public interface IReceiver
     {
-        /*public void ReceiveText(string text)
-        {
-			var temp = text = text.ToLower();
-        }
 
-		public MediaFile ReceivePhoto()
-		{
-			return CameraUtil.PhotoOngoingJourney();
-		}*/
     }
 }

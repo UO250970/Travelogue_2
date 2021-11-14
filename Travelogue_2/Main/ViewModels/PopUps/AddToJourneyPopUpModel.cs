@@ -80,7 +80,6 @@ namespace Travelogue_2.Main.ViewModels.PopUps
         {
             if (CurrentJourneyId != null && DaySelectedNum != null)
             {
-                // TODO - Pilla el journey de BBDD y pilla el list de dias o whatever
                 Days = DataBaseUtil.GetDaysFromJourneyId(int.Parse(CurrentJourneyId))
                     .OrderBy(x => x.Date)
                     .ToList();

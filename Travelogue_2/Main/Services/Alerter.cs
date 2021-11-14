@@ -27,50 +27,13 @@ namespace Travelogue_2.Main.Services
         public static async Task AlertDatesAlreadyInUse()
             => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessDatesAlreadyInUse"], App.LocResources["Ok"]);
 
-        /*
-		public static async Task AlertDayOccupied()
-		{
-			await Page?.DisplayAlert(AppResources.AlertDiaInvalid, AppResources.MessDiaInvalid, AppResources.Ok);
-		}
-
-		internal static async Task<bool> AlertEntryWithNoData()
-		{
-			return await Page?.DisplayAlert(AppResources.Empty, AppResources.MessEntryEmpty, AppResources.Ok, AppResources.Cancel);
-		}
-
-		internal static async Task<bool> AlertJourneyCanBeOpened()
-		{
-			return await Page?.DisplayAlert(AppResources.Empty, AppResources.MessJourneyCanBeOpened, AppResources.Ok, AppResources.Cancel);
-		}
-
-		internal static async Task<bool> AlertDelayIniDate()
-		{
-			return await Page?.DisplayAlert(AppResources.Empty, AppResources.MessJourneyWillBeDelayed, AppResources.Ok, AppResources.Cancel);
-		}
-
-		internal static async Task<bool> AlertJourneyCanBeClosed()
-		{
-			return await Page?.DisplayAlert(AppResources.Empty, AppResources.MessJourneyCanBeClosed, AppResources.Ok, AppResources.Cancel);
-		}
-
-		internal static async Task<bool> AlertRemoveJourneyWithPhotos()
-		{
-			return await Page?.DisplayAlert(AppResources.Empty, AppResources.MessRemoveJourneyWithPhotos, AppResources.Yes, AppResources.No);
-		}*/
-
         #endregion
 
         #region Created
 
         public static async Task AlertJourneyCreated()
-            => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessJourfCreated"], App.LocResources["Ok"]);
+            => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessJourCreated"], App.LocResources["Ok"]);
 
-        /*
-		public static async Task AlertJourneyAlreadyCreated()
-		{
-			await Page?.DisplayAlert(AppResources.Empty, AppResources.MessJourAlreadyCreated, AppResources.Ok);
-		}
-		*/
         internal static async Task AlertEventCreated()
             => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEventCreated"], App.LocResources["Ok"]);
 
@@ -95,12 +58,6 @@ namespace Travelogue_2.Main.Services
         #endregion
 
         #region NotName
-        /*
-		public static async Task AlertNoNameInNewCountry()
-		{
-			await Page?.DisplayAlert(AppResources.AlertNoNameInNewCountry, AppResources.MessNoNameInNewCountry, AppResources.Ok);
-		}
-		*/
         public static async Task AlertNoNameInJourney()
             => await Page?.DisplayAlert(App.LocResources["AlertNoNameInJourney"], App.LocResources["MessNoNameInJourney"], App.LocResources["Ok"]);
 
@@ -138,12 +95,6 @@ namespace Travelogue_2.Main.Services
         internal static async Task AlertTooManyEventsInDay()
             => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessTooManyEvents"], App.LocResources["Ok"]);
 
-        /*
-		internal static async Task AlertTooManyEntriesInDay()
-		{
-			await Page?.DisplayAlert(AppResources.Empty, AppResources.MessTooManyEntries, AppResources.Ok);
-		}*/
-
         #endregion
 
         #region Save
@@ -161,13 +112,6 @@ namespace Travelogue_2.Main.Services
             => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEntrySaved"], App.LocResources["Ok"]);
 
         #endregion
-
-        /** Does not exists */
-        /*
-		internal static async Task<bool> AlertCountryDoesNotExist()
-		{
-			return await Page?.DisplayAlert(AppResources.Empty, AppResources.MessCountryDoesNotExists, AppResources.Ok, AppResources.Cancel);
-		}
 
 		/** Already exists */
 

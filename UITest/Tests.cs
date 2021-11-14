@@ -179,50 +179,9 @@ namespace UITest
             app.EnterText(name);
         }
 
+
         [Test]
-        public void CreateJourneyTest()
-        {
-            app.Repl();
-            EnterCreateFuturJourney();
-
-            EnterText(Variables.TitleSelector, "Holi, test 1");
-
-            PickDestiny("SPAIN");
-        }
-
-        // TODO Tests
-
-        /*
-         *  - Modificar settings de journey
-         *      - Modificar nombre
-         *      - Modificar cover
-         *      - Modificar fechas
-         *      - Eliminar un destino, añadir un destino
-         *      - Salir y volver a entrar 
-         *      - Comprobar que sigue igual
-         *      
-         *  - Añadir info al journey
-         *      - Añadir una entry
-         *      - Modificar una entry
-         *      - Añadir texto a la entry
-         *      - Modificar texto de la entry
-         *      - Eliminar texto 
-         *      - Añadir foto a una entry
-         *      - Añadir pie a la foto
-         *      - Añadir foto normal a un viaje
-         * 
-         *  - Eliminar info del journey
-         *      - 
-         * 
-         *  - Ver info en el media
-         *      - Ver journeis en el calendario
-         *      - Ver fotos en el mapa
-         *      - Ver fotos ordenadas por journey
-         */
-
-        /** Done */
-        [Test]
-        public void SeeJourneyFromLibrary()
+        public void SeeJourneyFromLibraryTest()
         {
             //app.Repl();
             EnterFuturLibraryTrip();
@@ -329,6 +288,22 @@ namespace UITest
             EnterFuturTrip();
             app.TouchAndHold(x => x.Marked("Standard"));
 
+
+        }
+
+        [Test]
+        public void ModifyStyleTest()
+        {
+            app.Repl();
+            EnterSettings();
+
+        }
+
+        [Test]
+        public void SeeDestiniesTest()
+        {
+            //app.Repl();
+            EnterSettings();
 
         }
     }

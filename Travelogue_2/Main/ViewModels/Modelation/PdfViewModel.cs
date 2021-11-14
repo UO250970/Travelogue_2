@@ -12,18 +12,15 @@ namespace Travelogue_2.Main.ViewModels.Modelation
             set => SetProperty(ref journalPath, value);
         }
 
+        public PdfViewModel()
+		{
+            ExecuteLoadDataCommand();
+        }
+
         public override void LoadData()
         {
             JournalModel temp = DataBaseUtil.GetJournalById(int.Parse(CurrentJourneyId));
             JournalPath = temp.JournalPath;
-            JournalName = temp.Name;
-        }
-
-        private string journalName = string.Empty;
-        public string JournalName
-        {
-            get => journalName;
-            set => SetProperty(ref journalName, value);
         }
     }
 }

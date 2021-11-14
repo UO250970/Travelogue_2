@@ -49,7 +49,7 @@
 
                                             <StackLayout>
 
-                                                <Label x:Name="DestinyName" FontSize="Medium" 
+                                                <Label x:Name="DestinyName" FontSize="Large" 
                                                         Text="{Binding .Destiny}">
                                                     <Label.GestureRecognizers>
                                                         <TapGestureRecognizer Command="{Binding BindingContext.DestinyTapped, Source={x:Reference SettingsDestiniesViewName}}"
@@ -114,11 +114,12 @@
 
                                                     </Grid>
 
-                                                    <Label FontSize="Large" 
+                                                    <Label FontSize="Medium" 
                                                             Text="{Binding BindingContext.Resources[Embassies], Source={x:Reference SettingsDestiniesViewName}}"/>
 
                                                     <StackLayout x:Name="EmbassiesCollection"
-                                                                BindableLayout.ItemsSource="{Binding .Embassies}">
+                                                                BindableLayout.ItemsSource="{Binding .Embassies}"
+                                                                 BackgroundColor="{StaticResource PrimaryFaded}">
 
                                                         <BindableLayout.ItemTemplate>
                                                             <DataTemplate>
@@ -156,10 +157,10 @@
 
         </Grid>
 
-        <Button x:Name="AddDestinyButton" 
+        <!--Button x:Name="AddDestinyButton" 
                     Style="{StaticResource circleButtonAddStyle}"
                     Command="{Binding AddDestinyCommand}"
-                    HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}" />
+                    HorizontalOptions="StartAndExpand"  Text="&#xea0a;" FontFamily="{StaticResource Icon}" /-->
 
     </AbsoluteLayout>
 

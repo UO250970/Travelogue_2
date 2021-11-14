@@ -356,7 +356,6 @@
                     AbsoluteLayout.LayoutFlags="PositionProportional"
                     AbsoluteLayout.LayoutBounds="1,0"
                     FontSize="Title"
-                    IsVisible="{Binding SettingsVisible}"
                     TextColor="{StaticResource White}"
                     BackgroundColor="{StaticResource None}"
                     Command="{Binding ModifyJourneyCommand}"

@@ -2,6 +2,7 @@
 using System.Linq;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
+using Travelogue_2.Main.Utils;
 using Travelogue_2.Main.Views.Modelation.Modelate;
 using Xamarin.Forms;
 
@@ -39,8 +40,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
         public override void LoadData()
         {
             Backgrounds.Clear();
-            CommonVariables.GetBackgrounds().ToList().ForEach(x => Backgrounds.Add(x));
-            //DataBaseUtil.GetImages().ToList().ForEach(x => Backgrounds.Add(x));
+            DataBaseUtil.GetBackgrounds().ToList().ForEach(x => Backgrounds.Add(x));
         }
 
         async void OnBackgrondSelected(ImageModel background)

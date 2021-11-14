@@ -21,12 +21,12 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Text="{Binding Resources[CardHolder]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
-                    <Label Grid.Column="1" Text="&#x1f50d;" FontFamily="{StaticResource Icon}" FontSize="Large"  VerticalTextAlignment="Center" HorizontalOptions="Center"
+                    <!--Label Grid.Column="1" Text="&#x1f50d;" FontFamily="{StaticResource Icon}" FontSize="Large"  VerticalTextAlignment="Center" HorizontalOptions="Center"
                                TextColor="{DynamicResource Primary}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SearchCardCommand}"/>
                         </Label.GestureRecognizers>
-                    </Label>
+                    </Label-->
                 </Grid>
 
                 <SearchBar IsVisible="{Binding SearchVisible}" Placeholder="{Binding Resources[SearchDestiny]}" Text="{Binding SearchText, Mode=TwoWay}"/>
@@ -42,10 +42,9 @@
                     <DataTemplate>
 
                         <fragments:CardView BindingContext="{Binding .}"
-                                            Margin="10"
-                                            
-                         effects:LongPressedEffect.Command="{Binding BindingContext.EditOrDeleteCardCommand, Source={x:Reference SettingsCardHolderViewName}}"
-                         effects:LongPressedEffect.CommandParameter="{Binding .}">
+                                            Margin="10"                   
+                                            effects:LongPressedEffect.Command="{Binding BindingContext.EditOrDeleteCardCommand, Source={x:Reference SettingsCardHolderViewName}}"
+                                            effects:LongPressedEffect.CommandParameter="{Binding .}">  
 
 
                             <fragments:CardView.Effects>

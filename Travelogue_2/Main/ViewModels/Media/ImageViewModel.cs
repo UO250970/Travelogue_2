@@ -1,8 +1,6 @@
 ﻿using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
-using Travelogue_2.Main.ViewModels.PopUps;
-using Travelogue_2.Main.Views.PopUps;
 using Xamarin.Forms;
 
 namespace Travelogue_2.Main.ViewModels.Media
@@ -40,14 +38,8 @@ namespace Travelogue_2.Main.ViewModels.Media
 
                 Caption = image.Caption;
                 Journey = image.Journey;
-                //CoverImage.ImageSour = journey.Image;
-
-                // TODO - Chekear acciones según estado
-
                 ImageSource = image.ImageSour;
-
             }
-            //ImageName = "Prueba de imagen";
         }
 
         #region Journey

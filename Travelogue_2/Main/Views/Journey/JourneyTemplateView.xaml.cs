@@ -17,8 +17,6 @@ namespace Travelogue_2.Main.Views.Journey
             MainScroll.PropertyChanged += OnScrollViewPropertyChanged;
         }
 
-        // TODO - Añadir a documentación https://alexdunn.org/2017/12/27/xamarin-tip-xamarin-forms-long-press-effect/
-
         protected void OnAppearing()
         {
             JourneyName.TranslationY = _journeyNameFrameTop * 0.1;
@@ -57,10 +55,10 @@ namespace Travelogue_2.Main.Views.Journey
                 }
                 else
                 {
-                    JourneyName.TranslationY = (0 - _journeyNameFrameTop);
-                    JourneyNameBoxView.TranslationY = (0 - _journeyNameFrameTop);
-                    JourneyStateBoxView.TranslationY = (0 - _journeyNameFrameTop);
-                    JourneyState.TranslationY = (0 - _journeyNameFrameTop);
+                    JourneyName.TranslationY = 0 - _journeyNameFrameTop;
+                    JourneyNameBoxView.TranslationY = 0 - _journeyNameFrameTop;
+                    JourneyStateBoxView.TranslationY = 0 - _journeyNameFrameTop;
+                    JourneyState.TranslationY = 0 - _journeyNameFrameTop;
 
                     JourneyNameBoxView.FadeTo(1, 100);
                 }

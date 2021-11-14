@@ -26079,9 +26079,6 @@ namespace Travelogue_2.Droid
 			// aapt resource value: 0x7F0700F5
 			public const int Viewmode = 2131165429;
 			
-			// aapt resource value: 0x7F0700F6
-			public const int xamarin_logo = 2131165430;
-			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

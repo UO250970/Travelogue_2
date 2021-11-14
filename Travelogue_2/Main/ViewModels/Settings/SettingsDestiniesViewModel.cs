@@ -119,8 +119,6 @@ namespace Travelogue_2.Main.ViewModels.Settings
                 return;
 
             // TODO -  A futuros, abrir pestañita con info de forma chula
-            // This will push the ItemDetailPage onto the navigation stack
-            //await Shell.Current.GoToAsync($"{nameof(JourneyView)}?{nameof(JourneyViewModel.JourneyId)}={journey.Id}");
         }
     }
 }

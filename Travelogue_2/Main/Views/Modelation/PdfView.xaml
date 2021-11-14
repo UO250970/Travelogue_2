@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Travelogue_2.Main.Views.Modelation.PdfView"
-             xmlns:syncfusion="clr-namespace:Syncfusion.SfPdfViewer.XForms;assembly=Syncfusion.SfPdfViewer.XForms">
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfPdfViewer.XForms;assembly=Syncfusion.SfPdfViewer.XForms"
+             x:Name="PdfViewName">
+
+    <syncfusion:SfPdfViewer x:Name="pdfViewerControl" />
     
-    <Grid x:Name="pdfViewGrid">
-        <syncfusion:SfPdfViewer x:Name="pdfViewerControl" />
-    </Grid> 
 </ContentPage>

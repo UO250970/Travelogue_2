@@ -8,7 +8,7 @@ namespace Travelogue_2.Main.Services
 {
     [Serializable]
     public class ObservableKeyValuePair<TKey, TValue> : INotifyPropertyChanged
-    { // TODO - Meter a documentación https://stackoverflow.com/questions/10616554/observabledictionary-for-c-sharp
+    {
         #region properties
         private TKey key;
         private TValue value;

@@ -1,6 +1,7 @@
-﻿using Plugin.Media.Abstractions;
+﻿using Plugin.Permissions.Abstractions;
 using Plugin.Settings;
 using Syncfusion.SfCalendar.XForms;
+using Syncfusion.SfImageEditor.XForms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,19 +10,20 @@ using System.Threading.Tasks;
 using Travelogue_2.Main.BBDD;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
-using Travelogue_2.Main.ViewModels.PopUps;
+using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Entry = Travelogue_2.Main.BBDD.Entry;
 using Image = Travelogue_2.Main.BBDD.Image;
+using Style = Travelogue_2.Main.BBDD.Style;
 
 namespace Travelogue_2.Main.Utils
 {
     public static class DataBaseUtil
     {
 
-        public static void Start()
-        {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+		public static void Start()
+		{
+			string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             DataBase.OpenDataBase(path);
 
             DayTracker.Start();
@@ -252,6 +254,8 @@ namespace Travelogue_2.Main.Utils
             return CardsToModel(cards);
         }
 
+        public static ObservableCollection<ImageModel> GetBackgrounds() => CommonVariables.GetBackgrounds();
+
         internal static void InsertStyles(List<Style> list) => DataBase.InsertStyles(list);
 
         public static ImageModel GetCoverFromJourney(int journeyId)
@@ -335,7 +339,7 @@ namespace Travelogue_2.Main.Utils
         public static void ShareImage(int ImageId)
         {
             Image temp = DataBase.GetImageById(ImageId);
-            ShareUtil.ShareImage(temp.Path);
+			ShareUtil.ShareImage(temp.Path);
         }
 
         public static JourneyModel CreateEmptyJourney()
@@ -839,13 +843,46 @@ namespace Travelogue_2.Main.Utils
 
             return DataBase.UpdateCard(temp);
         }
+
+        public async static void SavePage(ImageSavingEventArgs page, string name, string journalId)
+		{
+            PermissionStatus permission = await CameraUtil.CheckPermissions();
+
+            try
+            {
+                if (permission == PermissionStatus.Granted)
+                {
+                    if (page.FileName is null || page.FileName == string.Empty)
+                    {
+                        page.FileName = name;
+                    }
+                    string Path = DependencyService.Get<IDependency>().Save(page.Stream, page.FileName);
+
+                    JournalModel journal = GetJournalById(int.Parse(journalId));
+                    var temp = journal.Pages.Find(x => x.Path.Contains(page.FileName));
+                    if (temp is null)
+                    {
+                        CreateImageJournal(Path, int.Parse(journalId));
+                    }
+
+                    Alerter.AlertPageSaved();
+                }
+                else
+                {
+                    Alerter.AlertNoStoragePermissions();
+                }
+            }
+            catch (Exception e)
+            {
+                Alerter.AlertNoStoragePermissions();
+            }
+        }
         #endregion
 
         #region Delete
 
         public static bool DeleteJourney(int JourneyId, bool alert = false)
         {
-            ////ToDo revisar alerter  if (DataBase.DeleteJourneyById(JourneyId)) Alerter.AlertJourneyDeleted();
             DayTracker.DeleteJourney(JourneyId);
             DataBase.DeleteJourneyById(JourneyId);
             if (alert) Alerter.AlertDeleteJourney();

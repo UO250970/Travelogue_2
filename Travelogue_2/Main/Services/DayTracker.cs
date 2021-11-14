@@ -159,24 +159,17 @@ namespace Travelogue_2.Main.Services
 
         /** Comprueba si se el viaje que se le pasa ha pasado la fecha final, y en caso
          * afirmativo lo cierra. Al cerrarse, se reinicia las variables de propiedades.*/
-
-        // TODO metodo modificado posterior a test, volver a testear
         private static async void CloseJourney(Journey journey)
         {
-            if (true
-                //await Alerter.AlertJourneyCanBeClosed()
-                )
-            {
-                if (GetJourneyOnTrack() != null && GetJourneyOnTrack().Id == journey.Id) ReStart();
+            if (GetJourneyOnTrack() != null && GetJourneyOnTrack().Id == journey.Id) ReStart();
 
-                journey.FinishJourney();
+            journey.FinishJourney();
 
-                Journal journal = new Journal(journey);
-                DataBase.InsertJournal(journal);
-                DataBase.UpdateJourney(journey);
+            Journal journal = new Journal(journey);
+            DataBase.InsertJournal(journal);
+            DataBase.UpdateJourney(journey);
 
-                CheckInitialTabAsync();
-            }
+            CheckInitialTabAsync();
         }
 
         public static async void DeleteJourney(int journeyId)
@@ -230,9 +223,6 @@ namespace Travelogue_2.Main.Services
             while (!DataBase.CheckDateIsEmpty(LastDay));
 
             SetNextDayAvailable(LastDay);
-
-            //Si no hay ninguno en track, significa que no hay ninguno que empiece hoy, 
-            //pero no es una obligación empezar uno que tecnicamente empiece hoy...
         }
 
         public static async Task CheckInitialTabAsync()

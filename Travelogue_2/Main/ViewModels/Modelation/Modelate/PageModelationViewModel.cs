@@ -2,7 +2,6 @@
 using Syncfusion.SfImageEditor.XForms;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
 using Travelogue_2.Main.Utils;
@@ -109,37 +108,7 @@ namespace Travelogue_2.Main.ViewModels.Modelation.Modelate
 
         public async void Save(ImageSavingEventArgs args)
         {
-            PermissionStatus permission = await CameraUtil.CheckPermissions();
-
-            try
-            {
-                if (permission == PermissionStatus.Granted)
-                {
-                    if (args.FileName is null || args.FileName == string.Empty)
-                    {
-                        args.FileName = GetName();
-                    }
-                    string Path = DependencyService.Get<IDependency>().Save(args.Stream, args.FileName);
-
-                    JournalModel journal = DataBaseUtil.GetJournalById( int.Parse(journalId) );
-                    var temp = journal.Pages.Find( x => x.Path.Contains(args.FileName));
-                    if (temp is null)
-                    {
-                        DataBaseUtil.CreateImageJournal(Path, int.Parse(CurrentJourneyId));
-                    }
-                    
-                    Alerter.AlertPageSaved();
-                }
-                else
-                {
-                    Alerter.AlertNoStoragePermissions();
-                }
-            }
-            catch (Exception e)
-            {
-                Alerter.AlertNoStoragePermissions();
-            }
-            
+            DataBaseUtil.SavePage(args, GetName(), journalId);
         }
 
         public string GetName()

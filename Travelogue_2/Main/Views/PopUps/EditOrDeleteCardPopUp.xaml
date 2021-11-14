@@ -43,7 +43,7 @@
 
                             <border:SfBorder.Content >
 
-                                <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding TopImage.ImageSour}" Aspect="AspectFill" />
+                                <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding Top}" Aspect="AspectFill" />
 
                             </border:SfBorder.Content>
 
@@ -57,7 +57,7 @@
 
                             <border:SfBorder.Content >
 
-                                <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding BackImage.ImageSour}" Aspect="AspectFill" />
+                                <Image HeightRequest="{Binding CoverImageHeight}" Source="{Binding Back}" Aspect="AspectFill" />
 
                             </border:SfBorder.Content>
 

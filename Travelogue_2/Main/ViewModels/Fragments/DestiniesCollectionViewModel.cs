@@ -10,6 +10,7 @@ namespace Travelogue_2.Main.ViewModels.Fragments
 {
     public class DestiniesCollectionViewModel : PhotoRendererModel
     {
+
         public Command AddDestinyCommand { get; }
         public Command MoreInfoCommand { get; }
 
@@ -32,6 +33,11 @@ namespace Travelogue_2.Main.ViewModels.Fragments
 
         public override void LoadData()
         {
+            JourneyModel Journey = DataBaseUtil.GetJourneyById(int.Parse(CurrentJourneyId));
+            State State = Journey.JourneyState;
+
+            DestiniesEnabled = !State.Equals(State.CLOSED);
+
             DestiniesList.Clear();
 
             DataBaseUtil.GetDestiniesFromJourney(int.Parse(CurrentJourneyId))
@@ -51,6 +57,13 @@ namespace Travelogue_2.Main.ViewModels.Fragments
         #endregion
 
         #region DestinyText
+        private bool destiniesEnabled = true;
+        public bool DestiniesEnabled
+        {
+            get => destiniesEnabled;
+            set => SetProperty(ref destiniesEnabled, value);
+        }
+
         private string destinyText;
         public string DestinyText
         {

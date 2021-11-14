@@ -14,15 +14,17 @@ namespace Travelogue_2.Main.Views.Modelation
         {
             BindingContext = model = new PdfViewModel();
             InitializeComponent();
+
+            Shell.SetNavBarIsVisible(this, false);
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            Stream  fileStream = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream(model.JournalPath);
             //Load the PDF
-            pdfViewerControl.LoadDocument(fileStream);
-            //pdfViewerControl.
+            Stream FileStream = typeof(App).GetTypeInfo().Assembly.GetManifestResourceStream(model.JournalPath);
+            pdfViewerControl.LoadDocument(FileStream);
+            
         }
     }
 }

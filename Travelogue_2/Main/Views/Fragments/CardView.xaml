@@ -10,7 +10,7 @@
     <StackLayout >
         <Label Text="{Binding Name}" FontSize="Large" TextColor="{StaticResource White}"/>
 
-        <StackLayout Orientation="Horizontal" HeightRequest="150" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand" Spacing="5" BackgroundColor="{StaticResource PrimaryFaded}">
+        <StackLayout Orientation="Horizontal" HeightRequest="150" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
 
             <Image Source="{Binding TopImageSour}" WidthRequest="150"/>
             <Image Source="{Binding BackImageSour}"  WidthRequest="150"/>
