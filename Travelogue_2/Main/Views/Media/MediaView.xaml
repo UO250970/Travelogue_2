@@ -30,7 +30,7 @@
                                              ShowInlineEvents="True"
                                              InlineViewMode="Agenda"
                                              VerticalOptions="FillAndExpand"
-                                             DataSource="{Binding CalendarJourneis}"
+                                             DataSource="{Binding CalendarJourneys}"
                                              Locale="{Binding Localization}"
                                              FirstDayofWeek="{Binding LocalizationFirstDay}">
                             <calendar:SfCalendar.MonthViewSettings>

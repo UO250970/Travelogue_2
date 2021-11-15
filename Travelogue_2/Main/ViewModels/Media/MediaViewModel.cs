@@ -14,7 +14,7 @@ namespace Travelogue_2.Main.ViewModels.Media
 {
     public class MediaViewModel : PhotoRendererModel
     {
-        public CalendarEventCollection CalendarJourneis { get; set; }
+        public CalendarEventCollection CalendarJourneys { get; set; }
 
         public int localizationFirstDay;
         public Command SearchJourneyCommand { get; }
@@ -30,7 +30,7 @@ namespace Travelogue_2.Main.ViewModels.Media
 
         public MediaViewModel()
         {
-            CalendarJourneis = new CalendarEventCollection();
+            CalendarJourneys = new CalendarEventCollection();
 
             localization = Resources.CurrentCultureI();
             localizationFirstDay = (int)Resources.CurrentCultureI().DateTimeFormat.FirstDayOfWeek;
@@ -47,12 +47,12 @@ namespace Travelogue_2.Main.ViewModels.Media
 
         public override void LoadData()
         {
-            CalendarJourneis.Clear();
-            DataBaseUtil.GetCalendarJourneis().ForEach(x => CalendarJourneis.Add(x));
+            CalendarJourneys.Clear();
+            DataBaseUtil.GetCalendarJourneys().ForEach(x => CalendarJourneys.Add(x));
 
             ImagesOrdered.Clear();
             ImagesSearched.Clear();
-            ObservableDictionary<string, List<ImageModel>> temp = DataBaseUtil.GetJourneisWithImages();
+            ObservableDictionary<string, List<ImageModel>> temp = DataBaseUtil.GetJourneysWithImages();
 
             temp.Keys.ForEach(x =>
             {

@@ -32,7 +32,7 @@ namespace Travelogue_2.Main.Utils
 
         public static void ClearDataBase() => DataBase.ClearDataBase();
 
-        public static bool HasJourneis() => DataBase.HasJourneis();
+        public static bool HasJourneys() => DataBase.HasJourneys();
 
         public static bool HasDestinies() => DataBase.HasDestinies();
 
@@ -58,10 +58,10 @@ namespace Travelogue_2.Main.Utils
             return JourneyToModel(temp);
         }
 
-        public static List<JourneyModel> GetJourneis()
+        public static List<JourneyModel> GetJourneys()
         {
             List<JourneyModel> temp = new List<JourneyModel>();
-            List<Journey> tempDB = DataBase.GetJourneis();
+            List<Journey> tempDB = DataBase.GetJourneys();
             foreach (Journey jour in tempDB)
             {
                 temp.Add(JourneyToModel(jour));
@@ -69,9 +69,9 @@ namespace Travelogue_2.Main.Utils
             return temp;
         }
 
-        internal static CalendarEventCollection GetCalendarJourneis()
+        internal static CalendarEventCollection GetCalendarJourneys()
         {
-            return CalendarUtil.GetJourneis(GetJourneis());
+            return CalendarUtil.GetJourneys(GetJourneys());
         }
 
         public static JournalModel GetJournalById(int JournalId)
@@ -121,12 +121,12 @@ namespace Travelogue_2.Main.Utils
             return temp;
         }
 
-        public static ObservableDictionary<string, List<ImageModel>> GetJourneisWithImages()
+        public static ObservableDictionary<string, List<ImageModel>> GetJourneysWithImages()
         {
             ObservableDictionary<string, List<ImageModel>> temp = new ObservableDictionary<string, List<ImageModel>>();
 
             List<ImageModel> Images = GetImages();
-            List<string> viajes = GetJourneis().Select(x => x.Name).ToList();
+            List<string> viajes = GetJourneys().Select(x => x.Name).ToList();
 
             if (Images.Count != 0)
             {
@@ -183,7 +183,7 @@ namespace Travelogue_2.Main.Utils
         public static List<JourneyModel> GetJourneysCreated()
         {
             List<JourneyModel> temp = new List<JourneyModel>();
-            List<Journey> tempDB = DataBase.GetJourneis(State.CREATED);
+            List<Journey> tempDB = DataBase.GetJourneys(State.CREATED);
             foreach (Journey jour in tempDB)
             {
                 temp.Add(JourneyToModel(jour));
@@ -194,7 +194,7 @@ namespace Travelogue_2.Main.Utils
         public static List<JourneyModel> GetJourneysClosed()
         {
             List<JourneyModel> temp = new List<JourneyModel>();
-            List<Journey> tempDB = DataBase.GetJourneis(State.CLOSED);
+            List<Journey> tempDB = DataBase.GetJourneys(State.CLOSED);
             foreach (Journey jour in tempDB)
             {
                 temp.Add(JourneyToModel(jour));
@@ -345,6 +345,9 @@ namespace Travelogue_2.Main.Utils
         public static JourneyModel CreateEmptyJourney()
         {
             Journey temp = new Journey();
+            temp.IniDate = DayTracker.GetNextDayAvailable();
+            temp.EndDate = temp.IniDate;
+
             DataBase.InsertJourney(temp);
 
             Journey journey = DataBase.FindJourney(temp);
@@ -670,12 +673,15 @@ namespace Travelogue_2.Main.Utils
             }
             if (temp.Name != journey.Name) temp.Name = journey.Name;
 
+            DataBase.UpdateJourney(temp);
+
             if (temp.IniDate != journey.IniDate || temp.EndDate != journey.EndDate)
             {
                 if (!await UpdadteDates(journey)) return false;
             }
 
-            return DataBase.UpdateJourney(temp);
+            return true;
+            
         }
 
         public static async Task<bool> SaveJournal(JournalModel journal)
@@ -694,20 +700,23 @@ namespace Travelogue_2.Main.Utils
             {
                 Journey temp = DataBase.GetJourneyById(journey.Id);
 
-                List<Day> tempDays = DataBase.GetDaysBetweenDates(temp.IniDate, temp.EndDate);
-                List<Day> newDays = DataBase.GetDaysBetweenDates(journey.IniDate, journey.EndDate);
-
-                List<Day> deleteDays = tempDays.FindAll(x => !newDays.Contains(x));
-
-                if (deleteDays.Find(x => x.Events.Count != 0 || x.Entries.Count != 0) != null)
+                if (temp.Days.Count != 0)
                 {
-                    bool check = await Alerter.AlertDayInfoWillBeLost();
-                    if (!check) return false;
+                    List<Day> tempDays = DataBase.GetDaysBetweenDates(temp.IniDate, temp.EndDate);
+                    List<Day> newDays = DataBase.GetDaysBetweenDates(journey.IniDate, journey.EndDate);
+
+                    List<Day> deleteDays = tempDays.FindAll(x => !newDays.Contains(x));
+
+                    if (deleteDays.Find(x => x.Events.Count != 0 || x.Entries.Count != 0) != null)
+                    {
+                        bool check = await Alerter.AlertDayInfoWillBeLost();
+                        if (!check) return false;
+                    }
+
+                    DataBase.DeleteDays(deleteDays);
                 }
 
-                DataBase.DeleteDays(deleteDays);
-
-                int duration = (int)(journey.EndDate - journey.IniDate).TotalDays + 1;
+                int duration = (int)((journey.EndDate - journey.IniDate).TotalDays + 1);
                 Enumerable.Range(0, duration).
                     Where(i => !temp.Days.Contains(new Day(journey.IniDate.AddDays(i)))).
                     Select(i => new Day(journey.IniDate.AddDays(i)) { Journey = temp, JourneyId = temp.Id }).
@@ -720,6 +729,7 @@ namespace Travelogue_2.Main.Utils
 
                 temp.IniDate = journey.IniDate;
                 temp.EndDate = journey.EndDate;
+                temp.Name = journey.Name;
 
                 DataBase.UpdateJourney(temp);
 

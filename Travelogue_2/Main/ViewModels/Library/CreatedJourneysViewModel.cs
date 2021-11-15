@@ -34,6 +34,7 @@ namespace Travelogue_2.Main.ViewModels.Library
             JourneysCreated.Clear();
             JourneysCreatedSearched.Clear();
 
+            var temp = DataBaseUtil.Getjourneys();
             DataBaseUtil.GetJourneysCreated()?.ForEach(x =>
             {
                 JourneysCreated.Add(x);
@@ -91,7 +92,11 @@ namespace Travelogue_2.Main.ViewModels.Library
         #endregion
 
         async internal void CreateJourneyC()
-            => await Shell.Current.GoToAsync(nameof(CreateJourneyView));
+        {
+            var temp = DataBaseUtil.CreateEmptyJourney();
+            CurrentJourneyId = temp.Id.ToString();
+            await Shell.Current.GoToAsync(nameof(CreateJourneyView));
+        }
 
         async void OnJourneySelected(JourneyModel journey)
         {
@@ -105,7 +110,7 @@ namespace Travelogue_2.Main.ViewModels.Library
 
         public override void OnAppearing()
         {
-            /*if (GetChangedCreatedJourneis())
+            /*if (GetChangedCreatedjourneys())
 			{
 				base.OnAppearing();
 			}*/

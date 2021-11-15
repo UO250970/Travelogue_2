@@ -148,13 +148,13 @@ namespace Travelogue_2.Main.BBDD
             return QueryFunc(Func);
         }
 
-        public static List<Journey> GetJourneis(State state)
+        public static List<Journey> GetJourneys(State state)
         {
             List<Journey> Func() => conn.GetAllWithChildren<Journey>(x => x.JourneyState.Equals(state), recursive: true);
             return QueryFunc(Func);
         }
 
-        public static List<Journey> GetJourneis()
+        public static List<Journey> GetJourneys()
         {
             List<Journey> Func() => conn.GetAllWithChildren<Journey>(recursive: false);
             return QueryFunc(Func);
@@ -172,9 +172,9 @@ namespace Travelogue_2.Main.BBDD
             return QueryFunc(Func);
         }
 
-        public static bool HasJourneis()
+        public static bool HasJourneys()
         {
-            var temp = GetJourneis();
+            var temp = GetJourneys();
             return temp != null && temp.Count() != 0;
         }
 
@@ -216,7 +216,7 @@ namespace Travelogue_2.Main.BBDD
 
         public static bool CheckDatesAreEmpty(DateTime dateIni, DateTime dateEnd, int JourneyId = -1)
         {
-            List<Journey> list = GetJourneis();
+            List<Journey> list = GetJourneys();
             Journey jour = list?.Find(x => x.Id != JourneyId && x.Collision(dateIni, dateEnd));
             return jour == null;
         }
@@ -291,7 +291,7 @@ namespace Travelogue_2.Main.BBDD
 
         public static bool InsertDay(Day day)
         {
-            void Act() => conn.InsertWithChildren(day);
+            void Act() => conn.Insert(day);
             return QueryAct(Act);
         }
 

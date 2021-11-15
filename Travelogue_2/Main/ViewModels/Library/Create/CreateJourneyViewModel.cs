@@ -22,8 +22,6 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
             CancelCommand = new Command(() => Back());
             SaveCommand = new Command(() => SaveC());
 
-            CurrentJourneyId = DataBaseUtil.CreateEmptyJourney().Id.ToString();
-
             ExecuteLoadDataCommand();
         }
 
@@ -125,9 +123,7 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
                     CoverId = CoverImage.ImageId
                 };
                 if (await DataBaseUtil.SaveJourney(temp))
-                    Back();
-
-                //ChangedCreatedJourneis();
+                    base.Back();
             }
         }
 

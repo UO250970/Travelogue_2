@@ -63,11 +63,11 @@ namespace Travelogue_2.Main.Utils
             }
         }
 
-        internal static CalendarEventCollection GetJourneis(List<JourneyModel> journeis)
+        internal static CalendarEventCollection GetJourneys(List<JourneyModel> journeys)
         {
             CalendarEventCollection collection = new CalendarEventCollection();
 
-            foreach (JourneyModel jour in journeis)
+            foreach (JourneyModel jour in journeys)
             {
                 CalendarInlineEvent evento = new CalendarInlineEvent();
 

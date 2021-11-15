@@ -106,7 +106,7 @@ namespace Travelogue_2.Main.Services
          *                      OPEN es 0 o 1.*/
         public static void UpdateDataBase()
         {
-            DataBase.GetJourneis().ForEach(x =>
+            DataBase.GetJourneys().ForEach(x =>
             {
                 if (!x.HasStarted() && !x.HasFinished())
                 {
@@ -116,7 +116,7 @@ namespace Travelogue_2.Main.Services
                 else if (x.HasStarted() && !x.HasFinished() && x.FinishedAlready()) { CloseJourney(x); }
             });
 
-            //Assert.IsFalse(DataBase.GetJourneis().Where(x => x.HasStarted() == true).Count() > 1);
+            //Assert.IsFalse(DataBase.GetJourneys().Where(x => x.HasStarted() == true).Count() > 1);
         }
 
         /** Método llamado desde la creación de viajes, 
@@ -232,16 +232,16 @@ namespace Travelogue_2.Main.Services
         }
 
 
-        private static bool changedCreatedJourneis = false;
-        public static void ChangedCreatedJourneis()
+        private static bool changedCreatedJourneys = false;
+        public static void ChangedCreatedJourneys()
         {
-            changedCreatedJourneis = true;
+            changedCreatedJourneys = true;
         }
-        public static bool GetChangedCreatedJourneis()
+        public static bool GetChangedCreatedJourneys()
         {
-            if (changedCreatedJourneis)
+            if (changedCreatedJourneys)
             {
-                changedCreatedJourneis = false;
+                changedCreatedJourneys = false;
                 return true;
             }
             else
@@ -250,16 +250,16 @@ namespace Travelogue_2.Main.Services
             }
         }
 
-        private static bool changedClosedJourneis = false;
-        public static void ChangedClosedJourneis()
+        private static bool changedClosedJourneys = false;
+        public static void ChangedClosedJourneys()
         {
-            changedClosedJourneis = true;
+            changedClosedJourneys = true;
         }
-        public static bool GetChangedClosedJourneis()
+        public static bool GetChangedClosedJourneys()
         {
-            if (changedClosedJourneis)
+            if (changedClosedJourneys)
             {
-                changedClosedJourneis = false;
+                changedClosedJourneys = false;
                 return true;
             }
             else

@@ -38,9 +38,10 @@ namespace Travelogue_2.Main.ViewModels.Fragments
 
             DestiniesEnabled = !State.Equals(State.CLOSED);
 
+            DestiniesSelected.Clear();
             DestiniesList.Clear();
 
-            DataBaseUtil.GetDestiniesFromJourney(int.Parse(CurrentJourneyId))
+            DataBaseUtil.GetDestiniesFromJourney(int.Parse(CurrentJourneyId))?
                 .ForEach(x => DestiniesSelected.Add(x));
 
             CommonVariables.AvailableDestinies?.Select(x => x.Destiny).ToList()

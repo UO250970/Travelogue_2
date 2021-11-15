@@ -37,7 +37,7 @@ namespace Travelogue_2.Main.BBDD
         [OneToMany(CascadeOperations = CascadeOperation.CascadeInsert | CascadeOperation.CascadeDelete | CascadeOperation.CascadeRead)]
         public List<Day> Days { get; set; } = new List<Day>();
 
-        public Journey() { }
+        public Journey() { JourneyState = State.CREATED; }
 
         /** Constructor público con tres parámetros:
          *  Name - Nombre del viaje

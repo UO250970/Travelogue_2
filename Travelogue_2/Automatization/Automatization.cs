@@ -150,12 +150,9 @@ namespace Travelogue_2.Automatization
 
             //_ = CheckPermissionsAsync();
 
-            if (!DataBaseUtil.HasJourneis())
+            if (!DataBaseUtil.HasJourneys())
             {
                 properties.Clear(); 
-                CreateOnCourse();
-                CreateFutur();
-                CreateFinished();
             }
 
             if (!DataBaseUtil.HasDestinies())
@@ -169,6 +166,11 @@ namespace Travelogue_2.Automatization
                 PrepareStyles();
             }
             DataBaseUtil.GetStyles().ForEach(x => CommonVariables.AvailableStyles.Add(x));
+
+
+            CreateOnCourse();
+            CreateFutur();
+            CreateFinished();
 
         }
 

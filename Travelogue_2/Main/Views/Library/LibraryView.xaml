@@ -25,11 +25,11 @@
                         </Label>
                     </Grid>
 
-                    <CollectionView x:Name="JourneisCreatedCollection" 
+                    <CollectionView x:Name="JourneysCreatedCollection" 
                                     ItemsSource="{Binding JourneysCreated}"
                                     SelectionMode="Single"
                                     SelectionChangedCommand="{Binding JourneyTapped}"		
-                                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference JourneisCreatedCollection}}">
+                                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference JourneysCreatedCollection}}">
 
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Horizontal"
@@ -67,11 +67,11 @@
                         </Label>
                     </Grid>
 
-                    <CollectionView x:Name="JourneisClosedCollection" 
+                    <CollectionView x:Name="JourneysClosedCollection" 
                                     ItemsSource="{Binding JourneysClosed}"
                                     SelectionMode="Single"
                                     SelectionChangedCommand="{Binding JourneyTapped}"		
-                                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference JourneisClosedCollection}}">
+                                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference JourneysClosedCollection}}">
 
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Horizontal"

@@ -20,8 +20,8 @@ namespace Travelogue_2.Main.Views.Library
 
         protected override void OnAppearing()
         {
-            JourneisCreatedCollection.SelectedItem = null;
-            JourneisClosedCollection.SelectedItem = null;
+            JourneysCreatedCollection.SelectedItem = null;
+            JourneysClosedCollection.SelectedItem = null;
             model.OnAppearing();
         }
     }

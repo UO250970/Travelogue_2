@@ -21,7 +21,7 @@ namespace UITest
             //app = ConfigureApp.Android.StartApp();
 
             app = ConfigureApp.Android
-                 .ApkFile(@"C:\Users\lmendezl\AppData\Local\Xamarin\Mono for Android\Archives\2021-10-20\Travelogue_2.Android 10-20-21 9.22 PM.apkarchive\com.companyname.travelogue_2.apk")
+                 .ApkFile(@"C:\Users\lmendezl\AppData\Local\Xamarin\Mono for Android\Archives\2021-11-15\Travelogue_2.Android 11-15-21 5.50 PM.apkarchive\com.companyname.travelogue_2.apk")
                  .DeviceSerial("6PQ0217821002256")
                  .PreferIdeSettings()
                  .EnableLocalScreenshots()
@@ -65,7 +65,7 @@ namespace UITest
         {
             EnterLibrary();
             app.Tap(x => x.Marked("CreatedJourneysButton"));
-            app.WaitForElement("FuturJourneisL", timeout: TimeSpan.FromSeconds(100));
+            app.WaitForElement("FuturjourneysL", timeout: TimeSpan.FromSeconds(100));
         }
 
         public void EnterFuturLibraryTrip()
@@ -97,7 +97,7 @@ namespace UITest
         {
             EnterLibrary();
             app.Tap(x => x.Marked("ClosedJourneysButton"));
-            app.WaitForElement("ClosedJourneisL", timeout: TimeSpan.FromSeconds(100));
+            app.WaitForElement("ClosedjourneysL", timeout: TimeSpan.FromSeconds(100));
         }
 
         public void EnterText(string element, string text)
@@ -110,6 +110,18 @@ namespace UITest
             EnterPastLibrary();
             app.WaitForElement("StandardTrip Finished", timeout: TimeSpan.FromSeconds(100));
             app.Tap(x => x.Marked("3"));
+        }
+
+        public void EnterStyles()
+        {
+            app.Tap(x => x.Marked("StyleButton"));
+            app.WaitForElement("Estilos", timeout: TimeSpan.FromSeconds(100));
+        }
+
+        public void EnterDestinies()
+        {
+            app.Tap(x => x.Marked("DestiniesButton"));
+            app.WaitForElement("Desitnos", timeout: TimeSpan.FromSeconds(100));
         }
         #endregion
 
@@ -297,6 +309,7 @@ namespace UITest
             app.Repl();
             EnterSettings();
 
+            EnterStyles();
         }
 
         [Test]
@@ -305,6 +318,7 @@ namespace UITest
             //app.Repl();
             EnterSettings();
 
+            EnterDestinies();
         }
     }
 
