@@ -139,21 +139,15 @@ namespace Travelogue_2.Automatization
             DataBaseUtil.JourneyInsertEvent(journey, 1, "Concierto Pepita", TimeSpan.Parse("12:12"), "Calle romanov");
         }
 
-        private static void ClearDB()
+        private static void DB()
         {
-            DataBaseUtil.ClearDataBase();
+            DataBase.DropDataBase();
+            DataBase.CreateDatabase();
         }
 
         public static void PrepareBd(ISettings properties)
         {
-            ClearDB();
-
-            //_ = CheckPermissionsAsync();
-
-            if (!DataBaseUtil.HasJourneys())
-            {
-                properties.Clear(); 
-            }
+            //DB();
 
             if (!DataBaseUtil.HasDestinies())
             {
@@ -167,10 +161,14 @@ namespace Travelogue_2.Automatization
             }
             DataBaseUtil.GetStyles().ForEach(x => CommonVariables.AvailableStyles.Add(x));
 
+            if (!DataBaseUtil.HasJourneys())
+            {
+                properties.Clear();
 
-            CreateOnCourse();
-            CreateFutur();
-            CreateFinished();
+                CreateOnCourse();
+                CreateFutur();
+                CreateFinished();
+            }
 
         }
 

@@ -18,8 +18,8 @@ namespace Travelogue_2.Main.BBDD
             Folder = folder;
             conn = GetConnection();
             // Para Tests
-            DropDataBase();
-            CreateDatabase();
+            //DropDataBase();
+            //CreateDatabase();
         }
 
         private static SQLiteConnection GetConnection()
@@ -76,7 +76,7 @@ namespace Travelogue_2.Main.BBDD
             }
         }
 
-        private static bool CreateDatabase()
+        public static bool CreateDatabase()
         {
             void Act()
             {
@@ -557,6 +557,11 @@ namespace Travelogue_2.Main.BBDD
             Style Func() => conn.GetAllWithChildren<Style>().Find(x => x.Name.Equals(styleName));
             return QueryFunc(Func);
         }
+        public static Style GetStyleOnUse()
+		{
+            Style Func() => conn.GetAllWithChildren<Style>().Find(x => x.OnUse);
+            return QueryFunc(Func);
+        }
 
         /** Insert */
         public static bool InsertStyles(List<Style> styles)
@@ -569,6 +574,13 @@ namespace Travelogue_2.Main.BBDD
         {
             var temp = GetStyles();
             return temp != null && temp.Count() != 0;
+        }
+
+        /** Update */
+        public static bool UpdateStyle(Style style)
+		{
+            void Act() => conn.UpdateWithChildren(style);
+            return QueryAct(Act);
         }
         #endregion
 

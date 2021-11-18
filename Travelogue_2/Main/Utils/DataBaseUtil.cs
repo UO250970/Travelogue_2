@@ -25,6 +25,7 @@ namespace Travelogue_2.Main.Utils
 		{
 			string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             DataBase.OpenDataBase(path);
+            SetStyleOnUse();
 
             DayTracker.Start();
             Automatization.Automatization.PrepareBd(CrossSettings.Current);
@@ -119,6 +120,33 @@ namespace Travelogue_2.Main.Utils
                 temp.Add(StyleToModel(style));
             }
             return temp;
+        }
+
+        public static void SetStyleOnUse()
+		{
+            Style temp = DataBase.GetStyleOnUse();
+
+            Application.Current.Resources["Primary"] = Color.FromHex(temp.Primary);
+            Application.Current.Resources["PrimaryFaded"] = Color.FromHex(temp.PrimaryFaded);
+            Application.Current.Resources["Secondary"] = Color.FromHex(temp.Secondary);
+        }
+
+        public static void ChangeStyle(StyleModel style)
+		{
+            Application.Current.Resources["Primary"] = Color.FromHex(style.Primary);
+            Application.Current.Resources["PrimaryFaded"] = Color.FromHex(style.PrimaryFaded);
+            Application.Current.Resources["Secondary"] = Color.FromHex(style.Secondary);
+
+            Style temp = StyleFromModel(style);
+            GetStyles().ForEach( x =>
+            {
+                var y = StyleFromModel(x);
+                y.OnUse = false;
+                DataBase.UpdateStyle(y);
+            });
+
+            temp.OnUse = true;
+            DataBase.UpdateStyle(temp);
         }
 
         public static ObservableDictionary<string, List<ImageModel>> GetJourneysWithImages()

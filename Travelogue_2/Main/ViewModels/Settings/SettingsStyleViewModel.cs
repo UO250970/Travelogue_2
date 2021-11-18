@@ -30,9 +30,8 @@ namespace Travelogue_2.Main.ViewModels.Settings
             if (style == null)
                 return;
 
-            Application.Current.Resources["Primary"] = Color.FromHex(style.Primary);
-            Application.Current.Resources["PrimaryFaded"] = Color.FromHex(style.PrimaryFaded);
-            Application.Current.Resources["Secondary"] = Color.FromHex(style.Secondary);
+            DataBaseUtil.ChangeStyle(style);
+            
         }
     }
 
