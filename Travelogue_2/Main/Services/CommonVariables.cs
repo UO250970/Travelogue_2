@@ -62,7 +62,7 @@ namespace Travelogue_2.Main.Services
 
         public static string GenericFlag { get => FlagImagesPath + "DEFAULT" + FlagImagesExtension; }
 
-        public static List<string> AvailableLanguages { get => new List<string>() { "ES", "FR", "EN" }; }
+        public static List<string> AvailableLanguages { get => new List<string>() { "ES", "EN" }; }
 
         public static List<StyleModel> AvailableStyles { get; set; } = new List<StyleModel>();
 

@@ -20,14 +20,15 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Text="{Binding Resources[Destinies]}" FontSize="Title" VerticalTextAlignment="Center" HorizontalOptions="Center"/>
                     <Label Grid.Column="1" Text="&#x1f50d;" FontFamily="{StaticResource Icon}" FontSize="Large"  VerticalTextAlignment="Center" HorizontalOptions="Center"
-                               TextColor="{DynamicResource Primary}">
+                           TextColor="{DynamicResource Primary}"
+                           AutomationId="SearchButton">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SearchDestinyCommand}"/>
                         </Label.GestureRecognizers>
                     </Label>
                 </Grid>
 
-                <SearchBar IsVisible="{Binding SearchVisible}" Placeholder="{Binding Resources[SearchDestiny]}" Text="{Binding SearchText, Mode=TwoWay}"/>
+                <SearchBar AutomationId="SearchBar" IsVisible="{Binding SearchVisible}" Placeholder="{Binding Resources[SearchDestiny]}" Text="{Binding SearchText, Mode=TwoWay}"/>
 
             </StackLayout>
 

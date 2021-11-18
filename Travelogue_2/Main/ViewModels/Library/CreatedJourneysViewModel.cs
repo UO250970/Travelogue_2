@@ -34,7 +34,7 @@ namespace Travelogue_2.Main.ViewModels.Library
             JourneysCreated.Clear();
             JourneysCreatedSearched.Clear();
 
-            var temp = DataBaseUtil.Getjourneys();
+            var temp = DataBaseUtil.GetJourneys();
             DataBaseUtil.GetJourneysCreated()?.ForEach(x =>
             {
                 JourneysCreated.Add(x);

@@ -156,6 +156,12 @@ namespace UITest
         }
         #endregion
 
+        #region Search
+        public void SearchDestiny(string destiny)
+        {
+            app.Tap(x => x.Marked("??"));
+        }
+        #endregion
         public void SaveEventButton()
         {
             app.Tap(x => x.Marked(Variables.SaveButtonE));
@@ -308,8 +314,8 @@ namespace UITest
         {
             app.Repl();
             EnterSettings();
-
             EnterStyles();
+            app.TouchAndHold(x => x.Marked("Terciario"));
         }
 
         [Test]
@@ -319,6 +325,8 @@ namespace UITest
             EnterSettings();
 
             EnterDestinies();
+            app.WaitForElement("Albania", timeout: TimeSpan.FromSeconds(100));
+            SearchDestiny("Jap");
         }
     }
 
