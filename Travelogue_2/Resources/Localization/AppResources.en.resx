@@ -420,6 +420,9 @@
   <data name="MessNoTitleInReservation" xml:space="preserve">
     <value>The reservation must have a title</value>
   </data>
+  <data name="MessPageSaved" xml:space="preserve">
+    <value>Page savec correctly</value>
+  </data>
   <data name="MessReservationCreated" xml:space="preserve">
     <value>Reservation created correctly</value>
   </data>

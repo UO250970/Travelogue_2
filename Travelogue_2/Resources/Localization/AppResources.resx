@@ -429,6 +429,9 @@
   <data name="MessNoTitleInReservation" xml:space="preserve">
     <value>Se debe introducir un título a la reserva</value>
   </data>
+  <data name="MessPageSaved" xml:space="preserve">
+    <value>La página se ha guardado correctamente</value>
+  </data>
   <data name="MessReservationCreated" xml:space="preserve">
     <value>La reserva se ha creado correctamente</value>
   </data>

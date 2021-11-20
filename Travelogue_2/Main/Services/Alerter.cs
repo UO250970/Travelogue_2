@@ -109,7 +109,7 @@ namespace Travelogue_2.Main.Services
             => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessImageSaved"], App.LocResources["Ok"]);
 
         public static async Task AlertPageSaved()
-            => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessEntrySaved"], App.LocResources["Ok"]);
+            => await Page?.DisplayAlert(App.LocResources["Empty"], App.LocResources["MessPageSaved"], App.LocResources["Ok"]);
 
         #endregion
 

@@ -997,6 +997,15 @@ namespace Travelogue_2.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to La página se ha guardado correctamente.
+        /// </summary>
+        internal static string MessPageSaved {
+            get {
+                return ResourceManager.GetString("MessPageSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to La reserva se ha creado correctamente.
         /// </summary>
         internal static string MessReservationCreated {
