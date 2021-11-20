@@ -114,13 +114,14 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
             }
             else
             {
+                ImageModel cover = DataBaseUtil.CreateImage(CoverImage.Path, "", Title, CoverImage.Latitud, CoverImage.Longitud);
                 JourneyModel temp = new JourneyModel()
                 {
                     Id = int.Parse(CurrentJourneyId),
                     Name = Title,
                     IniDate = IniDate,
                     EndDate = EndDate,
-                    CoverId = CoverImage.ImageId
+                    CoverId = cover.ImageId
                 };
                 if (await DataBaseUtil.SaveJourney(temp))
                     base.Back();
@@ -139,6 +140,10 @@ namespace Travelogue_2.Main.ViewModels.Library.Create
 
         internal override void Back()
         {
+            if (CoverImage.ImageId > 0)
+			{
+                DataBaseUtil.DeleteImageById(CoverImage.ImageId);
+            }
             DataBaseUtil.DeleteJourney(int.Parse(CurrentJourneyId));
             base.Back();
         }

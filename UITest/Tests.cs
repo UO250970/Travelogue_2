@@ -21,7 +21,7 @@ namespace UITest
             //app = ConfigureApp.Android.StartApp();
 
             app = ConfigureApp.Android
-                 .ApkFile(@"C:\Users\lmendezl\AppData\Local\Xamarin\Mono for Android\Archives\2021-11-15\Travelogue_2.Android 11-15-21 5.50 PM.apkarchive\com.companyname.travelogue_2.apk")
+                 .ApkFile(@"C:\Users\Lulu\AppData\Local\Xamarin\Mono for Android\Archives\2021-11-20\Travelogue_2.Android 11-20-21 11.42 AM.apkarchive\com.companyname.travelogue_2.apk")
                  .DeviceSerial("6PQ0217821002256")
                  .PreferIdeSettings()
                  .EnableLocalScreenshots()
@@ -37,9 +37,7 @@ namespace UITest
         [Test]
         public void MenuNavigationTest()
         {
-            //app.Back();
-            app.Repl();
-            app.WaitForElement("CreatedJourneysId", timeout: TimeSpan.FromSeconds(100));
+            //app.WaitForElement("CreatedJourneysId", timeout: TimeSpan.FromSeconds(100));
 
             //Assert.IsNotEmpty( app.Query("CreatedJourneysId") );
             //app.Tap(x => x.Marked("MediaViewButton"));
@@ -65,7 +63,7 @@ namespace UITest
         {
             EnterLibrary();
             app.Tap(x => x.Marked("CreatedJourneysButton"));
-            app.WaitForElement("FuturjourneysL", timeout: TimeSpan.FromSeconds(100));
+            app.WaitForElement("FuturJourneysL", timeout: TimeSpan.FromSeconds(100));
         }
 
         public void EnterFuturLibraryTrip()
@@ -97,7 +95,7 @@ namespace UITest
         {
             EnterLibrary();
             app.Tap(x => x.Marked("ClosedJourneysButton"));
-            app.WaitForElement("ClosedjourneysL", timeout: TimeSpan.FromSeconds(100));
+            app.WaitForElement("ClosedJourneysL", timeout: TimeSpan.FromSeconds(100));
         }
 
         public void EnterText(string element, string text)
@@ -121,7 +119,7 @@ namespace UITest
         public void EnterDestinies()
         {
             app.Tap(x => x.Marked("DestiniesButton"));
-            app.WaitForElement("Desitnos", timeout: TimeSpan.FromSeconds(100));
+            app.WaitForElement("Destinos", timeout: TimeSpan.FromSeconds(100));
         }
         #endregion
 
@@ -137,12 +135,14 @@ namespace UITest
         {
             app.TouchAndHold(x => x.Marked(name));
 
-            app.WaitForElement("Fecha", timeout: TimeSpan.FromSeconds(100));
+            app.WaitForElement("Fecha inicio", timeout: TimeSpan.FromSeconds(100));
         }
 
         public void ModifyEntry(string name)
         {
+            app.TouchAndHold(x => x.Marked(name));
 
+            app.WaitForElement("Fecha", timeout: TimeSpan.FromSeconds(100));
         }
 
         public void ModifyEntryText(string name)
@@ -159,10 +159,12 @@ namespace UITest
         #region Search
         public void SearchDestiny(string destiny)
         {
-            app.Tap(x => x.Marked("??"));
+            app.Tap(x => x.Marked("SearchButton"));
+            app.Tap(x => x.Marked("SearchBar"));
+            app.EnterText(destiny);
         }
         #endregion
-        public void SaveEventButton()
+        public void SaveButton()
         {
             app.Tap(x => x.Marked(Variables.SaveButtonE));
             app.WaitForElement(Variables.OkButton, timeout: TimeSpan.FromSeconds(100));
@@ -171,9 +173,16 @@ namespace UITest
 
         public void PickDateEvent(int year, int month, int day)
         {
-            app.Tap(x => x.Marked("DateSelectorE"));
+            app.Tap(x => x.Marked(Variables.DateSelector));
             app.Query(x => x.Class("datePicker").Invoke("updateDate", year, month, day));
-            app.Tap(x => x.Marked("Aceptar"));
+            app.Tap(x => x.Marked(Variables.AceptButton));
+        }
+
+        public void PickIniDateReserv(int year, int month, int day)
+        {
+            app.Tap(x => x.Marked(Variables.DateIniSelector));
+            app.Query(x => x.Class("datePicker").Invoke("updateDate", year, month, day));
+            app.Tap(x => x.Marked(Variables.AceptButton));
         }
 
         public void PickTimeEvent(int hour, int minutes)
@@ -231,7 +240,7 @@ namespace UITest
             Assert.IsNotEmpty(app.Query(endDate.Date.ToString(Variables.DateFormat)));
             Assert.IsNotEmpty(app.Query(time.ToString(Variables.TimeFormat)));
 
-            SaveEventButton();
+            SaveButton();
             Assert.IsEmpty(app.Query("Concierto Manin"));
 
             app.Tap(x => x.Marked(day.ToString()));
@@ -244,7 +253,7 @@ namespace UITest
 
             EnterText(Variables.TitleSelector, " 2");
             EnterText(Variables.AddressSelector, " 1");
-            SaveEventButton();
+            SaveButton();
             app.Tap(x => x.Marked(day.ToString()));
             Assert.IsEmpty(app.Query("Concierto Manin"));
             Assert.IsEmpty(app.Query("Calle lapus"));
@@ -259,7 +268,7 @@ namespace UITest
             EnterFuturTrip();
             ModifyReserv("Hotel");
 
-            app.Tap(x => x.Marked(Variables.DateSelector));
+            app.Tap(x => x.Marked(Variables.DateIniSelector));
 
             DateTime iniDate = DateTime.Today.AddDays(3);
             DateTime endDate = DateTime.Today.AddDays(5);
@@ -272,31 +281,29 @@ namespace UITest
 
             Assert.IsNotEmpty(app.Query(iniDate.Date.ToString(Variables.DateFormat)));
 
-            PickDateEvent(year, month, day);
-            PickTimeEvent(time.Hours, time.Minutes);
+            PickIniDateReserv(year, month, day);
 
             Assert.IsNotEmpty(app.Query(endDate.Date.ToString(Variables.DateFormat)));
-            Assert.IsNotEmpty(app.Query(time.ToString(Variables.TimeFormat)));
 
-            SaveEventButton();
-            Assert.IsEmpty(app.Query("Concierto Manin"));
+            SaveButton();
+            Assert.IsEmpty(app.Query("Hotel"));
 
             app.Tap(x => x.Marked(day.ToString()));
-            Assert.IsNotEmpty(app.Query("Concierto Manin"));
-            Assert.IsNotEmpty(app.Query("Calle lapus"));
-            Assert.IsEmpty(app.Query("Concierto Manin 2"));
-            Assert.IsEmpty(app.Query("Calle lapus 1"));
+            Assert.IsNotEmpty(app.Query("Hotel"));
+            Assert.IsNotEmpty(app.Query("Calle milagros"));
+            Assert.IsEmpty(app.Query("Concierto Manin"));
+            Assert.IsEmpty(app.Query("Calle lapus"));
 
-            app.TouchAndHold(x => x.Marked("Concierto Manin"));
+            app.TouchAndHold(x => x.Marked("Hotel"));
 
             EnterText(Variables.TitleSelector, " 2");
             EnterText(Variables.AddressSelector, " 1");
-            SaveEventButton();
+            SaveButton();
             app.Tap(x => x.Marked(day.ToString()));
-            Assert.IsEmpty(app.Query("Concierto Manin"));
-            Assert.IsEmpty(app.Query("Calle lapus"));
-            Assert.IsNotEmpty(app.Query("Concierto Manin 2"));
-            Assert.IsNotEmpty(app.Query("Calle lapus 1"));
+            Assert.IsEmpty(app.Query("Hotel"));
+            Assert.IsEmpty(app.Query("Calle milagros"));
+            Assert.IsNotEmpty(app.Query("Hotel 2"));
+            Assert.IsNotEmpty(app.Query("Calle milagros 1"));
         }
 
         [Test]
@@ -304,15 +311,21 @@ namespace UITest
         {
             //app.Repl();
             EnterFuturTrip();
-            app.TouchAndHold(x => x.Marked("Standard"));
+            ModifyEntry("Standard");
 
+            app.Tap(x => x.Marked(Variables.TitleSelector));
+            app.ClearText();
+            app.EnterText("PruebaCambio");
+            SaveButton();
 
+            Assert.IsEmpty(app.Query("CStandard"));
+            Assert.IsNotEmpty(app.Query("PruebaCambio"));
         }
 
         [Test]
         public void ModifyStyleTest()
         {
-            app.Repl();
+            //app.Repl();
             EnterSettings();
             EnterStyles();
             app.TouchAndHold(x => x.Marked("Terciario"));
@@ -327,6 +340,14 @@ namespace UITest
             EnterDestinies();
             app.WaitForElement("Albania", timeout: TimeSpan.FromSeconds(100));
             SearchDestiny("Jap");
+
+            Assert.IsEmpty(app.Query("Albania"));
+            Assert.IsNotEmpty(app.Query("Japan"));
+            SearchDestiny("Jap");
+
+            app.Tap(x => x.Marked("Borrar consulta"));
+
+            Assert.IsNotEmpty(app.Query("Albania"));
         }
     }
 
@@ -342,6 +363,7 @@ namespace UITest
 
         public static string TitleSelector { get => "TitleSelectorE"; }
         public static string AddressSelector { get => "AddressSelectorE"; }
+        public static string PhoneSelector { get => "PhoneSelectorE"; }
         public static string DateSelector { get => "DateSelectorE"; }
 
         public static string DateIniSelector { get => "DateSelectorIniE"; }

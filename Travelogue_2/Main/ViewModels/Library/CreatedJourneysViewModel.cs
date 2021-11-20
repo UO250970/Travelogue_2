@@ -79,13 +79,11 @@ namespace Travelogue_2.Main.ViewModels.Library
             {
                 SetProperty(ref searchText, value);
                 var temp = JourneysCreated.Where(x => x.Name.ToUpper().Contains(searchText.ToUpper()) == true);
-                if (temp.Count() != JourneysCreatedSearched.Count())
+                
+                JourneysCreatedSearched.Clear();
+                foreach (var card in temp)
                 {
-                    JourneysCreatedSearched.Clear();
-                    foreach (var card in temp)
-                    {
-                        JourneysCreatedSearched.Add(card);
-                    }
+                    JourneysCreatedSearched.Add(card);
                 }
             }
         }

@@ -7,7 +7,6 @@ using System.IO;
 using System.Threading.Tasks;
 using Travelogue_2.Main.Models;
 using Travelogue_2.Main.Services;
-using Travelogue_2.Resources.Localization;
 using PermissionStatus = Plugin.Permissions.Abstractions.PermissionStatus;
 
 namespace Travelogue_2.Main.Utils
@@ -55,11 +54,11 @@ namespace Travelogue_2.Main.Utils
             string photo = await Alerter.AlertPhoto();
             if (photo != null)
             {
-                if (photo.Equals(AppResources.TakePhoto))
+                if (photo.Equals(App.LocResources["TakePhoto"])) 
                 {
                     return model.AddImage(await TakePhoto(), temporal);
                 }
-                else if (photo.Equals(AppResources.PickPhoto))
+                else if (photo.Equals(App.LocResources["PickPhoto"])) 
                 {
                     return model.AddImage(await PickPhoto(), temporal);
                 }

@@ -106,7 +106,7 @@ namespace Travelogue_2.Main.Services
          *                      OPEN es 0 o 1.*/
         public static void UpdateDataBase()
         {
-            DataBase.GetJourneys().ForEach(x =>
+            DataBase.GetJourneys()?.ForEach(x =>
             {
                 if (!x.HasStarted() && !x.HasFinished())
                 {
@@ -178,6 +178,7 @@ namespace Travelogue_2.Main.Services
             {
                 ReStart();
             }
+            DataBase.DeleteJourneyById(journeyId);
             CurrentJourneyId = "0";
         }
 
@@ -216,12 +217,11 @@ namespace Travelogue_2.Main.Services
         {
             DateTime LastDay = OnTrack ? GetJourneyOnTrack().EndDate.Date : DateTime.Today;
 
-            do
+            while (!DataBase.CheckDateIsEmpty(LastDay))
             {
                 LastDay = LastDay.AddDays(1);
             }
-            while (!DataBase.CheckDateIsEmpty(LastDay));
-
+            
             SetNextDayAvailable(LastDay);
         }
 

@@ -147,7 +147,7 @@ namespace Travelogue_2.Automatization
 
         public static void PrepareBd(ISettings properties)
         {
-            //DB();
+            DB();
 
             if (!DataBaseUtil.HasDestinies())
             {
@@ -155,11 +155,6 @@ namespace Travelogue_2.Automatization
             }
             DataBaseUtil.GetDestinies().ForEach(x => CommonVariables.AvailableDestinies.Add(x));
 
-            if (!DataBaseUtil.HasStyles())
-            {
-                PrepareStyles();
-            }
-            DataBaseUtil.GetStyles().ForEach(x => CommonVariables.AvailableStyles.Add(x));
 
             if (!DataBaseUtil.HasJourneys())
             {
@@ -169,6 +164,12 @@ namespace Travelogue_2.Automatization
                 CreateFutur();
                 CreateFinished();
             }
+
+            if (!DataBaseUtil.HasStyles())
+            {
+                PrepareStyles();
+            }
+            DataBaseUtil.GetStyles().ForEach(x => CommonVariables.AvailableStyles.Add(x));
 
         }
 

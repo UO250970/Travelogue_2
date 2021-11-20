@@ -234,6 +234,9 @@
   <data name="DateFormat" xml:space="preserve">
     <value>dd-MM-yyyy</value>
   </data>
+  <data name="Dates" xml:space="preserve">
+    <value>Fechas</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Eliminar</value>
   </data>
@@ -489,6 +492,9 @@
   <data name="NoCaption" xml:space="preserve">
     <value>Sin pie de foto</value>
   </data>
+  <data name="NoJourney" xml:space="preserve">
+    <value>No hay ningún viaje en curso :)</value>
+  </data>
   <data name="NoJourneyAssociated" xml:space="preserve">
     <value>Sin viaje asociado</value>
   </data>
@@ -563,6 +569,9 @@
   </data>
   <data name="Time" xml:space="preserve">
     <value>Hora</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Titulo</value>
   </data>
   <data name="TopImage" xml:space="preserve">
     <value>Cara</value>

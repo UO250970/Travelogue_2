@@ -6,7 +6,7 @@ using Android.OS;
 
 namespace Travelogue_2.Droid
 {
-    [Activity(Label = "Presentation", MainLauncher = true, Theme = "@style/MyTheme.Splash")]
+    [Activity(Label = "Travelogue", MainLauncher = true, Theme = "@style/MyTheme.Splash")]
     public class PresentationActivity : Activity
     {
         public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)

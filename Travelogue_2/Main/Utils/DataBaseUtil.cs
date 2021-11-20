@@ -24,14 +24,13 @@ namespace Travelogue_2.Main.Utils
 		public static void Start()
 		{
 			string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+
             DataBase.OpenDataBase(path);
-            SetStyleOnUse();
+            Automatization.Automatization.PrepareBd(CrossSettings.Current);
 
             DayTracker.Start();
-            Automatization.Automatization.PrepareBd(CrossSettings.Current);
+            SetStyleOnUse();
         }
-
-        public static void ClearDataBase() => DataBase.ClearDataBase();
 
         public static bool HasJourneys() => DataBase.HasJourneys();
 
@@ -126,9 +125,12 @@ namespace Travelogue_2.Main.Utils
 		{
             Style temp = DataBase.GetStyleOnUse();
 
-            Application.Current.Resources["Primary"] = Color.FromHex(temp.Primary);
-            Application.Current.Resources["PrimaryFaded"] = Color.FromHex(temp.PrimaryFaded);
-            Application.Current.Resources["Secondary"] = Color.FromHex(temp.Secondary);
+            if (temp != null)
+			{
+                Application.Current.Resources["Primary"] = Color.FromHex(temp.Primary);
+                Application.Current.Resources["PrimaryFaded"] = Color.FromHex(temp.PrimaryFaded);
+                Application.Current.Resources["Secondary"] = Color.FromHex(temp.Secondary);
+            }
         }
 
         public static void ChangeStyle(StyleModel style)
@@ -154,7 +156,7 @@ namespace Travelogue_2.Main.Utils
             ObservableDictionary<string, List<ImageModel>> temp = new ObservableDictionary<string, List<ImageModel>>();
 
             List<ImageModel> Images = GetImages();
-            List<string> viajes = GetJourneys().Select(x => x.Name).ToList();
+            List<string> viajes = Images.Select(x => x.Journey).Distinct().ToList();
 
             if (Images.Count != 0)
             {
@@ -919,12 +921,34 @@ namespace Travelogue_2.Main.Utils
 
         #region Delete
 
-        public static bool DeleteJourney(int JourneyId, bool alert = false)
+        public static async Task<bool> DeleteJourney(int JourneyId, bool alert = false)
         {
-            DayTracker.DeleteJourney(JourneyId);
-            DataBase.DeleteJourneyById(JourneyId);
-            if (alert) Alerter.AlertDeleteJourney();
-            return true;
+            if (alert)
+			{
+                bool result = await Alerter.AlertDeleteJourney();
+                if (result)
+				{
+                    string JourneyName = DataBase.GetJourneyById(JourneyId).Name;
+                    List<Image> images = DataBase.GetImagesByJourney(JourneyName);
+                    images?.ForEach(x =>
+                    {
+                        x.Journey = string.Empty;
+                        DataBase.UpdateImage(x);
+                    });
+                    DayTracker.DeleteJourney(JourneyId);
+
+                    return true;
+                }
+				else
+				{
+                    return false;
+				}
+            }
+			else
+            {
+                DayTracker.DeleteJourney(JourneyId);
+                return true;
+            }
         }
 
         public static bool DeleteEvent(EventModel Event)
@@ -1202,7 +1226,10 @@ namespace Travelogue_2.Main.Utils
 
             temp.Path = image.Path;
             temp.Caption = image.Caption;
-            temp.Journey = image.Journey;
+            if (!image.Journey.Equals(string.Empty))
+            {
+                temp.Journey = image.Journey;
+            }
             temp.Journal = image.Journal;
             if (temp.Journal != null)
             {

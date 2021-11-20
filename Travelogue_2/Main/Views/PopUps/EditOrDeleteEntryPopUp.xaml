@@ -27,7 +27,7 @@
                                 <TapGestureRecognizer Command="{Binding CancelCommand}"/>
                             </Label.GestureRecognizers>
                         </Label>
-                        <Label AutomationId="SaveButton" Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
+                        <Label AutomationId="SaveButtonE" Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding SaveEntryCommand}"/>
                             </Label.GestureRecognizers>
@@ -37,11 +37,11 @@
                     <StackLayout Margin="10">
 
                         <Label Text="{Binding Resources[Date]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                        <DatePicker Date="{Binding Entry.Day, Mode=TwoWay}" FontSize="Medium" 
+                        <DatePicker AutomationId="DateSelectorE" Date="{Binding Entry.Day, Mode=TwoWay}" FontSize="Medium" 
                                     MaximumDate="{Binding MaxDaySelected}" MinimumDate="{Binding MinDaySelected}"/>
 
                         <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                        <Entry Text="{Binding Entry.Title, Mode=TwoWay}" FontSize="Medium" />
+                        <Entry AutomationId="TitleSelectorE" Text="{Binding Entry.Title, Mode=TwoWay}" FontSize="Medium" />
 
                     </StackLayout>
                 </StackLayout>

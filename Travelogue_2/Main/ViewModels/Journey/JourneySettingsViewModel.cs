@@ -155,10 +155,12 @@ namespace Travelogue_2.Main.ViewModels.Journey
             PhoneDialer.Open(number);
         }
 
-        internal void DeleteJourneyC()
+        internal async void DeleteJourneyC()
         {
-            DataBaseUtil.DeleteJourney(int.Parse(CurrentJourneyId), true);
-            base.Back();
+            if ( await DataBaseUtil.DeleteJourney(int.Parse(CurrentJourneyId), true) )
+            {
+                base.Back();
+            };
         }
 
         internal void CheckNewIniDate(DatePicker iniDatePicker, DatePicker endDatePicker)

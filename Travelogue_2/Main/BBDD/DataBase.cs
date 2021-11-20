@@ -19,7 +19,7 @@ namespace Travelogue_2.Main.BBDD
             conn = GetConnection();
             // Para Tests
             //DropDataBase();
-            //CreateDatabase();
+            CreateDatabase();
         }
 
         private static SQLiteConnection GetConnection()
@@ -97,27 +97,6 @@ namespace Travelogue_2.Main.BBDD
             }
             return QueryAct(Act);
         }
-        public static bool ClearDataBase()
-        {
-            void Act()
-            {
-                conn.DeleteAll<JourneyDestiny>();
-                conn.DeleteAll<Journey>();
-                conn.DeleteAll<Journal>();
-                conn.DeleteAll<Destiny>();
-                conn.DeleteAll<Embassy>();
-                conn.DeleteAll<DayEvent>();
-                conn.DeleteAll<Day>();
-                conn.DeleteAll<Event>();
-                conn.DeleteAll<Entry>();
-                conn.DeleteAll<EntryData>();
-                conn.DeleteAll<Image>();
-
-                conn.DeleteAll<Style>();
-                conn.DeleteAll<Card>();
-            }
-            return QueryAct(Act);
-        }
         public static bool DropDataBase()
         {
             void Act()
@@ -151,13 +130,15 @@ namespace Travelogue_2.Main.BBDD
         public static List<Journey> GetJourneys(State state)
         {
             List<Journey> Func() => conn.GetAllWithChildren<Journey>(x => x.JourneyState.Equals(state), recursive: true);
-            return QueryFunc(Func);
+            List<Journey> result = QueryFunc(Func);
+            return result ?? new List<Journey>();
         }
 
         public static List<Journey> GetJourneys()
         {
             List<Journey> Func() => conn.GetAllWithChildren<Journey>(recursive: false);
-            return QueryFunc(Func);
+            List<Journey> result = QueryFunc(Func);
+            return result ?? new List<Journey>();
         }
 
         public static Image GetCoverFromJourney(int journeyId)
@@ -256,7 +237,8 @@ namespace Travelogue_2.Main.BBDD
         public static List<Journal> GetJournals()
         {
             List<Journal> Func() => conn.GetAllWithChildren<Journal>(recursive: false);
-            return QueryFunc(Func);
+            List<Journal> result = QueryFunc(Func);
+            return result ?? new List<Journal>();
         }
 
         public static Journal GetJournalById(int id)
@@ -268,7 +250,8 @@ namespace Travelogue_2.Main.BBDD
         public static List<Journal> GetJournals(State state)
         {
             List<Journal> Func() => conn.GetAllWithChildren<Journal>(x => x.JournalState.Equals(state), recursive: true);
-            return QueryFunc(Func);
+            List<Journal> result = QueryFunc(Func);
+            return result ?? new List<Journal>();
         }
 
         /** Update */
@@ -286,7 +269,8 @@ namespace Travelogue_2.Main.BBDD
         public static List<Day> GetDays()
         {
             List<Day> Func() => conn.GetAllWithChildren<Day>();
-            return QueryFunc(Func);
+            List<Day> result = QueryFunc(Func);
+            return result ?? new List<Day>();
         }
 
         public static bool InsertDay(Day day)
@@ -305,8 +289,8 @@ namespace Travelogue_2.Main.BBDD
         {
             Func<List<Day>> Func = () => conn.GetAllWithChildren<Day>().FindAll(x => (x.Date.CompareTo(dateIni.Date) >= 0)
                 && (x.Date.CompareTo(dateEnd.Date) <= 0));
-
-            return QueryFunc(Func);
+            List<Day> result = QueryFunc(Func);
+            return result ?? new List<Day>();
         }
 
         /** Update */
@@ -454,7 +438,8 @@ namespace Travelogue_2.Main.BBDD
         public static List<Destiny> GetDestinies()
         {
             List<Destiny> Func() => conn.GetAllWithChildren<Destiny>(recursive: false);
-            return QueryFunc(Func);
+            List<Destiny> result = QueryFunc(Func);
+            return result ?? new List<Destiny>();
         }
 
         internal static bool GetDestiny(Destiny destiny)
@@ -468,7 +453,8 @@ namespace Travelogue_2.Main.BBDD
         public static List<string> GetCountriesNames()
         {
             List<string> Func() => conn.GetAllWithChildren<Destiny>().Select(x => x.Name).ToList();
-            return QueryFunc(Func);
+            List<string> result = QueryFunc(Func);
+            return result ?? new List<string>();
         }
         public static Destiny GetDestinyByName(string destinyName)
         {
@@ -478,7 +464,8 @@ namespace Travelogue_2.Main.BBDD
         public static List<Destiny> GetNotDefaultCountries()
         {
             Destiny Func() => conn.GetAllWithChildren<Destiny>().Find(x => x.Original == false);
-            return QueryFunc(Func);
+            List<Destiny> result = QueryFunc(Func);
+            return result ?? new List<Destiny>();
         }
 
         /** Update */
@@ -507,13 +494,15 @@ namespace Travelogue_2.Main.BBDD
         public static List<Image> GetImagesByJourney(string journey)
         {
             List<Image> Func() => conn.GetAllWithChildren<Image>().FindAll(x => x.Journey.Equals(journey));
-            return QueryFunc(Func);
+            List<Image> result = QueryFunc(Func);
+            return result ?? new List<Image>();
         }
 
         internal static List<Image> GetImages()
         {
             List<Image> Func() => conn.GetAllWithChildren<Image>(recursive: false).FindAll(x => x.Journal is null);
-            return QueryFunc(Func);
+            List<Image> result = QueryFunc(Func);
+            return result ?? new List<Image>();
         }
 
         public static Image GetImageById(int id)
@@ -550,7 +539,8 @@ namespace Travelogue_2.Main.BBDD
         public static List<Style> GetStyles()
         {
             List<Style> Func() => conn.GetAllWithChildren<Style>(recursive: false);
-            return QueryFunc(Func);
+            List<Style> result = QueryFunc(Func);
+            return result ?? new List<Style>();
         }
         public static Style GetStyleByName(string styleName)
         {
@@ -589,7 +579,8 @@ namespace Travelogue_2.Main.BBDD
         public static List<Card> GetCards()
         {
             List<Card> Func() => conn.GetAllWithChildren<Card>(recursive: false);
-            return QueryFunc(Func);
+            List<Card> result = QueryFunc(Func);
+            return result ?? new List<Card>();
         }
         public static Card GetCardById(int id)
         {

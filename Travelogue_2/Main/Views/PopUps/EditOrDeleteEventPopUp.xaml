@@ -83,12 +83,12 @@
                     <StackLayout>
 
                         <StackLayout Orientation="Horizontal">
-                            <Label AutomationId="CancelButtonR" Text="&#xea0f;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand">
+                            <Label AutomationId="CancelButtonE" Text="&#xea0f;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding CancelCommand}"/>
                                 </Label.GestureRecognizers>
                             </Label>
-                            <Label AutomationId="SaveButtonR" Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
+                            <Label AutomationId="SaveButtonE" Text="&#xea10;" FontSize="Title" TextColor="{DynamicResource Primary}" FontFamily="{StaticResource Icon}" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding SaveEventCommand}"/>
                                 </Label.GestureRecognizers>
@@ -102,24 +102,24 @@
                                 <Label HorizontalOptions="StartAndExpand" Text="{Binding Resources[EndDate]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal">
-                                <DatePicker AutomationId="DateSelectorRI" HorizontalOptions="FillAndExpand" x:Name="IniDatePicker"
+                                <DatePicker AutomationId="DateSelectorIniE" HorizontalOptions="FillAndExpand" x:Name="IniDatePicker"
                                             Date="{Binding Evento.IniDay, Mode=TwoWay}" FontSize="Medium" 
                                             MaximumDate="{Binding MaxDaySelected}" 
                                             DateSelected="CheckNewIniDate" MinimumDate="{Binding MinDaySelected}"/>
-                                <DatePicker AutomationId="DateSelectorRE" HorizontalOptions="FillAndExpand" x:Name="EndDatePicker" 
+                                <DatePicker AutomationId="DateSelectorEndE" HorizontalOptions="FillAndExpand" x:Name="EndDatePicker" 
                                             Date="{Binding Evento.EndDay, Mode=TwoWay}" FontSize="Medium" 
                                             MaximumDate="{Binding MaxDaySelected}" 
                                             DateSelected="CheckNewEndDate" MinimumDate="{Binding MinDaySelected}"/>
                             </StackLayout>
 
                             <Label Text="{Binding Resources[Name]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                            <Entry AutomationId="TitleSelectorR" Text="{Binding Evento.Title, Mode=TwoWay}" FontSize="Medium" />
+                            <Entry AutomationId="TitleSelectorE" Text="{Binding Evento.Title, Mode=TwoWay}" FontSize="Medium" />
 
                             <Label Text="{Binding Resources[Address]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                            <Entry AutomationId="TitleSelectorR" Text="{Binding Evento.Address, Mode=TwoWay}" FontSize="Medium" />
+                            <Entry AutomationId="AddressSelectorE" Text="{Binding Evento.Address, Mode=TwoWay}" FontSize="Medium" />
 
                             <Label Text="{Binding Resources[PhoneNumber]}" FontSize="Large" TextColor="{DynamicResource PrimaryFaded}"/>
-                            <Entry AutomationId="TitleSelectorR" Text="{Binding Evento.PhoneNumber, Mode=TwoWay}" FontSize="Medium" />
+                            <Entry AutomationId="PhoneSelectorE" Text="{Binding Evento.PhoneNumber, Mode=TwoWay}" FontSize="Medium" />
 
                         </StackLayout>
                     </StackLayout>

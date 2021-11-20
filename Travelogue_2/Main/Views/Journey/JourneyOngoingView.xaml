@@ -8,11 +8,13 @@
 
         <StackLayout>
 
-            <AbsoluteLayout IsVisible="{Binding JourneyNotOnGoing}" 
+            <StackLayout IsVisible="{Binding JourneyNotOnGoing}" 
                             BackgroundColor="{DynamicResource PrimaryFaded}"
                             VerticalOptions="FillAndExpand">
-                <Label VerticalOptions="CenterAndExpand" Text=" No hay ningún viaje en curso :) "/>
-            </AbsoluteLayout>
+                <Label VerticalOptions="CenterAndExpand" Text="{Binding Resources[NoJourney]}" FontSize="Title"
+                       HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
+            </StackLayout>
 
             <journey:JourneyTemplateView x:Name="JourneySpace" 
                                          IsVisible="{Binding JourneyOnGoing}"

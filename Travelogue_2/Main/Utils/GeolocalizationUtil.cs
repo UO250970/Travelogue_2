@@ -10,7 +10,6 @@ namespace Travelogue_2.Main.Utils
 {
     public static class GeolocalizationUtil
     {
-
         public static async Task<PermissionStatus> CheckPermissions()
         {
             PermissionStatus statusLocation = PermissionStatus.Unknown;

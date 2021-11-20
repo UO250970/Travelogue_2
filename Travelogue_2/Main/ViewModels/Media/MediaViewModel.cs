@@ -95,12 +95,20 @@ namespace Travelogue_2.Main.ViewModels.Media
                 SetProperty(ref searchText, value);
                 if (ImagesOrdered.Count != 0)
                 {
+                    var temp = ImagesOrdered.Keys.Where(x => x.ToUpper().Contains(searchText.ToUpper())).ToList();
+                    
+                    ImagesSearched.Clear();
+                    foreach (var key in temp)
+                    {
+                        ImagesSearched.Add(key, ImagesOrdered[key]);
+                    }
+                    /*
                     ImagesSearched = ImagesOrdered;
                     List<string> keysToRemove = ImagesOrdered.Keys.Where(x => !x.ToUpper().Contains(searchText.ToUpper())).ToList();
                     foreach (string key in keysToRemove)
                     {
                         ImagesSearched.Remove(key);
-                    }
+                    }*/
                 }
             }
         }

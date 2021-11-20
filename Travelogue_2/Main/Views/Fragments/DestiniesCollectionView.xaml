@@ -7,7 +7,7 @@
         x:Name="DestiniesCollectionViewName">
 
     <StackLayout>
-        <Label Text="Destinos" FontSize="Large" TextColor="{DynamicResource Primary}"/>
+        <Label Text="{Binding Resources[Destinies]}" FontSize="Large" TextColor="{DynamicResource Primary}"/>
         <StackLayout Orientation="Horizontal">
 
             <autocomplete:SfAutoComplete AutomationId="DestinySelectorAC" x:Name="AutocompleteDestiny"
